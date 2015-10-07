@@ -65,7 +65,7 @@ function global:Set-WinStyle {
 	$console = $host.UI.RawUI
 	$buffer = $console.BufferSize
 	$buffer.Width = 128
-	$buffer.Height = 999
+	$buffer.Height = 2000
 	$console.BufferSize = $buffer
 
 	$size = $console.WindowSize
@@ -184,9 +184,46 @@ function script:LoadScripts {
 }
 LoadScripts
 
-# Style the Window
-if ((Get-Command Set-RegularMode -errorAction SilentlyContinue)) {
-	Set-RegularMode > $null 2>&1 3>&1
+If($host.Name -eq 'ConsoleHost') {
+	# Console Mode
+
+	# Set the Environment variable
+	if (-not ($RunEnv)) {
+		$global:RunEnv = "Terminal"
+	}
+
+	# Style the Window
+	if ((Get-Command Set-RegularMode -errorAction SilentlyContinue)) {
+		Set-RegularMode > $null 2>&1 3>&1
+	}
+
+	# Change Window Title
+	$a = (Get-Host).UI.RawUI
+	$WhoAmI = ([Environment]::UserName)
+	$a.WindowTitle = "$WhoAmI > Windows PoSH"
+	$WhoAmI = $null
+} elseif (($host.Name -eq 'Windows PowerShell ISE Host') -and ($psISE)) {
+	# Yeah, we run within the ISE
+
+	# Set the Environment variable
+	if (-not ($RunEnv)) {
+		$global:RunEnv = "Terminal"
+	}
+
+	# Style the Window
+	if ((Get-Command Set-LightMode -errorAction SilentlyContinue)) {
+		Set-RegularMode > $null 2>&1 3>&1
+	}
+} elseif ($host.Name -eq 'PrimalScriptHostImplementation') {
+	# Oh, we runnung in a GUI
+
+	# Set the Environment variable
+	if (-not ($RunEnv)) {
+		$global:RunEnv = "GUI"
+	}
+}
+else {
+	# Not in the Console, not ISE... Where to hell are we?
 }
 
 # Change the prompt
@@ -194,12 +231,6 @@ function global:prompt {
 	Write ("PS " + (Get-Location) + "> ")
 	return " "
 }
-
-# Change Window Title
-$a = (Get-Host).UI.RawUI
-$WhoAmI = ([Environment]::UserName)
-$a.WindowTitle = "$WhoAmI > Windows PoSH"
-$WhoAmI = $null
 
 # Where the windows Starts
 set-location $BasePath
@@ -252,27 +283,7 @@ Unregister-Event FileCreated -ErrorAction SilentlyContinue
 Unregister-Event FileChanged -ErrorAction SilentlyContinue
 Unregister-Event TimerTick -ErrorAction SilentlyContinue
 
-# Make a clean screen
-Clear-Host
 
-# Welcome message
-If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
-	$MyUserInfo = $env:Username.ToUpper()
-	Write-Host "Entering PowerShell as $MyUserInfo with user permissions on $env:COMPUTERNAME" -ForegroundColor "White"
-} else {
-	$MyUserInfo = $env:Username.ToUpper()
-	Write-Host "Entering PowerShell as $MyUserInfo with admin permissions on $env:COMPUTERNAME" -ForegroundColor "Green"
-}
-
-# Show infos
-if (Get-Command info -errorAction SilentlyContinue) {
-	info
-}
-
-# Show message of the day
-if (Get-Command motd -errorAction SilentlyContinue) {
-	motd
-}
 
 # Try the new auto connect feature or authenticate manual via Auth-O365
 if (Get-Command tryAutoLogin -errorAction SilentlyContinue) {
@@ -285,9 +296,38 @@ if (Get-Command tryAutoLogin -errorAction SilentlyContinue) {
 # Enable strict mode
 #Set-StrictMode -Version Latest
 
-# Set the Environment variable
-if (-not ($RunEnv)) {
-	$global:RunEnv = "Terminal"
+# Where are we?
+If($host.Name -eq 'ConsoleHost') {
+	# Console Mode
+
+	# Make a clean screen
+	Clear-Host
+
+	# Welcome message
+	If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+		$MyUserInfo = $env:Username.ToUpper()
+		Write-Host "Entering PowerShell as $MyUserInfo with user permissions on $env:COMPUTERNAME" -ForegroundColor "White"
+	} else {
+		$MyUserInfo = $env:Username.ToUpper()
+		Write-Host "Entering PowerShell as $MyUserInfo with admin permissions on $env:COMPUTERNAME" -ForegroundColor "Green"
+	}
+
+	# Show infos
+	if (Get-Command info -errorAction SilentlyContinue) {
+		info
+	}
+
+	# Show message of the day
+	if (Get-Command motd -errorAction SilentlyContinue) {
+		motd
+	}
+} elseif (($host.Name -eq 'Windows PowerShell ISE Host') -and ($psISE)) {
+	# Yeah, we run within the ISE
+} elseif ($host.Name -eq 'PrimalScriptHostImplementation') {
+	# Oh, we runnung in a GUI
+}
+else {
+	# Not in the Console, not ISE... Where to hell are we?
 }
 
 # Do a garbage collection
@@ -296,10 +336,10 @@ if (Get-Command run-gc -errorAction SilentlyContinue) {
 }
 
 # SIG # Begin signature block
-# MIITegYJKoZIhvcNAQcCoIITazCCE2cCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
+# MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFmwXyLinsa+1bhv+k5fBwlqc
-# Uleggg4LMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6MjoLVfxU2BnRg/q3jHtIbwT
+# drOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -374,30 +414,93 @@ if (Get-Command run-gc -errorAction SilentlyContinue) {
 # 9eFEUjuq5esoJM6FV+MIKv/jPFWMp5B6EtX4LDHEpYpLRVQnuxoc38mmd+NfjcD2
 # /o/81bu6LmBFegHAaGDpThGf8Hk3NVy0GcpQ3trqmH6e3Cpm8Ut5UkoSONZdkYWw
 # rzkmzFgJyoM2rnTMTh4ficxBQpB7Ikv4VEnrHRReihZ0zwN+HkXO1XEnd3hm+08j
-# LzGCBNkwggTVAgEBMIGRMH0xCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVy
-# IE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBD
-# QSBMaW1pdGVkMSMwIQYDVQQDExpDT01PRE8gUlNBIENvZGUgU2lnbmluZyBDQQIQ
-# FtT3Ux2bGCdP8iZzNFGAXDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAig
-# AoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgEL
-# MQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUa1krbVdRPoaFijCISkp9
-# ZhRCmEIwDQYJKoZIhvcNAQEBBQAEggEAriAikieoqY+qDrUNyyFUi/2poqyBzo2j
-# 7qXIPoQ2lZmyuvnqMjhhS2jYZNYHTSiiTrQYpyd3m2174AfZuhl+S/a7nukao5g4
-# vM6q+oIHygMVpnD8pQHCo5LSy1D2i6FwXiemDJBOxq0KEhDnDcne+TeQOUE7rJUf
-# zuzScZ7JQ4gpgh0RaeozojD9V8F3UCE+9Bwgp0Zvy6BBwb1Z2IL9piovvO4LLsxP
-# J0vmmcVik0p45fMZg/HNJUYPc66JIGyKefaoM0rYBIvp+KJvLbvJLJ/+n630SzLy
-# ZnkxFtFWfPj02JHrwnwbaOmOYzFDE6X2yI0KpP38TA5Ehi5BjwhINKGCAqIwggKe
-# BgkqhkiG9w0BCQYxggKPMIICiwIBATBoMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
-# ExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIFRpbWVzdGFt
-# cGluZyBDQSAtIEcyAhIRIQaggdM/2HrlgkzBa1IJTgMwCQYFKw4DAhoFAKCB/TAY
-# BgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xNTEwMDQx
-# NTEzNTJaMCMGCSqGSIb3DQEJBDEWBBSIejYhtGsgX1dT34MF8VaMi8RN9DCBnQYL
-# KoZIhvcNAQkQAgwxgY0wgYowgYcwgYQEFLNjCLTUze1Pz71muVX647+xLCnmMGww
-# VqRUMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgw
-# JgYDVQQDEx9HbG9iYWxTaWduIFRpbWVzdGFtcGluZyBDQSAtIEcyAhIRIQaggdM/
-# 2HrlgkzBa1IJTgMwDQYJKoZIhvcNAQEBBQAEggEAJuhxqfwSJ4HLsIyLkIkrKRtt
-# 3jL1k8ZjNwmcdV1G4WZtSKt2Hzu4pSOGiur5Q7ejYCn63+y3CrDhT5u3710DPAQt
-# 0+XQp+N+p3NtIwAwjxIAGmMOlemriyKHG2kOus0v9IbTdyHCahAQOH8pk9jBTH2F
-# y7hCSUCM2VPXZn13jpzZzoptF1CvAVYCp1Ce9oh6iicz3JSjltY5rcn0SUS0Oh37
-# /SHTBjLyeWsgq1P3LvyKiyLlda4DUCIcZmc78MTqI/elAwPuHtBUQRJxMDsPgjNo
-# 4dVJfSZvB7YkTjUZWPPuiKPf40nIU22jp5mHrccbRclqZdBMwuLpjXkhTUgpSQ==
+# LzCCBdgwggPAoAMCAQICEEyq+crbY2/gH/dO2FsDhp0wDQYJKoZIhvcNAQEMBQAw
+# gYUxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAO
+# BgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBMaW1pdGVkMSswKQYD
+# VQQDEyJDT01PRE8gUlNBIENlcnRpZmljYXRpb24gQXV0aG9yaXR5MB4XDTEwMDEx
+# OTAwMDAwMFoXDTM4MDExODIzNTk1OVowgYUxCzAJBgNVBAYTAkdCMRswGQYDVQQI
+# ExJHcmVhdGVyIE1hbmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoT
+# EUNPTU9ETyBDQSBMaW1pdGVkMSswKQYDVQQDEyJDT01PRE8gUlNBIENlcnRpZmlj
+# YXRpb24gQXV0aG9yaXR5MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEA
+# kehUktIKVrGsDSTdxc9EZ3SZKzejfSNwAHG8U9/E+ioSj0t/EFa9n3Byt2F/yUsP
+# F6c947AEYe7/EZfH9IY+Cvo+XPmT5jR62RRr55yzhaCCenavcZDX7P0N+pxs+t+w
+# gvQUfvm+xKYvT3+Zf7X8Z0NyvQwA1onrayzT7Y+YHBSrfuXjbvzYqOSSJNpDa2K4
+# Vf3qwbxstovzDo2a5JtsaZn4eEgwRdWt4Q08RWD8MpZRJ7xnw8outmvqRsfHIKCx
+# H2XeSAi6pE6p8oNGN4Tr6MyBSENnTnIqm1y9TBsoilwie7SrmNnu4FGDwwlGTm0+
+# mfqVF9p8M1dBPI1R7Qu2XK8sYxrfV8g/vOldxJuvRZnio1oktLqpVj3Pb6r/SVi+
+# 8Kj/9Lit6Tf7urj0Czr56ENCHonYhMsT8dm74YlguIwoVqwUHZwK53Hrzw7dPamW
+# oUi9PPevtQ0iTMARgexWO/bTouJbt7IEIlKVgJNp6I5MZfGRAy1wdALqi2cVKWlS
+# ArvX31BqVUa/oKMoYX9w0MOiqiwhqkfOKJwGRXa/ghgntNWutMtQ5mv0TIZxMOmm
+# 3xaG4Nj/QN370EKIf6MzOi5cHkERgWPOGHFrK+ymircxXDpqR+DDeVnWIBqv8mqY
+# qnK8V0rSS527EPywTEHl7R09XiidnMy/s1Hap0flhFMCAwEAAaNCMEAwHQYDVR0O
+# BBYEFLuvfgI9+qbxPISOre44mOzZMjLUMA4GA1UdDwEB/wQEAwIBBjAPBgNVHRMB
+# Af8EBTADAQH/MA0GCSqGSIb3DQEBDAUAA4ICAQAK8dVGhLeuUbtssk1BFACTTJzL
+# 5cBUz6AljgL5/bCiDfUgmDwTLaxWorDWfhGS6S66ni6acrG9GURsYTWimrQWEmla
+# jOHXPqQa6C8D9K5hHRAbKqSLesX+BabhwNbI/p6ujyu6PZn42HMJWEZuppz01yfT
+# ldo3g3Ic03PgokeZAzhd1Ul5ACkcx+ybIBwHJGlXeLI5/DqEoLWcfI2/LpNiJ7c5
+# 2hcYrr08CWj/hJs81dYLA+NXnhT30etPyL2HI7e2SUN5hVy665ILocboaKhMFrEa
+# mQroUyySu6EJGHUMZah7yyO3GsIohcMb/9ArYu+kewmRmGeMFAHNaAZqYyF1A4CI
+# im6BxoXyqaQt5/SlJBBHg8rN9I15WLEGm+caKtmdAdeUfe0DSsrw2+ipAT71VpnJ
+# Ho5JPbvlCbngT0mSPRaCQMzMWcbmOu0SLmk8bJWx/aode3+Gvh4OMkb7+xOPdX9M
+# i0tGY/4ANEBwwcO5od2mcOIEs0G86YCR6mSceuEiA6mcbm8OZU9sh4de826g+XWl
+# m0DoU7InnUq5wHchjf+H8t68jO8X37dJC9HybjALGg5Odu0R/PXpVrJ9v8dtCpOM
+# pdDAth2+Ok6UotdubAvCinz6IPPE5OXNDajLkZKxfIXstRRpZg6C583OyC2mUX8h
+# wTVThQZKXZ+tuxtfdDCCBeAwggPIoAMCAQICEC58h8wOk0pS/pT9HLfNNK8wDQYJ
+# KoZIhvcNAQEMBQAwgYUxCzAJBgNVBAYTAkdCMRswGQYDVQQIExJHcmVhdGVyIE1h
+# bmNoZXN0ZXIxEDAOBgNVBAcTB1NhbGZvcmQxGjAYBgNVBAoTEUNPTU9ETyBDQSBM
+# aW1pdGVkMSswKQYDVQQDEyJDT01PRE8gUlNBIENlcnRpZmljYXRpb24gQXV0aG9y
+# aXR5MB4XDTEzMDUwOTAwMDAwMFoXDTI4MDUwODIzNTk1OVowfTELMAkGA1UEBhMC
+# R0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UEBxMHU2FsZm9y
+# ZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxIzAhBgNVBAMTGkNPTU9ETyBS
+# U0EgQ29kZSBTaWduaW5nIENBMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKC
+# AQEAppiQY3eRNH+K0d3pZzER68we/TEds7liVz+TvFvjnx4kMhEna7xRkafPnp4l
+# s1+BqBgPHR4gMA77YXuGCbPj/aJonRwsnb9y4+R1oOU1I47Jiu4aDGTH2EKhe7VS
+# A0s6sI4jS0tj4CKUN3vVeZAKFBhRLOb+wRLwHD9hYQqMotz2wzCqzSgYdUjBeVoI
+# zbuMVYz31HaQOjNGUHOYXPSFSmsPgN1e1r39qS/AJfX5eNeNXxDCRFU8kDwxRstw
+# rgepCuOvwQFvkBoj4l8428YIXUezg0HwLgA3FLkSqnmSUs2HD3vYYimkfjC9G7WM
+# crRI8uPoIfleTGJ5iwIGn3/VCwIDAQABo4IBUTCCAU0wHwYDVR0jBBgwFoAUu69+
+# Aj36pvE8hI6t7jiY7NkyMtQwHQYDVR0OBBYEFCmRYP+KTfrr+aZquM/55ku9Sc4S
+# MA4GA1UdDwEB/wQEAwIBhjASBgNVHRMBAf8ECDAGAQH/AgEAMBMGA1UdJQQMMAoG
+# CCsGAQUFBwMDMBEGA1UdIAQKMAgwBgYEVR0gADBMBgNVHR8ERTBDMEGgP6A9hjto
+# dHRwOi8vY3JsLmNvbW9kb2NhLmNvbS9DT01PRE9SU0FDZXJ0aWZpY2F0aW9uQXV0
+# aG9yaXR5LmNybDBxBggrBgEFBQcBAQRlMGMwOwYIKwYBBQUHMAKGL2h0dHA6Ly9j
+# cnQuY29tb2RvY2EuY29tL0NPTU9ET1JTQUFkZFRydXN0Q0EuY3J0MCQGCCsGAQUF
+# BzABhhhodHRwOi8vb2NzcC5jb21vZG9jYS5jb20wDQYJKoZIhvcNAQEMBQADggIB
+# AAI/AjnD7vjKO4neDG1NsfFOkk+vwjgsBMzFYxGrCWOvq6LXAj/MbxnDPdYaCJT/
+# JdipiKcrEBrgm7EHIhpRHDrU4ekJv+YkdK8eexYxbiPvVFEtUgLidQgFTPG3UeFR
+# AMaH9mzuEER2V2rx31hrIapJ1Hw3Tr3/tnVUQBg2V2cRzU8C5P7z2vx1F9vst/dl
+# CSNJH0NXg+p+IHdhyE3yu2VNqPeFRQevemknZZApQIvfezpROYyoH3B5rW1CIKLP
+# DGwDjEzNcweU51qOOgS6oqF8H8tjOhWn1BUbp1JHMqn0v2RH0aofU04yMHPCb7d4
+# gp1c/0a7ayIdiAv4G6o0pvyM9d1/ZYyMMVcx0DbsR6HPy4uo7xwYWMUGd8pLm1Gv
+# TAhKeo/io1Lijo7MJuSy2OU4wqjtxoGcNWupWGFKCpe0S0K2VZ2+medwbVn4bSoM
+# fxlgXwyaiGwwrFIJkBYb/yud29AgyonqKH4yjhnfe0gzHtdl+K7J+IMUk3Z9ZNCO
+# zr41ff9yMU2fnr0ebC+ojwwGUPuMJ7N2yfTm18M04oyHIYZh/r9VdOEhdwMKaGy7
+# 5Mmp5s9ZJet87EUOeWZo6CLNuO+YhU2WETwJitB/vCgoE/tqylSNklzNwmWYBp7O
+# SFvUtTeTRkF8B93P+kPvumdh/31J4LswfVyA4+YWOUunMYIE2TCCBNUCAQEwgZEw
+# fTELMAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4G
+# A1UEBxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxIzAhBgNV
+# BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
+# MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
+# DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
+# MCMGCSqGSIb3DQEJBDEWBBSg7C4QpTWVQ1zGoUwby2I/OqVgETANBgkqhkiG9w0B
+# AQEFAASCAQANuVvvMF4zxzRze9+7jcYVdMlzPiIk7ichFJ8ab/MVFOCPtqvS2Q45
+# mhCRWEpvFtrrZORSQrlB3IBmcdy82tdxUN88SrzJ+TD4cfNW5Ij+vIIx+F81a0Yb
+# idOqvt2P97KjBKLZlyYJzXNeTw8ri6r41woIs8J5Lbr0NHvPw0EP2B+CoDCt54NR
+# AmHr+IlfEYtJfnuL86ZpwLc7v1+gRk0X6npqakIinVgKyKnRBveeETs82J8kTctV
+# J3OxnhLUdb0oILoW5s8CPUnT6sE4+6Z3LahYLUp0kg4C/ceI+VTtGHk8WKWj4T2j
+# b08+KJ8iWSzrhEKdE5PB/H483DOkYPiVoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
+# c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
+# BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNzE3MzAyOVowIwYJKoZIhvcN
+# AQkEMRYEFNO6eS86pk0wbiUZ1s24Lm/yeY7VMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
+# QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
+# Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
+# hkiG9w0BAQEFAASCAQCLskGruvySUR6EfodxJlmDPY3BxspQS2yPkoj/7P/aVkJC
+# 0cWMIIxnJ9/GCym9Zs8lhAEPoO6IIUF+HuCtFYLeTFRkXDgiSBp1T6MbTmhi/AGu
+# G3PFi3sfh3orWGXBKYNpf6/hLj44GKco9YWKA+D4QdZ5aBYG4ieRgEUU8C9Kn5j+
+# 3JXiDAom+GPeVMs3tRZZaEunNevP6G2ES8q8yizcuyGYZOhRE71J5F/xgVF0D/zY
+# tsGI65/quigvqJte5gFb6dtBqiyOzhrlTtG8zYZehaCovyJFmUk3LxqZxtaOw+oc
+# 7UZzVZsSZz2kBFADjqfWwU4bxM2gYQ12wC36CqHB
 # SIG # End signature block
