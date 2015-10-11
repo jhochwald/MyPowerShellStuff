@@ -28,27 +28,27 @@
 #>
 
 # Every *NIX user known Tocu and we miss that on PowerShell ;-)
-function touch {
+function global:touch {
 <#
 	.SYNOPSIS
 		Change file access and modification times
-	
+
 	.DESCRIPTION
 		The touch utility sets the modification and access times of files.
 		Touch changes both modification and access times.
-		
+
 		If any file does not exist, it is created with default permissions.
-	
+
 	.PARAMETER file
 		The File to Touch
-	
+
 	.NOTES
 		Make Powershell more Uni* like
-	
+
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-	
+
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -58,7 +58,7 @@ function touch {
 		[string]
 		$file
 	)
-	
+
 	if (test-path -ErrorAction SilentlyContinue -WarningAction SilentlyContinue $file) {
 		$TouchFile = get-item $file;
 		$DateNow = get-date
@@ -66,7 +66,7 @@ function touch {
 	} else {
 		"" | out-file -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -FilePath $file -Encoding ASCII
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -76,8 +76,8 @@ function touch {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUA2yBvePw6wHJH46xyv1TuJqr
-# gdKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsIR0DFFvJ/2MKuPb/jG61INF
+# qxCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -220,25 +220,25 @@ function touch {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR7phnZnF9392hRhk438ppXHwVU/DANBgkqhkiG9w0B
-# AQEFAASCAQBaHsFS/I7/iuXrc5V8I6KSgOKizdQ0plb2T0+5itmqT1Fhb3pP7HAd
-# qBsVVjuho0y7bhnPfD0p+ChpL4BMqkilhk/nOorNfrAHSboP6R1UJzZ6Y9ojL1om
-# bEonOsrVd72D2goOh+n3pryP5R2nezWfwEEZvyK+KE7YPzvxY38yjVpFM5hQj7jd
-# 0boHPK6tUL2jfb4wQ/8LNxtXsKwXpMXUB/cGMKFWswsa2HO+g4LzFcPAxGwWbU3H
-# w+mZJKDtu5022DquTwUk0dwl1KX78Pm4mpcAo84NHAnfAC03S6C3fh1QpcRd8v+5
-# fHFuXMAkB59y1/TbfcRsTVtFjaFq18X3oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTCqu7GdIzs4eWWi+bMctygM3zDrzANBgkqhkiG9w0B
+# AQEFAASCAQAAdYRdxrWifgES04WAPI2qVqPk4B89zpv8bpHLYb/+UeJOPeZsR312
+# emkFGGpOdinRiGNkz4MTHS5g9NACJGL4SuirW769L9oXU1jUd8oG01jm7nGouGWJ
+# 13weRMWGROWubabKFeU/M31CndIn3ZKfOjoOzJkHEn3IAhCkZOnNQLxwiInONxJG
+# iIjsP62nlESYh8kot+GpBs4b9XM68ihv7uvk/I+OHkSFPOnD0EdgT+3P2eHb91rA
+# IJNsFUgQHREY0Ge03n6ruRB+jnS3GuumqQV9usZYR8VXiK30aYtaGgMrA/kAWLxI
+# ke6rR4K857ejDdNniSXHuzwNMi/yKHvloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzNlowIwYJKoZIhvcN
-# AQkEMRYEFHlxC/jmyh1XRzV6dIvCEDizsOQ9MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxOVowIwYJKoZIhvcN
+# AQkEMRYEFGNzkszm6ME5GBgoxy59n9BPPz3cMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAwb4nnAoAllH7SyOhNrcWGCJn9yBsyjhn0nkangUpKXQgh
-# xxxB3abMVk1c9AjMcsHn3dF83yBnl0hXbQuPR6Xs3SspDjikGUIW959YsF7tBg25
-# L/lkBbyJz/9VYsiJFGABH0pajsmXZK6MxGlDJLyGXYLhq3Rsv8g3hz131tNroEE8
-# zCyBipF6QC07327O/2p/ghfZkYTNM9qPuGKPsyfapYk9ZhCQxaP9AtJjOtIev1tA
-# syJfncT/vXsxIiiHzt2Y8xT2+VOOrsD/zucm7FuenCKUjuInCjUuDl6t8Cc4fo25
-# UbaClr5xjmF1RhNviyG3VA3yIGRBO+MJ4rklPJjk
+# hkiG9w0BAQEFAASCAQBSPE/vvZUvgRLJVN2FYMpGqPAUoWhLWmdC8RfuYmj+9EHB
+# zcQCMz66kWjPxNj5m8Au2Q0cvXENzFFrlCg7GEdOA0tEjGNWSZ6QloQlmVUvmtq1
+# mivzRCnuRONRLDAMT1MYj10SbeRicKSuS/jHAbBR4rHO1V5gDs0q/RuSZEPpQVba
+# zqCoDTNGbs5zsqPATHXlf8bvUQ8nxid27XBSRbwmHSXYpS6Te9kSlK4D6PflOlrs
+# kHP3p7B2jD1YTtwPnZRtKlSrOYbQsSltbJAK25CEUW/ZadafqDe+VzqX6/yBpK5T
+# zwb/9Lb2dtYLBOVYK5vRaif9pr1mp5ZMt79mpQpA
 # SIG # End signature block

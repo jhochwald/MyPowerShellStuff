@@ -27,49 +27,53 @@
 	authorization from Joerg Hochwald
 #>
 
-function Invoke-VisualEditor {
+function global:Invoke-VisualEditor {
 <#
 	.SYNOPSIS
 		Wrapper to edit files
-	
+
 	.DESCRIPTION
 		This is a quick wrapper that edits files with editor ftom the VisualEditor variable
-	
+
+	.PARAMETER Filename
+		File that you would like to edit
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> Invoke-VisualEditor example.txt
-		
+
 		# Invokes Note++ or ISE and edits "example.txt".
 		# This is possible, even if the File does not exists... The editor should ask you if it should create it for you
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> Invoke-VisualEditor
 		# Invokes Note++ or ISE without opening a file
-	
+
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-	
-	.PARAMETER Filename
-		File that you would like to edit
-	
+
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	
-	[CmdletBinding(ConfirmImpact = 'None')]
-	param ()
+
 	# Call the newly set Editor
-	if (!($VisualEditor)) {
+	if (!($VisualEditor))
+	{
 		# Aw SNAP! The VisualEditor is not configured...
-		Write-PoshError -Message "System is not configured! The Visual Editor is not given..." -Stop
-	} else {
+		Write-PoshError -Message:"System is not configured well! The Visual Editor is not given..." -Stop
+	}
+	else
+	{
+		# Yeah! Do it...
 		Start-Process -FilePath $VisualEditor -ArgumentList "$args"
 	}
-	
+
 	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+	if ((Get-Command run-gc -errorAction SilentlyContinue))
+	{
 		run-gc
 	}
 }
+
 # Set a compatibility Alias
 (set-alias vi Invoke-VisualEditor -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 (set-alias vim Invoke-VisualEditor -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
@@ -77,8 +81,8 @@ function Invoke-VisualEditor {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUe1eTdgV95hk+XKRod7OYm/OE
-# 9eagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/Ld23kD0fjMksSUGfYO4eizt
+# YZ6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -221,25 +225,25 @@ function Invoke-VisualEditor {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSrrttpWwQR0jU36yAq/Wdlv/Sx6DANBgkqhkiG9w0B
-# AQEFAASCAQCXXHq0RYQX4AR0B/K6Tk8wWK6yhHp/3tXuWJ2+cVeUH63g4jr3NQeN
-# zDlj4AVuMtpxRCS1k15bV0bGGwb2meSCCQiSw1q5o0sMlj0EY0JmWJaFWlEufRbg
-# 6EraivHnJOk3rpci65QwkUo2TA19inMpy0Nd7xlo9LvTBYX5gjCtPB/abj62Wq00
-# FXpjRRPs9NnjWNIl91mz5cSXmfj4MXuRj2jkj4kSTQarORQcezPhd3ItQGvionxD
-# EDpxJwyM1zbaB4OYDja4hJJoObExAtLCisPOebNu0at7reby17zRkku0QmVo8HiZ
-# UXuVYB/+ZQ2sXLM/6unn/qzXptGveGFZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRzOOkmNCbLl4LAbTvaKvukDRKnVjANBgkqhkiG9w0B
+# AQEFAASCAQAyHAB5nHVFtLJmOA2DXbh72aLxDG/ec2ATctVp4y2RoHT5AtFQxqV9
+# 75NExlL70CBDtR7G3qEnsOVyfsD0dPi7GsnJBznXUoKYPgkooLGVwkTmc0Zm5Zxo
+# +bUM+546uF8nbG9QwZu1by0F8ot0K8tweiCGQBsH0z/KiWvpqxCv3B4o+kxbIkOa
+# nBroF0vfkidOGrXZEO6uWeu7cck+i8/j8FNeQevqNkJKpokHmRTcBW7A1G4nZGPa
+# P9gZT0MOR40xsgEHaNMTI3OXF5P9QAGKPwgWEPB8l0xeDFTjRffJRUHD48HWYWoI
+# VnemSVktYdJLQPleVmc+r/fhQyaL1jVcoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzMFowIwYJKoZIhvcN
-# AQkEMRYEFGAmp7IOW1SZkImt1s/plvj6/HJnMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxM1owIwYJKoZIhvcN
+# AQkEMRYEFDjbqNRSaW0/SEw+hCwW9xGoGEdZMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBqeHow4LVzYt8Qe1yW86fSKWJSOtETJXFTIK2MjvLVNFbO
-# OQDSt6sjx7O3wUluOO9hsusdrba+w6cTnc20PObsL8MjIhPiXV49BE3sA8aQvfoF
-# 7tf9/VRO5ufy9M4aOqp7eDDB1plhaMnfkqgxRZAT7KUMjcK6W5H3A9mlTTsYQSWy
-# sBbDfNTpUy6PMWs9ItXOQa5CkWtuWOiVnlTrQIoTyfzK+ZoaAnARnJzdHEZRLAwY
-# 6HqG54K9XpW1TetI0gApgKhecVG2vIJBb7hut/StyYmgY0rZUv8dD6cgirDThHih
-# 6ahCMyp1EiDPEYiAJ/cTdlgv7jvXnYEOvvtHoAHe
+# hkiG9w0BAQEFAASCAQArcy1J+kBizchMD2ypVK5At+1KaOlmAwcZPJuF681UecY9
+# hOgji8JiZNH/fuQZ3PssGVrSjWkGlaPyh2Bqj/2Wdm/D6UUV2s41t/a+2V1JPhjV
+# uHG+76uJlKsDsC3FPIRj9tBZpxQpGBkiATl7RWg+GtbbwRkQfjK1x4MG596o4TwM
+# v/a3jCIS+xYKT0nFy01+5I9H2XrQixXhE7K8VaMp9smIgVxp1D9wXId4W3hkLHcx
+# 4hGCcs+wMq0hLRM5eZMtKDDeoUUaBYkIgDd2KCXTakNTyOB3ZyKoLdMlCEQ4FPnF
+# 5YyAwftc02ZYpmv4E+6SgDkPf6Fn97WRpT3C0+YQ
 # SIG # End signature block

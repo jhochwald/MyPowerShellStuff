@@ -27,28 +27,28 @@
 	authorization from Joerg Hochwald
 #>
 
-function append-classpath {
+function global:append-classpath {
 <#
 	.SYNOPSIS
 		Append a given path to the Classpath
-	
+
 	.DESCRIPTION
 		Appends a given path to the Java Classpath. Useful if you still need that old java crap!
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> append-classpath "."
 		Include the directory where you are to the Java Classpath
-	
+
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-	
+
 	.PARAMETER path
 		Path to include in the Java Classpath
-	
+
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'Medium')]
 	param ()
 	if ([String]::IsNullOrEmpty($env:CLASSPATH)) {
@@ -56,7 +56,7 @@ function append-classpath {
 	} else {
 		$env:CLASSPATH += ';' + $args
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -66,8 +66,8 @@ function append-classpath {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUeHTeuhTltoPJJ9lLlglojjDN
-# IuKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAi+3rLsN5R/3OeF5dIHEl9Jo
+# 6pOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -210,25 +210,25 @@ function append-classpath {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTKDMGiiIDkixD/VreRfgo8LdiCgzANBgkqhkiG9w0B
-# AQEFAASCAQAe0nAhMwXdJkElx8V12r7lYWjtG+fjew6hX18Nka13WbIyvc4QsHyB
-# lIMY+V0x2V1wOkAhLGnTfUmtY1ZAG+YkGbGfjsHcTPOPCWN/W076bM476/yE2MTN
-# b9DSh1j601DU0oDnFlU77Qxwx0gcVTQ0YrrRFzBXGJGHYLt1IH3itiCnAVh7Wn0U
-# AeF1xQKewCe8/GSu86c7aZQADRy3hLP6x8hWt+tNn2eo7vnZc9LRmayqOffM96T7
-# o+9zlBrCL4IgVEjzUugoGOjBiNNppTsoUcuBVeIykokQcQFq8k66x3iN3ie3tuQN
-# KkzXr9iXPsWGgHn3Xp+7GweYotPyzAjIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTJmuBnz+W3BMvZ5SpF5AAF5PA+kzANBgkqhkiG9w0B
+# AQEFAASCAQClz31vmvUWVSdnzfOOok07JjxhqNPZZtGCM/IQRbxWHEYcrM+XodhD
+# 26974MSrveXFXtCC0e0/cWrePt2arSZNGct9FjpHUdppQfTW1PsFuJgNJk2wWTSr
+# wJi4rbj1AJUVVy+ccqaTe52BiVujn5Pm70JtsUFTkIHxzmJWNWgOMPSz9yB4aLpa
+# 03bxErbQl88dmn92hYOp2cSusf0DlM2YfSUxjzxKXsPiq3ZdisIEP+sf6rTBqyxX
+# kLgqSdjs8ET+jJxbq0xc/rANDAc3fcIL1TjkglxkCEAoZniI/XaIn39oe1UqZyOm
+# s8lgGsVLjWx5AYyDlvL2aejxEop+2WhkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzMVowIwYJKoZIhvcN
-# AQkEMRYEFMFWk/TXSgD/RX+SvoItKVXk0ZWBMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxNFowIwYJKoZIhvcN
+# AQkEMRYEFHBPGfuk0og3AhCklDimKamyvIWzMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQApB+ev75IDAS6A9DYXahgfv4CMK2tg6KP2D1oaOfXpfPtL
-# NpYnUhrcRNRSKASFRb0Or/jpxPPNf7SzkGhi/TF0+kJuCPCNbY1qSjb4bS4QDZgq
-# cbSPXiuieX3PwgSOTivfpmpkEZYBOKuo9tA2SGq+G97cft5/p24EUiSyXlrBn25z
-# tSfva5H+LhZCMpS3UMaX3KQ+imyQxMr5XrYWjrQrL2MDDTeApYLtzz6QRmzC14yj
-# 4lDx+/PSSVB6pRJYk5Vt3UHdwF+kRWD67fPefEHHljuptQKNm+pdI2kZTNyHOF0h
-# nUtVa+D0l0NrWmepdXlqvneRItkdC6S1zOTp5h53
+# hkiG9w0BAQEFAASCAQA+WCHNM4WURXWik6AV1Dxgbz3aL4qTl3udC6GRMOrfoNb7
+# iIdq1mNcsbn/WZ+HMrV7G+zjT62tDISqoe/0rEB7Ja5qLETm7TE0e3Fffb47VOIY
+# kMNJDDYsVKoCaJtFiCog1UoH3hzRuolUIk2DHnEh1O82Z7AERhH/iWPlF9m6Tr/s
+# rJmrvsiKj4iTmLO5+5OiZqjByumaDkC1dPiy4QLRSFmibLgjHBva+Yc/P2Xuo62y
+# i+bQtOPvFDgJuqdzjNpPci9jdXhJ/QqnOLdvnkrWz5nhsxrTKa49E6aYbf6343bP
+# IuaEetRpXaZUzmvwS/w5nWMkWs+rrujaoLqx8xft
 # SIG # End signature block

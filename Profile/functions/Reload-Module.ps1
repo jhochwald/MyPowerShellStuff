@@ -28,24 +28,24 @@
 #>
 
 # Reload-Module
-function Reload-Module {
+function global:Reload-Module {
 <#
 	.SYNOPSIS
 		Reloads a PowerShell Module
-	
+
 	.DESCRIPTION
 		Reloads a PowerShell Module
-	
+
 	.PARAMETER ModuleName
 		Name of the Module
-	
+
 	.NOTES
 		Needs to be documented
-	
+
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-	
+
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -53,24 +53,24 @@ function Reload-Module {
 		[ValidateNotNullOrEmpty()]
 		$ModuleName
 	)
-	
+
 	if ((get-module -all | where{ $_.name -eq "$ModuleName" } | measure-object).count -gt 0) {
 		remove-module $ModuleName
 		Write-Verbose "Module $ModuleName Unloaded"
-		
+
 		$pwd = Get-ScriptDirectory
 		$file_path = $ModuleName;
-		
+
 		if (Test-Path (join-Path $pwd "$ModuleName.psm1")) {
 			$file_path = (join-Path $pwd "$ModuleName.psm1")
 		}
-		
+
 		import-module "$file_path" -DisableNameChecking -verbose:$false
 		Write-Verbose "Module $ModuleName Loaded"
 	} else {
 		Write-Warning "Module $ModuleName Doesn't Exist"
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -80,8 +80,8 @@ function Reload-Module {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU35j9X9Eugw4BeRAIzV/Qqr00
-# 5nmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBIz+GArBmIkxt5+fRFShAva/
+# WQqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +224,25 @@ function Reload-Module {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ0cXUiI/kib69VG2H7sL959cX+/TANBgkqhkiG9w0B
-# AQEFAASCAQCh0HfmQumNMPU3++1GHzawgsmYkH257WXWvfVX9Pm16JuaPnLugYut
-# nJjX3YaE0rGeWQXbYz+jpX3WqZJE7V30UYhC1hBaGyeefDlozqly1Ki83Na45AGF
-# r7sozEI2eU5uG38wEMqv6RH3XSilttl3ohrx8FR4fMtbqjSKkh6iWpllF5gY9A96
-# 9wJthpATRFVH++3qY3A4lSE8/hv+qzoLZj2r+RkYu3JLsMJKrdnJRgVKhNZi2uzu
-# BT81nNlV6DWLk9Pkc+bLe2bd55QbcEf8jDLcDf4rCDRIvaE35Sy63YIAehDAM2Y2
-# gHVOdCtVHWM9Lc+7jedT367LFClFfycboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSVZIuDQvlhp7lNSPnAwnme5qa44zANBgkqhkiG9w0B
+# AQEFAASCAQCUdSSLNuftG62XDIxBQ3ZXX5M+LzmC7gFcLGTBm7SYXlrX0evBuU/o
+# QgI970oQQO3gJSV2HWOFWOpEfmtqLg7R0nTvGy1cQFySSa7ewXydtcUc8zwRMyWR
+# RJfRq9Sai174pxUsERLSxSslWlWmNctkDLezUU9ffBkz7Mv3uZ+6+29hNAfTGx38
+# X0iwk5xQL1u0UDkKi8TjYLThFY4/O1JKyvcyOetIAFSSJbSU0hLN2Af76CSgMHKT
+# yqA08ZPirB7wCe5lX4jxvZYgCd5z1qtj+nvmfYlrxWfSmHtBlEVliWeLEUWZK8mw
+# cidxNtcNOxWVxDATt0/1d2ZRpgGaat4NoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzM1owIwYJKoZIhvcN
-# AQkEMRYEFJkjPFhkdh53RO8h0Ne1gBLgGG3yMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxNlowIwYJKoZIhvcN
+# AQkEMRYEFNAYBT2KtZpiso0xmGTKMJIcu9+nMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAStdXxLIp2upJq30lVxToEb6WpY01Cc8vbTf8dv+YGDY26
-# RijJtl55RI4m1AoOPYDG4Ohtq1z+5lnF+aZCdWEjQn7aarndzuYaG5M0p9Ujw97d
-# 2jvk4uQDqsOvHG3MJ5kbumzaJQpK6XbzQ65z4wNZQOo7cqAkf5VkJ9B064PE2e/o
-# kStUGDq2WdErQNVbEhcdneVLh74SCpVALzzPArWrJJ0dJtxUAeu5QOJMcVFElmuS
-# VH1HHPJyqAoFRHY+9Ii8Me7EzgM+8w0HQbFM6hz2knSPR/HsTTucNr1AOfGmhMGa
-# Vx5UTZMh4tgSScLY2JXHRjtbDY9Fefq2tMHTXE6T
+# hkiG9w0BAQEFAASCAQAyfLaO+OvyKlOt1elzfdJigQNOXVEjgocyVbZB5qs3FlOr
+# NU4bjn65QF2EKFVrUzj7DvP+BP1OKv4AQkC21P7aVqudcX4DuYLbNoF0eDKs1gHl
+# 6jjULlv5Yuq3wk+KhAp+L6WMR/bN+Jhe4waF6prxIx17OY+WBZiDGBTYkg0VOlfB
+# 2DHo8YtZ16xR6ZpHKO/sdbSDxfqBIlVRvroEoWdUFGqnpzPaRK1Y0iYHXg9WcLFo
+# 88qpqoMnlMHeI40D34IN4xQFwj0koqjqGGZDphKTcFMBHG5zfMf2bma+oLvDWupj
+# tgT2scBLeciWn0CYfv+8BroyUVfP0td7QW8XrZd7
 # SIG # End signature block

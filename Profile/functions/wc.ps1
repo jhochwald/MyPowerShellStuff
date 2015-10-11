@@ -47,17 +47,17 @@ function global:wc {
 		hochwald.net http://hochwald.net
 #>
 	param ($object)
-	
+
 	begin {
 		# initialize counter for counting number of data from
 		$counter = 0
 	}
-	
+
 	# Process is invoked for every pipeline input
 	process {
 		if ($_) { $counter++ }
 	}
-	
+
 	end {
 		# if "wc" has an argument passed, ignore pipeline input
 		if ($object) {
@@ -66,12 +66,12 @@ function global:wc {
 			} else {
 				($object | Measure-Object).Count
 			}
-			
+
 		} else {
 			$counter
 		}
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -81,8 +81,8 @@ function global:wc {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCWY4q24f8s701B5/VKyb9gXG
-# 5/mgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7VAKxql3IePI9R+e9uEmbfcy
+# 8bOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -225,25 +225,25 @@ function global:wc {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTh+UQGsSeOsOPRiPMFC8Y8VPezrjANBgkqhkiG9w0B
-# AQEFAASCAQBvNzMPHMQiErwrYIbU245iuo3mXBS/f107wxorNDNoL8CVlb7S+WC9
-# Ks74HZoN4OeU9y6fqysMRaGsLolRgzqpIJ90wdz9DeNZtLcPluY1IBMXi+0q5ReA
-# Mpibwuuk6spV9mar/nGyC8DoI6jQicc59vo6tBjHO4vUWCmyaD4kv6wAO0h2lmOO
-# 7WAc1cFkXjb6r/4eGtElCz8AzxPtMoacPNsI8lriDj5e66Ab8L1yjv4S56nS1Hnk
-# lP1DEGBdJLpOU/e/Ll2vvzX+VqUHac8VV51RPkhSj9NLFtf1RN9aRVEaaLZKzXij
-# /I87BIET/x2RBuuzmaJdewrkYOLWHUXkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTAiBojzNpz4MX4ovo6bReA5qvGfDANBgkqhkiG9w0B
+# AQEFAASCAQAycIliZhkrS82AHmKsuZH1hWIylx8l8+fG4iF9uQUVCDVmmXLRcRVs
+# I+JypprHuEGa0UR5gzWAY9mWicMw7n9Wd/x+J9NZIrjNDDI5j4bGI2PD/p6dhpq4
+# 2KZitYIL+AdCZdr19EhfBPOuo+hvjPmsvuF4CAJ9vAyeN7SqnfQthR95ltRZye9n
+# T4fBQpFDMK/WcPidKxKzRdmmCt/CooyRZfcjMZfBdUiNadsH/KvfRjsyxvHvgPGN
+# wmGpbERuWwcGrRzP1JG0N9X3uVVMDCP9bPzjuft964AJIkANOgpTPia/xX7mCXtH
+# m/Yn6Vh8mZJDktMk2Tc++RDrb0fnjhvGoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzN1owIwYJKoZIhvcN
-# AQkEMRYEFNg6YjwjhGh5qTf++YxS8rufOXejMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIyMFowIwYJKoZIhvcN
+# AQkEMRYEFFiNwTHC2mdWYHkNjPEs2gkiBBgfMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCsY2C6P62TIVEeVa+R+dD+cbFSuHPY2Ug2dNURepw2rh3C
-# W3V9W/RoIK8Z2O6xnBoHcM0VqE5hlrMLnO3cP9jKniBkxGRuTOJJPG4TTJ/pNUiQ
-# qfd4lwfkPhyYfxAy5vMjAezJdjIImRNWHeNUCetQ2F2qqRjm+ectgo1xRJBiRClC
-# TP9KWiJLmzNEGdXVH5tQwvjL4/+i0FJ5+hKyI1SAnnIwTZQHsfiHgAbLKyI0Lp1l
-# rpJfhc5umV3Uebh1+mp2/aRQTTCsOl4k7DVVLuOeKh0TfOsiIBURgQJCMBsV61Gg
-# JRz7jfnY15YLzxoLq2WHnnqEykb/aho+2Y5iv5om
+# hkiG9w0BAQEFAASCAQA2O4RFGGv6WYARf2X81lPihzQOawGcJDs+KEUHzRLAI6Ds
+# Y1hW9A1hqsw1VVIY6KsEeCuDfyjiYk5ibKKDQbGlnjdDJSBQJNU/c11XhN9Eq1Rv
+# l6t8PDlq+7CRwdyrnV7HR3W+rQWmlnBJMFNIsE/IlHe3kvhL8qArfeXmvuzfYSIK
+# ohgp3rw7BZyE+RTg/WO6KZV7+7ROoe/rSno8gwutEi4bwWF3Ov+lyoGBNYcJS9n/
+# B3eikRWgczu2c9mxhGfvQnGUiC+gMwCF3LZmHl9UH+HO19FPv/HrPi/sdUsRG6Ic
+# DHXZygE77HBGYQ57VYWcouXbrtCkCJHmMfBjzJAc
 # SIG # End signature block

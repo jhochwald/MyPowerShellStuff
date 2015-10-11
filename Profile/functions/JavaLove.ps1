@@ -27,66 +27,66 @@
 	authorization from Joerg Hochwald
 #>
 
-function JavaLove {
+function global:JavaLove {
 <#
 	.SYNOPSIS
 		Set the JAVAHOME Variable to use JDK and/or JRE instances withing the Session
-	
+
 	.DESCRIPTION
 		You are still using Java Stuff?
 		OK... Your choice, so we do you the faivor and create/fill the variable JAVAHOME based on the JDK/JRE that we found.
 		It also append the Info to the PATH variable to make things easier for you.
 		But think about dropping the buggy Java crap as soon as you can. Java is not only buggy, there are also many Security issues with it!
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> JavaLove
-		
+
 		# Find the installed JDK and/or JRE version and crate the JDK_HOME and JAVA_HOME variables for you.
 		# It also appends the Path to the PATH  and CLASSPATH variable to make it easier for you.
 		#
 		# But do you still need java?
-	
+
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-	
+
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'Medium')]
 	param ()
 	# Where do we want to search for the Java crap?
 	$baseloc = "$env:ProgramFiles\Java\"
-	
+
 	# Show Java a little love...
 	# And I have no idea why I must do that!
 	if ((test-path $baseloc)) {
 		# Include JDK if found
 		$sdkdir = (resolve-path "$baseloc\jdk*")
-		
+
 		if ($sdkdir -ne $null -and (test-path $sdkdir)) {
 			# Set the enviroment
 			$env:JDK_HOME = $sdkdir
-			
+
 			# Tweak the PATH
 			append-path "$sdkdir\bin"
 		}
-		
+
 		# Include JRE if found
 		$jredir = (resolve-path "$baseloc\jre*")
-		
+
 		if ($jredir -ne $null -and (test-path $jredir)) {
 			# Set the enviroment
 			$env:JAVA_HOME = $jredir
-			
+
 			# Tweak the PATH
 			append-path "$jredir\bin"
 		}
-		
+
 		# Update the Classpath
 		append-classpath "."
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -96,8 +96,8 @@ function JavaLove {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCZZKRonQ5Jf9WFmKEep5I+CJ
-# Cg2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvjl1yqpGI0fyvfNzXgTfVmns
+# oVqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -240,25 +240,25 @@ function JavaLove {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSkAWsFEBuUkr95KXSRQ9TWFH6EIjANBgkqhkiG9w0B
-# AQEFAASCAQCeUP6UvjSj6Iy8iMYUA2MzrnXuqjiIt46dfB1jvJnScvnIZ7HKjEIB
-# Tq85t+WCfS+O3bywg8Gywi5fnpgAUMo19UUBUCs3Qvp0zTxWOAxL79DufSOCzp//
-# J6+mVfo9OUUf05kIXzNTfxW/BY0xl/FDiO2hAz0YgvPEoAFFCIw+NBVmhYMPDIfQ
-# 5LaEElXz+Qo4yvBx8WQRzwvsAA4bk+NGZQ+QRt/NHBhbEaQUZqk/aXoMVUL9HMJV
-# HKjVR/PKrxUfYoLFn7gfbyS79aIG7glCPZmzntymFnANhO8OgKPR9QUuLoR2SSU6
-# EARlIciH0DCxtV8y+SGje1mJqfiOXIRNoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTAUWqr939jP4aYNGkJbbu5aNVPxjANBgkqhkiG9w0B
+# AQEFAASCAQBFQOoOZ9ph7Pdwt9scktm8faNT7PTW6KDoCbGM1j8DcP5CZOJzJdfY
+# h1H1sWnOgDKVJmCa5XxSb5/DYfw8R7hYb7+SpD2EWffiWaeulC37udK9bPhmK956
+# umQs0MQD2ZQznD8+EXB1qOg8erfJ8aSt4JnQ9yk2ntwaKCbVAD+zPt81ivmxNVph
+# oscb9mfOzZFNpRZI7HeurBG1Su0U/WVSJePxjojLOEXKHdUBK/Fgz/R/8LBTV2hp
+# AHDuOHX2eF5MBWRqlRzhJFhBGyW5I6HgG5OSBntEkNMnLhbuUeggomxFm3JjcFjK
+# dC3SVvwiMrWIiqzjRrRfo/Ys1QDjjmqXoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzMFowIwYJKoZIhvcN
-# AQkEMRYEFJ6BaSZ/4FFLlKD5WMsSTZp1ZkQWMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxM1owIwYJKoZIhvcN
+# AQkEMRYEFEns8I7kojPYP5TcgKrNVvpu/QtuMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCZm2qnCBMYR6arA4bLee3O+t8hJp7Z/JuunmSFksjpV2TZ
-# OCxLhLnyHhlZP76U7FDon1L168ROWGxlSPtu6Li17vHOEEU81RDF8gaa0d0sqFYZ
-# gE/CiEmkMLLGoAurXkxwYZyQnRP6b9x5zOmFzPyyiPKI3jnL6NgCthpEoEMPE1sy
-# mY9Q0NnHI0p6vhQ6JqHkYTK5+K8ox5cy9MT3lqZTIR+aWYpaFfx1twum8/6ZzeB7
-# iF7wJL3YGi9aTYe5oVbpKUU4//8tVpu4qtj5TKmEZk8M1LbvBdOMiCMExEHYinDN
-# 901YpIWkzMmxcDHhSBegVeNb+jWmcvcSxDVm8q33
+# hkiG9w0BAQEFAASCAQAG6vC39uXVAzpi0lFGHmMQ7fZAV/dWPIk38aLFGXad7FF2
+# cEd3mU2G2bjT9B4IvpR4lU/4rc1Ai2U2nc44nPt1ct0lIp+0P05HzXZ1zCp/fmEP
+# hIHtjhloeVWdAXEvvt/Ke6jPII/YqbkUoHA4UpLqag6trfsa6RXEijsQaqiUbvDt
+# l4HHLOV4ggO9ODdAy3jcNBVpXF4ICJ9Y+O87x0Kv3B4MKDFtwZhLg1Rf4jV7CINK
+# 44VtyTAGF4drP3HVm9A6RwwfnaM90j8jHsZM7Brpl9VkI8RIo5P9Y0IjrJe6eAQh
+# DRkcUAr2lVYuPQ8MxTqvoTT1/FgFT9R92lb7s0HT
 # SIG # End signature block

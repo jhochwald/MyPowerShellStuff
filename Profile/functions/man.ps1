@@ -28,34 +28,34 @@
 #>
 
 # Make Powershell more Uni* like
-function man {
+function global:man {
 <#
 	.SYNOPSIS
 		Wrapper of Get-Help
-	
+
 	.DESCRIPTION
 		This wrapper uses Get-Help -full for a given cmdlet and shows eversthing paged. This is very much like the typical *nix like man
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> man get-item
-		
+
 		# Shows the complete help text of the cmdlet "get-item", page by page
-	
+
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-	
+
 	.PARAMETER cmdlet
 		commandlet
-	
+
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
 	clear-host
 	Get-Help $args[0] -full | Out-Host -paging
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -65,8 +65,8 @@ function man {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU76j2Ew1JUEeUAoRo5FvHUoqA
-# GMKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTGohERcbAaBJXk4kpBcjBp8j
+# WQmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -209,25 +209,25 @@ function man {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRJ56sz3eBl6aVipXJ9u3qxvaLXhzANBgkqhkiG9w0B
-# AQEFAASCAQA/Y41yjy1nldVytyC2aaE0INNzWKSVQnqLjIO24eba7oRQ2SsjEXEt
-# lO1ZNHm/2IwOU1vkXXfg0vvInAfg5RZT+W+KB0KLeevLqOgsuq7gjAsIzSTlASn4
-# POEAquJLCRjYhzzIIZDIAdPo/JI5UhL7IK3C8d47JIcYblSDkZIpz4gsQXLfpSqX
-# HOAnOlf9um0x3XLbZT2tqWEmiLWsB74mYrwGrkxtvu0JCFPAOCg9OFgu8Wp1tdp/
-# BqV3urWqI8d3+5sRJzEs7suEPFjo5xdEYgmCRmKLcaTJznBFSYdEOH+gcYRQ7t+w
-# aoCJ4GuFovodcZHXMN0yVPCYHnUbDIzgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRLJrjt4bKIrWKixMcKJWKAqnzOPzANBgkqhkiG9w0B
+# AQEFAASCAQBQwtTVktaP5fnwW6pHv3mcnEChQzFwf2PqrX+ulvoaouEuWmoyG2rE
+# IZpy/v4lOK8RI23BNRmf4kc7fMDmibt9a+jkqRWlzh4cENB19fd+p7V5tluzCgwS
+# ubDkhWdq8XLq+/6VFsgLA6aHXJI/FkHR6E1ysBMShZZv8YUCWWAbgWwnrPswv891
+# 7bTg6ixQlCTV7pl9Bx5zEoZpIdeiViJ7VbiKwwD8w8MN9Adl0rBN+RMG7nxJ0Vig
+# LSBQFhsDkvo9Oo5lI6k65ahQVzJ16715s0D5LQPIkgmUJJcAlxXtu2l+f9k7LASx
+# BmWBctG+T9Vm/Jo2dTxq1+767jLC3LPsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzMVowIwYJKoZIhvcN
-# AQkEMRYEFDhqJewd3h3+38Mj0CLfYuuVb9QJMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxNFowIwYJKoZIhvcN
+# AQkEMRYEFBo53nbxtNPVYPDGLM9VUhZkBlxcMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQByLHLPBr6LwY2KjUsNYoUmYzvtU+EqByEQdXt8Z3oEOP/K
-# 83Ybau6fVlfTNHY70doWRkbGXZ9iWmbh4Q+2t5bHupGJHsllgWoN9lrAVxtGJ8nd
-# NaTgFqGXkgPyssr0dUZ3/jRmcodyMa5hgnKi3eQpuX5IkJnFRw6keS2i0MUSy0I6
-# eQUgxITt27gEa0z+vdKXVVCvOYZsRJP1c7FXH3WpLmExqQbo0mh6QSmlo4jrHQlC
-# 75NrJkrPz5wb/FiOwG7y8sxJ4Rli2mHqr0eXzyBosCGIOnBPGmcKrChXyEy7nCHn
-# i2lM01W6dfpi4nFSvsgR6ARGSf2I9wvIcVnzjRoP
+# hkiG9w0BAQEFAASCAQBYa6tcM5mK05I7t6hWOHoBQ1nPaNcUAA8xPrMtf8KHianf
+# QWR/y5pXt5pypeih078TI/ozImGHLOnRLXYbeXvBdroJDOvx/lK8uH2r34DQjqBS
+# 1lM0rOweqem78DS2uA4zwMw8nEIXhWAeAJWiMbWZERb2jFkrjdyDk0sfk/M1qZ+d
+# 7cXccJ9VX+uQ70afyLXpC62RTzDNh5OuCh7pT8WNMTpCT/UdbegXmlCH9Z8754Hm
+# Er1Xz2DQX7M1VclV+zoMMFe0xOsbtxbcrWuKS+L68T71+S7QCORA8oJuQjejxlPG
+# K0itsxxzIzzCk7VUipJvLChm5MBnhCgjB9KykkA/
 # SIG # End signature block

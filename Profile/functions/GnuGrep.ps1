@@ -29,36 +29,36 @@
 
 # Old implementation of the above GREP tool
 # More complex but even more UNI* like
-function GnuGrep {
+function global:GnuGrep {
 <#
 	.SYNOPSIS
 		File pattern searcher
-	
+
 	.DESCRIPTION
 		This command emulates the wel known (and loved?) GNU file pattern searcher
-	
+
 	.PARAMETER pattern
 		 Pattern (STRING) - Mandatory
-	
+
 	.PARAMETER filefilter
 		 File (STRING) - Mandatory
-	
+
 	.PARAMETER r
 		 Recurse
-	
+
 	.PARAMETER i
 		 Ignore case
-	
+
 	.PARAMETER l
 		 List filenames
-	
+
 	.NOTES
 		More complex but even more UNI* like
-	
+
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-	
+
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -80,9 +80,9 @@ function GnuGrep {
 		[switch]
 		$l
 	)
-	
+
 	$path = $pwd
-	
+
 	# need to add filter for files only, no directories
 	$files = Get-ChildItem $path -include "$filefilter" -recurse:$r
 	if ($l) {
@@ -99,7 +99,7 @@ function GnuGrep {
 			$_ | select-string -pattern $pattern -caseSensitive:$i
 		}
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -109,8 +109,8 @@ function GnuGrep {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUiCAK7CTYxIN4bzbIqfzofQav
-# XcOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrBlRHyjqNpr1MStXtFLoXIko
+# FyWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -253,25 +253,25 @@ function GnuGrep {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT8CgZiAcnV4c9kAdhf0qT7GZX66DANBgkqhkiG9w0B
-# AQEFAASCAQBqD3Sgy1E49SsrcWzhq1tSWbr2lufjm1fgP0kCJfUi0FWOLOSMApWh
-# kpd357NFXN1tCzWjyHw3WJo8mP9Ey59xXcsxQ+oQanvEIvo5jzQqhjO1or6DIc9G
-# mAUeIFSloRp7eul8tC2FqTSGi/RAL0yK8pnQvD1zXyMDdlTnI3+osTCXYTuVbBHs
-# tFRW5phPLGbXvIKu85nCJCbzSoavRGxw5erWQJMP9hmwqbsDJprMQ6Ouy2jJqLAU
-# rM6yT2W72wv1jweWzOzHxyaO4sdDbBw/2TuDObZPwx7PQv5/clfSEMdXrcy3CPk9
-# ryf3vKlGDCVC5rzWKBCU+iYK7kni7kTgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTXtFVAsRmGEBGAVpHJOFFVwPpaWjANBgkqhkiG9w0B
+# AQEFAASCAQCnBUavSgI1GwfSq4XwVkRIh2u6teI/49qvJ23FMRX/KHu5cy9jZdJr
+# kwxEkqNtguO8rC8NFqzmIWaTYdFzu77DZnWf+4dbPpAUoUtWwznobp+2yRaw/F6q
+# av94hHvp12vtN0qP+nbhUaZi5o5f5j8HkVqOYjilrMlco/V8aTaXl7AW3g5pzjS7
+# IrA0Ps5mZwf1WPXtncTCYKLWRYItE4CdlldgehUJ4LdnB7sI97F55MmV3HKR5lJj
+# gMJbCggP0phXaroclNvXHmJvdncV/78DVni8jUn/u/jw4six06q52eQmGK8Q/Wf/
+# rWyfElDV2T8ESmGZ7aBvYVTKbUNS22X7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkyOFowIwYJKoZIhvcN
-# AQkEMRYEFHFpGrLgjb039/rnbQJc2O2D8mYeMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxMlowIwYJKoZIhvcN
+# AQkEMRYEFFnqen4Jg7+8OMGAFjrDFeVIlqnsMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCYDzE7NjqvJzkk7RpWY9iNBFqxj7rr1kCh1t6bY9TQVTVR
-# LNS8PNuS2O6kRtutJtmrofz3Of0hUpTRyRh3bD/8BAGUZB48KDdRqK4xtmlV5AB7
-# xgmXxX9l5RTC3kG/ZjjLf+0pG8DA/4D4P+2svXr7L/lulp9BG1f0d+TmVFd5gSre
-# Pt10pbJ9BkGnOnSSxfzEsbzbM/Gr81phuAz0VEPZK6XuVTRAGspe+9rPYPU6Tq61
-# RW3TMWYaITVFy3m8bFJOWApL6XyvTew7LV2Ox6b9g83aj8XnFlCsaKufWpPEx6fp
-# t/F+EVHXtSX81c7soHOLNE1vslxB9uAw6yvNy+pp
+# hkiG9w0BAQEFAASCAQBUsZobl6jNDmuO3MX3R6SMvQ8VE/+76tnOAlgbQG/ZDofG
+# TLlDhUt3sOj9lwgcm8teP7CSm62asvO5Bbxia5Mc4WXYCIndD/4kXOKz9+8/+MAN
+# q/zqEOkgsj+uXcSR/w/eLx6X8fb6gOmPurIaxpzklnrHc9L110Z/RFMMyzkURVrX
+# ug9bef6Qrp0BOK1NQoPDz0m1zzXjUq//aav+YcpyDXikV8DOOD2wvO3eSDFuwRns
+# zehZDAwm1gd/KG5XsyKSCgR7Na140li8yzlFOObn14luqhvqMk6hyq43sSq6oe1B
+# zkjMVxpRoE3VokgQCp/eaz7tmIcLkQCrdijYLoVD
 # SIG # End signature block

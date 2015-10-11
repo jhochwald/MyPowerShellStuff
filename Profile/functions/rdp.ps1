@@ -27,41 +27,41 @@
 	authorization from Joerg Hochwald
 #>
 
-function rdp {
+function global:rdp {
 <#
 	.SYNOPSIS
 		wrapper for the Windows RDP Client
-	
+
 	.DESCRIPTION
 		Just a wrapper for the Windows Remote Desktop Protocoll (RDP) Client.
-	
+
 	.PARAMETER rdphost
 		String
-		
+
 		The Host could be a hostname or an IP address
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> rdp SNOOPY
-		
+
 		# Opens a Remote Desktop Session to the system with the Name SNOOPY
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> rdp -host:"deepblue.fra01.kreativsign.net"
-		
+
 		# Opens a Remote Desktop Session to the system deepblue.fra01.kreativsign.net
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> rdp -host:10.10.16.10
-		
+
 		# Opens a Remote Desktop Session to the system with the IPv4 address 10.10.16.10
-	
+
 	.NOTES
 		Additional information about the function.
-	
+
 	.INPUTS
 		String
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param
 	(
@@ -72,13 +72,13 @@ function rdp {
 		[string]
 		$rdphost
 	)
-	
+
 	if (!($rdphost)) {
 		Write-PoshError -Message "Mandatory Parameter HOST is missing" -Stop
 	} else {
 		Start-Process -FilePath mstsc -ArgumentList "/admin /w:1024 /h:768 /v:$rdphost"
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -88,8 +88,8 @@ function rdp {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZ4+jPqwuGM+XnKT0MSBl9n3G
-# 7oygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsb2BRzjLjX8qcsgdXVjb16Ko
+# uCOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -232,25 +232,25 @@ function rdp {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTKOd5h2h3FBl2DrO+2qnBbBpYVMzANBgkqhkiG9w0B
-# AQEFAASCAQBGWPnN25rSdaziCg3X8pQTBta+Z2zUi1us4HYJjX/5ItScjq88g4br
-# O2jBMo6LjYy1W3oa2GEaz0uYsCI13Sv+BlDR0nvaDEnSmNsG7c0W6GrVO1Ir7u/Q
-# BM4bN9jrvoqka69rZJX9WlzSTFnjL/2QWwdUdRMa4wMR6TLMVGg+r4rVIbFFkRki
-# nvak7c/M84coeaY/+UIMYgA53/la9/pqOKqpFHL6eHa52hrphVR/RJ81fZNNm2sX
-# wXzxj+itgaKaTXxuuQD/sjR6R5q/7g/QA56jLS3QCyRCL/3lyv0EjkRBmM2LT9DS
-# KoLqOX7rnZ/ic89Vf/iGlSMlRfWULw2coYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTAAyfAmOG8semhyQIfrrWMebsfszANBgkqhkiG9w0B
+# AQEFAASCAQAAnQQJxwiOwyEj8P23/A2Vqg/oPcjdvl/xbqS/122wob9AQsmuqM7K
+# Hx8YfM8mlbWYOWcb4/5c//tde+9tLS2qNqrIsRS9iY2jnz4MeNMg3rpySTbXFAWP
+# 9xKLdFt+LwUnX8VbgcdBSnbx6PF3/7pJuDgHEsKkQDRfOTcYXQoyauYomd0kwZJh
+# Eb3FywhxQr3avEdxJ5JjsdS9Bhm2z3axVa2xVBCCIM/T6tIStFAZm4iNpxi2fWF0
+# GsDWxe7QQTXRYjcFn4EuL67VcG6IioGlIcYiDyYFeiJY8f9c/IPfvWEtv+0DqzUu
+# wsbRQUAAPVFQn/hHzMfOErPyjDaOr+CWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzM1owIwYJKoZIhvcN
-# AQkEMRYEFOC7Xt7VCYOkCx9iwdm3/liIWV/WMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxNlowIwYJKoZIhvcN
+# AQkEMRYEFNDh7btmLj7MoJK5KTYrfnU9xM6SMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBFtd+1H2bYEGpIkVq7rNHf/wwzjeoZNxhlaLL5z4hK31vt
-# RCATveWR7ZWSkMZ0JVvsMcx+iQApVFsp4RsPj6Spg9IQhe9UHQd1jQMGwzeUqyZ2
-# n1gNjaTeFUqnTdtAdgrGCnP6lY/+yrBCbVLR2dO4xL8wud6j2sWnAqcM/GBanN4S
-# Ukkg1Nbwwj5++oFKOrbV5j+/teG/IdUcl7AFmWU5hTpM57PS4Zr+ZaW0d669b8lq
-# RJe0G6dhVcI+x4knQiDEXGXA6rJ7Tglr7EkaryNjFNK8xk6M7kqHQlAIoXr41qAs
-# Pb6EifrjGU7mGSHJRtIffrfe9SQGRfAiwRAgChB8
+# hkiG9w0BAQEFAASCAQBz+W1Osvrw4Qo08i2dPsCFV/o8devkw0mV/Awx80HxkePI
+# ZMLjLUC41ph2xIsXIUIe6zDY+VRxpMPf0TbDRsG2hO0jijOOEW/4PVDODSa/pCZf
+# uemUP68OOZF1G3EZtlykjDnuxZUW/CvpCmLgRa1+s/fR5Ng0Gkd7SKS0vgiA5o5s
+# 7MHrI0nMnJRLiOKvE+Y1Z8UWzdH3qCI8GapqKm495rsI9rP69W6iMVf5HFar1Es+
+# cAxE06nA0aLtZ5dsQ/S01ChjEvS9lkz9YNMoFD5fG58/sJ2dFKIkjFB/5O+zLcMT
+# MzFocUIOf4P9uYJKyGix2glGbkGboVpFp1zdPxw4
 # SIG # End signature block

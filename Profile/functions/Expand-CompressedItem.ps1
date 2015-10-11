@@ -27,76 +27,76 @@
 	authorization from Joerg Hochwald
 #>
 
-function Expand-CompressedItem {
+function global:Expand-CompressedItem {
 <#
 	.SYNOPSIS
 		Expands a compressed archive or container.
-	
+
 	.DESCRIPTION
 		Expands a compressed archive or container.
-		
+
 		Currently only ZIP files are supported. Per default the contents of the ZIP
 		is expanded in the current directory. If an item already exists, you will
 		be visually prompted to overwrite it, skip it, or to have a second copy of
 		the item exanded. This is due to the mechanism how this is implemented (via
 		Shell.Application).
-	
+
 	.PARAMETER InputObject
 		Specifies the archive to expand. You can either pass this parameter as a path and name to the archive or as a FileInfo object. You can also pass an array of archives to the parameter. In addition you can pipe a single archive or an array of archives to this parameter as well.
-	
+
 	.PARAMETER Path
 		Specifies the destination path where to expand the archive. By default this is the current directory.
-	
+
 	.PARAMETER Format
 		A description of the Format parameter.
-	
+
 	.EXAMPLE
 		PS C:\> Expands an archive 'mydata.zip' to the current directory.
-		
+
 		# Expand-CompressedItem mydata.zip
-	
+
 	.EXAMPLE
 		# Expands an archive 'mydata.zip' to the current directory and prompts for
 		# every item to be extracted.
-		
+
 		PS C:\> Expand-CompressedItem mydata.zip -Confirm
-	
+
 	.EXAMPLE
 		PS C:\> Get-ChildItem Y:\Source\*.zip | Expand-CompressedItem -Path Z:\Destination -Format ZIP -Confirm
-		
+
 		# You can also pipe archives to the Cmdlet.
 		# Enumerate all ZIP files in 'Y:\Source' and pass them to the Cmdlet. Each item
 		# to be extracted must be confirmed.
-	
+
 	.EXAMPLE
 		# Expands archives 'data1.zip' and 'data2.zip' to the current directory.
-		
+
 		PS C:\> Expand-CompressedItem "Y:\Source\data1.zip","Y:\Source\data2.zip"
-	
+
 	.EXAMPLE
 		# Expands archives 'data1.zip' and 'data2.zip' to the current directory.
-		
+
 		PS C:\> @("Y:\Source\data1.zip","Y:\Source\data2.zip") | Expand-CompressedItem
-	
+
 	.OUTPUTS
 		This Cmdlet has no return value.
-	
+
 	.NOTES
 		See module manifest for required software versions and dependencies at:
 		http://dfch.biz/biz/dfch/PS/System/Utilities/biz.dfch.PS.System.Utilities.psd1/
-		
+
 		.HELPURI
-	
+
 	.INPUTS
 		InputObject can either be a full path to an archive or a FileInfo object. In
 		addition it can also be an array of these objects.
-		
+
 		Path expects a directory or a DirectoryInfo object.
-	
+
 	.LINK
 		Online Version: http://dfch.biz/biz/dfch/PS/System/Utilities/Expand-CompressedItem/
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'Low',
 				   HelpUri = 'http://dfch.biz/biz/dfch/PS/System/Utilities/Expand-CompressedItem/',
 				   SupportsShouldProcess = $true)]
@@ -119,12 +119,12 @@ function Expand-CompressedItem {
 		[string]
 		$Format = 'default'
 	)
-	
+
 	BEGIN {
 		$datBegin = [datetime]::Now;
 		[string]$fn = $MyInvocation.MyCommand.Name;
 		Log-Debug -fn $fn -msg ("CALL. InputObject: '{0}'. Path '{1}'" -f $InputObject.FullName, $Path.FullName) -fac 1;
-		
+
 		# Currently only ZIP is supported
 		switch ($Format) {
 			"ZIP"
@@ -139,11 +139,11 @@ function Expand-CompressedItem {
 		}
 		$CopyHereOptions = 4 + 1024 + 16;
 	}
-	
+
 	PROCESS {
 		$fReturn = $false;
 		$OutputParameter = $null;
-		
+
 		foreach ($Object in $InputObject) {
 			$Object = Get-Item $Object;
 			if ($PSCmdlet.ShouldProcess(("Extract '{0}' to '{1}'" -f $Object.Name, $Path.FullName))) {
@@ -158,7 +158,7 @@ function Expand-CompressedItem {
 		}
 		return $OutputParameter;
 	}
-	
+
 	END {
 		# Cleanup
 		if ($ShellApplication) {
@@ -176,8 +176,8 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMpZziZCndeiwhpIBMh960olL
-# F4agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHTLzhTMCfP3EGJJR+G4FPrDO
+# PtygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -320,25 +320,25 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS5mdky2GFEB1enxjOyP9Znwkrf7jANBgkqhkiG9w0B
-# AQEFAASCAQBEGpTEQTORCGQwk+R5PAnybvgi1IGfPv0T+kxIxIdUwPcOcJ/SssSj
-# 87LmbOAXAbDhYcJQ7pEsZPXesCuXOwrel8cbcbMrQkXV7JpOGC9WXkj9wLKQvvnj
-# VbAXHZRSwxHYEGTrrqPIjBnkJ9GZa2A0lxlqaCl8SRyYxxoXdhx8xriFAH2rmqqR
-# iTYbj2GkyfI3JvDkdlkU/XFUjW93se3srTsYBQB6hGjOZ59j+188eQidFIII5Hsj
-# z+euUV4LvYSOYlokNyx5S5pcxAF2qWXTNy9ssnP/qcT4Fk5tP6OqGL+tWmK/bOuV
-# l7Gl0iAo35dmsAa+6Tv51NbTpzNRSAmooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRDPKoCGmLe6avvF7tsC4f/pSJ7IDANBgkqhkiG9w0B
+# AQEFAASCAQAKxZelLoBFhsbn1URNDiQLHltJQd/1k3/TnWXAOHll74eQ66+R5wGl
+# J16BKrfw1ZdfsERP6rXurYWdWSvYsDN10hR6hnQPB+XsdKpELnULj8ncFhg44FR7
+# I5UW1qwkyoQjHVCcP84AOtqvkfE4hTGM7w9iwT24tr14RkjazDlNWyUHx3KvQyA1
+# 2ZfSky6JjM3Xtr/yfVrtBbdaS3p5ZsSfUKBdG7zwnQ7n0LYqlxJm8efPVFqQDUTV
+# 8f8zhjc9M08UUCrZq+HPTwDj0lSBjiuv1IX3WbBAwTEoj36HkVjx/HJ8yKdI/cMB
+# 5wXN0BGQfGnFVdY3iztqP1KZn61h8gu4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkyNlowIwYJKoZIhvcN
-# AQkEMRYEFHIH3PuigmWGoDa9xKrsH0DnwQibMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxMFowIwYJKoZIhvcN
+# AQkEMRYEFB4VW/nqW6+3o2LOQ+1IRJDYnT4+MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBwEDPaMSkgkg53Qyo1k8mg9mCDu9W3oM5rXMMO0vVu0fGa
-# Lt95A6tDN8XeWgZQJxGEkXo+WFfYYoG6Yyt/c8HChF5U5mh2NUYkQ8s49Uhm/Wnn
-# E00VDNd6P8KxTRN4Hm2QZqpmWcB5dsTk9oyhQYHRtOZt+MgvnJM/nMc6o71HuUaT
-# WLVkVEPOkS87VBpK8u1ckS/4isyzIgwNskcg18vhmMsPesidiOk+APEGfTCDQ0vm
-# SkhAn4jcq8OebYhX27FlB8KNr4sqw8u3y0eAcTsEdZk+DEEesaTaw9lX6nxuB9F0
-# 29k93wVvcpjk2JjiuuhiOmR0XxToHolfv39W8M6v
+# hkiG9w0BAQEFAASCAQB1y0YZeMbE63v+lxV2ft6s3HQoiNS0W8pgCOYgvLZwEIVL
+# lc1Ft9hJgyYwFuoo7db1YxdaKlfuY7PiZLZf6mjv4kVslNJObA8o6ss+y4V9WPc+
+# mhgvQANgPUI9gSVne+ImF3n8vcAJA2oihJH33XGEcsPJR8Rkb6Hr9qd6ar7aNJ9o
+# EMEmm7mqUMxKh8NHUA3WWQVtOzBjJ0pB56mvQOL0l1YSMGt589v2wrDSjkaYdtWq
+# qmgUOGoYwHDoDhRXCbBxvKMpWqCj0C65r0JjzS2igYC6KqbA2FtJ5nfQMmIn0I67
+# P26TxG811Ge6/9+s1ba06+x/O152JWMnn0TLwk0p
 # SIG # End signature block

@@ -27,29 +27,29 @@
 	authorization from Joerg Hochwald
 #>
 
-function help {
+function global:help {
 <#
 	.SYNOPSIS
 		Wrapper that use the cmdlet Get-Help -full
-	
+
 	.DESCRIPTION
 		Wrapper that use the regular cmdlet Get-Help -full to show all technical informations about the given command
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> help get-item
-		
+
 		# Show the full technical informations of the get-item cmdlet
-	
+
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-	
+
 	.PARAMETER cmdlet
 		commandlet
-	
+
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
 	clear-host
@@ -59,8 +59,8 @@ function help {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPdSZyWYOCNqzoQXooNazOTxY
-# BeugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjqB0GI4DlyYMyl08kiknKWjG
+# IfegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -203,25 +203,25 @@ function help {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT8yxBkGprsDtPaRaoySCoAHtVn5zANBgkqhkiG9w0B
-# AQEFAASCAQAwstrRz0bSbgOqrNxZqtVclLAw7xwyAzC9Q1eL4qucHXE4ZVEc9ONG
-# CUp5BvO3dxM836s0v8dCARgamiz6VD3UdIwOAHlVIQ0n0BzaSlBlv3GKHtUmI62X
-# crPHyMU9AaYuMlMXwX1urZ0Qa9E67oQx50svAci6SBfmM35uHRNWxo63y1d7ZxvK
-# i2C4B5xEeQ4wollFZGPi9qqGQQsQTYkLFxCIWpnSoPGGYZ91Tv62iufLYjk5LSSi
-# LZ6pFZrcxH5NtfNbmWVabpNAfSD2sb2It7GZ4EReeo+xXgGRMKSJqlWnHM6oopmb
-# lRSfdO5UXO2LRVo8dmhmHhNROpbkwkrfoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRgdyNARrmWIC7vLfHLFWzBU+DiATANBgkqhkiG9w0B
+# AQEFAASCAQActMtW6WBPIWbo9ciVEC+Pc0L9kLgJRM2HXkzEO0U3V7rzwpgSA4Er
+# +kqjXJ1Q0rXNWuAFU5kmVXw4JG3X1Ts0v4c0Ck+N9K8vxveHSQ9caaPcksLYEnWw
+# T9vC+bgJCgRtcXGOnEuP7WdDUjvBFt3mW3Ud3gwQSFVM2cl4nMuo5/+4zNU3zQjO
+# iEyy8CaQunwO4b/Fq6avt6l3EX0IzlR3lurLBupTGWq1MaiII7xp+KQKd5fB8FVk
+# BZU7CW1obMoiNjLS8KmTlJJrBVtBTPgquuQf8T0oLXcSn4nLi+fCYuOIHhsIq+1Z
+# WQVwMqoys3Yk7LrhMIlZd1vqjyePsZpNoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkyOVowIwYJKoZIhvcN
-# AQkEMRYEFACZcy9iJqx8gRLCdXx3POSRp+WhMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxMlowIwYJKoZIhvcN
+# AQkEMRYEFNWxSYP44XZhPJQ47549hA+X0aDNMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCLze5MVSig6ZF9MTvpEjPtqahifLi9+zg3MxZHhy2wiqpO
-# 1dsUL56XjEodqSq2jen4ZtsJ1NRRvAPXczuBQB6pxivoLY1ld6qttFeuSZhwpyGN
-# HBGvo0egWM85czxG79rM+eEsoDuSSYaNS9MwQE1jbbEq5dV1tUmv96y0gtgeLnh3
-# 4NRgirSloq+dce8JMeyrsXg7sa6fB/d4LWX6AJHRR2pVbeTeaNQk9SPVCjoiaZLH
-# DP8qXBbDscGVBr5jAvriokZ45BCcTvRTNasq521tWhWtdxfbhxGsW4ndEl+5HhjG
-# 7df434LVGj5sX+5zEwVx6OWxIGippQCTsRUEoyMN
+# hkiG9w0BAQEFAASCAQBc5JbtYGqutinqKMsEQbkisZwyjXBu/t+lBIy1PK8Js0FH
+# yKfSUnGIVRa/Ckf84nndQMxMrgjh0YwrS2Q2vMw1KD+5oGA6jEg6UGDhRahEBZOY
+# 2NmnvnfWr+zXTL8EJtcgMcsMOt1tlFXxQl2CTkLJ/FHUl4JrsPO+wj2tPJ/23qDl
+# 5nhCFkEc2eK/qI+oNZai7xRrmyf5ziyhh7kXlKtHdIsN6iINtJImlLbsQBgugQ7l
+# t/WY4PcKy+VXNBLKVyX1XaHRLL3a7OlFULoihqVsHhv04mxqdUMTyWQKDoiLATz+
+# PdnrM5s4n+pqeHcEkBF1fUJrPc/Xc5IkhjJaHE+R
 # SIG # End signature block

@@ -1,0 +1,3731 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<helpItems xmlns="http://msh" schema="maml">
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Check-SessionArch</command:name>
+			<maml:description>
+				<maml:para>Show the CPU architectire</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Check</command:verb>
+			<command:noun>SessionArch</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>You want to know if this is a 64BIT or still a 32BIT system?
+Might be useful, maybee not!</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Check-SessionArch</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Additional information about the function.</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; Check-SessionArch</dev:code>
+				<dev:remarks>
+					<maml:para>x64
+
+# Shows that the architecture is 64BIT and that the session also supports X64</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>CheckTcpPort</command:name>
+			<maml:description>
+				<maml:para>Check a TCP Port</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>CheckTcpPort</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Opens a connection to a given (or default) TCP Port to a given (or default) server.
+This is not a simple port ping, it creates a real connection to see if the port is alive!</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>CheckTcpPort</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>Port</maml:name>
+					<maml:description>
+						<maml:para>Default is 587
+e.g. &quot;25&quot;
+Port to use</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>Server</maml:name>
+					<maml:description>
+						<maml:para>e.g. &quot;outlook.office365.com&quot; or &quot;192.168.16.10&quot;
+SMTP Server to use</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>Port</maml:name>
+				<maml:description>
+					<maml:para>Default is 587
+e.g. &quot;25&quot;
+Port to use</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+				<dev:type>
+					<maml:name>Int32</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>Server</maml:name>
+				<maml:description>
+					<maml:para>e.g. &quot;outlook.office365.com&quot; or &quot;192.168.16.10&quot;
+SMTP Server to use</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.Boolean</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Internal Helper function to check if we can reach a server via a TCP connection on a given port</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; CheckTcpPort</dev:code>
+				<dev:remarks>
+					<maml:para># Check port 587/TCP on the default Server</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; CheckTcpPort -Port:25 -Server:mx.net-experts.net</dev:code>
+				<dev:remarks>
+					<maml:para># Check port 25/TCP on Server mx.net-experts.net</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>convert-frombinhex</command:name>
+			<maml:description>
+				<maml:para>Convert a HEX Value to a String</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>convert</command:verb>
+			<command:noun>frombinhex</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Converts a given HEX value back to human readable strings</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>convert-frombinhex</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>binhex</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>binhex</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; convert-frombinhex 0c</dev:code>
+				<dev:remarks>
+					<maml:para># Return the regular Value (12) of the given HEX 0c</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>convert-tobinhex</command:name>
+			<maml:description>
+				<maml:para>Convert a String to HEX</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>convert</command:verb>
+			<command:noun>tobinhex</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Converts a given String or Array to HEX and dumps it</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>convert-tobinhex</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>array</maml:name>
+					<maml:description>
+						<maml:para>Array that should be converted to HEX</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>array</maml:name>
+				<maml:description>
+					<maml:para>Array that should be converted to HEX</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name>String
+Array</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; convert-tobinhex 1234</dev:code>
+				<dev:remarks>
+					<maml:para># Return the HEX Value (4d2) of the String 1234</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>ConvertTo-PlainText</command:name>
+			<maml:description>
+				<maml:para>Convert a secure string back to plain text</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>ConvertTo</command:verb>
+			<command:noun>PlainText</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Convert a secure string back to plain text</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>ConvertTo-PlainText</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+					<maml:name>secure</maml:name>
+					<maml:description>
+						<maml:para>Secure String to convert</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">security.securestring</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+				<maml:name>secure</maml:name>
+				<maml:description>
+					<maml:para>Secure String to convert</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">security.securestring</command:parameterValue>
+				<dev:type>
+					<maml:name>security.securestring</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.String</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Helpper function</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; ConvertTo-PlainText -secure $value1</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>hochwald.net http://hochwald.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Create-ZIP</command:name>
+			<maml:description>
+				<maml:para>Create a ZIP archive of a given file</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Create</command:verb>
+			<command:noun>ZIP</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Create a ZIP archive of a given file.
+By default within the same directory and the same name as the input file.
+This can be changed via command line parameters</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Create-ZIP</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="Named">
+					<maml:name>InputFile</maml:name>
+					<maml:description>
+						<maml:para>Mandatory
+
+The parameter InputFile is the file that should be compressed.
+You can use it like this: &quot;ClutterReport-20150617171648.csv&quot;,
+or with a full path like this: &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot;</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="Named">
+					<maml:name>Input</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>OutputFile</maml:name>
+					<maml:description>
+						<maml:para>Optional
+
+You can use it like this: &quot;ClutterReport-20150617171648&quot;,
+or with a full path like this: &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648&quot;
+Do not append the extension!</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>Output</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>OutputPath</maml:name>
+					<maml:description>
+						<maml:para>Optional
+
+By default the new archive will be created in the same directory as the inpufile,
+if you would like to have it in another directory specify it here like this: &quot;C:\temp\&quot;
+The directory must exist!</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="Named">
+				<maml:name>InputFile</maml:name>
+				<maml:description>
+					<maml:para>Mandatory
+
+The parameter InputFile is the file that should be compressed.
+You can use it like this: &quot;ClutterReport-20150617171648.csv&quot;,
+or with a full path like this: &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot;</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="Named">
+				<maml:name>Input</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>OutputFile</maml:name>
+				<maml:description>
+					<maml:para>Optional
+
+You can use it like this: &quot;ClutterReport-20150617171648&quot;,
+or with a full path like this: &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648&quot;
+Do not append the extension!</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>Output</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>OutputPath</maml:name>
+				<maml:description>
+					<maml:para>Optional
+
+By default the new archive will be created in the same directory as the inpufile,
+if you would like to have it in another directory specify it here like this: &quot;C:\temp\&quot;
+The directory must exist!</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name>Parameters above</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name>Compress File</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Notes</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Create-ZIP -InputFile &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot;</dev:code>
+				<dev:remarks>
+					<maml:para># This will create the archive &quot;ClutterReport-20150617171648.zip&quot; from the given inputfile
+# &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot;.
+# The new archive will be located in &quot;C:\scripts\PowerShell\export\&quot;!</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Create-ZIP -InputFile &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot; -OutputFile &quot;NewClutterReport&quot;</dev:code>
+				<dev:remarks>
+					<maml:para># This will create the archive &quot;NewClutterReport.zip&quot; from the given inputfile
+# &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot;.
+# The new archive will be located in &quot;C:\scripts\PowerShell\export\&quot;!</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 2  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Create-ZIP -InputFile &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot; -OutputPath &quot;C:\temp\&quot;</dev:code>
+				<dev:remarks>
+					<maml:para># This will create the archive &quot;ClutterReport-20150617171648.zip&quot; from the given inputfile
+# &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot;.
+# The new archive will be located in &quot;C:\temp\&quot;! The directory must exist!</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 3  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Create-ZIP -InputFile &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot; -OutputFile &quot;NewClutterReport&quot; -OutputPath &quot;C:\temp\&quot;</dev:code>
+				<dev:remarks>
+					<maml:para># This will create the archive &quot;NewClutterReport.zip&quot; from the given inputfile
+# &quot;C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv&quot;.
+# The new archive will be located in &quot;C:\temp\&quot;! The directory must exist!</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Edit-HostsFile</command:name>
+			<maml:description>
+				<maml:para>Edit the Windows Hostfile</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Edit</command:verb>
+			<command:noun>HostsFile</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Shortcut to quickly edit the Windows host File. Might be usefull for testing things without changing the regular DNS.
+Handle with care!</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Edit-HostsFile</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Additional information about the function.</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Edit-HostsFile</dev:code>
+				<dev:remarks>
+					<maml:para># Opens the Editor configured within the VisualEditor variable to edit the Windows Host file</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Expand-CompressedItem</command:name>
+			<maml:description>
+				<maml:para>Expands a compressed archive or container.</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Expand</command:verb>
+			<command:noun>CompressedItem</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Expands a compressed archive or container.
+
+Currently only ZIP files are supported. Per default the contents of the ZIP
+is expanded in the current directory. If an item already exists, you will
+be visually prompted to overwrite it, skip it, or to have a second copy of
+the item exanded. This is due to the mechanism how this is implemented (via
+Shell.Application).</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Expand-CompressedItem</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+					<maml:name>InputObject</maml:name>
+					<maml:description>
+						<maml:para>Specifies the archive to expand. You can either pass this parameter as a path and name to the archive or as a FileInfo object. You can also pass an array of archives to the parameter. In addition you can pipe a single archive or an array of archives to this parameter as well.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1">
+					<maml:name>Path</maml:name>
+					<maml:description>
+						<maml:para>Specifies the destination path where to expand the archive. By default this is the current directory.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">System.IO.DirectoryInfo</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>Format</maml:name>
+					<maml:description>
+						<maml:para>A description of the Format parameter.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+				<maml:name>InputObject</maml:name>
+				<maml:description>
+					<maml:para>Specifies the archive to expand. You can either pass this parameter as a path and name to the archive or as a FileInfo object. You can also pass an array of archives to the parameter. In addition you can pipe a single archive or an array of archives to this parameter as well.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="1">
+				<maml:name>Path</maml:name>
+				<maml:description>
+					<maml:para>Specifies the destination path where to expand the archive. By default this is the current directory.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">System.IO.DirectoryInfo</command:parameterValue>
+				<dev:type>
+					<maml:name>System.IO.DirectoryInfo</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>Format</maml:name>
+				<maml:description>
+					<maml:para>A description of the Format parameter.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name>InputObject can either be a full path to an archive or a FileInfo object. In
+addition it can also be an array of these objects.
+
+Path expects a directory or a DirectoryInfo object.</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name>This Cmdlet has no return value.</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>See module manifest for required software versions and dependencies at:
+http://dfch.biz/biz/dfch/PS/System/Utilities/biz.dfch.PS.System.Utilities.psd1/
+
+.HELPURI</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Expands an archive &#39;mydata.zip&#39; to the current directory.</dev:code>
+				<dev:remarks>
+					<maml:para># Expand-CompressedItem mydata.zip</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; # Expands an archive &#39;mydata.zip&#39; to the current directory and prompts for</dev:code>
+				<dev:remarks>
+					<maml:para># every item to be extracted.
+
+PS C:\&gt; Expand-CompressedItem mydata.zip -Confirm</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 2  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Get-ChildItem Y:\Source\*.zip | Expand-CompressedItem -Path Z:\Destination -Format ZIP -Confirm</dev:code>
+				<dev:remarks>
+					<maml:para># You can also pipe archives to the Cmdlet.
+# Enumerate all ZIP files in &#39;Y:\Source&#39; and pass them to the Cmdlet. Each item
+# to be extracted must be confirmed.</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 3  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; # Expands archives &#39;data1.zip&#39; and &#39;data2.zip&#39; to the current directory.</dev:code>
+				<dev:remarks>
+					<maml:para>PS C:\&gt; Expand-CompressedItem &quot;Y:\Source\data1.zip&quot;,&quot;Y:\Source\data2.zip&quot;</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 4  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; # Expands archives &#39;data1.zip&#39; and &#39;data2.zip&#39; to the current directory.</dev:code>
+				<dev:remarks>
+					<maml:para>PS C:\&gt; @(&quot;Y:\Source\data1.zip&quot;,&quot;Y:\Source\data2.zip&quot;) | Expand-CompressedItem</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>Online Version: http://dfch.biz/biz/dfch/PS/System/Utilities/Expand-CompressedItem/
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>explore</command:name>
+			<maml:description>
+				<maml:para>Open explorer in this directory</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>explore</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Open the Windows Explorer in this directory</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>explore</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>loc</maml:name>
+					<maml:description>
+						<maml:para>A description of the loc parameter.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>loc</maml:name>
+				<maml:description>
+					<maml:para>A description of the loc parameter.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.String</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Just a little helper function</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; explore</dev:code>
+				<dev:remarks>
+					<maml:para># Open the Windows Explorer in this directory</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>get-hash</command:name>
+			<maml:description>
+				<maml:para>Show the HASH Value of a given File</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>get</command:verb>
+			<command:noun>hash</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Shows the MD5 Hash value of a given File</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>get-hash</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>value</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>hashalgo</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>value</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>hashalgo</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; get-hash .\profile.ps1</dev:code>
+				<dev:remarks>
+					<maml:para>81d84c612566cb633aff63e3f4f27a28
+
+#Return the MD5 Hash of .\profile.ps1</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>get-myprocess</command:name>
+			<maml:description>
+				<maml:para>Get our own process information</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>get</command:verb>
+			<command:noun>myprocess</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Get our own process information about the PowerShell Session</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>get-myprocess</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name>process information</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Just a little helper function that might be usefull if you have a long running shell session</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; get-myprocess</dev:code>
+				<dev:remarks>
+					<maml:para>Handles  NPM(K)    PM(K)      WS(K) VM(M)   CPU(s)     Id ProcessName
+-------  ------    -----      ----- -----   ------     -- -----------
+511      44    79252      93428   664   11,653   3932 powershell</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>get-syntax</command:name>
+			<maml:description>
+				<maml:para>Get the syntax of a cmdlet, even if we have no help for it</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>get</command:verb>
+			<command:noun>syntax</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Helper function to get the syntax of a alias or cmdlet, even if we have no help for it</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>get-syntax</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>cmdlet</maml:name>
+					<maml:description>
+						<maml:para>commandlet that you want to check</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>cmdlet</maml:name>
+				<maml:description>
+					<maml:para>commandlet that you want to check</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; get-syntax get-syntax</dev:code>
+				<dev:remarks>
+					<maml:para># Get the syntax and parameters for the cmdlet &quot;get-syntax&quot;.
+# Makes no sense at all, but this is just an example!</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Get-Uptime</command:name>
+			<maml:description>
+				<maml:para>Show how long system has been running</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Get</command:verb>
+			<command:noun>Uptime</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Uni* like Uptime - The uptime utility displays the current time, the length of time the system has been up</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Get-Uptime</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.String</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Make PowerShell even more Uni* like</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Get-Uptime</dev:code>
+				<dev:remarks>
+					<maml:para>Uptime: 0 days, 2 hours, 11 minutes
+
+# Returns the uptime of the system, the time since last reboot/startup</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText></maml:linkText>
+				<maml:uri>http://hochwald.net</maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>GnuGrep</command:name>
+			<maml:description>
+				<maml:para>File pattern searcher</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>GnuGrep</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>This command emulates the wel known (and loved?) GNU file pattern searcher</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>GnuGrep</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="0">
+					<maml:name>pattern</maml:name>
+					<maml:description>
+						<maml:para>Pattern (STRING) - Mandatory</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1">
+					<maml:name>filefilter</maml:name>
+					<maml:description>
+						<maml:para>File (STRING) - Mandatory</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>r</maml:name>
+					<maml:description>
+						<maml:para>Recurse</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">switch</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>i</maml:name>
+					<maml:description>
+						<maml:para>Ignore case</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">switch</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>l</maml:name>
+					<maml:description>
+						<maml:para>List filenames</maml:para>
+					</maml:description>
+					<command:parameterValue required="false" variableLength="false">switch</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="0">
+				<maml:name>pattern</maml:name>
+				<maml:description>
+					<maml:para>Pattern (STRING) - Mandatory</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="1">
+				<maml:name>filefilter</maml:name>
+				<maml:description>
+					<maml:para>File (STRING) - Mandatory</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>r</maml:name>
+				<maml:description>
+					<maml:para>Recurse</maml:para>
+				</maml:description>
+					<command:parameterValue required="false" variableLength="false">switch</command:parameterValue>
+				<dev:type>
+					<maml:name>switch</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>i</maml:name>
+				<maml:description>
+					<maml:para>Ignore case</maml:para>
+				</maml:description>
+					<command:parameterValue required="false" variableLength="false">switch</command:parameterValue>
+				<dev:type>
+					<maml:name>switch</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>l</maml:name>
+				<maml:description>
+					<maml:para>List filenames</maml:para>
+				</maml:description>
+					<command:parameterValue required="false" variableLength="false">switch</command:parameterValue>
+				<dev:type>
+					<maml:name>switch</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>More complex but even more UNI* like</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; GnuGrep -pattern &#39;Value1&#39; -filefilter &#39;Value2&#39;</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>hochwald.net http://hochwald.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>head</command:name>
+			<maml:description>
+				<maml:para>display first lines of a file</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>head</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>This filter displays the first count lines or bytes of each of the specified files,
+or of the standard input if no files are specified.
+If count is omitted it defaults to 10.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>head</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>file</maml:name>
+					<maml:description>
+						<maml:para>Filename</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>count</maml:name>
+					<maml:description>
+						<maml:para>A description of the count parameter.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>file</maml:name>
+				<maml:description>
+					<maml:para>Filename</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>count</maml:name>
+				<maml:description>
+					<maml:para>A description of the count parameter.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">int</command:parameterValue>
+				<dev:type>
+					<maml:name>int</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Make PowerShell more like Uni*</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; head -file &#39;Value1&#39; -count $value2</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>hochwald.net http://hochwald.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>help</command:name>
+			<maml:description>
+				<maml:para>Wrapper that use the cmdlet Get-Help -full</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>help</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Wrapper that use the regular cmdlet Get-Help -full to show all technical informations about the given command</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>help</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; help get-item</dev:code>
+				<dev:remarks>
+					<maml:para># Show the full technical informations of the get-item cmdlet</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Initialize-Modules</command:name>
+			<maml:description>
+				<maml:para>Initialize PowerShell Modules</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Initialize</command:verb>
+			<command:noun>Modules</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Initialize PowerShell Modules</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Initialize-Modules</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Needs to be documented</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Initialize-Modules</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>hochwald.net http://hochwald.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Invoke-VisualEditor</command:name>
+			<maml:description>
+				<maml:para>Wrapper to edit files</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Invoke</command:verb>
+			<command:noun>VisualEditor</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>This is a quick wrapper that edits files with editor ftom the VisualEditor variable</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Invoke-VisualEditor</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; Invoke-VisualEditor example.txt</dev:code>
+				<dev:remarks>
+					<maml:para># Invokes Note++ or ISE and edits &quot;example.txt&quot;.
+# This is possible, even if the File does not exists... The editor should ask you if it should create it for you</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; Invoke-VisualEditor</dev:code>
+				<dev:remarks>
+					<maml:para># Invokes Note++ or ISE without opening a file</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>append-classpath</command:name>
+			<maml:description>
+				<maml:para>Append a given path to the Classpath</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>append</command:verb>
+			<command:noun>classpath</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Appends a given path to the Java Classpath. Useful if you still need that old java crap!</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>append-classpath</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; append-classpath &quot;.&quot;</dev:code>
+				<dev:remarks>
+					<maml:para>Include the directory where you are to the Java Classpath</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>JavaLove</command:name>
+			<maml:description>
+				<maml:para>Set the JAVAHOME Variable to use JDK and/or JRE instances withing the Session</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>JavaLove</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>You are still using Java Stuff?
+OK... Your choice, so we do you the faivor and create/fill the variable JAVAHOME based on the JDK/JRE that we found.
+It also append the Info to the PATH variable to make things easier for you.
+But think about dropping the buggy Java crap as soon as you can. Java is not only buggy, there are also many Security issues with it!</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>JavaLove</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; JavaLove</dev:code>
+				<dev:remarks>
+					<maml:para># Find the installed JDK and/or JRE version and crate the JDK_HOME and JAVA_HOME variables for you.
+# It also appends the Path to the PATH  and CLASSPATH variable to make it easier for you.
+#
+# But do you still need java?</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>ll</command:name>
+			<maml:description>
+				<maml:para>Quick helper to mak my PowerShell a bit more like *nix</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>ll</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Everyone ever used a modern Unix and/or Linux system knows and love the colored output of LL
+This function is hack to emmulate that on PowerShell.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>ll</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>dir</maml:name>
+					<maml:description>
+						<maml:para>Directory</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>all</maml:name>
+					<maml:description>
+						<maml:para>A description of the all parameter.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>dir</maml:name>
+				<maml:description>
+					<maml:para>Directory</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>all</maml:name>
+				<maml:description>
+					<maml:para>A description of the all parameter.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Additional information about the function.</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; ll -dir $value1 -all $value2</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>man</command:name>
+			<maml:description>
+				<maml:para>Wrapper of Get-Help</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>man</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>This wrapper uses Get-Help -full for a given cmdlet and shows eversthing paged. This is very much like the typical *nix like man</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>man</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; man get-item</dev:code>
+				<dev:remarks>
+					<maml:para># Shows the complete help text of the cmdlet &quot;get-item&quot;, page by page</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>mkdir</command:name>
+			<maml:description>
+				<maml:para>Wrapper of New-Item</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>mkdir</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Wrapper of New-Item to create a directory</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>mkdir</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+					<maml:name>Directory</maml:name>
+					<maml:description>
+						<maml:para>Directory name to create</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+					<maml:name>dir</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+				<maml:name>Directory</maml:name>
+				<maml:description>
+					<maml:para>Directory name to create</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+				<maml:name>dir</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; mkdir test</dev:code>
+				<dev:remarks>
+					<maml:para># Creates a directory with the name &quot;test&quot;</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>myls</command:name>
+			<maml:description>
+				<maml:para>Wrapper for Get-ChildItem</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>myls</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>This wrapper for Get-ChildItem shows all directories and files (even hidden ones)</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>myls</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>loc</maml:name>
+					<maml:description>
+						<maml:para>A description of the loc parameter.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>loc</maml:name>
+				<maml:description>
+					<maml:para>A description of the loc parameter.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; myls</dev:code>
+				<dev:remarks>
+					<maml:para># Show the content of the directory where you are</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; myls c:\</dev:code>
+				<dev:remarks>
+					<maml:para># Show the content of &quot;c:\&quot;</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>New-Guid</command:name>
+			<maml:description>
+				<maml:para>Creates a new Guid object and displays it to the screen</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>New</command:verb>
+			<command:noun>Guid</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Uses static System.Guid.NewGuid() method to create a new Guid object</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>New-Guid</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.String</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a quick &amp; dirty helper function to generate GUID&#39;s
+this is neat if you need a new GUID for an PowerShell Module.</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; New-Guid</dev:code>
+				<dev:remarks>
+					<maml:para>fd6bd476-db80-44e7-ab34-47437adeb8e3
+
+# Creates a new Guid object and displays its GUI to the screen</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>PoSHModuleLoader</command:name>
+			<maml:description>
+				<maml:para>Loads all Script modules</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>PoSHModuleLoader</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Loads all Script modules</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>PoSHModuleLoader</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Needs to be documented</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PoSHModuleLoader</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>hochwald.net http://hochwald.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>get-sessionfile</command:name>
+			<maml:description>
+				<maml:para>Restore PowerShell Session information</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>get</command:verb>
+			<command:noun>sessionfile</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>This command shows many PowerShell Session informations.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>get-sessionfile</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>sessionName</maml:name>
+					<maml:description>
+						<maml:para>Name of the Session you would like to dump</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>sessionName</maml:name>
+				<maml:description>
+					<maml:para>Name of the Session you would like to dump</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; get-sessionfile $O365Session</dev:code>
+				<dev:remarks>
+					<maml:para>C:\Users\adm.jhochwald\AppData\Local\Temp\[PSSession]Session2
+
+# Returns the Session File for a given Session</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; get-sessionfile</dev:code>
+				<dev:remarks>
+					<maml:para>C:\Users\adm.jhochwald\AppData\Local\Temp\
+
+# Returns the Session File of the running session, cloud be none!</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>export-session</command:name>
+			<maml:description>
+				<maml:para>Export PowerShell session info to a file</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>export</command:verb>
+			<command:noun>session</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>This is a (very) poor man approach to save some session infos
+
+Our concept of session is simple and only considers:
+- history
+- The current directory
+
+But still can be very handy and usefull. If you type in some sneaky commands,
+or some very complex things and you did not copied these to another file or script
+it can save you a lot of time if you need to do it again (And this is often the case)
+
+Even if you just want to dump it quick to copy it somewhen later to a documentation or
+script this might be usefull.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>export-session</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>sessionName</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>sessionName</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; export-session -sessionName &#39;Value1&#39;</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>import-session</command:name>
+			<maml:description>
+				<maml:para>Import a PowerShell session info from file</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>import</command:verb>
+			<command:noun>session</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>This is a (very) poor man approach to restore some session infos
+
+Our concept of session is simple and only considers:
+- history
+- The current directory
+
+But still can be very handy and usefull. If you type in some sneaky commands,
+or some very complex things and you did not copied these to another file or script
+it can save you a lot of time if you need to do it again (And this is often the case)
+
+Even if you just want to dump it quick to copy it somewhen later to a documentation or
+script this might be usefull.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>import-session</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>sessionName</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>sessionName</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; import-session -sessionName &#39;Value1&#39;</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>rdp</command:name>
+			<maml:description>
+				<maml:para>wrapper for the Windows RDP Client</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>rdp</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Just a wrapper for the Windows Remote Desktop Protocoll (RDP) Client.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>rdp</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>rdphost</maml:name>
+					<maml:description>
+						<maml:para>String
+
+The Host could be a hostname or an IP address</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>host</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>rdphost</maml:name>
+				<maml:description>
+					<maml:para>String
+
+The Host could be a hostname or an IP address</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>host</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Additional information about the function.</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; rdp SNOOPY</dev:code>
+				<dev:remarks>
+					<maml:para># Opens a Remote Desktop Session to the system with the Name SNOOPY</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; rdp -host:&quot;deepblue.fra01.kreativsign.net&quot;</dev:code>
+				<dev:remarks>
+					<maml:para># Opens a Remote Desktop Session to the system deepblue.fra01.kreativsign.net</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 2  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; rdp -host:10.10.16.10</dev:code>
+				<dev:remarks>
+					<maml:para># Opens a Remote Desktop Session to the system with the IPv4 address 10.10.16.10</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Reload-Module</command:name>
+			<maml:description>
+				<maml:para>Reloads a PowerShell Module</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Reload</command:verb>
+			<command:noun>Module</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Reloads a PowerShell Module</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Reload-Module</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>ModuleName</maml:name>
+					<maml:description>
+						<maml:para>Name of the Module</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>ModuleName</maml:name>
+				<maml:description>
+					<maml:para>Name of the Module</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Needs to be documented</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Reload-Module -ModuleName $value1</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>hochwald.net http://hochwald.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Set-VisualEditor</command:name>
+			<maml:description>
+				<maml:para>Set the VisualEditor variable</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Set</command:verb>
+			<command:noun>VisualEditor</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Setup the VisualEditor variable. Checks if the free (GNU licensed) Notepadd++ is installed,
+if so it uses this great free editor. If not the fallback is the PowerShell ISE.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Set-VisualEditor</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>This is just a little helper function to make the shell more flexible</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Set-VisualEditor</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>kreativsign.net http://kreativsign.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>SuDo</command:name>
+			<maml:description>
+				<maml:para>Uni* like Superuser Do (Sudo)</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>SuDo</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Uni* like Superuser Do (Sudo)</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>SuDo</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>file</maml:name>
+					<maml:description>
+						<maml:para>Script/Program to run</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>file</maml:name>
+				<maml:description>
+					<maml:para>Script/Program to run</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Still a internal Beta function!</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; SuDo C:\scripts\PowerShell\profile.ps1</dev:code>
+				<dev:remarks>
+					<maml:para></maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; SuDo</dev:code>
+				<dev:remarks>
+					<maml:para></maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText></maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>tail</command:name>
+			<maml:description>
+				<maml:para>Make the PowerShell a bit more *NIX like</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>tail</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Wrapper for the PowerShell command Get-Content. It opens a given file and shows the content...
+Get-Content normally exists as soon as the end of the given file is reached, this wrapper keeps it open
+and display every new informations as soon as it appears. This could be very usefull for parsing logfiles.
+
+Everyone ever used Unix or Linux known tail ;-)</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>tail</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>file</maml:name>
+					<maml:description>
+						<maml:para>File to open</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>file</maml:name>
+				<maml:description>
+					<maml:para>File to open</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Additional information about the function.</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; tail C:\scripts\PowerShell\logs\create_new_OU_Structure.log</dev:code>
+				<dev:remarks>
+					<maml:para># Opens the given Logfile (C:\scripts\PowerShell\logs\create_new_OU_Structure.log) and shows every new entry until you break it (CTRL + C)</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>Test-Method</command:name>
+			<maml:description>
+				<maml:para>Short description</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>Test</command:verb>
+			<command:noun>Method</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Detailed description</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>Test-Method</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>moduleName</maml:name>
+					<maml:description>
+						<maml:para>A description of the moduleName parameter.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>functionName</maml:name>
+					<maml:description>
+						<maml:para>A description of the functionName parameter.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>moduleName</maml:name>
+				<maml:description>
+					<maml:para>A description of the moduleName parameter.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>functionName</maml:name>
+				<maml:description>
+					<maml:para>A description of the functionName parameter.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; Example text</dev:code>
+				<dev:remarks>
+					<maml:para></maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>hochwald.net http://hochwald.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>time</command:name>
+			<maml:description>
+				<maml:para>Timing How Long it Takes a Script or Command to Run</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>time</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>This is a quick wrapper for Measure-Command Cmdlet
+
+Make the PowerShell a bit more *NIX like
+
+Everyone ever used Unix or Linux known time ;-)</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>time</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>file</maml:name>
+					<maml:description>
+						<maml:para>Script or command to execute</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>file</maml:name>
+				<maml:description>
+					<maml:para>Script or command to execute</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Additional information about the function.</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; time new-Bulk-devices.ps1</dev:code>
+				<dev:remarks>
+					<maml:para># Runs the script new-Bulk-devices.ps1 and shows how log it takes to execute</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; time Get-Service | Export-Clixml c:\scripts\test.xml</dev:code>
+				<dev:remarks>
+					<maml:para># When you run this command, service information will be saved to the file Test.xml
+# It also shows how log it takes to execute</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>to-hex</command:name>
+			<maml:description>
+				<maml:para>Short description</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>to</command:verb>
+			<command:noun>hex</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Detailed description</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>to-hex</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>dec</maml:name>
+					<maml:description>
+						<maml:para>N.A.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">long</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>dec</maml:name>
+				<maml:description>
+					<maml:para>N.A.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">long</command:parameterValue>
+				<dev:type>
+					<maml:name>long</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name>Integer</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.Int64</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Just a little helper function</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; to-hex &quot;100&quot;</dev:code>
+				<dev:remarks>
+					<maml:para>0x64</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>touch</command:name>
+			<maml:description>
+				<maml:para>Change file access and modification times</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>touch</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>The touch utility sets the modification and access times of files.
+Touch changes both modification and access times.
+
+If any file does not exist, it is created with default permissions.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>touch</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="0">
+					<maml:name>file</maml:name>
+					<maml:description>
+						<maml:para>The File to Touch</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="false" position="0">
+				<maml:name>file</maml:name>
+				<maml:description>
+					<maml:para>The File to Touch</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Make Powershell more Uni* like</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; touch -file &#39;Value1&#39;</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>hochwald.net http://hochwald.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>ConvertFrom-UrlEncoded</command:name>
+			<maml:description>
+				<maml:para>Decodes a UrlEncoded string.</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>ConvertFrom</command:verb>
+			<command:noun>UrlEncoded</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Decodes a UrlEncoded string.
+
+Input can be either a positional or named parameters of type string or an
+array of strings. The Cmdlet accepts pipeline input.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>ConvertFrom-UrlEncoded</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+					<maml:name>InputObject</maml:name>
+					<maml:description>
+						<maml:para>A description of the InputObject parameter.</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="0">
+				<maml:name>InputObject</maml:name>
+				<maml:description>
+					<maml:para>A description of the InputObject parameter.</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.String</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; ConvertFrom-UrlEncoded &#39;http%3a%2f%2fwww.d-fens.ch&#39;</dev:code>
+				<dev:remarks>
+					<maml:para>http://www.d-fens.ch
+
+# Encoded string is passed as a positional parameter to the Cmdlet.</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; ConvertFrom-UrlEncoded -InputObject &#39;http%3a%2f%2fwww.d-fens.ch&#39;</dev:code>
+				<dev:remarks>
+					<maml:para>http://www.d-fens.ch
+
+# Encoded string is passed as a named parameter to the Cmdlet.</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 2  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt;  ConvertFrom-UrlEncoded -InputObject &#39;http%3a%2f%2fwww.d-fens.ch&#39;, &#39;http%3a%2f%2fwww.dfch.biz%2f&#39;</dev:code>
+				<dev:remarks>
+					<maml:para>http://www.d-fens.ch
+http://www.dfch.biz/
+
+# Encoded strings are passed as an implicit array to the Cmdlet.</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 3  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; ConvertFrom-UrlEncoded -InputObject @(&quot;http%3a%2f%2fwww.d-fens.ch&quot;, &quot;http%3a%2f%2fwww.dfch.biz%2f&quot;)</dev:code>
+				<dev:remarks>
+					<maml:para>http://www.d-fens.ch
+http://www.dfch.biz/
+
+# Encoded strings are passed as an explicit array to the Cmdlet.</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 4  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; @(&quot;http%3a%2f%2fwww.d-fens.ch&quot;, &quot;http%3a%2f%2fwww.dfch.biz%2f&quot;) | ConvertFrom-UrlEncoded</dev:code>
+				<dev:remarks>
+					<maml:para>http://www.d-fens.ch
+http://www.dfch.biz/
+
+Encoded strings are piped as an explicit array to the Cmdlet.</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 5  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; &quot;http%3a%2f%2fwww.dfch.biz%2f&quot; | ConvertFrom-UrlEncoded</dev:code>
+				<dev:remarks>
+					<maml:para>http://www.dfch.biz/
+
+# Encoded string is piped to the Cmdlet.</maml:para>
+
+				</dev:remarks>
+			</command:example>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 6  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; $r = @(&quot;http%3a%2f%2fwww.d-fens.ch&quot;, 0, &quot;http%3a%2f%2fwww.dfch.biz%2f&quot;) | ConvertFrom-UrlEncoded</dev:code>
+				<dev:remarks>
+					<maml:para>PS C:\scripts\PowerShell&gt; $r
+http://www.d-fens.ch
+0
+http://www.dfch.biz/
+
+# In case one of the passed strings is not a UrlEncoded encoded string, the
+# plain string is returned. The pipeline will continue to execute and all
+# strings are returned.</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>Online Version: http://dfch.biz/biz/dfch/PS/System/Utilities/ConvertFrom-UrlEncoded/
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>ConvertTo-UrlEncoded</command:name>
+			<maml:description>
+				<maml:para></maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb>ConvertTo</command:verb>
+			<command:noun>UrlEncoded</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para></maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>ConvertTo-UrlEncoded</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="0">
+					<maml:name>InputObject</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="true (ByPropertyName, ByValue)" position="0">
+				<maml:name>InputObject</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.String</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; ConvertTo-UrlEncoded -InputObject &#39;Value1&#39;</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>uuidgen</command:name>
+			<maml:description>
+				<maml:para>Generates a UUID String</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>uuidgen</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Generates a UUID String and is a uuidgen.exe replacement</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>uuidgen</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.String</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Just a little helper function</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; uuidgen</dev:code>
+				<dev:remarks>
+					<maml:para>a08cdabe-f598-4930-a537-80e7d9f15dc3
+
+# Generates a UUID String</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>ValidateMailAddress</command:name>
+			<maml:description>
+				<maml:para>Regex check to see if a given Email address is valid</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>ValidateMailAddress</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Checks a given Mail Address against a REGEX Filter to see if it is RfC822 complaint</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>ValidateMailAddress</maml:name>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="Named">
+					<maml:name>Email</maml:name>
+					<maml:description>
+						<maml:para>e.g. &quot;joerg.hochwald@sartorius.com&quot;
+Email address to check</maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+				<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="Named">
+					<maml:name>Mail</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="Named">
+				<maml:name>Email</maml:name>
+				<maml:description>
+					<maml:para>e.g. &quot;joerg.hochwald@sartorius.com&quot;
+Email address to check</maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+			<command:parameter required="true" variableLength="false" globbing="false" pipelineInput="true (ByValue)" position="Named">
+				<maml:name>Mail</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false">string</command:parameterValue>
+				<dev:type>
+					<maml:name>string</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<command:inputTypes>
+			<command:inputType>
+				<dev:type>
+					<maml:name>Mail Adress to check against the RfC822 REGEX Filter</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:inputType>
+		</command:inputTypes>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+<maml:name>System.Boolean</maml:name>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+				<maml:uri/>
+			</command:returnValue>
+		</command:returnValues>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Internal Helper function to check Mail addresses via REGEX to see if they are RfC822 complaint before use them.</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; ValidateMailAddress -Email:&quot;Robot.Noreply@Sartorius.com&quot;</dev:code>
+				<dev:remarks>
+					<maml:para># Checks a given Mail Address (Robot.Noreply@Sartorius.com) against a REGEX Filter to see if it is RfC822 complaint</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>wc</command:name>
+			<maml:description>
+				<maml:para>Word, line, character, and byte count</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>wc</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>The wc utility displays the number of lines, words, and bytes contained in each input file, or standard input (if no file is specified) to the standard output.  A line
+is defined as a string of characters delimited by a &lt;newline&gt; character.  Characters beyond the final &lt;newline&gt; character will not be included in the line count.
+
+A word is defined as a string of characters delimited by white space characters.  White space characters are the set of characters for which the iswspace(3) function
+returns true.  If more than one input file is specified, a line of cumulative counts for all the files is displayed on a separate line after the output for the last
+file.</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>wc</maml:name>
+				<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+					<maml:name>object</maml:name>
+					<maml:description>
+						<maml:para></maml:para>
+					</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				</command:parameter>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+			<command:parameter required="false" variableLength="false" globbing="false" pipelineInput="false" position="Named">
+				<maml:name>object</maml:name>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+					<command:parameterValue required="true" variableLength="false"></command:parameterValue>
+				<dev:type>
+					<maml:name></maml:name>
+					<maml:uri/>
+				</dev:type>
+				<dev:defaultValue></dev:defaultValue>
+			</command:parameter>
+		</command:parameters>
+		<maml:alertSet>
+			<maml:title></maml:title>
+			<maml:alert>
+				<maml:para>Make PowerShell more like Uni*</maml:para>
+			</maml:alert>
+		</maml:alertSet>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 1 --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; wc -object $value1</dev:code>
+				<dev:remarks>
+					<maml:para>Write example description here.</maml:para>
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+		<maml:relatedLinks>
+			<maml:navigationLink>
+				<maml:linkText>hochwald.net http://hochwald.net
+</maml:linkText>
+				<maml:uri></maml:uri>
+			</maml:navigationLink>
+		</maml:relatedLinks>
+	</command:command>
+	<command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10">
+		<command:details>
+			<command:name>whoami</command:name>
+			<maml:description>
+				<maml:para>Shows the windows login info</maml:para>
+
+			</maml:description>
+			<maml:copyright>
+				<maml:para></maml:para>
+			</maml:copyright>
+			<command:verb></command:verb>
+			<command:noun>whoami</command:noun>
+			<dev:version/>
+		</command:details>
+		<maml:description>
+				<maml:para>Make PowerShell a bit more like *NIX! Shows the Login info as you might know it from Unix/Linux</maml:para>
+
+		</maml:description>
+		<command:syntax>
+			<command:syntaxItem>
+				<maml:name>whoami</maml:name>
+			</command:syntaxItem>
+		</command:syntax>
+		<command:parameters>
+		</command:parameters>
+		<command:returnValues>
+			<command:returnValue>
+				<dev:type>
+					<maml:name>String</maml:name>
+					<maml:uri/>
+				</dev:type>
+				<maml:description>
+					<maml:para></maml:para>
+				</maml:description>
+			</command:returnValue>
+		</command:returnValues>
+		<command:examples>
+			<command:example>
+				<maml:title>--------------------------  EXAMPLE 0  --------------------------</maml:title>
+				<maml:introduction>
+					<maml:para></maml:para>
+				</maml:introduction>
+				<dev:code>PS C:\&gt; PS C:\scripts\PowerShell&gt; whoami</dev:code>
+				<dev:remarks>
+					<maml:para>BART\josh
+
+# Login (User) Josh on the system named BART</maml:para>
+
+				</dev:remarks>
+			</command:example>
+		</command:examples>
+	</command:command>
+</helpItems>
+

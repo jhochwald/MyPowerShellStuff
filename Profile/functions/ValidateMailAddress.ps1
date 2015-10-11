@@ -1,79 +1,9 @@
-<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
-
-	Permission is hereby granted, free of charge, to any person obtaining a
-	copy of this software and associated documentation files (the "Software"),
-	to deal in the Software without restriction, including without limitation
-	the rights to use, copy, modify, merge, publish, distribute, sublicense,
-	and/or sell copies of the Software, and to permit persons to whom the
-	Software is furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in
-	all copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-	DEALINGS IN THE SOFTWARE.
-
-	Except as contained in this notice, the name of the Software, NET-experts
-	or Joerg Hochwald shall not be used in advertising or otherwise to promote
-	the sale, use or other dealings in this Software without prior written
-	authorization from Joerg Hochwald
-#>
-
-function global:ConvertTo-PlainText {
-<#
-	.SYNOPSIS
-		Convert a secure string back to plain text
-
-	.DESCRIPTION
-		Convert a secure string back to plain text
-
-	.PARAMETER secure
-		Secure String to convert
-
-	.NOTES
-		Helpper function
-
-	.LINK
-		hochwald.net http://hochwald.net
-#>
-
-	[CmdletBinding(ConfirmImpact = 'None')]
-	[OutputType([string])]
-	param
-	(
-		[Parameter(Mandatory = $true,
-				   ValueFromPipeline = $true,
-				   Position = 0,
-				   HelpMessage = 'Secure String to convert')]
-		[ValidateNotNullOrEmpty()]
-		[security.securestring]
-		$secure
-	)
-
-	$marshal = [Runtime.InteropServices.Marshal];
-	return $marshal::PtrToStringAuto($marshal::SecureStringToBSTR($secure));
-
-	###
-	# Do a garbage collection
-	###
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
-	}
-}
-
+<#	if ($Statement) { Write-Output "Code is poetry" }	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>	Permission is hereby granted, free of charge, to any person obtaining a	copy of this software and associated documentation files (the "Software"),	to deal in the Software without restriction, including without limitation	the rights to use, copy, modify, merge, publish, distribute, sublicense,	and/or sell copies of the Software, and to permit persons to whom the	Software is furnished to do so, subject to the following conditions:	The above copyright notice and this permission notice shall be included in	all copies or substantial portions of the Software.	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER	DEALINGS IN THE SOFTWARE.	Except as contained in this notice, the name of the Software, NET-experts	or Joerg Hochwald shall not be used in advertising or otherwise to promote	the sale, use or other dealings in this Software without prior written	authorization from Joerg Hochwald#>function global:ValidateMailAddress {<#	.SYNOPSIS		Regex check to see if a given Email address is valid	.DESCRIPTION		Checks a given Mail Address against a REGEX Filter to see if it is RfC822 complaint	.PARAMETER Email		e.g. "joerg.hochwald@sartorius.com"		Email address to check	.EXAMPLE		PS C:\> ValidateMailAddress -Email:"Robot.Noreply@Sartorius.com"		# Checks a given Mail Address (Robot.Noreply@Sartorius.com) against a REGEX Filter to see if it is RfC822 complaint	.OUTPUTS		boolean		Value is True or False	.NOTES		Internal Helper function to check Mail addresses via REGEX to see if they are RfC822 complaint before use them.	.INPUTS		Mail Adress to check against the RfC822 REGEX Filter#>	[CmdletBinding(ConfirmImpact = 'None',				   SupportsShouldProcess = $true)]	[OutputType([bool])]	param	(		[Parameter(Mandatory = $true,				   ValueFromPipeline = $true,				   HelpMessage = 'Enter the Mail Address that you would like to check (Mandatory)')]		[ValidateNotNullOrEmpty()]		[Alias('Mail')]		[string]		$Email	)	return $Email -match "^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$"	# Do a garbage collection	if ((Get-Command run-gc -errorAction SilentlyContinue)) {		run-gc	}}# Set a compatibility Alias(set-alias ValidateEmailAddress ValidateMailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1(set-alias Validate-Email ValidateMailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNeKsI3A10FxrS0430+Y1YPoo
-# vjmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUv7GnsyCX4cKUp5UTdXXoUJ2v
+# DZKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -216,25 +146,25 @@ function global:ConvertTo-PlainText {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSVu1YZvNQrj9WAsd0VXNvpLcJq+jANBgkqhkiG9w0B
-# AQEFAASCAQCQdPrpyVvjcX10DNvnJ/yAC2/KQANc+2j6sqgmMEyhndX175IF5i2Y
-# axezqfYngKNhAzEcafGyn/91LFeX+XsbdkB4ZN0IZa8woA0qkrOtEh1naZd3ulbI
-# EkZTa6PxaA4uiOjCoCP1s3vyxfR/X7/4prnqieKn7c4oNtpYQsdxd9+NXa8cloWF
-# GtYz3BAu8fuSVCXoyxlyWI7VYnQGkSkaqEArzLZHeTt037byYdWAaMEd2D2wEerG
-# hLlFAr2w2O0T6N/fc8uk5Zkqrnd5/f+zrW2+5sWf5xf52ZpJLywBqu13iOf9+qRb
-# FUEqXT7O9+flIgjfVG8r6CM2f3OYUyGRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTQnQqxT+r6mnQErowYdzgvAcEWNzANBgkqhkiG9w0B
+# AQEFAASCAQCDEZ1E/9XMpIC0zjoGid9DXVcUkwzJH511V9zDUnDHS21vvWxNu0LM
+# KOg7pCjsA/UiRNJbkHPf6PfSG1RSF/DJtWmHWHaPplJV5w/bzMaRdzbCUQNOwG8v
+# lZ+Z5FkQCkyI2SQnlj6QSmRqIRUcBb14bWp0mGsc2TEmLjmH6o9xcrJDqMDAP4CU
+# Y3DhzE4NkgNvQleYdeJ6SmwnU0SgkQflztUT20tbasRS91rUMhU95Jj78j8fS1lh
+# yiLWA083cqhgmEnBxAFmDeHONsYEPWGZRLCmL2I4b0g6oQxhwZw3tGjHTaf4JvF/
+# /VXSwJt0+r+fUZr1f0wEBs1Yc3QGnKV9oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIwOVowIwYJKoZIhvcN
-# AQkEMRYEFAaU0/3atfGyG5qmMNgNGeBeZrZIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIyMFowIwYJKoZIhvcN
+# AQkEMRYEFKahFCyPPpIU/qza5EhxRUcs/jePMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCnWgGjOUUkDud2OnwNr+Qrw1/+wTDXaVcK8oQieqLU8Xwm
-# dSgPXAngkhNOPasfOcPsSi+tmHITrrdK70WAKb/xem1B6Yf+ojNHwEAyBEnBM3hy
-# N9bPcct52uUnswjuHgmnxLqCcwyXzNPoT0IenEhnJINMFk1GUy8q72BECi2k1QbW
-# 0iiWQa8b8rr5xXzQPldEUtvlQol8XTQ9SVdQepnqb9BMPjpr/muZP7vQHPO6AufI
-# mfcvpNLavG8BehwuR4gXhBcqOQ5Qjv16Lvagm+tBE42Z1HMYO4kYYeNKQDaXFmlm
-# N/iwB2/mQ1VPl5pPSaD9RLnVm/JVr+dofM6f5F9r
+# hkiG9w0BAQEFAASCAQBQN7J9BlDnulTSv6kM+pZgvNscPaKnBTzbKoso6u2Y/etK
+# PLdBEhFFd4qei05S880PoFiXPrH+GuXWBc9TGYdjLo8BO6IFuIWMvRLfb2nItHRW
+# BALmQSNqAfsfL51aMI4bgOZRbgcLPMLluqZCDO7/RK20UvZYb1g59onlGEs+Xwpu
+# 07zGYZfEyGKltIiENT3WEAXHiDChOVbu1dwPpIkizSUFYlGmKbQ1igCZAR3xOlnC
+# mUSqqDU0xW5F/TRgGmhWpITGlJtbqv6ec11xeB89Va28MhG0XoDlSpy3FOeadVw/
+# jXqS6XDEmmydfTG/q7RX+Hg3y8Ptnfpq0886vZ3j
 # SIG # End signature block

@@ -27,42 +27,42 @@
 	authorization from Joerg Hochwald
 #>
 
-function time {
+function global:time {
 <#
 	.SYNOPSIS
 		Timing How Long it Takes a Script or Command to Run
-	
+
 	.DESCRIPTION
 		This is a quick wrapper for Measure-Command Cmdlet
-		
+
 		Make the PowerShell a bit more *NIX like
-		
+
 		Everyone ever used Unix or Linux known time ;-)
-	
+
 	.PARAMETER file
 		Script or command to execute
-	
+
 	.EXAMPLE
 		PS C:\> time new-Bulk-devices.ps1
-		
+
 		# Runs the script new-Bulk-devices.ps1 and shows how log it takes to execute
-	
+
 	.EXAMPLE
 		PS C:\> time Get-Service | Export-Clixml c:\scripts\test.xml
-		
+
 		# When you run this command, service information will be saved to the file Test.xml
 		# It also shows how log it takes to execute
-	
+
 	.OUTPUTS
 		String
-	
+
 	.NOTES
 		Additional information about the function.
-	
+
 	.INPUTS
 		String
 #>
-	
+
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -70,7 +70,7 @@ function time {
 		[ValidateNotNullOrEmpty()]
 		$file
 	)
-	
+
 	if (!($file)) {
 		# Aw SNAP! That sucks...
 		Write-Error -Message:"Error: File to tail is missing..." -ErrorAction:Stop
@@ -78,7 +78,7 @@ function time {
 		# Measure the execution for you, Sir! ;-)
 		Measure-Command { $file }
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -88,8 +88,8 @@ function time {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjAZPf25XA5VTqkv/1CMOmuO3
-# EJ6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUs7qdULbwHUNYvZkeYqqpdvV/
+# SAagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -232,25 +232,25 @@ function time {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQmKCV8J7qx51auWi0iiRu2xNaP4zANBgkqhkiG9w0B
-# AQEFAASCAQAHj6f+AftMWp+0Apg09SK+sF6OlavAN2fBLQlVEJ0oU3klAspPUw2K
-# wWhwer2EM8/jZmg1ucYvA387SLjzJ0BY5B/8vwdRksMyPiiohanaoiOYhF3hnOlr
-# G/fJ6N+EewNKCbjkclUtq8+DlWUROZSR2jVBuEla8w4ItJ1OQiZ1IEuBhjSOguCI
-# /1RNDc6zSdbpGG0waBfZokrmBOQGMxcCVVR47EO2+m1/mD8gGij4poL1dPIBG3kP
-# 2CrXqVxHziQG0QHyejHmsJSOlNHFges+3F3L//VOB6JQd20nLb44tF1zSGiLFejR
-# DyYA3OpK4eniuzpbcFPNDNQnPQxBRDvsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSYQhVf43YOtGEaM6TO/gy/IWtDRzANBgkqhkiG9w0B
+# AQEFAASCAQB1EnbziilK7H5mOyIQTg4lmB4GKpBS65CwBwxBCybqDdaR+VFu5yPw
+# 6E7tF8oH+2iDoakoBWqDzaq7Ft+2XhTgy19YHZB53FgZ+uA7CreL47puLcOI8m8F
+# +lApBiIW/+Ov7lIiLgtT6p0VYrOB0fM6ZX/Jg7VAEghAo5dSE3Pmbpz2C2oubF9J
+# UCV4Bwn6zzwy2RKj0rsGS+3sVHjMOpC/yZ0t/D6M4NadvXmy8tjdGjDX9Ev+RnrF
+# ZnTnak4e6nO8Go/NeJFpepMSQ9YQKRL+cAuDrGFNyh5VRzxyA3Sn7nonnEzADJIe
+# ydciSu3TJ93jvon9MxRcA/8ZQXjBTSS1oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzNVowIwYJKoZIhvcN
-# AQkEMRYEFFwFVOyboc4bywLENzBWwYrxrg7FMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxOFowIwYJKoZIhvcN
+# AQkEMRYEFK+ToMC0QLvi7kR+V4NsNMWGdN2SMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB+fMNiA7CR1hOCiUheRn2HcKD3jzxfVyyz7axo4FSqxnau
-# ZTlWNwadyUaqNm9u9UIwvoji1SruBiL6FGrd66UZ3v7UCqUbU6Nj+ksJxKkg+R7r
-# QQqbNgQ+pt80Wv/vWJ5SyIySDVz4HAdmiDcK6zUld8EO2K4enZVmu7dSCtsE+4WG
-# kXJhqlY0CO0FB0wsfK90xfIqoJ4kqtV0U1vWOjaNQdsMeMJ/Pj0EqQQCJRInSNR9
-# FSbANvrTGghuuFLkQ8aMZGto0OzEKqmlH+cXspeVHGAdvRfpcU29XPxU1McuvXDj
-# dno1KLHjtzoENgAL5Wve13UgKoCxwbJbg8KzxEVv
+# hkiG9w0BAQEFAASCAQBGxvuYfRm0Q2998WD+CR8JB7rc40yORZmzV1ZFD/keLpKl
+# 93KhfBmYW0Y9ZBIBYXpD2NcGEd8ROQZ9KDcpfIrH/nt6J+++GpABEAiQLq6drHt2
+# 5yAqDothi8VdFoBewQU+Lzilx2Z0NRkkvLBXZuXe7gH2jFtVq3OzuZsbazVZ+lqR
+# 3JxXLc05CLmFwczydl+cUx8NS1d8HAhcUs7WfNredxt8AMaCagMCS61Kd0P5srfr
+# 7UTOW/xmaFWgrDSgACX4h3Es9OtWNGm+R3sTolNhSEn3mwKp4juqLHeo44YNJff5
+# JeHVXfPUvDUZxf/aP7+HTQyXTStlgSBMdadxy5EB
 # SIG # End signature block

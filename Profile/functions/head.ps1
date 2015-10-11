@@ -27,29 +27,29 @@
 	authorization from Joerg Hochwald
 #>
 
-function head {
+function global:head {
 <#
 	.SYNOPSIS
 		display first lines of a file
-	
+
 	.DESCRIPTION
 		This filter displays the first count lines or bytes of each of the specified files,
 		or of the standard input if no files are specified.
 		If count is omitted it defaults to 10.
-	
+
 	.PARAMETER file
 		Filename
-	
+
 	.PARAMETER count
 		A description of the count parameter.
-	
+
 	.NOTES
 		Make PowerShell more like Uni*
-	
+
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-	
+
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -60,14 +60,14 @@ function head {
 		[int]
 		$count = 10
 	)
-	
+
 	if ((Test-Path $file) -eq $False) {
 		Write-Error -Message:"Unable to locate file $file" -ErrorAction:Stop
 		return;
 	}
-	
+
 	return Get-Content $file | Select-Object -First $count
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -77,8 +77,8 @@ function head {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZ/HkGuoR9ZjNwKp0UJD8jtjz
-# +sSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU93wvFPaZDIcdbUxi47H+OTLw
+# wtmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -221,25 +221,25 @@ function head {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS0ozuRf4KP/pg3OZrfcHcKiQH8yzANBgkqhkiG9w0B
-# AQEFAASCAQAFulzU9kft4x4qJkiJKaPFgzgJfGGGK8gZPO1fGk+9VweO/7FtKcxe
-# 6wt21xGFqHrn13olqORhpb1+Hb0AEvo+Z/1KPJL4RU4c6dxdWEwvEYStdlBcC7mE
-# KPLl85KHovxK8PtbOFlGw7AelzRMV95x3ni1l2ZgUun7/0dKpb7a4APRJVpP9o/1
-# WxMFEUCfWpicWEq0x2Om+wHfE3xsWk9qAjJkXEq3tRuXQQeEmBEKmTK2kQt3jrFa
-# RL3dRdIyT/woKFiMQnKjVPgmFih2t+Fi27KTEcYtyZ/VPCVz59Zi6QxOU6Rz9mKY
-# 08juBaWqxFQuRiLJL/D+g77SI/Bxl3nYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTbAzur55F3nwHK/NyjnUzLHiDSCzANBgkqhkiG9w0B
+# AQEFAASCAQBzuHPCYyCHKoJ4oO7v/C/Aiwc3Gh2kK84Dr9eKniZmTBLLwwOk9L48
+# ogThLdPBetMWMPIH6lfkPIyVF9+aERevNeCr23GFEqjqFjJ+7Nz9g/ygU6dPQ4kD
+# VIOhUCg4WB6dfaGB19PtPYEKiyX96lvZgw68MmGL/smO05QR2137HZGToW2fTO9m
+# gEzpBxKUwCk1HofvC6b34g57puza6Q3O3uYzDbbalManDfQJREK049hcuja4N7C0
+# Hp39ytTltPnGeHOrtYy05Mv0EKkrw9Rq0jdYIxXHwBsTNrgXwT96EMnnEagR92VY
+# 4wbo2i8M2ook7uqK96PMpRnLTEZd+OQcoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkyOVowIwYJKoZIhvcN
-# AQkEMRYEFHunD1w6Da1OSV2mT1EhasNpV/+IMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxMlowIwYJKoZIhvcN
+# AQkEMRYEFPmmOFiIgmuLg5RVkhRFpcJt8fZsMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBA5XUVW9JQJOiSs0rK1XGFwOW2YT9IUwA/12iamR/mQWEW
-# nP7D9yIfYUfnvqA8tn7XGwpjjyxxQwyZanheLLEO65dBpXFuBWZrNkYayL0OW0Br
-# SOB4nESN8GAoOr5hQ0wAXXHJLiYQ7ePYEuPuDHPLrX2jrYDLbLjqM+oisO80SR7t
-# TpPv5SqZ+1MuX85SrzTBLsV+iNMvTuL0n0kKdtToAWfedJQe1/RG+ArhGO9fhwq/
-# snzIzn5WpKP9QxRZKkdynIH6zBo5q9csR51rCY9fUJyGRwa50YSw4oYuirRPT6ZZ
-# +5NdGzXwiPcuBrWo0xR8XZuyYVb0sRANfYsQgIVy
+# hkiG9w0BAQEFAASCAQA2fZ0et6p+EUHezrvoXdzexp8wtcV0mD0bAyTo4BQUhhg7
+# J2+1Lb7x6RmULLoUMrQppOZnVFmOWz9+HAH7bFcDheRD/Fza1hDF8eJyUX7Ng2On
+# /QN2/u/3YNtwFxgGujv1yTni1oZoPAXGDtcoFn4yV0hBYatbPKSuOyNqwMzogshn
+# HKpDi0xXUGm9nKE9C/oi850t/OJw55YySIJrADiU9YGcocrwQkr+V1+l10G/l92Z
+# ZA8Dmn87iXd6ocaHaAwf69ahfQONvpErXXH6g90boUiNPqXo9jSohe62aGfYJ2tP
+# ogFz5r1isx10WKrF4dfUROnj70DCFzEOa10zQDE/
 # SIG # End signature block

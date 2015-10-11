@@ -27,37 +27,37 @@
 	authorization from Joerg Hochwald
 #>
 
-function Edit-HostsFile {
+function global:Edit-HostsFile {
 <#
 	.SYNOPSIS
 		Edit the Windows Hostfile
-	
+
 	.DESCRIPTION
 		Shortcut to quickly edit the Windows host File. Might be usefull for testing things without changing the regular DNS.
 		Handle with care!
-	
+
 	.EXAMPLE
 		PS C:\> Edit-HostsFile
-		
+
 		# Opens the Editor configured within the VisualEditor variable to edit the Windows Host file
-	
+
 	.NOTES
 		Additional information about the function.
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
 	if (!($VisualEditor)) {
 		# Aw SNAP! The VisualEditor is not configured...
 		Write-PoshError -Message "System is not configured! The Visual Editor is not given..." -Stop
-		
+
 		# If you want to skip my VisualEditor function, add the following here instead of the Write-Error:
 		# Start-Process -FilePath notepad -ArgumentList "$env:windir\system32\drivers\etc\hosts"
 	} else {
 		# Here we go: Edit the Host file...
 		Start-Process -FilePath $VisualEditor -ArgumentList "$env:windir\system32\drivers\etc\hosts"
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -67,8 +67,8 @@ function Edit-HostsFile {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxBH5R1gYE48TqGCYzM34d1/0
-# k9ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUk0dINKj/2NKSj4nndCIN8LMv
+# f6+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -211,25 +211,25 @@ function Edit-HostsFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTG/24ZDmuCmlV3ARUXPpjH2NwPvDANBgkqhkiG9w0B
-# AQEFAASCAQBvjs1TZF560l+h3KndkRfOncY0JtHjOaCO+qg78HmfNeUZiabD9HOF
-# UN+EOXw2JLbm5iGHAsBKBHEZGCCsDi9B5nf6alH35C6SHm+RqlXkfxS/dJysa5Jw
-# 0DvKv20VhC9dBjVrvT17Vy5gEc5/A7wYCkjil9tGEUGBKhLnw3hMn+9vKqs+qLyr
-# OtZFPP3kIMyLvhue8fUk31cQ03KYtL1yrk0aRZ6AR61TraAGTXQPSRKSuOwSrFpN
-# l2375KSBp7Dd+JvUMgc9z64zPwvK1aQXlw5Uel/9Z+xdLptt8gVdx4/tCRBwpDuN
-# 7zXAlW+ydiHxfFJZEij3/HnQuqKc7KxtoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQUsMxduC3xKFrdCx1TmdXf/lUygzANBgkqhkiG9w0B
+# AQEFAASCAQCY6vy28PDEO2EDa5/6pEL1gN/18WMVluz1dDnO0Abwrdh4W6in6ypL
+# BEidwE01DjHFRpjRDwCeUlI77vGGERLq9WLQNcVJDItL86ziqrllhr/0Dl98Re9a
+# 9QzIj9kpSofqhjfWAIWyMjJ//ZHVIMCH7yUAZ4lVA40W0Zp8Dj7u9fYY4TEIzvKp
+# +CVsYTIKyJnNRkVOj/IkP6+rEf/K9iRa/JIHQan5V2BeH4JLM/8cwR7yo0M5kTCE
+# l52kIX5Bb3jhstflY5KQy88go9Dk/Zt45zsAXoa2rvRoAjVZt8qCu3mCAPNwJSUH
+# Z8qu/OZI/+/O0eKnIqW3VGNLa+Q6eJtJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkyNVowIwYJKoZIhvcN
-# AQkEMRYEFIdWfncXxrJT4cuTzez147gTAlvtMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIwOVowIwYJKoZIhvcN
+# AQkEMRYEFMdsRRqBxdE9ud4zUgSyYX7lWtCJMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCt+G9L8gNYgQ1lyPJsUj0/mCe9hcUwG1WvrU6qQseK6URU
-# WyfPkKhuvklgfQAFMwhtwuO5QbJwSF2/0MoZhy1SpV3hxeFJuftuGuervXKl+qU8
-# kct+Y4h+5PtGtBBWCPTd3LAxZHnhKilcTXE8BG86ecOJ7Qh9b00Wij2NkEi+m0S9
-# ISNU45QcxpSWJnnelvR1D0156y38ry4yG8AHC+8qlkIfzvaF1xRUe4GLynaUDMea
-# PNg9HQGogsbDrd0fmDpalvXBCWZF/RYN+LDbaTFa/eRxJWS/9COf8lgad7wcXHCM
-# KzTNGeJpyMUKS5k3wfvIp+0AZyFKVbGX7C4Bzcmp
+# hkiG9w0BAQEFAASCAQBdHcmdrSwJo5kEBr6TobrQyipxwP6Hq9VvPBrEHTT18obW
+# 2OnWnDVzZ9GmGxpyHHNs/SFY3cxwOg2t/5gq+9BdogVP57T3s1ooNqneJA7MJKS4
+# i93XgLal/yG1jsMXYfuxYZLNSdfHWHPgOl/GhfwLXx8s45yifVzbYzB23MATMesa
+# V7fAz+LvexqEAvlAkeTfgBEz1t7zNoWNQ3H3d+aXnrBxs+HpKS8kC1EWwPUGAEIh
+# uY3LvZlaoGAvqSEuTCoEz5iDNUDZAEZh/O6ztxX0byDNAJglQ9ZCNA8P7IDKoew4
+# S2nPA8+l61oO3E3iP1Ya4neFwWsl67KaitB6OxUh
 # SIG # End signature block

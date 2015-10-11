@@ -27,21 +27,21 @@
 	authorization from Joerg Hochwald
 #>
 
-function Initialize-Modules {
+function global:Initialize-Modules {
 <#
 	.SYNOPSIS
 		Initialize PowerShell Modules
-	
+
 	.DESCRIPTION
 		Initialize PowerShell Modules
-	
+
 	.NOTES
 		Needs to be documented
-	
+
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
 	Get-Module | Where-Object { Test-Method $_.Name $_.Name } | foreach
@@ -50,7 +50,7 @@ function Initialize-Modules {
 		Write-Verbose "Initializing Module $functionName"
 		Invoke-Expression $functionName | Out-Null
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -60,8 +60,8 @@ function Initialize-Modules {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0DsGjRw6/IDp/YxtKN9hfT0l
-# /HKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUG+wheYjrNXEmZ7WyiywNOxZU
+# rBqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -204,25 +204,25 @@ function Initialize-Modules {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQiVJcAbJCoDxj9GK1KvbI5AqYz2zANBgkqhkiG9w0B
-# AQEFAASCAQAT/Pie0l03xQG5kiMvzRYsRU+UKB1sp0FTpKw9N5CIP1Dexx8vF4mv
-# ynmoCxsX9gjfDIE9elLTuFbpRv+cxNTZpYTwpXQxpolNG8aDiJRHa0L18AHkAcj4
-# oIDQnBTPRGFcN1yAZkLOsr+f90JECLHrNtsmOsN75fjyFb0aX/z6SpvvVNcatzko
-# XryRmCggJqXxFi/Gu0Witl+m8JGbzTNA0wJHgOSQmkIqaHnlCHZEzBSws3CbJ/2t
-# RvOVDg/16g5TKrRaScXeLCgIC1hXcYsV4+XFpYXbTmMfZ4hRJNh5C9MEyp8vqP6o
-# ATqZCccqy0GZxiC6ihkD9Za+ahn359rFoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSK4WfBBDmwByU4IB4DzfLWy7hoWjANBgkqhkiG9w0B
+# AQEFAASCAQBAWSOe71jKJ1KjLTJQhIjDabptQwJtIE0bcqDQ9BaCVgswYijebsJy
+# 9vG8wonNWpn7MBrnckyQjFNrNffvRl76AZdOfjVz+DjaQu4HGIyN2ERe5vsLt6qC
+# o3R98hS285WsRRlusydPc1yf+BSDjBgB4PIRouZ0IxKnRcR30LfzUwLaekGoGeDS
+# XlezkH6VyqMGdyxqBnOEVfKf00FGQT3U8a3ithwbeIjQdmgfy958KKe4ViNLnPed
+# ft2zRMEd1haXHTVpb+inodul44iAjpT4OF7Wa1hSFaPhoxq6B4/h8NO4AMYtMVLc
+# 1CtP1F74ny2WMZmCHsd6dkyBY7UtQFIAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkyOVowIwYJKoZIhvcN
-# AQkEMRYEFOXu7BPPZfiDw4p6AaqOCTDO9VJIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxM1owIwYJKoZIhvcN
+# AQkEMRYEFBfsqqoUdiINAN6lZSo+BMWtIHeoMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAMxmIQeUp9HSDvpri2fW/A/JvCA9RtKaB7Gv7GuKxDoiq7
-# OOcaaxX5QMfPtEdkQSmcsaMdDz2HCsr4c2XkdFVc1bZJ6241zatzqYRuYRBJkMoO
-# kUkywzjGEraFnvQVxj5OeYEU6sxg5BIORm22LL3nwLwyUYLYkUXXJTYzy/s7gUd8
-# me17sWsfzTLnJcreyfit2uruMhxrIdT3TnaKY6+WaYJSwFygt4PyKi7DUmrZzJUK
-# YnvxmS0oapgwCatlCU20EIS3f4Zf0UMAJRwULO9HvUJlJt0xfXlramsoAmscdJFW
-# F/tSDSZI8zroXeLJbI6v/mzepDSwNJntjMKAzqMZ
+# hkiG9w0BAQEFAASCAQB5DEgGURccPqpXAZte4bMYXnwjoRm2tQih9PQ0473A3y/k
+# 3md2W8KkebPacw7duq71NZpbJ5hzr6w2SsixHfhhT7wo0tATWHrv7OXWAS5oJwCA
+# ox4yU3avzxdcVowAlv26p2/KG3VYE/c648PImbpeoONrWvxPLG2oi7q9OMBqqWMa
+# qRcef8ffk4kq1sDQZWfOHGcIhzJovx+F0f8cC1V2YDj0Q6qC8cyZUZ92LwD1gsgj
+# 0tPlEBmD9K3ZTIVegN2oFjbsc7Cl0x6igcXrt5Cn1F99JQXBbXfPGuN9V2eV9V5w
+# C1fY8HYchZFDOqFMaPiTWPQ826lWjuLmtvJwEM8b
 # SIG # End signature block

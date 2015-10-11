@@ -28,44 +28,44 @@
 #>
 
 # Make Powershell more Uni* like
-function myls {
+function global:myls {
 <#
 	.SYNOPSIS
 		Wrapper for Get-ChildItem
-	
+
 	.DESCRIPTION
 		This wrapper for Get-ChildItem shows all directories and files (even hidden ones)
-	
+
 	.PARAMETER loc
 		A description of the loc parameter.
-	
+
 	.PARAMETER location
 		This optional parameters is usefull if you would like to see the content of another directory
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> myls
-		
+
 		# Show the content of the directory where you are
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> myls c:\
-		
+
 		# Show the content of "c:\"
-	
+
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-	
+
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param
 	(
 		[string]
 		$loc = '.'
 	)
-	
+
 	Get-ChildItem -force -att !a "$loc"
 	Get-ChildItem -force -att !d "$loc"
 }
@@ -75,8 +75,8 @@ function myls {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU76ioIYcODWPSbZrzDe4ZZey+
-# SD+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3CDJtc5/vAAVOMKm7Sv/c8Cd
+# U86gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -219,25 +219,25 @@ function myls {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRt3soeTc2kPEuQFjz6xa0cIkXGmTANBgkqhkiG9w0B
-# AQEFAASCAQA4fCGRVK7nnfp7E55U8tz0QNzu1BTeYmqx4aC0saUlBegf1vME+xNK
-# BM9n0RgBwf68l9lBddk+yGe9Dz+tc82LOEJ0kFDBsXlj57N6WoAwP6lsAf3VGcQv
-# FeWw1TvSx+9X9mRVrwZdThrlj69ANahlcDHfzH3569LXL7C8aUq1ud4bRmSXVVjd
-# fenhz9NCr316acB4W13BAT9GgicU+rcI06zTD06DrnmjNiJHFu5PD6szFk+kmIl4
-# JXTs2S2mR+Pzs201JSIW9djB5If3X1zHzIH343lQ+W0zs+QKd0pXHBKeAi0yoDkZ
-# l2GFiS/Xiufvyzgq0gM1kZwtS/bUgdc0oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRxBf4Neu/mErQNzPrUa1xGzgqb6DANBgkqhkiG9w0B
+# AQEFAASCAQBZYtPjSpsO6hO6kYN6pfdCN3t8zRemU3DQdQV20ln29UD6AhdLrNaT
+# zhbYPIqu8hnhqPksr7ck8rLPrMSi2VIjHWcVAVQbL37zvwUTniJ4qbQ43GrW93ce
+# DAwSuBurlst/YOT/7vBvZ3XMo6RBRwndn/wcc2ccW5ly1N7bS4tlm5KeT9WoAT1Y
+# yi0p0tYCEk8TX7VFki2AwlDauSL0GmsZjbiYI3zxeciKCqQN409dh6vQGa6q52RK
+# +qAJPAfwjIBuiS8sH5LMypCJgo1NjGUjpf2SKbwLhzj42R7DSjr4sElvfMrTef6P
+# i9VKsjctPpv1A1shFuHwiy9WiMPna0tkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzMlowIwYJKoZIhvcN
-# AQkEMRYEFAH1AyKSFT4Kj5nk5l5OrWubJ//MMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxNVowIwYJKoZIhvcN
+# AQkEMRYEFEZxEoOSW4ctnyTH7VhtXZaxhtUBMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCIfRvOEFTriG6zChfnh/YSMoQKCzxEl5Yqo4s7yXX3mAdY
-# +unqxkSJyyWd919BGnAloqoR6PHIT4RL25YNFdRhvUEyFSUPL5IBtlIHqrO/q8qL
-# J5r5rEiKT/WmpRnx3nzNG6/xyAhY8K7xUyE6gYK16iobDxaAqL4F6wpvQuNAD+WY
-# K2vjc6TaCxp7kNqqtahdt9d/yAScJ52t5hmivrWyhbyHbdtoI3LDU/APb3I4bNhz
-# puXFe5oIt57/9fuLIRJb70visUYqJvLh3swZlB+tbhX4HgFIl/54F3tWEgsi4KWN
-# bsTe3vGBt62lqwgk586hJRJ9lg3bs6NUSh/oz8h1
+# hkiG9w0BAQEFAASCAQCj6aJ6uufFHuzctnZTkAUtEMuTJkiXLTtnn0/2D5y0cUkG
+# xGTPYkh4ZnizI6TSOeuS+vn50IH8seS87QBmfpTsEu8GNnqpAf6a2lbIEhbFpxpV
+# iVirWV8NtLCDnfNkx+ex4kcWq9wDQQ8Um0DxkkLHzuLUGx56W4oxQdhMHRm1Ln0R
+# L/nvMBkLSCbCyfPUWuRwdubr8RWTSxJ93KSo7X7teK3E6iSCtzsiMJP8ghtxwuGc
+# 5qFBmIzGIj22q/wWyT8pQMhVOM7uc3hMYiCIKfaAslmIK5haFv0a00wzgofAr5rz
+# p0XzqB01s+LhtWdEVMU8bNpaoJz0ioEsuPRdMqTA
 # SIG # End signature block

@@ -27,7 +27,10 @@
 	authorization from Joerg Hochwald
 #>
 
-<#
+
+
+function global:PoSHModuleLoader {
+	<#
 	.SYNOPSIS
 		Loads all Script modules
 
@@ -41,8 +44,9 @@
 		hochwald.net http://hochwald.net
 #>
 
-# Load some PoSH modules
-Get-Module -ListAvailable | Where-Object { $_.ModuleType -eq "Script" } | Import-Module -DisableNameChecking -force -Scope Global -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+	# Load some PoSH modules
+	Get-Module -ListAvailable | Where-Object { $_.ModuleType -eq "Script" } | Import-Module -DisableNameChecking -force -Scope Global -ErrorAction SilentlyContinue -WarningAction SilentlyContinue
+}
 
 # Do a garbage collection
 if ((Get-Command run-gc -errorAction SilentlyContinue)) {
@@ -51,8 +55,8 @@ if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWf7DUh/isEA2ZmjZ4d/ashhy
-# FQagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIeUZZ/jixH684ts9YAA7Navu
+# 926gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -195,25 +199,25 @@ if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQYopQg24DgWNn3r6w4GCK8JlsPLzANBgkqhkiG9w0B
-# AQEFAASCAQBrobm/YIdDIGJY0RZf/vYoP6liqcq/4lenUkpK5C3Yg3dq7y1bSzW7
-# yU8y3jvpEQ4E0ty+3eCLeLO+FaI1x5kGiPgViCbviHV1N6CoHn99mqtUKw15BCbF
-# Vr/Sy1coMi2zmWlZv0oAoqSkQpUtIIE0gDgBbf4kRT52NSjjWJM3eOGI31ejNIn8
-# BbsWCrcQSndvEfjX03Yn+7PCaqIZgXjL9yn9YU5DrkPJGseJFl1X6KSSlLLB37ue
-# JmONhM5YZAar+ry37FdZ1+TNrpdgSA1Z0f4ehwLcc+btvnuwsZNzahJpDcV1JOVD
-# 5YVaO8BTrBVU+4KJl5VHBaI+IOLSnhvuoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQvHg+0JrLgK3WaIdIN1QNRGuuDwjANBgkqhkiG9w0B
+# AQEFAASCAQA6k0nX5/mzr/bTwzm09poODfmOFADRJ7FSKYrgh/QWCTbjn5I0flfm
+# kUME9a9NhdEzpd2GNvsyePOgSxlo2Tjqgp5WsXNvekwyk+wus2oGjxiaKu+t+45V
+# y8XFQnOYhcGqLJAKZGOvgR5KrNoV7M+ciuM1suSTJj8BH7PqCOhunxhT0/AU43Sk
+# HgYjVjG6pO9Pi1NnESfmO0HQwS9hT4/XZAEvYJ7051RLo0Zo6O3tcyXcwm1Ppqg/
+# U8KEwsdRmkBDcGepc849DFjJzyixQde+uPD2ZUHwWpAHKUza7Cy7DK3co30PrUdX
+# X4pGVkckB+mwYyT+13p4ECkFrH548jatoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAwNTExMzkzM1owIwYJKoZIhvcN
-# AQkEMRYEFN0A8wsx+dZpUXgsl5GXtTlZnj1XMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxNlowIwYJKoZIhvcN
+# AQkEMRYEFMUU7ePtmj3R937Lf3RFRF+uGt4rMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQALbYJXE5sMNHOjLAI9x9D9I3xQ8WXDZ4cQViypjkMuxu12
-# dYgaf5GU2Pj6XuLE5DpV0P874O4j7JvSoNQ1jqY1q5Bhva8SFn8N1U5LpiUhgrDz
-# LkBYLnorG0oteaZNAZ3ogcE1kGySGinc8fXVxBXFYWF3Z4NKrOfv4MWyfV1iXvEb
-# mhcP+9w9mFR7cqZ5llthwdiuVS9gQwSs0iDxN/8tv8SDpNl7fQ8P58RXuHA2cP7S
-# BOBJQoGk7tz74I7x6kURnRnyOZWyZrnhAXOn5AvGM4xMBF6/c13Gs69SaPaW3OU3
-# JpnuoN6s43W1oUNgOpkwTloywSBNpXNtyT6zVXKu
+# hkiG9w0BAQEFAASCAQB9QCd17GKbIPrdGeZMdQgRe3hs7XIZY0Rhr6zgIXzpxyfI
+# 3v4QBT1LYc+DUkDL3cD/AWi8FiHUSF+eFNRujN7ykLz3zngEaZSt4ZAgRCnej+se
+# 9kmYfXR6hspDttcWnxvu8P+lsrN/oyl3RK3g6bPxi4LQ3lgHZUmAiBxmsPzqdm8r
+# 3uBoIBW3j1V/6wWHdlkBEFUGvcTzO+hmOhUXOnP2ko1pVIEfNBKjAqB9n1woExqO
+# 8ggtFwPRrLFgsGFTQbeEQT5oSZHAGA81TOJFQevava3hOApKU4p+nVvM7FNp1wee
+# c3SraDeBneAjn2POIwUPiQwBozznVnQAcAgAadu6
 # SIG # End signature block
