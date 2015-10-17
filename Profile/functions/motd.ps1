@@ -43,29 +43,63 @@ function Global:Update-SysInfo {
 	.NOTES
 		Based on an idea found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
 #>
+	# Call Companion to Cleanup
+	if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
+		Clean-SysInfo
+	}
 	
-	Set-Variable -Name Operating_System -Value $(Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property LastBootUpTime, TotalVisibleMemorySize, FreePhysicalMemory, Caption, Version, SystemDrive)
-	Set-Variable -Name Processor -Value $(Get-CimInstance -ClassName Win32_Processor | Select-Object -Property Name, LoadPercentage)
-	Set-Variable -Name Logical_Disk -Value $(Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object -Property DeviceID -eq -Value $(${Operating_System}.SystemDrive) | Select-Object -Property Size, FreeSpace)
-	Set-Variable -Name Get_Date -Value $(Get-Date)
-	Set-Variable -Name Get_OS_Name -Value $(${Operating_System}.Caption)
-	Set-Variable -Name Get_Kernel_Info -Value $(${Operating_System}.Version)
-	Set-Variable -Name Get_Uptime -Value $("$((${Get_Uptime} = ${Get_Date} - $(${Operating_System}.LastBootUpTime)).Days) days, $(${Get_Uptime}.Hours) hours, $(${Get_Uptime}.Minutes) minutes")
-	Set-Variable -Name Get_Shell_Info -Value $("{0}.{1}" -f ${PSVersionTable}.PSVersion.Major, ${PSVersionTable}.PSVersion.Minor)
-	Set-Variable -Name Get_CPU_Info -Value $(${Processor}.Name -replace '\(C\)', '' -replace '\(R\)', '' -replace '\(TM\)', '' -replace 'CPU', '' -replace '\s+', ' ')
-	Set-Variable -Name Get_Process_Count -Value $((Get-Process).Count)
-	Set-Variable -Name Get_Current_Load -Value $(${Processor}.LoadPercentage)
-	Set-Variable -Name Get_Memory_Size -Value $("{0}mb/{1}mb Used" -f (([math]::round(${Operating_System}.TotalVisibleMemorySize/1KB)) - ([math]::round(${Operating_System}.FreePhysicalMemory/1KB))), ([math]::round(${Operating_System}.TotalVisibleMemorySize/1KB)))
-	Set-Variable -Name Get_Disk_Size -Value $("{0}gb/{1}gb Used" -f (([math]::round(${Logical_Disk}.Size/1GB)) - ([math]::round(${Logical_Disk}.FreeSpace/1GB))), ([math]::round(${Logical_Disk}.Size/1GB)))
+	# Fill Variables with values
+	Set-Variable -Name Operating_System -Scope:Global -Value $(Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property LastBootUpTime, TotalVisibleMemorySize, FreePhysicalMemory, Caption, Version, SystemDrive)
+	Set-Variable -Name Processor -Scope:Global -Value $(Get-CimInstance -ClassName Win32_Processor | Select-Object -Property Name, LoadPercentage)
+	Set-Variable -Name Logical_Disk -Scope:Global -Value $(Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object -Property DeviceID -eq -Value $(${Operating_System}.SystemDrive) | Select-Object -Property Size, FreeSpace)
+	Set-Variable -Name Get_Date -Scope:Global -Value $(Get-Date)
+	Set-Variable -Name Get_OS_Name -Scope:Global -Value $(${Operating_System}.Caption)
+	Set-Variable -Name Get_Kernel_Info -Scope:Global -Value $("$((${Get_Uptime} = ${Get_Date} - $(${Operating_System}.LastBootUpTime)).Days) days, $(${Get_Uptime}.Hours) hours, $(${Get_Uptime}.Minutes) minutes")
+	Set-Variable -Name Get_Shell_Info -Scope:Global -Value $("{0}.{1}" -f ${PSVersionTable}.PSVersion.Major, ${PSVersionTable}.PSVersion.Minor)
+	Set-Variable -Name Get_CPU_Info -Scope:Global -Value $(${Processor}.Name -replace '\(C\)', '' -replace '\(R\)', '' -replace '\(TM\)', '' -replace 'CPU', '' -replace '\s+', ' ')
+	Set-Variable -Name Get_Process_Count -Scope:Global -Value $((Get-Process).Count)
+	Set-Variable -Name Get_Current_Load -Scope:Global -Value $(${Processor}.LoadPercentage)
+	Set-Variable -Name Get_Memory_Size -Scope:Global -Value $("{0}mb/{1}mb Used" -f (([math]::round(${Operating_System}.TotalVisibleMemorySize/1KB)) - ([math]::round(${Operating_System}.FreePhysicalMemory/1KB))), ([math]::round(${Operating_System}.TotalVisibleMemorySize/1KB)))
+	Set-Variable -Name Get_Disk_Size -Scope:Global -Value $("{0}gb/{1}gb Used" -f (([math]::round(${Logical_Disk}.Size/1GB)) - ([math]::round(${Logical_Disk}.FreeSpace/1GB))), ([math]::round(${Logical_Disk}.Size/1GB)))
+}
+
+function Global:Clean-SysInfo {
+	<#
+	.SYNOPSIS
+		Companion for Update-SysInfo
+
+	.DESCRIPTION
+		Cleanup for variables from the Update-SysInfo function
+
+	.EXAMPLE
+		PS C:\> Clean-SysInfo
+
+		# Cleanup for variables from the Update-SysInfo function
+
+	.NOTES
+
+#>
+	Remove-Variable Operating_System -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Processor -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Logical_Disk -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_Date -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_OS_Name -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_Kernel_Info -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_Shell_Info -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_CPU_Info -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_Process_Count -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_Current_Load -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_Memory_Size -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_Disk_Size -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 }
 
 function Global:Get-MOTD {
 <#
-    .SYNOPSIS
-        Displays system information to a host.
+	.SYNOPSIS
+		Displays system information to a host.
 
-    .DESCRIPTION
-        The Get-MOTD cmdlet is a system information tool written in PowerShell.
+	.DESCRIPTION
+		The Get-MOTD cmdlet is a system information tool written in PowerShell.
 
 	.EXAMPLE
 		PS C:\> Get-MOTD
@@ -73,9 +107,9 @@ function Global:Get-MOTD {
 		# Display the colorful Message of the Day with an Windows Logo and some system infos
 
 	.NOTES
-        Found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
+		Found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
 
-        I moved some stuff in a seperate function to make it reusable
+		I moved some stuff in a seperate function to make it reusable
 #>
 	
 	# Update the Infos
@@ -142,6 +176,11 @@ function Global:Get-MOTD {
 	Write-Host -Object ("                 'VEzjt:;;z>*``           ") -ForegroundColor Yellow
 	Write-Host -Object ("                      ````                  ") -ForegroundColor Yellow
 	Write-Host -Object ("")
+	
+	# Call Cleanup
+	if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
+		Clean-SysInfo
+	}
 }
 
 function Global:Get-SysInfo {
@@ -202,13 +241,20 @@ function Global:Get-SysInfo {
 	
 	Write-Host -Object ("Disk: ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_Disk_Size}") -ForegroundColor Gray
+	
+	Write-Host -Object ("")
+	
+	# Call Cleanup
+	if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
+		Clean-SysInfo
+	}
 }
 
 # SIG # Begin signature block
 # MIITegYJKoZIhvcNAQcCoIITazCCE2cCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUYzSNy7MM9K5Q/OkICSc65y8A
-# Jn2ggg4LMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlShzbYbY4cfQGm3JEavaTFxG
+# UNuggg4LMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -288,25 +334,25 @@ function Global:Get-SysInfo {
 # QSBMaW1pdGVkMSMwIQYDVQQDExpDT01PRE8gUlNBIENvZGUgU2lnbmluZyBDQQIQ
 # FtT3Ux2bGCdP8iZzNFGAXDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAig
 # AoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgEL
-# MQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUXlzLyUjszJOtGKV9I8nk
-# xbJf3C8wDQYJKoZIhvcNAQEBBQAEggEAF1DfWKnmj7X/kQrsI1tl7YB8SmFam8yk
-# 4mszWMr3+vSmMMDToRAem/3FcDiKvd08XzRXrN4pzm9q9evvnE5y7Ylz62HuO4Oy
-# G17lNVoyvrApbpHRuJ8luleZxL6KSk6ohA/7K5LoviZ1aYAuFIA77Iyqqz6GW1lH
-# 7VoyNFy+3+JWYSsBJ+qX8p3v5k1KWpKdr/fut1eUlTMhcSLs0TdzbYhN6iVM3qkI
-# xUDdK1xB15XBa8Rz3zFq5jC++NDw1TB/Ltm2ruM4EXcVCBuhEwuNqvWBZ86Xoe5F
-# y4oPeJ596YBIMYxgDobTF0jMOpZDVdRDXx++Aic/Q3h6xSArFYAl0aGCAqIwggKe
+# MQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUzmVoQffFm/Ay8bDR7/eH
+# g713q+YwDQYJKoZIhvcNAQEBBQAEggEAhe8KlYiAGH8vQeSLNpcb2ZMgylIqpSLM
+# DEOBmRq6TBlEs8bXs59CSWiBjJhnLbq15O6fqdhEs05dDlnwYK3LJHzpvE+cjsIO
+# 9tovGgiCHFy39EK0YJhvNxx5/gcabNR1EIM64DA2AThHvpUqVpctde8udWC5FGob
+# 7habZowwXcpScU38B0Ou9qRh/1vRcHTIqe9qbdYjtga7C4Un1z25UY1zoMsI/ia9
+# YAlLTaSLyvNHIcPpQ/FljPQQh/E2kzJadHOebbgvn0kg3kk+tAEx1GyhWTXKP4l0
+# rQ52Ckt8kZylmBBjcmjkgJDkqSYmcqBZdWJFz9KCNGw0lD+l9AeePqGCAqIwggKe
 # BgkqhkiG9w0BCQYxggKPMIICiwIBATBoMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
 # ExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIFRpbWVzdGFt
 # cGluZyBDQSAtIEcyAhIRIQaggdM/2HrlgkzBa1IJTgMwCQYFKw4DAhoFAKCB/TAY
 # BgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xNTEwMTcx
-# NzQxNThaMCMGCSqGSIb3DQEJBDEWBBTm2T2mMndojSyJFxNYGsaKiX+t8jCBnQYL
+# NzU1MjNaMCMGCSqGSIb3DQEJBDEWBBSLWsmDIso4VUegzLy+gVsbSrtVjTCBnQYL
 # KoZIhvcNAQkQAgwxgY0wgYowgYcwgYQEFLNjCLTUze1Pz71muVX647+xLCnmMGww
 # VqRUMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgw
 # JgYDVQQDEx9HbG9iYWxTaWduIFRpbWVzdGFtcGluZyBDQSAtIEcyAhIRIQaggdM/
-# 2HrlgkzBa1IJTgMwDQYJKoZIhvcNAQEBBQAEggEAgo9edwmuHsgRN/uUs26OWxdN
-# /Q3rkw0H9pbGDurEzpzfSa4mJ8/yjvz5vt9+lPYc3hoDoMozo9nSNjklokAROF9V
-# IVhLcXb7VjERK93/il/6EwpF46s4kKgfM5PUzcuf/lt2pePjxws78Ms1AcSQz5hw
-# COp1Kf5b/bETkBC+RGuBevl77QFrhvUcWQr6WVmdAcmfXymfXUyhEE0WQz6f0Mmx
-# IsGGuE//gHU7voprbysBCRiR5V+KStdWoSs71mxUTuJmxiHTAGbSUKKvT8UflDyq
-# kRvAKylgBdOK6c11UwV4QflcTtJr7ZAcGKJG+ImGK4AHI2ntfZ2LyN88NuNmZw==
+# 2HrlgkzBa1IJTgMwDQYJKoZIhvcNAQEBBQAEggEAgPfa3uF65ic/+qEcPSAV2OLB
+# sWFixn3WUNYLQ+UaalQXyQIDjDALfDEP3xIHR/MWexLxvYNcSAiR7ojfngEK9X9a
+# j9r1ysbigmmZTVMv3mlgcmL+mtRBN+eYma33nNdT4kPHQZLbBHQuIyOI/qlfLEJt
+# mXPGJt1xMVBqTYsJCruL3uOkwj/c52wGELuVWx3qLJjQNN2PxlSptdb5oPusfldc
+# 7uecwtX7q/KnfwCuNl0rPesN4UjLNCdHvtKHcRzKQGws0UBj9bsAGcw6qMr8tvFY
+# 3s9nsTnMSe9uvRzWDpQvCVQfGBNvzdZ/wd15AopjJUEMzt/IslbTzOSTRiRgqA==
 # SIG # End signature block
