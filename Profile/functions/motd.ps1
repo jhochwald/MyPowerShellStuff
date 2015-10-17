@@ -54,7 +54,8 @@ function Global:Update-SysInfo {
 	Set-Variable -Name Logical_Disk -Scope:Global -Value $(Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object -Property DeviceID -eq -Value $(${Operating_System}.SystemDrive) | Select-Object -Property Size, FreeSpace)
 	Set-Variable -Name Get_Date -Scope:Global -Value $(Get-Date)
 	Set-Variable -Name Get_OS_Name -Scope:Global -Value $(${Operating_System}.Caption)
-	Set-Variable -Name Get_Kernel_Info -Scope:Global -Value $("$((${Get_Uptime} = ${Get_Date} - $(${Operating_System}.LastBootUpTime)).Days) days, $(${Get_Uptime}.Hours) hours, $(${Get_Uptime}.Minutes) minutes")
+	Set-Variable -Name Get_Kernel_Info -Scope:Global -Value $(${Operating_System}.Version)
+	Set-Variable -Name Get_Uptime -Scope:Global -Value $("$((${Get_Uptime} = ${Get_Date} - $(${Operating_System}.LastBootUpTime)).Days) days, $(${Get_Uptime}.Hours) hours, $(${Get_Uptime}.Minutes) minutes")
 	Set-Variable -Name Get_Shell_Info -Scope:Global -Value $("{0}.{1}" -f ${PSVersionTable}.PSVersion.Major, ${PSVersionTable}.PSVersion.Minor)
 	Set-Variable -Name Get_CPU_Info -Scope:Global -Value $(${Processor}.Name -replace '\(C\)', '' -replace '\(R\)', '' -replace '\(TM\)', '' -replace 'CPU', '' -replace '\s+', ' ')
 	Set-Variable -Name Get_Process_Count -Scope:Global -Value $((Get-Process).Count)
@@ -85,6 +86,7 @@ function Global:Clean-SysInfo {
 	Remove-Variable Get_Date -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable Get_OS_Name -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable Get_Kernel_Info -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable Get_Uptime -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable Get_Shell_Info -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable Get_CPU_Info -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable Get_Process_Count -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
@@ -253,8 +255,8 @@ function Global:Get-SysInfo {
 # SIG # Begin signature block
 # MIITegYJKoZIhvcNAQcCoIITazCCE2cCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlShzbYbY4cfQGm3JEavaTFxG
-# UNuggg4LMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbYZ9f5M7KpyYG5O3DwruJvVi
+# 3Q+ggg4LMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -334,25 +336,25 @@ function Global:Get-SysInfo {
 # QSBMaW1pdGVkMSMwIQYDVQQDExpDT01PRE8gUlNBIENvZGUgU2lnbmluZyBDQQIQ
 # FtT3Ux2bGCdP8iZzNFGAXDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAig
 # AoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgEL
-# MQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUzmVoQffFm/Ay8bDR7/eH
-# g713q+YwDQYJKoZIhvcNAQEBBQAEggEAhe8KlYiAGH8vQeSLNpcb2ZMgylIqpSLM
-# DEOBmRq6TBlEs8bXs59CSWiBjJhnLbq15O6fqdhEs05dDlnwYK3LJHzpvE+cjsIO
-# 9tovGgiCHFy39EK0YJhvNxx5/gcabNR1EIM64DA2AThHvpUqVpctde8udWC5FGob
-# 7habZowwXcpScU38B0Ou9qRh/1vRcHTIqe9qbdYjtga7C4Un1z25UY1zoMsI/ia9
-# YAlLTaSLyvNHIcPpQ/FljPQQh/E2kzJadHOebbgvn0kg3kk+tAEx1GyhWTXKP4l0
-# rQ52Ckt8kZylmBBjcmjkgJDkqSYmcqBZdWJFz9KCNGw0lD+l9AeePqGCAqIwggKe
+# MQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUlo5ML7SsXRz/TqajdkVk
+# fmqq5BIwDQYJKoZIhvcNAQEBBQAEggEAOXpt3aTskEpEFuFUIshHDDXSloBuuFuD
+# 7S4/9vVcp+Ym4uodHgU3SccVomBrKsYXAC4TCCPDDcWlYZND+fGa7d8KSOMVg1bu
+# 3CBVY2dfLqmbQF6zwLSB6+PA95vaRbyYmLL4GR5+HLoGbdxiotQGim29B9bh6KjJ
+# Mrtz3svpNsdlLoETE/ph/HYj9HZyf8UclNsF4lE6SX1IB1966uAH6KVGAloh/5EN
+# ye7oq10UZy2gd7xDtsWRbz15A2wfZOBY7kJg1peXRn0jen5ivctJVeTs44KIXIOr
+# Hkx2IM3xORhEEZOtRUnHgUajzUCxmdrPXy4LCBf4RT0fKqr6QVIhWqGCAqIwggKe
 # BgkqhkiG9w0BCQYxggKPMIICiwIBATBoMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
 # ExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIFRpbWVzdGFt
 # cGluZyBDQSAtIEcyAhIRIQaggdM/2HrlgkzBa1IJTgMwCQYFKw4DAhoFAKCB/TAY
 # BgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xNTEwMTcx
-# NzU1MjNaMCMGCSqGSIb3DQEJBDEWBBSLWsmDIso4VUegzLy+gVsbSrtVjTCBnQYL
+# ODMzMjNaMCMGCSqGSIb3DQEJBDEWBBQNsx7lttR/bjMF2fKH7ahiZJ0WDTCBnQYL
 # KoZIhvcNAQkQAgwxgY0wgYowgYcwgYQEFLNjCLTUze1Pz71muVX647+xLCnmMGww
 # VqRUMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgw
 # JgYDVQQDEx9HbG9iYWxTaWduIFRpbWVzdGFtcGluZyBDQSAtIEcyAhIRIQaggdM/
-# 2HrlgkzBa1IJTgMwDQYJKoZIhvcNAQEBBQAEggEAgPfa3uF65ic/+qEcPSAV2OLB
-# sWFixn3WUNYLQ+UaalQXyQIDjDALfDEP3xIHR/MWexLxvYNcSAiR7ojfngEK9X9a
-# j9r1ysbigmmZTVMv3mlgcmL+mtRBN+eYma33nNdT4kPHQZLbBHQuIyOI/qlfLEJt
-# mXPGJt1xMVBqTYsJCruL3uOkwj/c52wGELuVWx3qLJjQNN2PxlSptdb5oPusfldc
-# 7uecwtX7q/KnfwCuNl0rPesN4UjLNCdHvtKHcRzKQGws0UBj9bsAGcw6qMr8tvFY
-# 3s9nsTnMSe9uvRzWDpQvCVQfGBNvzdZ/wd15AopjJUEMzt/IslbTzOSTRiRgqA==
+# 2HrlgkzBa1IJTgMwDQYJKoZIhvcNAQEBBQAEggEALEzRLpmPm/XRWJlwhK/aiw4T
+# pH5MxxMCghSZREiqVs/KMjG+DgDAG88IhIDwrJzK7ubFcDAQznPv60O2HKFNYjNt
+# 4+8UzBkzQAF0fKHdMsR/4lZbfmz47nZlIC0SLnIaEuAmYN8p0yYrTASY6Y3OF8ld
+# tTU6qHMXEwO0GXr7y8y5hqGML5vDVD+SuuPa/tUeL/kG7uqE+Gd8iyaZY/4FjENf
+# JYxw1ERfs8jg7XFMiRvTSJmyVQHK9cNPrG37WMdnJELIZVDcpJporiocxqK1G+o4
+# +LGLw3xbrwU0Jr73leNjz6/1efYNep+6jSbHwRGXo7nXT/Aq3kA6Nkq0aJ+xaQ==
 # SIG # End signature block
