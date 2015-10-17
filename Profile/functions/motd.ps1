@@ -1,16 +1,45 @@
-﻿function Update-SysInfo {
+﻿<#
+	if ($Statement) { Write-Output "Code is poetry" }
+
+	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+
+	Permission is hereby granted, free of charge, to any person obtaining a
+	copy of this software and associated documentation files (the "Software"),
+	to deal in the Software without restriction, including without limitation
+	the rights to use, copy, modify, merge, publish, distribute, sublicense,
+	and/or sell copies of the Software, and to permit persons to whom the
+	Software is furnished to do so, subject to the following conditions:
+
+	The above copyright notice and this permission notice shall be included in
+	all copies or substantial portions of the Software.
+
+	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+	DEALINGS IN THE SOFTWARE.
+
+	Except as contained in this notice, the name of the Software, NET-experts
+	or Joerg Hochwald shall not be used in advertising or otherwise to promote
+	the sale, use or other dealings in this Software without prior written
+	authorization from Joerg Hochwald
+#>
+
+function Global:Update-SysInfo {
 <#
 	.SYNOPSIS
 		Update Information about the system
-	
+
 	.DESCRIPTION
 		This function updates the informations about the systems it runs on
-	
+
 	.EXAMPLE
 		PS C:\> Update-SysInfo
 
 		# Update Information about the system, no output!
-	
+
 	.NOTES
 		Based on an idea found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
 #>
@@ -30,17 +59,17 @@
 	Set-Variable -Name Get_Disk_Size -Value $("{0}gb/{1}gb Used" -f (([math]::round(${Logical_Disk}.Size/1GB)) - ([math]::round(${Logical_Disk}.FreeSpace/1GB))), ([math]::round(${Logical_Disk}.Size/1GB)))
 }
 
-function Get-MOTD {
+function Global:Get-MOTD {
 <#
     .SYNOPSIS
         Displays system information to a host.
 
     .DESCRIPTION
-        The Get-MOTD cmdlet is a system information tool written in PowerShell. 
+        The Get-MOTD cmdlet is a system information tool written in PowerShell.
 
 	.EXAMPLE
 		PS C:\> Get-MOTD
-	
+
 		# Display the colorful Message of the Day with an Windows Logo and some system infos
 
 	.NOTES
@@ -115,19 +144,19 @@ function Get-MOTD {
 	Write-Host -Object ("")
 }
 
-function Get-SysInfo {
+function Global:Get-SysInfo {
 <#
 	.SYNOPSIS
 		Displays Information about the system
-	
+
 	.DESCRIPTION
 		Displays Information about the system it is started on
-	
+
 	.EXAMPLE
 		PS C:\> Get-SysInfo
-	
+
 		# Display some system infos
-	
+
 	.NOTES
 		Based on an idea found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
 #>
@@ -178,8 +207,8 @@ function Get-SysInfo {
 # SIG # Begin signature block
 # MIITegYJKoZIhvcNAQcCoIITazCCE2cCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvrK2rxS1KEf4On0gYsXaOVl0
-# zpWggg4LMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUYzSNy7MM9K5Q/OkICSc65y8A
+# Jn2ggg4LMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -259,25 +288,25 @@ function Get-SysInfo {
 # QSBMaW1pdGVkMSMwIQYDVQQDExpDT01PRE8gUlNBIENvZGUgU2lnbmluZyBDQQIQ
 # FtT3Ux2bGCdP8iZzNFGAXDAJBgUrDgMCGgUAoHgwGAYKKwYBBAGCNwIBDDEKMAig
 # AoAAoQKAADAZBgkqhkiG9w0BCQMxDAYKKwYBBAGCNwIBBDAcBgorBgEEAYI3AgEL
-# MQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUbPqk74uuUW/a98VHvBhJ
-# Og+iwZwwDQYJKoZIhvcNAQEBBQAEggEALpYT59tPuQJ//IZX/WQeY12OzeQrBgLG
-# GJYXEfILUbnqA8F9lHSgqLzkNhgvonwp1quu+/pgu4nUZbflzzHyjYrfdLUG9uSh
-# nq99ZIN3c8N+E4j9EVHdvzoX69TWnq6+1tgu6MqhcdQjhO5I0z8WEIEnlzzu8o8F
-# +/bJLKL6DoIo7ooJkvc+c/JLEKAswq+YKE4yvdLKTBz/9LU7CDaN+UEUbBCEzT/j
-# pCYcV/P8oPps8XPrxsag99fOBspUDkLvIhnX5Qa5G3xNgA3KIk4wtT2wUrOojyOd
-# DojwepU05vn15jBvmYNODz/PJkvTGDzb0ySfrcgXWVbg5H6KRJvHBqGCAqIwggKe
+# MQ4wDAYKKwYBBAGCNwIBFTAjBgkqhkiG9w0BCQQxFgQUXlzLyUjszJOtGKV9I8nk
+# xbJf3C8wDQYJKoZIhvcNAQEBBQAEggEAF1DfWKnmj7X/kQrsI1tl7YB8SmFam8yk
+# 4mszWMr3+vSmMMDToRAem/3FcDiKvd08XzRXrN4pzm9q9evvnE5y7Ylz62HuO4Oy
+# G17lNVoyvrApbpHRuJ8luleZxL6KSk6ohA/7K5LoviZ1aYAuFIA77Iyqqz6GW1lH
+# 7VoyNFy+3+JWYSsBJ+qX8p3v5k1KWpKdr/fut1eUlTMhcSLs0TdzbYhN6iVM3qkI
+# xUDdK1xB15XBa8Rz3zFq5jC++NDw1TB/Ltm2ruM4EXcVCBuhEwuNqvWBZ86Xoe5F
+# y4oPeJ596YBIMYxgDobTF0jMOpZDVdRDXx++Aic/Q3h6xSArFYAl0aGCAqIwggKe
 # BgkqhkiG9w0BCQYxggKPMIICiwIBATBoMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
 # ExBHbG9iYWxTaWduIG52LXNhMSgwJgYDVQQDEx9HbG9iYWxTaWduIFRpbWVzdGFt
 # cGluZyBDQSAtIEcyAhIRIQaggdM/2HrlgkzBa1IJTgMwCQYFKw4DAhoFAKCB/TAY
 # BgkqhkiG9w0BCQMxCwYJKoZIhvcNAQcBMBwGCSqGSIb3DQEJBTEPFw0xNTEwMTcx
-# NzMyMjFaMCMGCSqGSIb3DQEJBDEWBBTPL8yGmd/I5dDlXU19lYXBbeAzXDCBnQYL
+# NzQxNThaMCMGCSqGSIb3DQEJBDEWBBTm2T2mMndojSyJFxNYGsaKiX+t8jCBnQYL
 # KoZIhvcNAQkQAgwxgY0wgYowgYcwgYQEFLNjCLTUze1Pz71muVX647+xLCnmMGww
 # VqRUMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQKExBHbG9iYWxTaWduIG52LXNhMSgw
 # JgYDVQQDEx9HbG9iYWxTaWduIFRpbWVzdGFtcGluZyBDQSAtIEcyAhIRIQaggdM/
-# 2HrlgkzBa1IJTgMwDQYJKoZIhvcNAQEBBQAEggEAV7QoL7Z24zHUsRmm/DeeRue8
-# zP5kg3SL+oeNfLBrtgip/CWswATIvSF0HNAzz02VW6SXUOhnKq2lQZN3o/Y9OVzB
-# jWZ1HLK4SnZxQnHm37SFoyfREHX8WQjJjm4ld5yt88ZxlFTQS6d4//NII3aaSU2Q
-# YOXQPbyQLQ5nC6vlXdicOiiP19JxHRR7SfJBjFfnIOgsp+UmHcnyQCeyP1aTnAHw
-# DPvTH3gdqW4dkviqrOe6FgV1Y9rQ/IrxgnpbFXIOCO5PI6Sn8G7du4Ry7XoMVJ7f
-# B0QEqph9FwYTabUdnMfIOjFoDG1KzBIO1+XUoOFeKOMfPb/qCFgSPh6pLfSmQA==
+# 2HrlgkzBa1IJTgMwDQYJKoZIhvcNAQEBBQAEggEAgo9edwmuHsgRN/uUs26OWxdN
+# /Q3rkw0H9pbGDurEzpzfSa4mJ8/yjvz5vt9+lPYc3hoDoMozo9nSNjklokAROF9V
+# IVhLcXb7VjERK93/il/6EwpF46s4kKgfM5PUzcuf/lt2pePjxws78Ms1AcSQz5hw
+# COp1Kf5b/bETkBC+RGuBevl77QFrhvUcWQr6WVmdAcmfXymfXUyhEE0WQz6f0Mmx
+# IsGGuE//gHU7voprbysBCRiR5V+KStdWoSs71mxUTuJmxiHTAGbSUKKvT8UflDyq
+# kRvAKylgBdOK6c11UwV4QflcTtJr7ZAcGKJG+ImGK4AHI2ntfZ2LyN88NuNmZw==
 # SIG # End signature block
