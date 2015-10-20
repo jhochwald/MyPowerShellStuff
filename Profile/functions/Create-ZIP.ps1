@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -95,7 +95,7 @@ function Global:Create-ZIP {
 	.INPUTS
 		Parameters above
 #>
-
+	
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param
@@ -117,25 +117,25 @@ function Global:Create-ZIP {
 		[string]
 		$OutputPath
 	)
-
+	
 	# Cleanup the variables
 	Remove-Variable MyFileName -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable MyFilePath -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable OutArchiv -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable zip -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-
+	
 	# Extract the Filename, without PATH and EXTENSION
 	$MyFileName = ((Get-Item $InputFile).Name)
-
+	
 	# Check if the parameter "OutputFile" is given
 	if (-not ($OutputFile)) {
 		# Extract the Filename, without PATH
 		$OutputFile = ((Get-Item $InputFile).BaseName)
 	}
-
+	
 	# Append the ZIP extension
 	$OutputFile = ($OutputFile + ".zip")
-
+	
 	# Is the OutputPath Parameter given?
 	if (-not ($OutputPath)) {
 		# Build the new Path Variable
@@ -143,42 +143,42 @@ function Global:Create-ZIP {
 	} else {
 		# Strip the trailing backslash if it exists
 		$OutputPath = ($OutputPath.TrimEnd("\"))
-
+		
 		# Build the new Path Variable based on the given OutputPath Parameter
 		$MyFilePath = (($OutputPath) + "\")
 	}
-
+	
 	# Build a new Filename with Path
 	$OutArchiv = (($MyFilePath) + ($OutputFile))
-
+	
 	# Check if the Archive exists and delete it if so
 	If (Test-Path $OutArchiv) {
 		# If the File is locked, Unblock it!
 		Unblock-File -Path:$OutArchiv -Confirm:$false -ErrorAction:Ignore -WarningAction:Ignore
-
+		
 		# Remove the Archive
 		Remove-Item -Path:$OutArchiv -Force -Confirm:$false -ErrorAction:Ignore -WarningAction:Ignore
 	}
-
+	
 	# The ZipFile class is not available by default in Windows PowerShell because the
 	# System.IO.Compression.FileSystem assembly is not loaded by default.
 	Add-Type -AssemblyName "System.IO.Compression.FileSystem"
-
+	
 	# Create a new Archive
 	$zip = [System.IO.Compression.ZipFile]::Open($OutArchiv, "Create")
-
+	
 	# Add input to the Archive
 	$null = [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $InputFile, $MyFileName, "optimal")
-
+	
 	# Close the archive file
 	$zip.Dispose()
-
+	
 	# Waiting for compression to complete...
 	do {
 		# Wait 1 second and try again if working entries are not null
 		Start-sleep -Seconds:"1"
 	} while (($zip.Entries.count) -ne 0)
-
+	
 	# Extended Support for unattended mode
 	if (($RunUnattended) -eq $true) {
 		# Inform the Robot (Just pass the Archive Filename)
@@ -188,16 +188,16 @@ function Global:Create-ZIP {
 		Write-Output "Compressed: $InputFile"
 		Write-Output "Archive: $OutArchiv"
 	}
-
+	
 	# If the File is locked, Unblock it!
 	Unblock-File -Path:$OutArchiv -Confirm:$false -ErrorAction:Ignore -WarningAction:Ignore
-
+	
 	# Cleanup the variables
 	Remove-Variable MyFileName -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable MyFilePath -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable OutArchiv -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable zip -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -210,8 +210,8 @@ function Global:Create-ZIP {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUr89a1sjxC8qTwe+z7F1NncRN
-# BQigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUc6QIcru550RXXzkL6O1g6A3e
+# 9tagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -354,25 +354,25 @@ function Global:Create-ZIP {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSHOeKvoL/d90cyXjmX3qtihWLCITANBgkqhkiG9w0B
-# AQEFAASCAQBTjLsK4AYngfW3IjzrKC8U0sX3orFSLGnfIaHtHvA793GFLnchUQ1G
-# mkNR/UZp4O2iXd+XJXofINljZVnn0QGJLSWPPD1I256Z4ks+n5kr+s042ZVANwc5
-# i85urEJNk4f9BwgssKmhJxRYy0zah5DAJZw6Np46HN0mP06D+K7jifu6ris9OHvH
-# sJKa0M6IPNuL/jLmfGq/tgBV38Sumb15RMVnh4Zoz6RK1dPn3iuJhlVYnr1Cj1VY
-# 0VHdUg15RhonUGPHVYeUyoX06YXPUd/PZ93ayIIIqcXvG0EfgaUenl+NmBS3Fw36
-# fWj1R+HJt4aLZY7Efi9b8lhpjj+BI+KtoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSHcE+UPMMfSU6xBUukKE6KeuvXhDANBgkqhkiG9w0B
+# AQEFAASCAQA46XIazkKGc25KBCoNqDu3GOla0FQFhZE5JAoQmmYC2VXQ6cIMDJ2J
+# +3jWm6pgTHAQnSwZTW3CucR12yK8v1XZXVmoKyfSQIFQo/Kz4uy7HzpAiic9/n7P
+# fDDpgNBBgDLGwdcEjldsrlNOIAQ0qUbRYgDizk+9tAj/w/9ACjEByEFORTd+h3Cz
+# CC+Jv8v7SYyaEk2Z4QTZjCBFY19p3apyRUDy0gd80O/LpTfKpiHlaHEMIPuIXixK
+# TNq9XZZml0sQjEUGpfdHTeusVSDbKQypOtXD2cTq0vTFIOZQoAx8kn8Dt4HZGHuo
+# ocg4ib3IGxHn2ox2RWWWCmdhLC/WqWRhoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIwOVowIwYJKoZIhvcN
-# AQkEMRYEFJ9y7CjD0/YUdzNeqmtVTKwDC78aMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1N1owIwYJKoZIhvcN
+# AQkEMRYEFE6fdnV4YSWL1bzXzjI4SQeYwFlHMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAxp6q8ncOgUYJjyP57kWrq8KCgfIKscdF3Khmk6u99A9G1
-# HRcuhP1NoNQowYA2UibIA3+ulKFLupRW2I5jwsUYeizzfGp1dJbIjLcIJ5D4YfUn
-# FTw8pO0ZL3U0tD0yYnq4YSrqSJ2U85dSIKqHa3GxCx0GrG3qj7yRoZxrnv9ptTcq
-# KaGVJa/wBUsfuCVbAkbr6FdSdnERTKhuqzL380ztCSKZDPC1Zk10P1KjFdLzUxy3
-# 5bfTxPuwk5yBHsHXeD/eymdcZnx38XzutmK/p2QOPhCwufk/GgyiMywustL64Y+i
-# 1o0pqUtETUatuil4Bb5YnXFKOiPCuaqZ/drPgEtH
+# hkiG9w0BAQEFAASCAQBo7YXvsC1cD82cDEXqudbxPd42EG+oMA0Z9jVLNzkMWkrH
+# ov93f1ke3llNWZCN16MhCiRDMssDsZ64Hg5iQT/SMgvhNPNvaMOuItYaIJb1Q6l1
+# AVgd61PIhynS5oA3o7iNnidilUtC62yDCAMVr2iLV7uoBk8wqlhQMBywEoMyBHyS
+# 1IxlgtjV/DkEL/YAbX2GhCQ+AHOrAn499XnOCz2AJDvR/pa6tDuNd5Jg6W8V50mF
+# V6VFp3lRMrc9rwEJW3bGMdcJ9AmUpXMIwDk60ZTjq/RcTr6UE7rFpSloUrW9u+xk
+# 9g8U6Y+MpO4EKxpdv29/usUw1FehN/alT1Q0lWWC
 # SIG # End signature block

@@ -27,117 +27,57 @@
 	authorization from Joerg Hochwald
 #>
 
-function Global:CheckTcpPort {
+
+# Make Powershell more Uni* like
 <#
 	.SYNOPSIS
-		Check a TCP Port
+		Load Pester Mobule
 
 	.DESCRIPTION
-		Opens a connection to a given (or default) TCP Port to a given (or default) server.
-		This is not a simple port ping, it creates a real connection to see if the port is alive!
-
-	.PARAMETER Port
-		 Default is 587
-		 e.g. "25"
-		 Port to use
-
-	.PARAMETER Server
-		 e.g. "outlook.office365.com" or "192.168.16.10"
-		 SMTP Server to use
-
-	.EXAMPLE
-		PS C:\> CheckTcpPort
-
-		# Check port 587/TCP on the default Server
-
-	.EXAMPLE
-		PS C:\> CheckTcpPort -Port:25 -Server:mx.net-experts.net
-
-		# Check port 25/TCP on Server mx.net-experts.net
-
-	.OUTPUTS
-		boolean
-		Value is True or False
+		Load the Pester PowerShell Mobule to the Global context.
+		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
 
 	.NOTES
-		Internal Helper function to check if we can reach a server via a TCP connection on a given port
+		Pester Module must be installed
+
+	.LINK
+		Pester https://github.com/pester/Pester
+		hochwald.net http://hochwald.net
 #>
-	
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	[OutputType([bool])]
-	param
-	(
-		[Parameter(Mandatory = $false,
-				   ValueFromPipeline = $false)]
-		[Int32]
-		$Port,
-		[Parameter(Mandatory = $false,
-				   ValueFromPipeline = $false)]
-		[string]
-		$Server
-	)
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# Set the defaults for some stuff
-	if (!($Port)) {
-		# This is the default TCP Port to Check
-		$Port = "587"
-	}
-	
-	if (!($Server)) {
-		# Do we know any defaults?
-		if (!($PSEmailServer)) {
-			# We have a default SMTP Server, use it!
-			$Server = ($PSEmailServer)
-		} else {
-			# Aw Snap! No Server given on the commandline, no Server configured as default... BAD!
-			Write-PoshError -Message "No SMTP Server given, no default configured" -Stop
+
+function Global:Load-Test {
+	# Lets check if the Pester PowerShell Module is installed
+	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
+		try {
+			#Make sure we remove the Pester Module (if loaded)
+			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+			
+			# Import the Pester PowerShell Module in the Global context
+			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+		} catch {
+			# Sorry, Pester PowerShell Module is not here!!!
+			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
+			
+			# Still here? Make sure we are done!
+			break
+			
+			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
+			exit 1
 		}
-	}
-	
-	# Create a function to open a TCP connection
-	$ThePortStatus = New-Object Net.Sockets.TcpClient -ErrorAction SilentlyContinue
-	
-	# Look if the Server is online and the port is open
-	try {
-		# Try to connect to one of the on Premise Exchange front end servers
-		$ThePortStatus.Connect($Server, $Port)
-	} catch [System.Exception]
-	{
-		# BAD, but do nothing yet! This is something the the caller must handle
-	}
-	
-	# Share the info with the caller
-	$ThePortStatus.Client.Connected
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# CLOSE THE TCP Connection
-	if ($ThePortStatus.Connected) {
-		# Mail works, close the connection
-		$ThePortStatus.Close()
-	}
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	} else {
+		# Sorry, Pester PowerShell Module is not here!!!
+		Write-Warning  "Pester Module ist not installed! Go to https://github.com/pester/Pester to get it!"
 	}
 }
+
 # Set a compatibility Alias
-(set-alias IsSmtpMessageAlive CheckTcpPort -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdr4l4pb6wM39bNfNoubuX4Fs
-# tp2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9GQCJsQjZZBfSjVDXPvgc1O9
+# F52gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -280,25 +220,25 @@ function Global:CheckTcpPort {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSVf81m3GXSrYg2XdCbE//KbL4olTANBgkqhkiG9w0B
-# AQEFAASCAQClRbI13thqJ6QKQ1IMR5GAl9iJTs2Ol6oSrZfPiPc+UuOYQb3CiUDB
-# VpDfFXmzT7FCRMb3n1+9sDNaX93OVOLLvdRV39DNlgr8/lpiaPUNabJcyDIzkanB
-# mTu4EWcrg9vrN0zCGrrJ4sf6MDJlm5Gb9cCHyhl4LY1P63YsuyLXuJW4NuKtn7XO
-# O1r8ZSzdf63g5FI+/e/PEavpkZH+kGd5R0zm0z/ysT+nagx3K/HZU+jQnpv/yv9x
-# 41D/OOywmMtPWfPQnrGwoME/Cxygl6asMSvqk6ucS0cJ3lfpQ2w1rvIoyco4X0PS
-# Gw1SBKN4wWHEheCaVLvqc6RdP7o1M/fkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTD9zs8yt/bRkR5CVluM4u0iks+bjANBgkqhkiG9w0B
+# AQEFAASCAQASUS2XiU0+ThTOLiMwWW7htGZWjZyifrQj3V+R8AUzEcbKCKdau/ZL
+# qeWPs9iH5r0Go6TeCOxIc+ESYGcIWEvT7/WDD2Szv+PxZi3WRpAv8AjYYPbuBZ20
+# tzo50uF18frCJNQ2ce431sl6QenYJBNih2/IrDtpDDjL93t/2IRvKukTBDT/keXi
+# Q5E/K62s5eQO6s8oNWTeBF8OnwX1vbk8gQZjhHyZt0yfXVlGN3ybV0aSi983oYEs
+# 8z4T9hQQRUFR73/p3DHTNIozxU6t9+t6mBIn99I+/M8vasx2dFGBzmodg9jKHdqb
+# KFxVF4ltQihpaH9p+hF3jx0DXg4KMpBToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1NlowIwYJKoZIhvcN
-# AQkEMRYEFCGR/rsy16lqMazLba9A5ZjESuqpMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwNFowIwYJKoZIhvcN
+# AQkEMRYEFMkEDmWgAs5P5qHAIBbwph77wYlEMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB5FJnjWCGzndpw9T0cRXqD+jpOY4L2qmYeyDWmvdw9fuOU
-# jnCMe7KHbJiVYUkv7YPKvcs4L5KUWgtWoNHxS+l98qek74Y5om9IBud41W3L3KHd
-# mO1xr0bbvtmXze89aHgnlaLjlIDi6hUBXwaqo5FS5rws62fU4s+ZzjLISgopNVEH
-# bAk0U+0ucqsnBil3J3HWOn7wnZ8UDcL2G/SR9mGn9P27dmh3kaLpqW4Vk2S9pO5y
-# 8cGJ9PKTtLSXSvsM8YZ16ZFZ2NFCISTL5YRbdH5zlJsSz/oQZdb6dVkJN3Or2CkS
-# t8nEdqjav5HACsQ+hkFyozdE1vgj74cY2kQm3vnP
+# hkiG9w0BAQEFAASCAQBxRymJCZZC0zDJFaa9CLKOGQHnN5T0jpyeLrHb0vabCQxt
+# VubtTB73nmncBHdelg2ndXBQmHmE9Neu9v/jJ50iSO6mR5HjFrWyglUXw3xB8vZI
+# eHMxlaBm9REI3tB9f5c5MkFf9XBbLUnKCsBV3t8Pm0k3KcvNu+kEwAsgbc2itHu7
+# EEbyLbMbqe1K7lMf9yWMmaG+D+X6eXMKnh7YnYkdp3ZSUq57z7EzL5WUqSZQMCUw
+# pbfm8p0OrfBdrkFPVIPEyiZZv3eiEKd+E3QredbVJImdZm/Q1ThQpmGVKjjhj2bH
+# 9YSWJlvkIKLVaE03Nv70tl+zQ+lWED+E9NB7Z4C1
 # SIG # End signature block

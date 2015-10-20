@@ -27,117 +27,132 @@
 	authorization from Joerg Hochwald
 #>
 
-function Global:CheckTcpPort {
+function Global:Set-Encoding() {
 <#
 	.SYNOPSIS
-		Check a TCP Port
+		Converts Encoding of text files
 
 	.DESCRIPTION
-		Opens a connection to a given (or default) TCP Port to a given (or default) server.
-		This is not a simple port ping, it creates a real connection to see if the port is alive!
+		Allows you to change the encoding of files and folders.
+		It supports file extension agnostic
+		Please note: Overwrites original file if destination equals the path
 
-	.PARAMETER Port
-		 Default is 587
-		 e.g. "25"
-		 Port to use
+	.PARAMETER path
+		Folder or file to convert
 
-	.PARAMETER Server
-		 e.g. "outlook.office365.com" or "192.168.16.10"
-		 SMTP Server to use
+	.PARAMETER encoding
+		Encoding method to use for the Patch or File
 
-	.EXAMPLE
-		PS C:\> CheckTcpPort
-
-		# Check port 587/TCP on the default Server
+	.PARAMETER dest
+		If you want so save the newly encoded file/files to a new location
 
 	.EXAMPLE
-		PS C:\> CheckTcpPort -Port:25 -Server:mx.net-experts.net
+		PS C:\scripts\PowerShell> Set-Encoding -path "c:\windows\temps\folder1" -encoding "UTF8"
 
-		# Check port 25/TCP on Server mx.net-experts.net
+			# Converts all Files in the Folder c:\windows\temps\folder1 in the UTF8 format
 
-	.OUTPUTS
-		boolean
-		Value is True or False
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Set-Encoding -path "c:\windows\temps\folder1" -dest "c:\windows\temps\folder2" -encoding "UTF8"
+
+			# Converts all Files in the Folder c:\windows\temps\folder1 in the UTF8 format and save them to c:\windows\temps\folder2
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> (Get-Content -path "c:\temp\test.txt") | Set-Content -Encoding UTF8 -Path "c:\temp\test.txt"
+
+		This converts a single File via hardcore PowerShell without a Script.
+		Might be useful if you want to convert this script after a transfer!
 
 	.NOTES
-		Internal Helper function to check if we can reach a server via a TCP connection on a given port
+		BETA!!!
+
+	.LINK
+		KreativSign http://kreativsign.net
 #>
-	
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	[OutputType([bool])]
-	param
-	(
-		[Parameter(Mandatory = $false,
-				   ValueFromPipeline = $false)]
-		[Int32]
-		$Port,
-		[Parameter(Mandatory = $false,
-				   ValueFromPipeline = $false)]
+	[CmdletBinding()]
+	param (
+		[Parameter(Mandatory = $true)]
 		[string]
-		$Server
+		$path,
+		[Parameter(Mandatory = $false)]
+		[string]
+		$dest = $path,
+		[Parameter(Mandatory = $true)]
+		[string]
+		$encoding
 	)
 	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# Set the defaults for some stuff
-	if (!($Port)) {
-		# This is the default TCP Port to Check
-		$Port = "587"
+	# ensure it is a valid path
+	if (-not (Test-Path -Path $path)) {
+		# Aw, Snap!
+		throw "File or directory not found at {0}" -f $path
 	}
 	
-	if (!($Server)) {
-		# Do we know any defaults?
-		if (!($PSEmailServer)) {
-			# We have a default SMTP Server, use it!
-			$Server = ($PSEmailServer)
+	# if the path is a file, else a directory
+	if (Test-Path $path -PathType Leaf) {
+		# if the provided path equals the destination
+		if ($path -eq $dest) {
+			# get file extension
+			$ext = [System.IO.Path]::GetExtension($path)
+			
+			#create destination
+			$dest = $path.Replace([System.IO.Path]::GetFileName($path), ("temp_encoded{0}" -f $ext))
+			
+			# output to file with encoding
+			Get-Content $path | Out-File -FilePath $dest -Encoding $encoding -Force
+			
+			# copy item to original path to overwrite (note move-item loses encoding)
+			Copy-Item -Path $dest -Destination $path -Force -PassThru | ForEach-Object { Write-Output -inputobject ("{0} encoded {1}" -f $encoding, $_) }
+			
+			# remove the extra file
+			Remove-Item $dest -Force -Confirm:$false
+			
+			# Do a garbage collection
+			if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+				run-gc
+			}
 		} else {
-			# Aw Snap! No Server given on the commandline, no Server configured as default... BAD!
-			Write-PoshError -Message "No SMTP Server given, no default configured" -Stop
+			# output to file with encoding
+			Get-Content $path | Out-File -FilePath $dest -Encoding $encoding -Force
+		}
+		
+	} else {
+		# get all the files recursively
+		foreach ($i in Get-ChildItem -Path $path -Recurse) {
+			if ($i.PSIsContainer) {
+				continue
+			}
+			
+			# get file extension
+			$ext = [System.IO.Path]::GetExtension($i)
+			
+			# create destination
+			$dest = "$path\temp_encoded{0}" -f $ext
+			
+			# output to file with encoding
+			Get-Content $i.FullName | Out-File -FilePath $dest -Encoding $encoding -Force
+			
+			# copy item to original path to overwrite (note move-item loses encoding)
+			Copy-Item -Path $dest -Destination $i.FullName -Force -PassThru | ForEach-Object { Write-Output -inputobject ("{0} encoded {1}" -f $encoding, $_) }
+			
+			# remove the extra file
+			Remove-Item $dest -Force -Confirm:$false
+			
+			# Do a garbage collection
+			if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+				run-gc
+			}
 		}
 	}
-	
-	# Create a function to open a TCP connection
-	$ThePortStatus = New-Object Net.Sockets.TcpClient -ErrorAction SilentlyContinue
-	
-	# Look if the Server is online and the port is open
-	try {
-		# Try to connect to one of the on Premise Exchange front end servers
-		$ThePortStatus.Connect($Server, $Port)
-	} catch [System.Exception]
-	{
-		# BAD, but do nothing yet! This is something the the caller must handle
-	}
-	
-	# Share the info with the caller
-	$ThePortStatus.Client.Connected
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# CLOSE THE TCP Connection
-	if ($ThePortStatus.Connected) {
-		# Mail works, close the connection
-		$ThePortStatus.Close()
-	}
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
-	}
 }
+
 # Set a compatibility Alias
-(set-alias IsSmtpMessageAlive CheckTcpPort -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(set-alias Set-TextEncoding Set-Encoding -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdr4l4pb6wM39bNfNoubuX4Fs
-# tp2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/5icofHeZ+4kXtGpaEttqT8O
+# OtegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -280,25 +295,25 @@ function Global:CheckTcpPort {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSVf81m3GXSrYg2XdCbE//KbL4olTANBgkqhkiG9w0B
-# AQEFAASCAQClRbI13thqJ6QKQ1IMR5GAl9iJTs2Ol6oSrZfPiPc+UuOYQb3CiUDB
-# VpDfFXmzT7FCRMb3n1+9sDNaX93OVOLLvdRV39DNlgr8/lpiaPUNabJcyDIzkanB
-# mTu4EWcrg9vrN0zCGrrJ4sf6MDJlm5Gb9cCHyhl4LY1P63YsuyLXuJW4NuKtn7XO
-# O1r8ZSzdf63g5FI+/e/PEavpkZH+kGd5R0zm0z/ysT+nagx3K/HZU+jQnpv/yv9x
-# 41D/OOywmMtPWfPQnrGwoME/Cxygl6asMSvqk6ucS0cJ3lfpQ2w1rvIoyco4X0PS
-# Gw1SBKN4wWHEheCaVLvqc6RdP7o1M/fkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBThyveXGI65WvmZT+/QBtCZ9plAnTANBgkqhkiG9w0B
+# AQEFAASCAQB6ZGMFG9As+VEeWmMkbgh6Kqh3hw4s8pXCCTOhCXIrqBI66bZWoUnC
+# WaTECsR67RQKdYg1TYjyIySIYxILXvf/SBNP9EGN89OQSlfnxpSfern2IJoq11du
+# Mc9lTRligFYzfl+OTX+56gzzMqSuYQPkNDi6Rnfwy/+3TYbE8wOacgFmwZ/d4IuC
+# WIXk8Q5/Xs7vc3KcLaFTw7oxen5zvXou949hfkwaraeYpklfn4sWmZLLwHpcic0x
+# UkbuBVolvuB7/4UWN2YzU6fF1ysy7/EP5GkXuJ6KCGErlCbvFuBfWtZh9V8oTy62
+# 3cjHbBc12HKl4F2/h9HF32qdda6WeG6AoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1NlowIwYJKoZIhvcN
-# AQkEMRYEFCGR/rsy16lqMazLba9A5ZjESuqpMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwOFowIwYJKoZIhvcN
+# AQkEMRYEFLEdR15FBPqTYGnJN88jQLKEitCDMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB5FJnjWCGzndpw9T0cRXqD+jpOY4L2qmYeyDWmvdw9fuOU
-# jnCMe7KHbJiVYUkv7YPKvcs4L5KUWgtWoNHxS+l98qek74Y5om9IBud41W3L3KHd
-# mO1xr0bbvtmXze89aHgnlaLjlIDi6hUBXwaqo5FS5rws62fU4s+ZzjLISgopNVEH
-# bAk0U+0ucqsnBil3J3HWOn7wnZ8UDcL2G/SR9mGn9P27dmh3kaLpqW4Vk2S9pO5y
-# 8cGJ9PKTtLSXSvsM8YZ16ZFZ2NFCISTL5YRbdH5zlJsSz/oQZdb6dVkJN3Or2CkS
-# t8nEdqjav5HACsQ+hkFyozdE1vgj74cY2kQm3vnP
+# hkiG9w0BAQEFAASCAQBP2g0U636D/Fk1sHL07vNgoLHA2NwNeswq/VAfLvzMLNd5
+# 3v6oNRw8UNNhWxLlC7w/wnYeRmlcfYvI6NkQBNLi83bVu9o6yTodeVQw10OyL/G6
+# iWOxooWZrhxPo9euYgj/uN1sapJo3xdQgFhJoAqFjJQBNycw5Ty7AuQa0e46yjsV
+# OZ0xuJyJ3ODYSoLM7rIAD7nBby9NDmVfNGS+F8Z4BTeBCMoUjeWL9/D4TdlWNUnR
+# mwx3iEwkZhvm5pTqz1BDVL3go1OuD/qmSgLsTc6rpb+0HW1ZJwiMqCocujWdWulY
+# H3QY11wQmAruoESRRBNBPA5fR4yJeGNAczTF1oR5
 # SIG # End signature block

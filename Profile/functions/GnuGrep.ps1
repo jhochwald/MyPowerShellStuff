@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -58,7 +58,7 @@ function global:GnuGrep {
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-
+	
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -80,9 +80,9 @@ function global:GnuGrep {
 		[switch]
 		$l
 	)
-
+	
 	$path = $pwd
-
+	
 	# need to add filter for files only, no directories
 	$files = Get-ChildItem $path -include "$filefilter" -recurse:$r
 	if ($l) {
@@ -99,7 +99,7 @@ function global:GnuGrep {
 			$_ | select-string -pattern $pattern -caseSensitive:$i
 		}
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -109,8 +109,8 @@ function global:GnuGrep {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrBlRHyjqNpr1MStXtFLoXIko
-# FyWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU05B3YqVC61YUXBfreurzsySX
+# 5u6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -253,25 +253,25 @@ function global:GnuGrep {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTXtFVAsRmGEBGAVpHJOFFVwPpaWjANBgkqhkiG9w0B
-# AQEFAASCAQCnBUavSgI1GwfSq4XwVkRIh2u6teI/49qvJ23FMRX/KHu5cy9jZdJr
-# kwxEkqNtguO8rC8NFqzmIWaTYdFzu77DZnWf+4dbPpAUoUtWwznobp+2yRaw/F6q
-# av94hHvp12vtN0qP+nbhUaZi5o5f5j8HkVqOYjilrMlco/V8aTaXl7AW3g5pzjS7
-# IrA0Ps5mZwf1WPXtncTCYKLWRYItE4CdlldgehUJ4LdnB7sI97F55MmV3HKR5lJj
-# gMJbCggP0phXaroclNvXHmJvdncV/78DVni8jUn/u/jw4six06q52eQmGK8Q/Wf/
-# rWyfElDV2T8ESmGZ7aBvYVTKbUNS22X7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQJqfMs57zeK24nbqqAKDhll/2cRTANBgkqhkiG9w0B
+# AQEFAASCAQCG1VOVehfMG5Ljadz07sGGXWiJdSFe/BGDQtYYaAF5Hzqa2G/6N/yv
+# TTUvOWbhMzLRMn5z5it2tn3WmEkDnjqYeiAStV2mXm4IkXfJqZaJIAstb7jVGgjO
+# g1PRk1c3JG8INRRGWxHPZoSKMDEXe9c3rUkNh8OrT95/Sh8TrHRryhexsx8Plkj4
+# 3FVAqITMA6MREK1QJwTvLAjL46r6P0gJmQnA4hPCgiAgJ751ZDXtJ/679Njj0by0
+# o7ni5puEMWzbKvjra5rUQD+Qb4t3P27EswngpSO6duonI045NdsVxRwGkk9bd47U
+# WusdjineVmANlq1lwdFWB7TST+NkNrZRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxMlowIwYJKoZIhvcN
-# AQkEMRYEFFnqen4Jg7+8OMGAFjrDFeVIlqnsMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwMFowIwYJKoZIhvcN
+# AQkEMRYEFMG8iMeHVhczNzxI0X3v+0h/2JLkMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBUsZobl6jNDmuO3MX3R6SMvQ8VE/+76tnOAlgbQG/ZDofG
-# TLlDhUt3sOj9lwgcm8teP7CSm62asvO5Bbxia5Mc4WXYCIndD/4kXOKz9+8/+MAN
-# q/zqEOkgsj+uXcSR/w/eLx6X8fb6gOmPurIaxpzklnrHc9L110Z/RFMMyzkURVrX
-# ug9bef6Qrp0BOK1NQoPDz0m1zzXjUq//aav+YcpyDXikV8DOOD2wvO3eSDFuwRns
-# zehZDAwm1gd/KG5XsyKSCgR7Na140li8yzlFOObn14luqhvqMk6hyq43sSq6oe1B
-# zkjMVxpRoE3VokgQCp/eaz7tmIcLkQCrdijYLoVD
+# hkiG9w0BAQEFAASCAQAQ9DOHOGLEKFFrTWuDCcoAaxJ7aldGbIyUsulVsY/ZwDxC
+# 0bMGx6owEcAyVl2lZ1/K2AmO50JZh+C6z6bA5XEmM3Su4LqHomvhjBUMLsWkuvOD
+# 0CwpV+KVxgY/ZRg8e1wmYyAjpMdVyb+TPTrvZH7eHE7zigPLkL6Cdn1GYFdG3cty
+# JJQ1fL6GbloDOZ3gXkqIQm6ldk3GosOfNNJrr0XXt2boAVgOuMGkVDgT2XTfegTw
+# iZmYcE+nbaDzz4fN7NuQf4wnKgXmQnL79Qty5TW216oyoKsc3qVYenlX4Zl2gx8N
+# G7GBjqztOxAoe7MDZCV6zGyd6Col7YDhja0n62BW
 # SIG # End signature block

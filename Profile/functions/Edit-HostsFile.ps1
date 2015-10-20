@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -44,20 +44,20 @@ function global:Edit-HostsFile {
 	.NOTES
 		Additional information about the function.
 #>
-
+	
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
 	if (!($VisualEditor)) {
 		# Aw SNAP! The VisualEditor is not configured...
 		Write-PoshError -Message "System is not configured! The Visual Editor is not given..." -Stop
-
+		
 		# If you want to skip my VisualEditor function, add the following here instead of the Write-Error:
 		# Start-Process -FilePath notepad -ArgumentList "$env:windir\system32\drivers\etc\hosts"
 	} else {
 		# Here we go: Edit the Host file...
 		Start-Process -FilePath $VisualEditor -ArgumentList "$env:windir\system32\drivers\etc\hosts"
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -67,8 +67,8 @@ function global:Edit-HostsFile {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUk0dINKj/2NKSj4nndCIN8LMv
-# f6+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUma31sYXxOQgjBTCbGH3L0n0t
+# SFWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -211,25 +211,25 @@ function global:Edit-HostsFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQUsMxduC3xKFrdCx1TmdXf/lUygzANBgkqhkiG9w0B
-# AQEFAASCAQCY6vy28PDEO2EDa5/6pEL1gN/18WMVluz1dDnO0Abwrdh4W6in6ypL
-# BEidwE01DjHFRpjRDwCeUlI77vGGERLq9WLQNcVJDItL86ziqrllhr/0Dl98Re9a
-# 9QzIj9kpSofqhjfWAIWyMjJ//ZHVIMCH7yUAZ4lVA40W0Zp8Dj7u9fYY4TEIzvKp
-# +CVsYTIKyJnNRkVOj/IkP6+rEf/K9iRa/JIHQan5V2BeH4JLM/8cwR7yo0M5kTCE
-# l52kIX5Bb3jhstflY5KQy88go9Dk/Zt45zsAXoa2rvRoAjVZt8qCu3mCAPNwJSUH
-# Z8qu/OZI/+/O0eKnIqW3VGNLa+Q6eJtJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTVG9epCEPIhQLC7+L0NaQg12LyujANBgkqhkiG9w0B
+# AQEFAASCAQBsj8Lq2O/E443Zh2QPrWh7vZWRN3mxLWa7uAUEkzIl6ehHV3cpU/1b
+# 8TxoLWcerqRIY6sK31M+jxWiliYHhgRD56UO+9g89Z3oJDnCq5T3H5i5SFdMvsUh
+# zasqdR4n97UeOXQ98KV7ugMhgyjj+C4U4P7XmOiYXyZ3nJEczI28uje8EVNBtjcp
+# M/aP50Y5c4Pr5vgp/GDgMeYJlsdjyMVrxyK+M6SsROfSeD+BdO+/G0TIJt/aU1oi
+# Dz58n4/yLl2QPsZpVGYILLnDBrlCk2X5mPW8QHIIKlLHqSABQlou1ShQhTvYO4K3
+# Xu4c4eUaP0QqbSmfC9rMfT7sS/SzNAJwoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIwOVowIwYJKoZIhvcN
-# AQkEMRYEFMdsRRqBxdE9ud4zUgSyYX7lWtCJMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1OFowIwYJKoZIhvcN
+# AQkEMRYEFM09VJ/xgHih/uipG1SNv8TJAIHGMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBdHcmdrSwJo5kEBr6TobrQyipxwP6Hq9VvPBrEHTT18obW
-# 2OnWnDVzZ9GmGxpyHHNs/SFY3cxwOg2t/5gq+9BdogVP57T3s1ooNqneJA7MJKS4
-# i93XgLal/yG1jsMXYfuxYZLNSdfHWHPgOl/GhfwLXx8s45yifVzbYzB23MATMesa
-# V7fAz+LvexqEAvlAkeTfgBEz1t7zNoWNQ3H3d+aXnrBxs+HpKS8kC1EWwPUGAEIh
-# uY3LvZlaoGAvqSEuTCoEz5iDNUDZAEZh/O6ztxX0byDNAJglQ9ZCNA8P7IDKoew4
-# S2nPA8+l61oO3E3iP1Ya4neFwWsl67KaitB6OxUh
+# hkiG9w0BAQEFAASCAQBRBrxu5AcxlD+6G5NdiBWzLgchhDm2h2fYONN/hHZhOVJp
+# +gUxyNODsaNgcALfLgqRA8oRJHh+jqCycs070wtuoori6aS82LE5JzJEVx6YqHID
+# Ak0g5VRN2CUtwilkrnawMWBzpJXV3xtuiPfsx5zKcx3lG1pSc6J/mseiuYwHLHLd
+# /3Kcz43nCQSvXYWXeCAzcxjH+BGP2hiFxc83pPT4Ju3K65rgc0yZqN8UvNVGJ+OK
+# PCnuxERueXfSNt8SFQbxjlJlsxzSmdrP/Hq/cv9K9zOsJM9VDmtQtEJ8IL74Seaa
+# OhgdaFCXEm2w+tnScq8+GaVukCLNm0csXHuxxddA
 # SIG # End signature block

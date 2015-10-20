@@ -27,117 +27,110 @@
 	authorization from Joerg Hochwald
 #>
 
-function Global:CheckTcpPort {
+function global:Approve-MailAddress {
 <#
 	.SYNOPSIS
-		Check a TCP Port
+		Regex check to see if a given Email address is valid
 
 	.DESCRIPTION
-		Opens a connection to a given (or default) TCP Port to a given (or default) server.
-		This is not a simple port ping, it creates a real connection to see if the port is alive!
+		Checks a given Mail Address against a REGEX Filter to see if it is RfC822 complaint
+		Not directly related is the REGEX check. Most mailer will not be able to handle it if there
+		are non standard chars within the Mail Address...
 
-	.PARAMETER Port
-		 Default is 587
-		 e.g. "25"
-		 Port to use
-
-	.PARAMETER Server
-		 e.g. "outlook.office365.com" or "192.168.16.10"
-		 SMTP Server to use
+	.PARAMETER Email
+		e.g. "joerg.hochwald@outlook.com"
+		Email address to check
 
 	.EXAMPLE
-		PS C:\> CheckTcpPort
+		PS C:\> Approve-MailAddress -Email:"No.Reply@bewoelkt.net"
 
-		# Check port 587/TCP on the default Server
+		# Checks a given Mail Address (No.Reply@bewoelkt.net) against a REGEX Filter to see if
+		# it is RfC822 complaint
+		#
+		# Will return True
 
 	.EXAMPLE
-		PS C:\> CheckTcpPort -Port:25 -Server:mx.net-experts.net
+		PS C:\> Approve-MailAddress -Email:"Jörg.hochwald@gmail.com"
 
-		# Check port 25/TCP on Server mx.net-experts.net
+		# Checks a given Mail Address (Jörg.hochwald@gmail.com) against a REGEX Filter to see if
+		# it is RfC822 complaint, and it is NOT
+		#
+		# Will return False
+
+	.EXAMPLE
+		PS C:\> Approve-MailAddress -Email:"Joerg hochwald@gmail.com"
+
+		# Checks a given Mail Address (Joerg hochwald@gmail.com) against a REGEX Filter to see
+		# if it is RfC822 complaint, and it is NOT
+		#
+		# Will return False
+
+	.EXAMPLE
+		PS C:\> Approve-MailAddress -Email:"Joerg.hochwald@gmail"
+
+		# Checks a given Mail Address (Joerg.hochwald@gmail) against a REGEX Filter to see
+		# if it is RfC822 complaint, and it is NOT
+		#
+		# Will return False
+
 
 	.OUTPUTS
 		boolean
 		Value is True or False
 
 	.NOTES
-		Internal Helper function to check if we can reach a server via a TCP connection on a given port
+		The Function name is changed!
+
+		Internal Helper function to check Mail addresses via REGEX to see if they are
+		RfC822 complaint before use them.
+
+	.INPUTS
+		Mail Adress to check against the RfC822 REGEX Filter
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	[OutputType([bool])]
 	param
 	(
-		[Parameter(Mandatory = $false,
-				   ValueFromPipeline = $false)]
-		[Int32]
-		$Port,
-		[Parameter(Mandatory = $false,
-				   ValueFromPipeline = $false)]
+		[Parameter(Mandatory = $true,
+				   ValueFromPipeline = $true,
+				   HelpMessage = 'Enter the Mail Address that you would like to check (Mandatory)')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('Mail')]
 		[string]
-		$Server
+		$Email
 	)
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# Set the defaults for some stuff
-	if (!($Port)) {
-		# This is the default TCP Port to Check
-		$Port = "587"
+
+	# More complex REGEX check
+	# This REGEX is explained here: http://www.regular-expressions.info/email.html
+	$EmailRegex = '[a-z0-9!#$%&''*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&''*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?'
+
+	# Check that the given Address is valid.
+	if ( ([regex]::Match($Email, $EmailRegex, "IgnoreCase ")).Success -and ($Email -match "^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$") ) {
+	    # Email seems to be valid
+	    Write-Verbose "True"
+	} else {
+		# Wow, that looks bad!
+		Write-Verbose "False"
 	}
-	
-	if (!($Server)) {
-		# Do we know any defaults?
-		if (!($PSEmailServer)) {
-			# We have a default SMTP Server, use it!
-			$Server = ($PSEmailServer)
-		} else {
-			# Aw Snap! No Server given on the commandline, no Server configured as default... BAD!
-			Write-PoshError -Message "No SMTP Server given, no default configured" -Stop
-		}
-	}
-	
-	# Create a function to open a TCP connection
-	$ThePortStatus = New-Object Net.Sockets.TcpClient -ErrorAction SilentlyContinue
-	
-	# Look if the Server is online and the port is open
-	try {
-		# Try to connect to one of the on Premise Exchange front end servers
-		$ThePortStatus.Connect($Server, $Port)
-	} catch [System.Exception]
-	{
-		# BAD, but do nothing yet! This is something the the caller must handle
-	}
-	
-	# Share the info with the caller
-	$ThePortStatus.Client.Connected
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# CLOSE THE TCP Connection
-	if ($ThePortStatus.Connected) {
-		# Mail works, close the connection
-		$ThePortStatus.Close()
-	}
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
 	}
 }
+
 # Set a compatibility Alias
-(set-alias IsSmtpMessageAlive CheckTcpPort -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(set-alias ValidateEmailAddress Approve-MailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(set-alias ValidateEmailAddress Approve-MailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(set-alias Validate-Email Approve-MailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdr4l4pb6wM39bNfNoubuX4Fs
-# tp2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnPYLPX71VQ4YT9Cs0Az+05bX
+# xiygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -280,25 +273,25 @@ function Global:CheckTcpPort {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSVf81m3GXSrYg2XdCbE//KbL4olTANBgkqhkiG9w0B
-# AQEFAASCAQClRbI13thqJ6QKQ1IMR5GAl9iJTs2Ol6oSrZfPiPc+UuOYQb3CiUDB
-# VpDfFXmzT7FCRMb3n1+9sDNaX93OVOLLvdRV39DNlgr8/lpiaPUNabJcyDIzkanB
-# mTu4EWcrg9vrN0zCGrrJ4sf6MDJlm5Gb9cCHyhl4LY1P63YsuyLXuJW4NuKtn7XO
-# O1r8ZSzdf63g5FI+/e/PEavpkZH+kGd5R0zm0z/ysT+nagx3K/HZU+jQnpv/yv9x
-# 41D/OOywmMtPWfPQnrGwoME/Cxygl6asMSvqk6ucS0cJ3lfpQ2w1rvIoyco4X0PS
-# Gw1SBKN4wWHEheCaVLvqc6RdP7o1M/fkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQVJHR32/afVviX5X9N8V3Gfw1d8TANBgkqhkiG9w0B
+# AQEFAASCAQAHLV20La7OUzPxkzGOJU5oEouuZrdX4WG2Xt16f8+mbG4RM+0Y4uRZ
+# p3BxIKN7GLCVJVmZf/ZnY3NbknemLbKNDZVsMo1MVnsR91zTWFj8jp0KyEclJqYT
+# 6RPYLKOuqZ3Z/yR1hJlxeSD3wVh5p8MZqgqydaebe0RWzAaXrQ0wvFJgznPO4ZW8
+# 3aHIqnaywC8g4kgqOiIpWFZUDI/NjWhw9bZz9WWw9fbZbi7vIo+sHIbAD8VHHiVI
+# wV7KjSVlI4n2JHZjWM5c7+hpr/yjY5gprWc4JqazeLeBVMU7fITkkykur9tj0Pgu
+# IZTwrySSO1T2nlTGabrYHP2WaABxqexpoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1NlowIwYJKoZIhvcN
-# AQkEMRYEFCGR/rsy16lqMazLba9A5ZjESuqpMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1NVowIwYJKoZIhvcN
+# AQkEMRYEFMxHJNfLQQWiIsC7b77dyDFI9JiBMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB5FJnjWCGzndpw9T0cRXqD+jpOY4L2qmYeyDWmvdw9fuOU
-# jnCMe7KHbJiVYUkv7YPKvcs4L5KUWgtWoNHxS+l98qek74Y5om9IBud41W3L3KHd
-# mO1xr0bbvtmXze89aHgnlaLjlIDi6hUBXwaqo5FS5rws62fU4s+ZzjLISgopNVEH
-# bAk0U+0ucqsnBil3J3HWOn7wnZ8UDcL2G/SR9mGn9P27dmh3kaLpqW4Vk2S9pO5y
-# 8cGJ9PKTtLSXSvsM8YZ16ZFZ2NFCISTL5YRbdH5zlJsSz/oQZdb6dVkJN3Or2CkS
-# t8nEdqjav5HACsQ+hkFyozdE1vgj74cY2kQm3vnP
+# hkiG9w0BAQEFAASCAQBH5lvjLtTy2ASggLYK+5c8qLd1KWoV/f4N6/EuPU/85Q+K
+# 2O7aTYWgEsN/qZa3cXQPOhnb1F/7eiipyFENzZJTSDQ/29QJjvelplb/dyr02uLR
+# 3K5l5fdjAccjOYgIJN9tg2rlXKU4LQIo+s5R/1nKjPi/F18CUThLbdi0khnPrbbT
+# +xFJWiaderPs+PSfq3TDRZvB1d47kkkqIEUdYIPRyBzvoxjNdKzmB+lV1WdHythq
+# KvePnuu1k3Yfx0eWX+nvp9TtSTs2uKofikORDEpHdH3CBHVQOvgcu4OUaig45efX
+# veYfaRdzdNABvTXI+g/TMk/enmHxf1AdUJauEcAH
 # SIG # End signature block

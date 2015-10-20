@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -61,7 +61,7 @@ function global:rdp {
 	.INPUTS
 		String
 #>
-
+	
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param
 	(
@@ -72,13 +72,13 @@ function global:rdp {
 		[string]
 		$rdphost
 	)
-
+	
 	if (!($rdphost)) {
 		Write-PoshError -Message "Mandatory Parameter HOST is missing" -Stop
 	} else {
 		Start-Process -FilePath mstsc -ArgumentList "/admin /w:1024 /h:768 /v:$rdphost"
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -88,8 +88,8 @@ function global:rdp {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsb2BRzjLjX8qcsgdXVjb16Ko
-# uCOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULoQQvCOkPKDLS9XLWXozoRyN
+# uyegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -232,25 +232,25 @@ function global:rdp {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTAAyfAmOG8semhyQIfrrWMebsfszANBgkqhkiG9w0B
-# AQEFAASCAQAAnQQJxwiOwyEj8P23/A2Vqg/oPcjdvl/xbqS/122wob9AQsmuqM7K
-# Hx8YfM8mlbWYOWcb4/5c//tde+9tLS2qNqrIsRS9iY2jnz4MeNMg3rpySTbXFAWP
-# 9xKLdFt+LwUnX8VbgcdBSnbx6PF3/7pJuDgHEsKkQDRfOTcYXQoyauYomd0kwZJh
-# Eb3FywhxQr3avEdxJ5JjsdS9Bhm2z3axVa2xVBCCIM/T6tIStFAZm4iNpxi2fWF0
-# GsDWxe7QQTXRYjcFn4EuL67VcG6IioGlIcYiDyYFeiJY8f9c/IPfvWEtv+0DqzUu
-# wsbRQUAAPVFQn/hHzMfOErPyjDaOr+CWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRXLkd+DHfGLdR3eiQf+LnyJwrHzDANBgkqhkiG9w0B
+# AQEFAASCAQBe1PL3Z9k46QTpvFF4beiR+z1d3vvLLXSrGbVXwjbPQKu6U5uNh1tk
+# 4+tM7ckQuJKTI7692ZrmQrM5g+5jUgn6v+XnDdO0SGk7+Tu0fSOUFn/wotJ2Z5PF
+# i3VYJ+8b4R9LtxNhhstHiGIpWvMx9PJzYBdfzbjttjeuZ47mOxEHhVtxNfrrq3m7
+# FBf0SeABdDZrO5lPSTe4wYPxyiHSq46C52WlqZKw4AYpmCOYw0gliX3zjOIwAfGM
+# ovgcbP6l4AE/by8GMgr3nxFoHsqa7paYPFpT/+YJz1eIm7nVJ5cpjKpHWm+lP82w
+# Xwp+DHtEEefCrw4ALHPbXtYjajk3GafFoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxNlowIwYJKoZIhvcN
-# AQkEMRYEFNDh7btmLj7MoJK5KTYrfnU9xM6SMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwN1owIwYJKoZIhvcN
+# AQkEMRYEFOjXXkSfxHGMA8xzBir6h6g9uMvLMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz+W1Osvrw4Qo08i2dPsCFV/o8devkw0mV/Awx80HxkePI
-# ZMLjLUC41ph2xIsXIUIe6zDY+VRxpMPf0TbDRsG2hO0jijOOEW/4PVDODSa/pCZf
-# uemUP68OOZF1G3EZtlykjDnuxZUW/CvpCmLgRa1+s/fR5Ng0Gkd7SKS0vgiA5o5s
-# 7MHrI0nMnJRLiOKvE+Y1Z8UWzdH3qCI8GapqKm495rsI9rP69W6iMVf5HFar1Es+
-# cAxE06nA0aLtZ5dsQ/S01ChjEvS9lkz9YNMoFD5fG58/sJ2dFKIkjFB/5O+zLcMT
-# MzFocUIOf4P9uYJKyGix2glGbkGboVpFp1zdPxw4
+# hkiG9w0BAQEFAASCAQCCN6VgQx5lDzvKhm9+ZQlefp5Ptl3m0Dm1pTVWLxpqjYw4
+# 61mxbQxJj4Z6LOuQJIePK0GjktG0JFzw00/g9meMnBUyLMWxSf/LMJwOW03dUNAp
+# 2ZAIVvcrZQiXWuOHjVLMQ8z7XxGOICGBx9CrWozqqX3k/vlHc58C5vQeFbSSTjlY
+# lF/zuFxxXxJ1Bh8nZ6MGYu8v9l4Dy6SNv5759yn9MG+VfArHiIVkl02dwwznYrHt
+# hih0X1zKWUVcDKegAmCzCaeF0IU+ob++qKQOhs4mgJ60VgXItmSnigW0a2+9rwWj
+# vLju25Sj5U4omq9jLb3z/sQITielWxAiifiZ4EKT
 # SIG # End signature block

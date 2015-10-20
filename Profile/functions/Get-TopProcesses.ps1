@@ -27,117 +27,34 @@
 	authorization from Joerg Hochwald
 #>
 
-function Global:CheckTcpPort {
+function Global:Get-TopProcesses {
+	
 <#
 	.SYNOPSIS
-		Check a TCP Port
+		Make the PowerShell a bit more *NIX like
 
 	.DESCRIPTION
-		Opens a connection to a given (or default) TCP Port to a given (or default) server.
-		This is not a simple port ping, it creates a real connection to see if the port is alive!
+		This is a PowerShell Version of the well known *NIX like TOP
 
-	.PARAMETER Port
-		 Default is 587
-		 e.g. "25"
-		 Port to use
-
-	.PARAMETER Server
-		 e.g. "outlook.office365.com" or "192.168.16.10"
-		 SMTP Server to use
-
-	.EXAMPLE
-		PS C:\> CheckTcpPort
-
-		# Check port 587/TCP on the default Server
-
-	.EXAMPLE
-		PS C:\> CheckTcpPort -Port:25 -Server:mx.net-experts.net
-
-		# Check port 25/TCP on Server mx.net-experts.net
-
-	.OUTPUTS
-		boolean
-		Value is True or False
-
-	.NOTES
-		Internal Helper function to check if we can reach a server via a TCP connection on a given port
 #>
 	
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	[OutputType([bool])]
-	param
-	(
-		[Parameter(Mandatory = $false,
-				   ValueFromPipeline = $false)]
-		[Int32]
-		$Port,
-		[Parameter(Mandatory = $false,
-				   ValueFromPipeline = $false)]
-		[string]
-		$Server
-	)
+	Set-Variable -Name SetValX -Value $([Console]::CursorLeft)
+	Set-Variable -Name SetValY -Value $([Console]::CursorTop)
 	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# Set the defaults for some stuff
-	if (!($Port)) {
-		# This is the default TCP Port to Check
-		$Port = "587"
-	}
-	
-	if (!($Server)) {
-		# Do we know any defaults?
-		if (!($PSEmailServer)) {
-			# We have a default SMTP Server, use it!
-			$Server = ($PSEmailServer)
-		} else {
-			# Aw Snap! No Server given on the commandline, no Server configured as default... BAD!
-			Write-PoshError -Message "No SMTP Server given, no default configured" -Stop
-		}
-	}
-	
-	# Create a function to open a TCP connection
-	$ThePortStatus = New-Object Net.Sockets.TcpClient -ErrorAction SilentlyContinue
-	
-	# Look if the Server is online and the port is open
-	try {
-		# Try to connect to one of the on Premise Exchange front end servers
-		$ThePortStatus.Connect($Server, $Port)
-	} catch [System.Exception]
-	{
-		# BAD, but do nothing yet! This is something the the caller must handle
-	}
-	
-	# Share the info with the caller
-	$ThePortStatus.Client.Connected
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# CLOSE THE TCP Connection
-	if ($ThePortStatus.Connected) {
-		# Mail works, close the connection
-		$ThePortStatus.Close()
-	}
-	
-	# Cleanup
-	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	While ($true) {
+		Get-Process | Sort-Object -Descending CPU | Select-Object -First 30;
+		Start-Sleep -Seconds 2;
+		[Console]::SetCursorPosition(${SetValX}, ${SetValY} + 3)
 	}
 }
 # Set a compatibility Alias
-(set-alias IsSmtpMessageAlive CheckTcpPort -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(set-alias top Get-TopProcesses -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdr4l4pb6wM39bNfNoubuX4Fs
-# tp2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIWC1sZAOdy4S7zVLj885Ayyy
+# dyegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -280,25 +197,25 @@ function Global:CheckTcpPort {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSVf81m3GXSrYg2XdCbE//KbL4olTANBgkqhkiG9w0B
-# AQEFAASCAQClRbI13thqJ6QKQ1IMR5GAl9iJTs2Ol6oSrZfPiPc+UuOYQb3CiUDB
-# VpDfFXmzT7FCRMb3n1+9sDNaX93OVOLLvdRV39DNlgr8/lpiaPUNabJcyDIzkanB
-# mTu4EWcrg9vrN0zCGrrJ4sf6MDJlm5Gb9cCHyhl4LY1P63YsuyLXuJW4NuKtn7XO
-# O1r8ZSzdf63g5FI+/e/PEavpkZH+kGd5R0zm0z/ysT+nagx3K/HZU+jQnpv/yv9x
-# 41D/OOywmMtPWfPQnrGwoME/Cxygl6asMSvqk6ucS0cJ3lfpQ2w1rvIoyco4X0PS
-# Gw1SBKN4wWHEheCaVLvqc6RdP7o1M/fkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQuQtUVfgCF1qMd237nVoWrLNBqwDANBgkqhkiG9w0B
+# AQEFAASCAQCuJv5JT2mlZX2ECKwUBvyIvDaQ8N9fhcE3Vcql5QkMQUX4Isn+LOlt
+# Yt+qyn/6w0j034gh+H74bLuzFsDWq33TM/DFG4/BFZHqThq1N08y5+GRxh5yj3N1
+# IOKGMuEgvIdsa+AUPnMAfX23slcQFF2OdCE8OOTiuDigNpEPU5nFKXCO0cGuzdNX
+# Jio/THraS3sptdrcOwPFWbcLq+OIier7tJn3vKpn3iPPN/ap00URmIP5kuDCzRYY
+# xe+q9x50rTkjVJWGE5meW1jImJbawol9J+dNSpVpXN8DoajBDU2Z8ATb1fkJvGO7
+# /woNtDbKxQJyScXKBMS4LhoOEjwmS2TKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1NlowIwYJKoZIhvcN
-# AQkEMRYEFCGR/rsy16lqMazLba9A5ZjESuqpMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1OVowIwYJKoZIhvcN
+# AQkEMRYEFM3zIYIrce43rBY4hgyo3WS8PZzFMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB5FJnjWCGzndpw9T0cRXqD+jpOY4L2qmYeyDWmvdw9fuOU
-# jnCMe7KHbJiVYUkv7YPKvcs4L5KUWgtWoNHxS+l98qek74Y5om9IBud41W3L3KHd
-# mO1xr0bbvtmXze89aHgnlaLjlIDi6hUBXwaqo5FS5rws62fU4s+ZzjLISgopNVEH
-# bAk0U+0ucqsnBil3J3HWOn7wnZ8UDcL2G/SR9mGn9P27dmh3kaLpqW4Vk2S9pO5y
-# 8cGJ9PKTtLSXSvsM8YZ16ZFZ2NFCISTL5YRbdH5zlJsSz/oQZdb6dVkJN3Or2CkS
-# t8nEdqjav5HACsQ+hkFyozdE1vgj74cY2kQm3vnP
+# hkiG9w0BAQEFAASCAQCQQTE/l+hIotuN7NQGyNb/XmxVdu7E1TPnx/WmnjOcmoeM
+# zeKd5DA1Gz7ZqrpPbzFbm8w9xBlu2z3aTLxh02QblgHw2D8KwSEcki9gA8AwR1FH
+# y2HGQ22VlQag5ny1gAelPJB3SIi8yrEGFkF6UtUdnXHfIryJnZmuADxX8+KqL12A
+# 80scDupHEL6rb9OaybNhcCHuRnjSBmEmWHM9E0VtSOdnc4S/yxsB2q1AelN90hXH
+# q3cN1b6cCslZL62wj/h2V9/SUnlu9pg28AnmkT3OjHNW5DcEBhwhsaSJz1mxIxxF
+# MM5IuQmSpMw9vzRSUNMnIz65uJNE6qH6HO9h9tMz
 # SIG # End signature block

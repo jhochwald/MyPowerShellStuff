@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -56,7 +56,7 @@ function global:tail {
 	.INPUTS
 		String
 #>
-
+	
 	[CmdletBinding()]
 	param
 	(
@@ -65,7 +65,7 @@ function global:tail {
 		[ValidateNotNullOrEmpty()]
 		$file
 	)
-
+	
 	if (!($file)) {
 		# Aw SNAP! That sucks...
 		Write-Error -Message:"Error: File to tail is missing..." -ErrorAction:Stop
@@ -73,7 +73,7 @@ function global:tail {
 		# tailing the file for you, Sir! ;-)
 		Get-Content $file -Wait
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -83,8 +83,8 @@ function global:tail {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJvak+VWlLzyxME5YKLyVXqmn
-# KsSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpt6SmV4dbljszimAUBICRUKA
+# HRygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -227,25 +227,25 @@ function global:tail {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSC6JZjwWbV9uA7wzXVXp+IYc0mPjANBgkqhkiG9w0B
-# AQEFAASCAQA7FBDW5t+tfY8edc2Im1TLVtWG3z8J7EQRPrPjH9qSjGH0My9nfhto
-# 1BLEY5GJY3A/8TPu1MARmqseEad4BO0IH6jze6GR0r4py9DYV+/ODSv1PAVVa9aW
-# OrX93uKnahscBtVJyR75RQAf55/obvEWp29ls5GoBlNpcnmonTEtTh8cSW8q+N3F
-# ABTZCU3CoZCbNhZamyruIuOjQnoruwWTKghpQ0OGb13C2cdaUjPh4yDjB5hSVxKD
-# tmFwXvdkIf84V8y0y3oOQnjdT+KnNX48JRUkURbUMtnP07C9nDbhi2/Z61N4zbyb
-# HfOUTgbNaNnzogxehGqvBgEYt7RrKrqioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSDc7S5C94EuqSVMKvBrR7lg2Xg/jANBgkqhkiG9w0B
+# AQEFAASCAQBufOPu46ZJ/TM9xdxHzliqwOR+WSdCbJCu1SenAkeaij5v3uGyG/WM
+# KLEuDp2e7MHhrkMMRtTF957PImFmZFlYNbfuR4V7XpopXljeOkGLSL+it8nunSAT
+# yJ7e1GPxyQiyz9b93jREWi+zjjKlXkJTs7cAr5NmiSh4cIDuY28+nooDmi+WMvSk
+# NO+JAIWnd53piZnX9pvsPKKTFGIIrJb4gGCDuo2qRbjz6MyuODUxBJfhMfBv2vIx
+# 3SAP0abh3efcv7V+GBlUEvpHThaky/c1wOIpl83+BOeFyuwXortwzXc1VwjwMPmZ
+# JzQ5bIaFDL3+zgcbHcPHQIAP3mnRNYdSoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxN1owIwYJKoZIhvcN
-# AQkEMRYEFM4DQye1aiFS18Pa+rwLzJ2IK3SKMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwOVowIwYJKoZIhvcN
+# AQkEMRYEFO9IWU49LQc5o0xWWREFLtDoxfnZMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBJYpxaO8gwKBxkmNE7F4cJ4CldbCpAPWuA/Q5l3xnCUaO4
-# wPk9ZyIFJobLFOrRI8FueOEHQ23VIOcdcn9KNsAnlpf1gj/ghE3ZG2LrCk3dLp5g
-# AfkRqsXGkrOtsbFRBQAHdiAsplkXiyXzz48uKBip6/2DIaxKuGCC/fjTaTzz+P12
-# C7HRbPyPsCTH6Am6Fj0p4szW/uQvD/lhUtCftbaYe+7AmQkpelrTRsDFdRng0RHQ
-# tXZZx8Xvy1lr9qchsCuKNZs57q4N6xuH/JdY1K3oY9ZBsdT+IhGZHA+G8U+ZWA5Z
-# PmUVEOcgP3cJ8cfm4xcWHIdq2izrC1X6nYDKXFv7
+# hkiG9w0BAQEFAASCAQABF74DkXcpgNBmhtD2Rj3hFNobqluIBdVMk/rGEoKOrVFn
+# Z0kIPdu6Dk2Y05x+Bn5Oxr8idOy0fFtLiCFW0dsatPP28k/iivMKkiNA9Xc97ILm
+# Xg2dGZEvOxTncavtKcj9k81y9qlMtvBscGlUEO4ouiPuuM2bZK3LR9RTRo0iUtMN
+# fwqFyfaZWTf+zh1T4RrGYCEIeqgTKEBCovFY9/NUjOiej5Kc5XLKuEdkz6A77siQ
+# HIdqMK+8sLFzLGxDK1uI+oONU2ZK8nFlhR3qKS8F12AVXLjzPkerMBgM2msVLcH9
+# dnVypZzIbwcYLvtvA5kdRFa4F93COl0dIdAbbty5
 # SIG # End signature block

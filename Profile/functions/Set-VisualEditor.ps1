@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -42,16 +42,16 @@ function global:Set-VisualEditor {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-
+	
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
 	# Do we have the Sublime Editor installed?
 	$SublimeText = Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "Sublime*") "Sublime_text*");
-
+	
 	# Check if the GNU licensed Note++ is installed
 	$NotepadPlusPlus = Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "notepad*") "notepad*");
 	(resolve-path "${env:ProgramFiles(x86)}\Notepad++\notepad++.exe" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue)
-
+	
 	# What Editor to use?
 	if ($SublimeText -ne $null -and (test-path $SublimeText)) {
 		# We have Sublime Editor installed, so we use it
@@ -63,7 +63,7 @@ function global:Set-VisualEditor {
 		# No fancy editor, so we use ISE instead
 		$global:VisualEditor = "PowerShell_ISE.exe"
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -76,8 +76,8 @@ Set-VisualEditor
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvR/03VrrKOJ5BALXvR2I96+j
-# 1KigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7sdyVu7kfBeMxPdxZLChH5yr
+# 7+GgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -220,25 +220,25 @@ Set-VisualEditor
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSev+3vc436JN4quMR2o70SvxpseDANBgkqhkiG9w0B
-# AQEFAASCAQAWqDEkbkvZ5NADGvkNx+MALzaqjPi2aBMJfY91sUSFtcobpHDs4r8c
-# t4tm8Sq2YlC9TqdlhyDUZv/h4+PzzmQzZ9B1tm6n7dF9Ceud65ABh4BKOjhalns/
-# frVKB/ajjgPUJ2Dtgh2/8pYvzyd/QoQLg/N/RcDVcz5AyIkOWlOVEXJOHW6QhUgi
-# PDwus8ZW6rZjJO4w9V5PolPM8fO49p7KhyoM/nMF8etjNqxGbFua+wM7zi0h+Y18
-# FYgrbb6IkIli5E1QHvn1evlhbag7hAl2OBj6rOElSzXwVKzbH4VRVyE9RircwkKs
-# ehMsUGZEtcgLD5qZ7cU+HN154C5JLV3koYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTFsmp8B5cg8s1X1+oFXjf8CTGtODANBgkqhkiG9w0B
+# AQEFAASCAQB1fzlLyl/xIKjOe4PML6shtknoYPGAKs1autDAhxPP93Ixow0VlLlY
+# EHi4K0GOBuGYAj/WQ3iGNgUSUEKlhofZfgzJhul7FU7Qp+noK1b6JnWhccZYJ5z0
+# jYlC8XvuI4k9tGXDX3m+Sw1jFHA/kHF8TZhtxDcvYoD7gPCuMopGkLzEZUUvHT5M
+# u2UkN3KODRJtsOWOoGY8g1HNjAavZRut7z8DG0SnwbKWLceKjGxlB2XXwIwXKHAb
+# V4RlSZSUPG8DpJnOYAf2tkldn2JBayR9BcBpu+9x0eExbNNwm8sRoZsNc/x8Jstr
+# OEBzR4P10LDLkGDA5T9rMSMiWSS1rCyVoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxN1owIwYJKoZIhvcN
-# AQkEMRYEFMDwPRTcknQIdWeedasEM1zhW/Y5MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwOFowIwYJKoZIhvcN
+# AQkEMRYEFFPRHgPhvvhizzD8d5LGBiVmF1LoMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAiOu9+w3drm8fqYJcRmppw/W2zGG11YRXSKb9WCaouVoIf
-# v6aI6ZABuBW+x/c8SbBn2MepL2M/aTE7QatPqRDM8F96YB5MxXe/FlwQoP5LFWsU
-# 2RjDfm4UK+/aCSwJmf5neD2sM9/3wMGdLyTbsRMfubooQyHKYHiEpZE76CA0dqIH
-# dB0b0nxQpzONvPX2NNhnASfVLKgeL5JfoHipjt2iuWF0bymYEehRKoAxSikFpR0T
-# bmTHpKBzHBxweM6AuDPj5Z45YRsmrSTmhMzURFSrobmxvApWaNIHHcOSFYk3jBZs
-# Gm9aoucC7eWfw5lNGs/JsypeF2T8SqsAmdaAy1uA
+# hkiG9w0BAQEFAASCAQCWxHTQUZ8bMm6ADp605IREfg0pG/TC9MdhUzjdCLovXbxW
+# A9e840fKlqxr8n4S+DeFKS/l2cciqYe5NVSmjImKF//6Zo2Lc3JumNh8Q4IDsdGH
+# xrLHdJESSUSEYqqR4eS9H7KEbu8rZ31WSitB070Ru6qwLCG5ihkpbGEtRuKv3RIh
+# l0W6fLlPsnRW2O9OPgMBYhLddiAMyMc35/sO3YmFi0bEf0ZlShFTs4ooH84RR+CF
+# ZXvDA32QPuYiIGW7oMD7E7odVyWBmbjm+d2xzjc9jBF1L8BYGDbP0/sP3Lu6jDWF
+# NEzhudqlbyoUdHnjhfz0rnWQyXNLMOvJe7VHgV3/
 # SIG # End signature block

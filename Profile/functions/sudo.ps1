@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -51,7 +51,7 @@ function global:SuDo {
 	.LINK
 
 #>
-
+	
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -60,7 +60,7 @@ function global:SuDo {
 		[string]
 		$file
 	)
-
+	
 	$sudo = new-object System.Diagnostics.ProcessStartInfo
 	$sudo.Verb = "runas";
 	$sudo.FileName = "$pshome\PowerShell.exe"
@@ -75,19 +75,20 @@ function global:SuDo {
 	} else {
 		$sudo.Arguments = "-executionpolicy unrestricted -NoExit -Command  &{set-location '" + (get-location).Path + "'}"
 	}
-
+	
 	[System.Diagnostics.Process]::Start($sudo) | out-null
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUt4G2sGSTvS5smrpWQ3Hp7xfM
-# bNegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXnyTuiDTudO+mes5qO/Q0iy7
+# zb2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -230,25 +231,25 @@ function global:SuDo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRNZUmcedwV8KDO0NSvZMauuYImyDANBgkqhkiG9w0B
-# AQEFAASCAQCBzWrKteLHrCANb3s10GRxOy8EiWLydOew8KBoc3XApnBCNlaFVr9c
-# YbvDIC4mJnguzmtmJqM65UyCDtabuvluJMTttlfxIgIt74Lx+eZYSRKe4QnBLl1D
-# 4szlbzazZhXc80/yshCMNfMd1e7kjg7E5OUFyzR1oplPmVwCU0HkmWuNiqtAd3zT
-# siu5upUJY3AKpJHT+Rd+K2r0nnjT7JNT8EEt8es+wgbRJaiCAkpSSrN31eKDlQLm
-# k0/kU3ca+IAO3IvrRQ3aOKBV3RttfMRX3JLCAZ7+tcda1rATgPClri7PTtBRPZwA
-# 6LLpa6HjjHn2KfUyx0KO8/SVSKsgc8x7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTwMlS2oJ0ROLuUaJzpYSJT2er1BDANBgkqhkiG9w0B
+# AQEFAASCAQBDjqXonDfJCZJak6by0vXzmqDGW7UB5MmGUCqHPjYUh6XD5OhHSYvc
+# us6+sfVf34Sqahw1QOjETP55TIdhW+1VOZ9CLPnC31XO2BKdnIOYP1Oje/6ZsZwk
+# EKJY7tfcNc3qgfvNNYplYHepAbwnOqFbCMVFL2rIMWZoGzaZk2FmmP+yfaETyYtU
+# HbzFfXOBoKerArB02Rw33rOgRcNjDKbztA1Thq5HwyPoIAxFthkYbYMD+4QpX/9N
+# JSMP3u0Po0hOogjPvvl+P2aXiy5wTGUXZCNLsVUS3Q8aPGL1uJyYx095229GlRXt
+# otzDcT3PvGXj2sT1jLFoiqlzUQFaZ+58oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxN1owIwYJKoZIhvcN
-# AQkEMRYEFEthVe14fKIaJ0WKrI7EwhuC/bjOMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwOFowIwYJKoZIhvcN
+# AQkEMRYEFMwavkNRBQY7765+3B+aq30QW+WRMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAKuOykOzmXyjrvTCihmQRycNhq+fRswjFXUmhW7uMMyG57
-# TFR1c/Pgzb8C7g82hdsWppOyLcCaZfFETYfG8uyycmhOfldAsasWWGg02OzffEs3
-# MkeekyfX7YjJnhiFHj4rj7x7Ne4ZYbhi3HCQGDdGOjv3cmy7tskzhHEZnZjswGa3
-# fF2vCi4uT6enusXWrktWE+pnZbWW1AXOgkF+8w5EBewH6gF6+xhgNn8LuQ+7Yy/0
-# EwoZ/sDg0xcYzchWW3JuTO2AFxfEee/NnWntjsRPo+kJLB3/M1mKMyq2R5BrDucz
-# cwrW5YAtUF2uiEfpVjw4Ur8HXdHzOy5I2AVpqhfw
+# hkiG9w0BAQEFAASCAQBM5p/5c86+U2O6n4WN90m+gA9NND4ooNZiBxfUzLToAYzl
+# bcS8BjpmBEuHI8aso1OgswyKkBIRnkhH563OQJGrmyHHIPsd0ndzKJyMvzYXZgsm
+# 9A5GF2I5uauLJ0rd0Z2h86iwBAz6SjWmlLcIBWN6sm5NSSjc9l2TgxSEvNyzRpaa
+# zsBgLPvJenovZHRgYEnp6buKiNrBHvH3xt1yXMYpAAYT0TPozyU54VXb+BC/sxn8
+# lg79v3ehtFKTDOM1uTQMmSy8lcLTVh01e5n/OsCcK3HWOha0YL68C12G6XUo7AjQ
+# pzxsHa7jl1/pMNCXM1NcxSa04j62POYMUimcA/Gx
 # SIG # End signature block

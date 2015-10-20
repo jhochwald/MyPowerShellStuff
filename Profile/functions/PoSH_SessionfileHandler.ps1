@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -60,7 +60,7 @@ function global:get-sessionfile([string]$sessionName) {
 		kreativsign.net http://kreativsign.net
 #>
 	return "$([io.path]::GetTempPath())$sessionName";
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -94,15 +94,15 @@ function global:export-session {
 #>
 	param ([string]
 		$sessionName = "session-$(get-date -f yyyyMMddhh)")
-
+	
 	$file = (get-sessionfile $sessionName)
-
+	
 	(pwd).Path > "$file-pwd.ps1session"
-
+	
 	get-history | export-csv "$file-hist.ps1session"
-
+	
 	Write-Output "Session $sessionName saved"
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -135,14 +135,14 @@ function global:import-session([string]$sessionName) {
 		kreativsign.net http://kreativsign.net
 #>
 	$file = (get-sessionfile $sessionName)
-
+	
 	if (-not [io.file]::Exists("$file-pwd.ps1session")) {
 		write-error -Message:"Session file doesn't exist" -ErrorAction:Stop
 	} else {
 		cd (gc "$file-pwd.ps1session")
 		import-csv "$file-hist.ps1session" | add-history
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -152,8 +152,8 @@ function global:import-session([string]$sessionName) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUN0YkEbcLboVg/rkUsD/ZJ3Ga
-# XUygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcmK7ndGmmdHx4Oyx4HRuNin+
+# ms2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -296,25 +296,25 @@ function global:import-session([string]$sessionName) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT3wDAuAFNY4xs3HooIrNruZutWYDANBgkqhkiG9w0B
-# AQEFAASCAQCuwvwhumqLt5cLqtq29t9wKXSCHNLriH0LsJ+L0S2pq+7mdzoanVZU
-# V7t9jJ+DXtDv3rfUwRVEynIbUH8yCPogceZeIo2jG8r5DP20nFZjfdJxSR7pOFUk
-# icIwR/fqzS8uaTAN1dhM17jFYK1ZqyFrbW2mJ91WiKmWGad4GWWcPbATnTOfDvuW
-# h6MRzV7k9n+7Y9jmhVsLi5Vx/xaBucbvAqIr+bVahbb+vdZrqDetpzfOcVUo6gGw
-# PxqvXb4qUkLxIMBJl7M8nU9m+A8IljuO6XdZBwjO7hcCUr4UefesklPNfsEyG3ul
-# 12h4SCwwi4GKI6DgrJnMSmmGgC5/acn6oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSFXJ/+ociR49U39n1O9TkeUcl0LzANBgkqhkiG9w0B
+# AQEFAASCAQAxzI+BCWBSr1tnk9GBP9AX/4Vrx1zt8dDgmSiI43UKILrYFJ0t7Zfy
+# q09VxWob1oqO5me/wsZtr40pBthBKyPzcaa/5NgQGq4HjejhNfh0Aax0M152Zb5G
+# oMSLNaTxK66Z8gSRC5kLlcXFzJf9TFKHjZpkpSf0ZilAS/Uo64sRlvLNfxt6qvfL
+# n7Kr9i4Os+sTE626+TzNuMxPHxE3NFEzyu50yKcVrj1ym0xgE/q6JDtLN4QyGo9j
+# 9Dg4W4v74R8Fajhy5MW7e9BsSb78D6rdQVBkdqqZdAhlAkqoiwiJsiJRuAOs0mua
+# XCjyot6mnTt41hfi3g2P6uK7BAsNays2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxNlowIwYJKoZIhvcN
-# AQkEMRYEFGRqal/CXJC2oEGlHxYwobSJoUwcMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwN1owIwYJKoZIhvcN
+# AQkEMRYEFIxWCfxo30QiKK00RYGGI8V6G4JxMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAiDejhPRI3DOcTdPjnIRJnd1frGIv8LgCFzc3rpyDYuq0c
-# pkAnyMmcBjUcs1VMV1np42PZU3DiBuVLUz+jbueTaCbf2p6WndkWZfNrhS3tF97h
-# I2Vzun8+EA8e2211IiCRuRBP0gIE35hQmLHa5ojLoXs9ZgTZ1zs8ZGPv3Y8KII/C
-# LVJTlQ94dWr1LtCj/yqa/R38VLh4CVwhkXn0OJvJQUVBpCp7zfsv8itag6+X5uU4
-# tHfrFWwcndwrU/w44q4BfERVG+u9R+VwXcBuB6jls1sbU84YWmw6A3Ype05rIwMN
-# YWwM5fG2sDPDN6PCKBt9avXx3WCawLOXW2dcTfRp
+# hkiG9w0BAQEFAASCAQAIweodK4RsSvXy8In7QMnezbSlpQ+58YS+xPWzZ0b6cUPA
+# Qw5nZwjFhmaJ84yaTx0IsiJh2mn9pgra7LtUJsu/ROKIO4LhADzvIxS95HFCO1xB
+# xuK+YT9kUT5XdoNOocZ5fKdQtV7r+zcCsVhcA8dh6tCqOpELgqxU68BVCqwKrQPM
+# zbRUO6VNzLDbmr+Sg3wn4j/e882RqFNofSE1FwuPB7jmt+IUQXjBstU7mOJ7SPKj
+# XRRSGtJEHkGepUMM7YWDRESpCNhuXicMa1pCAfsiBI7dgOJJ3Kbf14vYYcECZLk2
+# 9XXZ63ZEn3X1NOhzMmoPwqolfkDp0N2vIHAQgFPz
 # SIG # End signature block

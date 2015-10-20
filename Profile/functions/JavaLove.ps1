@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -52,41 +52,41 @@ function global:JavaLove {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-
+	
 	[CmdletBinding(ConfirmImpact = 'Medium')]
 	param ()
 	# Where do we want to search for the Java crap?
 	$baseloc = "$env:ProgramFiles\Java\"
-
+	
 	# Show Java a little love...
 	# And I have no idea why I must do that!
 	if ((test-path $baseloc)) {
 		# Include JDK if found
 		$sdkdir = (resolve-path "$baseloc\jdk*")
-
+		
 		if ($sdkdir -ne $null -and (test-path $sdkdir)) {
 			# Set the enviroment
 			$env:JDK_HOME = $sdkdir
-
+			
 			# Tweak the PATH
 			append-path "$sdkdir\bin"
 		}
-
+		
 		# Include JRE if found
 		$jredir = (resolve-path "$baseloc\jre*")
-
+		
 		if ($jredir -ne $null -and (test-path $jredir)) {
 			# Set the enviroment
 			$env:JAVA_HOME = $jredir
-
+			
 			# Tweak the PATH
 			append-path "$jredir\bin"
 		}
-
+		
 		# Update the Classpath
 		append-classpath "."
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -96,8 +96,8 @@ function global:JavaLove {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvjl1yqpGI0fyvfNzXgTfVmns
-# oVqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMaBn0UWF/7weGtjbf7zPSVhs
+# 5LugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -240,25 +240,25 @@ function global:JavaLove {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTAUWqr939jP4aYNGkJbbu5aNVPxjANBgkqhkiG9w0B
-# AQEFAASCAQBFQOoOZ9ph7Pdwt9scktm8faNT7PTW6KDoCbGM1j8DcP5CZOJzJdfY
-# h1H1sWnOgDKVJmCa5XxSb5/DYfw8R7hYb7+SpD2EWffiWaeulC37udK9bPhmK956
-# umQs0MQD2ZQznD8+EXB1qOg8erfJ8aSt4JnQ9yk2ntwaKCbVAD+zPt81ivmxNVph
-# oscb9mfOzZFNpRZI7HeurBG1Su0U/WVSJePxjojLOEXKHdUBK/Fgz/R/8LBTV2hp
-# AHDuOHX2eF5MBWRqlRzhJFhBGyW5I6HgG5OSBntEkNMnLhbuUeggomxFm3JjcFjK
-# dC3SVvwiMrWIiqzjRrRfo/Ys1QDjjmqXoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSQgb4q2rF2Mtlfqm3Y/uHABnmXlTANBgkqhkiG9w0B
+# AQEFAASCAQBVrBSPkSLLQLEgkgaU3D2U5AR2ZgxaPozpR8ttPTwdKIUDYCQEoQ5v
+# M2WhQbetbHrgWQNTNUT77GiYR/pzjCLY8tGV7D+gVB1vShgx+32PyeRX7V/xTyhF
+# HKy330WEuml/dHJQv1qW9Co2JZz70r3fnPSzOVhMDhm30HkYCqDixmLVreCB0uB4
+# axc1f15pI2iei9HMBUhqAcjQ4fnVHykuF3dQrzbUrG1XKpZv84hq2t3EBKS0R8ir
+# GVJ24vRmOtGJwzCCFQw1eFIv2Mm6e0Ul8VpBU4Kbrx5zRes5rkS2sT6PNHuEB1mV
+# wa3pLkWSi2QXAppGOYUsczdmJ1lp/WKKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxM1owIwYJKoZIhvcN
-# AQkEMRYEFEns8I7kojPYP5TcgKrNVvpu/QtuMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwMlowIwYJKoZIhvcN
+# AQkEMRYEFL1n7I3CwuSkeQjoB2zVEoGBXzF0MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAG6vC39uXVAzpi0lFGHmMQ7fZAV/dWPIk38aLFGXad7FF2
-# cEd3mU2G2bjT9B4IvpR4lU/4rc1Ai2U2nc44nPt1ct0lIp+0P05HzXZ1zCp/fmEP
-# hIHtjhloeVWdAXEvvt/Ke6jPII/YqbkUoHA4UpLqag6trfsa6RXEijsQaqiUbvDt
-# l4HHLOV4ggO9ODdAy3jcNBVpXF4ICJ9Y+O87x0Kv3B4MKDFtwZhLg1Rf4jV7CINK
-# 44VtyTAGF4drP3HVm9A6RwwfnaM90j8jHsZM7Brpl9VkI8RIo5P9Y0IjrJe6eAQh
-# DRkcUAr2lVYuPQ8MxTqvoTT1/FgFT9R92lb7s0HT
+# hkiG9w0BAQEFAASCAQCKYPPUiZDJS149kLPF3DYrwGKFktcJ5TQJWV62LksqRtKf
+# Q8G/q/GiGlZgcVIavyXzVcQBa36AHeCpu1HMLTCuQDBw2l02A/siSbrWE+Buhl1u
+# H4ZV0NXtdvJJGLftyoeilDTcRv/9UF9uutVaLCz5jNeEEcRo6N0bi02gFfSRfYHA
+# 3E/EHi5gWMLP/0SVgxt/cApvpM6RXgZNstdJWsFmnp76ShccB0OZal33sWQX5HQ7
+# fBz74UuYpYBZRcQn9+dSExMFCiX230MP6vWgkDB6/Z8jQ6+GgP7B+WmYAWlFrkou
+# LV+GShumD0nuXFzX++00Sbbbr+Aokrmyh2rrFzMO
 # SIG # End signature block

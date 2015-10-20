@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -96,7 +96,7 @@ function global:Expand-CompressedItem {
 	.LINK
 		Online Version: http://dfch.biz/biz/dfch/PS/System/Utilities/Expand-CompressedItem/
 #>
-
+	
 	[CmdletBinding(ConfirmImpact = 'Low',
 				   HelpUri = 'http://dfch.biz/biz/dfch/PS/System/Utilities/Expand-CompressedItem/',
 				   SupportsShouldProcess = $true)]
@@ -119,12 +119,12 @@ function global:Expand-CompressedItem {
 		[string]
 		$Format = 'default'
 	)
-
+	
 	BEGIN {
 		$datBegin = [datetime]::Now;
 		[string]$fn = $MyInvocation.MyCommand.Name;
 		Log-Debug -fn $fn -msg ("CALL. InputObject: '{0}'. Path '{1}'" -f $InputObject.FullName, $Path.FullName) -fac 1;
-
+		
 		# Currently only ZIP is supported
 		switch ($Format) {
 			"ZIP"
@@ -139,11 +139,11 @@ function global:Expand-CompressedItem {
 		}
 		$CopyHereOptions = 4 + 1024 + 16;
 	}
-
+	
 	PROCESS {
 		$fReturn = $false;
 		$OutputParameter = $null;
-
+		
 		foreach ($Object in $InputObject) {
 			$Object = Get-Item $Object;
 			if ($PSCmdlet.ShouldProcess(("Extract '{0}' to '{1}'" -f $Object.Name, $Path.FullName))) {
@@ -158,7 +158,7 @@ function global:Expand-CompressedItem {
 		}
 		return $OutputParameter;
 	}
-
+	
 	END {
 		# Cleanup
 		if ($ShellApplication) {
@@ -176,8 +176,8 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHTLzhTMCfP3EGJJR+G4FPrDO
-# PtygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJbn8mW75QIfH+5FasfVkNCYi
+# o7mgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -320,25 +320,25 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRDPKoCGmLe6avvF7tsC4f/pSJ7IDANBgkqhkiG9w0B
-# AQEFAASCAQAKxZelLoBFhsbn1URNDiQLHltJQd/1k3/TnWXAOHll74eQ66+R5wGl
-# J16BKrfw1ZdfsERP6rXurYWdWSvYsDN10hR6hnQPB+XsdKpELnULj8ncFhg44FR7
-# I5UW1qwkyoQjHVCcP84AOtqvkfE4hTGM7w9iwT24tr14RkjazDlNWyUHx3KvQyA1
-# 2ZfSky6JjM3Xtr/yfVrtBbdaS3p5ZsSfUKBdG7zwnQ7n0LYqlxJm8efPVFqQDUTV
-# 8f8zhjc9M08UUCrZq+HPTwDj0lSBjiuv1IX3WbBAwTEoj36HkVjx/HJ8yKdI/cMB
-# 5wXN0BGQfGnFVdY3iztqP1KZn61h8gu4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSGrwOLbQoFMksU4l/PctCikSZOFDANBgkqhkiG9w0B
+# AQEFAASCAQCY+oklXzRtbqy/lDfPe2VUMwoMzR0MirIzBOBCGQJDE/lSlg4xhR9X
+# l7F3ilu/3SYtKPINkgjllBv/3jZ6JriwmAuziSepXF39kmvygchAi/YxclymZGLY
+# iZJhr+as6YCI0g85umH0m1qcub7Ltokjw/e2T9xk/gY80s9FRFgNwBFrv7nLExvb
+# ticmX2sT+LxkJWno/nZ1kjl4YCUIuMkHs+9iWV9PH3td0DD+y9tvxOLNREX1rIBB
+# qvlP3ZZoyfPj9pheR0veXhCBz2JiQxFNwxRl6oUrUfJI0Js8PtF10VBf7mTPOyc9
+# Zn4GtRasDmmVP89DjWcWVoZ2Mwr7C23MoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxMFowIwYJKoZIhvcN
-# AQkEMRYEFB4VW/nqW6+3o2LOQ+1IRJDYnT4+MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1OFowIwYJKoZIhvcN
+# AQkEMRYEFNR/dje3wZZEkdcO2OyLLpV7B7/8MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB1y0YZeMbE63v+lxV2ft6s3HQoiNS0W8pgCOYgvLZwEIVL
-# lc1Ft9hJgyYwFuoo7db1YxdaKlfuY7PiZLZf6mjv4kVslNJObA8o6ss+y4V9WPc+
-# mhgvQANgPUI9gSVne+ImF3n8vcAJA2oihJH33XGEcsPJR8Rkb6Hr9qd6ar7aNJ9o
-# EMEmm7mqUMxKh8NHUA3WWQVtOzBjJ0pB56mvQOL0l1YSMGt589v2wrDSjkaYdtWq
-# qmgUOGoYwHDoDhRXCbBxvKMpWqCj0C65r0JjzS2igYC6KqbA2FtJ5nfQMmIn0I67
-# P26TxG811Ge6/9+s1ba06+x/O152JWMnn0TLwk0p
+# hkiG9w0BAQEFAASCAQBG6MjbAyBjBAqQB1t0m3rSnRGTmSV+01PnA8GFA+Y5Ut7o
+# xC+6iIOWIh/184rXoQHhPaLRazFieu4+c3p5pSusc5dkqVHmxato5oKYaG2R9eA9
+# fNT/DT/ra/p49hsXr4CeJ4ERghqMoIK+lO6PZIjwA9G0DSEoIpQHO8BkN4F8IztK
+# c20Laq39RCDg229GrZ2LCLjMHbF8d7NS44QoWezoW5viP1MSsxpEOaeUKj93mISB
+# sfhRLIxPLEiD3lTOtK/iVB0ga4k/4JszPyCKKQEOZn0wIuJhxCjD8xVMHlk0PkZW
+# QqBLKUfTBKI20SNRkgXTn4MUeazfnna3nnP9Irzc
 # SIG # End signature block

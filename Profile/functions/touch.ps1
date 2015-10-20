@@ -1,4 +1,4 @@
-<#
+﻿<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -48,7 +48,7 @@ function global:touch {
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-
+	
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -58,7 +58,7 @@ function global:touch {
 		[string]
 		$file
 	)
-
+	
 	if (test-path -ErrorAction SilentlyContinue -WarningAction SilentlyContinue $file) {
 		$TouchFile = get-item $file;
 		$DateNow = get-date
@@ -66,7 +66,7 @@ function global:touch {
 	} else {
 		"" | out-file -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -FilePath $file -Encoding ASCII
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -76,8 +76,8 @@ function global:touch {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsIR0DFFvJ/2MKuPb/jG61INF
-# qxCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMZVGHLPILQ84PjHewcRopO+b
+# xvKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -220,25 +220,25 @@ function global:touch {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTCqu7GdIzs4eWWi+bMctygM3zDrzANBgkqhkiG9w0B
-# AQEFAASCAQAAdYRdxrWifgES04WAPI2qVqPk4B89zpv8bpHLYb/+UeJOPeZsR312
-# emkFGGpOdinRiGNkz4MTHS5g9NACJGL4SuirW769L9oXU1jUd8oG01jm7nGouGWJ
-# 13weRMWGROWubabKFeU/M31CndIn3ZKfOjoOzJkHEn3IAhCkZOnNQLxwiInONxJG
-# iIjsP62nlESYh8kot+GpBs4b9XM68ihv7uvk/I+OHkSFPOnD0EdgT+3P2eHb91rA
-# IJNsFUgQHREY0Ge03n6ruRB+jnS3GuumqQV9usZYR8VXiK30aYtaGgMrA/kAWLxI
-# ke6rR4K857ejDdNniSXHuzwNMi/yKHvloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRGd+bIJVvnHzXwaIoBQMQOIhZnMTANBgkqhkiG9w0B
+# AQEFAASCAQCXMqvCnxP+YwZylHqnE2hLYBey6uFTKDde8gxELItGhA8JHv4Lb7tm
+# P63NtqtDxDU9WRbcPnQ306ecrQHHChzOYQsPdzYVeL1C7Uk9hU27xkZ/ev5pAw39
+# uqZMHqNVbM/prSbWOZpfFsRtJYJJIw0cK/oPOvOYqf6uC5foHlcthBHhonqDDnbl
+# mbVOXetmk05VeG24zn94aTVdcRztktMOEAVyWF4FiT/09iESLgTXzjDlpfw6a7eu
+# u+1nO5NtknFGlxrfVgUPUv62AitJUxCkxu4iEs2Xf+Naxyo/qdtbrH120rE30/Xn
+# BgiU3hkVi2/oRUUJQrD9s2T2vzvfD+KJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAxMTE2MzIxOVowIwYJKoZIhvcN
-# AQkEMRYEFGNzkszm6ME5GBgoxy59n9BPPz3cMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgxMFowIwYJKoZIhvcN
+# AQkEMRYEFONWytDhzOwz2APFJFX658i8q4oGMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBSPE/vvZUvgRLJVN2FYMpGqPAUoWhLWmdC8RfuYmj+9EHB
-# zcQCMz66kWjPxNj5m8Au2Q0cvXENzFFrlCg7GEdOA0tEjGNWSZ6QloQlmVUvmtq1
-# mivzRCnuRONRLDAMT1MYj10SbeRicKSuS/jHAbBR4rHO1V5gDs0q/RuSZEPpQVba
-# zqCoDTNGbs5zsqPATHXlf8bvUQ8nxid27XBSRbwmHSXYpS6Te9kSlK4D6PflOlrs
-# kHP3p7B2jD1YTtwPnZRtKlSrOYbQsSltbJAK25CEUW/ZadafqDe+VzqX6/yBpK5T
-# zwb/9Lb2dtYLBOVYK5vRaif9pr1mp5ZMt79mpQpA
+# hkiG9w0BAQEFAASCAQAEcm5oVcZzPzb4eA95L/zv+jVgRCtamhx4hfSOPeqbIwmP
+# geD9iQ7/y+KYUJzYnf9tyCWnrByMpmp/+maipB/++hjlnZxljQihRFfbic+EKNtu
+# FsdSn2WnfE00mdjneBpnvZwBXpyJLb3yxPMbj3H8rQFk4gJbbb2iBWSFSN1xYhqc
+# mfWKX1vKZMDUm/rfMX6b2flA8097fJn/XNt1eug2ATEa6RZQJL4URLyrup2Q/w3w
+# 4Zey2bzwZH93fbuK19z5zHRssn8GIA+OqrjliegbIUNaqydNmWCobcfzULHP23Kj
+# K/pFdBkISsUB8ThfrAf78HJlXyEdofgKzSDavRF7
 # SIG # End signature block
