@@ -3,6 +3,12 @@
 .AppleDouble
 .LSOverride
 
+# PowerShell Studio Related
+.TempPoint.ps1
+.TempPoint.psm1
+.TempPoint.psd1
+*.TempPoint.*
+
 # Thumbnails
 ._*
 
