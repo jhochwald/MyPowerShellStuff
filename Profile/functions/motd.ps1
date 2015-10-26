@@ -47,7 +47,7 @@ function Global:Update-SysInfo {
 	if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
 		Clean-SysInfo
 	}
-	
+
 	# Fill Variables with values
 	Set-Variable -Name Operating_System -Scope:Global -Value $(Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property LastBootUpTime, TotalVisibleMemorySize, FreePhysicalMemory, Caption, Version, SystemDrive)
 	Set-Variable -Name Processor -Scope:Global -Value $(Get-CimInstance -ClassName Win32_Processor | Select-Object -Property Name, LoadPercentage)
@@ -109,76 +109,87 @@ function Global:Get-MOTD {
 		# Display the colorful Message of the Day with an Windows Logo and some system infos
 
 	.NOTES
-		Found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
+		inspired by this: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
+
+		The Microsoft Logo, PowerShell, Windows and some others are registered Trademarks by
+		Microsoft Corporation. I do not own them, i just use them here :-)
 
 		I moved some stuff in a seperate function to make it reusable
 #>
-	
+
 	# Update the Infos
 	Update-SysInfo
-	
+
 	# Write to the Console
 	Write-Host -Object ("")
 	Write-Host -Object ("")
-	Write-Host -Object ("         ,.=:^!^!t3Z3z.,                  ") -ForegroundColor Red
-	Write-Host -Object ("        :tt:::tt333EE3                    ") -ForegroundColor Red
-	Write-Host -Object ("        Et:::ztt33EEE ") -NoNewline -ForegroundColor Red
-	Write-Host -Object (" @Ee.,      ..,     ${Get_Date}") -ForegroundColor Green
-	Write-Host -Object ("       ;tt:::tt333EE7") -NoNewline -ForegroundColor Red
-	Write-Host -Object (" ;EEEEEEttttt33#     ") -ForegroundColor Green
-	Write-Host -Object ("      :Et:::zt333EEQ.") -NoNewline -ForegroundColor Red
-	Write-Host -Object (" SEEEEEttttt33QL     ") -NoNewline -ForegroundColor Green
-	Write-Host -Object ("User: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("${env:UserName}") -ForegroundColor Cyan
-	Write-Host -Object ("      it::::tt333EEF") -NoNewline -ForegroundColor Red
-	Write-Host -Object (" @EEEEEEttttt33F      ") -NoNewline -ForeGroundColor Green
-	Write-Host -Object ("Hostname: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("${env:ComputerName}") -ForegroundColor Cyan
-	Write-Host -Object ("     ;3=*^``````'*4EEV") -NoNewline -ForegroundColor Red
-	Write-Host -Object (" :EEEEEEttttt33@.      ") -NoNewline -ForegroundColor Green
-	Write-Host -Object ("OS: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("${Get_OS_Name}") -ForegroundColor Cyan
-	Write-Host -Object ("     ,.=::::it=., ") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object ("``") -NoNewline -ForegroundColor Red
-	Write-Host -Object (" @EEEEEEtttz33QF       ") -NoNewline -ForegroundColor Green
-	Write-Host -Object ("Kernel: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("NT ") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object ("${Get_Kernel_Info}") -ForegroundColor Cyan
-	Write-Host -Object ("    ;::::::::zt33) ") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object ("  '4EEEtttji3P*        ") -NoNewline -ForegroundColor Green
-	Write-Host -Object ("Uptime: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("${Get_Uptime}") -ForegroundColor Cyan
-	Write-Host -Object ("   :t::::::::tt33.") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object (":Z3z.. ") -NoNewline -ForegroundColor Yellow
-	Write-Host -Object (" ````") -NoNewline -ForegroundColor Green
-	Write-Host -Object (" ,..g.        ") -NoNewline -ForegroundColor Yellow
-	Write-Host -Object ("Shell: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("Powershell ${Get_Shell_Info}") -ForegroundColor Cyan
-	Write-Host -Object ("   i::::::::zt33F") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object (" AEEEtttt::::ztF         ") -NoNewline -ForegroundColor Yellow
-	Write-Host -Object ("CPU: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("${Get_CPU_Info}") -ForegroundColor Cyan
-	Write-Host -Object ("  ;:::::::::t33V") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object (" ;EEEttttt::::t3          ") -NoNewline -ForegroundColor Yellow
-	Write-Host -Object ("Processes: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("${Get_Process_Count}") -ForegroundColor Cyan
-	Write-Host -Object ("  E::::::::zt33L") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object (" @EEEtttt::::z3F          ") -NoNewline -ForegroundColor Yellow
-	Write-Host -Object ("Current Load: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("${Get_Current_Load}") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object ("%") -ForegroundColor Cyan
-	Write-Host -Object (" {3=*^``````'*4E3)") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object (" ;EEEtttt:::::tZ``          ") -NoNewline -ForegroundColor Yellow
-	Write-Host -Object ("Memory: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("${Get_Memory_Size}") -ForegroundColor Cyan
-	Write-Host -Object ("             ``") -NoNewline -ForegroundColor Cyan
-	Write-Host -Object (" :EEEEtttt::::z7            ") -NoNewline -ForegroundColor Yellow
-	Write-Host -Object ("Disk: ") -NoNewline -ForegroundColor Red
-	Write-Host -Object ("${Get_Disk_Size}") -ForegroundColor Cyan
-	Write-Host -Object ("                 'VEzjt:;;z>*``           ") -ForegroundColor Yellow
-	Write-Host -Object ("                      ````                  ") -ForegroundColor Yellow
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Red
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Green
+	Write-Host -Object ("    Date/Time: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${Get_Date}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Red
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Green
+	Write-Host -Object ("         User: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${env:UserName}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Red
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Green
+	Write-Host -Object ("         Host: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${env:ComputerName}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Red
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Green
+	Write-Host -Object ("           OS: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${Get_OS_Name}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Red
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Green
+	Write-Host -Object ("       Kernel: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("NT ") -NoNewline -ForegroundColor Gray
+	Write-Host -Object ("${Get_Kernel_Info}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Red
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Green
+	Write-Host -Object ("       Uptime: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${Get_Uptime}") -ForegroundColor Gray
 	Write-Host -Object ("")
-	
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Cyan
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Yellow
+	Write-Host -Object ("        Shell: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("Powershell ${Get_Shell_Info}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Cyan
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Yellow
+	Write-Host -Object ("          CPU: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${Get_CPU_Info}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Cyan
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Yellow
+	Write-Host -Object ("    Processes: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${Get_Process_Count}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Cyan
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Yellow
+	Write-Host -Object ("         Load: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${Get_Current_Load}") -NoNewline -ForegroundColor Gray
+	Write-Host -Object ("%") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Cyan
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Yellow
+	Write-Host -Object ("       Memory: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${Get_Memory_Size}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Cyan
+	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Yellow
+	Write-Host -Object ("         Disk: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("${Get_Disk_Size}") -ForegroundColor Gray
+	Write-Host -Object ("      ") -NoNewline
+	Write-Host -Object ("")
+	Write-Host -Object ("")
+
 	# Call Cleanup
 	if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
 		Clean-SysInfo
@@ -201,51 +212,40 @@ function Global:Get-SysInfo {
 	.NOTES
 		Based on an idea found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
 #>
-	
+
 	# Update the Infos
 	Update-SysInfo
-	
+
+	# Write to the Console
 	Write-Host -Object ("")
+	Write-Host -Object ("  Date/Time: ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_Date}") -ForegroundColor Gray
-	Write-Host -Object ("")
-	
-	Write-Host -Object ("User: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  User:      ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${env:UserName}") -ForegroundColor Gray
-	
-	Write-Host -Object ("Hostname: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  Host:      ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${env:ComputerName}") -ForegroundColor Gray
-	
-	Write-Host -Object ("OS: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  OS:        ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_OS_Name}") -ForegroundColor Gray
-	
-	Write-Host -Object ("Kernel: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  Kernel:    ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("NT ") -NoNewline -ForegroundColor Gray
 	Write-Host -Object ("${Get_Kernel_Info}") -ForegroundColor Gray
-	
-	Write-Host -Object ("Uptime: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  Uptime:    ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_Uptime}") -ForegroundColor Gray
-	
-	Write-Host -Object ("Shell: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  Shell:     ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("Powershell ${Get_Shell_Info}") -ForegroundColor Gray
-	
-	Write-Host -Object ("CPU: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  CPU:       ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_CPU_Info}") -ForegroundColor Gray
-	
-	Write-Host -Object ("Processes: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  Processes: ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_Process_Count}") -ForegroundColor Gray
-	
-	Write-Host -Object ("Current Load: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  Load:      ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_Current_Load}") -NoNewline -ForegroundColor Gray
 	Write-Host -Object ("%") -ForegroundColor Gray
-	
-	Write-Host -Object ("Memory: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  Memory:    ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_Memory_Size}") -ForegroundColor Gray
-	
-	Write-Host -Object ("Disk: ") -NoNewline -ForegroundColor DarkGray
+	Write-Host -Object ("  Disk:      ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_Disk_Size}") -ForegroundColor Gray
-	
 	Write-Host -Object ("")
-	
+
 	# Call Cleanup
 	if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
 		Clean-SysInfo
@@ -255,8 +255,8 @@ function Global:Get-SysInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbYZ9f5M7KpyYG5O3DwruJvVi
-# 3Q+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmyELALixtaQU6O+MhFqhDhe4
+# VoKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -399,25 +399,25 @@ function Global:Get-SysInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSWjkwvtKxdHP9OpqN2RWR+aqrkEjANBgkqhkiG9w0B
-# AQEFAASCAQA5em3dpOyQSkQW4VQiyEcMNdKWgG64W4PtLj/29Vyn5ibi6h0eBTdJ
-# xxWiYGsqxhcALhMII8MNxaVhk0P58Zrt3wpI4xWDVu7cIFVjZ18uqZtAXrPAtIHr
-# 48D3m9pFvJiYsvgZHn4cugZt3GKi1AaKbb0H1uHoqMkyu3Pey+k2x2UugRMT+mH8
-# diP0dnJ/xRyU2wXiUTpJfUgHX3rq4AfopUYCWiH/kQ3J7uirXRRnLaB3vEO2xZFv
-# PXkDbB9k4FjuQmDWl5dGfSN6fmK9y0lV5Ozjgohcg6seTHYgzfE5GEQRk61FSceB
-# RqPNQLGZ2s9fLgsIF/hFPR8qqvpBUiFaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS2zLlIlimtNywsX6rL7U5qx2vfPTANBgkqhkiG9w0B
+# AQEFAASCAQCAL9N9Ki4lUZyM4LOexWSV2lvQX9SAuuMwwmlTj2JVSHRImdunzCFh
+# f1tJhbi6R3U45THy1hiklermu6f3798jYJVcX//Ve3XxcfD2jEOafuw2APxPA695
+# j+gewCVcicM2p8hZcd1OMsSzyBq2RMLw5yr4BsGqwty7yznrgCJd0NZE/gTeN4YV
+# RUoIEQF20WSit15QTG8rVU2R46oQzRTOqRI9w8mG7lg3a6flCXk+jL2IFQYH7YkZ
+# 4oBI7JB/bB3GDd6wCjjcmSKNlJlK5jK9W9W6AETNvp6jsowObUA66uK3TOxCRQpt
+# 7obxlnmQsf07aXaGtx6jxPZQBvqWN83ToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTgwNVowIwYJKoZIhvcN
-# AQkEMRYEFA2zHuW21H9uMwXZ8oftqGJknRYNMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjA1OFowIwYJKoZIhvcN
+# AQkEMRYEFNAVdJaT2aNk41krQV6H8bK8lka4MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA1u8HSUAaBGm4XM55JGXm47tMJ2aPOssnKJ9Dv5OKLwfEW
-# otXHvA7oAJNZAsawZHEQTfeYKLkav5GQPg5XBQWwC2EZ+kn4Aa2+tdSglzduCWVQ
-# 3bDJervxeBTMqipT5cSkDZYVhe7dccsOIAXUT4L/6J1d/w9sPSTqxxIikjUUjrUC
-# UtSN4Qh8FOX241sshuh1dM/hxG0QA3N7AirR2LwNaDX1qizN177v6Oaovj08p/F8
-# YVWRWadfOtHMwsSlRqs+ejC7JJ0REWl91fyyZ2Q0cdHEcKFLqYPLrQDybdx2UlQe
-# Ezop96QrrsLHACx3wfdNQx/0qDNl0xKdEKIo4RA0
+# hkiG9w0BAQEFAASCAQCIb6NCCsfsS2mnxZ1tYwx3eb2hJbPJdBXtn+MZkLJVuIlu
+# o5lwKJb5v4qyyBWahKJwfmQfdwEXQdEAdpLaZmU9Ll9K8R3harV1380eVT8wbStB
+# s9WtwhmwoRP4NhIznzXROqKOaL776PaIChTbRMBUno+ShuVU79/j+bA8vuNPU8qm
+# J7g8Ve+xRi0zlVUwvyBOCm1ep8st7K7mSFftdoSDsNBg9Ycq1FegDZW4G3Y+rZ6N
+# pdQMjy5C9g5ZM+X4d/pBxbH5ZV7gyAreZPmpZNdWothc9UuP3wagxJ+PpZOA5YPJ
+# qwhzx3RY2182dsU7XJdjufvIpFdJPX0OUX4oLvPP
 # SIG # End signature block

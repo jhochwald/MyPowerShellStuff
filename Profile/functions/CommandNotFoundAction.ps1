@@ -27,34 +27,39 @@
 	authorization from Joerg Hochwald
 #>
 
-function Global:Get-TopProcesses {
-	
 <#
-	.SYNOPSIS
-		Make the PowerShell a bit more *NIX like
+	Whenever PowerShell comes across a command name that it does not know,
+	you see a red error message.
 
-	.DESCRIPTION
-		This is a PowerShell Version of the well known *NIX like TOP
+	However, starting with PowerShell 3.0, there is a "CommandNotFoundHandler"
+	that you can program. It can then log things, or try and resolve the issue.
 
+	Here is a simple example. Once you run this code, whenever there is a
+	command that PowerShell does not know, it runs Show-Command and opens a
+	helper tool with all valid commands
+
+	Source: http://powershell.com/cs/blogs/tips/archive/2015/10/22/adding-command-not-found-handler.aspx
 #>
+
+$ExecutionContext.InvokeCommand.CommandNotFoundAction =
+{
+	param (
+		[string]
+		$commandName,
+		[System.Management.Automation.CommandLookupEventArgs]
+		$eventArgs
+	)
 	
-	Set-Variable -Name SetValX -Value $([Console]::CursorLeft)
-	Set-Variable -Name SetValY -Value $([Console]::CursorTop)
+	Write-Warning "Command $commandName was not found."
+	$eventArgs.CommandScriptBlock = { Show-Command }
 	
-	While ($true) {
-		Get-Process | Sort-Object -Descending CPU | Select-Object -First 30;
-		Start-Sleep -Seconds 2;
-		[Console]::SetCursorPosition(${SetValX}, ${SetValY} + 3)
-	}
 }
-# Set a compatibility Alias
-(set-alias top Get-TopProcesses -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIWC1sZAOdy4S7zVLj885Ayyy
-# dyegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZRp8WXG6XiMv0gVr/m0UVRjz
+# uvCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -197,25 +202,25 @@ function Global:Get-TopProcesses {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQuQtUVfgCF1qMd237nVoWrLNBqwDANBgkqhkiG9w0B
-# AQEFAASCAQCuJv5JT2mlZX2ECKwUBvyIvDaQ8N9fhcE3Vcql5QkMQUX4Isn+LOlt
-# Yt+qyn/6w0j034gh+H74bLuzFsDWq33TM/DFG4/BFZHqThq1N08y5+GRxh5yj3N1
-# IOKGMuEgvIdsa+AUPnMAfX23slcQFF2OdCE8OOTiuDigNpEPU5nFKXCO0cGuzdNX
-# Jio/THraS3sptdrcOwPFWbcLq+OIier7tJn3vKpn3iPPN/ap00URmIP5kuDCzRYY
-# xe+q9x50rTkjVJWGE5meW1jImJbawol9J+dNSpVpXN8DoajBDU2Z8ATb1fkJvGO7
-# /woNtDbKxQJyScXKBMS4LhoOEjwmS2TKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBScMjADBG924y59VRHPlMYGMnE2pjANBgkqhkiG9w0B
+# AQEFAASCAQCGVUqiyxF+izqumTVYUiPT6wKW3XNRRiYKHv47l6U9ZpdTQMvUq94w
+# Pue7peZ2MY3xkIS5iUQZFOVSqaAA/N3qZdPReDjV2yNFMkIfzLJfhiGRo1SfBhox
+# bBHVgbUuxl3vcVrsLTZQ2xyQ+qYng+gV4voLvTKWg5LE8Kf2HyQdNMEL+puLucLf
+# mPkddxMWoQu85NpPK6dAOGdJgZNjVK9mt94h/CLbH8ojGdKAzYhV+8EbxMjUIKYM
+# E1vljudmCc5KQSYgteilnHX+vDSlkW9Bc5Wd4vgPVTbWpBL16FM3UcrSLNKXvP7i
+# emlaeVKMW4Sc3fVcO3gan/XyEs0C4Pu2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjAzNFowIwYJKoZIhvcN
-# AQkEMRYEFM3zIYIrce43rBY4hgyo3WS8PZzFMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjAxOVowIwYJKoZIhvcN
+# AQkEMRYEFFmqaA3XChCAmardDmoJDDjcQzDLMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAcziobrizW8PP4raGGu5JwRbA4Oc94lmMoWKCpSNVpVELQ
-# h5FfWE/p/HPeg2nrP0O4aztpZUvL+YdZ6TA1+kYhD1boLoxIJJPfz9hnpDGKTdbU
-# L0bXZuGc6Clfc2vlIS0l3lebsQY34oKEV9dShOC2BY+11uDsJP80YQyPsl/U2vhu
-# pTzsCSCXgghsS1QLIGYWNc91KsEBAgD/MFogyKZgLyFjIUet1vls43i/KmReoSQx
-# vO+Wu387NtfdOdza4drwHOHncaBUZO3jhGm9z9QdH19I6Cdos3aq041998iZQlGY
-# 2+KzYk7LiChF9BUcNAwuppkwr1kitXv0i8ySbGqv
+# hkiG9w0BAQEFAASCAQAIrwJ/a66nnPmY9jJHaFK5ZO5mnWvD6/86CWeSQ7HkqVxZ
+# xjwG2Y1eMUSGyvBdZAjQTjuclZNlv6tLoqHbbOzX1+osK8JSXn1wr+U3kwWW9OTc
+# wjyNv70GvN7+Jcwd/61Oi+3pbwwKnO5tFgRKjex3TwnJbEKl4a56PykxyefvgRgk
+# JZYsWAoPCGCU14koiLyCHygWEdBDfpzwHmDyiIYJsQd9YkRQi3huurVvGe/kE+Re
+# B+aVv4GdrVPlyXXkMfosf98Oa/Vl9TfaGrwW4K0Xt/L4ZVuLWmA2/fn/FBZyyafy
+# r1g64MamvT92L0c5ZLYSu1dn8OtHZ63NkyVAH0dG
 # SIG # End signature block

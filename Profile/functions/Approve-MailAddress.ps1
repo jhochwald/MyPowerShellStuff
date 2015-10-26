@@ -50,9 +50,9 @@ function global:Approve-MailAddress {
 		# Will return True
 
 	.EXAMPLE
-		PS C:\> Approve-MailAddress -Email:"Jörg.hochwald@gmail.com"
+		PS C:\> Approve-MailAddress -Email:"JÃ¶rg.hochwald@gmail.com"
 
-		# Checks a given Mail Address (Jörg.hochwald@gmail.com) against a REGEX Filter to see if
+		# Checks a given Mail Address (JÃ¶rg.hochwald@gmail.com) against a REGEX Filter to see if
 		# it is RfC822 complaint, and it is NOT
 		#
 		# Will return False
@@ -72,7 +72,6 @@ function global:Approve-MailAddress {
 		# if it is RfC822 complaint, and it is NOT
 		#
 		# Will return False
-
 
 	.OUTPUTS
 		boolean
@@ -102,17 +101,19 @@ function global:Approve-MailAddress {
 		$Email
 	)
 
-	# More complex REGEX check
-	# This REGEX is explained here: http://www.regular-expressions.info/email.html
-	$EmailRegex = '[a-z0-9!#$%&''*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&''*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?'
+	# Old REGEX check
+	$EmailRegexOld = "^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$"
+
+	# New REGEX check
+	$EmailRegex = '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$';
 
 	# Check that the given Address is valid.
-	if ( ([regex]::Match($Email, $EmailRegex, "IgnoreCase ")).Success -and ($Email -match "^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$") ) {
+	if ( ($Email -match $EmailRegexOld) -and ($Email -match $EmailRegex) ) {
 	    # Email seems to be valid
-	    Write-Verbose "True"
+	    Write-Output "True"
 	} else {
 		# Wow, that looks bad!
-		Write-Verbose "False"
+		Write-Output "False"
 	}
 
 	# Do a garbage collection
@@ -129,8 +130,8 @@ function global:Approve-MailAddress {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnPYLPX71VQ4YT9Cs0Az+05bX
-# xiygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2kxoo5wV4H3n7+QJr12xOK4f
+# ramgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -273,25 +274,25 @@ function global:Approve-MailAddress {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQVJHR32/afVviX5X9N8V3Gfw1d8TANBgkqhkiG9w0B
-# AQEFAASCAQAHLV20La7OUzPxkzGOJU5oEouuZrdX4WG2Xt16f8+mbG4RM+0Y4uRZ
-# p3BxIKN7GLCVJVmZf/ZnY3NbknemLbKNDZVsMo1MVnsR91zTWFj8jp0KyEclJqYT
-# 6RPYLKOuqZ3Z/yR1hJlxeSD3wVh5p8MZqgqydaebe0RWzAaXrQ0wvFJgznPO4ZW8
-# 3aHIqnaywC8g4kgqOiIpWFZUDI/NjWhw9bZz9WWw9fbZbi7vIo+sHIbAD8VHHiVI
-# wV7KjSVlI4n2JHZjWM5c7+hpr/yjY5gprWc4JqazeLeBVMU7fITkkykur9tj0Pgu
-# IZTwrySSO1T2nlTGabrYHP2WaABxqexpoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSsxE43ZjPsY7rNG2+RNkC8QhaFKjANBgkqhkiG9w0B
+# AQEFAASCAQBUh8H2idKM0IOHAdqiXUsN1qLRhqN3P1YtF5KY1EpuiCItf1WO1fTQ
+# qjxUb0G6VC8M7177pJVAdQpC9xJ7cv5fNo+GZVDk2LXYPBOmpM3zQu2UrkcvmpQI
+# HPVnqK4eY2kR9ydTr/exzUQxzuTJ5PVvTTt+QbXv5NBvtAuwSiaorJ/yVoPDWake
+# jOkoO5lWwRX8X4GLXv8N2Fn07jDOqEtEA2aNt9d0R5XVklHwdF3LwiZ5tEBoW943
+# 22rVb7NrRvkpTgjgd4gRKh4BFsDnYx8sHAO9yudQnjrw7r/jCCNFwuRQnE5ipbxS
+# yrIFj3zm7g/zlWBPSux5a/PMcfR91fkioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyMDIyNTc1NVowIwYJKoZIhvcN
-# AQkEMRYEFMxHJNfLQQWiIsC7b77dyDFI9JiBMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjAxNFowIwYJKoZIhvcN
+# AQkEMRYEFLJ+PLkY48ZeURwLpWD+8WZUCmvlMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBH5lvjLtTy2ASggLYK+5c8qLd1KWoV/f4N6/EuPU/85Q+K
-# 2O7aTYWgEsN/qZa3cXQPOhnb1F/7eiipyFENzZJTSDQ/29QJjvelplb/dyr02uLR
-# 3K5l5fdjAccjOYgIJN9tg2rlXKU4LQIo+s5R/1nKjPi/F18CUThLbdi0khnPrbbT
-# +xFJWiaderPs+PSfq3TDRZvB1d47kkkqIEUdYIPRyBzvoxjNdKzmB+lV1WdHythq
-# KvePnuu1k3Yfx0eWX+nvp9TtSTs2uKofikORDEpHdH3CBHVQOvgcu4OUaig45efX
-# veYfaRdzdNABvTXI+g/TMk/enmHxf1AdUJauEcAH
+# hkiG9w0BAQEFAASCAQA2VNMDZofQYX8R3KdbB7FZdIOAjwf9SXfUcH7CartzGuXj
+# J3MHN2FgCbqhIcP1CXTnALVogvhFli987UvjmAb10gwrfGlrFr+1nMyqmN2CaeE/
+# hVbJx/AHK12logsnvL2yv7yo5OrCJIcazkrRCwq/Hr2Mn0zhx5WXI4lTiFcwUQi8
+# MJ9zzDDKuy5lYYJWSyNDI0kYqj08gCiBG81asQipGnLYsIrYpoRbxG+l4p6or7GN
+# SBrgSczg/Eu0kYaO2RO50FtvxLBY4Usqp12RhRYg1XO3dbj9O8N7/M2lvWID115z
+# lTNFy+PL2M8C3soQDqvq/OAAh+NxM0vBs69ZjUe4
 # SIG # End signature block

@@ -27,34 +27,70 @@
 	authorization from Joerg Hochwald
 #>
 
-function Global:Get-TopProcesses {
-	
+function Get-TempFile {
 <#
 	.SYNOPSIS
-		Make the PowerShell a bit more *NIX like
+		Creates a string with a temp file
 
 	.DESCRIPTION
-		This is a PowerShell Version of the well known *NIX like TOP
+		Creates a string with a temp file
 
+	.PARAMETER Extension
+		File Extension as a string.
+		The default is "tmp"
+
+	.EXAMPLE
+		PS C:\> New-TempFile
+
+		Returns a String of the Temp File with the extension TMP:
+		C:\Users\josh\AppData\Local\Temp\332ddb9a-5e52-4687-aa01-1d67ab6ae2b1.tmp
+
+	.EXAMPLE
+		PS C:\> New-TempFile -Extension txt
+
+		Returns a String of the Temp File with the extension TXT:
+		C:\Users\josh\AppData\Local\Temp\332ddb9a-5e52-4687-aa01-1d67ab6ae2b1.tmp
+
+	.EXAMPLE
+		PS C:\> $foo = (New-TempFile)
+		PS C:\> New-Item -Path $foo -Force -Confirm:$false
+		PS C:\> Add-Content -Path:$LogPath -Value:"Test" -Encoding UTF8 -Force
+
+		Creates a temp File like this:
+		C:\Users\josh\AppData\Local\Temp\d08cec6f-8697-44db-9fba-2c369963a017.tmp
+		And fill the newly created file with the String "Test"
+
+	.OUTPUTS
+		String
+
+	.LINK
+		Idea http://powershell.com/cs/blogs/tips/archive/2015/10/15/creating-temporary-filenames.aspx
+
+	.NOTES
+		Helper to avoid "System.IO.Path]::GetTempFileName()" usage.
 #>
 	
-	Set-Variable -Name SetValX -Value $([Console]::CursorLeft)
-	Set-Variable -Name SetValY -Value $([Console]::CursorTop)
+	[OutputType([string])]
+	param
+	(
+		[Parameter(HelpMessage = 'File Extension as a string. like tmp')]
+		[string]
+		$Extension = 'tmp'
+	)
 	
-	While ($true) {
-		Get-Process | Sort-Object -Descending CPU | Select-Object -First 30;
-		Start-Sleep -Seconds 2;
-		[Console]::SetCursorPosition(${SetValX}, ${SetValY} + 3)
-	}
+	$elements = @()
+	$elements += [System.IO.Path]::GetTempPath()
+	$elements += [System.Guid]::NewGuid()
+	$elements += $Extension.TrimStart('.')
+	
+	'{0}{1}.{2}' -f $elements
 }
-# Set a compatibility Alias
-(set-alias top Get-TopProcesses -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIWC1sZAOdy4S7zVLj885Ayyy
-# dyegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUffLudJgsMZUyBiiB/XVQ0ZS3
+# msKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -197,25 +233,25 @@ function Global:Get-TopProcesses {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQuQtUVfgCF1qMd237nVoWrLNBqwDANBgkqhkiG9w0B
-# AQEFAASCAQCuJv5JT2mlZX2ECKwUBvyIvDaQ8N9fhcE3Vcql5QkMQUX4Isn+LOlt
-# Yt+qyn/6w0j034gh+H74bLuzFsDWq33TM/DFG4/BFZHqThq1N08y5+GRxh5yj3N1
-# IOKGMuEgvIdsa+AUPnMAfX23slcQFF2OdCE8OOTiuDigNpEPU5nFKXCO0cGuzdNX
-# Jio/THraS3sptdrcOwPFWbcLq+OIier7tJn3vKpn3iPPN/ap00URmIP5kuDCzRYY
-# xe+q9x50rTkjVJWGE5meW1jImJbawol9J+dNSpVpXN8DoajBDU2Z8ATb1fkJvGO7
-# /woNtDbKxQJyScXKBMS4LhoOEjwmS2TKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT4Nj83OTLvvsMeAZBlTzouipImujANBgkqhkiG9w0B
+# AQEFAASCAQBlpVySqWwUF3fiZqM2dNLD9kmgbSay+hZURBLqSDp3wiEaCG0MDtaJ
+# 3FvAJ00wEab85hmjimkskE8YD7MULBYhv0n+GtOHK9fezbK6r72eb+Q5xWwqoLKj
+# 8fNWsaLFyETxo2YZj11RJg6brMmDD/dt7DHPU1PvuKKBx0yeof2H33w7L2qQf5LL
+# hsO62kDNoysP7+r5k4hQkhcQytMR/bhxvEBoQczEooNdqdqEXBvL+dYifTLsJRk2
+# 39k7am4SJmtrWJIaVr/PG15ZgrWbSwIgiX0vJc8obxMcJuR/MBlfW97Ws5Ex4T5k
+# C8fn8tkaLVWjOAug2OpwD53xSlSla3esoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjAzNFowIwYJKoZIhvcN
-# AQkEMRYEFM3zIYIrce43rBY4hgyo3WS8PZzFMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjAzM1owIwYJKoZIhvcN
+# AQkEMRYEFHRvGJ+gQYXrO80oLOTns2QH9Zo0MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAcziobrizW8PP4raGGu5JwRbA4Oc94lmMoWKCpSNVpVELQ
-# h5FfWE/p/HPeg2nrP0O4aztpZUvL+YdZ6TA1+kYhD1boLoxIJJPfz9hnpDGKTdbU
-# L0bXZuGc6Clfc2vlIS0l3lebsQY34oKEV9dShOC2BY+11uDsJP80YQyPsl/U2vhu
-# pTzsCSCXgghsS1QLIGYWNc91KsEBAgD/MFogyKZgLyFjIUet1vls43i/KmReoSQx
-# vO+Wu387NtfdOdza4drwHOHncaBUZO3jhGm9z9QdH19I6Cdos3aq041998iZQlGY
-# 2+KzYk7LiChF9BUcNAwuppkwr1kitXv0i8ySbGqv
+# hkiG9w0BAQEFAASCAQAmA5yyBUUtm5tNyQr0NFm7/GdMXhGyb7ElsfkLMhfxBoL3
+# U8CKBdOTobN/jdSnJKNPPtWvYq5ID4idoKX+n0vdPq6+XnWTfD7LFY6XDyO7td1w
+# /WDo7yK5dqC/CUP/+D3OcD4HbsXeMEJvNc6/anZXB4VMh3RxOnRUSS/Hi7eN1K+M
+# Qeg+6Yk1Qv1axjVLj/4DJHHHbJpLc2cob8u5s2eW/yyRqNeSj6BQeCixWiMd5Fp5
+# lpEbQinJESsA5JOMBdlOhyDSWfcmLLWxLuvM697WkkaCzzjQjme4iMNtG3VKejLf
+# dTwDNxNAm7H/FQipPcBjnnqmS9++Qqm0TEzFpJCd
 # SIG # End signature block
