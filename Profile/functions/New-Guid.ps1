@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -46,19 +46,21 @@ function global:New-Guid {
 		This is just a quick & dirty helper function to generate GUID's
 		this is neat if you need a new GUID for an PowerShell Module.
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	[OutputType([string])]
 	param ()
+
 	[System.Guid]$guidObject = [System.Guid]::NewGuid()
+
 	Write-Host $guidObject.Guid
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULvuMrLdDgj+1xh+0cOZiZV+F
-# FoCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwxZIPk4VVHS8F29Sacv5IjKc
+# InagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -201,25 +203,25 @@ function global:New-Guid {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRHhIn+25m0LqusXSZSfmN+mTT0YTANBgkqhkiG9w0B
-# AQEFAASCAQCTPYsLClY2PbKGvkzXpfnr8Lak+dsVVPOrwkSMlifupMqfddsaJciC
-# aSplTNvf2WUwwY6EjeH7ezDx9M3gKxdYWGbYldP02170uR9emS3VTaQJtILJ5cDw
-# ROwMbWT3JCWISm7aGXWn5MVmFWFROhsgkTXzLjqtABnyJjIcPAGfFrJYN+GLKwUg
-# 6HxCSuLXtl7CzeYZ7+HZ2vIRmGZcIzspJTSno7aaHZVbl983gZCeYPG5cSYkyz2b
-# dKNOBDMluROsNIqZdaW3/YCReYl0SaKah7PRIDFpQ5609ojuFb5jE5ihlu+qcLhF
-# afRNrKlpkUKrZD1b4kN8GOyoESf5qnONoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRbLYmBzDhIXqqdU4c0PoVvM+pjCzANBgkqhkiG9w0B
+# AQEFAASCAQBu9Y5EQJdh4oy8mdZ+KWR0zo5eKPLsXAvvvIlZD+Neu+n8GHEfUx18
+# 8gPn/QJd9GB6VE9kS2x2sl5+FALbWFT2II5ly4i1yr5DTTQX24oHX2mWJBEgoBFm
+# RdYsxLDiYruBRyHEtlkiP+gkVkGwHivQJORZ2K71rlAwZpuDWz4W1xlB3dnUXqUh
+# yQF//29snCzB45dVdP0eJcnNK4fJNOVl10HUo4VCiHiBAKEet/XLwrAd+xKQiUQY
+# 5CAcg47RIy/ZrRk1y1+ZKg98TyMm/VyE/MQF7TD8G9wUALCs6rgPCkKYwdzUX+Xz
+# dKBBgybPrYfF+ZnvgKqyrr+dnG5IfIFsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjEwMVowIwYJKoZIhvcN
-# AQkEMRYEFFcirjE33NycFUrFc64hR9cHjGjCMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NVowIwYJKoZIhvcN
+# AQkEMRYEFEF50pLDJM/SPeK9BY1esr2UZGhrMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBJltVAu667Pia1mnLDZikwVZg0GySzjSy3SEL7LHORKvQL
-# UDMgM0uD/S82iqdyy/RDmwdyA1q+i/7dnS6Unko3Vm9ymn/fy3RH2+aoNmGGR+13
-# eP/9sRbO2mAAwj8WgnoKAj22YjTaxBHiU8znP6e0n3NY87N6sgpCkDd2vry1P7XZ
-# HUp5dcd6L2mK8c06VlUNI9CPa1FtnfYuwXzjDqV2mbvmLt05GS7jIIsojOC4Ev/J
-# 3RzZOJZQexmzIuHhQTxIXAnA7YqndN/tqh9do/OaE3nSMXBTUYjL4pSkrrShfBc0
-# IR+L/icbilR9pp4c8/qcYEdOJ5kKVkanwNPsvPja
+# hkiG9w0BAQEFAASCAQBvnPalOA17v47CFOqc1/BKUq7aEA9GfGeWVfK+J/MMAhqq
+# zHlNZqS7S4XTdMQQe2u/jzVZSKyWgfn9l3BYYkCk0No3yjDCcvuqxeCvHzJgdExs
+# 3sw1Wq+t/eNZD03gYTIokrsExO8bFpg1E5ahM/vSvEZvJGpCE4a0HZLGTFondCOd
+# a4Dh1iIY+91K6oHyf2d5e2rcfCIyasZpU6evFgS7Qyld8OGUiyDRPDN+JTLYShJ5
+# S/x3UdNjflVSY6n97dinctmJSztfGEJE8O5PtDzjhgMDoppuF0F9/42lH59Puapd
+# XAVPAwhzC97mmF+1S+pm9pm3aRaFTS6DUQW8pHUE
 # SIG # End signature block

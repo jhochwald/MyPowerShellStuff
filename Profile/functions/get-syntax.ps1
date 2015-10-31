@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -51,7 +51,7 @@ function global:get-syntax([string]$cmdlet) {
 		kreativsign.net http://kreativsign.net
 #>
 	get-command $cmdlet -syntax
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -61,8 +61,8 @@ function global:get-syntax([string]$cmdlet) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGzaWJM6kHM35NLxtXamAS9iy
-# wK2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzoZK9ggGtjZda92FEKbtgdnD
+# whKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -205,25 +205,25 @@ function global:get-syntax([string]$cmdlet) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBROxVixnZV7bvzmqC8WQFyGTZEubDANBgkqhkiG9w0B
-# AQEFAASCAQCEPpkejgivdY4l0e2zvKWMZiaWHX4orFP1thwebdW5WPnWU7fw4A9w
-# xVmLcjFAQ8PYgpAt99Qwv+BL3HTkWjGxrxkknpSqds/OFmX5CjT6X38ltU+dCCDU
-# /s9vTU5mksD7g+0hLVEERH2CzGs6A0nrqK+jCsb9+58BAexIQLqUlxMiCq7bJZJS
-# BobkXKasAL/M23Q4G9yHyDegU8n+61UqSkKvJYU+0YOz3SGAKQCQ28M2WXp1ODEi
-# DfWnzzjDu/xsb5K7EdzqmNt4eqtce579jHM253axJdb68MD4XBoeBUG7ItLecRXH
-# PbkS7GpvASwTq1fJBGI3SPJYNq/C2wdxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTpBtzXwuSwIKRBVpbh3QvWn4ZuJzANBgkqhkiG9w0B
+# AQEFAASCAQAWIIXs1jVAL2Nc3J1aTIEom585ETIpy8SkoQLHZO3XinMFlC3QoXrb
+# rtccJ9DCcPYIA/EVVS9aZjlaidnvIflUIcm0mjbYbssUfd61u9VGS3TVU7P3rwuf
+# dmu2lobDytrlv76g75iQ6bagMsKLgwt3gJ0fevW9bweDPQfhftQtaXWVq3jozzQ5
+# icGAO2azJ7PtSHZJILERi7gzP8yVY5AspicC09KFfftczfhij6Cj73tv6gKlZ/hw
+# YNC0RRrTRI+hNV7vvkQEXxcBF8acFH5EC/qzNvX6h3vYo8GvVA1iJ9vv9HbI3d0b
+# oaqFP2l/UK8h3J27MfqXWFPTO7ekzB4zoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjAzM1owIwYJKoZIhvcN
-# AQkEMRYEFCa2hd624DvtnLvQGPfn4+NGJrjKMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzOVowIwYJKoZIhvcN
+# AQkEMRYEFKxId0nlz3fAWT/Gi02FvAZzO/Q5MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAezaxf63ZjU7wMwLdVighvg7hme7S/1vwNTHuftGSrmXN5
-# zWZ52NbcaFxbmexODoAMFKl0zipTaFo5HDTDxicuQTOq6nFagR97Bd4Wlbli3C7f
-# /B6Z82LOOKL3FDL1vGDG3qli6mIZwuCYQZqSzsLzoemQKqjdApSX24V9yq5pVF8P
-# iERinytxuVL6oYwQ125yAo4ey/2Js1P2Ip5g1EITB0UVZUmIf8XuwaLe+e6z53ak
-# cp5MEiJ0X8yHQDqpIRgJIG4LFRb13l2EJCw2YLbudNOtl+CkagE6uAK4XeL1q2FJ
-# EYSUC+wL+HhsG8hF19TTdlCptUfjV7VUER9/zMjj
+# hkiG9w0BAQEFAASCAQCmXh0fASRCZxYqVYyfnGx4liHdFbxHUetz4UWaBC3brALm
+# q5kIHYTdEg/ff14Y2IXfqoRXyRwOUNrOovpX3c+y8ulic1/6Hed/mavSvuuWHNro
+# 0rQzSs9e4KriNG+S5w59hxBIjqCDq18W+iq6NdWqTULvqRUfidC8xmMG+rifIFF8
+# R80stRtBN4YETt2kFcNhc8jXM681Ns2VVAPEeC8owCV0+FTVWnX9XiJLS4aYS8n9
+# U0HkSQsRLVCdRp+sZEPhcHahu8mAi9hXRrCiXYoFnMZ1kxHaIIHDCnL/fo/n95So
+# vD2JzBgiNWBBkxRd929vZtSIE424LcK2uUluGlf/
 # SIG # End signature block

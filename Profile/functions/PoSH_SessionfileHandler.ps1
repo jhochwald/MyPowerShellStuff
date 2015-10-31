@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -60,7 +60,7 @@ function global:get-sessionfile([string]$sessionName) {
 		kreativsign.net http://kreativsign.net
 #>
 	return "$([io.path]::GetTempPath())$sessionName";
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -94,15 +94,15 @@ function global:export-session {
 #>
 	param ([string]
 		$sessionName = "session-$(get-date -f yyyyMMddhh)")
-	
-	$file = (get-sessionfile $sessionName)
-	
+
+	Set-Variable -Name file -Value $(get-sessionfile $sessionName)
+
 	(pwd).Path > "$file-pwd.ps1session"
-	
+
 	get-history | export-csv "$file-hist.ps1session"
-	
+
 	Write-Output "Session $sessionName saved"
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -134,15 +134,15 @@ function global:import-session([string]$sessionName) {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	$file = (get-sessionfile $sessionName)
-	
+	Set-Variable -Name file -Value $(get-sessionfile $sessionName)
+
 	if (-not [io.file]::Exists("$file-pwd.ps1session")) {
 		write-error -Message:"Session file doesn't exist" -ErrorAction:Stop
 	} else {
 		cd (gc "$file-pwd.ps1session")
 		import-csv "$file-hist.ps1session" | add-history
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -152,8 +152,8 @@ function global:import-session([string]$sessionName) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcmK7ndGmmdHx4Oyx4HRuNin+
-# ms2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUeAlvHwKUVK4mBgmh2/4buzyx
+# cyegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -296,25 +296,25 @@ function global:import-session([string]$sessionName) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSFXJ/+ociR49U39n1O9TkeUcl0LzANBgkqhkiG9w0B
-# AQEFAASCAQAxzI+BCWBSr1tnk9GBP9AX/4Vrx1zt8dDgmSiI43UKILrYFJ0t7Zfy
-# q09VxWob1oqO5me/wsZtr40pBthBKyPzcaa/5NgQGq4HjejhNfh0Aax0M152Zb5G
-# oMSLNaTxK66Z8gSRC5kLlcXFzJf9TFKHjZpkpSf0ZilAS/Uo64sRlvLNfxt6qvfL
-# n7Kr9i4Os+sTE626+TzNuMxPHxE3NFEzyu50yKcVrj1ym0xgE/q6JDtLN4QyGo9j
-# 9Dg4W4v74R8Fajhy5MW7e9BsSb78D6rdQVBkdqqZdAhlAkqoiwiJsiJRuAOs0mua
-# XCjyot6mnTt41hfi3g2P6uK7BAsNays2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBThYGA4nXq8wAxb+PRaFXMH6ea5pTANBgkqhkiG9w0B
+# AQEFAASCAQBEMSiEE7bIZ7cYcIcpJ/HJkQGv8nqUO947QHNH7AIsYOEzdn/3RLDC
+# TKSStBLA6zZp21F0k7nTlo6o1QjoqkyD/n+zuIIQ8MvFJFoaGG3Yv9d4bRvWw3Wv
+# enQr9C1blsS4e4Q56J9hkFW2OcE28ZbLDNadWpA/2KWHEToGBZhnb/Srd4FsBo2C
+# omzjY9K7kx9MRsxSQddmKCv5NgWSeGND+Snhyh1DS2Qh6fhgH5+xZEtx2ei1J9Tz
+# jDMMh46IorFramqF6jyJ+dg1mfkuAPBiIQeHrG2wtUu+Zlz8okPzyLVu2T5ais8g
+# fhUv7nwel141SRg7eJYYPSziatwcnxEyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjEwNFowIwYJKoZIhvcN
-# AQkEMRYEFIxWCfxo30QiKK00RYGGI8V6G4JxMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NlowIwYJKoZIhvcN
+# AQkEMRYEFKWmEI6uskyumcKznEF9GNGSl9lpMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAfSj5K8cvRGghH6e+pJSBBTkVizLgp7TL8EagvgAlczfaO
-# 0h/j9fxirPUxEWmJXsiUgB/r9BTt4WRyddutuv7jbCYN2heisj5u6paWIagcvqdf
-# yo4AzXPwknkp3p+1LxvHbPA4rRBHbdfGauA6Af3xevZMdSnjLTgCQNVuxwN3uyeZ
-# Am54RPZPb0lDeGmhlfMNh2XEH6ohnNMEO+1XREo+EYysRdaib9+U/CoQ2USthRUw
-# bUB1ArSfsRuuOiWH8dsffDSve5zdLqPU6CMxwxR1DVG18UHDHyb9tGLyEhdixXhy
-# B3nme+mh+nLNf137ZZ1llD75xeGbp+CJqyo7SVpp
+# hkiG9w0BAQEFAASCAQAc3SB8WL6BCXQMjrylsmcr2nZ9SkKt8PD6EiWKWcjoJcOu
+# 9m8Ucq3TFgcU07PTl+aDsxtJl1Ai6QTf+o2w6EHTD0f/RxomYTTM54nUAPw0wWnb
+# JcqoBiNu+sTfRPoNPRLL41p2uV8e3gwG3h5WU3d59Ss57ld2aiI+yqQcOIcvECmG
+# iqXF2LaMN7MFEfzY+xU7aKScM4gvlRt7gmsZGYesVfTA11sBa4MQWHCrlHxB3gxa
+# L2LjjIM7zIOm42U5GqS9w9eB7S5n7CYq+FOschtfq5Qqna/NkE2pJM1y10C+8TJc
+# 3F9XWA5Yx9A1sPYcKZxwDcFXXfC9RZRPTbQYLG1J
 # SIG # End signature block

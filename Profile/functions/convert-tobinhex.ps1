@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -53,12 +53,14 @@ function global:convert-tobinhex($array) {
 	.NOTES
 		This is just a little helper function to make the shell more flexible
 #>
-	$str = new-object system.text.stringbuilder
+	Set-Variable -Name str -Value $(new-object system.text.stringbuilder)
+
 	$array | %{
 		[void]$str.Append($_.ToString('x2'));
 	}
+
 	return $str.ToString()
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -68,8 +70,8 @@ function global:convert-tobinhex($array) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7MlCtXmLchjRXO0PXbkjw9Ev
-# yPWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhtyGCZ9EblgsdczhU1mFZMZI
+# y3agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -212,25 +214,25 @@ function global:convert-tobinhex($array) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTBPZe0gcBkI+luMynDltsneUMWFjANBgkqhkiG9w0B
-# AQEFAASCAQCKVTn+C2sXbrCyTgJFUvYtBzmhpwAlVgfb/dzomL7c96pxIdJzyt67
-# g5JaoZ0zD0zKbvbwB3HR2Q/DAtHk7KZxqP/Qxe9VaXWvJs06vPdetDlp+3rQofqU
-# YwxzjlmUjOVGBF4GhgYtu1wuuB2oDfOx8XuiBb0TPmfQ4ab68BqBoBSlYp9UV1LB
-# Se1EFsZgnbxyIXVZ2pnZo92m/JTOLXOx07m2gYIta8ArwITc4OOKd6sG/iNgoHOu
-# KhLF1O1I8/tIR8QNXGEFcNM+YHp/J+eisF6h3Xm9rF1D8QFhFWJ83/PMuYQrDMLA
-# z+YHJ7UGMa7s1WehpJqpTz5LLpj0ZwtroYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTD3YsTdv+c2D2k2k51oBC2BYF6bzANBgkqhkiG9w0B
+# AQEFAASCAQAL+zeg+Z6uhOC0lDBqU5Typ5Aa4bcSWlmJ2TiQJaybXfzYZZu6uYNc
+# d8bqoYThag1bDaWjzByDu5fe6fHDJ/UR1ewuRStu4avA7IFeNTx4gn/6MZ81tdMz
+# RZP7778MDNU4kbPfYLW+LbycsPRYqt14MTpeU4G7fKvhb5jFVMbXk9tPM/gyiwGk
+# f406V2b16dlE/1Laq688sjjsRNAFLI6SWZNxOFHCP7PWjRuSM9Hnd5vhSJdRWoyy
+# 3qCByRl5g7bQSqnXWZ+rCKaHsTr6PfRQ0i3g6hlIZ7rHt6vqCpHjHf0MDtJJk556
+# FTGVihheFlNchD3bmfW6Ou6SbL9FXQP6oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjAyMFowIwYJKoZIhvcN
-# AQkEMRYEFFyvFd0+05S4g0scSQcCxnymOZQXMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzN1owIwYJKoZIhvcN
+# AQkEMRYEFApNLBM2W3FhkPo7F3J5uIi/KiOLMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBYaTa/Wm9D1fgBGTchpIUL42aAN7IIMRP9JHpiMh5GwlB3
-# GZ5pV+Mm5NDOKeoDK8o4tMB6lrYzKphkqvWNbNzv1rSZz58jRphB9r2oownzXkdW
-# 24conLOsfd8NipKDZPn7AQ7JIo4+FCfA2c/cVM4SD+fCCvnQBsy/Su+3AiCeuau7
-# xyu9uBivXQ3h7YJbrrNKgW0PLE9RvIMKvW5JTttwh8IY8zgyREBPTmvTfNSmu2+W
-# gDW5x5eyGKHSmVw5twT2q+OhOEVWPmdmAqfIQu9WM1URVxRFx5WDvtNR/bUnuhfs
-# F2rmnIFrmvwCWxBwFHOjmWcdEtTWZhJZd17Td8BU
+# hkiG9w0BAQEFAASCAQBQhACGaIIVXRv3pneXJmeYQB4ULQUoZbL0utYPRDi9/L5/
+# b4aQHNeHwCejufAWo/C8CYPuckIA9Np6MMmDJZXXSX1wD9kxWQuZVazXPKgSvYjD
+# Pl/pFqmOs6lPF5vKapIjXfQxcVpNOnQ9BNgeN2ISlNtwQ5QZeSQbxBmoTRaUmAzK
+# u8NdRgarAUFJ78YZ9WjW/ynBsg+uNDKB1BupBEy4+QNtcNuA7av1BJeqXzqQ1CY7
+# Q7n7vcjZOwJmfejBo75y2q9bofwYeuoqHfgiqg8lwWOiVWPhq12vO32DKwBzeHTb
+# /rRQmObw6LmCWtS6DeCx68VOfu05flMbwg8V2+oL
 # SIG # End signature block

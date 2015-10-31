@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -42,28 +42,29 @@ function global:Set-VisualEditor {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
 	# Do we have the Sublime Editor installed?
-	$SublimeText = Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "Sublime*") "Sublime_text*");
-	
+	Set-Variable -Name SublimeText -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "Sublime*") "Sublime_text*");)
+
 	# Check if the GNU licensed Note++ is installed
-	$NotepadPlusPlus = Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "notepad*") "notepad*");
+	Set-Variable -Name NotepadPlusPlus -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "notepad*") "notepad*");)
+
 	(resolve-path "${env:ProgramFiles(x86)}\Notepad++\notepad++.exe" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue)
-	
+
 	# What Editor to use?
 	if ($SublimeText -ne $null -and (test-path $SublimeText)) {
 		# We have Sublime Editor installed, so we use it
-		$global:VisualEditor = ($SublimeText.Path)
+		Set-Variable -Name VisualEditor -Scope:Global -Value $($SublimeText.Path)
 	} elseif ($NotepadPlusPlus -ne $null -and (test-path $NotepadPlusPlus)) {
 		# We have Notepad++ installed, Sublime Editor is not here... use Notepad++
-		$global:VisualEditor = ($NotepadPlusPlus.Path)
+		Set-Variable -Name VisualEditor -Scope:Global -Value $($NotepadPlusPlus.Path)
 	} else {
 		# No fancy editor, so we use ISE instead
-		$global:VisualEditor = "PowerShell_ISE.exe"
+		Set-Variable -Name VisualEditor -Scope:Global -Value $("PowerShell_ISE.exe")
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -76,8 +77,8 @@ Set-VisualEditor
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7sdyVu7kfBeMxPdxZLChH5yr
-# 7+GgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpkOBzcxa93+QMK1k7PjguJvn
+# g3SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -220,25 +221,25 @@ Set-VisualEditor
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTFsmp8B5cg8s1X1+oFXjf8CTGtODANBgkqhkiG9w0B
-# AQEFAASCAQB1fzlLyl/xIKjOe4PML6shtknoYPGAKs1autDAhxPP93Ixow0VlLlY
-# EHi4K0GOBuGYAj/WQ3iGNgUSUEKlhofZfgzJhul7FU7Qp+noK1b6JnWhccZYJ5z0
-# jYlC8XvuI4k9tGXDX3m+Sw1jFHA/kHF8TZhtxDcvYoD7gPCuMopGkLzEZUUvHT5M
-# u2UkN3KODRJtsOWOoGY8g1HNjAavZRut7z8DG0SnwbKWLceKjGxlB2XXwIwXKHAb
-# V4RlSZSUPG8DpJnOYAf2tkldn2JBayR9BcBpu+9x0eExbNNwm8sRoZsNc/x8Jstr
-# OEBzR4P10LDLkGDA5T9rMSMiWSS1rCyVoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQUXhIiiIY1Gedamzzm+ImdrrAlJTANBgkqhkiG9w0B
+# AQEFAASCAQCeNFJkawW+GyaBVJvglJQkbZKUi51YZyIlPOv+mASWsqumRNPjyqVn
+# umbwiBRdrHR+2fuca7AjjUjJk6zvjISrjmGF4PtmPAdxbz34/wpbNrzSsHmx1HVF
+# 8HkgkRQ8UOS/4mVa+aWMffXsHCsvpjQpuHDc9QoAoooxGu16Yb+w3rPQ9AU03PFW
+# 4oqfxMnv6kMGxN29aQ7lkpJQ0F/yVcg5dReyXHfBsTCwfeh95YPFAUW2DB1PxByw
+# VYTiAHi2bX30Yz87w0isO0hws5NPVZ8dvyTllfZBvrTw95mAd8RYUrnBH8CyDMjv
+# AUpdVFNdnUoAO15P/bpBscmsrfhhBdeUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjExMlowIwYJKoZIhvcN
-# AQkEMRYEFFPRHgPhvvhizzD8d5LGBiVmF1LoMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0N1owIwYJKoZIhvcN
+# AQkEMRYEFFQ5iERwW9cAd/bso8MbZepw4ouNMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCRw9ZU2TeQ4XGffCiRKpWqLkdZktXX1KWx7JJNIO+9nFbo
-# LR1xtzXZvAKFGVc4Cv8Am94MsUUpmHx+EDLgnAj5c6zsZijGJE5Mf7JJYKaWoQNn
-# 3EDKPIGyMsmzqiiK/x5HKsQ6rVz0ZMvBQwWNCCjs17jVKz+kRKERDHWzDCvi39cv
-# Pl42UTzdVMV7+CcrQlKtZmXvPgKCcsFiG0RIISTCrNI/5ngqUtMJNIzxI0Yao1xk
-# g1596Ixa59w2SVtWxKpS7lXPJAL60wEUf0/0QIrL9v6kuJ90zBGPIXwgDYHQw60a
-# 7jviFdiqX3T/FjPyEfD6UZcME3Pvk15XxW3GgUBV
+# hkiG9w0BAQEFAASCAQBgf5hTzm/Vu5cayn/EB/08BG2Uxe5QHrKdPlQj2glOx8m3
+# UAHriv2Yvgf9H2vfGRzVwHhuyWTLKK9OgAsl9/fhO5qTCCpRUuqUy2n+zrx9Abqh
+# CRKXhLPWDCgMS9SpySgicaDCd9R/CUloNltARAp5l4fGf1sQTbndzk4rErF0pdFq
+# GLOB+Sf4790xXkiyhQH39y5MxoK9tpFbd95cSsMwBPfXTUCEDHflY/9cLeLA2XJi
+# 7otGcggssTIuElhMEnm3rqNsqDgf7YpslDtYgfqNjlnkaONfotg88mPNcn8hX043
+# xao5PzySRTG2lSco51Plmjyt31RPCrqNtZZUplGI
 # SIG # End signature block

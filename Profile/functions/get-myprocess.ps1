@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -49,10 +49,10 @@ function global:get-myprocess {
 #>
 	# Do a garbage collection
 	run-gc
-	
+
 	# Get the info
 	[diagnostics.process]::GetCurrentProcess()
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -62,8 +62,8 @@ function global:get-myprocess {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1j9mhjtLCHO+nkxvvEj5Og/v
-# jEygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtq3OvCfnQ9Cp4zGpSDWxdfJ2
+# Pt6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -206,25 +206,25 @@ function global:get-myprocess {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQRGbQDDl9t5mZT71MaDAEyMipB5DANBgkqhkiG9w0B
-# AQEFAASCAQBt/mccE7nrY17mEoTAmPyvZYQ3/8dka+gyCaI0OAcjm5NUyCynGB32
-# WvCvS8fKZSX0cety3bDs8Axe4Axn1aONQ27nqtPXVcSt4XcfE6jD3zjUnVLhMlkI
-# jrKwQ6m/TnRb9YNWabIvt28+d1wCshtbLnzLGiP44/yPZuPJ2FhDyY5WziwoLjaX
-# B3yyxZRiAgsGrelfr2Ufvmh+jhFwBKwrbn86pKyXkwYwWgBv9bTnE8jTsnBlVZ/W
-# wpV9NSV1LRApCa17vL+wP3gYWg87JqxcxjX2ThmzVQ1VM2ZqDZwcmFdLbxFpO+ft
-# s53VrmcwPMnXAqBDnBzVCPlqgK94H+nLoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTgoABwueJP/yIKjw1/PIcnWooO9TANBgkqhkiG9w0B
+# AQEFAASCAQAPpd7SoSJWcePjkUhdChtGDSBOzUgBM2uLN8T960/x1/RxDVPjd0N0
+# 6cL3dJSCnebUHR2C/Aa9Ffdse10s/fOf9ET31/InWliK3B53mlFbFJG7zW463WMk
+# +Y0b1uHzf2wl58ufVk7Vw5/BOadH0cjMLNoet55b/XWDTqoLPOxDpBPJHE3+S34I
+# dHmB77fMv3IaUjU3crldw6X4+39Ez9QDTwLDp7t4viiB5ANnp4y/uZBMmfrEbu9d
+# ENmy9fGnRU5iRq/EGlFJ4M0zboU0FWM/sWY2mEGpJM+V1Vpkdd9PDuHGGkEACa74
+# kI8dTWUrqUUtKEXiG2KNKk0D9YEXjFaNoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjAzMlowIwYJKoZIhvcN
-# AQkEMRYEFHkLJg3oKk/Q4RbBMhgiU6g7fJpaMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzOVowIwYJKoZIhvcN
+# AQkEMRYEFMSeizL6hOGo2EK7aFiqGdwhvesnMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQALrdXcRqla4z7dRaby64ccdLkoR4p00I9b9M1uWAmM/piZ
-# 1TQc99pNUJLkEjVVyaT+DMKMBx6Do7LQaf6eSQswdOg5TKrwM7WttosnlA2pYFEk
-# WzL50ReSIyRUGVJDvnr1iB/KtcVm826uUcml0Ik9mZV+VdlqI2xeSy+u0I9bO4cj
-# yhQI6m5wuqt8UXUVOSb8LzSa5tNUuegl6KJ18gwfdmVVJef67GUd9j094XQ7uWLl
-# mzfPu6RyoxvGPKyAamy3MgCnN36LRGEDwPRJ6F1uhuXnsSAxABffgsJgox8XsCqi
-# hLGN7u7JtzJHqnKh2CT7dyfiRgqkElotkFUiYWB4
+# hkiG9w0BAQEFAASCAQCVSeSe3Mu8WBRS86dSgU3VXq2n6+eNRyymUJJed8HYp3Fv
+# ud/o7OKQuaNAxQmTeUnjmt2on0xKqB/VIcAtVKR1PMoiCUmYY8adGi1Pk3IUzNxk
+# a/nlAQZkwWMzKxL9pFQQ9OuavE4x0Kfa4JqUvneiAHMsJNSfobaPFSN5+mKTvU0v
+# d8UWfjZV9sLIJW2HLvoH5vH2CCKDG9fDZRiwdzAfHtzhJpU2zrvBx7rPT+Js4CK/
+# KORdRO/T/SvHec5KGSFrFNoxLZ4sVFGIKTzymy6WqSEwy21WcuaXfH9N5buPMnl6
+# V1+BEf00yf3jyY+3mDkBftmdVwRnFOhpAv7psrzA
 # SIG # End signature block

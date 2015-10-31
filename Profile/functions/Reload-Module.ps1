@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -45,7 +45,7 @@ function global:Reload-Module {
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-	
+
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -53,24 +53,25 @@ function global:Reload-Module {
 		[ValidateNotNullOrEmpty()]
 		$ModuleName
 	)
-	
+
 	if ((get-module -all | where{ $_.name -eq "$ModuleName" } | measure-object).count -gt 0) {
 		remove-module $ModuleName
 		Write-Verbose "Module $ModuleName Unloaded"
-		
-		$pwd = Get-ScriptDirectory
-		$file_path = $ModuleName;
-		
+
+		Set-Variable -Name pwd -Value $(Get-ScriptDirectory)
+		Set-Variable -Name file_path -Value $($ModuleName;)
+
 		if (Test-Path (join-Path $pwd "$ModuleName.psm1")) {
-			$file_path = (join-Path $pwd "$ModuleName.psm1")
+			Set-Variable -Name file_path -Value $(join-Path $pwd "$ModuleName.psm1")
 		}
-		
+
 		import-module "$file_path" -DisableNameChecking -verbose:$false
+
 		Write-Verbose "Module $ModuleName Loaded"
 	} else {
 		Write-Warning "Module $ModuleName Doesn't Exist"
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -80,8 +81,8 @@ function global:Reload-Module {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9qcMNbjbIsfE6/gh5LxFoKQh
-# YSygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZNMdCE2Z5WRhuZSQJgQ1iHvr
+# Z86gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +225,25 @@ function global:Reload-Module {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSs9rk0Hiao+GUcGYIu6/WpOH0dEDANBgkqhkiG9w0B
-# AQEFAASCAQCjeu8tMxJShO90e4PVAVuafv9aBeDFzcPKGV7Nizw+1TBRjX27ctLA
-# BNVJTPOY+QY/bvGLecsaxVmS4LSeQYMDK/s4V16x1FYQFx8AoM5oFt8mrdOBvCRC
-# 5Ze1btiub1B05PqUNmL5ICDkOeBHddQckPRHi7ltZfXfdVYf/6NnChw2WLsr5gsp
-# h1jcS1HHJdyd3zWFzzpJL4nj7g/TLmTuA5HUmIPUXzN0c+Q7ezj2Mz9pTqoSrOat
-# qs3wWp9E6+mQ6mp0d7TzReUzs+7NNczaDaprzKWN5/ZXWe2SyL9o/EF1+YWLOpXF
-# sE7JSWhg5etw8lBfPail5OK1785UC8z0oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSBLX2UQnhlgsmd5rR/zLvciiE8+zANBgkqhkiG9w0B
+# AQEFAASCAQATkJGZJaLyH9Gh85gUTjrQwp8t9Ig0WPoXfMTlIKDPKZ8TXL+asVHv
+# s5ssAW3B/vngAmHmAU4TmiK//fFeQMFUSSThQNsiSg0Z3krzqmGr7WEb2UN3530Q
+# MNAEMRLU4UUOQ3cvFA7CYha89YLeL1S7vDprL/YmZX8zYVd/2ft4Uqao+YNEzyV+
+# rHZetZa1Sn5OZpwPla7h0QP6/GgufMJ4ViW0SB2qd1orRuml2MD4C+CemjvtiLk3
+# Lez30u2rQGpaYplKXQfsLcISsx1WmnWzbcFqYS5ypelXxDOFxpKh4eHwPCk/z4Ed
+# U68U/k095aP7riGXXmKzEk8Sn0fSviUDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjEwOFowIwYJKoZIhvcN
-# AQkEMRYEFNDvjPTKaXwxwKeQR+OUNMtiL208MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NlowIwYJKoZIhvcN
+# AQkEMRYEFIJSy8SE5AuVFrpprAZyXq72FvTgMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCUY9wxYtprejzMaBpo2lEXFCrCm+9qlTk5/5xwJzLzvX9/
-# WA8VB+E82dMGj4TZq3I5da9QCESZwATM6+UEsncWcQYnbEDhbj59ChzTGcOP+ifK
-# q/1qXv5bK4HKILvhLv6jeJddKE9ADWo97Z3A4U/nZGpNVZViUJswFqaI/23VOcVO
-# r/4ygm1REl63XyzEo8EqzPmK+8YTooAChpEViyeGegV8JpxlUm/b44G6sc39/0/g
-# 71wI45+gLsg2BhbkWKfB+fc5Ec5VaToSUD5OArju4A5u/9cpg4gOaUwEdMdppEcT
-# 4AUYEjB9bAu7DhnBIus2r6XhBotzJQkr1AREdjXx
+# hkiG9w0BAQEFAASCAQBRZ68GO/HBOogu6+blX2ILUcvQu1ZRqGIKqcvFXWC4auPa
+# MoIbJlH2Pv8LJQPGacIURfJw/e9BZnm3F2iJ5r46oEqLzQsM0FtqirsUJTLZtzho
+# Kh9WJcScJmjdvANZcXttu90DlO3P0GdkYEL+LYUqQqgNUXohpqJ63BD37TSiNb52
+# 8/4K6pM6ACHxcDM4LlZbphfO8+PyWZrFEs1SKK2a/SORQ4kE58z6Iaf51YDB2kqo
+# Zb4gaZavNjvrNHLqQGzrRSnSTwFr1s1Qg4qEnAXEBNcKF3xZ2qBBcOffABvWhzfK
+# 7GICL9hwb8y1RxuPRtGjKPC63fvS91CyIbeOFa5E
 # SIG # End signature block

@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -51,16 +51,16 @@ function Global:Load-Test {
 		try {
 			#Make sure we remove the Pester Module (if loaded)
 			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
+
 			# Import the Pester PowerShell Module in the Global context
 			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
 		} catch {
 			# Sorry, Pester PowerShell Module is not here!!!
 			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
+
 			# Still here? Make sure we are done!
 			break
-			
+
 			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
 			exit 1
 		}
@@ -76,8 +76,8 @@ function Global:Load-Test {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9GQCJsQjZZBfSjVDXPvgc1O9
-# F52gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU26ynaRLrzp+k4iTVMvin/nYm
+# VtegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -220,25 +220,25 @@ function Global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTD9zs8yt/bRkR5CVluM4u0iks+bjANBgkqhkiG9w0B
-# AQEFAASCAQASUS2XiU0+ThTOLiMwWW7htGZWjZyifrQj3V+R8AUzEcbKCKdau/ZL
-# qeWPs9iH5r0Go6TeCOxIc+ESYGcIWEvT7/WDD2Szv+PxZi3WRpAv8AjYYPbuBZ20
-# tzo50uF18frCJNQ2ce431sl6QenYJBNih2/IrDtpDDjL93t/2IRvKukTBDT/keXi
-# Q5E/K62s5eQO6s8oNWTeBF8OnwX1vbk8gQZjhHyZt0yfXVlGN3ybV0aSi983oYEs
-# 8z4T9hQQRUFR73/p3DHTNIozxU6t9+t6mBIn99I+/M8vasx2dFGBzmodg9jKHdqb
-# KFxVF4ltQihpaH9p+hF3jx0DXg4KMpBToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQflUzyOO3Ra6biV1BJPRPu9XOSODANBgkqhkiG9w0B
+# AQEFAASCAQCDrPFWLa2Lx3/wcuKvcoSRZqrCVq//lCbgX+AKm/z2FCrRyw6uugjD
+# qwJwK1yRsrU2CkFdvB6jm/1/DjQTbws0un2mcQMryLc7jE/KL5AR726nI/6McPl6
+# zJpA/IQ5PERA27JFWOwU7cYAkN3uGItf7SpWALxvpiF1VX+71oolKODJffgH80a7
+# WKKJql9BPzzoovoAGuT7T0ESC/EZMXhoUhdqn2DPmU6Qv5fy06mvY1cdY0oaR0hZ
+# GPXecPTwoqh8qAMoA0EI/siewb2NWIzyQz+uR34ZXCCZrqC2wk88mULylB0qQsJx
+# LwO+GhLa2eI+vFy4Je04TeS6dZsP3bu4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjA1M1owIwYJKoZIhvcN
-# AQkEMRYEFMkEDmWgAs5P5qHAIBbwph77wYlEMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NFowIwYJKoZIhvcN
+# AQkEMRYEFPjL2x3+jTNAbjJhXJO1MDIlb6W/MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCuORqxsOFdljr6IYQjyvFmfIc6oa7r+AEdecWDraLTwFgR
-# h/Njd2kmkpSVxbuo5l4qNybWL00T7Fw1ImlMI0V7Sih9KSLavGy5OOSPHd0KAEvi
-# PdO3w0pSVvjLvHTHvXp4rXzuEgNEI9RA1naxaTMxmHakyt1piDl232F0EwKmlexo
-# P1MRX+CEYArbxmMwDWiim9VYVdxLkRnwZ+qYovfNWyMNJp8X8NxUq+e0kPb7+9Oi
-# hM5yejDD+rEEigsTS4ZEneszgwMNOlpz5FQgyb3ZcSJ9xNx5liSRtqogbX0Zy2FP
-# MP35q9c/2BggLzOivHyM7M9Pg7VJZX99Nx/gn+Ny
+# hkiG9w0BAQEFAASCAQA/ciXVRcEbzcjmo/K/jJi5KjeFjI8BAXyOj41HJ8Ho6uvI
+# YzE9ykebHPYl6VnEMY0ww5V+0zUeJwNrbgfVCAS8FO9URGHNnlx5cFoY47WumX9h
+# GegKhI0CKGx8xn+SLPS55MtxQvvSdP9azAVpYHWWetV9htQvjJKvHhywnOrgvonI
+# lNclexkBRg34GG4gp5eQTcJyhxAtIv42ZsqK/FX4JuaiZm9jyD/G4S/Nc059bHDV
+# rNNaOZvEIPhUIZrI2XsfjRIIVivEy9yvsAE+PcIx+i6VAmTg+ZNQLKTjkVn6Lju5
+# IsVXqyqfahdrCOmaEE1IddrtWaRfnFxPfnFi1aGJ
 # SIG # End signature block

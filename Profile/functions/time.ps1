@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -62,7 +62,7 @@ function global:time {
 	.INPUTS
 		String
 #>
-	
+
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -70,7 +70,7 @@ function global:time {
 		[ValidateNotNullOrEmpty()]
 		$file
 	)
-	
+
 	if (!($file)) {
 		# Aw SNAP! That sucks...
 		Write-Error -Message:"Error: File to tail is missing..." -ErrorAction:Stop
@@ -78,7 +78,7 @@ function global:time {
 		# Measure the execution for you, Sir! ;-)
 		Measure-Command { $file }
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -88,8 +88,8 @@ function global:time {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWl/vjVYTVJaDeqtBWUl0B11W
-# JSmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUi/MDfvnX1ySRfFNxhYqW5irA
+# luKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -232,25 +232,25 @@ function global:time {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQfWWXLbNu98BkxQA6UtrqTwnmjFTANBgkqhkiG9w0B
-# AQEFAASCAQCU3PYkP6mxRsqTLLJUSTVuW63IgJLPGe9MvTBKu9pctZUStvjYrCgm
-# 7Ahnzhufd9JJnKXHgyV1GrcGARKcTZP6FgJP/17irZJlhXzLd2fdBb9RI4tWlFjm
-# bLPFHAgCcfeqPAxOj3z6RztxU6223nKpGtJ90xHpRnKMzFm6KPx0/YUhm2zJen84
-# Q0uR+0C5B1aRXyMNFmYUJXpobXMQvKrGiAimkrC34s7Xf0vRtd6ao95SMekVpyLD
-# y9zC+OO+2469RV0pDvdTZqV9zc24AqZOwA3gpYGYfJqVCLTZPlKNo67PcBLhc4XS
-# 1O8igX7GGoGawq4edcEnRSlJxcztKLXioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTfvLS11qCn1bkP5RXOL3EgmEU4JzANBgkqhkiG9w0B
+# AQEFAASCAQAsda6NNn0zHiWLKrohZ7k3oftYpGqFWiJKshjpCc/ibQtMsbrBgPEi
+# urColnLIS2XXRJe/kjJX0njp0SOtZkvJYxbzFEVGL2+XbnCfM+y39ojEiA9dZHHr
+# ZuFtUcgMVRNZSPxaDBlL2byNLYi8UmXVpVdEn7FP6Wbh4sgAKUxFLClMFxADK2Qm
+# dddd1q/wFOUV9hXT0++TKFTuGsI01JIHkWAKxZVpT690juVzhcWpkyuMbZdOnMn2
+# yQ/dfx93VplQXtPnQ4wsaJgJV2BbkR/XiaLCNB+XHWjvI60jkSnq9WLhDCM4yrDQ
+# zUrds27MV/u16SKz/33qTB11CzKo5jowoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjExNFowIwYJKoZIhvcN
-# AQkEMRYEFBHyoVS+pwQe3bqmX1HMwvHEKi8DMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0OVowIwYJKoZIhvcN
+# AQkEMRYEFB9ElW4kYk3VNOfnnKVXc77+ZbLUMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBnid+cVb+7uZyA2Jh6MidWj7AdKoWqEoICA27LUDvkAU/U
-# i9FjDjDXLQsVzAlNwrogzykhKwP0wLHZFmcSagVJDHvOnchVwMzx1LCWnAqle6Sl
-# IVGGHgLU2XSiwvsHND45C+R6gRjBITEwga85QTF3gGjzt2M7rHHNknMFxkKb9K+B
-# k8VZHrG5W5mNGiixuR/si6UDAdgC5isNnmk3YpN0eeiAHDMXHmuJqiWUId/qyhEj
-# zYjS+h0FEaqg952GpmppAydQVZfkpJo6DdIj/SYfpEyHa8AAjSRCRWM1YG8WHmir
-# SizofLwS+u+MMGzUCu/BmpGnPExIcFbWWiuGQpAc
+# hkiG9w0BAQEFAASCAQB/PR8jI5CebB9/dYqljaZE7Ud8wNfOhLbb2z8+xNsri7am
+# 82ts4ee0yHgEwO8/ZtY9Ohcp4QNXOctFcPQWpsn1ZBvTsRW4DL5d8O06hRYzzsfm
+# +cgM+Ku0uUUiRd87BAxga4zzmx7q0Yybej16YLYqO+7Xawhg0q24rnfwpSSsYtB6
+# +2mQw75Z+yz0zH+izvLaz7ZuXKv+tU+V4f8tw0L16RrFrx1FNPld3egJBOESYpjI
+# MwijrAjV5Dc21pnWDkivagmqxBqm3zbgpGKGCiOQ20/yMspyRQQIIXwfnJfkCFW4
+# 1VPjplfn/0l1Aw8oGXuxYX32oTK9OsoJF6Egpxh3
 # SIG # End signature block

@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -49,17 +49,18 @@ $ExecutionContext.InvokeCommand.CommandNotFoundAction =
 		[System.Management.Automation.CommandLookupEventArgs]
 		$eventArgs
 	)
-	
+
 	Write-Warning "Command $commandName was not found."
+
 	$eventArgs.CommandScriptBlock = { Show-Command }
-	
+
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZRp8WXG6XiMv0gVr/m0UVRjz
-# uvCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdnvZyBua+ETnadZZ+cwGzYB7
+# xfugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -202,25 +203,25 @@ $ExecutionContext.InvokeCommand.CommandNotFoundAction =
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBScMjADBG924y59VRHPlMYGMnE2pjANBgkqhkiG9w0B
-# AQEFAASCAQCGVUqiyxF+izqumTVYUiPT6wKW3XNRRiYKHv47l6U9ZpdTQMvUq94w
-# Pue7peZ2MY3xkIS5iUQZFOVSqaAA/N3qZdPReDjV2yNFMkIfzLJfhiGRo1SfBhox
-# bBHVgbUuxl3vcVrsLTZQ2xyQ+qYng+gV4voLvTKWg5LE8Kf2HyQdNMEL+puLucLf
-# mPkddxMWoQu85NpPK6dAOGdJgZNjVK9mt94h/CLbH8ojGdKAzYhV+8EbxMjUIKYM
-# E1vljudmCc5KQSYgteilnHX+vDSlkW9Bc5Wd4vgPVTbWpBL16FM3UcrSLNKXvP7i
-# emlaeVKMW4Sc3fVcO3gan/XyEs0C4Pu2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSMlLB12PBAvlIaX0ZmYwiJD1D2BjANBgkqhkiG9w0B
+# AQEFAASCAQBeHRwAe+91pceTr+citkpI2f2FBxXRr7oh6NslYf8t2aay7rPipeBx
+# M/ZQEwgaiLQ9G5QyxitD+BWr/NqpewT1T7KL4dCOvWmpuzXk+Kv0mkBpR08K/zpI
+# Qean9ejx4xiewSG5CSR/HENjU7KnalDNuJule48KZ0+ivbeOojleh6uQ1OyuO0CK
+# GywQwdMRBuXrtASmfM1zNVgTwAs+XxvmQYdcsOPIHJKn31bSJqRek+bPhEEnz8Ws
+# MD8A0vakUh18RrANO8sUbbwK4M3f7+wRowaXGCG1Yjj7/0RGeHVZiw5T04jLzDoS
+# n7pU7M8SDmR2bC5W4ZofnjTS7f/nhXWnoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjAxOVowIwYJKoZIhvcN
-# AQkEMRYEFFmqaA3XChCAmardDmoJDDjcQzDLMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzNlowIwYJKoZIhvcN
+# AQkEMRYEFGFxiL5tZcjqAAjEGhnPUxrOhftvMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAIrwJ/a66nnPmY9jJHaFK5ZO5mnWvD6/86CWeSQ7HkqVxZ
-# xjwG2Y1eMUSGyvBdZAjQTjuclZNlv6tLoqHbbOzX1+osK8JSXn1wr+U3kwWW9OTc
-# wjyNv70GvN7+Jcwd/61Oi+3pbwwKnO5tFgRKjex3TwnJbEKl4a56PykxyefvgRgk
-# JZYsWAoPCGCU14koiLyCHygWEdBDfpzwHmDyiIYJsQd9YkRQi3huurVvGe/kE+Re
-# B+aVv4GdrVPlyXXkMfosf98Oa/Vl9TfaGrwW4K0Xt/L4ZVuLWmA2/fn/FBZyyafy
-# r1g64MamvT92L0c5ZLYSu1dn8OtHZ63NkyVAH0dG
+# hkiG9w0BAQEFAASCAQBrXW9Alsf6w+Q9ib0IyXUxoG+RdnUUcwL+qmcJ1ls63JIf
+# Kf3Ljwmr10XymxpzlHmyAUgaCfuau26BY62emGbmlDIw1H1SQgbaciTJsn6kst7b
+# RN7bohQQPz+v915M7L2HQbPqmjSNYyLR8UNJ23eoP9AR6JhIluPxOQgddF59EaLr
+# JlhIrjC/9fvloCjovWvXRcH6mT45u4yccnetZJyeppoI5noBmFoVdQmHC5HxpHOu
+# kIMzpbAu6IZfUe2uh/wg7rCvmBZM7XkhH0BTaJqYYcCTT9gXfhy4g06SoeHnNxZe
+# VzvnSqqATtsU6nAEAONETtjlKT7OndoZBsOUjkZP
 # SIG # End signature block

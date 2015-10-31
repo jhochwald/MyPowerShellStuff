@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -80,32 +80,32 @@ function Global:Set-Encoding() {
 		[string]
 		$encoding
 	)
-	
+
 	# ensure it is a valid path
 	if (-not (Test-Path -Path $path)) {
 		# Aw, Snap!
 		throw "File or directory not found at {0}" -f $path
 	}
-	
+
 	# if the path is a file, else a directory
 	if (Test-Path $path -PathType Leaf) {
 		# if the provided path equals the destination
 		if ($path -eq $dest) {
 			# get file extension
-			$ext = [System.IO.Path]::GetExtension($path)
-			
+			Set-Variable -Name ext -Value $([System.IO.Path]::GetExtension($path))
+
 			#create destination
-			$dest = $path.Replace([System.IO.Path]::GetFileName($path), ("temp_encoded{0}" -f $ext))
-			
+			Set-Variable -Name dest -Value $($path.Replace([System.IO.Path]::GetFileName($path), ("temp_encoded{0}" -f $ext)))
+
 			# output to file with encoding
 			Get-Content $path | Out-File -FilePath $dest -Encoding $encoding -Force
-			
+
 			# copy item to original path to overwrite (note move-item loses encoding)
 			Copy-Item -Path $dest -Destination $path -Force -PassThru | ForEach-Object { Write-Output -inputobject ("{0} encoded {1}" -f $encoding, $_) }
-			
+
 			# remove the extra file
 			Remove-Item $dest -Force -Confirm:$false
-			
+
 			# Do a garbage collection
 			if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 				run-gc
@@ -114,29 +114,29 @@ function Global:Set-Encoding() {
 			# output to file with encoding
 			Get-Content $path | Out-File -FilePath $dest -Encoding $encoding -Force
 		}
-		
+
 	} else {
 		# get all the files recursively
 		foreach ($i in Get-ChildItem -Path $path -Recurse) {
 			if ($i.PSIsContainer) {
 				continue
 			}
-			
+
 			# get file extension
-			$ext = [System.IO.Path]::GetExtension($i)
-			
+			Set-Variable -Name ext -Value $([System.IO.Path]::GetExtension($i))
+
 			# create destination
-			$dest = "$path\temp_encoded{0}" -f $ext
-			
+			Set-Variable -Name dest -Value $("$path\temp_encoded{0}" -f $ext)
+
 			# output to file with encoding
 			Get-Content $i.FullName | Out-File -FilePath $dest -Encoding $encoding -Force
-			
+
 			# copy item to original path to overwrite (note move-item loses encoding)
 			Copy-Item -Path $dest -Destination $i.FullName -Force -PassThru | ForEach-Object { Write-Output -inputobject ("{0} encoded {1}" -f $encoding, $_) }
-			
+
 			# remove the extra file
 			Remove-Item $dest -Force -Confirm:$false
-			
+
 			# Do a garbage collection
 			if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 				run-gc
@@ -151,8 +151,8 @@ function Global:Set-Encoding() {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/5icofHeZ+4kXtGpaEttqT8O
-# OtegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUSqSLseBJsEnsL/R64FpvsUxd
+# CnygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -295,25 +295,25 @@ function Global:Set-Encoding() {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBThyveXGI65WvmZT+/QBtCZ9plAnTANBgkqhkiG9w0B
-# AQEFAASCAQB6ZGMFG9As+VEeWmMkbgh6Kqh3hw4s8pXCCTOhCXIrqBI66bZWoUnC
-# WaTECsR67RQKdYg1TYjyIySIYxILXvf/SBNP9EGN89OQSlfnxpSfern2IJoq11du
-# Mc9lTRligFYzfl+OTX+56gzzMqSuYQPkNDi6Rnfwy/+3TYbE8wOacgFmwZ/d4IuC
-# WIXk8Q5/Xs7vc3KcLaFTw7oxen5zvXou949hfkwaraeYpklfn4sWmZLLwHpcic0x
-# UkbuBVolvuB7/4UWN2YzU6fF1ysy7/EP5GkXuJ6KCGErlCbvFuBfWtZh9V8oTy62
-# 3cjHbBc12HKl4F2/h9HF32qdda6WeG6AoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRpsIOT46YsIVzlhljj+4gY1EVKdTANBgkqhkiG9w0B
+# AQEFAASCAQCTaHAkXtT9DpoAvMZuRTugMV7ojt1YYSaqHhjhm88pRtqFO9Mg349v
+# wM6BFPfO5MVgFmz5z9hhxNvlX1x0jxkFU+kAnHmMsZXiyhzJuYKV39F6lvFZj/yx
+# F2GppneTjUcNmaP13850jUaWtAgxEj8pAEwDJbaQIx6RAn8qu6rkulE2IOvHj67l
+# FdodOrxptuarX8feSoqKcbBEtaCosNWHiY9hLPzyA7ZY5pTsDUJgEQ1dv6/3gcik
+# 0VgG3ed0XdNI0V0QSM7jPufXeFxqNopVtjgkdTBy/v6BI0sCcBBarmntgNHmmTvw
+# GSW/myCsnJQVvMJlZljj/CgcY+LvvxkpoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjEwOVowIwYJKoZIhvcN
-# AQkEMRYEFLEdR15FBPqTYGnJN88jQLKEitCDMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0N1owIwYJKoZIhvcN
+# AQkEMRYEFN9mEAop7X5sCVgQUy1wjvREW1H4MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBfjgPxS4ovwsYJkJSGG6ip3I5MHz74MmPSdvLYhk5z4oDT
-# yj9uEKGUWTKdU6MCjKKIIAbzF9fao7Ri60SiJvTdPI8dyMBrlZwAAewrc8K5bGn1
-# 1pPNhwtaOhl+KqoVUgcNLSmvQCf1z7eQHPErvfD/fMpJCXmzaPds6E7H0rwBHxwN
-# GqWCld736sX+xrfFYEhRifMX82UBHbiD1S4FPDPvNAvBIuG9sc3bby+9YKe3W7V5
-# vH9xcQE4tQ2da2XcAhmM8j2fpXPiItxrPL+kXko4H0gb+Gic4rr55L3spE1gowSA
-# 7paUoJ0WcKz/3T4zEpYg9LjA/JWoeB68b3SI7dfR
+# hkiG9w0BAQEFAASCAQBHQh9DFrBEKKZpdgXOOwuqw4YCgOCexuTrdoKcMkTxLuCQ
+# uLKe4FvfG19Ewd8CUYoXJ5gEZDirVPWB19Z9uUQZzQ8TK5TIUATtmpTFPoS1oKPt
+# uQKvwyM8wpXI6NFcdS9DEPf5t+ZLB6z1nQ/NKoAwPq5QbQlsdAeWCo7s4TvRVmlB
+# DzTx0WdcsFhmqnhuac6Bg3pLq82ayYSRpGib7dcy3YJeCU0oNQrK3yyNbhYM5T9v
+# D0eepPeVi5UEIsPN3md5tB3l3NEfn5qjFSRji/6j506ReFgG4NGmxmzTkPgIr7ez
+# DJMsQdKjpOgPDqFNRYxrZc3Aj7UDojHIlUzhtXL8
 # SIG # End signature block

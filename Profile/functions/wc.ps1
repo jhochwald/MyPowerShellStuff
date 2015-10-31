@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -47,17 +47,17 @@ function global:wc {
 		hochwald.net http://hochwald.net
 #>
 	param ($object)
-	
+
 	begin {
 		# initialize counter for counting number of data from
 		$counter = 0
 	}
-	
+
 	# Process is invoked for every pipeline input
 	process {
 		if ($_) { $counter++ }
 	}
-	
+
 	end {
 		# if "wc" has an argument passed, ignore pipeline input
 		if ($object) {
@@ -66,12 +66,11 @@ function global:wc {
 			} else {
 				($object | Measure-Object).Count
 			}
-			
 		} else {
 			$counter
 		}
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -81,8 +80,8 @@ function global:wc {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIdhl6VziAabMx4tiWjUq+J+p
-# +ZygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU02iH20waZw1NSetZA0zmUpQk
+# HjygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -225,25 +224,25 @@ function global:wc {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRH4ha+lK8rLynyss58EOR6OsP34jANBgkqhkiG9w0B
-# AQEFAASCAQAIJQAcEA/V16UjTKI7SLSrLyoPbas1wzmKEGO4gGFet/uabRcfI4h4
-# RZpNnz8augcjSMWwyXopnU6mvt3HPugiypTm9fCoWqEOAMvLiP4ZGNLdNGhKQlWf
-# 73Jwa+1YqpAsWh3T95LvqiCZk2+2IvyaUqk3JI8RK6hS+2ypg0TaryKYkoCk0xpZ
-# 78kpNVu61sigazOnrkRherP+QbitCuobHag68huAOq3EyaExSuXNoX7l8R5pGLwO
-# osJNxQ+mhhG1f+xpDVOUulX4VT4MkR5GOTlNN8MVcC//khoqNoBdXwdfe/irKRDN
-# H4aeEeJGyIy6tyzrkjrKCnsoGIa1GoL4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTkAAZjNBpkhg/iWYgaS4zq20H25TANBgkqhkiG9w0B
+# AQEFAASCAQCNu/XgrvHxyW0Q05HTNPyXwRYF40OoNtnu0D5PgD1shvdIBlf5hFna
+# 647d9HhH6PstEeDnBOKM20H4WnAmYfm7kVrRRlo7WZ4H/q0bQIyUs9tdveJKkn8s
+# UCQI2xdK7iR3JaTd5sfWn8F7PqPK8Q/2VJcWby1aDtEjfDAlabXsSG+vZJvGrSYy
+# ZlEzbhDUCuEVXMbsygJvf0y5ejx8AI75t4i0InWbVH9/S7ttyvA8XRX/ANskeL80
+# aPBTk0/0cHki9RKMy0OQDX8iLjceCQroWLUwz7Y9kFK1JoIlx0a9/M8dNgxr80d8
+# FcT1znSApjpTXIFPsHcr3rKEgCECD2n9oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjExNlowIwYJKoZIhvcN
-# AQkEMRYEFCHMF0mhqbkpxopYt84REKmnkkA5MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg1MVowIwYJKoZIhvcN
+# AQkEMRYEFChVCObhSJES4+8THc9UVmDKHWOeMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBrUjYRROHA/8FUWddAc0GDRmvVvk6rIIbSfrDP2C61YA+v
-# 9Ousi5rTiuIaUbsGShxgsd06CTSD+nFz5N2AusZF5dfKM69jSu/T6SPlzFLBfBGu
-# sv18Cp3fPURD5yrfok3OR66xWNYEVwsaiQTu6HJ9jZzaIYmPqUpmD+xnN1CRJbqy
-# LkzJO0mmqBAUjULQ9cMYgE7ekfBpg2uljbiPyqmd8Y8II6tYAdaAyDFFhaTbhuDo
-# XMCtvuHPNksTlfZt5b0smDPHluSOhjtAXdRMPxi55id3RBYHbyyFj2PvO80E08mC
-# 3V8DybBZqpLWrz5/VWuAKSpNXctLvttbGasJF7pu
+# hkiG9w0BAQEFAASCAQAQxCekQihh9WSyG269VBJEIE3TwJCCv6OaBNNszTSLsqWT
+# aikJgEvYfU2jY3DTod1Yfkyt4ZXLeN/8/ErNhU4Hb3A39upq2JRIb6UFpr1W1laK
+# DZMSKKgwPLbfA/xbl5DqpbKtUm6Janm6GoRzbzfUWjGYJoumZqg6HFR/MOy090rZ
+# HwtpvMUdtu5Qz4bMz9+hGlt1X0W454YeHMk6zgUpPc5XA66FPXFJTPFI5Ygwo/Pp
+# sSAlQtpJoEmHyZUkJFLvdKOZjbVfh0sNU7wDIiugJ9gyqV+5l9adefLgQWmwx++C
+# YbywQ3Ld0FEb9E4uPGrlYlLFNWaQTx7SFviuU2Cz
 # SIG # End signature block

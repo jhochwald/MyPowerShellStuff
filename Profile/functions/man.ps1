@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -50,12 +50,13 @@ function global:man {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
+
 	clear-host
 	Get-Help $args[0] -full | Out-Host -paging
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -65,8 +66,8 @@ function global:man {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUkjEROkaizj/Ah6Hp2u9c6iws
-# KIGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnmxbeR4eSK5PplRE/urEpzRA
+# 4kKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -209,25 +210,25 @@ function global:man {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxXqTWy1JL2Uvglf24MnfHngaDnzANBgkqhkiG9w0B
-# AQEFAASCAQCUmUQvCbI7A5JyE0lugya29hdId2RVfKj4Kbe860/vjkPu5kNAN0vc
-# WgqBYGK2vUz6jR8TmBJD3U1GdFnMxpyh1hm5mlP0dNPOulTkN/8hY+izYeYc+0eu
-# QStTCKyTEAuolmWp8i4F3s5TmD3WFZdeB69ltKi0gPjsgqelh7moFy4tpzj2E3cv
-# dnXbtNnAZ7GWsGAloHF+FciVgTaGuz3i1JP5c9UV1tQhM9rL1WkCPyDNLvYO4FE4
-# s1SZ3TIn4vBBA4C4vMr+DlrsT/UmcAXKfzSu61w6gQWwCgzf947NAbkog0Ku0MiT
-# F5pWVdn9ejkAqkcc+2TwCKS4raSGjp7SoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS2k0a1rcDq9tTWPVvSnJCs9cLbBjANBgkqhkiG9w0B
+# AQEFAASCAQBwrUJTCrgPSjXcbyHH3XXMF0kF3Wo+B7848JzQcj/zDcVmgniu/xO1
+# i3eNZpj12FjdQlqpO5Vddqrua4hlPTNlneJgk+ip0ukfxmUZmFILieFzbf4oybYM
+# TF+UzzhNPGqcI97yZ7TDceMy9xWz6IpQOd+BlENxGDjtT6cuwPHZzNQi6zEDiHKK
+# drhd4Rz1DSWXTQ4x1LRvuffmYZ2NbRhM/8gb30qhfK8ljC1/1FFJQMo0r4/Gp/IL
+# myGUPGo8PAltTP2iyEuNXcL6xxoYA9b3v1/OLfFW0jI+Ma6qrkUj4eufny2QunpL
+# V+27VSnSJxW7jbXcGbXcMuFro8zVk575oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjA1NVowIwYJKoZIhvcN
-# AQkEMRYEFCk3G+sOL8wCFYatilU2uyMsKf6jMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NFowIwYJKoZIhvcN
+# AQkEMRYEFHjUxp0Bce8mOKkY2wT2FcLD5sk+MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAnOXtvVoU2afQYsERds+dQ0wXv2queEL+J5+I6w3UkpO4w
-# xNJZY4VlHS1wOH8QXEvJZtWG/DF+6Zpu0dUvMxk5VZDFbUCtDv7dLQDgAftn7Byy
-# YH1fN0SeBl8CSPgo635R+ZP4ApxK4ntUVhmEfZelQ2+ay/MeMZRJl9nw+FZZDAx8
-# Jml/gshKLvIsQRMqKf3692wvuLCqmRRbCFq/6cSkyXlYOXgnciDKg1fpD5xEcTB5
-# WrS4eMB4n7aC/jMG3n7AHAan/e0WsizW6KveyZ7KT/zzML+DhC8pBDDtkIRRJc2p
-# nwmsRGmnrrh+vlMhCYQGq+C/A/rVdQhea7dX/gHf
+# hkiG9w0BAQEFAASCAQADlUTb4yHTrV6h1B7NPzfEVovvgrF3KOf0bn9B9GexrrxK
+# eR6i36SbNWodMT0OmrcJ8AF38yaZa+7qRhHHnPT5T3IUPZ7sUJdSsvVxsMJ38W9u
+# 3s/YYHoQxUnGHrSMQIbAhMoqLp04dUtai+qiTB7jFo08lApnqEly855csoqm80FN
+# qAdjoqeYF5w2m/G6BQxeNdQKDAmPqe78qk9HUFenJSQiDM0CuqdebzYUPce8FOng
+# bZPk2eSaWn8/jpzozfNua/Iu+aUeqiMzl3IHFPwgRx+zn+n0ysnOWxMJrXyDaGzW
+# uvYl3gGKQXpL5wnl7ZGXeqkiKXLJXzNhZ6ClMWNh
 # SIG # End signature block

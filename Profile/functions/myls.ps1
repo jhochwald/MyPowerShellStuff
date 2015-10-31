@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -58,14 +58,14 @@ function global:myls {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param
 	(
 		[string]
 		$loc = '.'
 	)
-	
+
 	Get-ChildItem -force -att !a "$loc"
 	Get-ChildItem -force -att !d "$loc"
 }
@@ -75,8 +75,8 @@ function global:myls {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOy93vmgURMda+LDxGShgBTjn
-# 5eigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdtRzyBKluYq/Q6Oyaovmxcpr
+# RKOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -219,25 +219,25 @@ function global:myls {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTdmKAteRHtMw4buUm4T37ukfZfOTANBgkqhkiG9w0B
-# AQEFAASCAQBGwNPstsaZp72JYJgKUeOs2DXkWTVf1Yt6bExqApZGAg04ZbLBouMs
-# c8YT31ZmTqNqlJQM/9Q/KCSjO66VcGzOuK/2dN8fztVvWoIJGmUA2c9zTvWr0Evo
-# 4dpPLv0Mk6aKC6DUVY+PTj5sFPB/hoka8pytpviE+msyzzYdVimgw2+TVI4ARCFZ
-# gBW+LnQB3YH+b1LSngFYZEcjnej3lTm413NqJn65XmRQ5rjpTRDAVDVmK8AVIrYI
-# 2Jgw/uuemRxrJ8Jf7edkuoMJ/ay0bIwvvjGOyM8+e/QUYpxhTXeFhycSZ1nR9V1S
-# jv+mLgI6ZuUzVg2qvG9lIOVRhjHbqsNOoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSi2xTf6xxjI1O8h2UjZklXS7norTANBgkqhkiG9w0B
+# AQEFAASCAQAO3aG28eyH4AOGxBE5QGgBfNmh35jMoIMRKz/seH7wGOmuYuwyyidT
+# 87mZIPIUgTEDEIWgPC7k0V07KUeoK0qGmZWOmMca+VO293YInnLcr5zlVSl6MusS
+# CJSlIpMLHz4j53wOfRstYr/04R9pYV8KQh6oXdOWEH+hhTYCA8m3jhX5yt+Gmc/M
+# jy1T8iuOZBUM+SLIFNS2n+H4RrsOY+/SceOs9htL+YC+kJEkxNmbBS2kQiXxjz1m
+# IoQP0mzhE2/XJVGO0dSH5hjsyIPyTVC2eWfQoRbH4O0aQT0tIWvjeFuleSlDG73L
+# UwWn4mTAn+qGDRXpMb5xaw3l8e1ii7GVoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjEwMVowIwYJKoZIhvcN
-# AQkEMRYEFJExW/k9AzVbVTpdsgETvJOXaEiEMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NVowIwYJKoZIhvcN
+# AQkEMRYEFHgxj4WAnvelEITgSqIY4wqGxTPAMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCnm4rAeybnlhp5/Uk20xPHjVbqeu8mbdNyqiJuqQtOF6eV
-# 16t/RPWmK50C/ffzcwXvAuiXOjjFCNuGBObKRULDg3B6H13/tvVLNvDRooGHbx9K
-# phn37onMeUAaTzGBdB2CPaSNw/JI8JIf1Z+ENWINRTMwvFIlRDrpCveDTty5K2n8
-# 43UCVSJpkTk64O1ZGitRdwqltZ0o8+Jct4G5vCzdpt9t2bnS29VnhSxnmx8wLOg+
-# /T1iiB8PcYtymV5QdsLRMs8I9C7NX0Xtc4dzihSNmrqm5jsTPgnVsozDTLJJ01or
-# G8eI0DSvh4Vpv+b3VyIcrQNKiq/qFY6kQgR/lrsK
+# hkiG9w0BAQEFAASCAQB5+lFpLi24YX0WZKYRgCKlbOObWHKr2bzNFtwJq1gNqSl3
+# IoEnqyTgFw0NMF7a8x/eU6vm9h9T/35SGPBXDg0ZYcYusLZvYotcsN56l1nSxNCG
+# PgH7eLjvDnzgkuBfAeG9vopDINNfivMpX23xSyqE9vaVrgjEV8Q+s+aBZiVWc2YG
+# N1TL9t2UL2yvTmXN3MxtG+NHq3jSZYRnE9UKxBhliVK8D/LtaWVct0iSfecxC3SG
+# WIuDI4b5SpO+nDvoqs5YMrBcwrbBSjXmN77+b/ARVh0iDr5YVAK2SSTz7Uhxijqv
+# 12177ESk+P4UVbURt/asfwPgcWZCfmR0sUmm78ye
 # SIG # End signature block

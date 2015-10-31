@@ -27,111 +27,220 @@
 	authorization from Joerg Hochwald
 #>
 
-function global:Approve-MailAddress {
+function global:Get-TinyURL {
 <#
 	.SYNOPSIS
-		Regex check to see if a given Email address is valid
+		Get a Short URL
 
 	.DESCRIPTION
-		Checks a given Mail Address against a REGEX Filter to see if it is RfC822 complaint
-		Not directly related is the REGEX check. Most mailer will not be able to handle it if there
-		are non standard chars within the Mail Address...
+		Get a Short URL using the TINYURL.COM Service
 
-	.PARAMETER Email
-		e.g. "joerg.hochwald@outlook.com"
-		Email address to check
+	.PARAMETER URL
+		Long URL
 
 	.EXAMPLE
-		PS C:\> Approve-MailAddress -Email:"No.Reply@bewoelkt.net"
+				PS C:\> Get-TinyURL -URL 'http://hochwald.net'
+				http://tinyurl.com/yc63nbh
 
-		# Checks a given Mail Address (No.Reply@bewoelkt.net) against a REGEX Filter to see if
-		# it is RfC822 complaint
-		#
-		# Will return True
-
-	.EXAMPLE
-		PS C:\> Approve-MailAddress -Email:"JÃ¶rg.hochwald@gmail.com"
-
-		# Checks a given Mail Address (JÃ¶rg.hochwald@gmail.com) against a REGEX Filter to see if
-		# it is RfC822 complaint, and it is NOT
-		#
-		# Will return False
-
-	.EXAMPLE
-		PS C:\> Approve-MailAddress -Email:"Joerg hochwald@gmail.com"
-
-		# Checks a given Mail Address (Joerg hochwald@gmail.com) against a REGEX Filter to see
-		# if it is RfC822 complaint, and it is NOT
-		#
-		# Will return False
-
-	.EXAMPLE
-		PS C:\> Approve-MailAddress -Email:"Joerg.hochwald@gmail"
-
-		# Checks a given Mail Address (Joerg.hochwald@gmail) against a REGEX Filter to see
-		# if it is RfC822 complaint, and it is NOT
-		#
-		# Will return False
-
-	.OUTPUTS
-		boolean
-		Value is True or False
+				Request the the TINYURL for http://hochwald.net.
+				In this example the return is http://tinyurl.com/yc63nbh
 
 	.NOTES
-		The Function name is changed!
-
-		Internal Helper function to check Mail addresses via REGEX to see if they are
-		RfC822 complaint before use them.
-
-	.INPUTS
-		Mail Adress to check against the RfC822 REGEX Filter
+		Additional information about the function.
 #>
 
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	[OutputType([bool])]
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[OutputType([string])]
 	param
 	(
 		[Parameter(Mandatory = $true,
-				   ValueFromPipeline = $true,
-				   HelpMessage = 'Enter the Mail Address that you would like to check (Mandatory)')]
+			Position = 0,
+			HelpMessage = 'Long URL')]
 		[ValidateNotNullOrEmpty()]
-		[Alias('Mail')]
 		[string]
-		$Email
+		$URL
 	)
 
-	# Old REGEX check
-	Set-Variable -Name EmailRegexOld -Value $("^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$")
+	try {
+		# Request
+		Set-Variable -Name tinyURL -Value $(Invoke-WebRequest -Uri "http://tinyurl.com/api-create.php?url=$URL" | Select-Object -ExpandProperty Content)
 
-	# New REGEX check
-	Set-Variable -Name EmailRegex -Value $('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$';)
-
-	# Check that the given Address is valid.
-	if ( ($Email -match $EmailRegexOld) -and ($Email -match $EmailRegex) ) {
-		# Email seems to be valid
-		Write-Output "True"
-	} else {
-		# Wow, that looks bad!
-		Write-Output "False"
-	}
-
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+		if (($tinyURL)) {
+			# Dump to the Console
+			write-output "$tinyURL"
+		} else {
+			throw
+		}
+	} catch {
+		# Something bad happend
+		Write-Output "Whoopsie... Houston, we have a problem!"
+	} finally {
+		# Cleanup
+		Remove-Variable tinyURL -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	}
 }
 
-# Set a compatibility Alias
-(set-alias ValidateEmailAddress Approve-MailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-(set-alias ValidateEmailAddress Approve-MailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-(set-alias Validate-Email Approve-MailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+
+function global:Get-IsGdURL {
+<#
+	.SYNOPSIS
+		Get a Short URL
+
+	.DESCRIPTION
+		Get a Short URL using the IS.GD Service
+
+	.PARAMETER URL
+		Long URL
+
+	.EXAMPLE
+				PS C:\> Get-IsGdURL -URL 'http://hochwald.net'
+				http://is.gd/FkMP5v
+
+				Request the the IS.GD for http://hochwald.net.
+				In this example the return is http://is.gd/FkMP5v
+
+	.NOTES
+		Additional information about the function.
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[OutputType([string])]
+	param
+	(
+		[Parameter(Mandatory = $true,
+			Position = 0,
+			HelpMessage = 'Long URL')]
+		[ValidateNotNullOrEmpty()]
+		[string]
+		$URL
+	)
+
+	try {
+		# Request
+		Set-Variable -Name isgdURL -Value $(Invoke-WebRequest -Uri "http://is.gd/api.php?longurl=$URL" | Select-Object -ExpandProperty Content)
+
+		if (($isgdURL)) {
+			# Dump to the Console
+			write-output "$isgdURL"
+		} else {
+			throw
+		}
+	} catch {
+		# Something bad happend
+		Write-Output "Whoopsie... Houston, we have a problem!"
+	} finally {
+		# Cleanup
+		Remove-Variable isgdURL -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	}
+}
+
+function global:Get-TrImURL {
+<#
+	.SYNOPSIS
+		Get a Short URL
+
+	.DESCRIPTION
+		Get a Short URL using the TR.IM Service
+
+	.PARAMETER URL
+		Long URL
+
+	.EXAMPLE
+				PS C:\> Get-TrImURL -URL 'http://hochwald.net'
+
+	.NOTES
+		The service is offline at the moment!
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[OutputType([string])]
+	param
+	(
+		[Parameter(Mandatory = $true,
+			Position = 0,
+			HelpMessage = 'Long URL')]
+		[ValidateNotNullOrEmpty()]
+		[string]
+		$URL
+	)
+
+	try {
+		# Request
+		Set-Variable -Name trimURL -Value $(Invoke-WebRequest -Uri "http://api.tr.im/api/trim_simple?url=$URL" | Select-Object -ExpandProperty Content)
+
+		if (($trimURL)) {
+			# Dump to the Console
+			write-output "$trimURL"
+		} else {
+			throw
+		}
+	} catch {
+		# Something bad happend
+		Write-Output "Whoopsie... Houston, we have a problem!"
+	} finally {
+		# Cleanup
+		Remove-Variable trimURL -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	}
+}
+
+function global:Get-LongURL {
+<#
+	.SYNOPSIS
+		Expand a Short URL
+
+	.DESCRIPTION
+		Expand a Short URL via the untiny.me
+		This service supports all well known (and a lot other) short UR L services!
+
+	.PARAMETER URL
+		Short URL
+
+	.EXAMPLE
+				PS C:\> Get-LongURL -URL 'http://cutt.us/KX5CD'
+				http://hochwald.net
+
+				Get the Long URL (http://hochwald.net) for a given Short URL
+
+	.NOTES
+		This service supports all well known (and a lot other) short UR L services!
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[OutputType([string])]
+	param
+	(
+		[Parameter(Mandatory = $true,
+			Position = 0,
+			HelpMessage = 'Short URL')]
+		[ValidateNotNullOrEmpty()]
+		[string]
+		$URL
+	)
+
+	try {
+		# Request
+		Set-Variable -Name longURL -Value $(Invoke-WebRequest -Uri "http://untiny.me/api/1.0/extract?url=$URL&format=text" | Select-Object -ExpandProperty Content)
+
+		if (($longURL)) {
+			# Dump to the Console
+			write-output "$longURL"
+		} else {
+			throw
+		}
+	} catch {
+		# Something bad happend
+		Write-Output "Whoopsie... Houston, we have a problem!"
+	} finally {
+		# Cleanup
+		Remove-Variable longURL -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	}
+}
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFSDuKLmrSpFvHjK8v2RaSoLh
-# gqigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUCUNijOYIq16ddLqAIZ4VfH6
+# mJmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -274,25 +383,25 @@ function global:Approve-MailAddress {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBREUOk3GlIPyZO9XSK8C7psSeAY/DANBgkqhkiG9w0B
-# AQEFAASCAQCrXm1dspsGNRhz+auY3WWqtnMi8i0Io+HPRFIwyN1mPPEZTnEDVtmK
-# 8nNQ/zahF+/lOtf9nBkNPNMLVunw/zhGgHpi5ijnbwGahR7nQcpCEaXxFss7aaEt
-# lK9HTc/yEigsjhJNGUAqqiRxdKQM0Sffkr2z0i/ConYQ+OC52kOGQ8favUjwbYBS
-# CdgD5LWeEtQfz1sXEUpSRd7LrLv5Fh2u/7yz3z7osJuNwG/J2AQPYo0LUSYoH2X4
-# bNBNxEQP5nGK9mXANmD0cFDrkSgLMqNvZ2w7Kf0xkBdmpcLdf+EMRRJ9qQTvh1zm
-# NPrpxaSDZlGuTgZgzAi3nVYgLdRX2uKMoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRjhdbTFyWkyKjFxA02fmZhHp1zWzANBgkqhkiG9w0B
+# AQEFAASCAQAEqN2MtsibSkcmaW2T48j/Iw2p5XeBhOfMGskD3GFNPUevDC6icYCt
+# 2ixVJAwabor6a1Sor3BdwXp058w2asmIQl8hVa9sZ28eqoZTFAj8XhDADfoj9i/h
+# 4JRE34m6DJrpRY94ueYaKjO03zcdK8rAyeKqa+1+SYDAIbyuxzSXEPjpJ5HdCQ0P
+# 5rBtLtFfP8mKBAhHctLP9haByYmmFxTpSO7iPEJDLvayhpB+YSsF2fFkIVhq9JZr
+# iGvw5vA52NVarL+LYtQRlert80CTOU2BEQ3BZO1Wcx3Kkdjy3/ofFRLhlZ90DhqA
+# 6yJdy1egRIQDxkDFtX3CvbBFhxxq+HS/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzNVowIwYJKoZIhvcN
-# AQkEMRYEFIrf+1uk5OuCDx8rcm/qGP6czIJLMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg1MFowIwYJKoZIhvcN
+# AQkEMRYEFIN6oeNycbppReac6u6CIMSTunErMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCPxBOudQABJ5cjoc0N8DJOhSP4jFnfPU20AvRQV/otSLID
-# MHAfl4dGD3QPsWeywembZzltjtmglQHClr31BvTYqof0vMHnlt1FPxo5Uv+OIgm3
-# t2q5gG8i3mhwm9Jqeo4Ow2RRnIKi6a6Md2kSEgSgpSeZ7swmC+q8PLrmVJIGZxLW
-# 1axP3CEr9DfMPpdn3zWliEG95hD/k5KG0DkQy8wvCaO/GhmAqUIO4BxvQSMgg4fm
-# UeuxBoIwXEU84/33Tb8FwWLgxhCUH4IY6TpAuBFw6gm0TS8ta1nJhHAHYijTX3+f
-# VhIN26CFjdjOoCcvJWOMlNu3sBziy/j8OQtOHPo7
+# hkiG9w0BAQEFAASCAQBD6B/o3pyJCcaFy6Ve1d5qEuf1vgZo8aX7Ubf45f6tQceN
+# BsW8bsQsnqrua3mhoJ8LmDNzjA81JOH4iPkEvRAMvUacpJZIm5syOvK1X2bYWKud
+# T2atOh3SwgPkA0X2yOfLZ9ScH+4xRvLs33xjAoy1EBDQWWjIiev6icjNKFNehxqP
+# JVEWNR0peBI0jGFLBAjQXMSXeZN//+M2Tm4+JaJU5C+tl853g0YeAtPbn+D009Fn
+# rnhJZje9YD/LAVYQovDciLPXq9XPdayp0ZW1+X0rlWH3UNjC4ITYaJzL/0XHeBbj
+# szFuS0kO5qQ4vKj1LH/I9LfHj+YXc0bIeVtw+0E8
 # SIG # End signature block

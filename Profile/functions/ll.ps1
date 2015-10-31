@@ -21,7 +21,7 @@
 	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 	DEALINGS IN THE SOFTWARE.
 
-	Except as contained in this notice, the name of the Software, NET-experts
+	Except as contained in this notice, the name of the Software, NET-Experts
 	or Joerg Hochwald shall not be used in advertising or otherwise to promote
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
@@ -46,21 +46,22 @@ function global:ll {
 	.NOTES
 		Additional information about the function.
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param
 	(
 		$dir = ".",
 		$all = $false
 	)
-	
-	$origFg = $Host.UI.RawUI.ForegroundColor
+
+	Set-Variable -Name origFg -Value $($Host.UI.RawUI.ForegroundColor)
+
 	if ($all) {
-		$toList = Get-ChildItem -force $dir
+		Set-Variable -Name toList -Value $(Get-ChildItem -force $dir)
 	} else {
-		$toList = Get-ChildItem $dir
+		Set-Variable -Name toList -Value $(Get-ChildItem $dir)
 	}
-	
+
 	foreach ($Item in $toList) {
 		Switch ($Item.Extension) {
 			".exe" { $Host.UI.RawUI.ForegroundColor = "DarkYellow" }
@@ -75,11 +76,11 @@ function global:ll {
 			".rar" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
 			Default { $Host.UI.RawUI.ForegroundColor = $origFg }
 		}
-		
+
 		if ($item.Mode.StartsWith("d")) {
 			$Host.UI.RawUI.ForegroundColor = "DarkGray"
 		}
-		
+
 		$item
 	}
 	$Host.UI.RawUI.ForegroundColor = $origFg
@@ -88,8 +89,8 @@ function global:ll {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcobOB6zYWNW6j8RiIM8fFaT+
-# HxygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUaxsl2D0FgTN0ew+ZxOC7hGZJ
+# dbGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -232,25 +233,25 @@ function global:ll {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTO1Miw167fhH982IS+5+e4Ce8GpTANBgkqhkiG9w0B
-# AQEFAASCAQBzJQ7vUYt6nyKNkBJZSVbS1s13W3kQyMfMhhyN7Evdw0nyHbAj4MH8
-# 7X9R4zB8dlJbeXNowVVhfyogzS9Lt6TCOfUVSeFxCtuYSMkVVCDsr6Kix4z/op2O
-# b2m+uaU3I82I4Mt8SlswKsdwb5ZRETE9aRGawg51vfb2FhN5PiubaHiC9U87UK4y
-# bDIFlL8tOqruh677otJYcQxiao0KpKkaseAKILpB0RkkpHiuqR/jZWOXZga1ckJV
-# S1oS8ZwqotvgLmcqnoL8P66IrsCUQlaWDYHcV3DPI4rNKEUpAyfhifY1W9ol5SZ5
-# RMVeixoHTw4W6qkbVuxydkFV1xoszBovoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTX5Df8osShgUF5pjwcZPSstq4s2TANBgkqhkiG9w0B
+# AQEFAASCAQBHpwSqUXwS09qMpqeegKe97R5Q+YpqqF4nBy70hKg9F2JJ6Bko/tdO
+# J8T032sDFmtdzcQWmavDhfiXzmuXS5pW3iQmrPX9tLOtkzKlWNtiB2xLt0C85VP8
+# DTZyEzqmPkviElEBACu/NSDlCQBUFjMkcp8AChKXeW2vwZoO1l1bvqjouqHqLlZX
+# d2Vbm2uCVPQYQfMqxX7IUDTGhIGDjntJ6UMKKWt5vErryfyD48sQJIBilaJ7sBoF
+# AAloTtL9IvC+lfa/nREyK4mGYPApZ/WQ41flklLm5nkAB+58A+GYlUA/xDAHFVsH
+# +21hcmDXSRrWrDKb2sKo67yHUrVT+E+BoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAyNjAwMjA1MlowIwYJKoZIhvcN
-# AQkEMRYEFJQb4RpMb66S+V73Cd8GUWl0oOXVMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0M1owIwYJKoZIhvcN
+# AQkEMRYEFNMMQrvJcL/D/n9Zr2JzEyALHWc7MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA/LlrEoYk94fRXpEPyGSYmTs2mgvW8YhWrbcmbBjnEXbPp
-# r8nOrjGPe7V4wUqBn02H8WAX9Sa+SFL3p4GtXn1mNQjNGyVmo2noGHrcMXBhl9OO
-# 89pc7wJk2gKh/fJiL/XhR3NLVYZf+CvQjDUzM5BroM0B92gzyfX1+d44YVIe+q5x
-# NM2+lPtGGmJRsVKZ5YgpusVb6zniVDfE/yvqDu1cLfnMimAsyGLOanMVc7/IK93K
-# p2cHAOQnt0bp6hEnmba41cUIUzmO0UgJj2z6F3b7uO4yZwudYpVxQOt+vAjPptVW
-# /spmJOrr0SSeFMgNwzyzM5eDqABU8Pyu0TRgZ1lI
+# hkiG9w0BAQEFAASCAQBLJ4UCjNart3Q1OIEO02ZC/cgz8vvvvlsbrdyjPJWJXunA
+# SFjDe86y2KL7wxYHqq+DPDmaMEQgRl+TA31HzAwXzBA+Kbv/9J1M4Y6lhl3jwSUU
+# jjTJoipxKPC0HhjXetB3m6t+/fzf/SDIdS5UtITG0W67YqsIqzesV7Nvqwkzs7/i
+# OtkmrxDZd4BdrFI3+k+5cW/jbyf076Rih3vIzkNHOMScY46W75bURUp/w0mod8Cf
+# bTQJCrv6/Qa5/UdVzEXANPoxVsu7/5ciK8TS8k5lhzaZEUvE4VRCkyaBuOpWXvwg
+# p6ALL6WTlhPPE6eFnI8FXdNhYQeiVECgOd3z9weD
 # SIG # End signature block
