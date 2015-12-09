@@ -27,7 +27,7 @@
 	authorization from Joerg Hochwald
 #>
 
-function Get-TempFile {
+function global:Get-TempFile {
 <#
 	.SYNOPSIS
 		Creates a string with a temp file
@@ -63,13 +63,15 @@ function Get-TempFile {
 	.OUTPUTS
 		String
 
-	.LINK
-		Idea http://powershell.com/cs/blogs/tips/archive/2015/10/15/creating-temporary-filenames.aspx
-
 	.NOTES
 		Helper to avoid "System.IO.Path]::GetTempFileName()" usage.
+
+	.LINK
+		Idea http://powershell.com/cs/blogs/tips/archive/2015/10/15/creating-temporary-filenames.aspx
 #>
 
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	[OutputType([string])]
 	param
 	(
@@ -78,19 +80,21 @@ function Get-TempFile {
 		$Extension = 'tmp'
 	)
 
+	# Define objects
 	$elements = @()
 	$elements += [System.IO.Path]::GetTempPath()
 	$elements += [System.Guid]::NewGuid()
 	$elements += $Extension.TrimStart('.')
 
+	# Here we go: This is a Teampfile
 	'{0}{1}.{2}' -f $elements
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJUU4F3EZvlxcdLoOmQSEv4X4
-# s/GgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAqCixkYLK+ZJ5OzpIQvpRX9J
+# H/SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -233,25 +237,25 @@ function Get-TempFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT2tmjTwPJHjNpp21yz806fLiSpdDANBgkqhkiG9w0B
-# AQEFAASCAQAnE8y/xjtwiUmwYFEIkTvh+fZyyG8LXPsCki75dSQwGKr7ZuiU9sRS
-# m8PyexWEwTgLfGrWIn4fK6t5czWCST5OXXDtacjkoilhX8McXAPjY420qSWWI1or
-# 2V9umIt38mrStXoF4o7SbGUw1QvVl1K0RxRIMK7k79lTO/E3BHytLK9hRuanZk5X
-# u/Xe21zctiXWK8oJBM3a99d0AZAjqn3KnOi7r/nYW8xfCAOBCre2TLryH2lSDzAy
-# riP6VZb6SzuRwCnNtSRqwdSQrBQ45fYanAv2SHNFBHzCliVC3Mx7syqSKDLzCFaD
-# CaEi+lxevK1aq+Jymul98Bss8EltyuJxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSBe0SEiZgy3agJn1GUa/7xo43eGjANBgkqhkiG9w0B
+# AQEFAASCAQCLB49K9m34+BU5LmiC6R99Yd9jiePSXVzY34bIenQqBCr2U4NkqU9f
+# YHnb+qRWgNRdggWtVtvQ6kceMenB8t4Vg5tCz2Y+BL6lxCqGtfJnFZ5STiXHxMkT
+# mqL1HIXuzvU9D0fXGYoLvgyaqQUPCwWDnEYkbDTS63BWd5xpIxfyPrJfSKl69gEB
+# bwwkN5als7ixjHh3FNg6BKWlaXmvv3Fy1LvOM6B9OfjOQGhp1FEwVjQs7ztClqbd
+# DSBZvY3bpOGMlW8/UQc+Ttm3fDfrmBoVLD5e8ivQo8pVCfQSxk+OO9v4sjFpHYP8
+# BtEBZw9JPW+NaicQhXGtLRllliyrZMFIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0MFowIwYJKoZIhvcN
-# AQkEMRYEFBRQ1bhWs4jUWlNgzveEXMqOmrCIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA0OVowIwYJKoZIhvcN
+# AQkEMRYEFDX0fMmgXaMBnD9WquQ9yEQNni3SMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBK5ZzkN+4Jdtzhm5CWak5tDbaV85F9oXaS2DZy4XK3zLKx
-# eCPvxRRljuNUfA65hyA872BbnMuzhupOBxsiV+GZWywtQaqePu+N3EZVnFlRTg4a
-# ED+r0QNvUKRr1JYwaIKoidmaWdtXuHRUmFT9LjG/yE1cPvt2EUgF8pUfqrdSalwO
-# leGg2KbGuRNFgs624YWldFysSQ8dZz6wf4l9XhqvAovfTe8Ihh6uQR2rsmnzAeyV
-# xb3BVz0m4xaugN4Km8kel0ociw+ZLvgMvWfR4tZ/47DD+9LpCTM2mVYjd+Ly33kn
-# FPTJXFLkF8xsF9FN4YAK511KMoP6L560uD/kB4HC
+# hkiG9w0BAQEFAASCAQA8D+jf9mtIe8c8A2tvPUK3te+1yKTMgj1RALq9Rd3ph/bm
+# 7ZgBQP510j5B2zbH0ePR8X0WmYBLuwc31Gpd0j7Qu2TBGQGAsRZl8M6HfNIdqEPw
+# tqpeKIl2D1+J9f1eXj1sk2Q/2rGMxzL2QECKxhm228NRQOC61O3gcbCxrxDx9Gk2
+# cGW8nosYoOWFeTBY3+ThJiy+xY/4sJINS9h37u6SDBNWesL2deW6wi/LW7njmGyI
+# nGytct3qIpv9thufM6zIDTjM+31NFx2yFYBROp/XST/8k3V0Lt8i82UEZb3mkLed
+# nNz5iNuviMZfcq+JgOHfTGDUcv1FbCdvGulZSpVA
 # SIG # End signature block

@@ -1,87 +1,72 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
+	Basic Function found somewhere on the Internet.
+	Unknown license and unknown copyright.
 
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
-
-	Permission is hereby granted, free of charge, to any person obtaining a
-	copy of this software and associated documentation files (the "Software"),
-	to deal in the Software without restriction, including without limitation
-	the rights to use, copy, modify, merge, publish, distribute, sublicense,
-	and/or sell copies of the Software, and to permit persons to whom the
-	Software is furnished to do so, subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in
-	all copies or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-	DEALINGS IN THE SOFTWARE.
-
-	Except as contained in this notice, the name of the Software, NET-Experts
-	or Joerg Hochwald shall not be used in advertising or otherwise to promote
-	the sale, use or other dealings in this Software without prior written
-	authorization from Joerg Hochwald
+	We just adopted and tweaked it.
 #>
 
-
-# Make Powershell more Uni* like
-function global:Load-Test {
+function global:Get-BingSearch {
 <#
 	.SYNOPSIS
-		Load Pester Module
-	
+		Get the Bing results for a string
+
 	.DESCRIPTION
-		Load the Pester PowerShell Module to the Global context.
-		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
-	
+		Get the latest Bin search results for a given string and presents it on the console
+
+	.PARAMETER searchstring
+		String to search for on Bing
+
+	.EXAMPLE
+		PS C:\> Get-BingSearch -searchstring:"Joerg Hochwald"
+
+		Return the Bing Search Results for "Joerg Hochwald"
+
+	.EXAMPLE
+		PS C:\> Get-BingSearch -searchstring:"KreativSign GmbH"
+
+		Return the Bing Search Results for "KreativSign GmbH" as a formated List (fl = Format-List)
+
 	.NOTES
-		Pester Module must be installed
-	
-	.LINK
-		Pester https://github.com/pester/Pester
-		hochwald.net http://hochwald.net
+		This is a function that Michael found useful, so we adopted and tweaked it a bit.
+		The original function was found somewhere on the Internet!
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	param ()
-	
-	# Lets check if the Pester PowerShell Module is installed
-	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-		try {
-			#Make sure we remove the Pester Module (if loaded)
-			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
-			# Import the Pester PowerShell Module in the Global context
-			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-		} catch {
-			# Sorry, Pester PowerShell Module is not here!!!
-			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
-			# Still here? Make sure we are done!
-			break
-			
-			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-			exit 1
+	param
+	(
+		[ValidateNotNullOrEmpty()]
+		[Alias('Search')]
+		[string]
+		$searchstring = $(throw "Please specify a search string.")
+	)
+
+	$client = New-Object System.Net.WebClient
+	$url = "http://www.bing.com/search?q={0}`&format=rss" -f $searchstring
+	[xml]$results = $client.DownloadString($url)
+	$channel = $results.rss.channel
+
+	foreach ($item in $channel.item) {
+		$result = New-Object PSObject
+		$result | Add-Member NoteProperty Title -value $item.title
+		$result | Add-Member NoteProperty Link -value $item.link
+		$result | Add-Member NoteProperty Description -value $item.description
+		$result | Add-Member NoteProperty PubDate -value $item.pubdate
+		$sb = {
+			$ie = New-Object -com internetexplorer.application
+			$ie.navigate($this.link)
+			$ie.visible = $true
 		}
-	} else {
-		# Sorry, Pester PowerShell Module is not here!!!
-		Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
+		$result | Add-Member ScriptMethod Open -value $sb
+		$result
 	}
 }
-
-# Set a compatibility Alias
-(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNlmsDh2ScEDVhBKdgVt4my5q
-# bXOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtPJ0ti85yo0sAOkQ5KGhLoh0
+# QWGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +209,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxbhLuidAX/LTi+98YgwUJL4N/aTANBgkqhkiG9w0B
-# AQEFAASCAQAU9OXhQQxE+26PAK8JuHxuoGoGL6sJzyoUYPtoUANJI3vn+uVcWgMD
-# E0kNPE0btQhQXJYGelxv8DW5p+zahtbK43+DY9/eFHvvrvVaavg4/eAVZ4uzUXaI
-# v63oCUnofh6k8nByHnx/n4bHRJ2yuOsl5pDROyrip+rOjj6VQbaFmxK0bQHYJdDM
-# w/NdyvY70uhbmO1yatatxt/K3AiLVfa6I2O+0uOWygvYuS0px8yclHWjmRLl2I7M
-# 2pHJ2djrHltChsIgTaZkKQ6m5/CCaF2dV1G2gAxc+JvEzqHjF9uh2TYSoQEFbPrO
-# YFXP/nxF2Bc6y1qnuMOWe2Ooc1l42k8uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRqWfSA/EKixi2/uJj1NXu2OS7lSjANBgkqhkiG9w0B
+# AQEFAASCAQANcmsOSz+qSIxjLVxEnDw2bffMQ2lh/9zrX0b3O6P9QkLowFJIfIsu
+# /aPyPjQ9BsR+nSfJ/aaBdyWxsDENdtKOT0W1LTYgtJVbdVue0WCfxoIaWssxgvqO
+# BTs3iAq/ZKbrMFdZzecp8f7sJvOvp0D02qMmCKq0GUTQTxmWqfFCBQ5LqPv6Gr3K
+# EZgNFLOXrVYXDjfaI1u3Aj8Qm7+UfU1yYfI/MkAVsupIv1FMPPFiBoEs1QzyN9l8
+# 1fNNRN5KtM0vRLORj/BnqC6XJKC4vt7KTt4WWFZYQN4/mylf8yIeCiZ+yfQVcNkD
+# /QIVRvK0gJ5xQN171ptPnT5JH8vsnWVIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExN1owIwYJKoZIhvcN
-# AQkEMRYEFAnwi3IPyeJ1gkFx5aGOYbKMokrYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAzNlowIwYJKoZIhvcN
+# AQkEMRYEFO/jAcax47Pj0UZLpf7y7g1A/wywMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz/t8gN2GaVS7YnYAyPFZjFg5tjX0VlVWp3OFtx33gHAHT
-# xEyhUrJmrjwJi84ljORrSI+m39cWU4yZMdyhGWNxqFnM86c5Z0P+vZ6UzPXxUEZr
-# GC53J3cy15ybEIlWfC+138pcVRJ+pQkMjQumw9ao8WShydr336DSl8l2A3vYlark
-# +ij+WrQdoTUab9zZuW5g443rSZniM75HQj14LiYmb342sSOE/Tv8Ta4mhR01ibVY
-# RY0btTaAwvdmXoumjmEOkwKOoH8w5Eq2uWpTVMNzKvQfgm6+HosUVmgwOBJY/C3O
-# q3A+HJZOML09pfBJGcL7wZkBBiimsIhfZ4bGgtPH
+# hkiG9w0BAQEFAASCAQCYZFn0FxWa0B60goU+uutKJ/IyDKgQlOWNZKGVvDdBJTLt
+# na+rZ7/xxwVx5ngymhJxVBbQ/dj4sSpodH/SFKMBARCfMEDQ9ZD4qtes5V7+ZEXU
+# dBWnh79qBqwvUEA+nbeZSPAUhs/QYFHD/gSC/qO2+/rAlvs1enQEuk7e83Vj323l
+# hKZhM7+Heny1Y4At/C/4aa1vDtXFpYQ5pGft4jNBS48+/ISp96PhDjB8O1IRiFOb
+# bUs39rqxwkVdpQ1Axt6tDx01xWx3hndtfzxJd000vHqrEx/DhahNuCwZTxBta7zr
+# zFzwP89emQ5Bw+QKsGoJ3rrk7iGqRn+N4oxXIu4E
 # SIG # End signature block

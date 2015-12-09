@@ -27,7 +27,7 @@
 	authorization from Joerg Hochwald
 #>
 
-function Global:Update-SysInfo {
+function global:Update-SysInfo {
 <#
 	.SYNOPSIS
 		Update Information about the system
@@ -43,6 +43,11 @@ function Global:Update-SysInfo {
 	.NOTES
 		Based on an idea found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
 #>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
 	# Call Companion to Cleanup
 	if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
 		Clean-SysInfo
@@ -63,19 +68,34 @@ function Global:Update-SysInfo {
 	Set-Variable -Name Get_Memory_Size -Scope:Global -Value $("{0}mb/{1}mb Used" -f (([math]::round(${Operating_System}.TotalVisibleMemorySize/1KB)) - ([math]::round(${Operating_System}.FreePhysicalMemory/1KB))), ([math]::round(${Operating_System}.TotalVisibleMemorySize/1KB)))
 	Set-Variable -Name Get_Disk_Size -Scope:Global -Value $("{0}gb/{1}gb Used" -f (([math]::round(${Logical_Disk}.Size/1GB)) - ([math]::round(${Logical_Disk}.FreeSpace/1GB))), ([math]::round(${Logical_Disk}.Size/1GB)))
 
-	if ((Get-Command Get-PoSHBaseVer -errorAction SilentlyContinue)) {
-		Set-Variable -Name MyPoSHver -Scope:Global -Value $(Get-PoSHBaseVer -s)
+	# Do we have the NET-Experts Base Module?
+	if ((Get-Command Get-NETXCoreVer -errorAction SilentlyContinue)) {
+		Set-Variable -Name MyPoSHver -Scope:Global -Value $(Get-NETXCoreVer -s)
 	} else {
 		Set-Variable -Name MyPoSHver -Scope:Global -Value $("Unknown")
 	}
 
+	# Are we Admin?
 	If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
 		Set-Variable -Name AmIAdmin -Scope:Global -Value $("(User)")
 	} else {
 		Set-Variable -Name AmIAdmin -Scope:Global -Value $("(Admin)")
 	}
 
+# Is this a Virtual or a Real System?
+	if ((Get-Command Get-IsVirtual -errorAction SilentlyContinue)) {
+		if ((Get-IsVirtual) -eq $true) {
+			Set-Variable -Name IsVirtual -Scope:Global -Value $("(Virtual)")
+		} else {
+			Set-Variable -Name IsVirtual -Scope:Global -Value $("(Real)")
+		}
+	} else {
+		# No idea what to do without the command-let!
+		Remove-Variable IsVirtual -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	}
+
 <#
+	# This is the old way (Will be removed soon)
 	if (get-adminuser -errorAction SilentlyContinue) {
 		if (get-adminuser -eq $true) {
 			Set-Variable -Name AmIAdmin -Scope:Global -Value $("(Admin)")
@@ -87,15 +107,17 @@ function Global:Update-SysInfo {
 	}
 #>
 
+	# What CPU type do we have here?
 	if ((Check-SessionArch -errorAction SilentlyContinue)) {
 		Set-Variable -Name CPUtype -Scope:Global -Value $(Check-SessionArch)
 	}
 
+	# Define object
 	Set-Variable -Name MyPSMode -Scope:Global -Value $($host.Runspace.ApartmentState)
 }
 
-function Global:Clean-SysInfo {
-	<#
+function global:Clean-SysInfo {
+<#
 	.SYNOPSIS
 		Companion for Update-SysInfo
 
@@ -110,6 +132,12 @@ function Global:Clean-SysInfo {
 	.NOTES
 
 #>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	# Cleanup old objects
 	Remove-Variable Operating_System -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable Processor -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable Logical_Disk -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
@@ -127,9 +155,10 @@ function Global:Clean-SysInfo {
 	Remove-Variable AmIAdmin -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable CPUtype -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	Remove-Variable MyPSMode -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable IsVirtual -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 }
 
-function Global:Get-MOTD {
+function global:Get-MOTD {
 <#
 	.SYNOPSIS
 		Displays system information to a host.
@@ -148,8 +177,12 @@ function Global:Get-MOTD {
 		The Microsoft Logo, PowerShell, Windows and some others are registered Trademarks by
 		Microsoft Corporation. I do not own them, i just use them here :-)
 
-		I moved some stuff in a seperate function to make it reusable
+		I moved some stuff in a separate function to make it reusable
 #>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
 
 	# Update the Infos
 	Update-SysInfo
@@ -200,7 +233,7 @@ function Global:Get-MOTD {
 	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Blue
 	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Yellow
 	Write-Host -Object ("          CPU: ") -NoNewline -ForegroundColor DarkGray
-	Write-Host -Object ("${Get_CPU_Info}") -ForegroundColor Gray
+	Write-Host -Object ("${Get_CPU_Info} ${IsVirtual}") -ForegroundColor Gray
 	Write-Host -Object ("      ") -NoNewline
 	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Blue
 	Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Yellow
@@ -232,7 +265,7 @@ function Global:Get-MOTD {
 	}
 }
 
-function Global:Get-SysInfo {
+function global:Get-SysInfo {
 <#
 	.SYNOPSIS
 		Displays Information about the system
@@ -248,6 +281,10 @@ function Global:Get-SysInfo {
 	.NOTES
 		Based on an idea found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
 #>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
 
 	# Update the Infos
 	Update-SysInfo
@@ -272,7 +309,7 @@ function Global:Get-SysInfo {
 	Write-Host -Object ("  Shell:     ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("Powershell ${Get_Shell_Info} - ${MyPSMode} Mode") -ForegroundColor Gray
 	Write-Host -Object ("  CPU:       ") -NoNewline -ForegroundColor DarkGray
-	Write-Host -Object ("${Get_CPU_Info}") -ForegroundColor Gray
+	Write-Host -Object ("${Get_CPU_Info} ${IsVirtual}") -ForegroundColor Gray
 	Write-Host -Object ("  Processes: ") -NoNewline -ForegroundColor DarkGray
 	Write-Host -Object ("${Get_Process_Count}") -ForegroundColor Gray
 	Write-Host -Object ("  Load:      ") -NoNewline -ForegroundColor DarkGray
@@ -293,8 +330,8 @@ function Global:Get-SysInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgF3CFcXHiOiKYmMLmiVsfXvl
-# glGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6PYulN3PSAV+w4+KiLDolfVR
+# bm6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -437,25 +474,25 @@ function Global:Get-SysInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRvQYwSLamRTHfBQvvxac3QTybKKjANBgkqhkiG9w0B
-# AQEFAASCAQBaXBvXowpSYvjokEFs9u/zxxb03siH4ZB8bjDCLZM5UZGrC7I2WaCw
-# AbnwpBZOMv0/CFKuGwqvuyOxPTrCoanKuwn2z2p67dqcDeajWjBJoZdRp3KhLi/B
-# NeNQFtVTyE56Uz5s2csVhVws7swkkCrzS/ucBBjEuY5CMuQt6nSaAxBEYT1ERIMq
-# fVs1lMRfR7NkXmbcPCYMPs6/oV3nvjI6k1EtF/D57TOY8omtAZufQLOa4tcUuiD9
-# 23DYbgH7jIRsZhwfdF3b5t8FMw3nfDcocPeTEBepJ7jisn9y78d5Y0r/obe0Zw/E
-# MeL6UHwM4tuEftlmKV/LqtjxAYs0vBHjoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSZeer0DzZlxn9vF9e2ilXRDZXPLTANBgkqhkiG9w0B
+# AQEFAASCAQApwFi4Ci4GMwQhqGxboLmOq4iOzJ+p+nlyOpWzk4cy1jAb7MCBM4Q1
+# YQC33Hv/ZDYjpSaubPAbeqYMs/5qUVPaMAVMT8pQIBTZxc+zzo9axK+FJrjIaY61
+# CdJZUbD5jS27/O2PzxM7OwPmvGMSJj81NnCPA4ifCI1JHJ9o96ejnxGUGHsfo+Gt
+# 7JG82VsAcKQmLyaOIm/VsSzARxl/0a60qxgazDkCTZftK/ojga1Ue7WEMmrPRhEG
+# GWcMpHpwZCE2+hntYpf3qoMKM2xmhWGfgFQItGqg2w+rEuKlpwpzUVIKyhUvd/OE
+# YsJPg0HVgKLU4QE/NL5YinPH6b/207AYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NVowIwYJKoZIhvcN
-# AQkEMRYEFJw9fEfBVlc/ky9mwrUkpetJPVFBMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyMVowIwYJKoZIhvcN
+# AQkEMRYEFOvU9+0f+o/W0AXVpIFYENLS7GMwMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBx3tb8heSMxQ3w6YC/Bwk3Fr8OML2FSyH5zAWnSa+qkXDG
-# Pt3/8rEp2ldD2qvhOvzITnGLveXn1RApQffBVwuknpqV6A+wF/0fE64G+bcPhELo
-# 19yLu/rD65W7RUzJwVa8vO0QZSK4tsAjIQoOUQwhYdtQS+b8Luyb9AP/ZxE/IYDA
-# YBRDuxFLSzbJz+LiI0xH+4MIfiYH4DPhC/jUeEHUJ0JDzPDuyYTMO7NMx4l1RSPv
-# i8ArZKS+bMasxQG+M/Kamky3i0MFbP8sQ+ryAdng7bjuygfGVVUdlvfs/1thAi44
-# fD+2MO8Ga016ASt6kwoyF7JajO1da3oovkvGxMJr
+# hkiG9w0BAQEFAASCAQAwdNy46tSz21krStyVdnvNdeFjVIoTuUHi+ENel4dYBQsu
+# eO+oVtZIqoOCBepH4+6lXdbMbnY/gXllKaeKiNtSqgTLT1QxnvtzhRTHeDe5EjbA
+# hV8kISkxqnBDA2H50vIsGZObGZ9F5EGJGD1cTc2WE5BgfvvhbeM4Qi/GnFsCnGpe
+# wcX8WF8dUzYUzkR1/UfPbuItzZs704Ox4uKvq8eHYUy/ad0b6TTUcNwHFndgdvYX
+# EsEPDWoJg0gP+92DiTIQLc5aG3Y4rU/21/fL4dp58j2QFncQNY8foWj8e9UFG/RG
+# m++8/dk3j8waYkN33K9TrzEQUr97SmU3LX3PdCPc
 # SIG # End signature block

@@ -31,39 +31,59 @@ function global:Invoke-VisualEditor {
 <#
 	.SYNOPSIS
 		Wrapper to edit files
-
+	
 	.DESCRIPTION
-		This is a quick wrapper that edits files with editor ftom the VisualEditor variable
-
+		This is a quick wrapper that edits files with editor from the VisualEditor variable
+	
+	.PARAMETER args
+		Arguments
+	
 	.PARAMETER Filename
 		File that you would like to edit
-
+	
 	.EXAMPLE
 		PS C:\scripts\PowerShell> Invoke-VisualEditor example.txt
-
+		
 		# Invokes Note++ or ISE and edits "example.txt".
 		# This is possible, even if the File does not exists... The editor should ask you if it should create it for you
-
+	
 	.EXAMPLE
 		PS C:\scripts\PowerShell> Invoke-VisualEditor
 		# Invokes Note++ or ISE without opening a file
-
+	
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-
+	
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $false,
+				   Position = 0)]
+		[Alias('File')]
+		[string]
+		$args
+	)
+	
 	# Call the newly set Editor
 	if (!($VisualEditor)) {
 		# Aw SNAP! The VisualEditor is not configured...
 		Write-PoshError -Message:"System is not configured well! The Visual Editor is not given..." -Stop
 	} else {
 		# Yeah! Do it...
-		Start-Process -FilePath $VisualEditor -ArgumentList "$args"
+		if (-not ($args)) {
+			#
+			Start-Process -FilePath $VisualEditor
+		} else {
+			#
+			Start-Process -FilePath $VisualEditor -ArgumentList "$args"
+		}
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -77,8 +97,8 @@ function global:Invoke-VisualEditor {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1V7WDjGyrUsaZdIfpP56vjsI
-# UaygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnOr4S1/Qei8dQxMFTKJScOz+
+# zzugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -221,25 +241,25 @@ function global:Invoke-VisualEditor {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQlh6hbyu5RqD9WTOVnfsIDCyTDNjANBgkqhkiG9w0B
-# AQEFAASCAQBOrRfWjyk4kSeYW6yoK/yb/pUCXqVaXUGzB3mC+887ezZE5WjDsvqw
-# HZVWGNIcohMFzjaeDmZIFQ47cO42WWQTcVN25p1IW7vAQqYiltFAWBSP44VsS/R2
-# m3LuWxN+ly0/o3L5TahJPxnHnlFhh53VWqAXzBV3syy+UtRBNjpj98HBQ+B8MAKA
-# CHkUvqopVHgGz5zDmO6YoHhF0YzswSTEu2eyh6up22A3wZ6+WbTRk+ldXHglgBkg
-# bl+u52uCLdRfHdFuM1m7rrjejmDGHloK3yEshJ6ftOWgM1MXXl/hRLLKb1+Mfz7+
-# yTbnhKe1sXiRviCO/Cz1IbZQBB1/KBJ+oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQrjoB7ZqokgFZUiU92Y3Ioor5hPzANBgkqhkiG9w0B
+# AQEFAASCAQAm03LyFi6xPywRapX0PoOycN3Z0gggy5Ghbe7rMm9xNnHrmLaEYtLT
+# n0Czgt34PJVVs2+f+GrUGHZa7S2jW+iQJt8gsaJ7HISV0LyQnDzlcKPUl+pqL2u7
+# E29FhCZ0mJeul0R4ECBa86fRfNzyOWu8NAz78CKNNVWC6eWCH6BXpSJIK2L8frAm
+# Q8Skv77Qx0JXOTqKWbDgamFHlUhEvRPh8wIP+KuNVyrH7NBUby8iAbrbvjgIl9m2
+# 7IUN6e7cJ5uSVL8lqjRgYXACIblUJ2A2g2QAvXRBxYnG33MnhVkOuat8Suh3jVOj
+# WWPBvoInrQd+CgxWpi+0DZtdfYVo3yjJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0MlowIwYJKoZIhvcN
-# AQkEMRYEFNN5mFCGDITrktwRX3Bbo042DamCMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEwOFowIwYJKoZIhvcN
+# AQkEMRYEFIRyKLFT//+2HTRYeujw1wZhe+IBMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQApBJdKZOY6YX5c/0l8tCnl/9qkJpglU/BZqKrpi3YIyB9J
-# FXMV0K/Nm2EnmYvNgxZWy+CyLdR3CKi2zv2Vtj3t7ChU/9Z+Bn7H5hYJmCmUBuPp
-# 90CRrWJCaIzAcKY0xi4s0YJRjritGKW2Hwd4mwmZh5vEUOMEw4U9MtcENRBBvkDX
-# daTEq76w50MtmcnpUwePrgkL5chK+uoJ6Ouy6gy5BcPxo0BMVXcT5sT39Hm3giqP
-# BJKcS10RYJJ2ZsxAE9IvpaUx5rWKHn2uLeIrhH0bzNF5UxnFadQlNAAhaEvV82/N
-# S9P0kT4yAtqrymeD1UOkvdfW/C6/2K60svtSBDTX
+# hkiG9w0BAQEFAASCAQA1nRbza475GxcthHn60UsKrgSTpYYLt3DJcoEElRXtv43t
+# PRwU/9uMuWO5G2bGe8ne0oGO3K30O+uRx4m+E7vr+1Xngq68IryF27UiDtPVjBxm
+# ZpSGWH3Bo72AZq7ijWB11I1qTl6rDJOMacK3xypqq7kRhxBaaY4fgnGj/M290gNg
+# 0BI3NFA4VTOW2MYNjf2hLEqFDmxutJTQOxZ/gD4pDvtIjzA2xR0X2Kpgs7l4Izps
+# pSMuSoDkrBer/F5kOayn+TQURk0TrwlgnJra9Apl4Hckb1wrS5WgPMbkjul0wrfs
+# O3RzBQEVXKoR/0EUqaOSclJmLHsWcMm1kfm2uQto
 # SIG # End signature block

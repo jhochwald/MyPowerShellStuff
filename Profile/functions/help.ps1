@@ -31,36 +31,41 @@ function global:help {
 <#
 	.SYNOPSIS
 		Wrapper that use the cmdlet Get-Help -full
-
+	
 	.DESCRIPTION
 		Wrapper that use the regular cmdlet Get-Help -full to show all technical informations about the given command
-
+	
 	.EXAMPLE
 		PS C:\scripts\PowerShell> help get-item
-
+		
 		# Show the full technical informations of the get-item cmdlet
-
+	
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-
+	
 	.PARAMETER cmdlet
-		commandlet
-
+		command-let
+	
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-
-	[CmdletBinding(ConfirmImpact = 'None')]
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	param ()
+	
+	# Make the console clean
 	clear-host
+	
+	# Get the FULL Help Message for the given command-let
 	Get-Help $args[0] -full
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvSPeNhLGvwzmbvSo1jQWrQoE
-# Om6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURwMgqH3uYXHHlQp91cWecfHj
+# AqKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -203,25 +208,25 @@ function global:help {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBToiCbhwPBoqF8QLUv57aV5zRJzmzANBgkqhkiG9w0B
-# AQEFAASCAQB1dbGw0PM+aXGtr4mcRZgvwyvRLxzwsWq3nH18hEq8YVWDcvxrFB5f
-# M6X/ugDUYN3yUeDl9oyLAGqtf49SOMa7gieLT+jmyNjImbWvdGooRGmoVxsjfHc0
-# A6sXfKLNOGUa810Vltd3MvYDZMAM2DECPUDM89BkZzCv8BQ7B3jrQr07q1zMpHLM
-# 0t04OpqEZVHn1pDUAPERO34FypaONixsy4GQzYkGGFb47VhMoF3EonIx3VWqRCqx
-# mQszO+i7Ly0dzUcD/pUO3twrOG2OqB/5SgZQE9tj5hFuBnz7GS9R5NHAWNe8zDe3
-# 4/eNX+beKrdjNqk/drh1ounEdY4mdlT8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ1tOJx0LfNSO87ptxlHJiJoSkJwjANBgkqhkiG9w0B
+# AQEFAASCAQBG/7IFCEa8/NYDBbRi/4wR/7E+5fUOUr6ojN6nFOyx3IdhEVrxT/bD
+# MqF2s1lsoIS8rJ3N6mujfCdNTgzjR1JKYyoXpYSzggdtAVOFFoK2ZdkYXzoG0SSV
+# QC0l9HT1s6dijCQcHg3caeYVOLHwCV2HdpDa+WYdvmvGkXZH4Ii0aon8P/aDwOyM
+# c9dmJUTgiQEfkVHW0EbihZRJPdmxRfDBRggKd13Y164ALwSaiYxSKAoXDOcu6apI
+# XQfodNBa64UWGCmEUTbeEcFVWT/TK0bKe9jf5sY9XgNa94uv/Tq6ay1Q0W4VYSCC
+# e1t/KKFpLYoPsDIVAi/v8qwOdSFsXuXKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0MlowIwYJKoZIhvcN
-# AQkEMRYEFNAsmEO4+PUgBoxXZBcwAznsFZjrMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEwNFowIwYJKoZIhvcN
+# AQkEMRYEFKq7ophO+CRoAkls9RlAdpmpGfEzMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQANOcel9m56vEuvzCgCJa8lyM5NpuNX0XGbsrxkATgGRDxn
-# vEXw2oR4NBlf26HqX8xa6BULQkHfZ/oDARoNe3p3VXONaY/0Wh8ckD3+2/IWYaY6
-# iadGWqS1zIgJg5uSLpAzXXty5QXpIhhyAZa8/ZFyZGS9D7HF1Zla05BsxXcBpB/p
-# e2oFfmpuj8jhGf+Kr3j4Smhkc7dzLwVjeuFZg+v1nLuc+TF41mZAY6xr/PwGbSvK
-# oT13ZSIAVo0SgktkGNTzVwia/CnNBuvtbCHDRm/b8Vc6Uoqzx7Mi+2QGsP4ZEMis
-# rFf6wzsDI57ZtQqxUg5nAS+5OdJCr2H/zUVZfZAK
+# hkiG9w0BAQEFAASCAQCZFQ1WVBAQxYUFVmidzTryO6+WL2GPWYocKM4PkpxPmEIb
+# a03ilLpWVk8q00ad+NQ8MMCXRm6WaNPfZwokkKNZ9pPb98/jlODeRFJd3yX/EfdE
+# Y5HchyVO3oBLlw7GDTABByRhplFSGqGVfFk4LybxSkvi6pnB77xsFCF0DlPvn8DX
+# 8TMfWgnyJP9QtxV5Yw1dFqviWGdBdZbuwFC4Ipv6sn20YS4jdFfHZcc2VRb4C4I2
+# wOQk+HLGgi/D03Ev7vLYBDpt5vgDlkVzAqAEMPiIe/Dpd2GZMe+rThXqt5tb2vu2
+# M33YdZN+Jz/Nwcgb0HV/sfmm4AS8hCqh+q4R7hJH
 # SIG # End signature block

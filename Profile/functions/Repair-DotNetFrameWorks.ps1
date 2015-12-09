@@ -27,61 +27,64 @@
 	authorization from Joerg Hochwald
 #>
 
-
-# Make Powershell more Uni* like
-function global:Load-Test {
+function global:Repair-DotNetFrameWorks {
 <#
 	.SYNOPSIS
-		Load Pester Module
+		Optimize all installed NET Frameworks
 	
 	.DESCRIPTION
-		Load the Pester PowerShell Module to the Global context.
-		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
+		Optimize all installed NET Frameworks by executing NGEN.EXE for each.
+		
+		This could be useful to improve the performance and sometimes the
+		installation of new NET Frameworks, or even patches, makes them use
+		a single (the first) core only.
+		
+		Why Microsoft does not execute the NGEN.EXE with each installation... no idea!
+	
+	.EXAMPLE
+		PS C:\> Repair-DotNetFrameWorks
+		
+		Optimize all installed NET Frameworks
 	
 	.NOTES
-		Pester Module must be installed
-	
-	.LINK
-		Pester https://github.com/pester/Pester
-		hochwald.net http://hochwald.net
+		The Function name is changed!
 #>
 	
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param ()
 	
-	# Lets check if the Pester PowerShell Module is installed
-	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-		try {
-			#Make sure we remove the Pester Module (if loaded)
-			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
-			# Import the Pester PowerShell Module in the Global context
-			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-		} catch {
-			# Sorry, Pester PowerShell Module is not here!!!
-			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
-			# Still here? Make sure we are done!
-			break
-			
-			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-			exit 1
-		}
-	} else {
-		# Sorry, Pester PowerShell Module is not here!!!
-		Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
+	# Cleanup
+	Remove-Variable frameworks -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	
+	# Get all NET framework paths and build an array with it
+	$frameworks = @("$env:SystemRoot\Microsoft.NET\Framework")
+	
+	# If we run on an 64Bit system (what we should), we add these frameworks to
+	If (Test-Path "$env:SystemRoot\Microsoft.NET\Framework64") {
+		# Add the 64Bit Path to the array
+		$frameworks += "$env:SystemRoot\Microsoft.NET\Framework64"
 	}
+	
+	# Loop over all NET frameworks that we found.
+	ForEach ($framework in $frameworks) {
+		# Find the latest version of NGEN.EXE in the current framework path
+		$ngen_path = Join-Path (Join-Path $framework -childPath (Get-ChildItem $framework | Where-Object { ($_.PSIsContainer) -and (Test-Path (Join-Path $_.FullName -childPath "ngen.exe")) } | Sort-Object Name -Descending | Select-Object -First 1).Name) -childPath "ngen.exe"
+		
+		# Execute the optimization command and suppress the output, we also prevent a new window
+		Write-Output "$ngen_path executeQueuedItems"
+		Start-Process $ngen_path -ArgumentList "executeQueuedItems" -NoNewWindow -Wait -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue -LoadUserProfile:$false -RedirectStandardOutput null
+	}
+	
+	# Cleanup
+	Remove-Variable frameworks -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 }
-
-# Set a compatibility Alias
-(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNlmsDh2ScEDVhBKdgVt4my5q
-# bXOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZBWVTIWq5U9QMqNlW8D13PpO
+# 3iSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +227,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxbhLuidAX/LTi+98YgwUJL4N/aTANBgkqhkiG9w0B
-# AQEFAASCAQAU9OXhQQxE+26PAK8JuHxuoGoGL6sJzyoUYPtoUANJI3vn+uVcWgMD
-# E0kNPE0btQhQXJYGelxv8DW5p+zahtbK43+DY9/eFHvvrvVaavg4/eAVZ4uzUXaI
-# v63oCUnofh6k8nByHnx/n4bHRJ2yuOsl5pDROyrip+rOjj6VQbaFmxK0bQHYJdDM
-# w/NdyvY70uhbmO1yatatxt/K3AiLVfa6I2O+0uOWygvYuS0px8yclHWjmRLl2I7M
-# 2pHJ2djrHltChsIgTaZkKQ6m5/CCaF2dV1G2gAxc+JvEzqHjF9uh2TYSoQEFbPrO
-# YFXP/nxF2Bc6y1qnuMOWe2Ooc1l42k8uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSkuJhqkvR2PZe7QwK5lMkOi0kHgzANBgkqhkiG9w0B
+# AQEFAASCAQAIMw7P/Uf/dd8JsG9GHyCtV2tXIaeUG2bCacFyQjwEmLvwwKusrmux
+# gK8oTmffWN5Kv/I7r5HmhZ4Po1mHhHxbfq7Ji7aElUGwsq4Vez1exzCPIuZ1+ZpH
+# JFKMDI1DAS1L6iawN7FQvQ+57C7p0fD3Y9Gkh4uj6b7CWIOUwxtrlR1tPXS50y3B
+# KVllEjtORlXLQkghqWxwrJs28uUYFyQyCPiPAwYPdVgY7QS3RO4D/816hgXkhyP2
+# 7rcRsnY1+nRRwuws6bOWXKpb0P68EeY+kutAtvNm257L/+fZhZYjDv9ARsWpH6OX
+# wQ9maODUL6tXceY0AE3V04mthCz1M12yoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExN1owIwYJKoZIhvcN
-# AQkEMRYEFAnwi3IPyeJ1gkFx5aGOYbKMokrYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyNFowIwYJKoZIhvcN
+# AQkEMRYEFITtJsDsIul+J6X+JBB5VQAVQQwQMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz/t8gN2GaVS7YnYAyPFZjFg5tjX0VlVWp3OFtx33gHAHT
-# xEyhUrJmrjwJi84ljORrSI+m39cWU4yZMdyhGWNxqFnM86c5Z0P+vZ6UzPXxUEZr
-# GC53J3cy15ybEIlWfC+138pcVRJ+pQkMjQumw9ao8WShydr336DSl8l2A3vYlark
-# +ij+WrQdoTUab9zZuW5g443rSZniM75HQj14LiYmb342sSOE/Tv8Ta4mhR01ibVY
-# RY0btTaAwvdmXoumjmEOkwKOoH8w5Eq2uWpTVMNzKvQfgm6+HosUVmgwOBJY/C3O
-# q3A+HJZOML09pfBJGcL7wZkBBiimsIhfZ4bGgtPH
+# hkiG9w0BAQEFAASCAQB3mkud9phwKCk8W5itm6ODwBGvCInKk0HpJxcqSMlKytFH
+# 7wLv3djE3G4oD7wRg/SYyJ69XKFrsgwz2Q4s2HimOLDj0XnjL4y3tlSNMEIFssIM
+# n1e0MSfLqy92g3SLCE2SwO2ftvdTz9MrM5nx6rcNrxmCIx76sS8whU72EJEBDhPy
+# ABGue1ClmNVbJcNu0Isro/D/ke2Y73l1Fwd/3Ig8U7hwFoRtmoI+3hWeVt7NEC8I
+# E2D71GYZfQrsDl6ZrtKDkjE9iuoOqr0Wul1/7OOrAy3GN5SjFU9eL9MUl1KpmfYS
+# cRAoqtzcETx/HxZ4FkySQFUicapNpgwpgJr6ySv7
 # SIG # End signature block

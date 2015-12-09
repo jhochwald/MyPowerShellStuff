@@ -31,43 +31,50 @@ function global:head {
 <#
 	.SYNOPSIS
 		display first lines of a file
-
+	
 	.DESCRIPTION
 		This filter displays the first count lines or bytes of each of the specified files,
 		or of the standard input if no files are specified.
 		If count is omitted it defaults to 10.
-
+	
 	.PARAMETER file
 		Filename
-
+	
 	.PARAMETER count
 		A description of the count parameter.
-
+	
 	.NOTES
 		Make PowerShell more like Uni*
-
+	
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	param
 	(
 		[Parameter(Mandatory = $true,
 				   HelpMessage = 'Filename')]
 		[ValidateNotNullOrEmpty()]
+		[Alias('FileName')]
 		[string]
 		$file,
+		[Alias('Counter')]
 		[int]
 		$count = 10
 	)
-
+	
+	# Does this exist?
 	if ((Test-Path $file) -eq $False) {
+		# Aw Snap!
 		Write-Error -Message:"Unable to locate file $file" -ErrorAction:Stop
 		return;
 	}
-
+	
+	# Show the fist X entries
 	return Get-Content $file | Select-Object -First $count
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -77,8 +84,8 @@ function global:head {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMG3mRISIQsBomvRk4FGDdQjM
-# n7agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2fFdWP9nJfKOUlsxScCmj07z
+# BGKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -221,25 +228,25 @@ function global:head {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTZozp8g2YxNxU2WZlOBNVoju1KuTANBgkqhkiG9w0B
-# AQEFAASCAQCcVlpsjbj4fg9WxgiaJN/l7V07ejkZmI+BnRUEuLyQpvea78XWVAwb
-# RkaQW/F0xNJGUJMtFhs3zRjDOA+lxs0Ctgz3cewm4w7XMbzOYcC0WYyHU1wxzBXT
-# HGCIJT7SKqPAT/UujGWyjte7oU3M1Ynceb9mlwTXyxQiIsOtcPLUI8qLFTUvuqOK
-# 1sBxEWZblz7OWEOlcFUEJ0Dg5PGESpvzekY9BsjOvuq0Na8oUHmLNXjll3u8K2b0
-# ZwTvKz2nSn+cphHjqgIXnBLClZUJxBoRCPeFjxiDlj+m4udm8j5nvZUydl+y0VEl
-# 9KEkvJdeCfk0Ot/+YmRqXxZ4O8nWy1LSoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQq7HmlPGHFY/+HZMOoIy6AR7HyPjANBgkqhkiG9w0B
+# AQEFAASCAQADypKxZdZ9nSP+F7IwticXuKOWPGRFvqQa7VktQyqarhbenbaASizB
+# VexfqgxKtS4EYSvhH0XQmCkuaQQLT+C+QAg6cuyW2Ngh0WoMhkbJ+tmcbwhQrKJw
+# meWJ7UZByIabf+NkHw3ZPMzsvrpXwcUBMQ2BwG5Q7TLZI5MQwA/hOcBmTDDW3IDF
+# 7cW7P1UvL9h/yR18Y4pI04YoLdS3PDcRAXuwX7AgwcNUmnxRkISuNuCMvmzU2B3D
+# WKraqWG4Zk2HL5kUmRlklLJ78AP4/6n2Ji074NjaQrvst3bCboe2nhABlbUpeAJA
+# GHexaMadRZHxGbG3MON/RncZwHs44TJqoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0MlowIwYJKoZIhvcN
-# AQkEMRYEFML3v5QK/azGXFxGMsqKLxLH20G9MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEwM1owIwYJKoZIhvcN
+# AQkEMRYEFD5k2x34wkwruW5K8Ur1kDpZP01ZMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAl8B4dsQS5EFi5l7yD2SDWZfDwr3mpUPz5ipsqhc8YH/pj
-# 8ZzGBwIeMbK2gk1CuAJceDSvFqgRN19zJUF2IUdP0zjFxX4TNWdhabZ4nb7UfDV4
-# uPmBDYIeP47BeJapZAPXVsrSgZfVRzNiahWqots2SIpSuVy4mGoNE5OL27RbnM5l
-# S8I7M6DBqR/k5i+BKSs8AWVw7NU2BFzWsnuj/Oerh1tRNVuswLt1eSz4koLbJf+4
-# Q/3kMQnAapyHDD/CzR8+6hfAnHLeWfmX7TZfmfcteE/ZuHR5cC77V2UpC3J/354r
-# HrplYcyOwLEuHlXNhh0JXBMqp7EGORxNqG9pDYOl
+# hkiG9w0BAQEFAASCAQB5Uv/y/XmN8ZccjZvDw5CVB3NAS0lRfVG90tJo7WdAJGLr
+# 6OnIbZR9sot+Bpq6qwJOTFp+j3vpCplr2ydHF7I8+tcZWIVDjLWxQJ+BR9bCxFlS
+# i10sunL+3X+/Xa1akHP0ZzLIpt9CflN/ET2y6o1aVbD3BxObKdkwg1S5OlD81Ptf
+# i6gEGRtGmo7aT8GHIuTlz++rm2IuiRFn9pRkNlaiI3N3gzg5hMM9CkVEcppjeTAl
+# trR2rXQjbPyMLgUpUJu2iQOch+d7nj6IrG7ilZqU54J10PFJhXggN8KQrvlF6eKW
+# FXJgxNaCoezTtf8t4K1/3oQRGoFHHTJCLkvWQYxL
 # SIG # End signature block

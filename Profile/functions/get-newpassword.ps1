@@ -1,4 +1,4 @@
-﻿<#
+<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -27,61 +27,132 @@
 	authorization from Joerg Hochwald
 #>
 
-
-# Make Powershell more Uni* like
-function global:Load-Test {
+function global:Get-NewPassword {
 <#
 	.SYNOPSIS
-		Load Pester Module
-	
+		Generates a New password with varying length and Complexity,
+
 	.DESCRIPTION
-		Load the Pester PowerShell Module to the Global context.
-		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
-	
+		Generate a New Password for a User.  Defaults to 8 Characters
+		with Moderate Complexity.  Usage
+
+		GET-NEWPASSWORD or
+
+		GET-NEWPASSWORD $Length $Complexity
+
+		Where $Length is an integer from 1 to as high as you want
+		and $Complexity is an Integer from 1 to 4
+
+	.PARAMETER PasswordLength
+		Password Length
+
+	.PARAMETER Complexity
+		Complexity Level
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-NewPassword
+
+		Create New Password based on the defaults
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-NewPassword 9 1
+
+		Generate a Password of strictly Uppercase letters that is 9 letters long
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-NewPassword 5
+
+		Generate a Highly Complex password 5 letters long
+
+	.EXAMPLE
+		$MYPASSWORD=ConvertTo-SecureString (Get-NewPassword 8 2) -asplaintext -force
+
+		Create a new 8 Character Password of Uppercase/Lowercase and store
+		as a Secure.String in Variable called $MYPASSWORD
+
 	.NOTES
-		Pester Module must be installed
-	
+		The Complexity falls into the following setup for the Complexity level
+		1 - Pure lowercase Ascii
+		2 - Mix Uppercase and Lowercase Ascii
+		3 - Ascii Upper/Lower with Numbers
+		4 - Ascii Upper/Lower with Numbers and Punctuation
+
 	.LINK
-		Pester https://github.com/pester/Pester
-		hochwald.net http://hochwald.net
+		Support http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	param ()
-	
-	# Lets check if the Pester PowerShell Module is installed
-	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-		try {
-			#Make sure we remove the Pester Module (if loaded)
-			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
-			# Import the Pester PowerShell Module in the Global context
-			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-		} catch {
-			# Sorry, Pester PowerShell Module is not here!!!
-			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
-			# Still here? Make sure we are done!
-			break
-			
-			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-			exit 1
-		}
-	} else {
-		# Sorry, Pester PowerShell Module is not here!!!
-		Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
+	[OutputType([string])]
+	param
+	(
+		[Parameter(HelpMessage = 'Password Length')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('Length')]
+		[int]
+		$PasswordLength = '8',
+		[Parameter(HelpMessage = 'Complexity Level')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('Level')]
+		[int]
+		$Complexity = '3'
+	)
+
+	# Delare an array holding what I need.  Here is the format
+	# The first number is a the number of characters (Ie 26 for the alphabet)
+	# The Second Number is WHERE it resides in the Ascii Character set
+	# So 26,97 will pick a random number representing a letter in Asciii
+	# and add it to 97 to produce the ASCII Character
+	#
+	[int32[]]$ArrayofAscii = 26, 97, 26, 65, 10, 48, 15, 33
+
+	# Complexity can be from 1 - 4 with the results being
+	# 1 - Pure lowercase Ascii
+	# 2 - Mix Uppercase and Lowercase Ascii
+	# 3 - Ascii Upper/Lower with Numbers
+	# 4 - Ascii Upper/Lower with Numbers and Punctuation
+	If ($Complexity -eq $NULL) {
+		Set-Variable -Name "Complexity" -Scope:Script -Value $(3)
 	}
+
+	# Password Length can be from 1 to as Crazy as you want
+	#
+	If ($PasswordLength -eq $NULL) {
+		Set-Variable -Name "PasswordLength" -Scope:Script -Value $(10)
+	}
+
+	# Nullify the Variable holding the password
+	Remove-Variable -Name "NewPassword" -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+
+	# Here is our loop
+	Foreach ($counter in 1..$PasswordLength) {
+
+		# What we do here is pick a random pair (4 possible)
+		# in the array to generate out random letters / numbers
+		Set-Variable -Name "pickSet" -Scope:Script -Value $((GET-Random $complexity) * 2)
+
+		# Pick an Ascii Character and add it to the Password
+		# Here is the original line I was testing with
+		# [char] (GET-RANDOM 26) +97 Which generates
+		# Random Lowercase ASCII Characters
+		# [char] (GET-RANDOM 26) +65 Which generates
+		# Random Uppercase ASCII Characters
+		# [char] (GET-RANDOM 10) +48 Which generates
+		# Random Numeric ASCII Characters
+		# [char] (GET-RANDOM 15) +33 Which generates
+		# Random Punctuation ASCII Characters
+		Set-Variable -Name "NewPassword" -Scope:Script -Value $($NewPassword + [char]((get-random $ArrayOfAscii[$pickset]) + $ArrayOfAscii[$pickset + 1]))
+	}
+
+	# When we're done we Return the $NewPassword
+	# BACK to the calling Party
+	Return $NewPassword
 }
-
-# Set a compatibility Alias
-(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNlmsDh2ScEDVhBKdgVt4my5q
-# bXOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTQYUFUlEISadiiXX6irOTgok
+# 8uWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +295,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxbhLuidAX/LTi+98YgwUJL4N/aTANBgkqhkiG9w0B
-# AQEFAASCAQAU9OXhQQxE+26PAK8JuHxuoGoGL6sJzyoUYPtoUANJI3vn+uVcWgMD
-# E0kNPE0btQhQXJYGelxv8DW5p+zahtbK43+DY9/eFHvvrvVaavg4/eAVZ4uzUXaI
-# v63oCUnofh6k8nByHnx/n4bHRJ2yuOsl5pDROyrip+rOjj6VQbaFmxK0bQHYJdDM
-# w/NdyvY70uhbmO1yatatxt/K3AiLVfa6I2O+0uOWygvYuS0px8yclHWjmRLl2I7M
-# 2pHJ2djrHltChsIgTaZkKQ6m5/CCaF2dV1G2gAxc+JvEzqHjF9uh2TYSoQEFbPrO
-# YFXP/nxF2Bc6y1qnuMOWe2Ooc1l42k8uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQdDkweH6l8MTszP2vPwjehr89rXjANBgkqhkiG9w0B
+# AQEFAASCAQBLLeT9g1HGJTSkjp8oxGhFsttjn6oTox6eP9a+oVDX4F1QBWYDmtzR
+# NAQ6RyGAS0yBwqljWxiw+thTYWu+ZznvrIgfpkH4W1NDF9xZvxHgtgojOnnvBG14
+# q2BkcPO04NBqvmqg/VhCgWbstQM8RafsxaC4uhY0KUSDjhPQRhi+dNs+n0GBujS6
+# x+oVFE6OXdBEJfcsdJi63G11Xp4AaHM0pXezt7QS8/SzX2SmVN/yjKc0fnD7eODS
+# q9ABDGBvCmXcDaMdSUvECUb6zWaS3pjqOKiRnZxxHXcCuXkdrxUc+OizA4MYMgST
+# E4NKPVWeip0OIxw/XBsDdm8vEc/TD4dmoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExN1owIwYJKoZIhvcN
-# AQkEMRYEFAnwi3IPyeJ1gkFx5aGOYbKMokrYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA0NVowIwYJKoZIhvcN
+# AQkEMRYEFJlJ+Pfm7m2Tn5OLBnRVzmNPjgDBMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz/t8gN2GaVS7YnYAyPFZjFg5tjX0VlVWp3OFtx33gHAHT
-# xEyhUrJmrjwJi84ljORrSI+m39cWU4yZMdyhGWNxqFnM86c5Z0P+vZ6UzPXxUEZr
-# GC53J3cy15ybEIlWfC+138pcVRJ+pQkMjQumw9ao8WShydr336DSl8l2A3vYlark
-# +ij+WrQdoTUab9zZuW5g443rSZniM75HQj14LiYmb342sSOE/Tv8Ta4mhR01ibVY
-# RY0btTaAwvdmXoumjmEOkwKOoH8w5Eq2uWpTVMNzKvQfgm6+HosUVmgwOBJY/C3O
-# q3A+HJZOML09pfBJGcL7wZkBBiimsIhfZ4bGgtPH
+# hkiG9w0BAQEFAASCAQBtoXinzmnxzgK/QBsxQsZhIJcqbcoT71VclSQAi6etqi0t
+# 4ODXVahf3cen3BD4m5IG2NDtxKSu4mEuQEYbtGxunT157IITedXbmf9SbY4j+LtZ
+# kRRsqOMz8gSblI4frXHtlRSfflZTdFDWplrZkeyegfcuef+iY24po+XI3IPA4+fO
+# /rrDmUMAnztGBG2VVzrwS0Me5LnTo0vtDx8D0UTc4HWMUb2lnTgeEDcz7G64djM5
+# CvmYiSUIWGzQ2jGD3e0PK+/sBQrVSb6gy0cmWr3A65dvKs1Evef+7shZmKw17dK5
+# aoOKJy3ueQwH+yZITfDm44c6f7WuR4Ve5JGYOR2M
 # SIG # End signature block

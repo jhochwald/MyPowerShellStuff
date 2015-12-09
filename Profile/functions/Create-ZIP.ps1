@@ -27,7 +27,7 @@
 	authorization from Joerg Hochwald
 #>
 
-function Global:Create-ZIP {
+function global:Create-ZIP {
 <#
 	.SYNOPSIS
 		Create a ZIP archive of a given file
@@ -54,35 +54,35 @@ function Global:Create-ZIP {
 	.PARAMETER OutputPath
 		Optional
 
-		By default the new archive will be created in the same directory as the inpufile,
+		By default the new archive will be created in the same directory as the input file,
 		if you would like to have it in another directory specify it here like this: "C:\temp\"
 		The directory must exist!
 
 	.EXAMPLE
 		PS C:\> Create-ZIP -InputFile "C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv"
 
-		# This will create the archive "ClutterReport-20150617171648.zip" from the given inputfile
+		# This will create the archive "ClutterReport-20150617171648.zip" from the given input file
 		# "C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv".
 		# The new archive will be located in "C:\scripts\PowerShell\export\"!
 
 	.EXAMPLE
 		PS C:\> Create-ZIP -InputFile "C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv" -OutputFile "NewClutterReport"
 
-		# This will create the archive "NewClutterReport.zip" from the given inputfile
+		# This will create the archive "NewClutterReport.zip" from the given input file
 		# "C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv".
 		# The new archive will be located in "C:\scripts\PowerShell\export\"!
 
 	.EXAMPLE
 		PS C:\> Create-ZIP -InputFile "C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv" -OutputPath "C:\temp\"
 
-		# This will create the archive "ClutterReport-20150617171648.zip" from the given inputfile
+		# This will create the archive "ClutterReport-20150617171648.zip" from the given input file
 		# "C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv".
 		# The new archive will be located in "C:\temp\"! The directory must exist!
 
 	.EXAMPLE
 		PS C:\> Create-ZIP -InputFile "C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv" -OutputFile "NewClutterReport" -OutputPath "C:\temp\"
 
-		# This will create the archive "NewClutterReport.zip" from the given inputfile
+		# This will create the archive "NewClutterReport.zip" from the given input file
 		# "C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv".
 		# The new archive will be located in "C:\temp\"! The directory must exist!
 
@@ -101,7 +101,6 @@ function Global:Create-ZIP {
 	param
 	(
 		[Parameter(Mandatory = $true,
-				   ValueFromPipeline = $true,
 				   HelpMessage = 'The parameter InputFile is the file that should be compressed (Mandatory)')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('Input')]
@@ -210,8 +209,8 @@ function Global:Create-ZIP {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtRlrJDy08IDlonnElENJDnB8
-# 6kSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUa6ggrs5vg3/5ZFF42IJs7o1i
+# 4LagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -354,25 +353,25 @@ function Global:Create-ZIP {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS28gUXJdizgj7pB7BOQZeso0GpmDANBgkqhkiG9w0B
-# AQEFAASCAQCSgCv25iIKL294tugNA8S7XkY1Mq/SlIgy5RFTBBLbBkmmVn3gwzq0
-# 2W1yEOVnPf2A0t1QxT1X/gkhjkZaBzKYv/TL1lY268yyw96xgxtAOoY1ubtlFI00
-# 4La3vX256BeRwIaH34NgYnis9rTd03tifgw0ReY9GtitcR+LNR9KsE63zDbGUBLt
-# oRMcrh1cwlMGYbxte474PWoFRKyzjEPQqf4TYwy8vip8TrO9AK+YdG98UJoo5VUG
-# SgA4noKj/2BEfle6wky+XO+tGan2f75uMKlBLNEMhIvPE/4lmhXK9AukWj9tROFs
-# iLcpzpkIZl7u/HHKbcsn7hIULxg+RR33oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQfWtTHfVVD8z5pjfsTZ03Sx5iUdzANBgkqhkiG9w0B
+# AQEFAASCAQB3fkGjEkz1i7MECRu0Rq44eiq8zCw0uvZOCfX5tq+FDhtD8mqpDEka
+# SfukO15xv8h7QTgaTRHYps9MwfsmiNq+ZhB/Czm+K6e1kFL/ljN0eYMWgXN0UN4J
+# ah2TPOfXhIb5w/s12Tk9wjKV0rRt1fK51Fshf1S4VOYS94szaceVi3Nnl8ogPOdV
+# 09XAfWPqxC9c3637dADXrjkDss1ViGjKYxglKod6u2tSQRZ8V6uvUriJHf3X4dk8
+# 3KmCIxZxgO6tYYbbApCRTIghC8tSPht2X/Mbn90GYJoR/QhqUYCgQrdAaf3pZIHs
+# 1dUEjphIYehS6nc1CVmBsQL12hWVDlbRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzOFowIwYJKoZIhvcN
-# AQkEMRYEFECn39ttogL3WtLCR5Fh6RuBEOZ0MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAzMFowIwYJKoZIhvcN
+# AQkEMRYEFP17DENvFXG77j7HQIxF4YCIBiGlMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAuXa7mnl2782t5e4mLiwi7lEz4VOsg5MgFnHmvoQa9/f8y
-# N5ve1FLqOHGAscHknbHlWWOEWoYmUSRiNZEgdXMFubrrLwBo26jBJBuBQtxcrJOr
-# OveX1W9qg1Z8+OCNKCgorF45q9jfrsHo94dnddQSVim3kHB3hvktZqhQkF5LlAwk
-# x6FUUJJOPLwq+rnsOIhpyXBS5gF1MMzI4QW5nAzLCK+3ket1MaDZG/4bZ9sX8GU3
-# OGP7+uErktlfcHKUrncoDigF72eJgCnRHuTeBtZL8ji2OOKG9bRbmIZ3UWG+p0hl
-# oxGwySGcMIqRpfl+lNGmr5N61W7Hi6aA4Muo0eKL
+# hkiG9w0BAQEFAASCAQByURst4BnzURLu2YuN5HGGa1fVvFHSVyORk8U+N98xGrGY
+# 7fsECXiQ2r/bch7bO4JZXgA83AjeFCQIMp4HlbDiHOPS1oyMM2VR4QKFoG1AZiUM
+# u3zYkMCg8ELlBVj+XNxajKHoM3kw8jogmtdGycX1HO+mihANC6bC3vZZzAPEAA8z
+# rCowN3Zp8+TKFNK2QvAbv3WwH+ZhEBw9LbjTGXfaSSjNPdogs79yFmEnQVz23Zbh
+# 69kRk5ca4DUQTH315nS94ZKnNYMVwGRS9xgVG1TFwiwN+e8qPdnqN9UXahZmPDTE
+# lsOruH8JK3UvaMrt4zvPZy87TRlYxo0wzkK1794m
 # SIG # End signature block

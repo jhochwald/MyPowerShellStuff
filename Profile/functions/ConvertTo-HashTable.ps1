@@ -1,4 +1,4 @@
-﻿<#
+<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -27,61 +27,57 @@
 	authorization from Joerg Hochwald
 #>
 
+Function Global:ConvertTo-HashTable {
+	<#
+	.Synopsis
+		Convert an object to a HashTable
+	.Description
+		Convert an object to a HashTable excluding certain types.  For example, ListDictionaryInternal doesn't support serialization therefore
+		can't be converted to JSON.
+	.Parameter InputObject
+		Object to convert
+	.Parameter ExcludeTypeName
+		Array of types to skip adding to resulting HashTable.  Default is to skip ListDictionaryInternal and Object arrays.
+	.Parameter MaxDepth
+		Maximum depth of embedded objects to convert.  Default is 4.
+	.Example
+		$bios = get-ciminstance win32_bios
+		$bios | ConvertTo-HashTable
+	#>
 
-# Make Powershell more Uni* like
-function global:Load-Test {
-<#
-	.SYNOPSIS
-		Load Pester Module
-	
-	.DESCRIPTION
-		Load the Pester PowerShell Module to the Global context.
-		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
-	
-	.NOTES
-		Pester Module must be installed
-	
-	.LINK
-		Pester https://github.com/pester/Pester
-		hochwald.net http://hochwald.net
-#>
-	
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	param ()
-	
-	# Lets check if the Pester PowerShell Module is installed
-	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-		try {
-			#Make sure we remove the Pester Module (if loaded)
-			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
-			# Import the Pester PowerShell Module in the Global context
-			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-		} catch {
-			# Sorry, Pester PowerShell Module is not here!!!
-			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
-			# Still here? Make sure we are done!
-			break
-			
-			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-			exit 1
+	Param (
+		[Parameter(Mandatory=$true,ValueFromPipeline=$true)]
+		[Object]$InputObject,
+		[string[]]$ExcludeTypeName = @("ListDictionaryInternal","Object[]"),
+		[ValidateRange(1,10)][Int]$MaxDepth = 4
+	)
+
+	Process {
+		Write-Verbose "Converting to hashtable $($InputObject.GetType())"
+		#$propNames = Get-Member -MemberType Properties -InputObject $InputObject | Select-Object -ExpandProperty Name
+		$propNames = $InputObject.psobject.Properties | Select-Object -ExpandProperty Name
+		$hash = @{}
+		$propNames | % {
+			if ($InputObject.$_ -ne $null) {
+				if ($InputObject.$_ -is [string] -or (Get-Member -MemberType Properties -InputObject ($InputObject.$_) ).Count -eq 0) {
+					$hash.Add($_,$InputObject.$_)
+				} else {
+					if ($InputObject.$_.GetType().Name -in $ExcludeTypeName) {
+						Write-Verbose "Skipped $_"
+					} elseif ($MaxDepth -gt 1) {
+						$hash.Add($_,(ConvertTo-HashTable -InputObject $InputObject.$_ -MaxDepth ($MaxDepth - 1)))
+					}
+				}
+			}
 		}
-	} else {
-		# Sorry, Pester PowerShell Module is not here!!!
-		Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
+		$hash
 	}
 }
-
-# Set a compatibility Alias
-(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNlmsDh2ScEDVhBKdgVt4my5q
-# bXOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2tHDg55V4+pve2FywoTOdBto
+# YpmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +220,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxbhLuidAX/LTi+98YgwUJL4N/aTANBgkqhkiG9w0B
-# AQEFAASCAQAU9OXhQQxE+26PAK8JuHxuoGoGL6sJzyoUYPtoUANJI3vn+uVcWgMD
-# E0kNPE0btQhQXJYGelxv8DW5p+zahtbK43+DY9/eFHvvrvVaavg4/eAVZ4uzUXaI
-# v63oCUnofh6k8nByHnx/n4bHRJ2yuOsl5pDROyrip+rOjj6VQbaFmxK0bQHYJdDM
-# w/NdyvY70uhbmO1yatatxt/K3AiLVfa6I2O+0uOWygvYuS0px8yclHWjmRLl2I7M
-# 2pHJ2djrHltChsIgTaZkKQ6m5/CCaF2dV1G2gAxc+JvEzqHjF9uh2TYSoQEFbPrO
-# YFXP/nxF2Bc6y1qnuMOWe2Ooc1l42k8uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRHimhtQjquxaPzDuLWKRjHI759RzANBgkqhkiG9w0B
+# AQEFAASCAQAqCDw1UxQr6uztob9s5EKbbo0hUZ8IunYc1z4XMi2IEz35DNpq9Wie
+# 0aIzTsdhDeaSUVjI8Docj7ZiHuryh9ydP/8OxTOZa3ZQCr91rhTdHrZEDOrasTvP
+# pNAHk0Q0Nf805aJxYtwmuJMHOc+J3knU+ZZcKzBtil5xImuhAxVb+hk0zhrT5D67
+# VhdS2vrjqaVfqB49Dxkh3O22myPtjihb07x0slUborxl1JzqR7sg4mSM9jJ64EyO
+# t3Xd1duLTv7bEGOhWrlfDPqhEuvDJauAdPdBtCHIvmDhW3rcbvhhYQ65DkdnJIuU
+# /t1xiPbs68sIeOwhhghOrRw/QQ9fEewToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExN1owIwYJKoZIhvcN
-# AQkEMRYEFAnwi3IPyeJ1gkFx5aGOYbKMokrYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAyNFowIwYJKoZIhvcN
+# AQkEMRYEFK66R/I4sD+ukw9UKiSwKx2INyhzMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz/t8gN2GaVS7YnYAyPFZjFg5tjX0VlVWp3OFtx33gHAHT
-# xEyhUrJmrjwJi84ljORrSI+m39cWU4yZMdyhGWNxqFnM86c5Z0P+vZ6UzPXxUEZr
-# GC53J3cy15ybEIlWfC+138pcVRJ+pQkMjQumw9ao8WShydr336DSl8l2A3vYlark
-# +ij+WrQdoTUab9zZuW5g443rSZniM75HQj14LiYmb342sSOE/Tv8Ta4mhR01ibVY
-# RY0btTaAwvdmXoumjmEOkwKOoH8w5Eq2uWpTVMNzKvQfgm6+HosUVmgwOBJY/C3O
-# q3A+HJZOML09pfBJGcL7wZkBBiimsIhfZ4bGgtPH
+# hkiG9w0BAQEFAASCAQCrQejftE95d+zKfNOzdv19uyz1gAad/qisXseRZvOkoo45
+# lJIYqI9LP2h6dVqSSGnasfgUIXiKWTP0I/pxIX4rdS1HCF9tqX83W2qioSFjwL77
+# LH5DyyHecVlaTtCIgby7Ia4YwkjlbyEFHWo+LuIxrdqavS1+/ybiuXHNH3IbMTQt
+# yDlaSwxCeW+7F//nLQHcogw15y/0YykYtx6ZNlZOLiP2HTFtwQNXKSCB11GLPCaL
+# 9qaBCXOKX11DQHy6sK5XFN2/s0iStrhGtXMx2ryzy96be2VfOmBTm1KxFKUrdayq
+# mLL+1J/WRTJegSEdObzI7Tr6HhGxO8mFUQkUcxNF
 # SIG # End signature block

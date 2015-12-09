@@ -32,40 +32,46 @@ function global:SuDo {
 <#
 	.SYNOPSIS
 		Uni* like Superuser Do (Sudo)
-
+	
 	.DESCRIPTION
 		Uni* like Superuser Do (Sudo)
-
+	
 	.PARAMETER file
-		 Script/Program to run
-
+		Script/Program to run
+	
 	.EXAMPLE
 		PS C:\scripts\PowerShell> SuDo C:\scripts\PowerShell\profile.ps1
-
+	
 	.EXAMPLE
 		SuDo
-
+	
 	.NOTES
 		Still a internal Beta function!
-
+	
 	.LINK
-
+		
 #>
-
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	param
 	(
 		[Parameter(Mandatory = $true,
 				   HelpMessage = ' Script/Program to run')]
 		[ValidateNotNullOrEmpty()]
+		[Alias('FileName')]
 		[string]
 		$file
 	)
-
+	
+	# Define some defaults
 	$sudo = new-object System.Diagnostics.ProcessStartInfo
 	$sudo.Verb = "runas";
 	$sudo.FileName = "$pshome\PowerShell.exe"
 	$sudo.windowStyle = "Normal"
 	$sudo.WorkingDirectory = (Get-Location)
+	
+	# What to execute?
 	if ($file) {
 		if ((Test-Path $file) -eq $True) {
 			$sudo.Arguments = "-executionpolicy unrestricted -NoExit -noprofile -Command $file"
@@ -73,11 +79,13 @@ function global:SuDo {
 			write-error -Message:"Error: File does not exist - $file" -ErrorAction:Stop
 		}
 	} else {
+		# No file given, so we open a Shell (Console)
 		$sudo.Arguments = "-executionpolicy unrestricted -NoExit -Command  &{set-location '" + (get-location).Path + "'}"
 	}
-
+	
+	# NET call to execute SuDo
 	[System.Diagnostics.Process]::Start($sudo) | out-null
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -87,8 +95,8 @@ function global:SuDo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2qwLY9YgxUzOjmnqMzf5r+Dj
-# aj6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnMpzl/m0/aFkfeEXI3ovDrqK
+# WnigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -231,25 +239,25 @@ function global:SuDo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRSxfS+1jDGJ/4fNwmsiPhuTu8hUTANBgkqhkiG9w0B
-# AQEFAASCAQA6AXbcr7EWWCwRfIpU4cORzG7Dtqp81KoDYw2+NH0AhoEpP9DMO4wg
-# Uy8wfGff7gaPBUg8WL5HE71Q1k0+JKdwaopvQ+ZMFruDHo68Uk5KlC52ROG5md5+
-# h/7XA8mUEkXmFfKaJ6xqyqtSqXzI3MVByTLo31azxgJSZNE1vMM+ogCfW/tSUZs2
-# lvzcJWSEGGdjBgU4p7r/afHp+XQ3ZXa0PuGA3gIZUylwj8U8ZMq1lezP1pAurDKJ
-# XaEsz1BF1b1trGJV1bNoAyejLS2eAM+y5Qq0JPbeUgZomSH7WPlvj7M9KCy96bxm
-# XdW1IYL+6qYtrW4x8c3QVz6oxoTdlmwqoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ5CT9EsQi+q0ISG5nvdlilW+VUaTANBgkqhkiG9w0B
+# AQEFAASCAQAKo8eTI1LAhYK20Qqoe9jSQM4/iaVyzCyMs3mNTafm2qqQNhMAp3wX
+# WsEp85fD3aOSJ2Ypwxo+8fG3jYRLILo+o34V3wsnHzhP8Z/L+Rjc1yazj+nix6nI
+# h1zwc2UI0zPAUS4QmNm/yKziUVOyD83CJJCFlR8oaY6D+TphnMCD0TKXul4wXs0T
+# ZcYTm+xknwfa3aKQ1G78VDgR9j5McPfhez02ubGF9TGNtZoQUooTm+0ITU5m7YUP
+# 6JlHY+EQmjL8dj8M13+dLs2xqSWi59enxmaTdi6YK5rCoZhN2TqWFo6S72pBIUdF
+# b3UUCTahGhusWusf+OeQfKG6ucJdhQ7moYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0N1owIwYJKoZIhvcN
-# AQkEMRYEFIyGSDu5G9JBH1U8UNOJmvJN+9JRMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyN1owIwYJKoZIhvcN
+# AQkEMRYEFOUFTMMIrgbYqAqNyotnImZfaw4LMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBwrfWjXprt81OR7p2UAmxTPbsLCFtxVs9t7lRj2utPOVVl
-# AqQezFCAN0C52N3jDAjNvmaZg2DidQy3ydNlHdgNN9UxG/jr8fzA7I6dPlD4kSb9
-# 0e031RDrTLZi2qbFmn76uHELPeiG3M62o/npVqtrLkSHGJqdAhdeRw5AgJiPaaeS
-# 1OpeaMilXjsk0mdZ1zYWqmKVB5HCbyyVlkF/URAcwSQtCh3YQ+DAJ1n3/lxZQAT0
-# RzDeRSyA2OvII7hrAyyn9kN3eeba6+4nHBOX495vO4bjr506wirwz8/HJ2X51Ing
-# zJ1LH5j6LOtcb8RVXhygGOwAV0JzPS8kNbiRls1g
+# hkiG9w0BAQEFAASCAQAINGTnJ+lsHYvOPH4K3YbVvasOa4t4eaSWU/6/PIzuXEry
+# jOloawvlwE+pNmgF6tVX8nXEwT9K7sTE9sgnr6x03n16g4Kyfw5smi9TQAz9m8JF
+# DTvtrVRxeVN9KrKsgD0e3I76UgSvp0L4u8uxD4VPdToLnkQ4GHTsNzmsR08eQx40
+# Q58QSu5UjbkEeMwKvA0pPR1zjvfSb2qb8nnR/XVNfdAvvAgDEBM0sRY91Ja97msl
+# fIo2UN6hPrN8KNfyWB/+XOgojfc8SliOITnEmGzX8JynvJxKKAmTjIAdBO0i3jDb
+# L/LnNd40JYP0Oi8mKPfYX5H35RQG8FQZL4tfZ4/1
 # SIG # End signature block

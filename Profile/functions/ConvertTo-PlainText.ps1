@@ -39,31 +39,33 @@ function global:ConvertTo-PlainText {
 		Secure String to convert
 
 	.NOTES
-		Helpper function
+		Helper function
 
 	.LINK
 		hochwald.net http://hochwald.net
 #>
 
-	[CmdletBinding(ConfirmImpact = 'None')]
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	[OutputType([string])]
 	param
 	(
 		[Parameter(Mandatory = $true,
-				   ValueFromPipeline = $true,
 				   Position = 0,
 				   HelpMessage = 'Secure String to convert')]
 		[ValidateNotNullOrEmpty()]
+		[Alias('SecureString')]
 		[security.securestring]
 		$secure
 	)
 
+	# Define the Marshal Variable
 	$marshal = [Runtime.InteropServices.Marshal];
+
+	# Return what we have
 	return $marshal::PtrToStringAuto($marshal::SecureStringToBSTR($secure));
 
-	###
 	# Do a garbage collection
-	###
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
 	}
@@ -72,8 +74,8 @@ function global:ConvertTo-PlainText {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZoMkXuNHS/nP5e2ulbvrUm8r
-# N9GgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUz5gpb3slyQV3n3Q4XVzdpKb/
+# 1bWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -216,25 +218,25 @@ function global:ConvertTo-PlainText {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTQAv/LjvArQC/VSXpGrlaTNakyPzANBgkqhkiG9w0B
-# AQEFAASCAQAGSj20LahcCdktf0ZK8HapxURShE44b2tpeS8UX1sqsIHn/8hkq6N1
-# RU+crtxlx+E+ZAi0y1ABqtIUaLfUHUuIkgE5HlqnIqcxW/73d2hXR/9us15mL0Qe
-# pnhJ9KtYHc2eYNtzFL63NaHw3KEYJBvUkyd6+/jVtNHzipPuJKKPwOzYwdsWOsdC
-# A1R5w23737zvtNwNSxZB5pjnZqK5CPR+HtbDpIkAvimKtQwCS2W27C13THLrtjCu
-# 2mXh7o7pTosLSPp0P9vwvd3z2Ji8vg0w7IEL+AUjj3/fd96PZSXRxuspWYY8R6Li
-# SoRcPAuNm/rJhd8IVNahj2oTuzAjsXmdoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQyWwElcqZaARCddWuUE+7sKTNeMTANBgkqhkiG9w0B
+# AQEFAASCAQB4xaA6NsdYvRrXJA4TNXMv21wa4BPq9vS24KaynWlkD6kMbBxVg78j
+# DQXagT8+t/FvMTQQ/9cOl0RP5pI5ISjoa/D6sWtZOSzjKFfMJ392Fe4pda2jsYl6
+# btbeNsXAkp1Cngx4wzSOqRChLDd+YJN5sUjvQPYb8Giva1P3/JsjKQZIs+YBQ54i
+# tIfDLxSM6CNIDBvFaJ8EuPAEPiPsw5VbP7XAl6IUdlaArMilQlaoI8O2l1YpYyUr
+# bpbw5dYIFLhGA7x2wcDzYC4YU2igwlmJV3u1j6/yQvB6+xm4eWuDDA1aeiJ1XLdu
+# 8l/eKpRJ60sZSJ6G3C7mvRJTRhz5C6CnoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzN1owIwYJKoZIhvcN
-# AQkEMRYEFA9WhAAFpWLrGqSwsDl6irNVab1OMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAyOFowIwYJKoZIhvcN
+# AQkEMRYEFLc+ygE+ATIphrtS0gHy3PxikUARMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAsTMNTuqozRpdg+krR6VohixoTVMKAnm7Y6yZwDU8Jl8im
-# X7dueLu1N4pP3gUlxHyXeGniuRtlNXiSYl/nYYbW/YpJsCczR3iOQ6ywYigbOzEt
-# eon0yYUIb8RVKnC0ZFzEHyHImuCn6e93uRBYRuq2uN+AY4S2CYpLCZh9UiMA/gWR
-# X3NiAckJMNKRhaI271ACmjhLzOKcKfVDgQQQuaDnmFKa/Rcg9eFF8pKfyf4oZh1p
-# WTdnuf2T12IPfWaDxIGPQv/jYub5/Nsb3OyhMFvuBP8Rd6nL75WRdXZkwrxn54HI
-# bG5aV6pm98v5vytUDyJXle3EVScHWBtjwA7T8skk
+# hkiG9w0BAQEFAASCAQBeAJjUaayRRYx59D7t5J5tcdcty3Wwfs3E0UbxBTIdeMXQ
+# 15F6Uy+67SMblaKHD19gwoyZDsgEiaHBzos4ZrDiTvLDrCP9CFfbclfvhUPl3TGd
+# nlItQA0Flgvv0pV7y7zB0RsUw6jRjgbFSAgT6+I1NI1pHwU0LhhxBKzAeLlqvHpg
+# +p2JzhU4hJ4pAw/2delEbcEJ0XYrGhondI+0K9nUBJOFzxiHf2dK2eb9UgAQ18FK
+# 7Zzjt0MC/XBYV3dEjjnMr/SwPB/KOhFi94PF9jF8+/00fxKjxnYSpF8i/7pTUf7E
+# QGAGH35xstcbM+ZNRD0/V5/j7Z34uHT90XtG5a/Z
 # SIG # End signature block

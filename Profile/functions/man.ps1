@@ -32,31 +32,35 @@ function global:man {
 <#
 	.SYNOPSIS
 		Wrapper of Get-Help
-
+	
 	.DESCRIPTION
-		This wrapper uses Get-Help -full for a given cmdlet and shows eversthing paged. This is very much like the typical *nix like man
-
+		This wrapper uses Get-Help -full for a given cmdlet and shows everything paged. This is very much like the typical *nix like man
+	
 	.EXAMPLE
 		PS C:\scripts\PowerShell> man get-item
-
+		
 		# Shows the complete help text of the cmdlet "get-item", page by page
-
+	
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-
+	
 	.PARAMETER cmdlet
-		commandlet
-
+		command-let
+	
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-
-	[CmdletBinding(ConfirmImpact = 'None')]
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	param ()
-
+	
+	# Cleanup the console
 	clear-host
+	
+	# get the Help for given command-let
 	Get-Help $args[0] -full | Out-Host -paging
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -66,8 +70,8 @@ function global:man {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnmxbeR4eSK5PplRE/urEpzRA
-# 4kKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsRJXs1+Mnj3b7pI0/bdIQmkd
+# BvugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -210,25 +214,25 @@ function global:man {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS2k0a1rcDq9tTWPVvSnJCs9cLbBjANBgkqhkiG9w0B
-# AQEFAASCAQBwrUJTCrgPSjXcbyHH3XXMF0kF3Wo+B7848JzQcj/zDcVmgniu/xO1
-# i3eNZpj12FjdQlqpO5Vddqrua4hlPTNlneJgk+ip0ukfxmUZmFILieFzbf4oybYM
-# TF+UzzhNPGqcI97yZ7TDceMy9xWz6IpQOd+BlENxGDjtT6cuwPHZzNQi6zEDiHKK
-# drhd4Rz1DSWXTQ4x1LRvuffmYZ2NbRhM/8gb30qhfK8ljC1/1FFJQMo0r4/Gp/IL
-# myGUPGo8PAltTP2iyEuNXcL6xxoYA9b3v1/OLfFW0jI+Ma6qrkUj4eufny2QunpL
-# V+27VSnSJxW7jbXcGbXcMuFro8zVk575oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTfhvpOEMTVKjyQjxhPhys5SpZ3njANBgkqhkiG9w0B
+# AQEFAASCAQBgd0JECTV39OIgtThkvodj6vUdJYPQOzTdxS+CwtoptBysZpRV5+tO
+# HtzbonoF9WVmNQoThqGvfuX1dpkd131gn5mM+Zz4SO8ac+OpFnvhJY3geVnpAt7X
+# LISvCcefE5i2gesabJ4wo46D+FFnYJhNI/S+aglCdADxvqGRLkzZ1NHRX4Z88Jfp
+# wOzneoHO0nIkYB3UcV4fiFYXgA3nVkZn0cw73ynbb0Ls7lTTs8uRMyhaTWB+lmIT
+# 6m37FhjrpVc1ccpVSAReaPeDkNIfOzvDuiU9OjQyEYN1wYYtPneRBm6cgRKCnhr/
+# 2e8B8966MNvkIryVZfrYp+mCHMx/5aFMoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NFowIwYJKoZIhvcN
-# AQkEMRYEFHjUxp0Bce8mOKkY2wT2FcLD5sk+MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExOVowIwYJKoZIhvcN
+# AQkEMRYEFPUUB51hZFHpjlbE2WM7DvW8LVhcMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQADlUTb4yHTrV6h1B7NPzfEVovvgrF3KOf0bn9B9GexrrxK
-# eR6i36SbNWodMT0OmrcJ8AF38yaZa+7qRhHHnPT5T3IUPZ7sUJdSsvVxsMJ38W9u
-# 3s/YYHoQxUnGHrSMQIbAhMoqLp04dUtai+qiTB7jFo08lApnqEly855csoqm80FN
-# qAdjoqeYF5w2m/G6BQxeNdQKDAmPqe78qk9HUFenJSQiDM0CuqdebzYUPce8FOng
-# bZPk2eSaWn8/jpzozfNua/Iu+aUeqiMzl3IHFPwgRx+zn+n0ysnOWxMJrXyDaGzW
-# uvYl3gGKQXpL5wnl7ZGXeqkiKXLJXzNhZ6ClMWNh
+# hkiG9w0BAQEFAASCAQA97EE/c+rYUMLrxavUoyBnZBrX0LFX1ooJeACK2E4oaQgU
+# PBIFEvh4Wn0+Vju99w5KXdlvQ3FdOuVIDahqs90793P1oO8E5JoN2Q0WTIDV0gIX
+# tslOu+df5RqNga/uotKx4biciWjkZgLQv37363FIo+fIXKMufQ49AiCdn3y/UNic
+# 8dmjWf7EQASHQPAEVmLiaKdxyrlrYJMShlL2oifGV5uufl9Ab/KsjnLVhuDHJV2Q
+# zXZrptWNFEBBTjv83zda/hkDoAXRh+fHgI0hbldgM2HMOEj5Usdk0QioLndI+RlN
+# N2NEPwbM4rVWINLS01+FIY/FT+yhyj6Uemg2amR3
 # SIG # End signature block

@@ -1,4 +1,4 @@
-﻿<#
+<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -27,61 +27,250 @@
 	authorization from Joerg Hochwald
 #>
 
-
-# Make Powershell more Uni* like
-function global:Load-Test {
+function global:Convert-IPtoDecimal {
 <#
 	.SYNOPSIS
-		Load Pester Module
-	
+		Converts an IP address to decimal.
+
 	.DESCRIPTION
-		Load the Pester PowerShell Module to the Global context.
-		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
-	
+		Converts an IP address to decimal value.
+
+	.PARAMETER IPAddress
+		An IP Address you want to check
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Convert-IPtoDecimal -IPAddress '127.0.0.1','192.168.0.1','10.0.0.1'
+
+		decimal		IPAddress
+		-------		---------
+		2130706433	127.0.0.1
+		3232235521	192.168.0.1
+		167772161	10.0.0.1
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Convert-IPtoDecimal '127.0.0.1','192.168.0.1','10.0.0.1'
+
+		decimal		IPAddress
+		-------		---------
+		2130706433	127.0.0.1
+		3232235521	192.168.0.1
+		167772161	10.0.0.1
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> '127.0.0.1','192.168.0.1','10.0.0.1' |  Convert-IPtoDecimal
+
+		decimal		IPAddress
+		-------		---------
+		2130706433	127.0.0.1
+		3232235521	192.168.0.1
+		167772161	10.0.0.1
+
 	.NOTES
-		Pester Module must be installed
-	
+		Additional information about the function.
+
 	.LINK
-		Pester https://github.com/pester/Pester
-		hochwald.net http://hochwald.net
+		Support http://support.net-experts.net
 #>
-	
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	param ()
-	
-	# Lets check if the Pester PowerShell Module is installed
-	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-		try {
-			#Make sure we remove the Pester Module (if loaded)
-			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
-			# Import the Pester PowerShell Module in the Global context
-			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-		} catch {
-			# Sorry, Pester PowerShell Module is not here!!!
-			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
-			# Still here? Make sure we are done!
-			break
-			
-			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-			exit 1
-		}
-	} else {
-		# Sorry, Pester PowerShell Module is not here!!!
-		Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
+
+	[CmdletBinding()]
+	[OutputType([psobject])]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   ValueFromPipeline = $true,
+				   Position = 0,
+				   HelpMessage = 'An IP Address you want to check')]
+		[Alias('IP')]
+		[string]
+		$IPAddress
+	)
+
+	BEGIN
+	{
+		# Dummy block - We so nothing here
+	}
+	PROCESS
+	{
+		# OK make sure the we have a string here!
+		# Then we split everthing based on the DOTs.
+		[String[]]$IP = $IPAddress.Split('.')
+
+		# Create a new object and transform it to Decimal
+		$Object = New-Object -TypeName psobject -Property (@{
+			'IPAddress' = $($IPAddress);
+			'Decimal' = [Int64](
+			([Int32]::Parse($IP[0]) * [Math]::Pow(2, 24) +
+			([Int32]::Parse($IP[1]) * [Math]::Pow(2, 16) +
+			([Int32]::Parse($IP[2]) * [Math]::Pow(2, 8) +
+			([Int32]::Parse($IP[3])
+			)
+			)
+			)
+			)
+			)
+		})
+	}
+	END
+	{
+		# Dump the info to the console
+		$Object
 	}
 }
 
-# Set a compatibility Alias
-(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+function global:Check-IPaddress {
+<#
+	.SYNOPSIS
+		Check if a given IP Address seems to be valid
 
+	.DESCRIPTION
+		Check if a given IP Address seems to be valid.
+		We use the .NET function to do so. This is not 100% reliable,
+		but is enough most times.
+
+	.PARAMETER IPAddress
+		An IP Address you want to check
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Check-IPaddress
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.LINK
+		Support http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([bool])]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   ValueFromPipelineByPropertyName = $true,
+				   Position = 0,
+				   HelpMessage = 'An IP Address you want to check')]
+		[ValidateScript({
+			$_ -match [IPAddress]
+			$_
+		})]
+		[Alias('IP')]
+		[string]
+		$IPAddress
+	)
+
+	BEGIN
+	{
+		# Dummy block - We so nothing here
+	}
+	PROCESS
+	{
+		# Use the .NET Call to figure out if the given address is valid or not.
+		Set-Variable -Name "IsValid" -Scope:Script -Value $(($IPAddress -As [IPAddress]) -As [Bool])
+	}
+	END
+	{
+		# Dump the bool value to the console
+		$IsValid
+	}
+}
+
+function global:Get-AtomicTime
+{
+<#
+	.Synopsis
+		Get the current time from a time server
+
+	.Description
+		This function gets the time from a time server,
+		in effect it returns an accurate time from an external atomic clock to your computer.
+
+	.Parameter TimeServer
+		Optionally enter an alternative time server to query
+			- the default is http://nist1-ny.ustiming.org:13
+
+	.Parameter NoCache
+		Optionally use to return a non cached time
+			- use when Get-Time is called more than once during a session
+
+	.example
+		"Time has been set to: " + (Set-Date (Get-AtomicTime))
+
+		Get atomic time and synchronise with your computer clock
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-AtomicTime
+
+		Get time from default time server
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-AtomicTime -timeserver http://time-a.nist.gov:13
+
+		Get time from specific timeserver
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-AtomicTime -noCache $true
+
+		Get a new time from server (not from cache)
+		This is optional and only required when the function is called more than once per session.
+
+	.Inputs
+		[optional]
+		-timeserver address
+		and
+		-noCache $true / $false
+
+	.Outputs
+		[datetime] Atomic Time adjusted to your time zone
+		or
+		[string] No Time Returned From (your timeserver address)
+
+	.link
+		http://tf.nist.gov/tf-cgi/servers.cgi
+
+	.Notes
+
+#>
+	[CmdletBinding()]
+
+	Param (
+	[Parameter(
+	ValueFromPipeline=$False,
+	Mandatory=$False,
+	HelpMessage="Enter alternative time server address")]
+	[string]$TimeServer="http://nist1-ny.ustiming.org:13",
+
+	[Parameter(
+	ValueFromPipeline=$False,
+	Mandatory=$False,
+	HelpMessage="A unique string to ensure that a cached time is not returned")]
+	[bool]$NoCache=$false
+	)
+
+	if ($NoCache -eq $true) {
+		Set-Variable -Name "rand" -Scope:Script -Value $(New-Object system.random)
+		Set-Variable -Name "unique" -Scope:Script -Value $($rand.nextdouble())
+	}
+
+	trap { return "No Time Returned From "+$TimeServer; continue; }
+
+	Set-Variable -Name "URL" -Scope:Script -Value $($TimeServer+"?_"+$unique)
+	Set-Variable -Name "xHTTP" -Scope:Script -Value $(new-object -com msxml2.xmlhttp)
+
+	$xHTTP.open("GET",$URL,$false)
+	$xHTTP.send()
+
+	Set-Variable -Name "response" -Scope:Script -Value $($xHTTP.ResponseText)
+	Set-Variable -Name "timeString" -Scope:Script -Value $($response.substring(10, 2) + "/" + $response.substring(13, 2) + "/" + $response.substring(7, 2) + " " + $response.substring(16, 9))
+	Set-Variable -Name "timezone" -Scope:Script -Value $(Get-WmiObject -Class win32_TimeZone)
+	Set-Variable -Name "bias" -Scope:Script -Value $($timezone.bias)
+
+	return ([datetime] $timeString).addminutes($bias)
+}
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNlmsDh2ScEDVhBKdgVt4my5q
-# bXOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5A9XDSURHIgMfYxiwnQjRrHA
+# mLagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +413,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxbhLuidAX/LTi+98YgwUJL4N/aTANBgkqhkiG9w0B
-# AQEFAASCAQAU9OXhQQxE+26PAK8JuHxuoGoGL6sJzyoUYPtoUANJI3vn+uVcWgMD
-# E0kNPE0btQhQXJYGelxv8DW5p+zahtbK43+DY9/eFHvvrvVaavg4/eAVZ4uzUXaI
-# v63oCUnofh6k8nByHnx/n4bHRJ2yuOsl5pDROyrip+rOjj6VQbaFmxK0bQHYJdDM
-# w/NdyvY70uhbmO1yatatxt/K3AiLVfa6I2O+0uOWygvYuS0px8yclHWjmRLl2I7M
-# 2pHJ2djrHltChsIgTaZkKQ6m5/CCaF2dV1G2gAxc+JvEzqHjF9uh2TYSoQEFbPrO
-# YFXP/nxF2Bc6y1qnuMOWe2Ooc1l42k8uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTKBPL6I28fxtQfVxP/LLOenaVWmDANBgkqhkiG9w0B
+# AQEFAASCAQCDbhldvWICDTXNvd805tgRVjBjKAA0iJoLmzpb9an/7shz82O4mDRz
+# sOlR8IdEbZJG1nTYHh++DaS7c+7iTJDF3tlFl3cywGHv1G/oRFl4SHzPpeeT2mzk
+# 0ft15ktnK6/d39CyuFbiHsQ09c+mmB7KkeL+YESauTlXD7uNYaKQolyuZWQoQWf3
+# TG1oekBakvLlPtxc62R5P3PEv7M424ekkt4Sbz+ZwPZbTfBMcgIZx9PpVOr82nov
+# g17SnCahUOUc3oCwo7Gy9tIneSSC9m5lO00jEBpDVMmnmUtRv5l7kAWmMNLwPJs5
+# TRKGOVbqInWuY+O8oeWdUmsDl+nNaIcWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExN1owIwYJKoZIhvcN
-# AQkEMRYEFAnwi3IPyeJ1gkFx5aGOYbKMokrYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExMFowIwYJKoZIhvcN
+# AQkEMRYEFEFgsAA5GRxilCprCkjjmlvGcs0sMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz/t8gN2GaVS7YnYAyPFZjFg5tjX0VlVWp3OFtx33gHAHT
-# xEyhUrJmrjwJi84ljORrSI+m39cWU4yZMdyhGWNxqFnM86c5Z0P+vZ6UzPXxUEZr
-# GC53J3cy15ybEIlWfC+138pcVRJ+pQkMjQumw9ao8WShydr336DSl8l2A3vYlark
-# +ij+WrQdoTUab9zZuW5g443rSZniM75HQj14LiYmb342sSOE/Tv8Ta4mhR01ibVY
-# RY0btTaAwvdmXoumjmEOkwKOoH8w5Eq2uWpTVMNzKvQfgm6+HosUVmgwOBJY/C3O
-# q3A+HJZOML09pfBJGcL7wZkBBiimsIhfZ4bGgtPH
+# hkiG9w0BAQEFAASCAQAuSmGvQJPRqvHg8dUD+QY7x/PZWGLhZ7njDd9pK52geLkh
+# UViomeYB3CUHiWAIkFo/HlB8dUT0vcxFkloIAsJ8dFOkhUhH/KMcLFEYLjMVB+8G
+# nqGqXwlJLd2JwJN4g5PtdZneKA/cZoqAtJWjDc/Ivmw/uE0eS4TtI+Nc51xGPPIN
+# +u6A/iT5q8KZRz8idhgGiGP4LNZ6aZfF2z4NkI31qHx4KZfYO+CWsz9+adBiqUra
+# fm2sng4PrpRKFbdpn2MoJRTs+6SI3bU5Mmi+9LP2eOSZf2eJOq8sVCgQiOqZC5VB
+# FKauUVH2aBuDjkYohvdydSCgCOQ/1fLx0LxhJJNv
 # SIG # End signature block

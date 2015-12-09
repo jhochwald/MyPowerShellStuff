@@ -27,8 +27,7 @@
 	authorization from Joerg Hochwald
 #>
 
-function Global:Get-TopProcesses {
-
+function global:Get-TopProcesses {
 <#
 	.SYNOPSIS
 		Make the PowerShell a bit more *NIX like
@@ -36,14 +35,27 @@ function Global:Get-TopProcesses {
 	.DESCRIPTION
 		This is a PowerShell Version of the well known *NIX like TOP
 
+	.NOTES
+		Additional information about the function.
 #>
 
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	# Define objects
 	Set-Variable -Name SetValX -Value $([Console]::CursorLeft)
 	Set-Variable -Name SetValY -Value $([Console]::CursorTop)
 
+	# figure out what uses the most CPU Time
 	While ($true) {
+		# Get the fist 30 items
 		Get-Process | Sort-Object -Descending CPU | Select-Object -First 30;
+
+		# Wait 2 seconds
 		Start-Sleep -Seconds 2;
+
+		# Dump the Info
 		[Console]::SetCursorPosition(${SetValX}, ${SetValY} + 3)
 	}
 }
@@ -53,8 +65,8 @@ function Global:Get-TopProcesses {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcw37eaK7MQwCp4JAQ8HI8xA8
-# s1KgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxM9pPQ0I2763gDTMcwNjSAf3
+# qBmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -197,25 +209,25 @@ function Global:Get-TopProcesses {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS6fgLX4zAIOlcppni4ipOkCNoixzANBgkqhkiG9w0B
-# AQEFAASCAQBBeEggIRrLNmEJsoTdG9u15CWtemz51g1z1ML+aQcidum98gAUse58
-# w9ISxgXwO1r5Rgb1sRo3KcGx9r/Weoo+Xv4Jdk8w0z07xqqxX31sBUBT+Moy9TXF
-# eTvko+ijaRHjzg+WhUlC4xUncjW9WAfv/BbXQ+A4jh62/fd9YtZRbEmC55bAQUaF
-# lr9ZYZYQnYmtjXXoOnPsHjUWz7X9Hqqtu+pjnPvc/MznB5QHOxwAyNimCs+ZphYH
-# N8LZ/JxjLgm5KCG+fxHKqkFjHay9w5WWNpqXoSX2oNxenbv/E+HNWgTpXP5sWG8B
-# 9uEBsshm8TexYo6C4dQjV7XEKxkgR/NUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ5YqvpVPgYb+E2JRn4iyx+6p3jxjANBgkqhkiG9w0B
+# AQEFAASCAQCkYqLYITSPlPYlNy/MN5Ci2pqyod4vUijaLgnXqGV7200VI9YkRJDN
+# /KmRn8BbDwkuGlqu8C14LTluO8fX+QGyiNGrfry7uiiGr2nrNurN3uzIZQxd+ZCZ
+# tPhWVANZF3+5mnfBOuxTgOaUCBCHAxKMi24q5Y1NzQMah2xoM00qk/oD8Rhgj0Xm
+# ZaUxGpLTU8InQrwAdb8SbU8Yd8GkC5c5nQj5+OtHB2Q0NZPRJFJf4Jen2rMoDWvW
+# ml66koPq87YLHuT/zfzQ0tNWQHaOYRXCAv/lV8QqcNGLzkGQdeE8VmMs6t3lSuRa
+# c9BLbEQMXgyJ3labXDsbshxd5J3gnhFXoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0MFowIwYJKoZIhvcN
-# AQkEMRYEFL1UdNXJylzVsEISz5mR8fWlPczGMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA1M1owIwYJKoZIhvcN
+# AQkEMRYEFAZpGl8L9wC5lXlbkCjKnfMGxPTSMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBFsDIcvm5URJQKwua7zx2SEmh1OYMjxkTy+n95tfbK4A1Z
-# n4KtlHn63sufjx2c8q5G5S/9Wnop6sF3xf26VGDHH34jYdArQUAQx8Gd9o1KzA9E
-# GhlxhyKD/oNXNCuRozdSkNuur4BqllTNv8SB8yV1sS3ywwkprKwZa+9pVT+YRfBV
-# 6sa6Stejw2+LMaUGAM/tEcOmsP78HUaA64ZsbWkf9CHcB4JZeHoYD7uZYtl/krKl
-# cO+BTTNHc5mdTPuxZFt6xVQvM7hyI2ZWc47jnWOu6u7zynm7gaD7U9Wah7LvA5h7
-# NpPhVmKm2gtENmHF/CUNLx6PropRMC7ppf1M4kb7
+# hkiG9w0BAQEFAASCAQAe43dYKjV2s6Rvv2d4sf9nFSuIiDPLxFVmK6mi0XXaL6vR
+# RrtCBU5FD/jXd/z2GyCp2cpeQM+OEvjxBXl7rz0XL9UMqIHlLkIuxZ/zqBoFYJ7U
+# tjygXi4I5maW/jzUuxsWGmMn5pZR3pBHLbG8Uml/bwqMXYNgibdJXQ4RwJRS6ISq
+# nHQaU/Y9j90Q+ZcabTsZ0IgSutUXAiGWS99ujTyF1F+RPq5oOAMsSZNMKFl3nF4O
+# WYjhifnHgVEqphQZyrjNfJjCGV/O+SOzUkQ2ESQcMYyaAntLTIbldL7dTWKNgMkF
+# eUFlKZn2QSqHgwz0D4i7R3P6hdZiHJ1OEqYvsWVQ
 # SIG # End signature block

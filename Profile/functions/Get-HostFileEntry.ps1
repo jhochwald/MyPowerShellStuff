@@ -1,4 +1,4 @@
-﻿<#
+<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -27,61 +27,62 @@
 	authorization from Joerg Hochwald
 #>
 
-
-# Make Powershell more Uni* like
-function global:Load-Test {
+function Get-HostFileEntry {
 <#
 	.SYNOPSIS
-		Load Pester Module
-	
+		Dumps the HOSTS File to the Console
+
 	.DESCRIPTION
-		Load the Pester PowerShell Module to the Global context.
-		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
-	
+		Dumps the HOSTS File to the Console
+		It dumps the WINDIR\System32\drivers\etc\hosts
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-HostFileEntry
+
+		IP                                                              Hostname
+		--                                                              --------
+		10.211.55.123                                                   GOV13714W7
+		10.211.55.10                                                    jhwsrv08R2
+		10.211.55.125                                                   KSWIN07DEV
+
+		Dumps the HOSTS File to the Console
+
 	.NOTES
-		Pester Module must be installed
-	
+		This is just a little helper function to make the shell more flexible
+
 	.LINK
-		Pester https://github.com/pester/Pester
-		hochwald.net http://hochwald.net
+		Support http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param ()
-	
-	# Lets check if the Pester PowerShell Module is installed
-	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-		try {
-			#Make sure we remove the Pester Module (if loaded)
-			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
-			# Import the Pester PowerShell Module in the Global context
-			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-		} catch {
-			# Sorry, Pester PowerShell Module is not here!!!
-			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
-			# Still here? Make sure we are done!
-			break
-			
-			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-			exit 1
-		}
-	} else {
-		# Sorry, Pester PowerShell Module is not here!!!
-		Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
+
+	# Cleanup
+	$HostOutput = @()
+
+	# Which File to load
+	Set-Variable -Name "HostFile" -Scope:Script -Value $($env:windir + "\System32\drivers\etc\hosts")
+
+	# REGEX Filter
+	[regex]$r = "\S"
+
+	# Open the File from above
+	Get-Content $HostFile | ? {
+		(($r.Match($_)).value -ne "#") -and ($_ -notmatch "^\s+$") -and ($_.Length -gt 0)
+	} | % {
+		$_ -match "(?<IP>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(?<HOSTNAME>\S+)" | Out-Null
+		$HostOutput += New-Object -TypeName PSCustomObject -Property @{ 'IP' = $matches.ip; 'Hostname' = $matches.hostname }
 	}
+
+	# Dump it to the Console
+	$HostOutput
 }
-
-# Set a compatibility Alias
-(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNlmsDh2ScEDVhBKdgVt4my5q
-# bXOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6fv/p5tGA1iih0G0xdoTMBqa
+# E3ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +225,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxbhLuidAX/LTi+98YgwUJL4N/aTANBgkqhkiG9w0B
-# AQEFAASCAQAU9OXhQQxE+26PAK8JuHxuoGoGL6sJzyoUYPtoUANJI3vn+uVcWgMD
-# E0kNPE0btQhQXJYGelxv8DW5p+zahtbK43+DY9/eFHvvrvVaavg4/eAVZ4uzUXaI
-# v63oCUnofh6k8nByHnx/n4bHRJ2yuOsl5pDROyrip+rOjj6VQbaFmxK0bQHYJdDM
-# w/NdyvY70uhbmO1yatatxt/K3AiLVfa6I2O+0uOWygvYuS0px8yclHWjmRLl2I7M
-# 2pHJ2djrHltChsIgTaZkKQ6m5/CCaF2dV1G2gAxc+JvEzqHjF9uh2TYSoQEFbPrO
-# YFXP/nxF2Bc6y1qnuMOWe2Ooc1l42k8uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTWs3QqGEl+meEDrd76o7gWK6yWazANBgkqhkiG9w0B
+# AQEFAASCAQA+FzPSLOrQVmZrwx7WmmSY4zRT2gzJDPJORcPShZZMUiKtSQsYhJd6
+# Wr71+e3NQCh/HAgtqvS52AawbuAs2ltyKlfFmnrashhestF8OSa3iC+UaRyWjDKb
+# g4viVU0M4lD0prMpFkL3g9SYUuZubzZRzETnou+p6Rhf41oPwyNijuzUXzLzxApu
+# tD7b/9iodGfvSLMPBmcJPj1sIiHwDdFQ06MWnL5/QnL6CbjhS/l3euL9J3xn7y+6
+# EI/A+8nHGA/nhl+bYwQSxpw5Snml/c4MOX4E48wHO2M83ysbKbk+E9pu5E6L8Z6A
+# moryB8au+tBLzVbLXMNKBj2WsrFi79GUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExN1owIwYJKoZIhvcN
-# AQkEMRYEFAnwi3IPyeJ1gkFx5aGOYbKMokrYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAzN1owIwYJKoZIhvcN
+# AQkEMRYEFFgWuyBeF9dM5ZwYXZ846+aHxeWLMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz/t8gN2GaVS7YnYAyPFZjFg5tjX0VlVWp3OFtx33gHAHT
-# xEyhUrJmrjwJi84ljORrSI+m39cWU4yZMdyhGWNxqFnM86c5Z0P+vZ6UzPXxUEZr
-# GC53J3cy15ybEIlWfC+138pcVRJ+pQkMjQumw9ao8WShydr336DSl8l2A3vYlark
-# +ij+WrQdoTUab9zZuW5g443rSZniM75HQj14LiYmb342sSOE/Tv8Ta4mhR01ibVY
-# RY0btTaAwvdmXoumjmEOkwKOoH8w5Eq2uWpTVMNzKvQfgm6+HosUVmgwOBJY/C3O
-# q3A+HJZOML09pfBJGcL7wZkBBiimsIhfZ4bGgtPH
+# hkiG9w0BAQEFAASCAQBIKLJkmSurn18pluEbBIAmaWmvY/QwaOJhQeycwPvkp3Ay
+# YHAtd3iTvShlkROj/nhlKx3bavPkjGTLlFHkd/aFeu0PhUYT5CI/csXHxeFVpw9Z
+# MvjQwscJVJ29RKMp90X6wZhKnEWVK5mJ27oJDj6JXhn6VIBwFtrkDHFIfdU6QGhQ
+# WCEKKzIIoK1/96YtSHJnxb87PVGGHUKa2XK9R3yCrGbHYphD73GfBvmP3iNb2o36
+# ic+Vvy2Z2/77OMAd47NDqn8cTgxXZpi7Mm+5fbPez9uhbYH/IYdcZDAhHQWQIV91
+# APxU2ViLhaRtIy6cmJWYJ2CP9tfA+1fruU5dqr5O
 # SIG # End signature block

@@ -1,4 +1,4 @@
-﻿<#
+<#
 	if ($Statement) { Write-Output "Code is poetry" }
 
 	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
@@ -27,61 +27,34 @@
 	authorization from Joerg Hochwald
 #>
 
-
-# Make Powershell more Uni* like
-function global:Load-Test {
+function global:Get-TimeStamp {
 <#
 	.SYNOPSIS
-		Load Pester Module
-	
+		Get-TimeStamp
+
 	.DESCRIPTION
-		Load the Pester PowerShell Module to the Global context.
-		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
-	
+		Get-TimeStamp
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-TimeStamp
+
+	#
+
+	.OUTPUTS
+
 	.NOTES
-		Pester Module must be installed
-	
+		This is just a little helper function to make the shell more flexible
+
 	.LINK
-		Pester https://github.com/pester/Pester
-		hochwald.net http://hochwald.net
+		Support http://support.net-experts.net
 #>
-	
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	param ()
-	
-	# Lets check if the Pester PowerShell Module is installed
-	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-		try {
-			#Make sure we remove the Pester Module (if loaded)
-			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
-			# Import the Pester PowerShell Module in the Global context
-			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-		} catch {
-			# Sorry, Pester PowerShell Module is not here!!!
-			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
-			# Still here? Make sure we are done!
-			break
-			
-			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-			exit 1
-		}
-	} else {
-		# Sorry, Pester PowerShell Module is not here!!!
-		Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
-	}
+	Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
 }
-
-# Set a compatibility Alias
-(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNlmsDh2ScEDVhBKdgVt4my5q
-# bXOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUA30Ay+dmnUVJvqqDEMi+6gT9
+# 2aWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +197,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxbhLuidAX/LTi+98YgwUJL4N/aTANBgkqhkiG9w0B
-# AQEFAASCAQAU9OXhQQxE+26PAK8JuHxuoGoGL6sJzyoUYPtoUANJI3vn+uVcWgMD
-# E0kNPE0btQhQXJYGelxv8DW5p+zahtbK43+DY9/eFHvvrvVaavg4/eAVZ4uzUXaI
-# v63oCUnofh6k8nByHnx/n4bHRJ2yuOsl5pDROyrip+rOjj6VQbaFmxK0bQHYJdDM
-# w/NdyvY70uhbmO1yatatxt/K3AiLVfa6I2O+0uOWygvYuS0px8yclHWjmRLl2I7M
-# 2pHJ2djrHltChsIgTaZkKQ6m5/CCaF2dV1G2gAxc+JvEzqHjF9uh2TYSoQEFbPrO
-# YFXP/nxF2Bc6y1qnuMOWe2Ooc1l42k8uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTj0NJAwdjkUwXkCU1b8n5O3pzLuDANBgkqhkiG9w0B
+# AQEFAASCAQAK6x/Zyp2bQ/Lu2bHgb8TuI1beOhxS33QMSRcFJJgoa9pj1n0s+UTN
+# VjmqzmIq8mlO3ANP87Y9KKYE7mDahZhLt5v/o2oYyuGvN22OTI2vnoGGBPUM6P7N
+# DKR2QmfcEl1MfknCS6uKEEPx+BPY//uewTHaO4y6SSrXtoy85MryCqZ9t54tGYFo
+# ZDVC24UeOJ+E4eviisZwzL788mWOKp/UmyRp9qK1qxhva5u0o5fAWOyb9gqyaCti
+# QpiQisAK8rW36tw3MnzaUMPNqYkwyu2o9Hz/ivA6DphmRMQ2mlja+Dsr/2YWQ7qv
+# ASfU7MlsPmLYSn/kO+AAx6mUjN5kxRIUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExN1owIwYJKoZIhvcN
-# AQkEMRYEFAnwi3IPyeJ1gkFx5aGOYbKMokrYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA1MVowIwYJKoZIhvcN
+# AQkEMRYEFJhSwSqsw8mugt7YBiJ76J7zlyP3MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz/t8gN2GaVS7YnYAyPFZjFg5tjX0VlVWp3OFtx33gHAHT
-# xEyhUrJmrjwJi84ljORrSI+m39cWU4yZMdyhGWNxqFnM86c5Z0P+vZ6UzPXxUEZr
-# GC53J3cy15ybEIlWfC+138pcVRJ+pQkMjQumw9ao8WShydr336DSl8l2A3vYlark
-# +ij+WrQdoTUab9zZuW5g443rSZniM75HQj14LiYmb342sSOE/Tv8Ta4mhR01ibVY
-# RY0btTaAwvdmXoumjmEOkwKOoH8w5Eq2uWpTVMNzKvQfgm6+HosUVmgwOBJY/C3O
-# q3A+HJZOML09pfBJGcL7wZkBBiimsIhfZ4bGgtPH
+# hkiG9w0BAQEFAASCAQCZx1NkPRCMGWuQfZP+nZS8crDxKCGc5uQ8feovoO14M4u9
+# lZChZpQZGKVohmQ1bE4/NU5IRFHxKS85xJrG1nF5yE0gi4svvC32pt0T+2i8b5DD
+# BT9s2i0Vk9U2rgpSwCSb5L4rG1rCmZcwMXVSPHe9iuKx0fFhOLtRTnVbNjzkzswb
+# +np810xMvLud9Rk9XR8Ko5BBlbYKYWre2xw9bxpVwn1sZMurXM6CAjGc+lKp6hMF
+# YX7iBtrVdNClD7zywYLfleN3upRXbG35VHXif/Z1lAtEHljTY2tIrJ2buIRQzZtg
+# OyX+nlxm43s5yv7nw/541sT2DWIS4Cnn4JCd1L0r
 # SIG # End signature block

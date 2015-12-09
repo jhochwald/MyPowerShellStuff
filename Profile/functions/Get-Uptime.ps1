@@ -26,6 +26,7 @@
 	the sale, use or other dealings in this Software without prior written
 	authorization from Joerg Hochwald
 #>
+
 # Uni* like Uptime
 function global:Get-Uptime {
 <#
@@ -33,7 +34,8 @@ function global:Get-Uptime {
 		Show how long system has been running
 
 	.DESCRIPTION
-		Uni* like Uptime - The uptime utility displays the current time, the length of time the system has been up
+		Uni* like Uptime - The uptime utility displays the current time,
+		the length of time the system has been up
 
 	.EXAMPLE
 		PS C:\> Get-Uptime
@@ -48,12 +50,17 @@ function global:Get-Uptime {
 		http://hochwald.net
 #>
 
-	[CmdletBinding(ConfirmImpact = 'None')]
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	[OutputType([string])]
 	param ()
+
+	# Define objects
 	$os = Get-WmiObject win32_operatingsystem
 	$uptime = (Get-Date) - ($os.ConvertToDateTime($os.lastbootuptime))
 	$Display = "Uptime: " + $Uptime.Days + " days, " + $Uptime.Hours + " hours, " + $Uptime.Minutes + " minutes"
+
+	# Dump the Infos
 	Write-Output $Display
 }
 # Set a compatibility Alias
@@ -62,8 +69,8 @@ function global:Get-Uptime {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgSC/gfD+TcqQwqZGNpwA0uOi
-# wIqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUSoJ9rkPbNj8Xt8t6F9ItmlAZ
+# gb2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -206,25 +213,25 @@ function global:Get-Uptime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSRXtRE6Dr1vUdR+3kfFSyAPE/zcDANBgkqhkiG9w0B
-# AQEFAASCAQBFqUFUSbR2Hu+q/UKKMz39nk3mbcjuQ+4Fv3CvAUiWbdLw5P/ILh7G
-# 46iqQ6fxp675blBiTy38r1m2v2VQ4AM8vX+lkQGD/cw0FR92iJbQf+Bk4AOoFwP7
-# xrtfLE+TKtkScLVFTQfjW9GUjF/nUDteJ6wpHTnNoul6EDXqYwkFjaxvwjep9PM9
-# L5nGe0K2G56MZGpjRaF9MMyriV98VpX0CnjI3k1SF+/l9j7VZMlQy6U3mx2uyAq9
-# JGX4d4smzcRXtMDaKTa9aEioigmueeUmnHfBwH1Ngd9/dDA+sbOlXhGsVSUNwQD8
-# Eyu7H/4LpIxesGq/jkpgAsIq0TT+evD6oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSxzkvKqQ26/0e4+H5FfNElrHPcWDANBgkqhkiG9w0B
+# AQEFAASCAQBBuEGmKOBTXNLmHaPD6BTelryS5ZTiNa2YMPemGOIOqvfbnPzPuZMb
+# MRUUGV4JOMqepmAeDAJMAXawH5xc3qu3KfuX58xU7T39kFX/dDPIJYPOozNwgpV8
+# LD+iC7BDQrp7mJeBMmHEugIC+uRy6mPFu/sA2uyLf1Hjg2ZKI7ZBwsVc7NPwtmfi
+# YunYiFpQlKOOFNjh5qYvY7uznqVr4abHLOISN0K6txykH+m/YYBzy6oF09YJuUug
+# RYQNx2jfQYjvsx/uGBPycufYQGBnjQO4eiIhoNYrNqlH3kUam6Od+Nj6LY2OK8/T
+# gJGzDQ4RVnOn0YnHax3+rTWsHpp+5ETtoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0MFowIwYJKoZIhvcN
-# AQkEMRYEFG87xj3hWdJ/vLmtXlUi14D5RN7vMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA1NVowIwYJKoZIhvcN
+# AQkEMRYEFI2AxftgshYL7I49Ql5rwyIR0P/HMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAtZQqQ98jlzJNX6FoPhSHgMVwC5MKMWxKFgpL6+n5Bd+f5
-# ZXuQBk+khQrIjYoeMYgg9o5q8blFOYLrn3vwTu0Vp5k+70lQSs96C7JkO1BgmnIs
-# v/VhbJPVgK2tVMgkXG5pFtL9hKd9WtlHlEn0nad9rvoUie5bwQO1Y9NFIQ3ikMgf
-# qA7uHXOQcfXPLLeYE+EJ9k2qOe8rbC09kV6GMA+SNZEh6oh90E2fJmCdHEBzxcaE
-# Ocww2QKltUmzIVrZ51AUUfR0OuoKoSHiRagoRXzugF9A+FMti0Mydpz0BR0EOFjr
-# /zSCmi6DxPomVlmefCtSfy1iST0Dm3W1z3WwsQX6
+# hkiG9w0BAQEFAASCAQAlzVm7ltkJdTy1Vtr6Ez3WXa2p0NQ8dT6v110gt+iZ265T
+# f0+TRUgeT3ClxO1egC+t7K59puij+lmIAQy6MNUBSC+Yd4iwMY7d2HJD0qETUFba
+# +v5dzF/xJUmB8Vf9nZ90xgvqNXl+JPZgoJKHtnhzNURI9PFkpzGKXAaFtaLBp1VG
+# W+jcWQxSxLND2i9Pl6lMOD9CShlCfziYZXXCg94dAJFbgcq95sa/I3XEsDspUoos
+# O1yGTP4soK6K/lZVu+QP2SfJuCdmbRjG6GMRRcbqVD1xE6ZXyX9S37BPaeobvgUu
+# L47n5I6Qst1AXfDhwcJiT5bmtIBeyogUf+XNNqpQ
 # SIG # End signature block

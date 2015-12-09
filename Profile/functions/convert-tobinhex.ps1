@@ -27,7 +27,7 @@
 	authorization from Joerg Hochwald
 #>
 
-function global:convert-tobinhex($array) {
+function global:ConvertTo-binhex {
 <#
 	.SYNOPSIS
 		Convert a String to HEX
@@ -39,7 +39,7 @@ function global:convert-tobinhex($array) {
 		Array that should be converted to HEX
 
 	.EXAMPLE
-		PS C:\> convert-tobinhex 1234
+		PS C:\> ConvertTo-binhex 1234
 
 		# Return the HEX Value (4d2) of the String 1234
 
@@ -53,12 +53,25 @@ function global:convert-tobinhex($array) {
 	.NOTES
 		This is just a little helper function to make the shell more flexible
 #>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param
+	(
+		[ValidateNotNullOrEmpty()]
+		$array
+	)
+
+	# Define a default
 	Set-Variable -Name str -Value $(new-object system.text.stringbuilder)
 
+	# Loop over the String
 	$array | %{
 		[void]$str.Append($_.ToString('x2'));
 	}
 
+	# Print the String
 	return $str.ToString()
 
 	# Do a garbage collection
@@ -67,11 +80,14 @@ function global:convert-tobinhex($array) {
 	}
 }
 
+# Set a compatibility Alias
+(set-alias convert-tobinhex ConvertTo-binhex -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhtyGCZ9EblgsdczhU1mFZMZI
-# y3agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPO44vVJUA4ImkNGJzCUVy6wO
+# 3pOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -214,25 +230,25 @@ function global:convert-tobinhex($array) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTD3YsTdv+c2D2k2k51oBC2BYF6bzANBgkqhkiG9w0B
-# AQEFAASCAQAL+zeg+Z6uhOC0lDBqU5Typ5Aa4bcSWlmJ2TiQJaybXfzYZZu6uYNc
-# d8bqoYThag1bDaWjzByDu5fe6fHDJ/UR1ewuRStu4avA7IFeNTx4gn/6MZ81tdMz
-# RZP7778MDNU4kbPfYLW+LbycsPRYqt14MTpeU4G7fKvhb5jFVMbXk9tPM/gyiwGk
-# f406V2b16dlE/1Laq688sjjsRNAFLI6SWZNxOFHCP7PWjRuSM9Hnd5vhSJdRWoyy
-# 3qCByRl5g7bQSqnXWZ+rCKaHsTr6PfRQ0i3g6hlIZ7rHt6vqCpHjHf0MDtJJk556
-# FTGVihheFlNchD3bmfW6Ou6SbL9FXQP6oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTivWkDPu56HJVpsBW+yhwBCcCNrjANBgkqhkiG9w0B
+# AQEFAASCAQA6vCkPEfRrwI2/MXPJzFJ9Xwp2SWUF79xWwJbREpEGL2wAeOUsLfBe
+# MOLKXIxfSm1QBSEqJt9Gt0d2TTD6lZ++sFvQWeKI3HnPDTrICaGIv4ddSINu+Pba
+# sj//SCgeY/yEn4EIhL+5Jzi7zq/SNSC/Y++fmbUIH4JAkYNwDYDPRwKqifuejuAI
+# ICdmQxhqj1z2cWhAoZeAIpAfv60Sa+MP5BK9VkeYW4WcQ+blbc0ihpBea/ztBobQ
+# XvABeY3k/eGhx8k3C3G4kKYc7kFKl8Zjn+gYuadk5SueYNy5rErBpM1nEM1Gu4Xu
+# lxPyh52nCo3OEev3tIZ8s/tada02Q1f4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzN1owIwYJKoZIhvcN
-# AQkEMRYEFApNLBM2W3FhkPo7F3J5uIi/KiOLMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAyMlowIwYJKoZIhvcN
+# AQkEMRYEFCNsPz1jvt605Po3nlJH0ht/flK6MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBQhACGaIIVXRv3pneXJmeYQB4ULQUoZbL0utYPRDi9/L5/
-# b4aQHNeHwCejufAWo/C8CYPuckIA9Np6MMmDJZXXSX1wD9kxWQuZVazXPKgSvYjD
-# Pl/pFqmOs6lPF5vKapIjXfQxcVpNOnQ9BNgeN2ISlNtwQ5QZeSQbxBmoTRaUmAzK
-# u8NdRgarAUFJ78YZ9WjW/ynBsg+uNDKB1BupBEy4+QNtcNuA7av1BJeqXzqQ1CY7
-# Q7n7vcjZOwJmfejBo75y2q9bofwYeuoqHfgiqg8lwWOiVWPhq12vO32DKwBzeHTb
-# /rRQmObw6LmCWtS6DeCx68VOfu05flMbwg8V2+oL
+# hkiG9w0BAQEFAASCAQAFId5DOS+zPydgWhT08YZaOhltEm5LU8q+wOeoXKLBIvTn
+# SO0SnvM7d6/hHzV7+99J+ECyzI6B4HOW7AQc35PkaCE3zXrasnvxq4hxZtrZecBd
+# qhUfbSG6PnBMoNRTUpvrROfpIfIdurN75inOypHvbdOsmxGkApMYXqKZ3Wu1/m/I
+# gITYpkQ/ZuCskxC3+Qo8OEn3kprcvD2tKI4EJhwNxTz/ldIuCT7fdg7LHWtKpWis
+# QpsQjM/bjEnoEh3d8U/cr9YYLV44eaIMAbL+mBS4MwDkgHpRYUzXV8GQmvRWOn61
+# VzhDbFHd/dTkGzCvlP0DalWJJk4s3cVxjqxuwS4v
 # SIG # End signature block

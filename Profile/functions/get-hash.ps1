@@ -27,7 +27,7 @@
 	authorization from Joerg Hochwald
 #>
 
-function global:get-hash($value, $hashalgo = 'MD5') {
+function global:get-hash {
 <#
 	.SYNOPSIS
 		Show the HASH Value of a given File
@@ -40,10 +40,9 @@ function global:get-hash($value, $hashalgo = 'MD5') {
 
 	.EXAMPLE
 		PS C:\scripts\PowerShell> get-hash .\profile.ps1
-
 		81d84c612566cb633aff63e3f4f27a28
 
-		#Return the MD5 Hash of .\profile.ps1
+		Return the MD5 Hash of .\profile.ps1
 
 	.OUTPUTS
 		String
@@ -54,16 +53,37 @@ function global:get-hash($value, $hashalgo = 'MD5') {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   Position = 0)]
+		[Alias('File')]
+		[string]
+		$value
+	)
+	
+	# Define a Default
+	Set-Variable -Name hashalgo -Value 'MD5'
+	
+	# Define a new working variable
 	Set-Variable -Name tohash -Value $($value)
-
+	
+	# Is this a string?
 	if ($value -is [string]) {
+		# Define a new working variable
 		Set-Variable -Name tohash -Value $([text.encoding]::UTF8.GetBytes($value))
 	}
-
+	
+	# Define a new working variable
 	Set-Variable -Name hash -Value $([security.cryptography.hashalgorithm]::Create($hashalgo))
-
+	
+	# What do we have?
 	return convert-tobinhex($hash.ComputeHash($tohash));
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -73,8 +93,8 @@ function global:get-hash($value, $hashalgo = 'MD5') {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU28XyY0+KZeTULZ3pIn2a3xO0
-# xtqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJ54ccujFkIZH7iteOsmILuEg
+# fFGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -217,25 +237,25 @@ function global:get-hash($value, $hashalgo = 'MD5') {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT71VMzvGSq07pe3VyPGy+8YI6ZuTANBgkqhkiG9w0B
-# AQEFAASCAQCPbT6r3yPe0M1XdA+i5DbqFKreL+XL1tssjVL0KRtTvw/XrO31cJqU
-# BBVMcL9mrjJZKkx1UMmHSaOEZ8jZgRwH4UmAKFzCu7327LFeGcAKzAYdRAhC8w+n
-# YO8Xw0xDSMKl5mcKLy950EVtICpNeglzhBBk4d4YmrQKySVaKk9HlMNKy9MNkQcd
-# A5ymrFEY6g6pETOYALneyJ4Sl0hPDBToWQGUxVbwS8wzchS2NeirbgMwlmrRTArO
-# zI3LwfqjpYj1ksXreh2f5qEE5D3hiIH6fQMI9keXzKzEDQ/mydNUz9xbKLAI/Xuf
-# nb7gTJ4klSM1nk40r8ZmTAKvVYWpV1vhoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRt/nMJBh9hZEyXkDRy3MJ2H2sPyzANBgkqhkiG9w0B
+# AQEFAASCAQAPKARQWWmGiPzZDlqESU5vxI2KcjLX8XmwvBQoVnmeN8nk4M9yHpbk
+# ejz9ycCPWu+JBGYfv7iREiRU6Mrd03couQ6WV1Zx80pq/7tPprUjIIDf8AYsoU6I
+# 3wRmP4T3zxVko+IbiIhiFvMHEI2Op2WlPuNblBOmFxGnnpG1Js3o4mw2VZg6GGKh
+# cJa1WrsBHcBbBVjfJtvxLkdeVszsXUby3f9EbLQJZ5zApYwWOt7wHP4E8Vd0z/J1
+# e4+cdaaVPFvDXChXZopEbs2K5bDJZd1tq4hI6luSM0pPJYyt/Osi+rGzSrqgldJR
+# veqExomPThBk2oYWMNn0ZWhh1/surbjAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzOVowIwYJKoZIhvcN
-# AQkEMRYEFHozjmcKY7A5O/AaIqvNim8hvsvuMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAzNlowIwYJKoZIhvcN
+# AQkEMRYEFDCzvnhWyDBsBWEupum+fRfGZ0d3MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCUcQaIipbAxJWy3ZJR2D52IOG7uztvUr08dK2eXqcTLEZl
-# KRj5NxgWGirq9MtzqCuKRvm4KI7YEdVT6ar2kmBg2bDEQBw6wWTETkwRl1xcK1GN
-# ZBu78fUvNzGa97gNkP71cyvNOm7FNBER8Srjo+NF8DVP8P54Ku9kmtseqcJrrHEz
-# vpzYyZt1hTc5+xyHfcA6JYwLvt9qyOzAAHZ0JwsT0E8xe0tbNmgHgMhoz66EyN95
-# me/2p45+d2hbfbOveP80NKU4swpP+8ySAYjuaHes9HN1nDup99LMy6dBmhbciETJ
-# o3w9jkHbUk0I5zXRmKtHkHGGpRa7qqjcaJXmkP0e
+# hkiG9w0BAQEFAASCAQA4LOl1D0DXKfoJ3a5Xn+f2s69/rljzCnHitABac64EdQPy
+# WPlNtH+lj8oHaXu/i6Xp7RmAIXdYjJeRTByVqLNbA9+7qHEqT9oAVs4sFtriGvDD
+# jxDK4yX4Xim4CmDuKaKAj225VlGmD3AciVEfqug7efFKBNaj/7WG8lZRtUBkYS87
+# lIgymle501u4NJjqk/uQKc32nZ/KMZnJ+VVBwGXuB4lEXCurdKhOVFI3NsE0m9D2
+# DG1zRYXbyAgPyThISNB6jvUmXEFrOqu91S1Y+tI7VORXv7jw3MPdNSyJS7HFvjJQ
+# QNvPPChOSrVczTb9tGSwirlwJEfGX1LAN8kf1xc9
 # SIG # End signature block

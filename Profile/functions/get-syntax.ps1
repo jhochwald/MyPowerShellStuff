@@ -27,7 +27,7 @@
 	authorization from Joerg Hochwald
 #>
 
-function global:get-syntax([string]$cmdlet) {
+function global:get-syntax {
 <#
 	.SYNOPSIS
 		Get the syntax of a cmdlet, even if we have no help for it
@@ -36,7 +36,7 @@ function global:get-syntax([string]$cmdlet) {
 		Helper function to get the syntax of a alias or cmdlet, even if we have no help for it
 
 	.PARAMETER cmdlet
-		commandlet that you want to check
+		command-let that you want to check
 
 	.EXAMPLE
 		PS C:\scripts\PowerShell> get-syntax get-syntax
@@ -50,8 +50,19 @@ function global:get-syntax([string]$cmdlet) {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-	get-command $cmdlet -syntax
-
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[ValidateNotNullOrEmpty()]
+		[Alias('Command')]
+		$cmdlet
+	)
+	
+	# Use Get-Command to show the syntax
+	Get-Command $cmdlet -syntax
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -61,8 +72,8 @@ function global:get-syntax([string]$cmdlet) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzoZK9ggGtjZda92FEKbtgdnD
-# whKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUae4ouNClC1OqBg4YzHKAtlee
+# mBOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -205,25 +216,25 @@ function global:get-syntax([string]$cmdlet) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTpBtzXwuSwIKRBVpbh3QvWn4ZuJzANBgkqhkiG9w0B
-# AQEFAASCAQAWIIXs1jVAL2Nc3J1aTIEom585ETIpy8SkoQLHZO3XinMFlC3QoXrb
-# rtccJ9DCcPYIA/EVVS9aZjlaidnvIflUIcm0mjbYbssUfd61u9VGS3TVU7P3rwuf
-# dmu2lobDytrlv76g75iQ6bagMsKLgwt3gJ0fevW9bweDPQfhftQtaXWVq3jozzQ5
-# icGAO2azJ7PtSHZJILERi7gzP8yVY5AspicC09KFfftczfhij6Cj73tv6gKlZ/hw
-# YNC0RRrTRI+hNV7vvkQEXxcBF8acFH5EC/qzNvX6h3vYo8GvVA1iJ9vv9HbI3d0b
-# oaqFP2l/UK8h3J27MfqXWFPTO7ekzB4zoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTDc1xFsMeQ3e/hYxWedf48Sa6vTDANBgkqhkiG9w0B
+# AQEFAASCAQCEVeFdsqBbfTYD5woaeP8UvRL2W5rci5GwWjbBbAPNazEjzOh5WXE3
+# 2dkPCzh8sZeFM4J11vyy6nDIb7xEHmmQVZ8kizZ0EiA7QTAxWWpj/qtw6wkYHwqC
+# 7d8GpWvm2hnktvlA9OS2nnGvv1KKptkAIhGm37Iw8+Z9/QXj4Z+isidaYxu7o7OV
+# WE/w/FxQlB/JYBmBkz0qU8/4LCtt4Ud5TNskfT7wLLZ9ZVHXrCqw2AgyseqIuqHv
+# z3MgrO2c6H9H9DK/Nm+jayEUrmz5FbB3i5mEy+LBtSgTkazYvbUfg7615YoDi3nV
+# cy9mAF2utMM1b0bH19A9ktKuUJ70caGJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzOVowIwYJKoZIhvcN
-# AQkEMRYEFKxId0nlz3fAWT/Gi02FvAZzO/Q5MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA0N1owIwYJKoZIhvcN
+# AQkEMRYEFJM7UYQaEQG4VteEEXk+JsH1Jij2MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCmXh0fASRCZxYqVYyfnGx4liHdFbxHUetz4UWaBC3brALm
-# q5kIHYTdEg/ff14Y2IXfqoRXyRwOUNrOovpX3c+y8ulic1/6Hed/mavSvuuWHNro
-# 0rQzSs9e4KriNG+S5w59hxBIjqCDq18W+iq6NdWqTULvqRUfidC8xmMG+rifIFF8
-# R80stRtBN4YETt2kFcNhc8jXM681Ns2VVAPEeC8owCV0+FTVWnX9XiJLS4aYS8n9
-# U0HkSQsRLVCdRp+sZEPhcHahu8mAi9hXRrCiXYoFnMZ1kxHaIIHDCnL/fo/n95So
-# vD2JzBgiNWBBkxRd929vZtSIE424LcK2uUluGlf/
+# hkiG9w0BAQEFAASCAQAPZdl54qrbl9KhxsvLYjqIEcnVf30FbJhlqBMZfjgJKYrw
+# 3w70+LvklFFJWoT1Xc6PYe1pWCcLtjKFYvQuCuU4tER0K0NPIgs2PFxrZJ2AGiZx
+# MJ73AdsWAe+iDmGj0qSF8FmKhH+MMiC4D5wk6oaPilZJfnyHgVo91AK3nOwoeV2o
+# BVCXFLQANQJV7BsRt+zjI3rS4vTqkoCL1iw36Xm3WKvv2ZH2mvCBA00VWBBQtaWk
+# VXlwKNdgylYfjQVZDoncfgmegfp4gunFJxV9OvMNVkPQoXTT0DDnx6AcK05nDpAS
+# Enw7V/rsLu9kRW4JTkAe062VCYofzn2/rKSbBHxm
 # SIG # End signature block

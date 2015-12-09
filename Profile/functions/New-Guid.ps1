@@ -32,35 +32,38 @@ function global:New-Guid {
 <#
 	.SYNOPSIS
 		Creates a new Guid object and displays it to the screen
-
+	
 	.DESCRIPTION
 		Uses static System.Guid.NewGuid() method to create a new Guid object
-
+	
 	.EXAMPLE
 		PS C:\scripts\PowerShell> New-Guid
 		fd6bd476-db80-44e7-ab34-47437adeb8e3
-
+		
 		# Creates a new Guid object and displays its GUI to the screen
-
+	
 	.NOTES
 		This is just a quick & dirty helper function to generate GUID's
 		this is neat if you need a new GUID for an PowerShell Module.
 #>
-
-	[CmdletBinding(ConfirmImpact = 'None')]
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	[OutputType([string])]
 	param ()
-
+	
+	# Define object via NET
 	[System.Guid]$guidObject = [System.Guid]::NewGuid()
-
+	
+	# Dump the new Object
 	Write-Host $guidObject.Guid
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwxZIPk4VVHS8F29Sacv5IjKc
-# InagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtl1MoB6cVppxEDGRUa61VQLQ
+# FMSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -203,25 +206,25 @@ function global:New-Guid {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRbLYmBzDhIXqqdU4c0PoVvM+pjCzANBgkqhkiG9w0B
-# AQEFAASCAQBu9Y5EQJdh4oy8mdZ+KWR0zo5eKPLsXAvvvIlZD+Neu+n8GHEfUx18
-# 8gPn/QJd9GB6VE9kS2x2sl5+FALbWFT2II5ly4i1yr5DTTQX24oHX2mWJBEgoBFm
-# RdYsxLDiYruBRyHEtlkiP+gkVkGwHivQJORZ2K71rlAwZpuDWz4W1xlB3dnUXqUh
-# yQF//29snCzB45dVdP0eJcnNK4fJNOVl10HUo4VCiHiBAKEet/XLwrAd+xKQiUQY
-# 5CAcg47RIy/ZrRk1y1+ZKg98TyMm/VyE/MQF7TD8G9wUALCs6rgPCkKYwdzUX+Xz
-# dKBBgybPrYfF+ZnvgKqyrr+dnG5IfIFsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSJa/WsSQ8F92Bnevz5CSqDwbLFRDANBgkqhkiG9w0B
+# AQEFAASCAQB+LHTsUwJS/KFDaP0TSr1SBlQ16ICnurDgArY+/GJN1FugB8C7TkI5
+# t8vFm6jknKG/Q9yv/JxwxDC79eTAYhFMJVIh4GwpEKsUSNd1uS0U5ADFG/5D1TvO
+# pFEAfukHcR3aDU/1FWcZtUrRebb08F1zegv0aW+DGpVsRBYSK8p7Mmb6P2r880/j
+# Gs+BS182RZak3rRkPP/GNsnqY7bRLIkv+VrcMrthCiPoT2oE7po4muxTvkRVugc3
+# 4IfDFVIIc76d/Wp0IdJd3PVf8iZ/41C7thXYI7n1gVz2+OJfb+/+O/p+USDRtPO/
+# 8Vl7frJmfpZaIeJsFCCe/iUNPZbprjo+oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NVowIwYJKoZIhvcN
-# AQkEMRYEFEF50pLDJM/SPeK9BY1esr2UZGhrMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyMlowIwYJKoZIhvcN
+# AQkEMRYEFMfsYN1kVgfZTe9HXXd3GFHpNi5TMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBvnPalOA17v47CFOqc1/BKUq7aEA9GfGeWVfK+J/MMAhqq
-# zHlNZqS7S4XTdMQQe2u/jzVZSKyWgfn9l3BYYkCk0No3yjDCcvuqxeCvHzJgdExs
-# 3sw1Wq+t/eNZD03gYTIokrsExO8bFpg1E5ahM/vSvEZvJGpCE4a0HZLGTFondCOd
-# a4Dh1iIY+91K6oHyf2d5e2rcfCIyasZpU6evFgS7Qyld8OGUiyDRPDN+JTLYShJ5
-# S/x3UdNjflVSY6n97dinctmJSztfGEJE8O5PtDzjhgMDoppuF0F9/42lH59Puapd
-# XAVPAwhzC97mmF+1S+pm9pm3aRaFTS6DUQW8pHUE
+# hkiG9w0BAQEFAASCAQAPrFmTvQMIzSybls4HlcqhLvKYhYlI84pQ6GyQhnKgplNN
+# YaCuFV4GslRZ0YIedYo4nv4Za9W8uXDhng/YWNzySHTOyolxjor1wX4qnpsjgOlR
+# vOwJwxgsMLWUk4AKwS1NYRei0SU543FqhTK41GV84CV7BCQ/c3IGo2f2JQIS2ToL
+# S435xGbyajPz1WgnUIJdSf+uoSijDvFdapMwpSSqOkiiskaSGNvdxeyCJOqLCFsW
+# 8DEF61Czixm15QxpbX1iKNFb//OQGC/aG2nr+rfv4Mmlz133MlTI+kZ0kNx+M0pS
+# sDlWgPxHUaOYCoKiL25QLaMy1S92zOYS0vDtMNUi
 # SIG # End signature block

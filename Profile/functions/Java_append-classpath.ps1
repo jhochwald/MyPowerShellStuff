@@ -31,32 +31,35 @@ function global:append-classpath {
 <#
 	.SYNOPSIS
 		Append a given path to the Classpath
-
+	
 	.DESCRIPTION
 		Appends a given path to the Java Classpath. Useful if you still need that old java crap!
-
+	
 	.EXAMPLE
 		PS C:\scripts\PowerShell> append-classpath "."
 		Include the directory where you are to the Java Classpath
-
+	
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-
+	
 	.PARAMETER path
 		Path to include in the Java Classpath
-
+	
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
-
-	[CmdletBinding(ConfirmImpact = 'Medium')]
+	
+	[CmdletBinding(ConfirmImpact = 'Medium',
+				   SupportsShouldProcess = $true)]
 	param ()
+	
+	# Do we have a class path?
 	if ([String]::IsNullOrEmpty($env:CLASSPATH)) {
 		$env:CLASSPATH = $args
 	} else {
 		$env:CLASSPATH += ';' + $args
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -66,8 +69,8 @@ function global:append-classpath {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbd2BidfZhnnCNbhOSfC3aKKu
-# rEqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURE1ZLWLUEbSRt7taOoCJnu5k
+# SfmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -210,25 +213,25 @@ function global:append-classpath {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTPdFq81oUeowPaTY6b+eelLylfFzANBgkqhkiG9w0B
-# AQEFAASCAQBRxo3fTbflehLyy2K3tuf9J3RsocM1F82aFdTT8bGSJlfEuLlDs5Tx
-# SEEH57Tyqar75iCX+fd7wpP2+vVrjdYAVdgT1sEKpyFsdtNzcHRq3dzGi1dY8EwY
-# Rb1qLluTgS8szB96JlOEGJChS1a89E2EXWyCsjPU1Kn5hv+kkgsWilWqCcqrU3DM
-# xGzQOKIoElhigXXDW1nhRMeS6qrLMHWDXvxgVkrbFI4s1P8RAzZm39tpMGAP0Qxx
-# MJVw2aGRjX1gLozbwShOju2G2q4u178KtoSslcdPHjxesHlhzXfxdQx1d/EMbraV
-# 4pSRBOZtQ08yZrF/c6KdhVrKZdvn86H5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQVXzCXnIjYmM4xz2N0RMq/uV/beTANBgkqhkiG9w0B
+# AQEFAASCAQBCkCeQRfYq8Ji/woToYv72U5GmY23u9sRSHF/PaTfWBHwvUk066EfS
+# OjyIrdhgR7n3T0++W5aZYDTBXiNwnjDYAPAt+7mLMbu2BuOvHem2lKOLVn/2R8JZ
+# eT/ouDIH6C6jcK+vMyhRvbEHknaQufuVDHYJJSY0wdV0jZiuzbbULZeItfS9t1mn
+# e1WyzGnyOEjXpUe5RVbLAoIWaq1s13E+83++oHwhSoaMqX8GXLFHgaLaR2gBiRDW
+# 1tmY/hUARu79B+o/4OBmD/7xl4Ixj3s7mcBgsoiQargXRYCy1/Ko58imnxP+OdPC
+# UjgX3XYWn6RykThIQ2qbXYXjTkzIzFh7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0M1owIwYJKoZIhvcN
-# AQkEMRYEFJxDRHd8rwgPgrsENtpvgEZGQhbTMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExM1owIwYJKoZIhvcN
+# AQkEMRYEFJfOFoMbkn3B88RkfJwQTI/Mlv6yMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBfgFfjYwRaNFe9g+F3AstDND1e88dND1/ZbSFVPLLZaIz/
-# JhugLd7EIlfBDidzBqcoc4zZAYEKAXYj8P7cSN3cuScNfF+6gjpix+XCzy2Kvlnw
-# fwsgdw3RwUIFbQDuqB5jbqMKK7oer8ExtAK0s4ZEAcQ2y/r6Fo3QrY4ldqeLbdb2
-# +1H4fM2nesnkRO3BeB0OeeT5kduOfKyATuZRYMW0ZaxyE/ROBFhdVEm4WX0gfcVX
-# HpSTx7kYNfvakE+FQ76SoxCdB7T6xw3DbXHoOTIZSzOJqeTeevY7DaClVOkyU+SY
-# DhG8QCSIYeZvmcnOtON9Otlyl0gW9/zV0ossMgnm
+# hkiG9w0BAQEFAASCAQBCn0zapzQv95e2Xp75ebfre7BJQ4QlFJHyBPEMpXToNhuE
+# gupWS+NUrN3n07Jna7g+8C0UwBOLfgfsJKzqgVLBHKXcLgyErmXBkSo/FkiEMD/r
+# hSkhDdR6ejSuB/IT9qTIlg62lGD7YIFels6vwkofFKUy+3dSA/tzwo62MGhWpsuu
+# 6wWixmw39ZgfXna8LEmSf55IVPCICI7ZIzhRALq6MhCpPzzYeM5gH9f3VFGbYFMg
+# aFdSLGZDMvnMdqcdCky/mm9mmv9q/AOceqsglsPZC2bXCnfAN6/STOQnu9Rsae1I
+# S0XnmvXtazLWKppjuX9uivg3woxAcFDZGvV7jCKo
 # SIG # End signature block

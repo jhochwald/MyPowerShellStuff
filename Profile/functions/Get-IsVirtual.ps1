@@ -27,61 +27,113 @@
 	authorization from Joerg Hochwald
 #>
 
-
-# Make Powershell more Uni* like
-function global:Load-Test {
+function global:Get-IsVirtual {
 <#
 	.SYNOPSIS
-		Load Pester Module
-	
+		Check if this is a Virtual Machine
+
 	.DESCRIPTION
-		Load the Pester PowerShell Module to the Global context.
-		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
-	
+		If this is a virtual System the Boolean is True, if not it is False
+
+	.EXAMPLE
+		PS C:\> Get-IsVirtual
+		True
+
+		If this is a virtual System the Boolean is True, if not it is False
+
+	.EXAMPLE
+		PS C:\> Get-IsVirtual
+		False
+
+		If this is not a virtual System the Boolean is False, if so it is True
+
+	.OUTPUTS
+		boolean
+		Value is True or False
+
 	.NOTES
-		Pester Module must be installed
-	
-	.LINK
-		Pester https://github.com/pester/Pester
-		hochwald.net http://hochwald.net
+		The Function name is changed!
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
+	[OutputType([bool])]
 	param ()
-	
-	# Lets check if the Pester PowerShell Module is installed
-	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-		try {
-			#Make sure we remove the Pester Module (if loaded)
-			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
-			# Import the Pester PowerShell Module in the Global context
-			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-		} catch {
-			# Sorry, Pester PowerShell Module is not here!!!
-			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
-			# Still here? Make sure we are done!
-			break
-			
-			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-			exit 1
-		}
-	} else {
-		# Sorry, Pester PowerShell Module is not here!!!
-		Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
-	}
-}
 
-# Set a compatibility Alias
-(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+	# Cleanup
+	Remove-Variable SysInfo_IsVirtual -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable SysInfoVirtualType -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable WMI_BIOS -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable WMI_ComputerSystem -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+
+	# Get some System infos via NET (WMI) call
+	Set-Variable -Name "WMI_BIOS" -Scope:Script -Value $($WMI_BIOS = (Get-WmiObject -Class 'Win32_BIOS' -ErrorAction Stop | Select-Object -Property 'Version', 'SerialNumber'))
+	Set-Variable -Name "WMI_ComputerSystem" -Scope:Script -Value $((Get-WmiObject -Class 'Win32_ComputerSystem' -ErrorAction Stop | Select-Object -Property 'Model', 'Manufacturer'))
+
+	# First we try to figure out if this is a Virtual Machine based on the
+	# Bios Serial information that we get via WMI
+	if ($WMI_BIOS.SerialNumber -like "*VMware*") {
+		Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+		Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("VMWare")
+	} elseif ($WMI_BIOS.Version -like "VIRTUAL") {
+		Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+		Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("Hyper-V")
+	} elseif ($WMI_BIOS.Version -like "A M I") {
+		Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+		Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("Virtual PC")
+	} elseif ($WMI_BIOS.Version -like "*Xen*") {
+		Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+		Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("Xen")
+	} elseif (($WMI_BIOS.Version -like "PRLS*") -and ($WMI_BIOS.SerialNumber -like "Parallels-*")) {
+		Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+		Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("Parallels")
+	}
+
+	# Looks like this is not a Virtual Machine, but to make sure that figure it out!
+	# So we try some other information that we have via WMI :-)
+	if (-not ($SysInfo_IsVirtual) -eq $true) {
+		if ($WMI_ComputerSystem.Manufacturer -like "*Microsoft*") {
+			Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+			Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("Hyper-V")
+		} elseif ($WMI_ComputerSystem.Manufacturer -like "*VMWare*") {
+			Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+			Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("VMWare")
+		} elseif ($WMI_ComputerSystem.Manufacturer -like "*Parallels*") {
+			Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+			Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("Parallels")
+		} elseif ($wmisystem.model -match "VirtualBox") {
+			Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+			Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("VirtualBox")
+		} elseif ($wmisystem.model -like "*Virtual*") {
+			Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($true)
+			Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("Unknown Virtual Machine")
+		}
+	}
+
+	# OK, this does not look like a Virtual Machine to us!
+	if (-not ($SysInfo_IsVirtual) -eq $true) {
+		Set-Variable -Name "SysInfo_IsVirtual" -Scope:Script -Value $($false)
+		Set-Variable -Name "SysInfoVirtualType" -Scope:Script -Value $("Not a Virtual Machine")
+	}
+
+	# Dump the Boolean Info!
+	Write-Output "$SysInfo_IsVirtual"
+
+	# Write some Debug Infos ;-)
+	Write-Debug -Message "$SysInfoVirtualType"
+
+	# Cleanup
+	Remove-Variable SysInfo_IsVirtual -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable SysInfoVirtualType -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable WMI_BIOS -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	Remove-Variable WMI_ComputerSystem -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+}
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNlmsDh2ScEDVhBKdgVt4my5q
-# bXOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOiNIPxl4teiG6BHDrezhSWt8
+# HPWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +276,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxbhLuidAX/LTi+98YgwUJL4N/aTANBgkqhkiG9w0B
-# AQEFAASCAQAU9OXhQQxE+26PAK8JuHxuoGoGL6sJzyoUYPtoUANJI3vn+uVcWgMD
-# E0kNPE0btQhQXJYGelxv8DW5p+zahtbK43+DY9/eFHvvrvVaavg4/eAVZ4uzUXaI
-# v63oCUnofh6k8nByHnx/n4bHRJ2yuOsl5pDROyrip+rOjj6VQbaFmxK0bQHYJdDM
-# w/NdyvY70uhbmO1yatatxt/K3AiLVfa6I2O+0uOWygvYuS0px8yclHWjmRLl2I7M
-# 2pHJ2djrHltChsIgTaZkKQ6m5/CCaF2dV1G2gAxc+JvEzqHjF9uh2TYSoQEFbPrO
-# YFXP/nxF2Bc6y1qnuMOWe2Ooc1l42k8uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTnAFzfQ7HaTC8WyqzTch0JXkp2XTANBgkqhkiG9w0B
+# AQEFAASCAQBr9wpN0/2Yp4B2jKC8yjmEylHdv7EZNBIXkWieHLjwQ0ScA8wbli5j
+# zXhE5KyvULllRbECGm3E7YJxToBueuTSWFAGoruSFmpNDkP2+U62/XihOeeNJeoS
+# CI7MTE7r1Mt21Jqp+Z8aRhANjAXACH0oGm8t8qYrWi3GWNXJEVP1RI1Ot1YVruMf
+# 9NZPGdf6PBtdGFNi6aR0k3ClXw9PJDf7s8gB46cgH9P5tpjbKe0Aky/lLnbzjqrg
+# zgmOdJPoDpJ564Nyf98uO/KW0pQAscZst9Ows3EUWX1rzeS8E3ZOhxbB089Jszk5
+# tSpPmpw04jxHnWLlxC9A9apaPZOV1X3KoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExN1owIwYJKoZIhvcN
-# AQkEMRYEFAnwi3IPyeJ1gkFx5aGOYbKMokrYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA0MVowIwYJKoZIhvcN
+# AQkEMRYEFOVUzcAWEvCMaDCtQgYVzHSJzZXfMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz/t8gN2GaVS7YnYAyPFZjFg5tjX0VlVWp3OFtx33gHAHT
-# xEyhUrJmrjwJi84ljORrSI+m39cWU4yZMdyhGWNxqFnM86c5Z0P+vZ6UzPXxUEZr
-# GC53J3cy15ybEIlWfC+138pcVRJ+pQkMjQumw9ao8WShydr336DSl8l2A3vYlark
-# +ij+WrQdoTUab9zZuW5g443rSZniM75HQj14LiYmb342sSOE/Tv8Ta4mhR01ibVY
-# RY0btTaAwvdmXoumjmEOkwKOoH8w5Eq2uWpTVMNzKvQfgm6+HosUVmgwOBJY/C3O
-# q3A+HJZOML09pfBJGcL7wZkBBiimsIhfZ4bGgtPH
+# hkiG9w0BAQEFAASCAQAjngEKRLY/Z1o+N5G+DHP/j8V8z/pOcC8N7dn9RUb5/fJZ
+# dgyG6l+5dNjyt+C/Y5JVBRHUTsjC3N5f5c4xyRMk6y8xzcxqWkufqihdv1Lqu93g
+# PP2VBx+dkU4EwPIj6M0mobM+MYoq7m5qGyQB+7gPpNxgvFJXr3HfK9QS+mszGJMf
+# dui+fW9Ua54rv8ZhF7M9cY/S7yHMZsvjEr7XUzmMq+O2BP9Fi6dkRBMY5KUySQrA
+# G4h4RGg9vBbHbkdnqlZflLfXo7bvZvcdorrbJ2P+bnliUBGzjbfaH2Y3euAOqrC7
+# b1cBuV6V7j9tSU0NDSaPesCmrtDd96knTjvh+ByV
 # SIG # End signature block

@@ -30,7 +30,7 @@
 <#
 	Simple Functions to save and restore PowerShell session information
 #>
-function global:get-sessionfile([string]$sessionName) {
+function global:get-sessionfile {
 <#
 	.SYNOPSIS
 		Restore PowerShell Session information
@@ -58,9 +58,23 @@ function global:get-sessionfile([string]$sessionName) {
 
 	.LINK
 		kreativsign.net http://kreativsign.net
-#>
+#>	
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param
+	(
+		[Parameter(Mandatory = $true)]
+		[ValidateNotNullOrEmpty()]
+		[Alias('Session')]
+		[string]
+		$sessionName
+	)
+	
+	# DUMP
 	return "$([io.path]::GetTempPath())$sessionName";
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -79,12 +93,12 @@ function global:export-session {
 		- history
 		- The current directory
 
-		But still can be very handy and usefull. If you type in some sneaky commands,
+		But still can be very handy and useful. If you type in some sneaky commands,
 		or some very complex things and you did not copied these to another file or script
 		it can save you a lot of time if you need to do it again (And this is often the case)
 
-		Even if you just want to dump it quick to copy it somewhen later to a documentation or
-		script this might be usefull.
+		Even if you just want to dump it quick to copy it some when later to a documentation or
+		script this might be useful.
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
@@ -92,24 +106,31 @@ function global:export-session {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	param ([string]
 		$sessionName = "session-$(get-date -f yyyyMMddhh)")
-
+	
+	# Define object
 	Set-Variable -Name file -Value $(get-sessionfile $sessionName)
-
+	
+	#
 	(pwd).Path > "$file-pwd.ps1session"
-
+	
+	#
 	get-history | export-csv "$file-hist.ps1session"
-
+	
+	# Dump what we have
 	Write-Output "Session $sessionName saved"
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
 	}
 }
 
-function global:import-session([string]$sessionName) {
+function global:import-session {
 <#
 	.SYNOPSIS
 		Import a PowerShell session info from file
@@ -121,12 +142,12 @@ function global:import-session([string]$sessionName) {
 		- history
 		- The current directory
 
-		But still can be very handy and usefull. If you type in some sneaky commands,
+		But still can be very handy and useful. If you type in some sneaky commands,
 		or some very complex things and you did not copied these to another file or script
 		it can save you a lot of time if you need to do it again (And this is often the case)
 
-		Even if you just want to dump it quick to copy it somewhen later to a documentation or
-		script this might be usefull.
+		Even if you just want to dump it quick to copy it some when later to a documentation or
+		script this might be useful.
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
@@ -134,15 +155,30 @@ function global:import-session([string]$sessionName) {
 	.LINK
 		kreativsign.net http://kreativsign.net
 #>
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param
+	(
+		[Parameter(Mandatory = $true)]
+		[ValidateNotNullOrEmpty()]
+		[Alias('Session')]
+		[string]
+		$sessionName
+	)
+	
+	# Define object
 	Set-Variable -Name file -Value $(get-sessionfile $sessionName)
-
+	
+	# What do we have?
 	if (-not [io.file]::Exists("$file-pwd.ps1session")) {
 		write-error -Message:"Session file doesn't exist" -ErrorAction:Stop
 	} else {
 		cd (gc "$file-pwd.ps1session")
 		import-csv "$file-hist.ps1session" | add-history
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -152,8 +188,8 @@ function global:import-session([string]$sessionName) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUeAlvHwKUVK4mBgmh2/4buzyx
-# cyegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2rnPp5qLe3lmChoVR19vrSvB
+# /S+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -296,25 +332,25 @@ function global:import-session([string]$sessionName) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBThYGA4nXq8wAxb+PRaFXMH6ea5pTANBgkqhkiG9w0B
-# AQEFAASCAQBEMSiEE7bIZ7cYcIcpJ/HJkQGv8nqUO947QHNH7AIsYOEzdn/3RLDC
-# TKSStBLA6zZp21F0k7nTlo6o1QjoqkyD/n+zuIIQ8MvFJFoaGG3Yv9d4bRvWw3Wv
-# enQr9C1blsS4e4Q56J9hkFW2OcE28ZbLDNadWpA/2KWHEToGBZhnb/Srd4FsBo2C
-# omzjY9K7kx9MRsxSQddmKCv5NgWSeGND+Snhyh1DS2Qh6fhgH5+xZEtx2ei1J9Tz
-# jDMMh46IorFramqF6jyJ+dg1mfkuAPBiIQeHrG2wtUu+Zlz8okPzyLVu2T5ais8g
-# fhUv7nwel141SRg7eJYYPSziatwcnxEyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTkNGnTtrLvTiHHRTfLkGaORKQ9rjANBgkqhkiG9w0B
+# AQEFAASCAQBdrskFD7uJZ+mbIa4zQNAmyV3SYmYrWWlLmApa5fvLlT5XlRHorFsd
+# IyN396xcX8OOwN+X7TqIRxxnTegfDc6sOcKhKWXXwkRP8APfSrwKwyfcyPvyoCX2
+# cLcOjdNqMDjDrH7W+Qik2TfRu88oZONxT0zfKunQ2WEDPYSdyqOTkE+xq0yNEG2x
+# yGbb5PdzKA+eVFOWGqyg6yHM3RJPJ1n7+jWNSL0ggc/wr5CzhVcZy3w6mIQAUcbO
+# cqRPzX0BaqwnHohFWr4FZfH1GTZYo1aMU4D6jvkayWNBwK1QV69kUZHf6KWBL4i5
+# 0xuH/BXCyytLU34lszD8wzQ+RHZzxK+7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg0NlowIwYJKoZIhvcN
-# AQkEMRYEFKWmEI6uskyumcKznEF9GNGSl9lpMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyMlowIwYJKoZIhvcN
+# AQkEMRYEFArCHAPwiTsm52fTd9OG2mm+65xNMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAc3SB8WL6BCXQMjrylsmcr2nZ9SkKt8PD6EiWKWcjoJcOu
-# 9m8Ucq3TFgcU07PTl+aDsxtJl1Ai6QTf+o2w6EHTD0f/RxomYTTM54nUAPw0wWnb
-# JcqoBiNu+sTfRPoNPRLL41p2uV8e3gwG3h5WU3d59Ss57ld2aiI+yqQcOIcvECmG
-# iqXF2LaMN7MFEfzY+xU7aKScM4gvlRt7gmsZGYesVfTA11sBa4MQWHCrlHxB3gxa
-# L2LjjIM7zIOm42U5GqS9w9eB7S5n7CYq+FOschtfq5Qqna/NkE2pJM1y10C+8TJc
-# 3F9XWA5Yx9A1sPYcKZxwDcFXXfC9RZRPTbQYLG1J
+# hkiG9w0BAQEFAASCAQAYEnWYuq7TeEDg6oWkglun5/h68x05Cs0TcIszxDOItajP
+# 2qxN/IBlQwiZYkI71tJnOnxfE9C8gR0dEmNu5CmSQ2qK5MaUOYODDF2VXvxdRrSo
+# V4Q9QPb0ZWa5OGqXocGWlB37M1nnDalZi+/Nl4SAbOIcWw6USLxTwJyP597V9EWd
+# 0nXZpkOoU9oUE1o09ZffdlQmtsUvRWiiSaNwNf9jGTTwdKVeR/b7TqaoYDNxz2sA
+# mnrwGY3IYeS6oTrGzBLY1wk69focKWcp/kyHp86fo31XjLUzce+/NwgtqBFT8+Pb
+# 4Dmv/I2y2nx/IUXKYdcXqWe8BW3W+m+++xU+XzcS
 # SIG # End signature block

@@ -27,46 +27,53 @@
 	authorization from Joerg Hochwald
 #>
 
-# Every *NIX user known Tocu and we miss that on PowerShell ;-)
+# Every *NIX user known touch and we miss that on PowerShell ;-)
 function global:touch {
 <#
 	.SYNOPSIS
 		Change file access and modification times
-
+	
 	.DESCRIPTION
 		The touch utility sets the modification and access times of files.
 		Touch changes both modification and access times.
-
+		
 		If any file does not exist, it is created with default permissions.
-
+	
 	.PARAMETER file
 		The File to Touch
-
+	
 	.NOTES
 		Make Powershell more Uni* like
-
+	
 	.LINK
 		hochwald.net http://hochwald.net
 #>
-
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	param
 	(
 		[Parameter(Mandatory = $true,
 				   Position = 0,
 				   HelpMessage = 'The File to Touch')]
 		[ValidateNotNullOrEmpty()]
+		[Alias('FileName')]
 		[string]
 		$file
 	)
-
+	
+	# Does the file exist?
 	if (Test-Path -ErrorAction SilentlyContinue -WarningAction SilentlyContinue $file) {
+		# Define objects
 		Set-Variable -Name TouchFile -Value $(Get-Item $file;)
 		Set-Variable -Name DateNow -Value $(Get-Date)
+		
+		# Define object
 		$TouchFile.LastWriteTime = $DateNow
 	} else {
 		"" | Out-File -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -FilePath $file -Encoding ASCII
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -76,8 +83,8 @@ function global:touch {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDMf2AUl1I2jycYedBCQ/nkw2
-# HsigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyRvsgaPeXZuBGBquqWnkacu5
+# rVWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -220,25 +227,25 @@ function global:touch {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSTq9+uyLwRxDJ9xawTAcWYv3kGLjANBgkqhkiG9w0B
-# AQEFAASCAQBpk6RD6HGPp5+O0OYuiD9/YsR/VZNQz7a7g9Q46qZdbKh3k8GGs90Y
-# 8kc+KbF0qvLoe4IZuKg7KRivbO+n1qAcfKp5JYqmO9PkGpqH4k4AOJsMcKEaa4Df
-# +rqMnFX2fiblI+zIqwuelB6Kvo4DHZfih9HBWFNVfi83TqWc2dTHjfSwg9/P85KC
-# i3e8Z2H3RnZUNhf57RX6rTE9OdASBdHWnkZFRZI4zO812ru6O/tUnAtwrqsSfZGO
-# h5KWDrHKRINDO0hoVSbL1Y+s1qd2t1wsFtodal9y6ogUplaMLYjcmJXfzi98KiY6
-# gQuCyN73diIeMlT7oUa1FNP7Orb9/c/ioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTviJQVrhnJNMru/1cwMbaFQ2L6qTANBgkqhkiG9w0B
+# AQEFAASCAQB7XWQJW1z7dnzZkeKcSpgNgZdmIjF2aPoo5cRh8jEgsMZOCvZsX3f1
+# QGXEsB0hRDPaWNxCyVqD3VyzOLR0FCR6dOIQ1o5xqLtW4J0t2LFTS4tTI4/sWqAi
+# 1t+TLxaMv6RmfXAH3IsYvfHLx+3XgQzOhX/TLcNN3IHCE0wACwcXJcE0kxcBnD+u
+# 0IOlCbR0jLaNF2meJytPmQE7lOML0RvVElb2dYZCgv2fnhqYjM3yYK2DcO7ytzFm
+# cxYUz53KECvbCr/tfiQAwYECk9vtuoPIIlQteR42HGT7iizfdqh4h5nVbs8RpeiG
+# QiFHfpImWCMH9WmaYqwh8/mdZ9KMvCZYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg1MFowIwYJKoZIhvcN
-# AQkEMRYEFHUKtENsA4Fz44M1pAdRJAeQ7JigMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyOVowIwYJKoZIhvcN
+# AQkEMRYEFFNDCIRw+5T2BxXoVcRWyWmFPO1hMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCvDNdrJCM6CMZpHdrmfeKI/9ohoAqZ9ks2gL16aCyT3WUg
-# 8x+lf1mnWUfKMf5s1wQ41yyKNdT0kjiubjxuE1CBPoDfvajcHJwcG8yVEDdKBkMG
-# o6yz/QOJVyW+P3iH9DT0M1N+RkuhY4h04yelGUaJVWA7bYSItu0LD1bJ0zopLMlI
-# GWOKnEBD+YvR/oKwjtWShsO+EbNGHyMyKMNfVkLtntD7nJYuV0m+RAFLXksf/9qu
-# rprPvT8FqFU2AQbD1i/CORc/gqhZ3FvGOY6HwM6suHrdU36474BctfV230nkBq+O
-# 3QbKoGl5SCvgus7p13o6kMR6Q86315XjpkE+FZkD
+# hkiG9w0BAQEFAASCAQCBP9KDUCJ8qyMcwIRp1gQ4lWLiFTiAGoys05EjqXYs/s2Y
+# 3HzC6bWXmk/qpFC1SRazuyffn8ORdwz4+5ddokp33e0VgbvC3ysYq/zV2YQFey0r
+# M+7lg5/pTOAlFJZqhTdP74eFRTEd+el0zcDponwNb8KRHBqss0TaOW5j3qGyYJQC
+# ytKLSYCVSghgT608yC7P0v+nNHBsLJ4a3JK/bU7NbqYieBpkStqlowrQyYc4K/J5
+# 9xbeiOT1vdPivaLYzrJj4sSGoY51LaKD+OtLBfiQWaxQbV5Cl+aNCzyYvYVUDgJa
+# 61EkvZDmS/PHQp2BrKw3Z3Zo53PCavj8Gh12pOtI
 # SIG # End signature block

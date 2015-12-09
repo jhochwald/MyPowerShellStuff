@@ -39,24 +39,26 @@ function global:Get-TinyURL {
 		Long URL
 
 	.EXAMPLE
-				PS C:\> Get-TinyURL -URL 'http://hochwald.net'
-				http://tinyurl.com/yc63nbh
+		PS C:\> Get-TinyURL -URL 'http://hochwald.net'
+		http://tinyurl.com/yc63nbh
 
-				Request the the TINYURL for http://hochwald.net.
-				In this example the return is http://tinyurl.com/yc63nbh
+		Request the TINYURL for http://hochwald.net.
+		In this example the return is http://tinyurl.com/yc63nbh
 
 	.NOTES
 		Additional information about the function.
 #>
 
-	[CmdletBinding(ConfirmImpact = 'None')]
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
 	[OutputType([string])]
 	param
 	(
 		[Parameter(Mandatory = $true,
-			Position = 0,
-			HelpMessage = 'Long URL')]
+				   Position = 0,
+				   HelpMessage = 'Long URL')]
 		[ValidateNotNullOrEmpty()]
+		[Alias('URL2Tiny')]
 		[string]
 		$URL
 	)
@@ -65,21 +67,22 @@ function global:Get-TinyURL {
 		# Request
 		Set-Variable -Name tinyURL -Value $(Invoke-WebRequest -Uri "http://tinyurl.com/api-create.php?url=$URL" | Select-Object -ExpandProperty Content)
 
+		# Do we have the TinyURL?
 		if (($tinyURL)) {
 			# Dump to the Console
 			write-output "$tinyURL"
 		} else {
+			# Aw Snap!
 			throw
 		}
 	} catch {
-		# Something bad happend
+		# Something bad happed
 		Write-Output "Whoopsie... Houston, we have a problem!"
 	} finally {
 		# Cleanup
 		Remove-Variable tinyURL -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	}
 }
-
 
 function global:Get-IsGdURL {
 <#
@@ -93,11 +96,11 @@ function global:Get-IsGdURL {
 		Long URL
 
 	.EXAMPLE
-				PS C:\> Get-IsGdURL -URL 'http://hochwald.net'
-				http://is.gd/FkMP5v
+		PS C:\> Get-IsGdURL -URL 'http://hochwald.net'
+		http://is.gd/FkMP5v
 
-				Request the the IS.GD for http://hochwald.net.
-				In this example the return is http://is.gd/FkMP5v
+		Request the IS.GD for http://hochwald.net.
+		In this example the return is http://is.gd/FkMP5v
 
 	.NOTES
 		Additional information about the function.
@@ -108,9 +111,10 @@ function global:Get-IsGdURL {
 	param
 	(
 		[Parameter(Mandatory = $true,
-			Position = 0,
-			HelpMessage = 'Long URL')]
+				   Position = 0,
+				   HelpMessage = 'Long URL')]
 		[ValidateNotNullOrEmpty()]
+		[Alias('URL2GD')]
 		[string]
 		$URL
 	)
@@ -119,14 +123,16 @@ function global:Get-IsGdURL {
 		# Request
 		Set-Variable -Name isgdURL -Value $(Invoke-WebRequest -Uri "http://is.gd/api.php?longurl=$URL" | Select-Object -ExpandProperty Content)
 
+		# Do we have the short URL?
 		if (($isgdURL)) {
 			# Dump to the Console
 			write-output "$isgdURL"
 		} else {
+			# Aw Snap!
 			throw
 		}
 	} catch {
-		# Something bad happend
+		# Something bad happed
 		Write-Output "Whoopsie... Houston, we have a problem!"
 	} finally {
 		# Cleanup
@@ -146,7 +152,7 @@ function global:Get-TrImURL {
 		Long URL
 
 	.EXAMPLE
-				PS C:\> Get-TrImURL -URL 'http://hochwald.net'
+		PS C:\> Get-TrImURL -URL 'http://hochwald.net'
 
 	.NOTES
 		The service is offline at the moment!
@@ -157,9 +163,10 @@ function global:Get-TrImURL {
 	param
 	(
 		[Parameter(Mandatory = $true,
-			Position = 0,
-			HelpMessage = 'Long URL')]
+				   Position = 0,
+				   HelpMessage = 'Long URL')]
 		[ValidateNotNullOrEmpty()]
+		[Alias('URL2Trim')]
 		[string]
 		$URL
 	)
@@ -168,14 +175,16 @@ function global:Get-TrImURL {
 		# Request
 		Set-Variable -Name trimURL -Value $(Invoke-WebRequest -Uri "http://api.tr.im/api/trim_simple?url=$URL" | Select-Object -ExpandProperty Content)
 
+		# Do we have a trim URL?
 		if (($trimURL)) {
 			# Dump to the Console
 			write-output "$trimURL"
 		} else {
+			# Aw Snap!
 			throw
 		}
 	} catch {
-		# Something bad happend
+		# Something bad happed
 		Write-Output "Whoopsie... Houston, we have a problem!"
 	} finally {
 		# Cleanup
@@ -196,10 +205,10 @@ function global:Get-LongURL {
 		Short URL
 
 	.EXAMPLE
-				PS C:\> Get-LongURL -URL 'http://cutt.us/KX5CD'
-				http://hochwald.net
+		PS C:\> Get-LongURL -URL 'http://cutt.us/KX5CD'
+		http://hochwald.net
 
-				Get the Long URL (http://hochwald.net) for a given Short URL
+		Get the Long URL (http://hochwald.net) for a given Short URL
 
 	.NOTES
 		This service supports all well known (and a lot other) short UR L services!
@@ -210,9 +219,10 @@ function global:Get-LongURL {
 	param
 	(
 		[Parameter(Mandatory = $true,
-			Position = 0,
-			HelpMessage = 'Short URL')]
+				   Position = 0,
+				   HelpMessage = 'Short URL')]
 		[ValidateNotNullOrEmpty()]
+		[Alias('URL2Exapnd')]
 		[string]
 		$URL
 	)
@@ -221,14 +231,16 @@ function global:Get-LongURL {
 		# Request
 		Set-Variable -Name longURL -Value $(Invoke-WebRequest -Uri "http://untiny.me/api/1.0/extract?url=$URL&format=text" | Select-Object -ExpandProperty Content)
 
+		# Do we have the long URL?
 		if (($longURL)) {
 			# Dump to the Console
 			write-output "$longURL"
 		} else {
+			# Aw Snap!
 			throw
 		}
 	} catch {
-		# Something bad happend
+		# Something bad happed
 		Write-Output "Whoopsie... Houston, we have a problem!"
 	} finally {
 		# Cleanup
@@ -239,8 +251,8 @@ function global:Get-LongURL {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUCUNijOYIq16ddLqAIZ4VfH6
-# mJmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8UwFj6RY5+Rgt6V6kFfOOCk3
+# 05agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -383,25 +395,25 @@ function global:Get-LongURL {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRjhdbTFyWkyKjFxA02fmZhHp1zWzANBgkqhkiG9w0B
-# AQEFAASCAQAEqN2MtsibSkcmaW2T48j/Iw2p5XeBhOfMGskD3GFNPUevDC6icYCt
-# 2ixVJAwabor6a1Sor3BdwXp058w2asmIQl8hVa9sZ28eqoZTFAj8XhDADfoj9i/h
-# 4JRE34m6DJrpRY94ueYaKjO03zcdK8rAyeKqa+1+SYDAIbyuxzSXEPjpJ5HdCQ0P
-# 5rBtLtFfP8mKBAhHctLP9haByYmmFxTpSO7iPEJDLvayhpB+YSsF2fFkIVhq9JZr
-# iGvw5vA52NVarL+LYtQRlert80CTOU2BEQ3BZO1Wcx3Kkdjy3/ofFRLhlZ90DhqA
-# 6yJdy1egRIQDxkDFtX3CvbBFhxxq+HS/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTOWCOytoJUuQojk0t4qXuWELTPQjANBgkqhkiG9w0B
+# AQEFAASCAQBoZ9YGupwf4ygVp4dcaTK5uA+npKICsFtivDMUyo8kBlWqG5WfUYVS
+# vHkS8K6zsd5Bunr6IArYI1vQFkYGHhOyVuxwRthVA/vZy6cjEM7o9AAshRsCkbze
+# cuQgPd6ikPQFcqT5FPNurmpz4t+q69g4RmXP07Jdf/zToKHBB21P1/RunhHXiNJ2
+# l3WQXYiVLSdoRMLFZsG9a9a1tR9FGW4aMmpftG/9hXIqV6JzJYfh6+jNL+gQEb/t
+# F7iN6HviiXN1aKDz0VTS9/PijG29l73M16eEnDNdS6gKEkpxd0kXFkKVYjmQX4UP
+# AZnWMzHWhmRBOhgdlBs65iczWxrwxrpnoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTg1MFowIwYJKoZIhvcN
-# AQkEMRYEFIN6oeNycbppReac6u6CIMSTunErMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEzMFowIwYJKoZIhvcN
+# AQkEMRYEFKFL4803WbY2FdYztwEbMBlLtvSHMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBD6B/o3pyJCcaFy6Ve1d5qEuf1vgZo8aX7Ubf45f6tQceN
-# BsW8bsQsnqrua3mhoJ8LmDNzjA81JOH4iPkEvRAMvUacpJZIm5syOvK1X2bYWKud
-# T2atOh3SwgPkA0X2yOfLZ9ScH+4xRvLs33xjAoy1EBDQWWjIiev6icjNKFNehxqP
-# JVEWNR0peBI0jGFLBAjQXMSXeZN//+M2Tm4+JaJU5C+tl853g0YeAtPbn+D009Fn
-# rnhJZje9YD/LAVYQovDciLPXq9XPdayp0ZW1+X0rlWH3UNjC4ITYaJzL/0XHeBbj
-# szFuS0kO5qQ4vKj1LH/I9LfHj+YXc0bIeVtw+0E8
+# hkiG9w0BAQEFAASCAQB8MQKvLxgVwA5XjWTeSKZ0UVn0+GGy9SqCFBeRsHyP/Lai
+# QVsSk2eLDGuJgt8DhNH1ypbfHWq2a6O57nZQ465PVxsxry+HQqpSwJRMyqNPbYsJ
+# gjh2pv81Jv5vsSGRzCL22dVL0T14+n69n4Ow64WtPOM5zq89WppFJbENh4COU8Uj
+# m533wQ/73TE8VM6k/ZIMuN90OBl58N7nKbpXI1qSGoOYahXO1iFQ9iMYj4m7Xu42
+# Y/aI43FhRSQuLjnnrGndG4SphYHtNz43YeD4KdyTuwuFtIT8ybYB/QtOUffGsih2
+# J/D6zKq3h1xc34TnJpDxfx84+Ef/cOsEHA4dq8/a
 # SIG # End signature block

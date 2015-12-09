@@ -30,27 +30,31 @@
 function global:Check-SessionArch {
 <#
 	.SYNOPSIS
-		Show the CPU architectire
-
+		Show the CPU architecture
+	
 	.DESCRIPTION
 		You want to know if this is a 64BIT or still a 32BIT system?
-		Might be useful, maybee not!
-
+		Might be useful, maybe not!
+	
 	.EXAMPLE
 		PS C:\scripts\PowerShell> Check-SessionArch
 		x64
-
+		
 		# Shows that the architecture is 64BIT and that the session also supports X64
-
+	
 	.OUTPUTS
 		String
-
+	
 	.NOTES
 		Additional information about the function.
 #>
-
-	[CmdletBinding(ConfirmImpact = 'None')]
+	
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
 	param ()
+	
+	# Figure out if this is a x64 or x86 system via NET call
 	if ([System.IntPtr]::Size -eq 8) {
 		return "x64"
 	} elseif ([System.IntPtr]::Size -eq 4) {
@@ -58,7 +62,7 @@ function global:Check-SessionArch {
 	} else {
 		Return "Unknown Type"
 	}
-
+	
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -68,8 +72,8 @@ function global:Check-SessionArch {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAQCZpy3Cml4jmANkHGbS+8UQ
-# 776gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlk9tguXG1yDtWG5n4ORpEma4
+# g+6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -212,25 +216,25 @@ function global:Check-SessionArch {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQsge18GCP/yiyZaiDfJjcuQXbUjzANBgkqhkiG9w0B
-# AQEFAASCAQBby5adQ9v2MEAPCbAF4oZ8DWAD3EtcH/Q9V02BJ0GMTgp+tuOWdJKu
-# sQS9u0xHd2WPZGqa85ITI+awoOl6riFCUp9MlC7GDfJii0MDUU1+x0L6R4y2rA6x
-# ZChvSLYuqgTL9LVbRMMdQlJ9hMQJDRDphHZdqpVi3JqwL03hfIlwei9C3YU2/5ly
-# 97S6RyvCNi3oOIJHW2bM5s1LwL8+FBSYv4Dzv1DHvozFfwuGGLH4HAZ9akNWCsct
-# w/VxxU1Bo+alSvbP3bxFUJdTPvqTE2xtfzknJpijX7JlJdKFfRNMYdWJDtWrPA2+
-# 2FU/dV5+4UDFZ/Fg/51zw6lCG4D2sS70oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQuwPn6XI62jB1zdDOvQnIAaOBUZjANBgkqhkiG9w0B
+# AQEFAASCAQBkD3MYFzspsdBjPWkh6cB00IGWec7HXCuhVK0ywuWM7w1oXHROT+ZQ
+# 7mTd0/kaX4R9oqPbpUlU0O2731n4bAnLzWJJSB3KJ5OmgQ4EO8MewD4cDTJA0far
+# ekpGGhWO2rsGWL2pGXlBb57JeNjhWYARXd1plZ90sTcL6AEFqG+9WSzt1ScgF89X
+# JyRQxQ6EZZz2aZSkqGodc+v9PofF8xPaCCSTgMGAeJUyxt/EIAf7lfUNq9AAfWYt
+# MEtwVGDSg0SewtV59mzl5Yg7h6Ic9O3CbtRiV5YJqqU11mB9YNe+3c5uDLxWgvAk
+# bKoFGTuDYNnOieiMUt9xDfXh9t2XaRIDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTAzMDIzNTgzNVowIwYJKoZIhvcN
-# AQkEMRYEFJnGEYkjPGEuuSftdu6JmzPy8a91MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAxNVowIwYJKoZIhvcN
+# AQkEMRYEFDopwkyg3bcLYh5HfI4qRlE+E3FKMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCVdS3CWBUx7mmwuQoYzuyJNR3i/ZDQJ/cZTbikTKN4mkV3
-# b4ZBuffkUfu1Az5mSt4Il9UG11O/FwrvuHYMYPsOrW3Bp3ZOLyUfhfQt59E6eIXq
-# CLEqMAh55Mhp5k1sOaxBQ4JKZYN2h4JZezwv3UYAcPVBHsfEGuETLqNkOycmJJXq
-# xKi67BKU3DVVINX4waIvmSCSpE+KNQEJ0QXsrLuiFj/XRnsGshh4QjHiyAqAtQHI
-# NEZ3PetsgO8ni06cUdfp7WCuBaiwxpNoBeJ/WYCh6ujV0Hjoj98YsZn69J+WSos8
-# yoVx/SDFEDAN5AL8SL2IYKNRetlEU9z3Ai0Y7ZTE
+# hkiG9w0BAQEFAASCAQBkxwEkDbcUXgR1D5KHIcAEGDmLNG8gh2P3+aykdz4L8Jx3
+# x7Tncy5Py05dGS2jhR939LrpWi5JYm/NU9rI1tRqkhoiBxyQVpsojUei3T57luzP
+# zNGjtNqD56MrTmXO7XZA26nEaGcFELa8/W14lXCj0bxPhyI+1yzxXDKR4FE4fEQh
+# SvmiIeckGo6r7CRzx8XOeR93NjDaucVdKM4WlB8BEHfitrw1IsYULyoB2bi+lXU1
+# gSIznTXIibNZ2rVoNbZuZ234nPoPrs5jS7f7nSPfSkfKnBdcDo/R/UCco+1wYCjF
+# tfIf0w8K13j5dnfzc3Grr2nTZmDIEAmaCORkseld
 # SIG # End signature block
