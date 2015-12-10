@@ -174,103 +174,93 @@ function global:Check-IPaddress {
 	}
 }
 
-function global:Get-AtomicTime
-{
+function global:Get-NtpTime {
 <#
-	.Synopsis
-		Get the current time from a time server
+	.SYNOPSIS
+		Get the NTP Time from a given Server
 
-	.Description
-		This function gets the time from a time server,
-		in effect it returns an accurate time from an external atomic clock to your computer.
+	.DESCRIPTION
+		Get the NTP Time from a given Server.
 
-	.Parameter TimeServer
-		Optionally enter an alternative time server to query
-			- the default is http://nist1-ny.ustiming.org:13
+	.PARAMETER Server
+		NTP Server to use. The default is de.pool.ntp.org
 
-	.Parameter NoCache
-		Optionally use to return a non cached time
-			- use when Get-Time is called more than once during a session
+	.NOTES
+		This sends an NTP time packet to the specified NTP server and reads back the response.
+		The NTP time packet from the server is decoded and returned.
 
-	.example
-		"Time has been set to: " + (Set-Date (Get-AtomicTime))
+		Note: this uses NTP (rfc-1305: http://www.faqs.org/rfcs/rfc1305.html) on UDP 123.
+		Because the function makes a single call to a single server this is strictly a
+		SNTP client (rfc-2030).
+		Although the SNTP protocol data is similar (and can be identical) and the clients
+		and servers are often unable to distinguish the difference.  Where SNTP differs is that
+		is does not accumulate historical data (to enable statistical averaging) and does not
+		retain a session between client and server.
 
-		Get atomic time and synchronise with your computer clock
+		An alternative to NTP or SNTP is to use Daytime (rfc-867) on TCP port 13 –
+		although this is an old protocol and is not supported by all NTP servers.
 
-	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-AtomicTime
-
-		Get time from default time server
-
-	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-AtomicTime -timeserver http://time-a.nist.gov:13
-
-		Get time from specific timeserver
-
-	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-AtomicTime -noCache $true
-
-		Get a new time from server (not from cache)
-		This is optional and only required when the function is called more than once per session.
-
-	.Inputs
-		[optional]
-		-timeserver address
-		and
-		-noCache $true / $false
-
-	.Outputs
-		[datetime] Atomic Time adjusted to your time zone
-		or
-		[string] No Time Returned From (your timeserver address)
-
-	.link
-		http://tf.nist.gov/tf-cgi/servers.cgi
-
-	.Notes
-
+	.LINK
+		Source https://chrisjwarwick.wordpress.com/2012/08/26/getting-ntpsntp-network-time-with-powershell/
 #>
-	[CmdletBinding()]
 
-	Param (
-	[Parameter(
-	ValueFromPipeline=$False,
-	Mandatory=$False,
-	HelpMessage="Enter alternative time server address")]
-	[string]$TimeServer="http://nist1-ny.ustiming.org:13",
-
-	[Parameter(
-	ValueFromPipeline=$False,
-	Mandatory=$False,
-	HelpMessage="A unique string to ensure that a cached time is not returned")]
-	[bool]$NoCache=$false
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([datetime])]
+	param
+	(
+		[Parameter(HelpMessage = 'NTP Server to use. The default is de.pool.ntp.org')]
+		[Alias('NETServer')]
+		[string]
+		$Server = 'de.pool.ntp.org'
 	)
 
-	if ($NoCache -eq $true) {
-		Set-Variable -Name "rand" -Scope:Script -Value $(New-Object system.random)
-		Set-Variable -Name "unique" -Scope:Script -Value $($rand.nextdouble())
-	}
+	# Construct client NTP time packet to send to specified server
+	# (Request Header: [00=No Leap Warning; 011=Version 3; 011=Client Mode]; 00011011 = 0x1B)
+	[Byte[]]$NtpData =, 0 * 48
+	$NtpData[0] = 0x1B
 
-	trap { return "No Time Returned From "+$TimeServer; continue; }
+	# Create the connection
+	$Socket = New-Object Net.Sockets.Socket([Net.Sockets.AddressFamily]::InterNetwork, [Net.Sockets.SocketType]::Dgram, [Net.Sockets.ProtocolType]::Udp)
 
-	Set-Variable -Name "URL" -Scope:Script -Value $($TimeServer+"?_"+$unique)
-	Set-Variable -Name "xHTTP" -Scope:Script -Value $(new-object -com msxml2.xmlhttp)
+	# Configure the connection
+	$Socket.Connect($Server, 123)
+	[Void]$Socket.Send($NtpData)
 
-	$xHTTP.open("GET",$URL,$false)
-	$xHTTP.send()
+	# Returns length – should be 48
+	[Void]$Socket.Receive($NtpData)
 
-	Set-Variable -Name "response" -Scope:Script -Value $($xHTTP.ResponseText)
-	Set-Variable -Name "timeString" -Scope:Script -Value $($response.substring(10, 2) + "/" + $response.substring(13, 2) + "/" + $response.substring(7, 2) + " " + $response.substring(16, 9))
-	Set-Variable -Name "timezone" -Scope:Script -Value $(Get-WmiObject -Class win32_TimeZone)
-	Set-Variable -Name "bias" -Scope:Script -Value $($timezone.bias)
+	# Close the connection
+	$Socket.Close()
 
-	return ([datetime] $timeString).addminutes($bias)
+	<#
+		Decode the received NTP time packet
+
+		We now have the 64-bit NTP time in the last 8 bytes of the received data.
+		The NTP time is the number of seconds since 1/1/1900 and is split into an
+		integer part (top 32 bits) and a fractional part, multipled by 2^32, in the
+		bottom 32 bits.
+	#>
+
+	# Convert Integer and Fractional parts of 64-bit NTP time from byte array
+	$IntPart = 0; Foreach ($Byte in $NtpData[40..43]) { $IntPart = $IntPart * 256 + $Byte }
+	$FracPart = 0; Foreach ($Byte in $NtpData[44..47]) { $FracPart = $FracPart * 256 + $Byte }
+
+	# Convert to Millseconds (convert fractional part by dividing value by 2^32)
+	[UInt64]$Milliseconds = $IntPart * 1000 + ($FracPart * 1000 / 0x100000000)
+
+	# Create UTC date of 1 Jan 1900,
+	# add the NTP offset and convert result to local time
+	(New-Object DateTime(1900, 1, 1, 0, 0, 0, [DateTimeKind]::Utc)).AddMilliseconds($Milliseconds).ToLocalTime()
 }
+# Set a compatibility Alias
+(set-alias Get-AtomicTime Get-NtpTime -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5A9XDSURHIgMfYxiwnQjRrHA
-# mLagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULw+bUicoCBTc6qPjmwNBR3at
+# Rh+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -413,25 +403,25 @@ function global:Get-AtomicTime
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTKBPL6I28fxtQfVxP/LLOenaVWmDANBgkqhkiG9w0B
-# AQEFAASCAQCDbhldvWICDTXNvd805tgRVjBjKAA0iJoLmzpb9an/7shz82O4mDRz
-# sOlR8IdEbZJG1nTYHh++DaS7c+7iTJDF3tlFl3cywGHv1G/oRFl4SHzPpeeT2mzk
-# 0ft15ktnK6/d39CyuFbiHsQ09c+mmB7KkeL+YESauTlXD7uNYaKQolyuZWQoQWf3
-# TG1oekBakvLlPtxc62R5P3PEv7M424ekkt4Sbz+ZwPZbTfBMcgIZx9PpVOr82nov
-# g17SnCahUOUc3oCwo7Gy9tIneSSC9m5lO00jEBpDVMmnmUtRv5l7kAWmMNLwPJs5
-# TRKGOVbqInWuY+O8oeWdUmsDl+nNaIcWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSfLDg4u0QX46ynutpVPBZEEk5hJTANBgkqhkiG9w0B
+# AQEFAASCAQA6OhAGYHvpm53hAW77GfZUy15ihNk/VuK0gowPF7ZEOD36uztd8HX0
+# mhugFbVrlob5plYcS6Av97sV3Z1VGjjW+5zdDk2OItvHmlUUQhoXXQzTau+cdDMT
+# 8tfRlNMNk2/MHmDu4nRma1XQvl0FHcHW0fbeL9Etw6U3Rr3WP74oge8ALBYMMgPy
+# dSZSEgstApzc5m4Jie+dv6+4HNWBuBEakfoSVKeVj2yTMiu1hYeyPia1T2RRClk2
+# Jx7BIWhDgrdnG3W45xTqHOqt0gOaYoFR5TUFa/RHvH2zH3xpVuqx6aRL/KIQ40Sq
+# fGrswyZk9KTt2dz4YY/4ntgihh7wQFYYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExMFowIwYJKoZIhvcN
-# AQkEMRYEFEFgsAA5GRxilCprCkjjmlvGcs0sMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxMDAwMTU1NVowIwYJKoZIhvcN
+# AQkEMRYEFGrSwsaF2oSED8MXMjkGVujzhj+PMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAuSmGvQJPRqvHg8dUD+QY7x/PZWGLhZ7njDd9pK52geLkh
-# UViomeYB3CUHiWAIkFo/HlB8dUT0vcxFkloIAsJ8dFOkhUhH/KMcLFEYLjMVB+8G
-# nqGqXwlJLd2JwJN4g5PtdZneKA/cZoqAtJWjDc/Ivmw/uE0eS4TtI+Nc51xGPPIN
-# +u6A/iT5q8KZRz8idhgGiGP4LNZ6aZfF2z4NkI31qHx4KZfYO+CWsz9+adBiqUra
-# fm2sng4PrpRKFbdpn2MoJRTs+6SI3bU5Mmi+9LP2eOSZf2eJOq8sVCgQiOqZC5VB
-# FKauUVH2aBuDjkYohvdydSCgCOQ/1fLx0LxhJJNv
+# hkiG9w0BAQEFAASCAQBwhXZMvAtrQQerCeRdJlu8E9CYtEffHD4VdIb4z0UUjZ48
+# W8O9e6a/Qj3ApuzFkiqZiKLQp7zQOBRo3P/hTyPukl4ORPXZoOIXCI2P8BsSJxMr
+# CAYamWsFzC5PCVZaG5Wxe1EBUxBnXLqzJSyA+UCUvjw1BJzeKIvT+w5Ns4TEC3hs
+# uuchijhaAgWcrZpvVNwoJX7veSRSdSvZPO3NqAej81jNTIa2uwoK5fNv+fmcrr+U
+# x2DUIrDqib4CvV2/HGPmLLmrcNVHXVqBJDQuTkAUEYQ0KXOcT3TfqEn88x4kAK65
+# 1SDM5+kuFFCPk3NGUi83itidMFth9HyoHIPTjbQY
 # SIG # End signature block
