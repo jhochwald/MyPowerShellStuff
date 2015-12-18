@@ -2,8 +2,12 @@
 	{
 		"info": {
 			"Statement": "Code is poetry",
-			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
-		}
+			"Author": "Joerg Hochwald",
+			"Contact": "joerg.hochwald@outlook.com",
+			"Link": "http://hochwald.net",
+			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
+		},
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
 	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
@@ -146,8 +150,8 @@ function global:Get-TcpPortStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9niQ6/blsm1XBu0M54+5NXgo
-# xIegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhjmpb8buQA2Pq035g2hMGaS9
+# TkmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -290,25 +294,25 @@ function global:Get-TcpPortStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQwrvR+v2Dml0p1+nsJL87D7dMjgzANBgkqhkiG9w0B
-# AQEFAASCAQBzBn4icQCXNzPDKuQmlQFP7i/Ukm5Dsaw5J5mLIhsVwISyA4eJlMm4
-# kjc5/ChHjHuZRBL/0JSdsMJHffn/r9FR9heaExhjMdVScwPwTH+K+D4dGYh+yfmD
-# a/2gTYhxriwS5JNxbOXadukg0py/0SUz/5v4HerBZoZuiDcagQ1tla34TRnZQDqt
-# yx8SptdgY6SVlr4MWtHhC8e5uOFdk39kn3enpBcs95SXtp9MSAOhRqGFIEePifxq
-# B+Dzvl/j6KM1KmKFweDf/b52ZVSABp9/YDnWbZOuTUG5CqzWcHFhGV7nls/K09Vy
-# p7tjGmpAm6KhcVo8+Ihb0Fjt/iHjGAg+oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQI60Mma/Nlod+VJ8/d7mjwKMmKHzANBgkqhkiG9w0B
+# AQEFAASCAQBwFQSninEThbLPOX//HSfDUFgsXeioo2xWk9loy+FgnI+WwyJ+Gftt
+# lZBSCdE//8nxPGJI41Y2ZFfjBqyp3xyA3pG1p+Fx39Rqfe2RD31lzHRy2ApVHukt
+# tcKq6ZeVI6oukIYKpuIguWszjOwcfqan2pg4wnJzXGVQMFavwXEw+/wcecAXfrvq
+# A1gEld4o1ORKUGiOyJDJXax3485NPnyERjjJQv4xVluj++KgnNE98g6ShtnbjmQM
+# 6OhkM4ItDNmjj1yyYzSomxlJqzRIBAvCW2cVvGdninvc7Vz4Gg/T10VgBqDXVMRl
+# cqMybrurbjBvZKe2xK68lv6VjjM1RKakoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTEzNFowIwYJKoZIhvcN
-# AQkEMRYEFC4+vQkxzhzYKoOlNTSBZQ5zm24fMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODEwNDE0N1owIwYJKoZIhvcN
+# AQkEMRYEFBVldobGeEjjxKVEn8AJ0zNKToM3MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCveErdp9+ke4wQfdewQyOI87KH/lEuL5UBz9Y7+uXtWjKE
-# 51y+Pif9/GA5OQHisy4+VSvcD5v+G3jfX7YqFlcVRrDvKHFq8DtndAdMJLCfIoHG
-# P0vqnx5gUQlhgElbf8o3q5Gs0R3VRzJNHeWSuJZMX2WCrbtvvmjRCTtQfvTnlPiP
-# g3CiHWt9zOdxfx1xy0TibTj2G15tkbk6tGLlA1aPR1VfvAms1cHZsv0mfSv5SZQa
-# OZF+LXcWsOzxmnfD4ppr1wyGSQS8SuhDcg2RXMC3qP7R4Rc3aPeqBLnIogLQf6xE
-# Alu1caFkdkVkQXcTKb6tZQRsuUarmMzcVOLn6sxq
+# hkiG9w0BAQEFAASCAQAe0n12aq2/zUB/eTr/9olMjEVgZClHcRIWTNR66CK/6JDi
+# 3WPR3aDKZrDVsQ8uN7WYTGzLBezaa0143AoaLyKG7URVpalQ1WQPiOJMnXA2vkQk
+# 4O19Sr+1JgDLNisE1jzmpFkK3ymzUmOUImo0q4qgqlXCnz7FkBP/LvmB135lTAFg
+# NIta8Ule7b9wdU2LvUVF8hliXycdQC3vE9Nt3I4ic7KzJnNdDNaEjskzwk3S2Mna
+# RtmObvH9YNMjbjFzWvxYZUqwgKJnAQmo617q6FyaoCX876qNDf5d8mVdmKdIixU3
+# VUPhOykDd1pcrY6LBTrbe7WkYlBhZDl2Ad4flX4+
 # SIG # End signature block
