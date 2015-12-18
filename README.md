@@ -7,14 +7,18 @@ Other functions make Windows (or better the PowerShell) more to act like *nix! T
 
 # Feedback
 Feedback is more then welcome!
+[https://github.com/jhochwald/MyPowerShellStuff/issues](https://github.com/jhochwald/MyPowerShellStuff/issues)
 
 # Contributing
 If you find a problem or Bug, just let me know.
 Or even better: Pull it, fix it and contribute ;-)
+[https://github.com/jhochwald/MyPowerShellStuff](https://github.com/jhochwald/MyPowerShellStuff)
+Or add some more documentation :)
 
 # Have something to add?
 Do you have something that you think it should be a part of this? Just publish it and sent me the link.
 If I like it, it will be a part of the next version here (formatted to fit and signed)
+[https://github.com/jhochwald/MyPowerShellStuff](https://github.com/jhochwald/MyPowerShellStuff)
 
 # No Warranty
 There is no Warranty of any kind! All Scripts are provided "**as is**"!
