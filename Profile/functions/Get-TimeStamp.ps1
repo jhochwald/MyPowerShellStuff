@@ -1,7 +1,10 @@
 <#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -37,24 +40,29 @@ function global:Get-TimeStamp {
 
 	.EXAMPLE
 		PS C:\scripts\PowerShell> Get-TimeStamp
+		2015-12-13 18:05:18
 
-	#
+		Get a Timestamp as i would like it.
 
 	.OUTPUTS
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
+		It is just a kind of a leftover: Used that within my old logging functions a lot
 
 	.LINK
-		Support http://support.net-experts.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 	Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
 }
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUA30Ay+dmnUVJvqqDEMi+6gT9
-# 2aWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVoWxA9ZaWCdDwHvGaUcf1Rnh
+# YV2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -197,25 +205,25 @@ function global:Get-TimeStamp {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTj0NJAwdjkUwXkCU1b8n5O3pzLuDANBgkqhkiG9w0B
-# AQEFAASCAQAK6x/Zyp2bQ/Lu2bHgb8TuI1beOhxS33QMSRcFJJgoa9pj1n0s+UTN
-# VjmqzmIq8mlO3ANP87Y9KKYE7mDahZhLt5v/o2oYyuGvN22OTI2vnoGGBPUM6P7N
-# DKR2QmfcEl1MfknCS6uKEEPx+BPY//uewTHaO4y6SSrXtoy85MryCqZ9t54tGYFo
-# ZDVC24UeOJ+E4eviisZwzL788mWOKp/UmyRp9qK1qxhva5u0o5fAWOyb9gqyaCti
-# QpiQisAK8rW36tw3MnzaUMPNqYkwyu2o9Hz/ivA6DphmRMQ2mlja+Dsr/2YWQ7qv
-# ASfU7MlsPmLYSn/kO+AAx6mUjN5kxRIUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSashuTAZqmSfJpplGn1otkvuXEujANBgkqhkiG9w0B
+# AQEFAASCAQCS00TLwCwkY9fwQendGfkJYf+ZpUcNugQ2WPIVfQJ/qS7prmj9qQ4b
+# klf7IgYXLMoFJur7agakGgoabr6XTgX19LDPQqwEyGwXfV4lV+JyHFofJ5XKk0aE
+# G5QJM1erF6lzMOHeKBQFDExn+aAZCCrxfs0AkMVpZcRnWhhO69mSuwkfatFM65tZ
+# XJMPReLxga+srU0SL3BzepEOzL4Pp0gf44V6vJ85F/unhMz1SPSi0mwHkQlpim8q
+# i7KiS0OVDmVpfrrG8kL3Q66xh78A4w4T/lf8AgVDctSBqB6XDRNJ4xnU8tCtOYVw
+# edQAiftMmfEN4gbytXQxo+vnD/Ej2ggRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA1MVowIwYJKoZIhvcN
-# AQkEMRYEFJhSwSqsw8mugt7YBiJ76J7zlyP3MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTE1NVowIwYJKoZIhvcN
+# AQkEMRYEFEUGMvWeuWINxY6mUsvIimIazzqWMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCZx1NkPRCMGWuQfZP+nZS8crDxKCGc5uQ8feovoO14M4u9
-# lZChZpQZGKVohmQ1bE4/NU5IRFHxKS85xJrG1nF5yE0gi4svvC32pt0T+2i8b5DD
-# BT9s2i0Vk9U2rgpSwCSb5L4rG1rCmZcwMXVSPHe9iuKx0fFhOLtRTnVbNjzkzswb
-# +np810xMvLud9Rk9XR8Ko5BBlbYKYWre2xw9bxpVwn1sZMurXM6CAjGc+lKp6hMF
-# YX7iBtrVdNClD7zywYLfleN3upRXbG35VHXif/Z1lAtEHljTY2tIrJ2buIRQzZtg
-# OyX+nlxm43s5yv7nw/541sT2DWIS4Cnn4JCd1L0r
+# hkiG9w0BAQEFAASCAQAP5T3P2sJRuVSEIDlmY5g8iV+bRDJyND4iKaiiIhWjJKcO
+# a7XCPuBGHfFBDgYiwl3RrjjcdmSvQNDzsUEpyvE8FTmCDXaxVnQ/FYbBR6TVl8zp
+# i4/18/rkBBpZzsjTr/Nq1FlL2KPnqJVxj8TnDZbKwBcn4AmZepdBIVDWBkcFebW7
+# 5JmIzBqapM6Cylf8ZuqnAHZEbKzL/oJvi/DTPjitwkNa1uwWu7UJL/Kvng+/r19S
+# 8gi5Ueb/zP0wFQSz7z3L6ku0T9+IajoCUn3pYv9scn9n4dVvpqsPAJu15w6a10y7
+# IAZKAomgyFIzJ3y7TVPjEYPL2dWxJZJAnM4kryD3
 # SIG # End signature block

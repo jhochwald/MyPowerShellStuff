@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -46,6 +49,13 @@ function global:Get-uuid {
 
 	.NOTES
 		Just a little helper function
+		If you have Visual Studio installed, you might find the function useless!
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -68,8 +78,8 @@ function global:Get-uuid {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhEjQQzno9angWFFq1of3Eftt
-# aFigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxfVZoWi8IeP4z/bVD0lvfYky
+# 7umgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -212,25 +222,25 @@ function global:Get-uuid {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRGfImnAR8b4Is264Mx0iNHFHNBDzANBgkqhkiG9w0B
-# AQEFAASCAQCoeS7Q+3Uf3yIG3ASMgpi/OBlmty+odTxrdR4TvyUu3qe1OwYXYSu/
-# Wt+zmAtIVxuYkkwLjF98NNQ3OSJPxASpzi4HIb5WzzlPPPkOXaT48BdVweXUUgWt
-# 1dSRT2wJsni8zuAYoKD7GRvnRRPzYROyi+eFj6mDS+gfwwKW1vMYpYlJH4ALeam4
-# N+CauAVckyrIMLWcY7QHLRkeFLCjcCakl+xs4cQ4aaczHw74g69izb+xAhG4nVgF
-# qC63vOwBvjdCLb9NQy9L4q6byJsK0yrJYKWMVZAf9eU10fYQokUs2yHQaLC0hwck
-# 5mrJQ3smluMA/NhOKjOMXMQBPM5oEztaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS84ATVHyPbD8jIPHbiQJG+W12DwDANBgkqhkiG9w0B
+# AQEFAASCAQAM3Lv/cTsIx1/njEzx2ChZGp8eOZGMpj/SLwaT922BBeICWyqmWNGs
+# qtCvJaQkpzT7mAR70dzQBGEC6bGN8A2I2HgfiyzIqiZ11NXdC39s5zVi5eA4Y2/E
+# Ss5xkhvwAMq7DZtOv2/nTsgtlTxmDmuyh66JSZNYUyufY2OWjKDbIwgiiTYK4n/V
+# aVd7CXnjPAlS3dKDJlLsUmKjvFLjWa0MMopcQqkNRzXC9L3CaprUqcq7bP51xWYV
+# ROvC4N8am2Bq8HqlxaDItMnaE9i6DUMtX9yBFYFm8tdHYCBsLiab/GroLftE8iOW
+# TNQBCL/7avsszLGqtNgJNsCuvOKMmQ0moYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA1N1owIwYJKoZIhvcN
-# AQkEMRYEFNvv08Qd3C0GfG8/Z/yf/MiW21OYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTE1N1owIwYJKoZIhvcN
+# AQkEMRYEFNpckTb66CSZ62hWItOFCZrAA/FaMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAOeQbmE9nyYZtD56etBWLVkGF7RA7SjU/kafua97fCGPp4
-# dDP3CRo4HcsP9S9PKISAtlvuO8M1vrxG8aClcNVAaQ8GhzmI87xldRVyOaegQH/J
-# gcEDv4REuoBIE2OBcQdfOvf8SJmXAj568VhQZ96iDgNqkLS9NC8h5T5ER3Ij+DGL
-# fYhvAD4lpXM6IKUf28MtvOwOePZ0CEmDsQRVtmCOavbyEGv3873tIROCcGkRXeVy
-# x9JkWMw7OD6ySVkQMNZu9AkX5j34UhGX4WTqBpa84871YcMTrbk7eziHriTVvw8x
-# sYZ5PinPVMYCnvhOy/i22tx6/S/t7Qr8RaejYdAu
+# hkiG9w0BAQEFAASCAQCTM+gCnlqDwnwQssd3A67eUG8xW20v32qyYSNs6lDTCoPV
+# FwsYT/5rk9LTzrs6jpbho4n8gwW6CgjEL0JS0yeAg4MKcGh0ZR5guR9sBsUzk3pw
+# GpcAGmcKNZOik2GFJK+amIWMlr2VVvEwkEHxJaT9f9CqvWsZvnga4+FuOrlbyeri
+# RQTCTa4Xzvsb4KtfRKdpR/WUT+aayly5f/ugcpJeSBEXTBlmwbXzyNLslW+Zi/vx
+# j4IgnptF8WT+hZpC6OPV6tqyBTCZ8Pe0EXhtW1ZHxEERzWNc6DX/OsuJ2RaipOF0
+# 91JHikUohtF/ZTDKeVC9TtOCRNVM76tY2spDzPAY
 # SIG # End signature block

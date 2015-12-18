@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,72 +34,72 @@ function global:Expand-CompressedItem {
 <#
 	.SYNOPSIS
 		Expands a compressed archive or container.
-	
+
 	.DESCRIPTION
 		Expands a compressed archive or container.
-		
+
 		Currently only ZIP files are supported. Per default the contents of the ZIP
 		is expanded in the current directory. If an item already exists, you will
 		be visually prompted to overwrite it, skip it, or to have a second copy of
 		the item expanded. This is due to the mechanism how this is implemented (via
 		Shell.Application).
-	
+
 	.PARAMETER InputObject
 		Specifies the archive to expand. You can either pass this parameter as a path and name to the archive or as a FileInfo object. You can also pass an array of archives to the parameter. In addition you can pipe a single archive or an array of archives to this parameter as well.
-	
+
 	.PARAMETER Path
 		Specifies the destination path where to expand the archive. By default this is the current directory.
-	
+
 	.PARAMETER Format
 		A description of the Format parameter.
-	
+
 	.EXAMPLE
 		PS C:\> Expands an archive 'mydata.zip' to the current directory.
-		
-		# Expand-CompressedItem mydata.zip
-	
+
+		Expand-CompressedItem mydata.zip
+
 	.EXAMPLE
-		# Expands an archive 'mydata.zip' to the current directory and prompts for
-		# every item to be extracted.
-		
 		PS C:\> Expand-CompressedItem mydata.zip -Confirm
-	
+
+		Expands an archive 'mydata.zip' to the current directory and
+		prompts for every item to be extracted.
+
 	.EXAMPLE
 		PS C:\> Get-ChildItem Y:\Source\*.zip | Expand-CompressedItem -Path Z:\Destination -Format ZIP -Confirm
-		
-		# You can also pipe archives to the Cmdlet.
-		# Enumerate all ZIP files in 'Y:\Source' and pass them to the Cmdlet. Each item
-		# to be extracted must be confirmed.
-	
+
+		You can also pipe archives to the Cmdlet.
+		Enumerate all ZIP files in 'Y:\Source' and pass them to the Cmdlet.
+		Each item to be extracted must be confirmed.
+
 	.EXAMPLE
-		# Expands archives 'data1.zip' and 'data2.zip' to the current directory.
-		
 		PS C:\> Expand-CompressedItem "Y:\Source\data1.zip","Y:\Source\data2.zip"
-	
+
+		Expands archives 'data1.zip' and 'data2.zip' to the current directory.
+
 	.EXAMPLE
-		# Expands archives 'data1.zip' and 'data2.zip' to the current directory.
-		
 		PS C:\> @("Y:\Source\data1.zip","Y:\Source\data2.zip") | Expand-CompressedItem
-	
+
+		Expands archives 'data1.zip' and 'data2.zip' to the current directory.
+
 	.OUTPUTS
 		This Cmdlet has no return value.
-	
+
 	.NOTES
 		See module manifest for required software versions and dependencies at:
 		http://dfch.biz/biz/dfch/PS/System/Utilities/biz.dfch.PS.System.Utilities.psd1/
-		
+
 		.HELPURI
-	
+
 	.INPUTS
 		InputObject can either be a full path to an archive or a FileInfo object. In
 		addition it can also be an array of these objects.
-		
+
 		Path expects a directory or a DirectoryInfo object.
-	
+
 	.LINK
 		Online Version: http://dfch.biz/biz/dfch/PS/System/Utilities/Expand-CompressedItem/
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'Low',
 				   HelpUri = 'http://dfch.biz/biz/dfch/PS/System/Utilities/Expand-CompressedItem/',
 				   SupportsShouldProcess = $true)]
@@ -119,17 +122,17 @@ function global:Expand-CompressedItem {
 		[string]
 		$Format = 'default'
 	)
-	
+
 	BEGIN {
 		# Define the Date
 		$datBegin = [datetime]::Now;
-		
+
 		# Build a string
 		[string]$fn = $MyInvocation.MyCommand.Name;
-		
+
 		# Log to debug (if we have to)
 		Log-Debug -fn $fn -msg ("CALL. InputObject: '{0}'. Path '{1}'" -f $InputObject.FullName, $Path.FullName) -fac 1;
-		
+
 		# Currently only ZIP is supported
 		switch ($Format) {
 			"ZIP"
@@ -142,31 +145,31 @@ function global:Expand-CompressedItem {
 				Set-Variable -Name ShellApplication -Value $(new-object -com Shell.Application;)
 			}
 		}
-		
-		# Set the Variable 
+
+		# Set the Variable
 		Set-Variable -Name CopyHereOptions -Value $(4 + 1024 + 16;)
 	}
-	
+
 	PROCESS {
 		# Define a variable
 		Set-Variable -Name fReturn -Value $($false;)
-		
+
 		# Remove a variable that we do not need anymore
 		Remove-Variable OutputParameter -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-		
+
 		# Loop over what we have
 		foreach ($Object in $InputObject) {
 			# Define a new variable
 			Set-Variable -Name $Object -Value $(Get-Item $Object;)
-			
+
 			# Check what we have here
 			if ($PSCmdlet.ShouldProcess(("Extract '{0}' to '{1}'" -f $Object.Name, $Path.FullName))) {
 				# Log to debug (if we have to)
 				Log-Debug $fn ("Extracting '{0}' to '{1}' ..." -f $Object.Name, $Path.FullName)
-				
+
 				# Set a new variable
 				Set-Variable -Name CompressedObject -Value $($ShellApplication.NameSpace($Object.FullName);)
-				
+
 				# Loop over what we have
 				foreach ($Item in $CompressedObject.Items()) {
 					if ($PSCmdlet.ShouldProcess(("Extract '{0}' to '{1}'" -f $Item.Name, $Path.FullName))) {
@@ -175,11 +178,11 @@ function global:Expand-CompressedItem {
 				}
 			}
 		}
-		
+
 		# Show what we have
 		return $OutputParameter;
 	}
-	
+
 	END {
 		# Cleanup
 		if ($ShellApplication) {
@@ -188,7 +191,7 @@ function global:Expand-CompressedItem {
 		}
 		# Set another variable
 		Set-Variable -Name datEnd -Value $([datetime]::Now;)
-		
+
 		# Log to debug (if we have to)
 		Log-Debug -fn $fn -msg ("RET. fReturn: [{0}]. Execution time: [{1}]ms. Started: [{2}]." -f $fReturn, ($datEnd - $datBegin).TotalMilliseconds, $datBegin.ToString('yyyy-MM-dd HH:mm:ss.fffzzz')) -fac 2;
 	}
@@ -202,8 +205,8 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5k/HoTDgGGSnOn4ZGIiV4h9g
-# ZxGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAiPgm5bZFcGF/OUR7uAqNEx5
+# i6agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -346,25 +349,25 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR5BVKQYjJ2l+u7lOpHCOfRzzQIVTANBgkqhkiG9w0B
-# AQEFAASCAQA0CGAJYiQRMoyPWzgf9hLDp+PDqA4trcqTeGIbroDwGSfmbaVzwCFp
-# U+dmNnhhTtjYyLDtvn8EMeh+XVXb4QIO++3JJ4AGifhQ09EvZj2QaUBxhz6/V/1Y
-# dreAtugCc6CLYtPx2368vBRizDkz2AXL4K5ZwEMm1NHVsJqWyaiNCwqpK9t2DfLA
-# KRrsjTd7QohOMAbeSFDVCwNGbOap9Wzswsi+PVmoHy+1DxWP6HH3XmH7xsPtR7+B
-# w0I2UDR9j7D38mK1BbUemhJMicP+r5Fp123AC9vi97mifwk8SngJ1hbYSBeq0G0/
-# gtd7zQW9WSC3InqeuICpXZdlM4Zt3DOsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRZd1eSROvOFXT+QOTvuUURMUFUljANBgkqhkiG9w0B
+# AQEFAASCAQBYiHcpwKsNfctnbB5Y5RUr+TGPBW6sc9iBe88uWTpVHQA/lotiZg5g
+# GKZpNuoaj9bCQ+n4PXjOHx/hnO8uMBWsJ6rK7aFmvoWAZBBnfTS19A5hP508+0rt
+# N4EFz0LeJXwfh9k7xbTqPMdJrpsCUHa3BQZ7LCnluf2yRc2x/E1b9V4Ew1YdeDX0
+# zoDknPfnWRd56dWXjdUOZCd3jhYPhkfmIV93KX5/mAXiM+s9n7a4YqZCLkCyKvA6
+# vV2PZRtnpnF9MSLzHphAKkToUWP2uxEsaLoBANIgec5w6oZ4y+CSBavJH9xjMnTv
+# atxtFN8vcPoLiImkkyTydFvRkd8CUN3noYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAzM1owIwYJKoZIhvcN
-# AQkEMRYEFA/+g/t2RAQ92VaOulPsFV+Gh22xMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTE0M1owIwYJKoZIhvcN
+# AQkEMRYEFHfVipn+UBsE7bhwpPncKfTesdujMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA39N79y7QRcFViyK4HgSh/pxqVKTjDWzRskGhMUZqQoxio
-# iLTyv5tfwm8G3NVGjKN382JUD81Y40FbYxqSz52YCd5LtC7zgJUx6sa4kjYL/ygq
-# knR4iMeoyyv0lw7ZLVMHeQPl60hkRFretrppypmHc9PHstod6bFPWPMXgzu4dOwz
-# RwLpx1dUvxlb6vDX5w+nBrQsFiOwnM2AFh/r0fvzHZWBBddZudhf6POK7dQJchxu
-# l1dL/kjmxqLpWrFz4fp0cMn8enQypjDE7jn+2i0O8vQHkwK3fhAkNRb5Qw9BPFuy
-# 3//LzxBMqr4s+Llzztens25Pz8PbHnkbgE17VLrG
+# hkiG9w0BAQEFAASCAQCYN7tBvaPq5vgslTEV4AnWzRkACS2cfFYgDtbSry98AZPe
+# 36x1M/QVrf1ztFn1sKXPULpfGNED09dh2gkN/IJYAwxWpaWrz8kCdTEK7KEC9PZW
+# lhal7tRxegeZLc0RFTXcFWHAdMVLszOisTI2/6Fk5DrFqxJfXgQr9BDGk3cCO8Cd
+# /lfeV2JyLHi4x+ZCjjNfyZTrQUAeowDr7bRosIp2amydGrXhty28hObTAGscbx9n
+# 21ze419/voUYHrK4L1j2dfhcy0mksevUgwIifwgDdR0eacaRKNiVUhPPfDAD+z9s
+# +39P2yMN6LEW9L9cqcX6M8DUCr3DqULVL0ORhcR8
 # SIG # End signature block

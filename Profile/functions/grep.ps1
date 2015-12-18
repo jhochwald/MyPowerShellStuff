@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -38,10 +41,13 @@
 		We do this by calling the PowerShell Command Let Select-String
 
 	.NOTES
-		Make PowerShell more like Uni*
+		Make PowerShell a bit more like *NIX!
 
 	.LINK
-		hochwald.net http://hochwald.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 
 # Set a compatibility Alias
@@ -50,8 +56,8 @@
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoBoDsc+44pEdvMeyWcLpC+Ng
-# /DWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUy8TouO2qUuJn8weHX1pa0pRW
+# XXWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -194,25 +200,25 @@
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTrMcqEPmqvcO1RY3SP5wNYPtm1bzANBgkqhkiG9w0B
-# AQEFAASCAQCCCVN8MHVuo+ijiwY1D6QVg+oYAeoRqD2OBSbREb0fP7hhpPyK7qIy
-# yzPAHHB072RvpPPTcqPU3F1we0PkEXNoc/WNfnZ53l8RyONKyK9w0gpLZmXIxlCP
-# lgoOfLrCVD8z9wq+jsDhPH6Rz7lD2MDlZM00Qoo2egBwWmAMD+lOqVhRXUefFAHW
-# GvG7U7FYFF+Y1RpV7G172/ZRtW6yzwkpgLrMCdZm3Wrhsdt0S9FK1Rr0PYzn8vgT
-# 5QfryQVcWOUY4PvLBM5SAJXz10TgTIxej5OavWiMejoftWN8hCKRHtRCGcKlDIGZ
-# JLmGVoVaXUahOUgK3y3vuNxj3L/CD4u1oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQZqXV0W0GIvxtbXP4sX3qvX+BCrDANBgkqhkiG9w0B
+# AQEFAASCAQBJIYluKI3hVbELApmcdwR/6ABJe9RlJAQO/h8XnKyWsE9bs8YR4nRi
+# BHvHvDNFoNtCNReWqIu9tijbMRYYl/emGgUh+HpMhbKAfeJPK8Ylq/oReYvCkp19
+# lHHeLDXSpB2qf0eUO+6gizdT/Q1Q5DSolUl5gRpmznXEV2Kaky3DI9sxPOzIe3pB
+# bpOZJehnOxYke6cUvoMauL002OxocwlRVafovj4hKEEK6Rkzf+7Ii5CQEUXcNfBy
+# 0ao7/QuRE1ZF2BVyouGu1kOxLCfSmBbOa1rIHL7tHqPBlKEgK72Gm06eON0tu8SO
+# VDYOehnECfz7BWeG5Z6vt9yyXUtvlzskoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEwMVowIwYJKoZIhvcN
-# AQkEMRYEFCX/bRaAWyMr9wXqARxhza/NjeyVMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTE1OFowIwYJKoZIhvcN
+# AQkEMRYEFNCKj9CCUquparpRs1vAKQjGq7R+MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBH4wD1rMbVyvnUZnVFHxl1YXyvSJOKg3ZCr4Gxt4LyoNKP
-# wwPmRhPWcBSSxK+gv2PLI22YIM5Tq02eP+mZBPGL5rF3jULfVZStgDr2hnLGi7Xq
-# NvTcUY2lPlL5fjVmanDJnePqNvndLp5YSwHRYNjHGKHo9F+JqPl7BnjToMbEDEBK
-# 6q0ciBLqwy8bwY6Y+/QSwg3r6RhmsGPlKZqmCGp0F3OgWmLaLkgz5HNLwC7+Zk4r
-# 59ToWqhnn+yBH0CjpSCAEFagyU+94CNqI8SPvZawhTW+vo6LNklNxMufcmfAOGZF
-# O/en5kdtBQDVSAV9o2K59CYFfh3LHp5dhkAVOrdY
+# hkiG9w0BAQEFAASCAQA1wcnR5AnVEM8HmUtq4OnBkvDNiMImpSmmdcAShwDMt+yK
+# 7/sGAgWmhhfQ5Y+yQKr5vjIPB1dczXxM4r7JGIRWizE3+VdRwmkyDo7unTZ+3vTH
+# peq8byMmz71gY6KRAI+I3E3RUvPGm7GvjoIxzt9uE/c3/RZXFKsYVT9hSMXJAZRN
+# Ck1wzvcKsbUUhTrgRiL0Rxy8UHvXWbqLRbmShWOkx1tKt/hiFZmRS5f7kxFMHas+
+# wVmO+eRSDWpPbZHtDreFZOPpBKLLr5Q9QRc3L7mKHxD4E8bCLccviMsCrGuBu06F
+# H2yMRI/SctzJnET8EsCxiliI15fUdHy6qvCTelwR
 # SIG # End signature block

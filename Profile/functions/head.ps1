@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,25 +34,30 @@ function global:head {
 <#
 	.SYNOPSIS
 		display first lines of a file
-	
+
 	.DESCRIPTION
 		This filter displays the first count lines or bytes of each of the specified files,
 		or of the standard input if no files are specified.
+
 		If count is omitted it defaults to 10.
-	
+
 	.PARAMETER file
 		Filename
-	
+
 	.PARAMETER count
 		A description of the count parameter.
-	
+	The Default is 10.
+
 	.NOTES
-		Make PowerShell more like Uni*
-	
+		Make PowerShell a bit more like *NIX!
+
 	.LINK
-		hochwald.net http://hochwald.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param
@@ -64,17 +72,17 @@ function global:head {
 		[int]
 		$count = 10
 	)
-	
+
 	# Does this exist?
 	if ((Test-Path $file) -eq $False) {
 		# Aw Snap!
 		Write-Error -Message:"Unable to locate file $file" -ErrorAction:Stop
 		return;
 	}
-	
+
 	# Show the fist X entries
 	return Get-Content $file | Select-Object -First $count
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -84,8 +92,8 @@ function global:head {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2fFdWP9nJfKOUlsxScCmj07z
-# BGKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIrshtIim358wAnNOPBO1XI/y
+# 8jWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -228,25 +236,25 @@ function global:head {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQq7HmlPGHFY/+HZMOoIy6AR7HyPjANBgkqhkiG9w0B
-# AQEFAASCAQADypKxZdZ9nSP+F7IwticXuKOWPGRFvqQa7VktQyqarhbenbaASizB
-# VexfqgxKtS4EYSvhH0XQmCkuaQQLT+C+QAg6cuyW2Ngh0WoMhkbJ+tmcbwhQrKJw
-# meWJ7UZByIabf+NkHw3ZPMzsvrpXwcUBMQ2BwG5Q7TLZI5MQwA/hOcBmTDDW3IDF
-# 7cW7P1UvL9h/yR18Y4pI04YoLdS3PDcRAXuwX7AgwcNUmnxRkISuNuCMvmzU2B3D
-# WKraqWG4Zk2HL5kUmRlklLJ78AP4/6n2Ji074NjaQrvst3bCboe2nhABlbUpeAJA
-# GHexaMadRZHxGbG3MON/RncZwHs44TJqoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQKAnD69BoGgkXYspPDI+JMkvx7qTANBgkqhkiG9w0B
+# AQEFAASCAQCihZNAHgyomTbwld1RBgu3uxapKeHJIorSpSD2yQHsWsRwFOoRT0IM
+# G/cn0+rONU+DQqT4+1bvds8gvaqQoAZm+7JZLJt5ubJ3Eb0D3fsiTDCstrigbLT7
+# 8bcSDM11scQCB+L0vbQWXVKckRDG6fm99Ug6MLT4SuFoYHaID5Rnr5u+pwfTnjnF
+# EaU3DRUbdiDSLf5HBwUX0UqbJlahZhyQW9tOblK18P+H75MGCn8k43twZt0eS6ii
+# lfwQsA5bd4kWHx03lXrIf6ns85joQPms4V6meQbjXwH0nhIEKdzD3J/05O7yt3vw
+# 1e2TLNZJgojDJcAlKLGQt9IxXDAaGSZloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEwM1owIwYJKoZIhvcN
-# AQkEMRYEFD5k2x34wkwruW5K8Ur1kDpZP01ZMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTE1OVowIwYJKoZIhvcN
+# AQkEMRYEFCU2QF9sHqK/S89KieA8d2kk84jpMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB5Uv/y/XmN8ZccjZvDw5CVB3NAS0lRfVG90tJo7WdAJGLr
-# 6OnIbZR9sot+Bpq6qwJOTFp+j3vpCplr2ydHF7I8+tcZWIVDjLWxQJ+BR9bCxFlS
-# i10sunL+3X+/Xa1akHP0ZzLIpt9CflN/ET2y6o1aVbD3BxObKdkwg1S5OlD81Ptf
-# i6gEGRtGmo7aT8GHIuTlz++rm2IuiRFn9pRkNlaiI3N3gzg5hMM9CkVEcppjeTAl
-# trR2rXQjbPyMLgUpUJu2iQOch+d7nj6IrG7ilZqU54J10PFJhXggN8KQrvlF6eKW
-# FXJgxNaCoezTtf8t4K1/3oQRGoFHHTJCLkvWQYxL
+# hkiG9w0BAQEFAASCAQASLsruQf3mmKglK8/v/rc8qrJEFeDdtLPPB255CggSp84S
+# eyN7SZIpWUC6wiCT6sRc3sEwEosc/5Udfdmt+3KIou9V88guw7KdJUYnroA8iD8X
+# miwg7ZlGZnU5PWY2ZQY1s27n0RKBrAofeZIwuzUiolEP2+ZbXSooZTLT1FyIlsgj
+# uD/zpvmcrKj2WuZIF5cve8bFhl8r7hZqhDc0mMDbefjNI4O35gmsCBcxkwhksK3s
+# 2yZMgsgPbeCs9wudjYljODoSC8gOtr3vbRmsIcI6bXwkVEsDUpkTUi9O4UzHPuzN
+# GrzQBsqi2SKu+kFxdVcWeyzYfQqnmnmERaAu7PH/
 # SIG # End signature block

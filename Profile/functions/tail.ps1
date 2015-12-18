@@ -1,7 +1,10 @@
-﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+<#
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,32 +34,38 @@ function global:tail {
 <#
 	.SYNOPSIS
 		Make the PowerShell a bit more *NIX like
-	
+
 	.DESCRIPTION
 		Wrapper for the PowerShell command Get-Content. It opens a given file and shows the content...
 		Get-Content normally exists as soon as the end of the given file is reached, this wrapper keeps it open
 		and display every new informations as soon as it appears. This could be very useful for parsing log files.
-		
+
 		Everyone ever used Unix or Linux known tail ;-)
-	
+
 	.PARAMETER file
 		File to open
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> tail C:\scripts\PowerShell\logs\create_new_OU_Structure.log
-		
-		# Opens the given Log file (C:\scripts\PowerShell\logs\create_new_OU_Structure.log) and shows every new entry until you break it (CTRL + C)
-	
+
+		Opens the given Log file (C:\scripts\PowerShell\logs\create_new_OU_Structure.log) and shows every new entry until you break it (CTRL + C)
+
 	.OUTPUTS
 		String
-	
+
 	.NOTES
-		Additional information about the function.
-	
+		Make PowerShell a bit more like *NIX!
+
 	.INPUTS
 		String
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param
@@ -67,7 +76,7 @@ function global:tail {
 		[Alias('FileName')]
 		$file
 	)
-	
+
 	# Is the File given?
 	if (!($file)) {
 		# Aw SNAP! That sucks...
@@ -76,7 +85,7 @@ function global:tail {
 		# tailing the file for you, Sir! ;-)
 		Get-Content $file -Wait
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -86,8 +95,8 @@ function global:tail {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUa1XjTkgy3CwYqU8ViWpyp5Bf
-# ONGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOFI+1ST98Xj0BLQkyc5f8bR1
+# 9EygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -230,25 +239,25 @@ function global:tail {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSXcSOK0yAAHAc+ggCtMNM+9OpqQTANBgkqhkiG9w0B
-# AQEFAASCAQAN7VThkuq3w87S0eoDNOpnshQvFZtk2Wu5d+Kz8IP4zYoHd1Yi447L
-# KozDR+qRXFX17HyIL6vFe8UUxuGu9FaL6ZF1SGvUhdrLBVMsSAsCxKTuVwoN1Ga/
-# dyYjJnL+sFXXCeJ4LxNcSoklOqg6ypzmozGJimRg20dSnTNLm1cufSc2nxFoNfZJ
-# ALV8jUSF4Ux65+1fDejXlY+utZMxo6JhvAOxcXYCtuetqp7ayjV6CVfOOu6N70KE
-# atBGTJaFVdRDtyqukf/o+cXKXEXOluEz+gw3m1ui58/DRum1EZ3UY7H7Eeai97yZ
-# EpkhdC6EcG2nm/vrkjdY3d3UxN9mTnXvoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTEc7v9IqcksAmUAtMCGqnhmzUA/DANBgkqhkiG9w0B
+# AQEFAASCAQCQbsEwSFMZeawCqCaT901ZnBxjtYZL31dDdMu0naPwgHCQ+0y2XnpL
+# uqRdjwlOBrap5N4SloYe0jB4LExmITVrP5ss6D6XpXuxX32YMmXF7+wu8DDDxzBW
+# arCFHLR8uVgM83wWPK+pwZM4jOcMUoQ8cQxhUPgOGaDIBwKu6XHArCc2403XCnb1
+# VKAZQced4eQ8SChM/5dSGPzvps7B4i9272AhPLBh8e5Y6dhFyKDkfusqfPhSuk5c
+# HaXy7nRB4X+KuijJLuz684ZSENGTd6y34rLxefXZ4zjF2cY0+pQy0O9P1g+cojEN
+# 9Hf0S53Nk9LGQ54qoEuLyD7x/qXiBHe0oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyN1owIwYJKoZIhvcN
-# AQkEMRYEFEhnZyva1maPGP8PO3FFTwHsRkFUMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIyNFowIwYJKoZIhvcN
+# AQkEMRYEFHtQExoIVcgP5UoW/29eZVckGu3rMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCYROP78fHxp1Ls8dh5zNTfvrPD2AzlPFidNP1/Ez72aUFA
-# DlJQZenpqZZfp8XV9FaCFrti3jODs4VVV2X76rlNzzvaBNQvOfdGfv1DR4Pz0i6s
-# taOYFrRTdc3DUbf7kvRry0ch++ExAjyUMRtHu0d27Rj6zmYL3QTFiuF9coyU9Azl
-# 1uKCyaUA+MwbRoTNkr340c4fCE+VGHq7Of+KgO0a2VvpfDi3F90yCwvUU/aXP9b7
-# 6ivQO3J0oXFOBhqOWJeqtb8iBWw5WQPxyu8PQZGI1lAPc6Zi97Asbj2AHkJ6Oj1U
-# VSsUA1zHQ6f0Qn5vk+ltjsppb3+1PoO49+DvSo0t
+# hkiG9w0BAQEFAASCAQCEPUeceH+i4wkXQwRMtdYZ2aJQ4K5a1/nSXJjI3fQtwqG0
+# M1kXWdt7g5qhCn9ULvw2odPKa7BO80w/ktUecnuWqAbQ02FJQROaN9FpF4BUczsc
+# Y4A9Ept1xDq6+UKh2ukFDxJ459iWxsHj8Z8iPjGT9f5GuR88hvv43fdfaa0NbLBi
+# Weyp1Qow8X+wi696ljSH6PYiq4pdxyqqX44XsiU53SnbDyNgx63KIP9Hvfc2kDuC
+# BYpqrGWxFUQGDqRJEmI7hDTQFzsAvwampKSTxJrNeo6Mp84cHIo6TLoTrDERorrc
+# hhh7HR8TwcMdY+UN7hO18Vux1YIF1n/aa6jSFyWx
 # SIG # End signature block

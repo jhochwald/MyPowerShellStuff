@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -57,9 +60,12 @@ function global:get-sessionfile {
 		This is just a little helper function to make the shell more flexible
 
 	.LINK
-		kreativsign.net http://kreativsign.net
-#>	
-	
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	[OutputType([string])]
@@ -71,10 +77,10 @@ function global:get-sessionfile {
 		[string]
 		$sessionName
 	)
-	
+
 	# DUMP
 	return "$([io.path]::GetTempPath())$sessionName";
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -104,26 +110,29 @@ function global:export-session {
 		This is just a little helper function to make the shell more flexible
 
 	.LINK
-		kreativsign.net http://kreativsign.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param ([string]
 		$sessionName = "session-$(get-date -f yyyyMMddhh)")
-	
+
 	# Define object
 	Set-Variable -Name file -Value $(get-sessionfile $sessionName)
-	
+
 	#
 	(pwd).Path > "$file-pwd.ps1session"
-	
+
 	#
 	get-history | export-csv "$file-hist.ps1session"
-	
+
 	# Dump what we have
 	Write-Output "Session $sessionName saved"
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -153,9 +162,12 @@ function global:import-session {
 		This is just a little helper function to make the shell more flexible
 
 	.LINK
-		kreativsign.net http://kreativsign.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	[OutputType([string])]
@@ -167,10 +179,10 @@ function global:import-session {
 		[string]
 		$sessionName
 	)
-	
+
 	# Define object
 	Set-Variable -Name file -Value $(get-sessionfile $sessionName)
-	
+
 	# What do we have?
 	if (-not [io.file]::Exists("$file-pwd.ps1session")) {
 		write-error -Message:"Session file doesn't exist" -ErrorAction:Stop
@@ -178,7 +190,7 @@ function global:import-session {
 		cd (gc "$file-pwd.ps1session")
 		import-csv "$file-hist.ps1session" | add-history
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -188,8 +200,8 @@ function global:import-session {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2rnPp5qLe3lmChoVR19vrSvB
-# /S+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUceqra1juEmsdqKzbQDxD67G0
+# WqCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -332,25 +344,25 @@ function global:import-session {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTkNGnTtrLvTiHHRTfLkGaORKQ9rjANBgkqhkiG9w0B
-# AQEFAASCAQBdrskFD7uJZ+mbIa4zQNAmyV3SYmYrWWlLmApa5fvLlT5XlRHorFsd
-# IyN396xcX8OOwN+X7TqIRxxnTegfDc6sOcKhKWXXwkRP8APfSrwKwyfcyPvyoCX2
-# cLcOjdNqMDjDrH7W+Qik2TfRu88oZONxT0zfKunQ2WEDPYSdyqOTkE+xq0yNEG2x
-# yGbb5PdzKA+eVFOWGqyg6yHM3RJPJ1n7+jWNSL0ggc/wr5CzhVcZy3w6mIQAUcbO
-# cqRPzX0BaqwnHohFWr4FZfH1GTZYo1aMU4D6jvkayWNBwK1QV69kUZHf6KWBL4i5
-# 0xuH/BXCyytLU34lszD8wzQ+RHZzxK+7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT0mJBRF0LWiXZQR5SjVW8EuXfpcjANBgkqhkiG9w0B
+# AQEFAASCAQBoGehNGDy4XKhDLMZwHHxDEeIe6jZhkbgrHGwDCGUkFjL1ptH0+COt
+# rSx7pArOKH/PadbCMmyxnMWysBCOA2hZ0vQyTc29Z/RPLlLesRLcZ+s6r8LsBPNn
+# NP8Jcs6Prw0mloGxIhdlm0Tb2JBuMBJCTbKrx3+j9BXivsczuqJ3DcbuBrp+QfqO
+# wO2LKbSM0gkwhFbWrbECPbddIL2P0znwUfilxuXur+xOXya/8SP3IpVOzluTBEMd
+# +5kSmZtk7jPgfjg7Tc6Ez2jcHTDb2b2qhtHCP0mYbGVY/Avp+FFiCrr13XuN7ssF
+# eSvucrziIBT/PKvcf4G9SBhhsQlr3FfToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyMlowIwYJKoZIhvcN
-# AQkEMRYEFArCHAPwiTsm52fTd9OG2mm+65xNMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIxMFowIwYJKoZIhvcN
+# AQkEMRYEFHqdBVfCotfKZLZX7mYNG2HidtBFMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAYEnWYuq7TeEDg6oWkglun5/h68x05Cs0TcIszxDOItajP
-# 2qxN/IBlQwiZYkI71tJnOnxfE9C8gR0dEmNu5CmSQ2qK5MaUOYODDF2VXvxdRrSo
-# V4Q9QPb0ZWa5OGqXocGWlB37M1nnDalZi+/Nl4SAbOIcWw6USLxTwJyP597V9EWd
-# 0nXZpkOoU9oUE1o09ZffdlQmtsUvRWiiSaNwNf9jGTTwdKVeR/b7TqaoYDNxz2sA
-# mnrwGY3IYeS6oTrGzBLY1wk69focKWcp/kyHp86fo31XjLUzce+/NwgtqBFT8+Pb
-# 4Dmv/I2y2nx/IUXKYdcXqWe8BW3W+m+++xU+XzcS
+# hkiG9w0BAQEFAASCAQAS3Pd1OFlslyUoFUpHYCSnJmh5OYWFv88wuvmtHIdCFhmQ
+# fsUxIu88wgTx4h5LSXmPeZ7QkT2uI2D0pgfrx3gPWN+ZVF6R+lCPIfoKgq1KeDyw
+# 0AUMHOf2bFKjiILLchH29Nhvj/lhEJBoopg9jmzoxIwvM0/YPO35mBzqUWudLaMq
+# lQtpcR7nFLvrfj0lZ7FlbyZbkDn5s9lIUXNktuvzkDEgyW3UAACrEUlU2FLLUkyU
+# 4SYlo5pGsrscRZQvemP/tHhDP6vl3nFGVroOwh7pyI1twwgvb1IbVsuurrmX7Wb/
+# dzO8zn5ehbMZOqMvPVF3K9q6FUX1NOrSnrELfk5+
 # SIG # End signature block

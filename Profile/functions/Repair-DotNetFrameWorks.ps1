@@ -1,7 +1,10 @@
-﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+<#
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,51 +34,57 @@ function global:Repair-DotNetFrameWorks {
 <#
 	.SYNOPSIS
 		Optimize all installed NET Frameworks
-	
+
 	.DESCRIPTION
 		Optimize all installed NET Frameworks by executing NGEN.EXE for each.
-		
+
 		This could be useful to improve the performance and sometimes the
 		installation of new NET Frameworks, or even patches, makes them use
 		a single (the first) core only.
-		
+
 		Why Microsoft does not execute the NGEN.EXE with each installation... no idea!
-	
+
 	.EXAMPLE
 		PS C:\> Repair-DotNetFrameWorks
-		
+
 		Optimize all installed NET Frameworks
-	
+
 	.NOTES
 		The Function name is changed!
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param ()
-	
+
 	# Cleanup
 	Remove-Variable frameworks -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
+
 	# Get all NET framework paths and build an array with it
 	$frameworks = @("$env:SystemRoot\Microsoft.NET\Framework")
-	
+
 	# If we run on an 64Bit system (what we should), we add these frameworks to
 	If (Test-Path "$env:SystemRoot\Microsoft.NET\Framework64") {
 		# Add the 64Bit Path to the array
 		$frameworks += "$env:SystemRoot\Microsoft.NET\Framework64"
 	}
-	
+
 	# Loop over all NET frameworks that we found.
 	ForEach ($framework in $frameworks) {
 		# Find the latest version of NGEN.EXE in the current framework path
 		$ngen_path = Join-Path (Join-Path $framework -childPath (Get-ChildItem $framework | Where-Object { ($_.PSIsContainer) -and (Test-Path (Join-Path $_.FullName -childPath "ngen.exe")) } | Sort-Object Name -Descending | Select-Object -First 1).Name) -childPath "ngen.exe"
-		
+
 		# Execute the optimization command and suppress the output, we also prevent a new window
 		Write-Output "$ngen_path executeQueuedItems"
 		Start-Process $ngen_path -ArgumentList "executeQueuedItems" -NoNewWindow -Wait -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue -LoadUserProfile:$false -RedirectStandardOutput null
 	}
-	
+
 	# Cleanup
 	Remove-Variable frameworks -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 }
@@ -83,8 +92,8 @@ function global:Repair-DotNetFrameWorks {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZBWVTIWq5U9QMqNlW8D13PpO
-# 3iSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKIKM8k2wkBbasay1zmpGEzoD
+# PoqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -227,25 +236,25 @@ function global:Repair-DotNetFrameWorks {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSkuJhqkvR2PZe7QwK5lMkOi0kHgzANBgkqhkiG9w0B
-# AQEFAASCAQAIMw7P/Uf/dd8JsG9GHyCtV2tXIaeUG2bCacFyQjwEmLvwwKusrmux
-# gK8oTmffWN5Kv/I7r5HmhZ4Po1mHhHxbfq7Ji7aElUGwsq4Vez1exzCPIuZ1+ZpH
-# JFKMDI1DAS1L6iawN7FQvQ+57C7p0fD3Y9Gkh4uj6b7CWIOUwxtrlR1tPXS50y3B
-# KVllEjtORlXLQkghqWxwrJs28uUYFyQyCPiPAwYPdVgY7QS3RO4D/816hgXkhyP2
-# 7rcRsnY1+nRRwuws6bOWXKpb0P68EeY+kutAtvNm257L/+fZhZYjDv9ARsWpH6OX
-# wQ9maODUL6tXceY0AE3V04mthCz1M12yoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT0KoXk94Q43foMgLGGk9nRSXwpijANBgkqhkiG9w0B
+# AQEFAASCAQB/jnqH25yyzNxs6avcPL7XhEE7e2xZBYibfoWxBz7AhaRSAr56apwE
+# xiqdzc0g0QS79/qzIOu6Chg94LxG+P80DcBKjoI2/CtOoa7NX9pa3lKH2YpgFKd6
+# eVE5gIRb77aL73QWC0hUE/4OKrcUmAcalvlMtP/q8C/JKE/NEYR6HIu0+rfgm4WA
+# lo+ARq1AocP5NQx4Mxc3u+4vi15VhsN6MbvHJHcPoWKX9VKuE0M+DfCrkesWFzBg
+# ZKa2bgS+ZkIJiZd4Vo4q6j2vsI1oripYWQIUuIOEaRxVYeVosboAfb5DxvPuMDdl
+# z4hElp0b0Lm+PqH/enGB++4gTktyffopoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyNFowIwYJKoZIhvcN
-# AQkEMRYEFITtJsDsIul+J6X+JBB5VQAVQQwQMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIxNVowIwYJKoZIhvcN
+# AQkEMRYEFNiGuqrKtt2AVjgYYtzyjKJCeyK/MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB3mkud9phwKCk8W5itm6ODwBGvCInKk0HpJxcqSMlKytFH
-# 7wLv3djE3G4oD7wRg/SYyJ69XKFrsgwz2Q4s2HimOLDj0XnjL4y3tlSNMEIFssIM
-# n1e0MSfLqy92g3SLCE2SwO2ftvdTz9MrM5nx6rcNrxmCIx76sS8whU72EJEBDhPy
-# ABGue1ClmNVbJcNu0Isro/D/ke2Y73l1Fwd/3Ig8U7hwFoRtmoI+3hWeVt7NEC8I
-# E2D71GYZfQrsDl6ZrtKDkjE9iuoOqr0Wul1/7OOrAy3GN5SjFU9eL9MUl1KpmfYS
-# cRAoqtzcETx/HxZ4FkySQFUicapNpgwpgJr6ySv7
+# hkiG9w0BAQEFAASCAQBpDZOnCs6GdeBzSrIG89grbdSOyZAhKsovGJXDyK7gpk+Z
+# +lI1nneejLKrrT5Y/Cfp1rZbLB7njAVgVAj6ZMPtmE0EhAEihV2X8byb27+d4xFh
+# Zmc0rAvjAzyt0MNftSMmykvxMTRd7/axCCWfL2TTXCQWSTeifFnvjTgtCeqtRF65
+# t9eSJ6uaV20D3aUecaKkvCy6TaKBU7g3wwGjZlth4rU5r4T7bzWd8J1YE+paPUUH
+# xAS5MrkY3/4SLJVBTlY81xk9GdIG1tIRgoapVD7Si0Nq/kHaMz3GvCvTmhCvtYUX
+# WP6lQ8evcUVsEcHe+rgLL9rI6h/E2/o54+TXigPF
 # SIG # End signature block

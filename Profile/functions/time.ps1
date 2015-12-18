@@ -1,7 +1,10 @@
-﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+<#
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,38 +34,44 @@ function global:time {
 <#
 	.SYNOPSIS
 		Timing How Long it Takes a Script or Command to Run
-	
+
 	.DESCRIPTION
 		This is a quick wrapper for Measure-Command Cmdlet
-		
+
 		Make the PowerShell a bit more *NIX like
-		
+
 		Everyone ever used Unix or Linux known time ;-)
-	
+
 	.PARAMETER file
 		Script or command to execute
-	
+
 	.EXAMPLE
 		PS C:\> time new-Bulk-devices.ps1
-		
+
 		# Runs the script new-Bulk-devices.ps1 and shows how log it takes to execute
-	
+
 	.EXAMPLE
 		PS C:\> time Get-Service | Export-Clixml c:\scripts\test.xml
-		
-		# When you run this command, service information will be saved to the file Test.xml
-		# It also shows how log it takes to execute
-	
+
+		When you run this command, service information will be saved to the file Test.xml
+		It also shows how log it takes to execute
+
 	.OUTPUTS
 		String
-	
+
 	.NOTES
-		Additional information about the function.
-	
+		Make PowerShell a bit more like *NIX!
+
 	.INPUTS
 		String
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param
@@ -73,7 +82,7 @@ function global:time {
 		[Alias('Command')]
 		$file
 	)
-	
+
 	# Does the file exist?
 	if (!($file)) {
 		# Aw SNAP! That sucks...
@@ -82,7 +91,7 @@ function global:time {
 		# Measure the execution for you, Sir! ;-)
 		Measure-Command { $file }
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -92,8 +101,8 @@ function global:time {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8EQ5hiymcYCAO6dn2sHxGhRf
-# tq6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGApvLwUyjRM/ld8gKG1XnUG9
+# iCqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -236,25 +245,25 @@ function global:time {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBScNRskpGJ/+e3JjNaMlL8VRfGpFjANBgkqhkiG9w0B
-# AQEFAASCAQCJmUZISNzM33oKuqdkBT+ilxMVtvQAaxiW17SeXyei/c6kjW2WM+3l
-# 9k/FA6xiOrKB4RZ22fgnJyvge7aoy6uuVs5FWLKXOmMPvrNpbUh+tdmjXrbAopYF
-# 60Jmpt2Uxo/UP3dmRH8RApvfGfYgz3ZsPOPGLMhlUDkKIOSq3COtWZtIzGybHC4B
-# hTzW1HqOhV9I5Z/gl2byjorjEJz0tkXOMlWkByTAY/d5KbYXSkuXiS+o1CgQCT19
-# CFeBGXXJa1gpm67cgQDlVS1o0Y4jAIBY76p/NLoQENhOvGA+SY2TipiW5AYRdV4q
-# 6czn5QXJzAriF4FPe2ftPR7foSR1/Hw2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSeerEZdiycsemHlPmY4NOp6r9/NTANBgkqhkiG9w0B
+# AQEFAASCAQBrLg4CnQvO90ESh6OaItmwLu3daXzmE9rheZiaSV68r6hKjcVwxn/m
+# iKKma7OxdD5dsckLYvrNTZuNG9Z4fxlGwPNRgGtkiI9sHxPtxUepXucNlnuJbtlh
+# JwCaG9jftPNaWX+hPOhlkcczIfg+J2QzmcUObWNBb1TOcbhOeIlo/LqnAgIEGus6
+# wNY0HTDXlNiOvQsk5PbZ++Wj9XxCqElGiPmvJsqDZJh7Ij5ElveMEdQ2oyF0x8MV
+# 3Tmn2PgIv6QDnBbSiGJeEQOEwT0R+JXSNwear757IJDSeD0ed5venSKLFDAWF5VX
+# +Q4YgdaBHLAOFWn8F8G/pfgOXpAUARefoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyOVowIwYJKoZIhvcN
-# AQkEMRYEFMoiT/B36DCJZgYSaMLDck4MF4daMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIyNVowIwYJKoZIhvcN
+# AQkEMRYEFFN43egKf3lGkGLULjUJnLYGhAtaMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCc4dwfkAUlkp4XLjTGDx0ojV375ksAJ4gi5Yk/mGw1BFVA
-# cL8EWxifRc2UTHel1sIh5FadUljdrcrLM+1g7ZwdS7CujIuePYdqxYcVW7KxmpA3
-# PmlNjsqkIYNKW1zzNVsD7ZTLF8kDjb3mCEQbOZX9nheawTMZ8dZgregD7/p4/qcp
-# Y+XYbWiTKEE4Co8FBIrV9dvNazPdOaB+rxONNkmQ8c2z6M5ZP8ZojApo1BGliAlf
-# U/cpJc+LkHWj5EMR+oaZU0AjHxdpVeJfBdFTz20qlGtLf9Nlt7zbPrg+m33Qe3tu
-# gJLdDP9S93DFOWwIrta4hCg0Yr6yNJyEbpEulI3N
+# hkiG9w0BAQEFAASCAQCd/hvTmE2KTqt4l+7x8Ia9ZSx4HbraQLLjPpRlqnUYZQ9d
+# bjHqBO9/l5M5sLuHRSUAA42jY5enszVrXu0+26IrE8G8FCPFMctxhC0C1xrIhyR3
+# +mFTC7wqb7OFVjSg+HKnoMCfiIbUGMRRJ8npPamWgVYye/mzA9lIW1LINoXJWTeJ
+# tsyWhOvtrRlLr3VvsxrDQ6OQ9Tz3nFjtCrX2APj6lhqm28bSVmCVf5C20duJnZ8s
+# g+64PUDmBympm4yig5bGDDqMJIPRGqTdrF5icQoX/OMcnGCmuudgve/cW9+bDwvW
+# I/dUJ2saA6j9TbIkAqVhaXedeTanv6KjzCTQF655
 # SIG # End signature block

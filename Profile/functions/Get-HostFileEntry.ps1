@@ -1,7 +1,10 @@
 <#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -49,9 +52,13 @@ function Get-HostFileEntry {
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
+		Sometimes I need to know what is set in the HOSTS File... So I came up with that approach.
 
 	.LINK
-		Support http://support.net-experts.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -81,8 +88,8 @@ function Get-HostFileEntry {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6fv/p5tGA1iih0G0xdoTMBqa
-# E3ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUEh165IQSY2OmmQrL3OWuwM0W
+# I9qgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -225,25 +232,25 @@ function Get-HostFileEntry {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTWs3QqGEl+meEDrd76o7gWK6yWazANBgkqhkiG9w0B
-# AQEFAASCAQA+FzPSLOrQVmZrwx7WmmSY4zRT2gzJDPJORcPShZZMUiKtSQsYhJd6
-# Wr71+e3NQCh/HAgtqvS52AawbuAs2ltyKlfFmnrashhestF8OSa3iC+UaRyWjDKb
-# g4viVU0M4lD0prMpFkL3g9SYUuZubzZRzETnou+p6Rhf41oPwyNijuzUXzLzxApu
-# tD7b/9iodGfvSLMPBmcJPj1sIiHwDdFQ06MWnL5/QnL6CbjhS/l3euL9J3xn7y+6
-# EI/A+8nHGA/nhl+bYwQSxpw5Snml/c4MOX4E48wHO2M83ysbKbk+E9pu5E6L8Z6A
-# moryB8au+tBLzVbLXMNKBj2WsrFi79GUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSa0Tp5A9uqe8SC4daNq38GPJDXaDANBgkqhkiG9w0B
+# AQEFAASCAQCKgrMn2MJRfIxUSzS7qKZomt385tcHzSbiVZfv8U8w60Nkcj4LrSQa
+# FqZuaDgoZsNwJh72Khi3MKkIfMNt1hdKP+2+gMvTBUGdtxjq3vzwfi36mYGcsiFD
+# I/tzKZINqPk/dzX+8hpmai6tHdM0hsiZ13WMMRBJdSDmzZ/fXs56vezMScPr+S8N
+# R9itS2DMVhsm71QGmI6IIJm69m3oUA2HmKz5WCvL+HCaeM508HBDkE6lcZ9c2LB6
+# Bjw7TfWA9zD3Q/1pHRQOqrGPt31N27o4gMWRJsm2pxk5+0zBUnAzWKWp3L+dV5ut
+# 5Aa7gF4xM36v4vI7CwbsJpSi4RJzLIdsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAzN1owIwYJKoZIhvcN
-# AQkEMRYEFFgWuyBeF9dM5ZwYXZ846+aHxeWLMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTE0NVowIwYJKoZIhvcN
+# AQkEMRYEFMamskfxTNtfCWUkEQLAl1PvLy0sMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBIKLJkmSurn18pluEbBIAmaWmvY/QwaOJhQeycwPvkp3Ay
-# YHAtd3iTvShlkROj/nhlKx3bavPkjGTLlFHkd/aFeu0PhUYT5CI/csXHxeFVpw9Z
-# MvjQwscJVJ29RKMp90X6wZhKnEWVK5mJ27oJDj6JXhn6VIBwFtrkDHFIfdU6QGhQ
-# WCEKKzIIoK1/96YtSHJnxb87PVGGHUKa2XK9R3yCrGbHYphD73GfBvmP3iNb2o36
-# ic+Vvy2Z2/77OMAd47NDqn8cTgxXZpi7Mm+5fbPez9uhbYH/IYdcZDAhHQWQIV91
-# APxU2ViLhaRtIy6cmJWYJ2CP9tfA+1fruU5dqr5O
+# hkiG9w0BAQEFAASCAQBGVnFnVdXaymUQtjtP1rX/wyuUQggLwDvplYFXBqpLCGUs
+# vKr73UAFoPNitStZDq97kA5RAivg2fan+OIaYbUxquKs6Wy/Qh0TCdEVtAXU73Uq
+# cC+JdApH8HP85nxMXFx5F0eY8NHJ30pa+kMyxQmSL+IWIooShtxFSnN7ie1OTEJh
+# otE6d8Ri0md63LVyt31nJwS4GtcgNrdSKTlK5uIPVqSO8aI0DzjB6LcwPGNJvQwR
+# eInRgGIRNnFbRwQMAN8XFObw7IK/8NdItV/H/7aD45FnAIVO61gpdo7pjdMiRkTT
+# 0oaHi3Q6a1dDkXoVBecrPPu0uU8HN//LocT+QqmD
 # SIG # End signature block

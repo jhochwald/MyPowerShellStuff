@@ -1,7 +1,10 @@
-﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+<#
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,22 +34,28 @@ function global:explore {
 <#
 	.SYNOPSIS
 		Open explorer in this directory
-	
+
 	.DESCRIPTION
 		Open the Windows Explorer in this directory
-	
+
 	.PARAMETER loc
 		A description of the loc parameter.
-	
+
 	.EXAMPLE
 		PS C:\> explore
-		
+
 		# Open the Windows Explorer in this directory
-	
+
 	.NOTES
 		Just a little helper function
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	[OutputType([string])]
@@ -56,7 +65,7 @@ function global:explore {
 		[string]
 		$loc = '.'
 	)
-	
+
 	# That is easy!
 	explorer "/e,"$loc""
 }
@@ -64,8 +73,8 @@ function global:explore {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+eeNYdRgLcVtN26HTxrTUuMw
-# GfygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQgeVHC2cjQ6p9m1ToTDqo+AE
+# mPmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -208,25 +217,25 @@ function global:explore {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRoJ/uO/JHmYhmY6Wnjev9LubFgqDANBgkqhkiG9w0B
-# AQEFAASCAQCd2H8b0cPLXTqQPJZMr5Wzvem4jkpJgX55ZqAgypYj/nmDFd0lsRJf
-# ShLlululSQ2zIiGc0Pr7Aw6N+QaaYnj+Mh7SmIT+DY8tJiyrgmJZ0zeZc8jRfeoT
-# P5q9l7VU0qeuDxQtJ2n+rh727N2e73KaTMUJA1nwE4Z90KE4CEiZfIHDpiEE9+G2
-# daa1x9dqrTyZS7yfn2R/es6eufZIkv4clH/X7IzzLMVbHhMYnE+eIkBXGCKToSFf
-# ncVmVFODEY3Kcn7qXBvk9kLBn7JJ/7lkZkQMrcMttIJUkyRG8uKkTjGktl5VCCc2
-# 7V+jca7IOWvi46q/afp+AH1u0oe9ovchoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTfHbd/TJIIFwCWxZfPv0GVNUClxDANBgkqhkiG9w0B
+# AQEFAASCAQCKirX0eM2hYTnR5NCNpoPZvHykKY9jg7XSA9d503MxILJGz/dCLOeq
+# 3yMPNzSiT9TSYQyyceN7TOlOuXlUPrerGtpMEP0Uqezy7rBviv4GgY5X5yMmskFv
+# D9tXlk+/7PeGrKecxRTBYnG9W/l98C+x+DW/z8XBvbdeFNm9cbSVI3gMgn7RyP6E
+# Q0mEWpD5wSv/R3bFVyMUgS+O/e3ez3hnMhMt1vJdLttpsJWie0838mVz1f0XSC9H
+# rolfek93faIxkU6a7MJpSdungnE2Lf+xn7McP0VEjAk0M5QoNxdpL2gmfSaAZSB+
+# HKVGEl7Vf9lyR2fXdKoi/qy6sxXXA4euoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAzNVowIwYJKoZIhvcN
-# AQkEMRYEFNoL1Pc4JwF5Cic2eepyyJh3X4GtMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTE0M1owIwYJKoZIhvcN
+# AQkEMRYEFEzSXVGGcFyVOK+cB1s2alhgJHftMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAa4PdGM8QwIHwheJDIsxBUzsIQEDdwrxo9JY9lSnN6ksEs
-# /JuqhYJb2wDSTjIGKGubHHlTRSvuJsCITBpVmBqSmEzfocT3Z65sytLkMgUsTHE/
-# 0+QjB4sJV5Qs/1IdDA424+QJnCXAbDmWMXi86oPWsX96qn+wWTlhgYn/SH9me2Cm
-# 4QmQEXN/uWlcXagyRVJm8Y0rJh4ZtMvHgmqrG6QfJqa7sRJU0EWBQHGi6SoZKqX9
-# JjQ9LLwa9IxOTpaJSb7YbKnAhuw+aGLP3+sJyi+II6BogVhlttrkJ4qId6Dxm+Mz
-# zcWREbS4Azt+7XdGeAwVprRgDlSLWp19U+eL+Gma
+# hkiG9w0BAQEFAASCAQBAjaU2sBGkOtyJGibwzeuaXysLgZOeYhnlUDPBadOYTJ7k
+# WHix4INTgK7ko+4DCPpHPCia7RsRZUoF3ExVsJdvKS+2Yrrf5TbNH/QzZUtqEitf
+# ox5b60e3kFkkAbmiRFr8O2wNYA9ifMgQ7yOtFU3669jy4NswMZc8+7Xvq/24LYxy
+# TPr7gianw6XwGZptUg/RQKwHne3lhsYq+Iad6a5LWt+Daw1kKiEeQdRkUc1yRMoa
+# lc3+ASZBWA0wf+Nv8GwyFaXS5yR+XZkQHG/3lQX1jTG28jlXmNZLpQ0U+kPGQwr/
+# Ca/0YSX8rln464Ze5aSvad9XB3VRpd8yJoD/EvQU
 # SIG # End signature block

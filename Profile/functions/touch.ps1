@@ -1,7 +1,10 @@
-﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+<#
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -27,64 +30,167 @@
 	authorization from Joerg Hochwald
 #>
 
-# Every *NIX user known touch and we miss that on PowerShell ;-)
-function global:touch {
+function global:Set-FileTime {
 <#
 	.SYNOPSIS
-		Change file access and modification times
-	
+		Change file Creation + Modification + Last Access times
+
 	.DESCRIPTION
-		The touch utility sets the modification and access times of files.
-		Touch changes both modification and access times.
-		
-		If any file does not exist, it is created with default permissions.
-	
-	.PARAMETER file
-		The File to Touch
-	
-	.NOTES
-		Make Powershell more Uni* like
-	
+		The touch utility sets the Creation + Modification + Last Access times of files.
+
+		If any file does not exist, it is created with default permissions by default.
+		To prevent this, please use the -NoCreate parameter!
+
+	.PARAMETER Path
+		Path to the File that we would like to change
+
+	.PARAMETER AccessTime
+		Change the Access Time Only
+
+	.PARAMETER WriteTime
+		Change the Write Time Only
+
+	.PARAMETER CreationTime
+		Change the Creation Time Only
+
+	.PARAMETER NoCreate
+		Do not create a new file, if the given one does not exist.
+
+	.PARAMETER Date
+		Date to set
+
+	.EXAMPLE
+		touch foo.txt
+
+		Change the Creation + Modification + Last Access Date/time and if the file
+		does not already exist, create it with the default permissions.
+
+		We use the alias touch instead of Set-FileTime to make it more *NIX like!
+
+	.EXAMPLE
+		Set-FileTime foo.txt -NoCreate
+
+		Change the Creation + Modification + Last Access Date/time if this file exists.
+		the -NoCreate makes sure, that the file will not be created!
+
+	.EXAMPLE
+		Set-FileTime foo.txt -only_modification
+
+		Change only the modification time
+
+	.EXAMPLE
+		Set-FileTime foo.txt -only_access
+
+		Change only the last access time
+
+	.EXAMPLE
+		dir . -recurse -filter "*.xls" | Set-FileTime
+
+		Change multiple files
+
 	.LINK
-		hochwald.net http://hochwald.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+
+	.LINK
+		Based on this: http://ss64.com/ps/syntax-touch.html
 #>
-	
-	[CmdletBinding(ConfirmImpact = 'None',
+
+	[CmdletBinding(ConfirmImpact = 'Medium',
 				   SupportsShouldProcess = $true)]
 	param
 	(
 		[Parameter(Mandatory = $true,
-				   Position = 0,
-				   HelpMessage = 'The File to Touch')]
-		[ValidateNotNullOrEmpty()]
-		[Alias('FileName')]
+				   ValueFromPipeline = $true,
+				   HelpMessage = 'Path to the File')]
 		[string]
-		$file
+		$Path,
+		[Parameter(HelpMessage = 'Change the Access Time Only')]
+		[switch]
+		$AccessTime,
+		[Parameter(HelpMessage = 'Change the Write Time Only')]
+		[switch]
+		$WriteTime,
+		[Parameter(HelpMessage = 'Change the Creation Time Only')]
+		[switch]
+		$CreationTime,
+		[switch]
+		$NoCreate,
+		[Parameter(HelpMessage = 'Date to set')]
+		[datetime]
+		$Date
 	)
-	
-	# Does the file exist?
-	if (Test-Path -ErrorAction SilentlyContinue -WarningAction SilentlyContinue $file) {
-		# Define objects
-		Set-Variable -Name TouchFile -Value $(Get-Item $file;)
-		Set-Variable -Name DateNow -Value $(Get-Date)
-		
-		# Define object
-		$TouchFile.LastWriteTime = $DateNow
-	} else {
-		"" | Out-File -ErrorAction SilentlyContinue -WarningAction SilentlyContinue -FilePath $file -Encoding ASCII
-	}
-	
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+
+	process {
+		# Let us test if the given file exists
+		if (Test-Path $Path) {
+			if ($Path -is [System.IO.FileSystemInfo]) {
+				Set-Variable -Name "FileSystemInfoObjects" -Scope:Global -Value $($Path)
+			} else {
+				Set-Variable -Name "FileSystemInfoObjects" -Scope:Global -Value $($Path | Resolve-Path -erroraction SilentlyContinue | Get-Item)
+			}
+
+			# Now we loop over all objects
+			foreach ($fsInfo in $FileSystemInfoObjects) {
+
+				if (($Date -eq $null) -or ($Date -eq "")) {
+					$Date = Get-Date
+				}
+
+				# Set the Access time
+				if ($AccessTime) {
+					$fsInfo.LastAccessTime = $Date
+				}
+
+				# Set the Last Write time
+				if ($WriteTime) {
+					$fsInfo.LastWriteTime = $Date
+				}
+
+				# Set the Creation time
+				if ($CreationTime) {
+					$fsInfo.CreationTime = $Date
+				}
+
+				# On, no parameter given?
+				# We set all time stamps!
+				if (($AccessTime -and $ModificationTime -and $CreationTime) -eq $false) {
+					$fsInfo.CreationTime = $Date
+					$fsInfo.LastWriteTime = $Date
+					$fsInfo.LastAccessTime = $Date
+				}
+			}
+		} elseif (-not $NoCreate) {
+			# Let us create the file for ya!
+			Set-Content -Path $Path -Value $null
+			Set-Variable -Name "fsInfo" -Scope:Global -Value $($Path | Resolve-Path -erroraction SilentlyContinue | Get-Item)
+
+			# OK, now we set the date to the given one
+			# We ignore all given parameters here an set all time stamps!
+			# If you want to change it, re-run the command!
+			if (($Date -ne $null) -and ($Date -ne "")) {
+				$fsInfo.CreationTime = $Date
+				$fsInfo.LastWriteTime = $Date
+				$fsInfo.LastAccessTime = $Date
+			}
+		}
+
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
+# Every *NIX user known touch and we miss that on PowerShell ;-)
+(set-alias touch Set-FileTime -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyRvsgaPeXZuBGBquqWnkacu5
-# rVWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqmHzLePHnmRuotFXGcsM3jrx
+# yt2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -227,25 +333,25 @@ function global:touch {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTviJQVrhnJNMru/1cwMbaFQ2L6qTANBgkqhkiG9w0B
-# AQEFAASCAQB7XWQJW1z7dnzZkeKcSpgNgZdmIjF2aPoo5cRh8jEgsMZOCvZsX3f1
-# QGXEsB0hRDPaWNxCyVqD3VyzOLR0FCR6dOIQ1o5xqLtW4J0t2LFTS4tTI4/sWqAi
-# 1t+TLxaMv6RmfXAH3IsYvfHLx+3XgQzOhX/TLcNN3IHCE0wACwcXJcE0kxcBnD+u
-# 0IOlCbR0jLaNF2meJytPmQE7lOML0RvVElb2dYZCgv2fnhqYjM3yYK2DcO7ytzFm
-# cxYUz53KECvbCr/tfiQAwYECk9vtuoPIIlQteR42HGT7iizfdqh4h5nVbs8RpeiG
-# QiFHfpImWCMH9WmaYqwh8/mdZ9KMvCZYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRkrlQ6KM1Wb7n9l1L82o60BUyKAzANBgkqhkiG9w0B
+# AQEFAASCAQB1sDBcmBZ9CloDyz/Dn72aUHiL4S/KuN2KtwZMSQZFyNLwek4YrCmI
+# w5a/Mw1i1TvbNcj/kfW6TFW7NIlgR8JHx9SkT9UvBHDxJWaCBXfY6tbh2EShn9ZS
+# Udtn/GdwMwqGgGZtq7vLDBfFDICKyj+KkDab3j9a3mxbFZRe/RAjM+YbJbA8RxqY
+# Lmdna3GLjCLohHykgZJ0ERcK1ZLng7JyxmZOFsHveK24U8+4efrNsRdpI42Rgqtj
+# OzdmNmqbsMaepHw2TAnMyHRBu1bvOlRTA/4UUTlXIk4ZZ4DJeJU8Wga8D5d7pe3E
+# rb4D8Acy6r9UH/xL0SbFt+Phc59o9SYXoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyOVowIwYJKoZIhvcN
-# AQkEMRYEFFNDCIRw+5T2BxXoVcRWyWmFPO1hMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIyN1owIwYJKoZIhvcN
+# AQkEMRYEFF08sWfCodalFAOnQDfcaHShjbOxMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCBP9KDUCJ8qyMcwIRp1gQ4lWLiFTiAGoys05EjqXYs/s2Y
-# 3HzC6bWXmk/qpFC1SRazuyffn8ORdwz4+5ddokp33e0VgbvC3ysYq/zV2YQFey0r
-# M+7lg5/pTOAlFJZqhTdP74eFRTEd+el0zcDponwNb8KRHBqss0TaOW5j3qGyYJQC
-# ytKLSYCVSghgT608yC7P0v+nNHBsLJ4a3JK/bU7NbqYieBpkStqlowrQyYc4K/J5
-# 9xbeiOT1vdPivaLYzrJj4sSGoY51LaKD+OtLBfiQWaxQbV5Cl+aNCzyYvYVUDgJa
-# 61EkvZDmS/PHQp2BrKw3Z3Zo53PCavj8Gh12pOtI
+# hkiG9w0BAQEFAASCAQCSF2Mt7UWB1HOn6aqcuPhDbq0pJCfLMJe88ExLwsqBAoZj
+# ye3jYYXxG+n6aUyw8AnCEA8DOITYWhal8ELGwzZQhFgdXI77OVrO+GXCKM9JV2xT
+# qz/x3J3h6KyvqUAfNTl99yVxSDaqScfreQsHV7dMeCxE2sou+/TpfHostaaTZh7y
+# qTdCOSwygeoiC/lcbAidajs1zTa4l+PmIwYnddTiOIqTo69P+IVZbKXB3UW7geQX
+# rlXuztfGtNfdYWYECqVxAfHEogQn8wnLFZ+52lmANFmPJvxoBzhWf3p9jvpSkLwY
+# /0VWvjWjqZmX0XFrEtc7EwbnIqXiAcFFCzKnXNRM
 # SIG # End signature block

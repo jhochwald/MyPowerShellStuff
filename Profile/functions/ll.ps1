@@ -1,7 +1,10 @@
-﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+<#
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -32,21 +35,27 @@ function global:ll {
 <#
 	.SYNOPSIS
 		Quick helper to make my PowerShell a bit more like *nix
-	
+
 	.DESCRIPTION
 		Everyone ever used a modern Unix and/or Linux system knows and love the colored output of LL
 		This function is hack to emulate that on PowerShell.
-	
+
 	.PARAMETER dir
-		Directory
-	
+		Show the content of this Directory
+
 	.PARAMETER all
-		A description of the all parameter.
-	
+		Show all files, included the hidden ones!
+
 	.NOTES
-		Additional information about the function.
+		Make PowerShell a bit more like *NIX!
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param
@@ -56,17 +65,17 @@ function global:ll {
 		[Alias('ShowAll')]
 		$all = $false
 	)
-	
+
 	# Define object
 	Set-Variable -Name origFg -Value $($Host.UI.RawUI.ForegroundColor)
-	
+
 	# What to do?
 	if ($all) {
 		Set-Variable -Name toList -Value $(Get-ChildItem -force $dir)
 	} else {
 		Set-Variable -Name toList -Value $(Get-ChildItem $dir)
 	}
-	
+
 	# Define the display colors for given extensions
 	foreach ($Item in $toList) {
 		Switch ($Item.Extension) {
@@ -82,12 +91,12 @@ function global:ll {
 			".rar" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
 			Default { $Host.UI.RawUI.ForegroundColor = $origFg }
 		}
-		
+
 		# All directories a Dark Grey
 		if ($item.Mode.StartsWith("d")) {
 			$Host.UI.RawUI.ForegroundColor = "DarkGray"
 		}
-		
+
 		# Dump it
 		$item
 	}
@@ -97,8 +106,8 @@ function global:ll {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMDUq6lhr2Bzile1jtsV5R7kI
-# QImgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXmqA7N6zCQvTjD9HUgQ7Dva5
+# m2CgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -241,25 +250,25 @@ function global:ll {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRIRloko+6YgggDD4ukAaisRG/59jANBgkqhkiG9w0B
-# AQEFAASCAQA4mZD0eTOApt0TlH6lOb0mdWjjgyg8K6/VwYHzf9wZZFHGfjG5ASD3
-# qXnOOPoqtOauvem/vHCpCb13rUTMRH9qfeZUo9sSPMurjvrM2daYc59JmHIHNSIL
-# TQE4H1xu7T0/UDA8q5f+YmV2bW6OLmV35YYaR/PNp7/Q18VCWa3H/x4JI/Ke0F/+
-# mUNVEQZDb4jHMklwtoReqdKBf0y+8rDxbUTxaFwTPAyG+Apwrw93cKxyTU4AaumC
-# 6B+HAgV7FM7YjESEkh55K2xi+/uDtJt+Nuas0m4pmTIfWVhvxIqRWLud9U2Tplt8
-# nQFFKT/13OvfVV9rNn9Rj0D1jweBv2cHoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTNlm6aNQNUS20roQsjtHUF+0u61TANBgkqhkiG9w0B
+# AQEFAASCAQAeg7P7tG8s65YbKoParfbIJVBvCGh+tfj3r0ENLXtB076IUNuqyRZz
+# yg/m2FAgHKd0pZL1PlZg9Bpm6X6O92MbkIUJczO7E9lk21FVYXmvlsM2ppcgRGEi
+# WgOGyoc0LZccVtPN+/IeYgmsTUnfsGr/UgwAlPxBy32F9TGt84uRpiDLDDXGbjyx
+# 4pi9soHT8mFZavCn+vHmCJ4hFGil7md37hLiFjQvNgOQzvJHA+zblEMO2zKla3T/
+# wiyt68Akw2FrK4fQj+7en2oHs7itqgIrnyCrpJ0CBKTrCq3RZWOUnQvD2zgJ2uGE
+# DOEC+Q050We+Vf2gw7qbnFgfz+Ckp2Y6oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExNVowIwYJKoZIhvcN
-# AQkEMRYEFFeGGbVWTY4M+GRzsC6mqg0W8C5/MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIwNVowIwYJKoZIhvcN
+# AQkEMRYEFKUQMxxSYk98bRBXV9ti/RpuZKurMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB/s+4sWuDZ74hmKh/qQN4LcUMY9ubP4ihs6c1Cdkvapx2r
-# fuB91xUhsph8RghOaRLZvma5a2SOdak0eWHtsfrc+Tkl/VJeVklKuWahIfYS2VHE
-# VYuTH02aMqDc0iz0t0QURP/O/s1gul8Ckz5rZSsPOlXGJDC7nGT/i0gXpVGaFz/H
-# TCXrxlZLXyNL9LyqThyiJbB1RnlZp42jSW+fkhZD28OeS6O+rIdmTfQahRgrvf4P
-# AnIqzlrmLTs73vgRgYWI9/Qscb3aGodyJunM+uYzbx4RzWHBn9wPaATrK9h1l37/
-# M7xly4WYmqyJMFlZr0lk5KooREX7r70u4RKBn8J+
+# hkiG9w0BAQEFAASCAQAOXpHtemAKWeQunfm3QTt+OSPnI09C7xlx0IcJEd9rZsdk
+# 55e5SO9yoqY+PGafpcgav2ocoVywR1lJqDKcStf/tUTQuL1JLHeAOjg1uFqt1j5G
+# KFGKv0CqRrx3QOA5G0Onyur3QDL9iObeL2iTl9EpINxO370CCjWdBOZ/Y892wL44
+# qTjVUNoRKvIdyLy3vxizAbBjLT1xHSVu5y+6/GZ9o+ySjqlo1pssQA9AoJEKRemr
+# UE0mcudZSXRunNCHmUGSZRkaBFzgkT0wnpkZ860yHUTshXAlTDJLit4APkci9+Ns
+# jBdEfIhAoVJFm6xyp7F6FkVhhZPqSmfmcthQJGqX
 # SIG # End signature block

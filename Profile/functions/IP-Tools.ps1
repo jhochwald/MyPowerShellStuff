@@ -1,7 +1,10 @@
 <#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -66,10 +69,13 @@ function global:Convert-IPtoDecimal {
 		167772161	10.0.0.1
 
 	.NOTES
-		Additional information about the function.
+		Sometimes I need to have that info, so I decided it would be great to have a functions who do the job!
 
 	.LINK
-		Support http://support.net-experts.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 
 	[CmdletBinding()]
@@ -85,12 +91,10 @@ function global:Convert-IPtoDecimal {
 		$IPAddress
 	)
 
-	BEGIN
-	{
+	BEGIN {
 		# Dummy block - We so nothing here
 	}
-	PROCESS
-	{
+	PROCESS {
 		# OK make sure the we have a string here!
 		# Then we split everthing based on the DOTs.
 		[String[]]$IP = $IPAddress.Split('.')
@@ -110,8 +114,7 @@ function global:Convert-IPtoDecimal {
 			)
 		})
 	}
-	END
-	{
+	END {
 		# Dump the info to the console
 		$Object
 	}
@@ -137,7 +140,10 @@ function global:Check-IPaddress {
 		This is just a little helper function to make the shell more flexible
 
 	.LINK
-		Support http://support.net-experts.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -201,7 +207,7 @@ function global:Get-NtpTime {
 		although this is an old protocol and is not supported by all NTP servers.
 
 	.LINK
-		Source https://chrisjwarwick.wordpress.com/2012/08/26/getting-ntpsntp-network-time-with-powershell/
+		Source: https://chrisjwarwick.wordpress.com/2012/08/26/getting-ntpsntp-network-time-with-powershell/
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -259,8 +265,8 @@ function global:Get-NtpTime {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULw+bUicoCBTc6qPjmwNBR3at
-# Rh+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHFY7qfvrdc2hbMkD54oZpS1h
+# BLugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -403,25 +409,25 @@ function global:Get-NtpTime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSfLDg4u0QX46ynutpVPBZEEk5hJTANBgkqhkiG9w0B
-# AQEFAASCAQA6OhAGYHvpm53hAW77GfZUy15ihNk/VuK0gowPF7ZEOD36uztd8HX0
-# mhugFbVrlob5plYcS6Av97sV3Z1VGjjW+5zdDk2OItvHmlUUQhoXXQzTau+cdDMT
-# 8tfRlNMNk2/MHmDu4nRma1XQvl0FHcHW0fbeL9Etw6U3Rr3WP74oge8ALBYMMgPy
-# dSZSEgstApzc5m4Jie+dv6+4HNWBuBEakfoSVKeVj2yTMiu1hYeyPia1T2RRClk2
-# Jx7BIWhDgrdnG3W45xTqHOqt0gOaYoFR5TUFa/RHvH2zH3xpVuqx6aRL/KIQ40Sq
-# fGrswyZk9KTt2dz4YY/4ntgihh7wQFYYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTH1+FJoVB8fw1BB9Z8KcZz9T8J2DANBgkqhkiG9w0B
+# AQEFAASCAQBMQj2EEVXxQJk5tLwdOwk445FeR2x9iofu8fGaEMxn7fyVV3tuszjV
+# AkIrRnMHovQllwa29NnJVMiM+m/UMDQDlvLwyFPhIbAGnr1/DgXDTEUnTOVxnCRo
+# MbTbOeelsHrmg7X/YBuTRChScCYKk/PYkMheelVRHyMabvy9RTkCy6kHZqek/w+N
+# OwdonMY6o3H6i5rMuX7yC+cjYkNQLQZDZJhSG3DqDB+tj1AsMidoUhBXvYc5MRmY
+# HmgTZeHYCpUU186jDlukQpUsLVExvNRipTkP3UUWpPgMytdL0eLxtaGEgHV4wl8f
+# QhE5uzAtZXAHziTqbzF85URbKxRrcK2foYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxMDAwMTU1NVowIwYJKoZIhvcN
-# AQkEMRYEFGrSwsaF2oSED8MXMjkGVujzhj+PMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIwNFowIwYJKoZIhvcN
+# AQkEMRYEFAl1IBHAbQcZ9423EeR/+4MBJ4dgMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBwhXZMvAtrQQerCeRdJlu8E9CYtEffHD4VdIb4z0UUjZ48
-# W8O9e6a/Qj3ApuzFkiqZiKLQp7zQOBRo3P/hTyPukl4ORPXZoOIXCI2P8BsSJxMr
-# CAYamWsFzC5PCVZaG5Wxe1EBUxBnXLqzJSyA+UCUvjw1BJzeKIvT+w5Ns4TEC3hs
-# uuchijhaAgWcrZpvVNwoJX7veSRSdSvZPO3NqAej81jNTIa2uwoK5fNv+fmcrr+U
-# x2DUIrDqib4CvV2/HGPmLLmrcNVHXVqBJDQuTkAUEYQ0KXOcT3TfqEn88x4kAK65
-# 1SDM5+kuFFCPk3NGUi83itidMFth9HyoHIPTjbQY
+# hkiG9w0BAQEFAASCAQBHtEr33aCSlQ+wbVmnIOckHa2jCIYYgVVjqRPaclz8jkCS
+# t2j9X+HIIs0l0rdltFu5nucmEbdrQgq791VTR+9e/0+p9Cs9o/uEM0GDQbhGllr+
+# dkO1grL/n/z5xSfLwGzA/WBeujMWznUTuer4UhhlG1CXGs2lgjyhcU17nL1LgQbW
+# 0JaMfbxWDKCcSrf5UKQwenqgiPr6adkx4Z+Zdh+DbWyAZRUie+KZK9sdYALoorNm
+# GLRAFYOp31zUmdWQPFZo64j4YWCqmqbKriE9LMbQ5IMrGIG68UGdDP8kHErEdFx3
+# oDEExr1VqZJu5zatldeEaJyYqRSxuJeQOKwU4CVx
 # SIG # End signature block

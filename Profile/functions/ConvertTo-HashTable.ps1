@@ -1,7 +1,10 @@
 <#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -28,22 +31,33 @@
 #>
 
 Function Global:ConvertTo-HashTable {
-	<#
+<#
 	.Synopsis
 		Convert an object to a HashTable
+
 	.Description
 		Convert an object to a HashTable excluding certain types.  For example, ListDictionaryInternal doesn't support serialization therefore
 		can't be converted to JSON.
+
 	.Parameter InputObject
 		Object to convert
+
 	.Parameter ExcludeTypeName
 		Array of types to skip adding to resulting HashTable.  Default is to skip ListDictionaryInternal and Object arrays.
+
 	.Parameter MaxDepth
 		Maximum depth of embedded objects to convert.  Default is 4.
+
 	.Example
 		$bios = get-ciminstance win32_bios
 		$bios | ConvertTo-HashTable
-	#>
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
 
 	Param (
 		[Parameter(Mandatory=$true,ValueFromPipeline=$true)]
@@ -76,8 +90,8 @@ Function Global:ConvertTo-HashTable {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2tHDg55V4+pve2FywoTOdBto
-# YpmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6oboXuzkPKufjpuUI+Z+UL/j
+# IyqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -220,25 +234,25 @@ Function Global:ConvertTo-HashTable {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRHimhtQjquxaPzDuLWKRjHI759RzANBgkqhkiG9w0B
-# AQEFAASCAQAqCDw1UxQr6uztob9s5EKbbo0hUZ8IunYc1z4XMi2IEz35DNpq9Wie
-# 0aIzTsdhDeaSUVjI8Docj7ZiHuryh9ydP/8OxTOZa3ZQCr91rhTdHrZEDOrasTvP
-# pNAHk0Q0Nf805aJxYtwmuJMHOc+J3knU+ZZcKzBtil5xImuhAxVb+hk0zhrT5D67
-# VhdS2vrjqaVfqB49Dxkh3O22myPtjihb07x0slUborxl1JzqR7sg4mSM9jJ64EyO
-# t3Xd1duLTv7bEGOhWrlfDPqhEuvDJauAdPdBtCHIvmDhW3rcbvhhYQ65DkdnJIuU
-# /t1xiPbs68sIeOwhhghOrRw/QQ9fEewToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTy/edvKY+UGE/ZQYiKpGALft7cPDANBgkqhkiG9w0B
+# AQEFAASCAQAmCzMsZc+OV6KPkT3u97n2kQSNtqFHRCPc+ZKS/jRTp/YXS/W8jgNb
+# ZeN1t0/UMEPdIEatoH3HOzLA6wk2cjjb3Amu8VZ79dNjamqFXKH1e8JmkjXtUpeu
+# VBfhGB6OtGShcd9in3FoHPE4N7aL0lo1TJ6Hszg5o2oxWBhC1tmj5brVjW6QwCkn
+# 9fH7r3AVEJ8COFhPJiob/2F5e5mhXN8fkOMKAHgJbRWPe5TNdZb0M9wV3EMJXYl3
+# wlkvn7pJPO54OtfX8RFfUSZdwdXxcI2/QTsZY3IPnbZnR7KD/2aEivE0jTMzmBqp
+# zeAbJkkGG6a/cgpTw5MBorvZPGGmTaqtoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAyNFowIwYJKoZIhvcN
-# AQkEMRYEFK66R/I4sD+ukw9UKiSwKx2INyhzMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTEzOFowIwYJKoZIhvcN
+# AQkEMRYEFPM7lG8VUQ/F87HP+JENkEGlgp6OMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCrQejftE95d+zKfNOzdv19uyz1gAad/qisXseRZvOkoo45
-# lJIYqI9LP2h6dVqSSGnasfgUIXiKWTP0I/pxIX4rdS1HCF9tqX83W2qioSFjwL77
-# LH5DyyHecVlaTtCIgby7Ia4YwkjlbyEFHWo+LuIxrdqavS1+/ybiuXHNH3IbMTQt
-# yDlaSwxCeW+7F//nLQHcogw15y/0YykYtx6ZNlZOLiP2HTFtwQNXKSCB11GLPCaL
-# 9qaBCXOKX11DQHy6sK5XFN2/s0iStrhGtXMx2ryzy96be2VfOmBTm1KxFKUrdayq
-# mLL+1J/WRTJegSEdObzI7Tr6HhGxO8mFUQkUcxNF
+# hkiG9w0BAQEFAASCAQALsNmeK7zVu+39/jYvWTGeixj54BZi689j8SYRhhZuRCuC
+# yhncxuTyL8KB3V38PTv5u4y18jgaotnICy5l57HuN9DsdigXxJfikJFdrVlyTM8z
+# wkqe52Gm+fOuzpN3xjBOLbPERokUdCMw/IEb1Ad/hA/0F2CPwLihseAPZPo9++sI
+# +4W/z4qik/oz3kd/EdYMyYZaMZ4oEiPDpRPACew1v8i1T5ugthBfGaK2hV2ZgSYC
+# GuLsXWQ0EMRwsVSD3NbVTMimrgT9JrGV3WSU9w9BJZErBlQI8jW+K9Mzp6MgNqP0
+# 6Ulzi9et6oAzcv1rM2rYPg5U54LT0o9A6gj5kP+t
 # SIG # End signature block

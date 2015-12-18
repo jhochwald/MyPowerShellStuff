@@ -1,7 +1,10 @@
-﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+<#
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,66 +34,71 @@ function global:JavaLove {
 <#
 	.SYNOPSIS
 		Set the JAVAHOME Variable to use JDK and/or JRE instances withing the Session
-	
+
 	.DESCRIPTION
 		You are still using Java Stuff?
 		OK... Your choice, so we do you the favor and create/fill the variable JAVAHOME based on the JDK/JRE that we found.
 		It also append the Info to the PATH variable to make things easier for you.
 		But think about dropping the buggy Java crap as soon as you can. Java is not only buggy, there are also many Security issues with it!
-	
+
+		By the way: I hate Java!
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> JavaLove
-		
-		# Find the installed JDK and/or JRE version and crate the JDK_HOME and JAVA_HOME variables for you.
-		# It also appends the Path to the PATH  and CLASSPATH variable to make it easier for you.
-		#
-		# But do you still need java?
-	
+
+		Find the installed JDK and/or JRE version and crate the JDK_HOME and JAVA_HOME variables for you.
+		It also appends the Path to the PATH  and CLASSPATH variable to make it easier for you.
+
+		But do you still need java?
+
 	.NOTES
 		This is just a little helper function to make the shell more flexible
-	
+
 	.LINK
-		kreativsign.net http://kreativsign.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'Medium',
 				   SupportsShouldProcess = $true)]
 	param ()
-	
+
 	# Where do we want to search for the Java crap?
 	Set-Variable -Name baseloc -Value $("$env:ProgramFiles\Java\")
-	
+
 	# Show Java a little love...
 	# And I have no idea why I must do that!
 	if ((test-path $baseloc)) {
 		# Include JDK if found
 		Set-Variable -Name sdkdir -Value $(resolve-path "$baseloc\jdk*")
-		
+
 		# Do we have a SDK?
 		if ($sdkdir -ne $null -and (test-path $sdkdir)) {
 			# Set the enviroment
 			$env:JDK_HOME = $sdkdir
-			
+
 			# Tweak the PATH
 			append-path "$sdkdir\bin"
 		}
-		
+
 		# Include JRE if found
 		$jredir = (resolve-path "$baseloc\jre*")
-		
+
 		# Do we have a JRE?
 		if ($jredir -ne $null -and (test-path $jredir)) {
 			# Set the enviroment
 			$env:JAVA_HOME = $jredir
-			
+
 			# Tweak the PATH
 			append-path "$jredir\bin"
 		}
-		
+
 		# Update the Classpath
 		append-classpath "."
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -100,8 +108,8 @@ function global:JavaLove {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxtlt+WxHmP7diPFWbcOVoOVz
-# wmGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6xkpYOs1Mi/Y3QZeZj7Fjsm5
+# jqqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -244,25 +252,25 @@ function global:JavaLove {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSX3Znhm5Dmp2lvHWmWNPl4Vmw1JjANBgkqhkiG9w0B
-# AQEFAASCAQAkLGhV9Nyc/c97oc3Sf6zuYHcAz5bdRzTcQLzkUJvyrdP4kBdk55TE
-# IBovE2iWCoDuZ7QeytI4U8ryUz1G4hiszDyHZ8x5IRvpVPeIDCQOZIshUm1+BxQq
-# S3oAZNr6kJ/Zxa0uyHhpuWP1Z9Fxp1/Ae/zh1P0E8Ch4hDU8KydkJMYbGaL4lFtS
-# exu6Lm8Jjzi+6T9P4qNO8scb8MkaalSHhcmghoScU1lxjXjxdoc+Zic60ENGxm0O
-# 7LmtJtUY+2+PmLEP7+klhAYpjRsLAYTcmrBQx7k6TEy+UKupqO4CsmWoWuvdt9Dg
-# o2xtLdM1SbFnXAMzsWpKFflxWt0HKzYIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSXARmoZ8t5py2/SGgUDN4osmXVNzANBgkqhkiG9w0B
+# AQEFAASCAQBzeZpjLOpFlx7/b8hMiV3zzSsH4726v6GbRbUZf/CY+o+fLTwvHta7
+# 0mK1bAH9uE4k8SoL3Nycq0eGAjFCYMNVa1dEyj6RZinsr/Sog3ax8M+an+LNVtBo
+# ATDAD9EYWhqENj9Em4svOEwFU5XiNMiM8xMfLeqHJIVbmpz59Az97WOiR3pk78b7
+# BH59kiTuvXlCQ7wOfk3HneDIpQxjnAw/GEbe/kyKvXzNQX1/MPId/vmIueRbM+jJ
+# 2wj5yC5DH2hLNzhHnlPRV22YGP3IewxXmP3bWJ+zJ60S3tYWbrvaG0vjbrTD/VfZ
+# 8rSXQOP90i7yYkTGT1RuQ3/heVY5o/4LoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExMVowIwYJKoZIhvcN
-# AQkEMRYEFPaI6aDbZto9QgquOa94gUomW29bMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIwNFowIwYJKoZIhvcN
+# AQkEMRYEFFVee/vOArRdAWbCjozrEb1URoiSMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBQQlYT+Q0Z+TTZpZnE29zX9V2axaIpicA3WwDGwwQ/RTG9
-# CEOuRiVLlWvYWvCKRbYPspzYV2IaT/Wo8ZZ7nYt/TwDWZl0meFCp4uraF2r3lGXm
-# SwMLGmKOOTsy7a4zJxLGbof4B1ifz75dZn3zI8Sye2PWqztZqtVxH0CCPZia2OCd
-# rS0lBK9b9iez972IQPH/JYxgDEf6f6fnlaRycb5PHplU85t06Zo3r5pDi3GZf67+
-# BuaOA3ca9rGBHRJuLvL3d9GxFSjhIk7UV0B/bhrMazGCzAALb04RbM5+jEh1y224
-# Xccsju1Z7sVrQJUW7JKaQfcqfgGw65XrjB+3YYH7
+# hkiG9w0BAQEFAASCAQChly7QA2Qn5pBtMBPuY1bXYNSAAB5d7+WAC40V/ad63ShI
+# k+v2xEcbnnglpA2tj/M6cXQW0k6C29AvAw3VfpNV2tSKqLbi/tlL0jsP09/kXiRp
+# Adf6aPwP0lmcw0mQlkPufM2AIwa7bjM2XQVbZuLO6FG3ys0OJ3T78J6513Vd24pI
+# 6vMKjt9v1UK2SIIT1Rj1DnkmIdIJ8njSaep7Yz1geS+UTuXPqKGrkv2NqBx2wsaX
+# d+e1cRigyzbPx+N+oMua1eO7Wev3BCzqKQO2izVzWYgq9UMvyqjCFPwIUL4jPJGl
+# ADiD5kHKv7jh9NbHTC0c8ADNFNSNfKfHlBZhlTz7
 # SIG # End signature block

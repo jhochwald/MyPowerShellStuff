@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,37 +34,43 @@ function global:rdp {
 <#
 	.SYNOPSIS
 		Wrapper for the Windows RDP Client
-	
+
 	.DESCRIPTION
 		Just a wrapper for the Windows Remote Desktop Protocol (RDP) Client.
-	
+
 	.PARAMETER rdphost
 		String
-		
+
 		The Host could be a host name or an IP address
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> rdp SNOOPY
-		
-		# Opens a Remote Desktop Session to the system with the Name SNOOPY
-	
+
+		Opens a Remote Desktop Session to the system with the Name SNOOPY
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> rdp -host:"deepblue.fra01.kreativsign.net"
-		
-		# Opens a Remote Desktop Session to the system deepblue.fra01.kreativsign.net
-	
+
+		Opens a Remote Desktop Session to the system deepblue.fra01.kreativsign.net
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> rdp -host:10.10.16.10
-		
-		# Opens a Remote Desktop Session to the system with the IPv4 address 10.10.16.10
-	
+
+		Opens a Remote Desktop Session to the system with the IPv4 address 10.10.16.10
+
 	.NOTES
 		Additional information about the function.
-	
+
 	.INPUTS
 		String
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param
@@ -73,14 +82,14 @@ function global:rdp {
 		[string]
 		$rdphost
 	)
-	
+
 	# What do we have?
 	if (!($rdphost)) {
 		Write-PoshError -Message "Mandatory Parameter HOST is missing" -Stop
 	} else {
 		Start-Process -FilePath mstsc -ArgumentList "/admin /w:1024 /h:768 /v:$rdphost"
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -90,8 +99,8 @@ function global:rdp {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMSZ4AR716ZLJeY88roE34KOM
-# /w6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0H0pYMbYQ8H5Y5speGKvRV7H
+# RN+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -234,25 +243,25 @@ function global:rdp {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSnXIkRThl40qgCe4vgxpKYQ0DoeDANBgkqhkiG9w0B
-# AQEFAASCAQASiJnG7dz1Hv9xPnzpNZvyd4jlPYpUy+OlgDjdJOuVhabWsQAGvlx6
-# 006CAl5/JnA/dg74wsoK/nDNGJy7Z2t7dSHeEgbUZMjOAAlwT/jLs2N2SeFFkMmy
-# l/sRfMwXt9lZ9knHJUWZuHobZOf4Pej4SBfPqARNCsxN2Ye3O8qQHDNMeA1u2wmQ
-# zh38UlzgZh5izd+QsjmKEgb2xeEjNIUuAEjv0VSajb91Fim6hyanMiImwh/GCbvs
-# Llb3rly2jL/y4VONfX3fUbD9j9Vp997IKB0wr2hGkO3nF3AXv/+MXRAVYKDfnV/x
-# 7tYfvbhsajeBA+E8BNRa2qX9CXA5Q3Z/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR29TKCPvlhhfp62Up31FpydN3WTzANBgkqhkiG9w0B
+# AQEFAASCAQCrDBtZJzazBCc9dvZzkLXVEsbbh1shGFu9Of/J1F+/nkFHyeciJ7gi
+# QLcGylfUFhJA1EcuMQpzt9wo7p2YWYTEj+8Z6XA8xP+Spj+Qi0k+4dMTgY3E7R5G
+# iIvPG2jh8yYI7gIu00cnsVNP6RhCfe9HGsnEFSUyAy5C/8cYnJPKT+OuRohix6pE
+# HByoz75kHKq9eCD9zaoQpJufO304mtMk1E2qks3d6/TkaFTbHq0OZIXUrLOqF4UK
+# +OYB8bmFAduTYEc5k7g+rZ5qQ87FMKvqINZvsL2FXjgdNvU7nM/+rpItmkIA5uWu
+# xSKZDk2lBesH3b46kpKTmbIlptVV9ZA9oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyM1owIwYJKoZIhvcN
-# AQkEMRYEFBzPgoanTfW4Ee6vihbSK9Z34tO6MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIxMVowIwYJKoZIhvcN
+# AQkEMRYEFBqMPyR2Bwt23ZgVsitBu/n+aQ5UMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA5QVg0Bp/dbawV6CkqXIahx9IA7aa+t3ar2otRn3DzUWGB
-# 3qkYLXGzFbkTJX2LrUpkbIX6Sg5JzTGgrgYXPVRvzpBZHRjF96lXMiSC5tk/8rlm
-# BEPQrV9ndNR8cmrCnP8/0PBZgJ9Jb3RSMJFVs+jVCHtPAbxAsgu9hjkz8PL6pMhE
-# BhDRzG9TvEs9UV5RQMtxsZtol4XA0o9yeSAQ33vbcGiaIKjzjggvfgVtYCPwhxDV
-# tyWGDJ7WJFN+na1IK7FkAZTrzNtF/SB63YE+KyybSPdiydaHB2mm6WR1lDJK4CqA
-# HOcMWA63yWXN//I00xfORank2siq01+2k4oSlBA8
+# hkiG9w0BAQEFAASCAQApsV9c3VJdFvJOTQTpAfkVCi1V1T5/CWjhO0S8ck2o10Iz
+# +fku9FdCbhZ8w4BaDJya5skKsxeSBjPn64KHUP8lGmQmboRCxyl76YUXD1DRGbGv
+# x9zBdcRFGPzrXirnYu/CUGa5xeFOeDBGQyDQVnX2VuKC5QhnUq9zm22MbtT7hzkO
+# lUUeNHTLJOKZqlErTitxemKzOPo5LUZ3spudYLNEs8DDcTzpbAnNAcsvgNZw8C1A
+# xnTxfzEHT+5n9JzV8xwa6RNNv984AN6Fujn3+XLoCl80u2PGUxI2x/hE0hZNxuHG
+# MQAKjs6FciEOlMb/Z05avOBmLwAv371VP6pj32+v
 # SIG # End signature block

@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,38 +34,44 @@ function global:Get-TcpPortStatus {
 <#
 	.SYNOPSIS
 		Check a TCP Port
-	
+
 	.DESCRIPTION
 		Opens a connection to a given (or default) TCP Port to a given (or default) server.
 		This is not a simple port ping, it creates a real connection to see if the port is alive!
-	
+
 	.PARAMETER Port
 		Default is 587
 		e.g. "25"
 		Port to use
-	
+
 	.PARAMETER Server
 		e.g. "outlook.office365.com" or "192.168.16.10"
 		SMTP Server to use
-	
+
 	.EXAMPLE
 		PS C:\> Get-TcpPortStatus
-		
-		# Check port 587/TCP on the default Server
-	
+
+		Check port 587/TCP on the default Server
+
 	.EXAMPLE
 		PS C:\> Get-TcpPortStatus -Port:25 -Server:mx.net-experts.net
-		
-		# Check port 25/TCP on Server mx.net-experts.net
-	
+		True
+
+		Check port 25/TCP on Server mx.net-experts.net
+
 	.OUTPUTS
 		boolean
-		Value is True or False
-	
+
 	.NOTES
 		Internal Helper function to check if we can reach a server via a TCP connection on a given port
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	[OutputType([bool])]
@@ -77,16 +86,16 @@ function global:Get-TcpPortStatus {
 		[string]
 		$Server
 	)
-	
+
 	# Cleanup
 	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
+
 	# Set the defaults for some stuff
 	if (!($Port)) {
 		# This is the default TCP Port to Check
 		Set-Variable -Name Port -Value $("587")
 	}
-	
+
 	# Server given?
 	if (!($Server)) {
 		# Do we know any defaults?
@@ -98,10 +107,10 @@ function global:Get-TcpPortStatus {
 			Write-PoshError -Message "No SMTP Server given, no default configured" -Stop
 		}
 	}
-	
+
 	# Create a function to open a TCP connection
 	Set-Variable -Name ThePortStatus -Value $(New-Object Net.Sockets.TcpClient -ErrorAction SilentlyContinue)
-	
+
 	# Look if the Server is Online and the port is open
 	try {
 		# Try to connect to one of the on Premise Exchange front end servers
@@ -109,22 +118,22 @@ function global:Get-TcpPortStatus {
 	} catch [System.Exception] {
 		# BAD, but do nothing yet! This is something the caller must handle
 	}
-	
+
 	# Share the info with the caller
 	$ThePortStatus.Client.Connected
-	
+
 	# Cleanup
 	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
+
 	# CLOSE THE TCP Connection
 	if ($ThePortStatus.Connected) {
 		# Mail works, close the connection
 		$ThePortStatus.Close()
 	}
-	
+
 	# Cleanup
 	Remove-Variable ThePortStatus -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -137,8 +146,8 @@ function global:Get-TcpPortStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOkNLUc08TgLt/ifRmgknsIU2
-# 5SugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9niQ6/blsm1XBu0M54+5NXgo
+# xIegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -281,25 +290,25 @@ function global:Get-TcpPortStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRrKIjBEUC99DMjB3GXHwvq5pYVvjANBgkqhkiG9w0B
-# AQEFAASCAQBrXWBqzhgzm2R4jiG8LN5NF7fw8bX2N5Ke+pKKkNfm0hBylfSTP5TU
-# hlMTLwIsO8aFmLqBn0PHhMFnV0U/AfyL19cIos61nVOWpI5YRUfDuX9dQvEWDLgZ
-# bkwbN3UC5UDDYUsEDNa/aJsdW6048tpDdOKHCIvnuvawoW8QUNFg9opL8hEhuitq
-# JLBwIsqwNF2e8JoynBF/uAydoJ91YYNeJ3IRcis2kLIsGxZrroW43zYL64H+6gLG
-# K04t2vz63Itkimi8QEM6P+2fTQdYaFlCKnWsKtXRkvwOmquimS0A7DCdEEo9crWM
-# QLwYBMLSS0nEI+zHHQcy/Kjz9rpbpQ+woYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQwrvR+v2Dml0p1+nsJL87D7dMjgzANBgkqhkiG9w0B
+# AQEFAASCAQBzBn4icQCXNzPDKuQmlQFP7i/Ukm5Dsaw5J5mLIhsVwISyA4eJlMm4
+# kjc5/ChHjHuZRBL/0JSdsMJHffn/r9FR9heaExhjMdVScwPwTH+K+D4dGYh+yfmD
+# a/2gTYhxriwS5JNxbOXadukg0py/0SUz/5v4HerBZoZuiDcagQ1tla34TRnZQDqt
+# yx8SptdgY6SVlr4MWtHhC8e5uOFdk39kn3enpBcs95SXtp9MSAOhRqGFIEePifxq
+# B+Dzvl/j6KM1KmKFweDf/b52ZVSABp9/YDnWbZOuTUG5CqzWcHFhGV7nls/K09Vy
+# p7tjGmpAm6KhcVo8+Ihb0Fjt/iHjGAg+oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAxNlowIwYJKoZIhvcN
-# AQkEMRYEFHcakaAhiI5FRLRgalPjeYNnHxiOMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTEzNFowIwYJKoZIhvcN
+# AQkEMRYEFC4+vQkxzhzYKoOlNTSBZQ5zm24fMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAlYfPdgFg0G4PChLLF/gsfjk31PipEohFEfYUv1XCXF7JA
-# WHluW8Nx2Izy4npcbtnvNm7EzwglbchiIAEhzbZqXA26xkrkR8dyI7zkHgPMX+Hr
-# Ojwee4zocpgPLSkP8Zo95Uo3Z/YE8TWAs/KOstCVOi5b38yfb+XQdhe9Oh2DuYAM
-# kiPtwbajF+AO4qBvhqqgcpk91rhBpDbaH4kY7ddxy/RpNHlT4nF/WLasOsRwjU+R
-# LucVC6JPcAvff7zM6Gt6oe7CVrgAQU6diAkW+FtGS6PTu4nNUjqHlfM44d+6zUcJ
-# iqhUnVfdG4ke21UXH/ODFpEsbeJ3ck00VJVMct+B
+# hkiG9w0BAQEFAASCAQCveErdp9+ke4wQfdewQyOI87KH/lEuL5UBz9Y7+uXtWjKE
+# 51y+Pif9/GA5OQHisy4+VSvcD5v+G3jfX7YqFlcVRrDvKHFq8DtndAdMJLCfIoHG
+# P0vqnx5gUQlhgElbf8o3q5Gs0R3VRzJNHeWSuJZMX2WCrbtvvmjRCTtQfvTnlPiP
+# g3CiHWt9zOdxfx1xy0TibTj2G15tkbk6tGLlA1aPR1VfvAms1cHZsv0mfSv5SZQa
+# OZF+LXcWsOzxmnfD4ppr1wyGSQS8SuhDcg2RXMC3qP7R4Rc3aPeqBLnIogLQf6xE
+# Alu1caFkdkVkQXcTKb6tZQRsuUarmMzcVOLn6sxq
 # SIG # End signature block

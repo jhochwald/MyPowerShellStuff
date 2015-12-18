@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -41,23 +44,23 @@ function global:Get-TempFile {
 
 	.EXAMPLE
 		PS C:\> New-TempFile
-
-		Returns a String of the Temp File with the extension TMP:
 		C:\Users\josh\AppData\Local\Temp\332ddb9a-5e52-4687-aa01-1d67ab6ae2b1.tmp
+
+		Returns a String of the Temp File with the extension TMP.
 
 	.EXAMPLE
 		PS C:\> New-TempFile -Extension txt
+		C:\Users\josh\AppData\Local\Temp\332ddb9a-5e52-4687-aa01-1d67ab6ae2b1.txt
 
-		Returns a String of the Temp File with the extension TXT:
-		C:\Users\josh\AppData\Local\Temp\332ddb9a-5e52-4687-aa01-1d67ab6ae2b1.tmp
+		Returns a String of the Temp File with the extension TXT
 
 	.EXAMPLE
 		PS C:\> $foo = (New-TempFile)
 		PS C:\> New-Item -Path $foo -Force -Confirm:$false
 		PS C:\> Add-Content -Path:$LogPath -Value:"Test" -Encoding UTF8 -Force
-
-		Creates a temp File like this:
 		C:\Users\josh\AppData\Local\Temp\d08cec6f-8697-44db-9fba-2c369963a017.tmp
+
+		Creates a temp File: C:\Users\josh\AppData\Local\Temp\d08cec6f-8697-44db-9fba-2c369963a017.tmp
 		And fill the newly created file with the String "Test"
 
 	.OUTPUTS
@@ -67,7 +70,13 @@ function global:Get-TempFile {
 		Helper to avoid "System.IO.Path]::GetTempFileName()" usage.
 
 	.LINK
-		Idea http://powershell.com/cs/blogs/tips/archive/2015/10/15/creating-temporary-filenames.aspx
+		Idea: http://powershell.com/cs/blogs/tips/archive/2015/10/15/creating-temporary-filenames.aspx
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -93,8 +102,8 @@ function global:Get-TempFile {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAqCixkYLK+ZJ5OzpIQvpRX9J
-# H/SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmkcxf1LaxkEu08v2JQPwq6ZP
+# /EKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -237,25 +246,25 @@ function global:Get-TempFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSBe0SEiZgy3agJn1GUa/7xo43eGjANBgkqhkiG9w0B
-# AQEFAASCAQCLB49K9m34+BU5LmiC6R99Yd9jiePSXVzY34bIenQqBCr2U4NkqU9f
-# YHnb+qRWgNRdggWtVtvQ6kceMenB8t4Vg5tCz2Y+BL6lxCqGtfJnFZ5STiXHxMkT
-# mqL1HIXuzvU9D0fXGYoLvgyaqQUPCwWDnEYkbDTS63BWd5xpIxfyPrJfSKl69gEB
-# bwwkN5als7ixjHh3FNg6BKWlaXmvv3Fy1LvOM6B9OfjOQGhp1FEwVjQs7ztClqbd
-# DSBZvY3bpOGMlW8/UQc+Ttm3fDfrmBoVLD5e8ivQo8pVCfQSxk+OO9v4sjFpHYP8
-# BtEBZw9JPW+NaicQhXGtLRllliyrZMFIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQOUNhcxhrZAul2UxLzoUvRfUJyzDANBgkqhkiG9w0B
+# AQEFAASCAQCk4Rnyh8qJiAJoRn/kFj/ZNcDMA/nMGRWIaYFPs75XNfiuKrPhIdHE
+# ih9uIkza4kLgfJg4yQy/+mFnUrraHlU0IKLGRBUmZ5kYH/kViM0O0rtgCT4Ylmqn
+# whp0j+rgA3swn+/6REs0H4V8AiACUyqX12/hkMrfvqgmzsa33fOkRntyrtRPJLK6
+# OBgO05Vaf0b2jDPoTsL3zd1dEExySl9GZwiY5TGRAqDkmGe6dUL3wxMpmYOJxuFJ
+# 2/KBcGZPE/XMarCc1dEL3IAWMzQKW6nl5W6+L/l/8EznM54e/ujP7CFilvKLpjLE
+# xBIUOdakOCwgvPkl5GuEWWSuaWMKF4ofoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA0OVowIwYJKoZIhvcN
-# AQkEMRYEFDX0fMmgXaMBnD9WquQ9yEQNni3SMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTE1M1owIwYJKoZIhvcN
+# AQkEMRYEFIEgg0SUsnlTFr96Ruz0doKOTf5+MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA8D+jf9mtIe8c8A2tvPUK3te+1yKTMgj1RALq9Rd3ph/bm
-# 7ZgBQP510j5B2zbH0ePR8X0WmYBLuwc31Gpd0j7Qu2TBGQGAsRZl8M6HfNIdqEPw
-# tqpeKIl2D1+J9f1eXj1sk2Q/2rGMxzL2QECKxhm228NRQOC61O3gcbCxrxDx9Gk2
-# cGW8nosYoOWFeTBY3+ThJiy+xY/4sJINS9h37u6SDBNWesL2deW6wi/LW7njmGyI
-# nGytct3qIpv9thufM6zIDTjM+31NFx2yFYBROp/XST/8k3V0Lt8i82UEZb3mkLed
-# nNz5iNuviMZfcq+JgOHfTGDUcv1FbCdvGulZSpVA
+# hkiG9w0BAQEFAASCAQCPtXNB8tT8BuZ5+zJJcO/3DXeE2v7dwvC1c1YLJjd6ME1o
+# POwFZV2q1UxVSbdKD+q2IIAP78Z9Iq7Cw7QR5YgbXrZlwPoxHKUG/SZDe9MRQYh1
+# 1wwdzucvHbnv0JXljDp94KwkaV9WfjWXWAHxt4FpF7PvDGuEEVTvPQKgo+8ebU6B
+# cYX4nPNkPNSjzi8GiHd17z4NQMrLCObXkndjGTFizixp8243xqAbmqedGT87vs0T
+# gYM+KtGhq6UJr4QNDmOoZwpMxiRxZATZCuXSCGbOyo5dsHAqMvGKq95nzz9LZsyO
+# uz/tZzhGC7FgXDdiy6Qoa6Yd+6o6mNn4qB0a8XMG
 # SIG # End signature block

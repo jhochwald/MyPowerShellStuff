@@ -1,7 +1,10 @@
-﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+<#
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -35,12 +38,14 @@
 		Make PowerShell more Uni* like by set an alias to the existing get-command command let
 
 	.NOTES
-		Just a helper to make PowerShell more like Uni*
+		Make PowerShell a bit more like *NIX!
 
 	.LINK
-		hochwald.net http://hochwald.net
-#>
+		Joerg Hochwald: http://hochwald.net
 
+	.LINK
+		Support: http://support.net-experts.net
+#>
 
 # Set a compatibility Alias
 (set-alias which get-command -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
@@ -49,8 +54,8 @@
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqX3bGwfZEPJnpYtuyErU+4dn
-# UJegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcQCUwNwMd7bQVDCYpk0xSZRW
+# tB6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -193,25 +198,25 @@
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQPtlWoJjKhtIUcCh0J0ufp3ywWljANBgkqhkiG9w0B
-# AQEFAASCAQAbIBcUKbdkvjkIrJYjbVavByL0/t2J6AfI/N0Z4gZ5+xfKV8EqeiXc
-# fs4W+/MWEx3IXYBaJzlh1b/ijgJCOxsysHIZ0+1ns+deOHGMtLblt0e0+uPScCX9
-# 2qwxlcf5fvhWu2U7jnfg1eIqFglsii57eexV2lo+PIWFQX7kHEW0RnDcqm6eQjm9
-# EpLZhyMYfd1QkZYYglL9D3aDwXktIzz7V3thMAgT51Ad2AkDUiO5jN6gORvRk7pM
-# wG0YFU4ySW7V7/SsUBDzu/UEHqnpenBrqNWmZ7sSGhrC8pQSIuiiLFwI4wBkFouR
-# JhmzGLUL3VkAv9g13ffk4H2q6L9SqYccoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSN2noROH5DmeW/CXvMgImnT6ZoezANBgkqhkiG9w0B
+# AQEFAASCAQCjHWTZ1yALYKKpjJloX9EHtl5L+gLNACOszlP94xofsDwrjIoY4wMv
+# 3+GwFwUviiwndvzV4WCmwFG5EiiCVQpv5GImp6vqWk0qGTs/D9rHBnDjvpo9aZw6
+# +zdNziHIVReYJnRuVBA+K2zz+zxx1Yibp5ssneFSZJ3mm3hHou9bo2/FVbzc8sA8
+# jyT0S06O6ekMTtBEdt4T4KkeDSvhzx9g2Klk4CMMv/E5grSaAngTXhTEomSFZNjX
+# UV0fYgcijUMnYhooSLQfcgozh0dKOdMRkQ33cwg7fkLPmwYet4pOqvg921A78NvJ
+# bMArWc1YeO39gOJjOVgz4CmdzlMrcZUgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEzMVowIwYJKoZIhvcN
-# AQkEMRYEFMJ+e2B6ns3EliE4sPu3ApaKyfhrMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIzMVowIwYJKoZIhvcN
+# AQkEMRYEFKDVcNOnjLTqEdyIntU3ohLVt/RsMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBMv/uL7XvQWOYEsBmm7/ncn3Azwu/9jHisVMBZfyVVTKJO
-# j2YUQqJBbttCYC1ivvwt5yNF5+QHWlr+H9vUaOGcQZe93nHEgB25ea7o1OiIqyIH
-# NSGjliGTDvZ7ijqQ0nk1h9BoULhcTeQvsOv5gkUZrAEwj6QGUkgm8y6hqG5+r11+
-# XZbt03K7c1PsCjQenntnFv3ub4+MGPxzlZqGegueZptbwtcLeIcyYbc4MKDWbM5c
-# 3oD2KnRMiKdZJKI2t1eMLUKboB2wI6aKuuYYGrzRIl68Pvhr8a9xTnsqystXcnBN
-# VTaqagQr3Ox13PtooEkUpkHEPOFH74gmQB/0H9Oj
+# hkiG9w0BAQEFAASCAQCEsQ1uv1V+v+hDx/nuPjyPgHtvRD8T7/90taHiCDx28QWH
+# ABrZn8+6ayc7KSMjZvLgl3cT3llWnPMpgfgyvQ6k+al4ng+cMvIssJvIjnFSjt+7
+# 3Ltawfn5i7/NM+68VeMdZqP5jbthY+0n3ZPG/aFEkBBWDCmmHvjF46HxDTMMFZ3+
+# EI7xBLm1tIcaeRld5pNSoOQOoc/bZTvtOetPXNpqf/1rarIEZH0XpcgfUJUcK3Zt
+# zSxjVTe7/EuPCO8z/uTEk2y1wUj8iCEhSEjsfFtrG10AJCCDVhkYlYn8haqqjjp8
+# d5QsTcqEbKT4SmXjmrR9XQw6es5RAdl6fw+yQ1s9
 # SIG # End signature block

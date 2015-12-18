@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,34 +34,37 @@ function global:Initialize-Modules {
 <#
 	.SYNOPSIS
 		Initialize PowerShell Modules
-	
+
 	.DESCRIPTION
 		Initialize PowerShell Modules
-	
+
 	.NOTES
 		Needs to be documented
-	
+
 	.LINK
-		hochwald.net http://hochwald.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param ()
-	
+
 	# is this a module?
 	Get-Module | Where-Object { Test-Method $_.Name $_.Name } | foreach
 	{
 		# Define object
 		Set-Variable -Name functionName -Value $($_.Name)
-		
+
 		# Show a verbose message
 		Write-Verbose "Initializing Module $functionName"
-		
+
 		# Execute
 		Invoke-Expression $functionName | Out-Null
 	}
-	
+
 	# Do a garbage collection
 	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 		run-gc
@@ -68,8 +74,8 @@ function global:Initialize-Modules {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmwgyfEcCNrbuYJlydRRn6wfy
-# j1ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoDUkUUnRdb/aHOJnniq1oZfw
+# YKigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -212,25 +218,25 @@ function global:Initialize-Modules {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRm45dj/tnOn/vNRaWLTfQZbXfVUDANBgkqhkiG9w0B
-# AQEFAASCAQBuXmKNoC62TOnQgO6annXTrWtDFRPBi967XPpk8Rke+lX+f2WiyEhV
-# J8JDPZ5O+G2S5v7wk2BOi2nQV5H5xd01cYqjWXbRXizU2FILNbwgT8QEgDDse18b
-# pQi+K25I8ysNzKTmnGgZUFQPE2jx5DqV0jY2NGB8sKl2x+UKtFWoBYw2AQKswpX8
-# erzqohpuwmZaQF8Kamp9i9nRKK2oN6jpQi5oiY6ceg6RoAWsZmkkY5BLmDX3lFR6
-# Q/ab6xDxW5bCH3lhHFGnpEye3vTCVFpa4km+ZsKNH/tV4xBHlg9BFKSPUr+GYTih
-# mJWynFiSpMqKXkePpXzlOJE8WaCms8n5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSYQVsM2H+B95zwwKnR0URdtSZKmTANBgkqhkiG9w0B
+# AQEFAASCAQAT9Ow6Ba2opAzzKYtlZj1ZW2SnhVzfP1nOHmAJ72GvSFQhZeC2Ni0u
+# Ky5PTNOy2KCSEh1BrV+Akpbe1iZrXheROsWzCBvTETn9qp7NUXg9X5GPF9lW8ukw
+# TkT+UxDMtcEwyP1GCwS8eRB/8SEHSlTfFoSQoP1DAj4Kq6ZjlNpr92R2ueUAdyn+
+# 5WV0SqC+w2NBPcnUHVr5S03mKnYtgg7XBLiDYl42neJ0crOt8X7iurX8DmgHRlGA
+# m7nvPXSHly2rFmF4ONLC9tUyJ6j3BAa+U6KLKJBYWMZSW0diV0qtuTB2Oe/ZkLk0
+# CDNmUVQoJf5xsuvjGiytpo/7Wd5WOr8AoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEwNlowIwYJKoZIhvcN
-# AQkEMRYEFLRngYAes2BoxuNobwBJXdwu0+qdMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIwMlowIwYJKoZIhvcN
+# AQkEMRYEFCXxzah2FEkHffkqUG2EwmC/9HGIMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBZOVcAQBQZRysw3OmsLC+7p4jAmRFTBk/gM1Upw/IFSpry
-# n3xmdNJg3TvN4STzbo8XzMPohWk3Y0+iGkEjcvpc7VPowyj9Mw5RyANIS58kNYwR
-# KGbi+1TMaAgpyvkCQVUIFfOG6oZ6Kbldh+MBtmRfsw2NLF6oDbemu14Lklel3Yio
-# GW48V8tS0cZsS8xRskwryoFZC4qDCQ4sShpHkfeUH7/5bMyifG3qfckZe9q2tWGh
-# tHqRA8kcEBUwxk6wytD99iyS6DfnDwOTuvppbqt1xWsA0wddQnWgOvBEE6G6cxQc
-# pfQd1z70+VTF46G1CQBlG8cpFfDhBYiLf7Dd7Lyp
+# hkiG9w0BAQEFAASCAQCXTCM5heU+XDMuf82R5yob6Kz0xvqb8FOlfFvrapZefOei
+# TI6JWtTU09JivuNuWxGkZ5C9YVrTzYI5Rbw4wfjL1+9zZFXSs1hKrXMsUxMj0PSp
+# FkFZsh67t9fN5fD0kkSKQk5p1oz9rgDyodhT/uaJrNwNYjMWQ7O8q9exgtAEysRr
+# M3U8XWQ2++gddsrveHliypZEKDAaiQYxhEo+6nPBUgUvxa3ZQOLkyZQ2wO3YNGQE
+# 73+Fpr8jP7X4m53xicEzXskjo/cvWpWlwSbd3LZdlXEFtSxQQu6oHUi+7tVeYvBe
+# Cq/1ZK4aNLmMng0xdawas0zG8iys34mGUXBMmT9m
 # SIG # End signature block

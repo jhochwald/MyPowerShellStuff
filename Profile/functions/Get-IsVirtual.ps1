@@ -1,7 +1,10 @@
-﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+<#
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -49,10 +52,15 @@ function global:Get-IsVirtual {
 
 	.OUTPUTS
 		boolean
-		Value is True or False
 
 	.NOTES
 		The Function name is changed!
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -132,8 +140,8 @@ function global:Get-IsVirtual {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOiNIPxl4teiG6BHDrezhSWt8
-# HPWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1wPbIAOiole/399xcEfxYVeG
+# MwygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -276,25 +284,25 @@ function global:Get-IsVirtual {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTnAFzfQ7HaTC8WyqzTch0JXkp2XTANBgkqhkiG9w0B
-# AQEFAASCAQBr9wpN0/2Yp4B2jKC8yjmEylHdv7EZNBIXkWieHLjwQ0ScA8wbli5j
-# zXhE5KyvULllRbECGm3E7YJxToBueuTSWFAGoruSFmpNDkP2+U62/XihOeeNJeoS
-# CI7MTE7r1Mt21Jqp+Z8aRhANjAXACH0oGm8t8qYrWi3GWNXJEVP1RI1Ot1YVruMf
-# 9NZPGdf6PBtdGFNi6aR0k3ClXw9PJDf7s8gB46cgH9P5tpjbKe0Aky/lLnbzjqrg
-# zgmOdJPoDpJ564Nyf98uO/KW0pQAscZst9Ows3EUWX1rzeS8E3ZOhxbB089Jszk5
-# tSpPmpw04jxHnWLlxC9A9apaPZOV1X3KoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSgw2YgIqhNDi823X1pBoq13FlTqzANBgkqhkiG9w0B
+# AQEFAASCAQA/Sid9xgl/T+EVxlSiVn/1BX4Ojv0slC1NPKMtJZU/myICwwbksWaP
+# cBMcatq1xU2MERrIAW9+KhizOgJNtz0LZGLFOxxDgdi/5Q4vKZ9nOD37zNlSUcA6
+# qyeMXhO1v9mSASYpqcE48KTt7tix0IKGmGJJoN8K4894bYC+GSlBpqkRenEcyd5X
+# 8s9ABcuwcopKnB/jUeeTd8h5U+8NbxVHFjbMFU7dCZ1tvFZirD1oeR/VJx8Yysw3
+# DvH6eP9EL4ilBKFN1tvrz/iJvpHVkO9TKa1H6Zuha7GVExeMfsaOblC+VU7ifa2x
+# jCXoqFlgCK9YfyyGQGKxp/X3IHb+usDAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDA0MVowIwYJKoZIhvcN
-# AQkEMRYEFOVUzcAWEvCMaDCtQgYVzHSJzZXfMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTE0NlowIwYJKoZIhvcN
+# AQkEMRYEFIwaZpaBjbskzWCgz1q8WFdPbODOMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAjngEKRLY/Z1o+N5G+DHP/j8V8z/pOcC8N7dn9RUb5/fJZ
-# dgyG6l+5dNjyt+C/Y5JVBRHUTsjC3N5f5c4xyRMk6y8xzcxqWkufqihdv1Lqu93g
-# PP2VBx+dkU4EwPIj6M0mobM+MYoq7m5qGyQB+7gPpNxgvFJXr3HfK9QS+mszGJMf
-# dui+fW9Ua54rv8ZhF7M9cY/S7yHMZsvjEr7XUzmMq+O2BP9Fi6dkRBMY5KUySQrA
-# G4h4RGg9vBbHbkdnqlZflLfXo7bvZvcdorrbJ2P+bnliUBGzjbfaH2Y3euAOqrC7
-# b1cBuV6V7j9tSU0NDSaPesCmrtDd96knTjvh+ByV
+# hkiG9w0BAQEFAASCAQBQBZETFqoCo76ZQE4oQUSCT0iutzsFdS1qV4QxXMPAoaFA
+# cTdjnoTEKp8dvxAUKQ1Af0ANXDJzlHla1UDxzvo80tiNh9h1KsWxjnGiGpFNEQFV
+# +2ZWrmkjyUfvd1TR91FTaxRit7Po3KExjrODzAMrIiFNb9imtx4NAeta5o8BgdkV
+# XpQLMZ8w/G2jOvHOIvyAMJUz6rvF+bIJ948JIFHQ7zwJCNzVKmcVrt54MZ/oMeSv
+# 9nmzArIpardvWY1qJ/2c7V4uEvhUpvjQAOUr8DWeKWkucNtf1Ga2/nWTFSredNg/
+# 308r73BwR8mA588QNMeAdrSsedf/AkZoKDZtwzIo
 # SIG # End signature block

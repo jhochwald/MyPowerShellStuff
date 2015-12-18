@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -43,39 +46,34 @@ function global:Approve-MailAddress {
 
 	.EXAMPLE
 		PS C:\> Approve-MailAddress -Email:"No.Reply@bewoelkt.net"
+		True
 
-		# Checks a given Mail Address (No.Reply@bewoelkt.net) against a REGEX Filter to see if
-		# it is RfC822 complaint
-		#
-		# Will return True
+		Checks a given Mail Address (No.Reply@bewoelkt.net) against a REGEX Filter to see if
+		it is RfC822 complaint
 
 	.EXAMPLE
 		PS C:\> Approve-MailAddress -Email:"Jörg.hochwald@gmail.com"
+		False
 
-		# Checks a given Mail Address (JÃ¶rg.hochwald@gmail.com) against a REGEX Filter to see if
-		# it is RfC822 complaint, and it is NOT
-		#
-		# Will return False
+		Checks a given Mail Address (JÃ¶rg.hochwald@gmail.com) against a REGEX Filter to see if
+		it is RfC822 complaint, and it is NOT
 
 	.EXAMPLE
 		PS C:\> Approve-MailAddress -Email:"Joerg hochwald@gmail.com"
+		False
 
-		# Checks a given Mail Address (Joerg hochwald@gmail.com) against a REGEX Filter to see
-		# if it is RfC822 complaint, and it is NOT
-		#
-		# Will return False
+		Checks a given Mail Address (Joerg hochwald@gmail.com) against a REGEX Filter to see
+		if it is RfC822 complaint, and it is NOT
 
 	.EXAMPLE
 		PS C:\> Approve-MailAddress -Email:"Joerg.hochwald@gmail"
+		False
 
-		# Checks a given Mail Address (Joerg.hochwald@gmail) against a REGEX Filter to see
-		# if it is RfC822 complaint, and it is NOT
-		#
-		# Will return False
+		Checks a given Mail Address (Joerg.hochwald@gmail) against a REGEX Filter to see
+		if it is RfC822 complaint, and it is NOT
 
 	.OUTPUTS
 		boolean
-		Value is True or False
 
 	.NOTES
 		The Function name is changed!
@@ -85,6 +83,12 @@ function global:Approve-MailAddress {
 
 	.INPUTS
 		Mail Address to check against the RfC822 REGEX Filter
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -129,8 +133,8 @@ function global:Approve-MailAddress {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5XkyRm1sCCy7a3vYavN5Zwub
-# fh6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOiK0NfGvbp1d7uJVn/ye7cru
+# NeqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -273,25 +277,25 @@ function global:Approve-MailAddress {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTRDxM+i70kiuuP3LoCSnzB8Nbj9jANBgkqhkiG9w0B
-# AQEFAASCAQCh/UDGxc3f0eb2x2MQZb/J9MdgqtGJBibLkLUdgKQPTWbu/EZd/Us+
-# Z05Hx6OOB1LgiUrJDtTSsPYgrc8XcoVyBs4lm6n89pWtXlnwvla4esosUraJUou1
-# gOERG0X9LS0lCxnez4Xm3lr8G3xPO8GL1dxWDjF4adqWgakKxGZTfotrgjSa83Ff
-# oXe0sYD5VLDfgVm13cNwQeQ+WReTJnuJ6aBIZBBTMNfeqenrfDEcksek9Xbkjfxa
-# nZA1mflBYuQRLjTIJWVqxPS1yqVaLH270Qtpnmnz5Dy2DipC4PiPtZ5yf2+M6uAx
-# 3QMb/dlGFCuV9YpUVMsOeDoe0ksC+KvJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSsJwXBQAxxBzREnGAlpfBKR4VBQDANBgkqhkiG9w0B
+# AQEFAASCAQAizrejxBgIRmEPRDdn6V5TsGtUMrPFfaRFH13UHYO7oE5w3zrXsziy
+# cjUldrRa92FLuCuZ2bY/Rb115AM47ojSsxXPkcCWcPIeXKUd3iTcuEfALPHv4N6s
+# 1wmKJyqyLUCy2VcREUuh6XTBkXDjLvdkgE9JBNk+yzfMaIiPxy+/p59AXHcmND+O
+# FXa5/EG8q4iquFO13Ahj88AoM/iwpyUA82xA0CurJYf2U2uVS5k2THba3YrP3Qz9
+# 2cMKIrB05N19HQ00IWLFJ+8eNGYfVb/rt6SgabhUXjWrPXn2JMJ5IxM+gTiaYK3e
+# M8Qp5DoWaND6xM8TXW5+3X2KrtdGgzSKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAxNFowIwYJKoZIhvcN
-# AQkEMRYEFF3zn1w1bXOq2RcB5Iy/QX5ck8GoMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTEzMFowIwYJKoZIhvcN
+# AQkEMRYEFHkuIn6iCkAZ7HidbO4h1ld2FxYcMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCg4SyiceJDyKf7KKoSPdZPxDUpfpQCKByOqnIk6tIPyuO3
-# SWDJn/J61OAqL/vv7R9ux5de7ZAdLl/wNHtu4uvlPpPCI8v4V5Ibe1Y0zjyfEm1Y
-# vEQ7g5zPJHCppuNBeHBGgrS9ruVyLmCFB0X4so7gbHsYwSRHvIBLLH4iL7YA/8wH
-# LMJkCbp1SgaVCCXLT+URQeF1suIew0CNZef6wL00s7qJ/brir1nERtu7nHqX6amo
-# EfIo08IM/L4HB7NTbYIYqEOhl6m0dd6AYinQwgV65UikpbmxOpSbS4mI9L/RXFwc
-# bjqEFG6d/amjmYLHhTAnS2FQR41PV821a5nui1Fy
+# hkiG9w0BAQEFAASCAQANORj+M/Zq+bjKSOS8x4PtfU8JC7ZGSlmGRs/IzON6gUsR
+# hzxqOfLRHuYYZ8bMJHiPE5B6G3ZWd5Qxu/7zRn9Cz8l/yDpyuHxodsBE4QHUtLop
+# MhSWJuMrSH6UA+YJF6u9ElzwITCNNhHo+Qv5OthJxHkPY974bVClPivg1g/54o5x
+# 81UmkRMej1wXrIjgkaXKRaa8vAgRnhETx+lF73JR4k6s86wakWQ6UnoOFT2h2s8/
+# jAdIDMevypZE0NeZkfpMK9DWM54aiQPXu+6quSOhYV2xH45KxlgRmdCPPT5mdZIH
+# V/R4x8bcO0uQhLz51BBjnMQw1sZEUjauPTnFKbbU
 # SIG # End signature block

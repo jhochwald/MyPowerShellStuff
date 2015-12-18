@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -52,6 +55,12 @@ function global:ConvertTo-binhex {
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -86,8 +95,8 @@ function global:ConvertTo-binhex {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPO44vVJUA4ImkNGJzCUVy6wO
-# 3pOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUz744PF4Sljujs3jTRFmaRTJO
+# DECgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -230,25 +239,25 @@ function global:ConvertTo-binhex {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTivWkDPu56HJVpsBW+yhwBCcCNrjANBgkqhkiG9w0B
-# AQEFAASCAQA6vCkPEfRrwI2/MXPJzFJ9Xwp2SWUF79xWwJbREpEGL2wAeOUsLfBe
-# MOLKXIxfSm1QBSEqJt9Gt0d2TTD6lZ++sFvQWeKI3HnPDTrICaGIv4ddSINu+Pba
-# sj//SCgeY/yEn4EIhL+5Jzi7zq/SNSC/Y++fmbUIH4JAkYNwDYDPRwKqifuejuAI
-# ICdmQxhqj1z2cWhAoZeAIpAfv60Sa+MP5BK9VkeYW4WcQ+blbc0ihpBea/ztBobQ
-# XvABeY3k/eGhx8k3C3G4kKYc7kFKl8Zjn+gYuadk5SueYNy5rErBpM1nEM1Gu4Xu
-# lxPyh52nCo3OEev3tIZ8s/tada02Q1f4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR3eISfwB1rW++JUsNMj1WT3B5ACjANBgkqhkiG9w0B
+# AQEFAASCAQBc/4f8twIdOAjqJCB4+pWkG74fLzx1FLyy2Onin9nqw54EYPesjOcF
+# MXoK3bGQAnWEIEnNbhYLPVhPXpFrlqjPIBc31VZhyIj1+TJpNmBMpeogJBhUGDtv
+# +zsWYprOrQuKFjO0jWzAx+wd8iF8BGqogq8Bnjtm2TpUKrcY/5m/vkJj4Hq4Z/TG
+# vfYJjY7OAqd7TqZY46x9n50KLEL0Y/4rSu2q8wC93vHM6Ra44Q9YMyy77yA2ttlJ
+# gA6ZBE+laSJ9XVd1z8GgO6Rbkf6/PvKT22mCECOtDdK5wxjWtafsfSrkBJ7R6ZX3
+# GW59R5w7LjBhFqCpluYjhzwjyY/cM8j8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDAyMlowIwYJKoZIhvcN
-# AQkEMRYEFCNsPz1jvt605Po3nlJH0ht/flK6MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTEzOFowIwYJKoZIhvcN
+# AQkEMRYEFIupbCVF0HKP1wH4ZCYk0N9IeLpLMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAFId5DOS+zPydgWhT08YZaOhltEm5LU8q+wOeoXKLBIvTn
-# SO0SnvM7d6/hHzV7+99J+ECyzI6B4HOW7AQc35PkaCE3zXrasnvxq4hxZtrZecBd
-# qhUfbSG6PnBMoNRTUpvrROfpIfIdurN75inOypHvbdOsmxGkApMYXqKZ3Wu1/m/I
-# gITYpkQ/ZuCskxC3+Qo8OEn3kprcvD2tKI4EJhwNxTz/ldIuCT7fdg7LHWtKpWis
-# QpsQjM/bjEnoEh3d8U/cr9YYLV44eaIMAbL+mBS4MwDkgHpRYUzXV8GQmvRWOn61
-# VzhDbFHd/dTkGzCvlP0DalWJJk4s3cVxjqxuwS4v
+# hkiG9w0BAQEFAASCAQAU/1jziBWhy17PYHmiOx0iatMo9tYvfkeqqViESyNqstbd
+# 77VYcjMNSWFQXBNFlSxIKHv4ccoSlKDtI0RbnvJ+tE4JImoLu4360xtRim19Tt8P
+# lmGsguryrletFOsScGr/yooP7aHnkIuu9Ti6SSybOpWaN3n+ZBs0tlX8qUTqYxWG
+# rtgnElVrKuG8m0x0IIFRZVM20dec5euj5O/8w9y8qFMZHmjAwS8tINd9O0wnsD8V
+# SJiT0bCWZkm6bKdeEf0yzsoXhoJUwiLalUdmApiceszhfl8N0v2+y6U9JnTZ9pgp
+# 4OQb/SGgXoTrvu0BoxTq9G3ByZ3R8DtvkZ45N29k
 # SIG # End signature block

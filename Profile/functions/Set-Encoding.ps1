@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -31,44 +34,47 @@ function global:Set-Encoding {
 <#
 	.SYNOPSIS
 		Converts Encoding of text files
-	
+
 	.DESCRIPTION
 		Allows you to change the encoding of files and folders.
 		It supports file extension agnostic
 		Please note: Overwrites original file if destination equals the path
-	
+
 	.PARAMETER path
 		Folder or file to convert
-	
+
 	.PARAMETER dest
 		If you want so save the newly encoded file/files to a new location
-	
+
 	.PARAMETER encoding
 		Encoding method to use for the Patch or File
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> Set-Encoding -path "c:\windows\temps\folder1" -encoding "UTF8"
-		
+
 		# Converts all Files in the Folder c:\windows\temps\folder1 in the UTF8 format
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> Set-Encoding -path "c:\windows\temps\folder1" -dest "c:\windows\temps\folder2" -encoding "UTF8"
-		
+
 		# Converts all Files in the Folder c:\windows\temps\folder1 in the UTF8 format and save them to c:\windows\temps\folder2
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> (Get-Content -path "c:\temp\test.txt") | Set-Content -Encoding UTF8 -Path "c:\temp\test.txt"
-		
+
 		This converts a single File via hardcore PowerShell without a Script.
 		Might be useful if you want to convert this script after a transfer!
-	
+
 	.NOTES
 		BETA!!!
-	
+
 	.LINK
-		KreativSign http://kreativsign.net
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param
@@ -87,32 +93,32 @@ function global:Set-Encoding {
 		[string]
 		$encoding
 	)
-	
+
 	# ensure it is a valid path
 	if (-not (Test-Path -Path $path)) {
 		# Aw, Snap!
 		throw "File or directory not found at {0}" -f $path
 	}
-	
+
 	# if the path is a file, else a directory
 	if (Test-Path $path -PathType Leaf) {
 		# if the provided path equals the destination
 		if ($path -eq $dest) {
 			# get file extension
 			Set-Variable -Name ext -Value $([System.IO.Path]::GetExtension($path))
-			
+
 			#create destination
 			Set-Variable -Name dest -Value $($path.Replace([System.IO.Path]::GetFileName($path), ("temp_encoded{0}" -f $ext)))
-			
+
 			# output to file with encoding
 			Get-Content $path | Out-File -FilePath $dest -Encoding $encoding -Force
-			
+
 			# copy item to original path to overwrite (note move-item loses encoding)
 			Copy-Item -Path $dest -Destination $path -Force -PassThru | ForEach-Object { Write-Output -inputobject ("{0} encoded {1}" -f $encoding, $_) }
-			
+
 			# remove the extra file
 			Remove-Item $dest -Force -Confirm:$false
-			
+
 			# Do a garbage collection
 			if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 				run-gc
@@ -121,29 +127,29 @@ function global:Set-Encoding {
 			# output to file with encoding
 			Get-Content $path | Out-File -FilePath $dest -Encoding $encoding -Force
 		}
-		
+
 	} else {
 		# get all the files recursively
 		foreach ($i in Get-ChildItem -Path $path -Recurse) {
 			if ($i.PSIsContainer) {
 				continue
 			}
-			
+
 			# get file extension
 			Set-Variable -Name ext -Value $([System.IO.Path]::GetExtension($i))
-			
+
 			# create destination
 			Set-Variable -Name dest -Value $("$path\temp_encoded{0}" -f $ext)
-			
+
 			# output to file with encoding
 			Get-Content $i.FullName | Out-File -FilePath $dest -Encoding $encoding -Force
-			
+
 			# copy item to original path to overwrite (note move-item loses encoding)
 			Copy-Item -Path $dest -Destination $i.FullName -Force -PassThru | ForEach-Object { Write-Output -inputobject ("{0} encoded {1}" -f $encoding, $_) }
-			
+
 			# remove the extra file
 			Remove-Item $dest -Force -Confirm:$false
-			
+
 			# Do a garbage collection
 			if ((Get-Command run-gc -errorAction SilentlyContinue)) {
 				run-gc
@@ -158,8 +164,8 @@ function global:Set-Encoding {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvU+b0k/pF93kmsHm+i3GA6JD
-# QbmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXh9vw8XiWI5mt60v8yCtmxOq
+# i0OgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -302,25 +308,25 @@ function global:Set-Encoding {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSTyJfN469FhXXjPIzx1DtTAQKpXzANBgkqhkiG9w0B
-# AQEFAASCAQCAYctOYBM2Q4CXi7nPA/gR/xsv2tkbOoeM171qUpdfG3Z1qzDYcdPX
-# RyGWHk5TA3cG7sRk/AknkhBDFzhm3IkWB6vWPk1pd7cNRyND2i6a1r0cBhupNQ0w
-# ffcRNh2e0cgeC4T7Ap2i7xG+qSsrTpoCMUj7d3AQPxcGprsxMl3GmT7GfUB0SBzs
-# Zo2v/NsUh2kqdOWJium2oAnXvQoW/W2yhGm44hFo9BtZYQNX0cEEm10ee69PRblk
-# pRSGv94UoLbneKkh/ZfaWdIP7LWACjboiLNmEljTwBpXX/ezP8CVB+GAGulkQOcg
-# Ut26wUuPHKPDSbXhKIrD2Y+OY+YQwyRvoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQATzZY1bsjvzt/yOzuUfydZ26rFzANBgkqhkiG9w0B
+# AQEFAASCAQBJ/ezRIZZdVPu/Xq+Y3Ao1FZcRFXFHXxHg0Kqs9HhqcsydDCSdaybB
+# Z9ojVD4Gv6KfcBZ3aIig0uKBA3Yyq2NUIddo8rB12VwggXpazh0LhmqxyDLGTScB
+# iaazRdKDbkvYySnuFnclimIxQb/Iqdvq+m/a5esLARplb2KkGqrCgOGAbScL7L+D
+# XuVTtTtdsKP9AtVvABjPu0/gIi9Gofp7BNWvANSaiZJyZF/ilYb+QD2fuFJbP/r/
+# WQ7QYwEYXMBs+AumSAyt4jCrDjialrAjDUDn3gqbDY88NmLf9dSCHNfjJuQMfMX6
+# SRTogZlX5Oka9NDyvEWnwqgZtY8nIo7ToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDEyNlowIwYJKoZIhvcN
-# AQkEMRYEFGY1cJqFJSjaSQzG7V2T1WNaOb38MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIxNlowIwYJKoZIhvcN
+# AQkEMRYEFOpJ2Fm+gOIamfND0prxx7TF9bh8MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBLYRcWkhiwnb6BMKabA+MODgutspEUmMJ5KBUpR8x9hpdw
-# VX4oN1KKsgaF1GatoxobkvMJTTQn0ao+DIot4Zji2U8DLxCnYee+BgzsfHDyxRBE
-# bphNPt9JJWPg9ttLCODpW8aQTKHextfaykLQmfePYFzO3AY0pdcrsvdmR6T/Lfw5
-# C3UFu5Amu7GOVZJtLnUtezIaZitfe8K3tG89P6qySfsAbsVJ9qsZiVc3V1Jlmj0z
-# RVnl8FsDtlAXvbHiyh/VHyoRWJPOx/ddyAUwmBcVA0s/4kXEGKkePagQ2pgPjBqU
-# t+J8JsGc5S+tjDrX6R70bL12sd46SamPJU5hY8wi
+# hkiG9w0BAQEFAASCAQBnL2rCe5vIQjkcHSF6bxCpsEL4YO5cTjgN8Myqljb7H99U
+# 0n8gy/M6GI/fgJak1cy4j1Biupd1wdEilFkkvsu778d9fJRE5ZW4RFzA6qpiREXn
+# WCrm6e3NwI0XyXdy3vT3AIHnP0V2LTMMJ+HHiynfOtU5/n0J2Z6c+Jn0gmMTX1De
+# QM5XbysvEoLZW8rbmKGh5GHyAXVDRw+6KwEBBdB1o98bPI3gTTdtJDG5vM5fban+
+# fsTcC7AyIcwxTeRxNIe1lW4D2rG9Z81Gv3Hb0uThxT2L/23NSJF5LnZLrwXD7u0J
+# NbNlAe59LNoXP7SNhyK+n5wgi5+ysmTQDzIutEpZ
 # SIG # End signature block

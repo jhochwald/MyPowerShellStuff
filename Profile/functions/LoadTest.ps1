@@ -1,7 +1,10 @@
 ﻿<#
-	if ($Statement) { Write-Output "Code is poetry" }
-
-	Copyright (c) 2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.de>
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Copyright": "2012 - 2015 by Joerg Hochwald <joerg.hochwald@outlook.com>"
+		}
+	}
 
 	Permission is hereby granted, free of charge, to any person obtaining a
 	copy of this software and associated documentation files (the "Software"),
@@ -33,38 +36,43 @@ function global:Load-Test {
 <#
 	.SYNOPSIS
 		Load Pester Module
-	
+
 	.DESCRIPTION
 		Load the Pester PowerShell Module to the Global context.
 		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
-	
+
 	.NOTES
 		Pester Module must be installed
-	
+
 	.LINK
-		Pester https://github.com/pester/Pester
-		hochwald.net http://hochwald.net
+		Pester: https://github.com/pester/Pester
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param ()
-	
+
 	# Lets check if the Pester PowerShell Module is installed
 	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
 		try {
 			#Make sure we remove the Pester Module (if loaded)
 			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-			
+
 			# Import the Pester PowerShell Module in the Global context
 			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
 		} catch {
 			# Sorry, Pester PowerShell Module is not here!!!
 			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-			
+
 			# Still here? Make sure we are done!
 			break
-			
+
 			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
 			exit 1
 		}
@@ -80,8 +88,8 @@ function global:Load-Test {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNlmsDh2ScEDVhBKdgVt4my5q
-# bXOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWZtZYb4YAiTIGkSFvlAWgRZ6
+# ENmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +232,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxbhLuidAX/LTi+98YgwUJL4N/aTANBgkqhkiG9w0B
-# AQEFAASCAQAU9OXhQQxE+26PAK8JuHxuoGoGL6sJzyoUYPtoUANJI3vn+uVcWgMD
-# E0kNPE0btQhQXJYGelxv8DW5p+zahtbK43+DY9/eFHvvrvVaavg4/eAVZ4uzUXaI
-# v63oCUnofh6k8nByHnx/n4bHRJ2yuOsl5pDROyrip+rOjj6VQbaFmxK0bQHYJdDM
-# w/NdyvY70uhbmO1yatatxt/K3AiLVfa6I2O+0uOWygvYuS0px8yclHWjmRLl2I7M
-# 2pHJ2djrHltChsIgTaZkKQ6m5/CCaF2dV1G2gAxc+JvEzqHjF9uh2TYSoQEFbPrO
-# YFXP/nxF2Bc6y1qnuMOWe2Ooc1l42k8uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ4RJoKH1ngM7I7K+MmBFNVkT/pODANBgkqhkiG9w0B
+# AQEFAASCAQAsKjsGn2Jq7l7yHe4WHI22EE/w9fVsX9kgCzUm6ky0Oz92zQ+v8XH0
+# qFrd/qEot4xDolKmUIyogpixQwxmUYGb5oLhxEis2IBDHU2V9oPUfLl5jk5YDpgL
+# c1UAmt3MQ4MH+JhTQKGCLAW5VJO5wsDXmntbY4O0xcW+y9vvsJe0iI4U0Loo41VZ
+# CuQx0w8QoGwYB6Pp7mq5OAWt69GIQ7C0RqJRXA1zyF+LrlBWvvB6/1vWuPPhxxjs
+# Bp7xIzolZJ9zMhe0yHsu4QW8PUSVvY6IltH1aHHLqeIsprdMPJCaPUiz26+5WhH8
+# pdliKC2vlJtTPQxJ58sBULQM49eRKnUDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDExN1owIwYJKoZIhvcN
-# AQkEMRYEFAnwi3IPyeJ1gkFx5aGOYbKMokrYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODA5NTIwNlowIwYJKoZIhvcN
+# AQkEMRYEFJGklgHrOtehGacXiBaIWj2ZKXvaMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBz/t8gN2GaVS7YnYAyPFZjFg5tjX0VlVWp3OFtx33gHAHT
-# xEyhUrJmrjwJi84ljORrSI+m39cWU4yZMdyhGWNxqFnM86c5Z0P+vZ6UzPXxUEZr
-# GC53J3cy15ybEIlWfC+138pcVRJ+pQkMjQumw9ao8WShydr336DSl8l2A3vYlark
-# +ij+WrQdoTUab9zZuW5g443rSZniM75HQj14LiYmb342sSOE/Tv8Ta4mhR01ibVY
-# RY0btTaAwvdmXoumjmEOkwKOoH8w5Eq2uWpTVMNzKvQfgm6+HosUVmgwOBJY/C3O
-# q3A+HJZOML09pfBJGcL7wZkBBiimsIhfZ4bGgtPH
+# hkiG9w0BAQEFAASCAQAShYKWJVVu94HDaH/cW7lZoN9SMX7fdCdhTnpiFTOqw8Jd
+# aWmKqkge9Y0ogi4kihrNsDORym+naGsue6SP/TLCupsXN62Z0piDq/wuECrDtW2n
+# eyD3pP8fSLwRK6mWf+wqc4eznqMmHsu/MTwEmv2ySKQB+yqhh03/ICJhCAevJreJ
+# +XJ7cOzlKxjjy6m/3n2S29iAbG1yg2yUiHUD8T5SpRpedrZnN21ce5Xl2EYs6T+W
+# pT33ucG8JXEoU/HBB00UKDZyinoka69ryR/J6+GJG+hYdVRewhVGxoYYoRH2auwT
+# fr+3DEUjNS1CANfUYowzKGVuNVG6YNQzpQBAxfrT
 # SIG # End signature block
