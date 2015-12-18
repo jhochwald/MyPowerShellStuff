@@ -34,6 +34,16 @@
 	Support Site https://support.net-experts.net
 #>
 
+# By default, when you import Microsofts ActiveDirectory PowerShell module which
+# ships with Server 2008 R2 and is a part of the free RSAT tools,
+# it will import AD cmdlets and also install an AD: PowerShell drive.
+#
+# If you do not want to install that drive set the variable to 0
+$env:ADPS_LoadDefaultDrive = 0
+
+# Resetting Console Colors
+[System.Console]::ResetColor()
+
 # Interactive mode
 Set-Variable -Name RunEnv -Scope:Global -Value $("Terminal")
 
@@ -94,11 +104,13 @@ if (Get-Command run-gc -errorAction SilentlyContinue) {
 function global:Set-WinStyle {
 	Set-Variable -Name console -Value $($host.UI.RawUI)
 	Set-Variable -Name buffer -Value $($console.BufferSize)
+
 	$buffer.Width = 128
 	$buffer.Height = 2000
 	$console.BufferSize = $buffer
 
 	Set-Variable -Name size -Value $($console.WindowSize)
+
 	$size.Width = 128
 	$size.Height = 50
 	$console.WindowSize = $size
@@ -170,7 +182,11 @@ function global:Set-LightMode {
 
 # Include this to the PATH
 if ((append-path run-gc -errorAction SilentlyContinue)) {
-	append-path (resolve-path "$BasePath")
+	try {
+		append-path (resolve-path "$BasePath")
+	} catch {
+		Write-Warning "Could not append $BasePath to the Path!"
+	}
 }
 
 # Helper Function, see below
@@ -199,28 +215,34 @@ If ($host.Name -eq 'ConsoleHost') {
 
 	# Style the Window
 	if ((Get-Command Set-RegularMode -errorAction SilentlyContinue)) {
+		# Set the Default Mode!
 		Set-RegularMode > $null 2>&1 3>&1
 	}
 
 	# Change Window Title
 	Set-Variable -Name a -Value $((Get-Host).UI.RawUI)
 	Set-Variable -Name WhoAmI -Value $([Environment]::UserName)
+
 	$a.WindowTitle = "$WhoAmI > Windows PoSH"
+
 	Remove-Variable WhoAmI -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 } elseif (($host.Name -eq 'Windows PowerShell ISE Host') -and ($psISE)) {
 	# Yeah, we run within the ISE
 
 	# Set the Environment variable
 	if (-not ($RunEnv)) {
+		# We are in a Console!
 		Set-Variable -Name RunEnv -Scope:Global -Value $("Terminal")
 	}
 
 	# Style the Window
 	if ((Get-Command Set-LightMode -errorAction SilentlyContinue)) {
+		# Set the Default Mode!
 		Set-RegularMode > $null 2>&1 3>&1
 	}
 } elseif ($host.Name -eq 'PrimalScriptHostImplementation') {
 	# Oh, we running in a GUI - Ask yourself why you run the profile!
+	Write-Debug "Running a a GUI based Environment and execute a Console Profile!"
 
 	# Set the Environment variable
 	if (-not ($RunEnv)) {
@@ -245,6 +267,7 @@ function info {
 	("Today is: " + $(Get-Date))
 	""
 	if ((Get-Command Get-NETXCoreVer -errorAction SilentlyContinue)) {
+		#Dump the Version info
 		Get-NETXCoreVer
 	}
 	""
@@ -252,16 +275,23 @@ function info {
 
 # The Message of the Day (MOTD) function
 function motd {
-	# Display MOTD
+	# Display Disk Informations
+	# We try toi display regular Disk only, no fancy disk drives
 	foreach ($HD in (GET-WMIOBJECT -query "SELECT * from win32_logicaldisk where DriveType = 3")) {
+		# Free Disk Space function
 		Set-Variable -Name Free -Value $($HD.FreeSpace / 1GB -as [int])
 		Set-Variable -Name Total -Value $($HD.Size / 1GB -as [int])
 
+		# How much Disk Space do we have here?
 		if ($Free -le 5) {
+			# Less then 5 GB available - WARN!
 			Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available" -ForegroundColor "Yellow"
 		} elseif ($Free -le 2) {
+			# Less then 2 GB available - WARN a bit more aggresiv!!!
 			Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available" -ForegroundColor "Red"
 		} else {
+			# Regular Disk Free Space- GREAT!
+			# With more then 5 GB available
 			Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available"
 		}
 	}
@@ -270,6 +300,7 @@ function motd {
 
 	#
 	if ((Get-Command Get-Uptime -errorAction SilentlyContinue)) {
+		# Get the Uptime...
 		Get-Uptime
 	}
 
@@ -307,12 +338,20 @@ If ($host.Name -eq 'ConsoleHost') {
 	# Console Mode - Make a clean screen
 	Clear-Host
 
-	# Welcome message
+	# Is this a user or an admin account?
+	# This has nothing to do with the user / User rights!
+	# We look for the Session: Is it started as Admin, or not!
 	If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+		# Make the Name ALL Lower case
 		$MyUserInfo = $env:Username.ToUpper()
+
+		# This is a regular user Account!
 		Write-Host "Entering PowerShell as $MyUserInfo with user permissions on $env:COMPUTERNAME" -ForegroundColor "White"
 	} else {
+		# Make the Name ALL Lower case
 		$MyUserInfo = $env:Username.ToUpper()
+
+		# This is an elevated session!
 		Write-Host "Entering PowerShell as $MyUserInfo with admin permissions on $env:COMPUTERNAME" -ForegroundColor "Green"
 	}
 
@@ -323,12 +362,19 @@ If ($host.Name -eq 'ConsoleHost') {
 
 	# Show message of the day
 	if (Get-Command motd -errorAction SilentlyContinue) {
+		# This is the function from above.
+		# If you want, you might use Get-MOTD here.
 		motd
 	}
 } elseif (($host.Name -eq 'Windows PowerShell ISE Host') -and ($psISE)) {
 	# Yeah, we run within the ISE
+	# We do not support this Environment :)
 } elseif ($host.Name -eq 'PrimalScriptHostImplementation') {
 	# Oh, we running in a GUI
+	# We do not support this Environment :)
+} elseif ($host.Name -eq 'DefaultHost') {
+	# Look who is using our PowerShell Web Proxy Server...
+	# We do not support this Environment :)
 } else {
 	# Not in the Console, not ISE... Where to hell are we right now?
 }
@@ -348,8 +394,8 @@ if (Get-Command run-gc -errorAction SilentlyContinue) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUX/dge8AxlRz4d6OSb09KSazp
-# N6SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUF+2oWQh9m3GG4ahGsRgpioqt
+# yE6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -492,25 +538,25 @@ if (Get-Command run-gc -errorAction SilentlyContinue) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRKYiRMQgO9/PhJUk1UBR9sMZlAqTANBgkqhkiG9w0B
-# AQEFAASCAQAX6KEk8qKGaeITLjSPIhFTSbpgSlFHwJD0uzrxXaX50VgdtNLLCCRR
-# OivIQtK50s3BFCIoqr4kCOk9qe5+iB1CKzN2fB369GPDwsfxpwdqLvOHs1fAKspo
-# PDOPmeTaQ+oHXseLtYkPr0kK9fERuClX0ScJt2jKgqcpBfOFEb8mYrX4wUMhbaPX
-# V1iE3k8EDlvZsLegqAADB3bJ6pwGk5/EBucDiXhcK4B4/JwKT5t7onIpmsQOpNQ9
-# c2YeRbzsqwyL+fmx25Je2uWSmq8pw4S3goVJj7IJx9s3CbYNoBzwyqCOHlLrr1xZ
-# UTNU9IYUDQKd0rnPplN6h8jOscl9yu4toYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTQNRgbTWyWrNIVKCDj0h/TougC+TANBgkqhkiG9w0B
+# AQEFAASCAQCoPlBnWpFIZRsW5pPs+B+AF0xnU9hcciUYp+uXi1Y1FlnFNAe9hzpB
+# 9TChVk4fILGxhiXtGaXJ+L6wfB7rh2vGlKDnQfTXt5nuXFZimZRguqeyxpwfbdR+
+# ImprgIRxF/4bbkR+rOOi9JqXzsoJkkB17lNM91OF6yNN7SdUPwIpV6lNMX8DgKRl
+# PemTm6DZdmWEbPK86sv39JGqaaiJcp0bKdHdYBKO0btSbqQavdyzt4JqDbFLJ1ll
+# 1Oa2LnovDtdaODiTdvAiZ66J9+nhGQx4OJbz7mfa7dJr6xEbjm0sUUmpfOd7bvSs
+# hKFIMUb4OHd+1WUP9GvIdv8nGDylvqzuoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIwOTIzMDE1MlowIwYJKoZIhvcN
-# AQkEMRYEFFdB3bSIdOjkORPR5w+1Sbs7JuVgMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODEwNDMyOVowIwYJKoZIhvcN
+# AQkEMRYEFP2YUfElw8bDFeJTJiq7+ruAy/NNMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCUx9LnDbktWi3S8VLNemb6+X8VEfzBBYWiWvkP6t9TyDL2
-# N9yXEHPrOMsoNxArmVTJ+sVKe4NumOK3SWZC4518qXcBg8il11mYe/G+5Hp33q5T
-# jPkpbOUG59sOO1EFF6i7goThPjt0hY6zyEzplILYgH9xLxquXzbSOB1P6Aq8bYeF
-# 7jo2hphy6bt/f9A52ebM5YvXdxsX/g1n6Qt3cg04IjQQ8Hk1CjonOsviVGuh8beS
-# ldurQ5kr543JuffL16NLiU+up1GcRJft9bomnAmYVpaDwAap/kTE/LTRv/eJ6uQx
-# 7y3WX+uLIGPXTlUIyLnLHP8+i2kVDEaaMeVyGH2b
+# hkiG9w0BAQEFAASCAQApV+u04lK+U/GTACDHBuFi5w6rVOVRIVEEso0x1KOqmbH8
+# yMeUJhvsVreaZdf3/O3FWvKCPtABnKXsPQqFuY0kQRg8c5jRRSmeBa/jL6rT/Mll
+# USfNdHVzXANTG5ZIS6EpmffiuiEZPft1cjxAp5wO6oHxKgiMMZGXBPnwniyb8I8b
+# U1q3ph3XUFOsePlFIUx6ExhUSb7brcSMtpmClTZIS/BTv/hzGE0cQRfklM6sK47f
+# JAe1cWNiVYZDczFcVlCQ54MyOBbuFwRSvwJBzMIh9i9ngKLvYQpCUU10PAwFJ+h0
+# OgEjGk/O3E9vD+HbFIWLqC7HldDYJa2NObLtJfiv
 # SIG # End signature block
