@@ -10,28 +10,31 @@
 		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
 	}
 
-	Permission is hereby granted, free of charge, to any person obtaining a
-	copy of this software and associated documentation files (the "Software"),
-	to deal in the Software without restriction, including without limitation
-	the rights to use, copy, modify, merge, publish, distribute, sublicense,
-	and/or sell copies of the Software, and to permit persons to whom the
-	Software is furnished to do so, subject to the following conditions:
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
 
-	The above copyright notice and this permission notice shall be included in
-	all copies or substantial portions of the Software.
+	1. Redistributions of source code must retain the above copyright notice, this list of
+	   conditions and the following disclaimer.
 
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-	IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-	FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-	AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-	FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-	DEALINGS IN THE SOFTWARE.
+	2. Redistributions in binary form must reproduce the above copyright notice,
+	   this list of conditions and the following disclaimer in the documentation and/or
+	   other materials provided with the distribution.
 
-	Except as contained in this notice, the name of the Software, NET-Experts
-	or Joerg Hochwald shall not be used in advertising or otherwise to promote
-	the sale, use or other dealings in this Software without prior written
-	authorization from Joerg Hochwald
+	3. Neither the name of the copyright holder nor the names of its contributors may
+	   be used to endorse or promote products derived from this software without
+	   specific prior written permission.
+
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+	IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+	AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+	CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+	CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+	SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+	THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+	OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+	POSSIBILITY OF SUCH DAMAGE.
+
+	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
 function global:ConvertFrom-binhex {
@@ -93,8 +96,8 @@ function global:ConvertFrom-binhex {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrqAaCRgbDPxH23N82GB4Ni6P
-# nO6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQOaoB6+7LysQOEZNLE1GAOel
+# LwygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -237,25 +240,25 @@ function global:ConvertFrom-binhex {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSkATj3ysAf5+yGqJhMfyhJUu4pbjANBgkqhkiG9w0B
-# AQEFAASCAQBqF5Wz+FyeaKlg1FQv6wO9HV19fIPcTRdpOfR/LZINGWfmcHiXUBUD
-# LdbpVLb/cEux2n45q2cNDbO9vck9Oyhy60HUWZGcsGlUJuTGc15SnV1esg3+CntZ
-# dFEy7yDxc/Fvv0Z0OK9iDnL3g2YxgRMEjwRFKkA3g3GFpfxQdGEJWMRNpmH+g2kn
-# i4dgFcgLqdBKbu/fEz66prhNdbKVQud+Y7Fl/UbAUiy2DVmyYAnEt8AEWiR+GH/T
-# nhaNqnjAX5Re4Mg4qL+eYhfuDEXpcfGYH1YOhP/y5wRrc7nyP0dKYLn9K4SsNOq2
-# W0pD5hxxWx6l1JrPam4sea29bqxyAXGooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRlScxF+xxaQ2dBk8z5rRr/+BIwjzANBgkqhkiG9w0B
+# AQEFAASCAQBYH850c1Xn3Nb+UcpwTUstUuZe+NLrx6JkVl3Tv/E5ajbHKRJh49bx
+# IT2Q8COg4Tm88WdRAegg5umkvQnkg8nLTH4MQSzCzWFOmmsvpAHTYzU2Uu1OESAu
+# 8M9LHkS8KGe9e+FiGP3D2LK0nHyUWqcmiAxpUJqA68SW3e5fVz+WFlH+R8pUFggU
+# srVTOrEdZ0XQGpeStPkcOSq3C1HvQ7KC25Uk65JUERAVDYXmn16oNah6u/o/mOxR
+# Xjf3//P5otMHtboUHh1AM0D5KWOJRtnmHpsYaIk6C7jRiJMMLR0TniNqL4crRblv
+# vIiyuUmCEnbdMV07GNzRfwMSxFVUovLyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODEwNDE1MFowIwYJKoZIhvcN
-# AQkEMRYEFA7taTQyMGUfPaVBkAFgtkVEgSipMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0MVowIwYJKoZIhvcN
+# AQkEMRYEFG2wue+bxzBS2iHmW+83xFr0sDRiMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAEqhcTW8p3yZagMZs1mXAAoxrvVkmJDiOst1A9zWQ8DZxb
-# jqPQid9u40So0tq4J4q/5aaHM9s/BE+Rb7Wa3kQsEr+4h6DnzsFLo3xVjFdJ0vtj
-# JjnvaZfzVc53YRludar8tTD+uKPJV94zYeML/9iDKud8RyeLOfvXK0u6Y5jX9IsY
-# 1lHw55H/5WEdyUSA407uhut3fkJ2h+FSQSl9mZKT9xiJmbA8qrNOhgkndzTjRN27
-# 6O34351Kwgh/XFjqb0Wrv7t7nnMD2593krEQ7XEh9W99JWLM7DhFW/7SiafHLjZG
-# A3MfgFtl6L7syHaGmRg7Mmp0G1qLHFf8pQM+bGlk
+# hkiG9w0BAQEFAASCAQBSJbGuH2VBDJRKRi4jqPtxrNWcKvoOzX3nqr7D/15L+cfb
+# nI4iwma16NSZ/GLJxqG7dnl6mt5aAKXoHjRuzPCMJr9yJ2Zws1OL5bfF3EfxzeNp
+# 6tBKi+Oow76+Kp1dAeW77RCfRzk5UbWjTSfE80yt9k0ransc8FJG3+vzOnFjLjxC
+# a1YuNMID5yaVMg+yXQFTms0sP5//9CZoMSkz/S+LnXlJdwssXMvcK9FvIIbd6Ux/
+# pG7x3Chn78fVzcdeg5FbJPHzlvT3O8LlzDhjk4lrQy4uO1U4qHP55PwUz4KlkzBE
+# Bv/zKzJNhvC47zEmKJ9VipVH3kFG6OA/4hjAxgTM
 # SIG # End signature block
