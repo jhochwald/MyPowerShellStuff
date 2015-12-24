@@ -37,12 +37,16 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+function Global:which {
 <#
 	.SYNOPSIS
 		Locate a program file in the user's path
 
 	.DESCRIPTION
 		Make PowerShell more Uni* like by set an alias to the existing get-command command let
+
+	.PARAMETER command
+		Locate a program file in the path
 
 	.NOTES
 		Make PowerShell a bit more like *NIX!
@@ -54,15 +58,25 @@
 		Support: http://support.net-experts.net
 #>
 
-# Set a compatibility Alias
-(set-alias which get-command -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   HelpMessage = 'Locate a program file in the path')]
+		[ValidateNotNullOrEmpty()]
+		$command
+	)
 
+	# Easy: Just use Get-Command ;-)
+	(Get-Command -All $command).Definition
+}
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbBFmgRSLx8IfS0E+I77NWkPp
-# 0vWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqXlJJpNN4BH+MJuG8nSoGIwE
+# nd+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -205,25 +219,25 @@
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSs+KlScoIRFHvIQ5LJHsr8mvnTiTANBgkqhkiG9w0B
-# AQEFAASCAQApdZilCoN5jShuhye8sMereu6p/dLGppcvAlfU+gueHDwxQ2/CjMMs
-# 6AoC9aStKRVF1CEHm2k7Ow8jvrKudaj5sc5TX9pYPSUtzbbMsKv4vDpnpatSeENX
-# R6c5VA/wCrQR3mQX3x1ka0iP3r4gesG8hKHXoMA+fd2mGa7g/kH0YV2n5OFk7XmA
-# JuplOv/xlmh+jFf5bW+CQ6mMu7ZYSGnGA7NTuYL72TD0FK2i0eFjpDTDwx2AuCdm
-# AyMEi3f+inW5r88wvEbY5zoF/YulpiJ+OY/f7IsMCr1SZjqbxldvrofCaA0OEUOD
-# D/1q+9BZC6t829xlKdkbDMs04OWiE/hxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRCAydzV9uhLBJBuUzwX+XPxEiLCTANBgkqhkiG9w0B
+# AQEFAASCAQBsC2KaS6ilcRe3Q91W3mAVr2RKaQuTWVmhDY746Dc+E+2njCEqAx+c
+# cC2PUOwgcWOUnzUp6+MYcu/qp6tI8EgOl7hhvgvBSe0IYE1i6zl8GciDtZD8x8Or
+# FW08c6y2c0/aDUqGMxSLC+GHnHd1cJJxik0eLiIR22GwMqFZBirgU/JDw2+52FRC
+# KayS+R3h2mh/o2Idsi1Hmbe26lpQZkQv9mI3TtQJ2L/tu3Btalz/hLSuP89nkEXR
+# JbPC/KOa70EVEJhrG8XYh5asQoBHZau5FzUIKq4ygD6rO4LrLS0JUjeT1RGHZs8G
+# hTZ6mP0uUrzT7UDfxrrAilH3ae/2+VrIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTUwMFowIwYJKoZIhvcN
-# AQkEMRYEFJX2J7Oh4lbziqRA7pxa2AIYZqwPMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyNDE0MDIyNFowIwYJKoZIhvcN
+# AQkEMRYEFI+DiuQZp17y8pRmcCNCpvF52xVxMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBbCfGfOjpqm3ff9wLvTsdpRLFMa4VIhTlR7NCIISdgz1Hw
-# EwtsGQ37Ug2E/HRqpIgvn50/FAs5nI+FOqBXpfc/tDQ/ccOP2UJ6+Aaikn2V/OPn
-# L3CtRlHeyw+81lhzvl4qI2PUGfoa/pxt3PkUe8IxvuXlpqPPAFxmM7Y2UTl7oL5G
-# GIcZuByaJn+Ap79aXuy9vCHDXFeYiQJq9B4e8hGeriBgydKHV5mMfm/43flrpBPH
-# ipM8guQM/MI19VGVCoQpMytLpWlqOJVdzaAeqEdkJdW5omQ7PM1ugBsdnU6kJrjO
-# INPA4B1nEBYlQ0NHvWT8AbEOVA9pByWCgVkKSP/G
+# hkiG9w0BAQEFAASCAQBtPn50szTrKmAXtLW8jH5HvPqpPRe3mOuwb5IFfDa0JSPU
+# 9uytU657gaag2dyMhFDDkNmtNwM6uZk3YGzwCfIGVv5tJNZYCLXLPe2/fnMOdH4U
+# podZZl4pL0o/y6RJgZwUOOVQFGrqw19CmxXM2GKvQmPAbu/0e3uQ4Uf3Y/K3a+Zl
+# W+1yzlAbUiegzbcIKPWnqWmVn21ziH9q5O5lwIKqk8OSZRPO62tzpPt8GKy3Wtt/
+# 9V1z/JeLsYNXGx2T44T2Y5xubqWtS9VjpRnZnjDX578MGvUv5E5OaRtV/INif+pY
+# ovEaKkIXuz6LvCiEjOFvBDVQQWWfPoLoJNtw/cRo
 # SIG # End signature block
