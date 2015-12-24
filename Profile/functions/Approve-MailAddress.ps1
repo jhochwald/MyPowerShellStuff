@@ -112,10 +112,10 @@ function global:Approve-MailAddress {
 	)
 
 	# Old REGEX check
-	Set-Variable -Name EmailRegexOld -Value $("^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$")
+	Set-Variable -Name EmailRegexOld -Value $("^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$" -as ([regex] -as [type]))
 
 	# New REGEX check
-	Set-Variable -Name EmailRegex -Value $('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$';)
+	Set-Variable -Name EmailRegex -Value $('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$'  -as ([regex] -as [type]))
 
 	# Check that the given Address is valid.
 	if (($Email -match $EmailRegexOld) -and ($Email -match $EmailRegex)) {
@@ -140,8 +140,8 @@ function global:Approve-MailAddress {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMa3IhDEKJrC4I61pyZRMTTVQ
-# R5SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUos/UpbmyjKc5YBYEY7WlidOf
+# uAigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -284,25 +284,25 @@ function global:Approve-MailAddress {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSa7XT0PRid/1Sj+QtilkVqWguXOjANBgkqhkiG9w0B
-# AQEFAASCAQBuMDh/ujpB8vGGxl8P1yj6FbCdtYzNboWRJRmzZkpwD5IVrgtXrW80
-# tmN6ynvvqIQ48ksrxZWN0aAXk4qIRCCooon981QjbrnQCv3prhh6T6d0EuF4lvrk
-# yM+Zru8YdiNoZ1RmLypAZMw+ska2PbgydcWnygXuE8W96MmdyaQQ7dODrtGN4BGs
-# MncfD7t4KKZLBLWlKPXf2/+dEudwNl0pExusKO7Xmr2vuhF3ir7dpQDf86nFlQfO
-# JBA2PzvnLEidM1MadPAI/6Y+FYP+qzHeDpmNjasnbKB6N61wEohwa94yUiizu+DO
-# /dfa5Qp7r0TzCU73P+D6guIo2eIzeTUWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR920NBdngLrbK/TSrJt25lUXQonTANBgkqhkiG9w0B
+# AQEFAASCAQClrfJOLurOGbnKD24soFckdjtG6FF9ZBkQGJVKUVu9BogOTJmUK17I
+# jyxeY8tT1lcEOqhslT5R73YkZrVZQAwx+sPecl+TjREqdlwVhzRxLjDZkvQOBc0w
+# v/JT5W30vvEQPJ53u8paxYRKglhw1SegKEcuk7D4n16KK7IB2rUsPppxe6a2mZv7
+# EnRcKFWIpkAD+5mX9Fd4eoeQ1lzPKLV/fGKk56yfPcFzEltoEYLm0ua8jY153NVH
+# zusZPRhpOAcbTULsOObrz6ptolrZLLC68cOZueeCQBtX9b3ZnMLrN64eat4svAFQ
+# IVdgbk6IOO2iQehn28b3Xx91CcsIvKSvoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0MFowIwYJKoZIhvcN
-# AQkEMRYEFPF8yxkfiMz8wagZ40UefYGm9xFrMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyNDE0MDIwMFowIwYJKoZIhvcN
+# AQkEMRYEFDHVWX0K80k1GkRDdebYez6XphdfMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQARK3aXMNGlUzff4KEjDFs06QEYo/4KMuNxCurHVxj3dKgd
-# HJFwHfhWHZkNTXwmWB5rQX1L8LbFLxOPgsRQnS8HE0mYiqSVvbwsPuA+JSCfOeVw
-# uAeCaCfLmtmkmLTVF94BDOzW/pA/SzG3DP6ry/VjZGq6jNYGjGVLFr+9n1wu/y6S
-# 3JVkWNwTlnH/lQZPT5yhDhbeK+cRMsG8ThiRwyzOI+m5qUf6Nl2k7S68XRgCvecf
-# XyyBDqocWjZQO9oJsrvAEtrSiGfOxKTemnS/i/tz9JGXP8SYKkNiiOYKpD+YXRbe
-# nVvMIWngb3hCSacHGs3xkwiffHj6GIvsB0JTlLFX
+# hkiG9w0BAQEFAASCAQATNbTyRHcdnqa4LiB/CNJsmRzxzEyGpRjnhYCYd8tptv6o
+# a6SBwbHr741G+tsxPS2V4NHl8zJDFRlloLHOUon86XLZXIe3fD1d5zWaxN6zSVsi
+# /VkrqioFDhRHtJz4s/eS5ZCSMQcvKkKC9H9S6IKkV3tYEMcJe0Q/MoGcmJHO/fGk
+# HmUI5xclspp27S7Y4fHrHLWMlXzy1gEbK3OwcHxf+Sx6h6E5ESzlAtQBmMfr+0iE
+# MXCYlMG8FFXci8TRSJUnTkw67TO/5z8169s6pLcPqUBg08UA7qM8lBj4HFglnHx2
+# fgcE4sD/UKJE0xJuWNE+5vsyxqQy0Sl6UIXLOFON
 # SIG # End signature block
