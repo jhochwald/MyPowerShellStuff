@@ -44,6 +44,74 @@ function global:tail {
 
 	.DESCRIPTION
 		Wrapper for the PowerShell command Get-Content. It opens a given file and shows the content...
+		Get-Content normally exists as soon as the end of the given file is reached, this wrapper keeps it open and display every new informations as soon as it appears. This could be very useful for parsing log files.
+
+		Everyone ever used Unix or Linux known tail ;-)
+
+	.PARAMETER f
+		Follow
+
+	.PARAMETER file
+		File to open
+
+	.EXAMPLE
+		PS C:\> tail C:\scripts\PowerShell\logs\create_new_OU_Structure.log
+
+		Opens the given Log file (C:\scripts\PowerShell\logs\create_new_OU_Structure.log) and shows every new entry until you break it (CTRL + C)
+
+	.OUTPUTS
+		String
+
+	.NOTES
+		Make PowerShell a bit more like *NIX!
+
+	.INPUTS
+		String
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(HelpMessage = 'Follow')]
+		[switch]$f,
+		[Parameter(Mandatory = $true,
+				   HelpMessage = 'File to open')]
+		[ValidateNotNullOrEmpty()]
+		$file
+	)
+
+	if ($f) {
+		# Follow is enabled, dump the last 10 lines and follow the stream
+		Get-Content $file -Tail 10 -Wait
+	} else {
+		# Follow is not enabled, just dump the last 10 lines
+		Get-Content $file -Tail 10
+	}
+
+	# Do a garbage collection
+	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+		run-gc
+	}
+}
+
+<#
+	This is the former version...
+	Deprecated and will be removed soon!
+#>
+function global:tail2 {
+<#
+	.SYNOPSIS
+		Make the PowerShell a bit more *NIX like
+
+	.DESCRIPTION
+		Wrapper for the PowerShell command Get-Content. It opens a given file and shows the content...
 		Get-Content normally exists as soon as the end of the given file is reached, this wrapper keeps it open
 		and display every new informations as soon as it appears. This could be very useful for parsing log files.
 
@@ -53,7 +121,7 @@ function global:tail {
 		File to open
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> tail C:\scripts\PowerShell\logs\create_new_OU_Structure.log
+		PS C:\> tail2 C:\scripts\PowerShell\logs\create_new_OU_Structure.log
 
 		Opens the given Log file (C:\scripts\PowerShell\logs\create_new_OU_Structure.log) and shows every new entry until you break it (CTRL + C)
 
@@ -102,8 +170,8 @@ function global:tail {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBA3A0jnrvdTC6odvl1Ne7HRN
-# W6agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWFZGieLrLVFg2K9grXo6k6yN
+# /s6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -246,25 +314,25 @@ function global:tail {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR6DoLAEwUg+r0YaxBp2x04v8n7WzANBgkqhkiG9w0B
-# AQEFAASCAQBg7iLzK/2YnpnHekFwHToVLovP3BuW51XPhvSnPteNH1FUjtlO2F7F
-# bhi4q6DstUc1Ewa1MHQyTT/53KGzydBA5+dLzbVr4h4LZaLCuFZN84YZvDQ1z+L3
-# xyK2Frqi7nItoCSLWqG0rhxNucWnUTpFkco4VZQl4DzrmsQJnQn7tSMuMcdMVbjp
-# mbBfbJb4ntGuHuyK0ITKM//SsG5E8vUdHL8b4RsNKdii3UcsXuC8Cn1x6jnBB3Rm
-# WpRvxFL1LoZY2E+vib/WDjy80AQH6wB9IneTYiVRyGjviVi6k9i+UTki9cw6OBnr
-# cabcJ7S7kb5UQQ9Cc8dP1vyMnTm0NroJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRY+bfy27Qm/pXGXaAcI/ttfgXZsjANBgkqhkiG9w0B
+# AQEFAASCAQBJHsX0Qm00mr9YJ4uBQVDzG1PHfzT3kJPh9cNuVZCJvGk6DTsysutC
+# KOQlBdLXaVzmouQsD4hCwphg1iQ1Rui4Yi9Mw76Xgo+3K+g13tX27FIQoIH3v8KL
+# CCIIkbmAmUq3euL1iMEs+lVXf6gUV3wvm7S+jAUkf2CYv5WrEDLAXqirXb73+gYO
+# q9XVZxJ6fnYMA2G1Q204Lhf36ObaCGhNpE+m19sozOL2ukIYTnJYNPuD7OYdkzcD
+# zve/Hceiu2ulshKweZ31u3tv8/iNRklkBo24QlwNTMokWUdhP1mveatvcNTTkUpJ
+# 0Hb6lJHnunCFgBqQIooFJ32eTawfSEnLoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1OFowIwYJKoZIhvcN
-# AQkEMRYEFD2RD7Rcz2BLJFiPXoMzo335DXaQMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyNDE0MDIyMVowIwYJKoZIhvcN
+# AQkEMRYEFLjkQGlWWJdbc8TkPnmpe++iW/RkMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCHWFWSPT9PjQcxf9V8GE0W1CAsYOFZAYNkU2r3Ru8oEPRe
-# nuqv1t1qOCdtv1DDz0MCBM0mTYjw7WYbYIon+RIa/nJOoPTdjueaCm1D4+QrSNHW
-# 1K3gGowvBFPOEo3mD5wKndPYqWAT4oEUwwoQTXzg3PmMkbqqLkUkQAjrOvwVy1yK
-# r4voD8E5phe6NBxpTEjOYzhCTeP1ZwBSVlsHYQbYoevgYwfHydQQzypeDYSs4vWk
-# 0ojEWtUjP7joahqHWhbwRnhFcVYjEhbeh9+YdkmjLZmmVOJ+GccO5DZ9cEzQOduc
-# BEmpCo04gTML18iWUCl+Iv6WJ5MccArlVOkHeUaG
+# hkiG9w0BAQEFAASCAQAHGcPJKuecTM81F3ZuRTsjL8ugRBFdGE7XJ2SqbZ+EqBAs
+# qzVRJBFxn4n9FCKlxrFRNyOV643lqz/K0LQyENkTpr2FLbDbcv/qVSK9W+S0NwXl
+# K2Wq4YQS+oFA5xnFVxJ4qIp8CNe9bH1QMI984gjxsXwKJZHt035KfloCAyYQnWSk
+# 0SefiBOMOQiyiwrPfwwyuMhdmTOBViz0iEgZBMJF3VH1/pqdG0hCUWIaHhRyXkYH
+# Fdl+dgdU8jjSXnh5vTftOdrwk3NPxe1bSE1AoogAtI3GSpOVwhpxIIZyNpUmf4w3
+# 5bq/AsB4smGxQCYuh26gq/w1q7SbzWwxQd5a+Aid
 # SIG # End signature block
