@@ -100,7 +100,7 @@ function global:Get-TcpPortStatus {
 	# Set the defaults for some stuff
 	if (!($Port)) {
 		# This is the default TCP Port to Check
-		Set-Variable -Name Port -Value $("587")
+		Set-Variable -Name Port -Value $("587" -as ([int] -as [type]))
 	}
 
 	# Server given?
@@ -108,7 +108,7 @@ function global:Get-TcpPortStatus {
 		# Do we know any defaults?
 		if (!($PSEmailServer)) {
 			# We have a default SMTP Server, use it!
-			Set-Variable -Name Server -Value $($PSEmailServer)
+			Set-Variable -Name Server -Value $("$PSEmailServer" -as ([string] -as [type]))
 		} else {
 			# Aw Snap! No Server given on the command line, no Server configured as default... BAD!
 			Write-PoshError -Message "No SMTP Server given, no default configured" -Stop
@@ -153,8 +153,8 @@ function global:Get-TcpPortStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqDjm2o2ZlNZGITgwyQKV3ZIY
-# Y7agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3CS+I5F7BHdngpzQRM6WmpJx
+# 4ZmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -297,25 +297,25 @@ function global:Get-TcpPortStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRKw/fWsXLZqBwG3DwK9tc/RPQkNjANBgkqhkiG9w0B
-# AQEFAASCAQBg+KhKNbh6RMTR6Yoe8rgbA3suNNJdg/ph7SVI/LuRe3N8HEI3+f+2
-# TYZa4ONIR1PJf9IW+ipiTALwrX4uopLPq2EMC3zpymozLkjammWlhls8TJQeoOcS
-# xYQfeESJWNBTiK8AQaR/u0Bx/tVcQXOwbCLiFkaRCg1+3LNao6Dtuj1+HC3ZvDBu
-# cXiFw8z5sflI0p7KpkuHpzUD8OcVaU9K1uaSs1nahfZ9az4HHXXv/vCjAKS8/HjC
-# spEcqT4r/SyfJzkD5PoFtGlMfTc2i/ZqLKdX+0s0Xo7gukxMbiXmBOP3yrcNi9hr
-# X1u5PoBakFxJECKBgaYrgtExXRaXl+jQoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS1y8Q63j/CTr6K1E2+2PXRrsjpWjANBgkqhkiG9w0B
+# AQEFAASCAQAloF2m6vSbQbaGa8jzFI5fO0xy8u5VTlHIuIqN6EJ0PdWbCz6u+LEn
+# nocdHZqS+DtOBrrrKhCVLVwMupE6aNFOgkjmC1YyqQpBSlW9RFXdKHqYsV9WVSgk
+# LeJN6tWFiBQr7UHSONyXNVItJJLnUfHda8PLMu1hTh0N5e7Yb9ugsAlL+DieDY37
+# YZc8Ga9Do8254on0mbXhKAzUjKvABlVD4oEjOzGGjDDDvfnOlN/AscobZWjVvZnc
+# H4TuMXBYDcwRZiiIYsAAPWWWzvKN6Z7pwqJlutil8g/am2lWju9npjqNJHFtCsJl
+# miiS1EE+BHsJeU1OfChafTeh2xpL5yMOoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0MVowIwYJKoZIhvcN
-# AQkEMRYEFIoSVWIO6kZ2NbhUvSVTIWC9/+Y7MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyNDE0MDIwMVowIwYJKoZIhvcN
+# AQkEMRYEFGTmqgf9Mn9hRwVyNipeniS8LUWLMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAi4O1o+3oDWrqoEJfyGd3DFMqv05PYixSz/hK4ilW1naHT
-# Yd9T7zUPDhe8ao/UIHKU/jtVmChcdzgvuxKYHAqrNePOEXYFjPrcrHeyz/TLP0t6
-# aQMjA1nFKyFN5Jg1X0vnx1aDKvX0joKRFNSag28TRXrGv6m5YZ0xzG+P6Y0czLEa
-# SJQHiGObuBzGu9Mjj6RZ/nV2j0D/+CnpJnm9IZkCNPPLOjFT7jUnqJVIQ0gQ9mOR
-# WyYMTm9MNiLb6lW2LqxLZFI8QDTeylO2Mno1DdZb5SNhDCF2htxg0zGkYHacBVYX
-# DoaGfToMfkOhZATgxIecxePuMaFxPYGKFEcL0zp2
+# hkiG9w0BAQEFAASCAQBOE52hGfGea2TrKQSAMrp4IycxFnWvzJ6baaiwzPDfJBS2
+# 634HAhilWx7AtFOdR2E6RBZfd/rIh4ewv8pvUf5JhSIgzVUlTgZumbqT1MXWitEE
+# xQQsEJkWwp9wn39C9ipZeqZkrtHR6J1zD4Kz4HtcRXcPlTPIw/PcIeseulfq38sR
+# tJskvE4iTBrh7iCivia2liVZHItL2BniJu3QcCbwYz/b+mBqSjqa7Fm7SAmmnK4M
+# KoMaVDa6zDTawgjwSAwbCyRlCpEXeQbgKBFSJ4243q073igTqD3HBcgMOIl6uTuC
+# 8EZmPd/++fN3lO8zRoZ2glO6p5ewQ51Eerp4vxyT
 # SIG # End signature block
