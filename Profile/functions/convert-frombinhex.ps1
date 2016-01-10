@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function global:ConvertFrom-binhex {
 <#
 	.SYNOPSIS
@@ -73,20 +77,26 @@ function global:ConvertFrom-binhex {
 		$binhex
 	)
 
-	# Define a default
-	Set-Variable -Name arr -Value $(new-object byte[] ($binhex.Length/2))
-
-	# Loop over the given string
-	for ($i = 0; $i -lt $arr.Length; $i++) {
-		$arr[$i] = [Convert]::ToByte($binhex.substring($i * 2, 2), 16)
+	BEGIN {
+		# Define a default
+		Set-Variable -Name arr -Value $(new-object byte[] ($binhex.Length/2))
 	}
 
-	# Return the new value
-	return $arr
+	PROCESS {
+		# Loop over the given string
+		for ($i = 0; $i -lt $arr.Length; $i++) {
+			$arr[$i] = [Convert]::ToByte($binhex.substring($i * 2, 2), 16)
+		}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+		# Return the new value
+		return $arr
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
@@ -96,8 +106,8 @@ function global:ConvertFrom-binhex {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQOaoB6+7LysQOEZNLE1GAOel
-# LwygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbidq7kYT1xtIPh1KMdaF6eVK
+# c3ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -240,25 +250,25 @@ function global:ConvertFrom-binhex {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRlScxF+xxaQ2dBk8z5rRr/+BIwjzANBgkqhkiG9w0B
-# AQEFAASCAQBYH850c1Xn3Nb+UcpwTUstUuZe+NLrx6JkVl3Tv/E5ajbHKRJh49bx
-# IT2Q8COg4Tm88WdRAegg5umkvQnkg8nLTH4MQSzCzWFOmmsvpAHTYzU2Uu1OESAu
-# 8M9LHkS8KGe9e+FiGP3D2LK0nHyUWqcmiAxpUJqA68SW3e5fVz+WFlH+R8pUFggU
-# srVTOrEdZ0XQGpeStPkcOSq3C1HvQ7KC25Uk65JUERAVDYXmn16oNah6u/o/mOxR
-# Xjf3//P5otMHtboUHh1AM0D5KWOJRtnmHpsYaIk6C7jRiJMMLR0TniNqL4crRblv
-# vIiyuUmCEnbdMV07GNzRfwMSxFVUovLyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSI/8d5vY6RkODFanoY1y7PKF7jCjANBgkqhkiG9w0B
+# AQEFAASCAQCTBs+R4u65Edj19Nb09D/D3bKYLFQx7ZdZvJnaFmYWxaNm3ki41oC3
+# i0Gg5aexpKl5kBC1n92QEDeR+RzKj4H2C4fq6jfFsHIHvIS6ZKEpkZTQnFTyg5Tg
+# lhepId2sFBIsj6lcSah5PPTI84xhcPlJXI67uym67Mm8jCGJsdpzIIguXCRU3hAe
+# U1QguWzffpWisyqLLkZ2AN3VV7YazhujHZbHfvCpSTYTP2hZwhyxVFLKYF++Srf3
+# 1EXAzujUa7OxvpUnRnC7He5yy3v3vXeojifvEZGcDbAERho35v1f2ANGGSgacbDz
+# KTHIbYwsxA93QotFH3FUE0cmRyBVLkCFoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0MVowIwYJKoZIhvcN
-# AQkEMRYEFG2wue+bxzBS2iHmW+83xFr0sDRiMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExOFowIwYJKoZIhvcN
+# AQkEMRYEFL+19rp/8pgAM1zVdAXgmpTuhVC6MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBSJbGuH2VBDJRKRi4jqPtxrNWcKvoOzX3nqr7D/15L+cfb
-# nI4iwma16NSZ/GLJxqG7dnl6mt5aAKXoHjRuzPCMJr9yJ2Zws1OL5bfF3EfxzeNp
-# 6tBKi+Oow76+Kp1dAeW77RCfRzk5UbWjTSfE80yt9k0ransc8FJG3+vzOnFjLjxC
-# a1YuNMID5yaVMg+yXQFTms0sP5//9CZoMSkz/S+LnXlJdwssXMvcK9FvIIbd6Ux/
-# pG7x3Chn78fVzcdeg5FbJPHzlvT3O8LlzDhjk4lrQy4uO1U4qHP55PwUz4KlkzBE
-# Bv/zKzJNhvC47zEmKJ9VipVH3kFG6OA/4hjAxgTM
+# hkiG9w0BAQEFAASCAQBx03gNBDc22vGz6Jnyns+ByUlLVl8QiE57+LIwqdM8GYXZ
+# VxnmuXwwEmJBTxGUt2flKKp9YpobQ1uZEzL77VdkzVrO3JkWUYR2oraXYnuBDO/X
+# ORTv8i9FejQIwt0iUxj8WaMZ45LSAfXmbZelrAJcA/jZ8rgQFT5WwdfaIQnekREU
+# ynF5tY/tti/VJnddfe/fvCvjwmG1yGvcyqgE+Wd3Xgf0bnVji6EYJg7itO3bZTnY
+# 3FWhUuNpkaTcgWdnn0L+S5BJ1jGZLZ66AChjNI4Ta4yEtvDZHwt5czjT/s/uN0HB
+# GrBVEpN2Y4ZhAyuGYSzDiFKwHZJhtQm8eZST5Cxq
 # SIG # End signature block

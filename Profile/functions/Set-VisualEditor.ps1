@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function global:Set-VisualEditor {
 <#
 	.SYNOPSIS
@@ -60,30 +64,38 @@ function global:Set-VisualEditor {
 				   SupportsShouldProcess = $true)]
 	param ()
 
-	# Do we have the Sublime Editor installed?
-	Set-Variable -Name SublimeText -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "Sublime*") "Sublime_text*");)
-
-	# Check if the GNU licensed Note++ is installed
-	Set-Variable -Name NotepadPlusPlus -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "notepad*") "notepad*");)
-
-	# Do we have it?
-	(resolve-path "${env:ProgramFiles(x86)}\Notepad++\notepad++.exe" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue)
-
-	# What Editor to use?
-	if ($SublimeText -ne $null -and (test-path $SublimeText)) {
-		# We have Sublime Editor installed, so we use it
-		Set-Variable -Name VisualEditor -Scope:Global -Value $($SublimeText.Path)
-	} elseif ($NotepadPlusPlus -ne $null -and (test-path $NotepadPlusPlus)) {
-		# We have Notepad++ installed, Sublime Editor is not here... use Notepad++
-		Set-Variable -Name VisualEditor -Scope:Global -Value $($NotepadPlusPlus.Path)
-	} else {
-		# No fancy editor, so we use ISE instead
-		Set-Variable -Name VisualEditor -Scope:Global -Value $("PowerShell_ISE.exe")
+	BEGIN {
+		#
 	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	PROCESS {
+		# Do we have the Sublime Editor installed?
+		Set-Variable -Name SublimeText -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "Sublime*") "Sublime_text*");)
+
+		# Check if the GNU licensed Note++ is installed
+		Set-Variable -Name NotepadPlusPlus -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "notepad*") "notepad*");)
+
+		# Do we have it?
+		(resolve-path "${env:ProgramFiles(x86)}\Notepad++\notepad++.exe" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue)
+
+		# What Editor to use?
+		if ($SublimeText -ne $null -and (test-path $SublimeText)) {
+			# We have Sublime Editor installed, so we use it
+			Set-Variable -Name VisualEditor -Scope:Global -Value $($SublimeText.Path)
+		} elseif ($NotepadPlusPlus -ne $null -and (test-path $NotepadPlusPlus)) {
+			# We have Notepad++ installed, Sublime Editor is not here... use Notepad++
+			Set-Variable -Name VisualEditor -Scope:Global -Value $($NotepadPlusPlus.Path)
+		} else {
+			# No fancy editor, so we use ISE instead
+			Set-Variable -Name VisualEditor -Scope:Global -Value $("PowerShell_ISE.exe")
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
@@ -93,8 +105,8 @@ Set-VisualEditor
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFoGED+Hql7AA1KHMaCrfOcPk
-# mjKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFMMJniiSpbvvtKSrPJMpYCPj
+# 4l2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -237,25 +249,25 @@ Set-VisualEditor
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQEyESLG1kGLZjvjhh/qQKt+LzOFDANBgkqhkiG9w0B
-# AQEFAASCAQBqUqWubVRi+oimT9MTaK+u/DURcThQBRmOm+L7lrWUdAl06nQkGlzZ
-# E1guLjtwdEUh3hv3oy0P5aDz93NQQuSCkLpHZfoOSnrE+GA1DvQr4cmGBuHsMAXS
-# r6qO4CRPcLxvVNnMNlbzsW8YOdZuT6Ek2UtntN1Cia0KQoiE72zExOFJPdqLxuG1
-# bKDlUuVmZHqE3gkFukSDBviYRrb6Gf53pWrMn9LKAUb8lTxnOn0rq439dS+c/CKX
-# OKLWFb3rk4TMs/2Jh0caW1MXPNLYat4x2OW9bGLPS1miLLRbqgNh/VzN+NdXhchW
-# ACKUKMm2Xt4qcqXRtuPkZy///+sXz1gBoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRCv7NMwbcY0nXYpsjgw0PU5rejVDANBgkqhkiG9w0B
+# AQEFAASCAQAEMJjmGFUzU6+fPcQGzpA+54ko961Q7jCtKzPryUGx4usTIaWa2yDP
+# /cOEvTUq7a9TzVipie5zc3TyXoh3k9RX/F64DQ2wQ/76cHQeASUGqY54Pldlbmof
+# SbtjNAqZtOZf49C0WQEjGdokhllUlFGovweFel59xXI93SpiIbdtdiZHWnyN8vpl
+# /Eo4suSZB+OgXiC2xI4jo2eOrDilnVOkbZtioVhy0ScBfoNzJqEi9emUHjjVKALn
+# /GzilV9KxyoY24XkLOcrRln+MnMflJ9QQgk48mP+nweM907Nrynjr2AzlP+csLhF
+# 8y3VYqEUxiveP7fz3asMC98m2km4x3scoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1N1owIwYJKoZIhvcN
-# AQkEMRYEFKpnK2NWII9mrzdTDFnPiklsKGvAMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzN1owIwYJKoZIhvcN
+# AQkEMRYEFGpR5AdEq25C4sTbYFkWggpJlchsMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBWFkdMVEbgAaZ+gHvORuakT0APKaO5yqQZ6+9m+fxDfT1a
-# gcNT40jGgFz3VaG/JKfbfTbr+LKwZXXqQRiCZ9+YbmScYE1Lz/7vmV5+eqZ6bYyv
-# mMF6dtMcNX9HZmzKWV2vdLLXRRXPYRYxA4slWtOrdPXrELbsuiDDxZq8L0McnAud
-# fuuhrY2YFJ6/y5olzV6UJu4QvnuJRMWDjINV0oRzb3LKciPn6wbGF40ToamMF/CC
-# W3yVkWJvqS9Jzx6yKKBqFDsz1sQ4U3YHU6nH9+bhrz7pO7el5pE9TItNp5dLyvhp
-# U2CWmsVYja8innbVfmYu3FI5PTY8ZJ11/s6elUk/
+# hkiG9w0BAQEFAASCAQCIBcThAVzrqvYZzht1lSH4vF6yYaUD7WP6KNzRwFSkZFQy
+# ec8sXY1kaoHJhr6SdZgOjFOFN0iIb7QwQKe1mlTfstSqwM2HR2Tb58xLxN8zevZI
+# mKiyiAXr5Tdwc4vVhUivA6qBlrmBX6/q01Wwl1sOVtQi6zam7HJU/VCQ8s0YIwWM
+# eW+XMQazmxDhmiqqo6Hulx5Wt65u+mYJ1UOrFiPH26I8CSvVHQg5AHByvA+pgxLh
+# bNK3KxNvf8KjKTGljKGtqDTaQrjMKd+rAeOmPeB8N+fMwprbItJiM2iW7EdXUm7u
+# PE4M34BhtkWhH7Ybj2xzmqRhV4vMmkX2PKZ6ZB+s
 # SIG # End signature block

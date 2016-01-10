@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 <#
 	Simple Functions to save and restore PowerShell session information
@@ -85,12 +89,16 @@ function global:get-sessionfile {
 		$sessionName
 	)
 
-	# DUMP
-	return "$([io.path]::GetTempPath())$sessionName";
+	PROCESS {
+		# DUMP
+		return "$([io.path]::GetTempPath())$sessionName";
+	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
@@ -207,8 +215,8 @@ function global:import-session {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUy4BAXt7bNu4rcs3TADaVfSYG
-# VOigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqMHJw6qN8UM+bUFDrUHEOp8e
+# z5ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -351,25 +359,25 @@ function global:import-session {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQoQSDINtMOYsazRPEQJy/pvZghcjANBgkqhkiG9w0B
-# AQEFAASCAQCVrGzhHIV0QL6WqfP02OgST74zEWs3oszwcrkObYEVEQQe6pje9r4J
-# VzrmGfwMIDLLBDudy33MDMwYFDK7JlqXn+7kH+1Tfd/oOG+t19ZKNSM4uW/wi+ny
-# 6Y1oG4j1ePM6sCOf/UckSGvycMHLQhQuHBC4KNeQhLKL60R4Fn6FqYrSj98+yByP
-# aJwxbPJQkZFNhiMTC9hSKujkYULFTLaRn/oWxlwjULL0yYXVoSDZwM/p4uwcrEaH
-# C9FjYzQk/0hejdN7J84MicHJC8n+H/g4ckRHkZ7Pj4ZEPFo+WoU11e0PDyrUzhUo
-# rmQ7edThs37Fe0+EaYENm9E3EJ7IiOmYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQZGQCCmwKJZ/xdI1387vF27KoBdzANBgkqhkiG9w0B
+# AQEFAASCAQBMau3QFrYEEya4ZfVYthNfLsdzP/egdcSnkRsqDEaRHNGkVMOxOp6u
+# bjmCGmk5u6z3TmYNo1MsApfdSZzugE6OLrFq0u/x1Pag6rc8RH0x2OTApXCo1P6x
+# zVXm9AZCBqHtfewxAKfRY97nJbs8nUT7ui95awHehZLNpgO/2MbukknNJVrDUPsV
+# FzljpizxZUWK0GvrxHyEEdKvzwnEjGKV0VWWHL7x7Ur6FG7tmUCzXnGzAW/J3J5Y
+# ZAdaAR5VXBFP2gkV00/3wmCTZcDDu/HQRSGm/45sfSy64yl1im2oKB6dD0sFQPCf
+# 0NDnWmA920Tl3pWRwm8Ajz8/sMv/WMPwoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1NVowIwYJKoZIhvcN
-# AQkEMRYEFBCGmy048NyOIuZUYd4aoWmtgkTAMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzNFowIwYJKoZIhvcN
+# AQkEMRYEFAOKzHpos1M8PLeV3LBne3G8Obo2MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA0UnCyRYzqfEv4hfoUsc+Rt0/ZZcG/sizOG03x+dLv4AWk
-# d4+/wTuxtlU7im5c7VyVklZ3C/puEDTakXj4NAIF9n7YdZrQuY1srpR94zSN+jVX
-# l4eQGDZfYdL0GDLs9xjaXQg0kGahb67+3bvZQ5w0aFsl2qWEEjuzB/fDBMpM/Llj
-# HkiPerWw1OakXx+UOFR1MtRie7LgyLiTCSHlQG5qWKzViFno4JZTYVtcnKm0zgVf
-# filcNkzsjYsFku+EX6f9Nc5BjwMYZkJH1r9gZcwTmA5leDA6fTFsyqeRbcPRBWsB
-# /kyI05xRr754YY56KFY+2ELScxV8I5UPIcDjKu7A
+# hkiG9w0BAQEFAASCAQCXum6pLKYAHAkTsfWHhbWAXy6dQROkBF0+HKWREKYrxLq5
+# JBetf9aHQdx/n7CCpQlA2zpbjI9ha0w8Z6B4hJbGXt5DuY1Yg1Qb7eJkaZnPhjdL
+# 4H2IrWHIuT7yS70rgONhNrXksKbwkqHLeko/L4tWyQiY+j/bE79N9gbAYf43enmh
+# AvV6m6pukQO15kHT44YWwwbsRHg5X7OT08b5z4FhLLXNjsPBIEb60jgf1Ixapf/w
+# CeHWbvAOuGOMravj9cB48km9j4ai7UO74jmkqiboPeN+q+tIztQstQSPh2qWQ/Hw
+# iaMfL3XVWzIdsQJ1xAGAfXZNG2TkliEG0ygrRz4A
 # SIG # End signature block

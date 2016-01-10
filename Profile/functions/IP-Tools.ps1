@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function global:Convert-IPtoDecimal {
 <#
@@ -101,6 +105,7 @@ function global:Convert-IPtoDecimal {
 	BEGIN {
 		# Dummy block - We so nothing here
 	}
+
 	PROCESS {
 		# OK make sure the we have a string here!
 		# Then we split everthing based on the DOTs.
@@ -121,9 +126,10 @@ function global:Convert-IPtoDecimal {
 			)
 		})
 	}
+
 	END {
 		# Dump the info to the console
-		$Object
+		Write-Output $Object
 	}
 }
 
@@ -171,19 +177,18 @@ function global:Check-IPaddress {
 		$IPAddress
 	)
 
-	BEGIN
-	{
-		# Dummy block - We so nothing here
+	BEGIN {
+		#
 	}
-	PROCESS
-	{
+
+	PROCESS {
 		# Use the .NET Call to figure out if the given address is valid or not.
 		Set-Variable -Name "IsValid" -Scope:Script -Value $(($IPAddress -As [IPAddress]) -As [Bool])
 	}
-	END
-	{
+
+	END {
 		# Dump the bool value to the console
-		$IsValid
+		Write-Output $IsValid
 	}
 }
 
@@ -228,43 +233,45 @@ function global:Get-NtpTime {
 		$Server = 'de.pool.ntp.org'
 	)
 
-	# Construct client NTP time packet to send to specified server
-	# (Request Header: [00=No Leap Warning; 011=Version 3; 011=Client Mode]; 00011011 = 0x1B)
-	[Byte[]]$NtpData =, 0 * 48
-	$NtpData[0] = 0x1B
+	PROCESS {
+		# Construct client NTP time packet to send to specified server
+		# (Request Header: [00=No Leap Warning; 011=Version 3; 011=Client Mode]; 00011011 = 0x1B)
+		[Byte[]]$NtpData =, 0 * 48
+		$NtpData[0] = 0x1B
 
-	# Create the connection
-	$Socket = New-Object Net.Sockets.Socket([Net.Sockets.AddressFamily]::InterNetwork, [Net.Sockets.SocketType]::Dgram, [Net.Sockets.ProtocolType]::Udp)
+		# Create the connection
+		$Socket = New-Object Net.Sockets.Socket([Net.Sockets.AddressFamily]::InterNetwork, [Net.Sockets.SocketType]::Dgram, [Net.Sockets.ProtocolType]::Udp)
 
-	# Configure the connection
-	$Socket.Connect($Server, 123)
-	[Void]$Socket.Send($NtpData)
+		# Configure the connection
+		$Socket.Connect($Server, 123)
+		[Void]$Socket.Send($NtpData)
 
-	# Returns length – should be 48
-	[Void]$Socket.Receive($NtpData)
+		# Returns length – should be 48
+		[Void]$Socket.Receive($NtpData)
 
-	# Close the connection
-	$Socket.Close()
+		# Close the connection
+		$Socket.Close()
 
-	<#
-		Decode the received NTP time packet
+		<#
+			Decode the received NTP time packet
 
-		We now have the 64-bit NTP time in the last 8 bytes of the received data.
-		The NTP time is the number of seconds since 1/1/1900 and is split into an
-		integer part (top 32 bits) and a fractional part, multipled by 2^32, in the
-		bottom 32 bits.
-	#>
+			We now have the 64-bit NTP time in the last 8 bytes of the received data.
+			The NTP time is the number of seconds since 1/1/1900 and is split into an
+			integer part (top 32 bits) and a fractional part, multipled by 2^32, in the
+			bottom 32 bits.
+		#>
 
-	# Convert Integer and Fractional parts of 64-bit NTP time from byte array
-	$IntPart = 0; Foreach ($Byte in $NtpData[40..43]) { $IntPart = $IntPart * 256 + $Byte }
-	$FracPart = 0; Foreach ($Byte in $NtpData[44..47]) { $FracPart = $FracPart * 256 + $Byte }
+		# Convert Integer and Fractional parts of 64-bit NTP time from byte array
+		$IntPart = 0; Foreach ($Byte in $NtpData[40..43]) { $IntPart = $IntPart * 256 + $Byte }
+		$FracPart = 0; Foreach ($Byte in $NtpData[44..47]) { $FracPart = $FracPart * 256 + $Byte }
 
-	# Convert to Millseconds (convert fractional part by dividing value by 2^32)
-	[UInt64]$Milliseconds = $IntPart * 1000 + ($FracPart * 1000 / 0x100000000)
+		# Convert to Millseconds (convert fractional part by dividing value by 2^32)
+		[UInt64]$Milliseconds = $IntPart * 1000 + ($FracPart * 1000 / 0x100000000)
 
-	# Create UTC date of 1 Jan 1900,
-	# add the NTP offset and convert result to local time
-	(New-Object DateTime(1900, 1, 1, 0, 0, 0, [DateTimeKind]::Utc)).AddMilliseconds($Milliseconds).ToLocalTime()
+		# Create UTC date of 1 Jan 1900,
+		# add the NTP offset and convert result to local time
+		(New-Object DateTime(1900, 1, 1, 0, 0, 0, [DateTimeKind]::Utc)).AddMilliseconds($Milliseconds).ToLocalTime()
+	}
 }
 # Set a compatibility Alias
 (set-alias Get-AtomicTime Get-NtpTime -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
@@ -272,8 +279,8 @@ function global:Get-NtpTime {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURVOyeb/VtJ7lR9G4DznZ5D7S
-# yqygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUib3VHiBi6Ca56BYAWLr9iVqJ
+# 2z2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -416,25 +423,25 @@ function global:Get-NtpTime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTBI9NYLQKQbVfiPD2AWhFuwsxlqDANBgkqhkiG9w0B
-# AQEFAASCAQAno5/9S6qFiDRB0tYLr/rEFZ2kiYLTimp4RQgS4XUVDhHMp7mzxgK0
-# vXSNn8jjjERhGV7xuF2Cn99lsmHTXWvd1s8KswrKmAtA/DRJ4voPx4XqMrPP5ScU
-# SzpMMVT9qDI23UdEaxRJOtnZIqj8/GfR5/TYA/jOlwPee9lVO/wfrA9zzlVAdtrd
-# ClhretvgWx9T4jlXO6emq2WVj7As9oGSTdMLkA3LUlHyNYDjOGu1+gh0rOJPqtzF
-# M5sLmovoDKsZmPjGvzTKP64tKhDV8chNgfRBmlMxnEaDR9RgdXWYZ9khRu8wAdxR
-# 7oTAy5y0xjGWpYLxBnyeoxLP+jp2E7IdoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTG6JNMcLnMFfB6xwmAWyYxze0E9DANBgkqhkiG9w0B
+# AQEFAASCAQAs51WuTWOmCg9TQYeT+ZHX96K3cERCAwtjiWJGUb4oB3+c3logTcgW
+# OFGnPenu8YSwy5oBBGFFxEz2t0NKrG2DktfeiFJ6V2i7d80pvTq6F19BnfJ0QR34
+# pFUoE5kZ0DGKwCsm3Z4RynocmhIAxg0EmY8Xd5tAiyktO1uUZzQ46XohqiFGF6k/
+# 2YXaoAr7BmsE+d0n6YYmxs+AK8Tzbav8P1/DY0wthI+XbFWWB+JVhR5VDU/CvZIq
+# /fH6NQes6qvO0Ety2/8e/Qyk9cPx9fvUfKNKaJU3Qcw/3pw2oxHW8NnKbvJcPqhz
+# x/Uj1C/2XChOJX1ZqRjJOlBIddkbh+f4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1MVowIwYJKoZIhvcN
-# AQkEMRYEFC1os7eJYSHNnoKIvCp/8gtfAvuKMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMFowIwYJKoZIhvcN
+# AQkEMRYEFKQjFoFhnudGjg1Ynqn0LqMQvJWsMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCJh7llnGlmYC/fKKzy4EHl0olyFGynZ/toDdP6hkKpFXYl
-# zV/ojSYsnEVKzbJRxcZrcY4RQqbTOXDtiIs1gmUNLtHMDI86ul7LQtdbQ3NluDZl
-# zrzTCHhVhEGGwSleZSQaQlc9oha+D51Kxyn8WCF9clNopGomU4VLOaS9xonc1+ha
-# as+kFwc0ukAWEvEeTuAzpGGGPzoRCDH3V+QUaQ+L5B6RAkax3SZxZUaGjesduZ7Q
-# OEj0VnvMv/+7lEPbYHuI26vbT5dvZBOVVBwLeyVNF6Av8BOtyAHaIG6W+XDWMSfy
-# jJs063BmcLX6Ph2Bbv1mNJ6nvpazcZq+wlUUAt5o
+# hkiG9w0BAQEFAASCAQClzCCzqXEJX0lUjSq3deONX4IJoGC6Zu5V8QVNZ3LXnuMm
+# 4itadmlpSQZ855xyQb8NnlsU3lQjavuWc8nTPzzs+nb4f7Nw6cgmA4Ac4nangNeg
+# Mv0oZp0os2sarD1tNwr3Grd1g2HSJaIo+adcDmi6yX/ZQPhEmy2ALwkqyGen9Rce
+# a93VBEtvFU25T/XiaRirI6VT9Xxo0G15jWdV32qwR4Sfyz9kfyjvhEuZ5TSQcZ6v
+# j6MIae8vVSS2BbGj5GjELWVHFgEpVKusUH7nFtpRachzkxfXyl9opXNmfVwmHJWj
+# i74bYMdNiTCe959zqcfnhhnkTQHTXfJBUoXsIuhM
 # SIG # End signature block

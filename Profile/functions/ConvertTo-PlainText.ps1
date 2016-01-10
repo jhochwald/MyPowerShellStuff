@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function global:ConvertTo-PlainText {
 <#
 	.SYNOPSIS
@@ -72,25 +76,31 @@ function global:ConvertTo-PlainText {
 		$secure
 	)
 
-	# Define the Marshal Variable
-	# We use the native .NET Call to do so!
-	$marshal = [Runtime.InteropServices.Marshal];
+	BEGIN {
+		# Define the Marshal Variable
+		# We use the native .NET Call to do so!
+		$marshal = [Runtime.InteropServices.Marshal];
+	}
 
-	# Return what we have
-	# We use the native .NET Call to do so!
-	return $marshal::PtrToStringAuto($marshal::SecureStringToBSTR($secure));
+	PROCESS {
+		# Return what we have
+		# We use the native .NET Call to do so!
+		return $marshal::PtrToStringAuto($marshal::SecureStringToBSTR($secure));
+	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7xnYNdGIGczDE2yZkENlYeF1
-# Z3GgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2c0tqP9yoUbTpM1EFoZxaEse
+# YySgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -233,25 +243,25 @@ function global:ConvertTo-PlainText {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQj3VOx49zWKAoFHmfi0fUGYqXafzANBgkqhkiG9w0B
-# AQEFAASCAQAMoHmDco7ilWk3OhEQzAiK4QrEYIGcJpX8W+nSdz8ljth54YOzNnzw
-# TpTYoJLm4NrLn/iw8bo6QYk6lbYmTANUVfJucEWxaosc+/5uNx0WpXmHvBvK+I6B
-# HuLLzBRMGjBNW1SNZAP732oIAD78aLQEFGHYi0Tc2HHFAG6+0GBzYXPh8XV6Wh9g
-# YbbkjdITBWyXcKASYsHa7gDn7G2dGAoZZ+CHBdZMOZwQRSZSVkLM1wSS+cLrjFax
-# O7Tjq7dMlwW+S0T2JET1k8nqDI7LL42+ugVisFmgPsdxAI1QDu80DnIsM8xv/hwh
-# wJ/nJ6sO70vTjwgM50YpTdcOtqqNze1IoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTjvjOi3Zt3/r+ZjMcp8sBoU+wPSDANBgkqhkiG9w0B
+# AQEFAASCAQCQi0HFqlhbrzurG+ljFjrqYxoUHAjq7tK32MLfu6DIGvCZDJnEBwTo
+# sP2ys8hi2gK5IKVWNckqTFns/E6Qetv3vZagCQip0eeZRKi6lJUlUWckT6aJNxGT
+# D98Ep4o4oIAThVXCnhQlhvm/f3plJvHqNQe6VoII61rpI1aa52BE19yu1cmGp8fO
+# ZyEDdkIdfKqultq0OxHemztbQSy20t6RT2r4V1vDVz/zrueok2w2xUkmertVC2+W
+# dauta9vI7qfO8D3O+9UEPAFUXhy3s3XGbE1uW2G9/e7BiUe6nFMyFPe/Lxs6dmF6
+# U0ENKBVneRP1LrZB/dElwfVlzo/7nu6xoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0M1owIwYJKoZIhvcN
-# AQkEMRYEFHsW2YjRGbUGgybOfBTOpYi0/H+KMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyMFowIwYJKoZIhvcN
+# AQkEMRYEFPI2Xvy7qbL0uC8Sx4gl5HoVKQ/lMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAfw7xq8c9nWqb7tPZ/A5/57xup2g1SWTP5xw/wQKOvWHTp
-# oRZ3RpV/evgju9KJJ1UsNui5Cn4UrkFgqjkB5KTGU6f0TAKVpAWIp+ihT+zs4f7Q
-# qlZQC4BUXpXTT44fSrpSbutzrqhlUPCyHzR91dUM7GxESha6t+ep6tfkSK96z1py
-# tlZJSgaIedReJBJljg32390uJ9IHyGqPf0U4FJUO18qVQYc01MYwbjMTsmO4lCRl
-# oKcoPzff96h73mkZ5kEMD4jQlaMJ1SH3CxfqsH6bKhRHS6JqxIocYr0qX/f2u7Bv
-# 3JNSBfeI78B/YUR2fbyDFdYpVa8soVP1x8FoqjsZ
+# hkiG9w0BAQEFAASCAQCVENK6ti2Wqw7Xu93IEh1kI/aItm9jRvfvVMUCv1H1g1Cm
+# JokyekprqLjMhmbMBTWX3BwzSqMc5hPVqbTbNP59dmEUdwH20eWI0gr6r4qE0bSm
+# pH5xjfTHukA0Du9Qhf9qy9lM7eam+7fPaz/+AqX5N3lLBuMLc3OMPsXOpuwgOhzW
+# RcFwvVNWGwy/6am36yCdkgZ5O+Xkw0VkTbLaAMw/6+Cw+E7t6IHW3fYGd2PMoY53
+# 3UcybOoxTOMuc0fHyYw8gFv5netbjXRfZzk5Sg8l5Uc/0GNYberVvRyXx+dijicg
+# 5zBPC1faWW0wLU4Q8sNeRUgTLLYXIbTi8fnYA3lF
 # SIG # End signature block

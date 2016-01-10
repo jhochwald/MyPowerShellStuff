@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 
 # Make Powershell more Uni* like
 function global:Load-Test {
@@ -65,38 +69,39 @@ function global:Load-Test {
 				   SupportsShouldProcess = $true)]
 	param ()
 
-	# Lets check if the Pester PowerShell Module is installed
-	if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-		try {
-			#Make sure we remove the Pester Module (if loaded)
-			Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+	PROCESS {
+		# Lets check if the Pester PowerShell Module is installed
+		if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
+			try {
+				#Make sure we remove the Pester Module (if loaded)
+				Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 
-			# Import the Pester PowerShell Module in the Global context
-			Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-		} catch {
+				# Import the Pester PowerShell Module in the Global context
+				Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+			} catch {
+				# Sorry, Pester PowerShell Module is not here!!!
+				Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
+
+				# Still here? Make sure we are done!
+				break
+
+				# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
+				exit 1
+			}
+		} else {
 			# Sorry, Pester PowerShell Module is not here!!!
-			Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
-
-			# Still here? Make sure we are done!
-			break
-
-			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-			exit 1
+			Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
 		}
-	} else {
-		# Sorry, Pester PowerShell Module is not here!!!
-		Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
 	}
 }
-
 # Set a compatibility Alias
 (set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTjWatWXuKI9uToCjtldsff3q
-# DDSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0I54cjQIVYEbxckUIpzCHNDj
+# Ij6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -239,25 +244,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTMg2aVz8wvYqqqOkAhuKufkh4f2TANBgkqhkiG9w0B
-# AQEFAASCAQBhYCO4GbB74tBmpDkTJ5hRW6S2+imWpIvX/3Fug0HV84oRc3sJCDjS
-# U4lQFcWvlo7WolUknsdOescElV0Hk2g/kebuDhvmdWNxj1Zl51ldXborxkeLkxQ6
-# 5VB59BHh2F67xjjsLr/rasCwgJr4PEFAeE03oJYrtuoSaV71/ofrBff+TJmXdxvd
-# sVBZS4QCw4gKhHFM+hK9vNibKnltNv/PZcc0U+hg9/+jLtrJqO2GrXGr/xDETpN7
-# KubIQqDZVgAI5baiRhnDCHzSoE+djcIWbODJdYnSI4otfsb4+IicxOTxfTlhG1BW
-# TQ5EFc6h+qtj2r51OtZP1J+N4a0+AMEIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSllqhdh5arfBJFD/yAaH8ltaNlWTANBgkqhkiG9w0B
+# AQEFAASCAQB/jq1xMQJ7YcHX1NTEKuYd/VQxoCwKpZBpl4zCgqFmFwNjZcIHz7vA
+# QyHSlGCYlsa7tH7VUq/OB6et6DUjao3QXFyOhzWNuzPHcdU0pD1PYWP9A/9d6hln
+# Fl3oh9SUAfiameNvbK3Dt/wK/BrQYOQkT2A1qhO4yHZQe6501bdCX0V4OoEZFh7h
+# 4FLMURL+BaywEsyX4DWaxqIAf/K68IVHyFUwg6HFk/0FK5mWKSJc3ojx5wEI0JPx
+# amoo5Z6ved6SuAyP1S1kHGMRxEguBfXW6gv+XtHz9W4pZ9GDV5w5ONkUTNsX/olm
+# yoJkHqcCqnR20zXKM5uScYwWrqKCSnH0oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1M1owIwYJKoZIhvcN
-# AQkEMRYEFHBcP1ajdhBqAwCcvhGpvUia/rCaMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMVowIwYJKoZIhvcN
+# AQkEMRYEFGZRmeAmryR+1pKy2FidHAGcrLYiMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB6cSGFifdQ8724X9ewUnhsEV/N6zla3BOhHFPRfNfmW32S
-# SVGB62VBFhDu1JXsR87FNIwkOyaFBBjMNYyys6n9qmdea5PSqUqYGAEc7dkXCeNy
-# w7E2bt0SQuJ5bcjRPeeg3fgdnQ0y8JUXZbVamCkbT4VIAjXSXdkliZ5nqriatOJr
-# Nr5thVM3B/RdlAA4zf1LzVVXKh42Gx7kOWNjX3fvU2Ziwn3CajuyrKPLnXKCA2Q6
-# kKegLfklPr/CypOkV28ejRAz8PtaVfOxanloyHrnExYsd5nK61L+jxbI9xlXVpzh
-# DzVAyOi8qyG+h5Qt9r7Ny/a++DevGlbhq61cAb/e
+# hkiG9w0BAQEFAASCAQA68pxFU9z5u2dxVVN5dtYoPZ5YHLjXrjWrPDDywECpSlOs
+# i80Gv9NwMdaIGB6DyYL6ZCzCdsWe02kICXpzsNQK+kQ7vI88uxiyPl11SWU52pp3
+# QibMmqxXXA/urGEZZ/ATfXG/xn+w3TIPKDBe6XXpTmctmkSducWnysB+LJR/Lo7G
+# bFyL44371Wwlf0l/61RE9fxtTx20F3735rHsfTvIG3sCOtcjprDxQs6SZblOW76C
+# dUtuKey19rKeukMt8+wQHrEsdT+SA0cdUKtl/BiMGYeI6yxNwqOFs6W1yCLQfnXQ
+# 0o7jUm40c5BUkMvM/MSccvaQ2MN4tviBOVIFeRuN
 # SIG # End signature block

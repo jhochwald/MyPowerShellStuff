@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function global:tail {
 <#
@@ -87,17 +91,25 @@ function global:tail {
 		$file
 	)
 
-	if ($f) {
-		# Follow is enabled, dump the last 10 lines and follow the stream
-		Get-Content $file -Tail 10 -Wait
-	} else {
-		# Follow is not enabled, just dump the last 10 lines
-		Get-Content $file -Tail 10
+	BEGIN {
+		#
 	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	PROCESS {
+		if ($f) {
+			# Follow is enabled, dump the last 10 lines and follow the stream
+			Get-Content $file -Tail 10 -Wait
+		} else {
+			# Follow is not enabled, just dump the last 10 lines
+			Get-Content $file -Tail 10
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
@@ -152,26 +164,34 @@ function global:tail2 {
 		$file
 	)
 
-	# Is the File given?
-	if (!($file)) {
-		# Aw SNAP! That sucks...
-		Write-Error -Message:"Error: File to tail is missing..." -ErrorAction:Stop
-	} else {
-		# tailing the file for you, Sir! ;-)
-		Get-Content $file -Wait
+	BEGIN {
+		#
 	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	PROCESS {
+		# Is the File given?
+		if (!($file)) {
+			# Aw SNAP! That sucks...
+			Write-Error -Message:"Error: File to tail is missing..." -ErrorAction:Stop
+		} else {
+			# tailing the file for you, Sir! ;-)
+			Get-Content $file -Wait
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWFZGieLrLVFg2K9grXo6k6yN
-# /s6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjypzkdDbZKSRRme9n5SddaTg
+# Jp6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -314,25 +334,25 @@ function global:tail2 {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRY+bfy27Qm/pXGXaAcI/ttfgXZsjANBgkqhkiG9w0B
-# AQEFAASCAQBJHsX0Qm00mr9YJ4uBQVDzG1PHfzT3kJPh9cNuVZCJvGk6DTsysutC
-# KOQlBdLXaVzmouQsD4hCwphg1iQ1Rui4Yi9Mw76Xgo+3K+g13tX27FIQoIH3v8KL
-# CCIIkbmAmUq3euL1iMEs+lVXf6gUV3wvm7S+jAUkf2CYv5WrEDLAXqirXb73+gYO
-# q9XVZxJ6fnYMA2G1Q204Lhf36ObaCGhNpE+m19sozOL2ukIYTnJYNPuD7OYdkzcD
-# zve/Hceiu2ulshKweZ31u3tv8/iNRklkBo24QlwNTMokWUdhP1mveatvcNTTkUpJ
-# 0Hb6lJHnunCFgBqQIooFJ32eTawfSEnLoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT0WvJfTuWAYgj70qb9TE76+cTSaDANBgkqhkiG9w0B
+# AQEFAASCAQBE2cgfQHgigNYSFf5i8lKZdDFXpi2hHnd64qawCyPzmQfhn34Mn4YJ
+# Avix5S/Hg8Z6iQwGqt4u/+ZdI99jh2/JaqmZ7D0lotLcOdMwSiTDHS81xU6pp65U
+# Mla1xwOILUe6Rxsxio8hDi1oho0KNHFi6Bq5LKym56y0XyOdSyoq0YPCaQgoj+re
+# T2qFt00zA3gWeNsLqgbm9IShe0KA8oKuLMsfrJUeAX1snGVIf2plnahU6cQKAYuI
+# 9tkMPGKJnoxnsKvvCDzxZF6XV5wamiFxT2pzfDUDzL+yyuwnhbHrIRxdmXiiGlVz
+# k0ICjR+vRa9mb4etZMRo4TxKw+jEDW7NoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyNDE0MDIyMVowIwYJKoZIhvcN
-# AQkEMRYEFLjkQGlWWJdbc8TkPnmpe++iW/RkMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzOFowIwYJKoZIhvcN
+# AQkEMRYEFG13tqDdHM0NI5RM/+N3RMcPYxDdMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAHGcPJKuecTM81F3ZuRTsjL8ugRBFdGE7XJ2SqbZ+EqBAs
-# qzVRJBFxn4n9FCKlxrFRNyOV643lqz/K0LQyENkTpr2FLbDbcv/qVSK9W+S0NwXl
-# K2Wq4YQS+oFA5xnFVxJ4qIp8CNe9bH1QMI984gjxsXwKJZHt035KfloCAyYQnWSk
-# 0SefiBOMOQiyiwrPfwwyuMhdmTOBViz0iEgZBMJF3VH1/pqdG0hCUWIaHhRyXkYH
-# Fdl+dgdU8jjSXnh5vTftOdrwk3NPxe1bSE1AoogAtI3GSpOVwhpxIIZyNpUmf4w3
-# 5bq/AsB4smGxQCYuh26gq/w1q7SbzWwxQd5a+Aid
+# hkiG9w0BAQEFAASCAQAW370TP1D3itxq2dJWQp51Z0aPoBp/ajwHCT0fr6UrMMlm
+# JoBBKfHP3W0wwp3SROkDLH2BU++R+pZnua5mvwrnq5vK2/FBTJjYDooOkPaf62la
+# M+ioJh6RnyWj7pmq7oftXyeWbXIkLz1Ma4F9gM91pDEaZIOYDCq/5o7gCeek4zyA
+# rJjthX094F/chazWW7FY4XPkCyAGOi/GM43Ni8TkdpOlDMgVKNaaDuXiRkiGb5WD
+# bLL3OGC+DKSOEEKqStOEz+VLXtemlivrw38oQefddmLZplWAleU9xHTXXs2NyuDV
+# 9/hePubgCsHz230VynTr1MXdeBMW4+0ZbKQKLD2l
 # SIG # End signature block

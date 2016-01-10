@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function global:rdp {
 <#
@@ -90,24 +94,28 @@ function global:rdp {
 		$rdphost
 	)
 
-	# What do we have?
-	if (!($rdphost)) {
-		Write-PoshError -Message "Mandatory Parameter HOST is missing" -Stop
-	} else {
-		Start-Process -FilePath mstsc -ArgumentList "/admin /w:1024 /h:768 /v:$rdphost"
+	PROCESS {
+		# What do we have?
+		if (!($rdphost)) {
+			Write-PoshError -Message "Mandatory Parameter HOST is missing" -Stop
+		} else {
+			Start-Process -FilePath mstsc -ArgumentList "/admin /w:1024 /h:768 /v:$rdphost"
+		}
 	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMiTCRK9WmxIZT81VI1tyoySC
-# eLegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3jnd+W/BRM2ZFzrsh6ixzIqf
+# YRugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -250,25 +258,25 @@ function global:rdp {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS7ouwBU+mgApSkBHWnvszbbGhICTANBgkqhkiG9w0B
-# AQEFAASCAQAt+9MRazUUTZuxMZ4Fysk6SVyuA1mKq1rcNsIi0vlSKxRDBnCWqLq9
-# BN1kdMeVvE3VEVHpP10kmjSy80ewvRb2/sLTr1bsICCJAJxLiEoYj8K04fRHsf2y
-# ggbCmkkj8cqIFf6OoY64H9Ok3uNe6CQp9ePpXywhERrqgLuer23dapLan0VaqBZX
-# tf3I9Naqajpg1/ws6qVQqCGKpYO9AcEKDBimrXQxl9C4DP4vzJ001thOlv+jFUQs
-# 8+CzNXgHblMeaIjOFiqq/trBjIZHPeyW0XcXT7KPxStLlite0DfSA2hSY8tkn6Lo
-# omB64YkYzDKRF4J7q6iR6rQGv2GRI6dloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQUwjfalH4JRMeLBrN8m9gv8FCH+TANBgkqhkiG9w0B
+# AQEFAASCAQALlG7cxXfEaxY75VyMmp0tyxGg896jbPkCsQatbT/YWzCPJSG1ClTn
+# KoFVG35+guqOsdaUTQiOln3EIYbnJ03JKbuWwNi2bK0VJj7WCMqs9Lu7a7e/j9hp
+# Z7u+Z/cwVtbtiPjIFT21wNsRpBD9Cczc6ZLBGRcFPhx8qfpvS+UweHHCl/WV6oL3
+# eaUgT3j4B/B3OMqmi7SibI/zPiwmG9vVFWDAPhbXR78IdEaRTP7nh1mzDKTEccv3
+# yAYljYis/NdFl5d+HWBPg3CEfQCCwdlkcw4b80Z1Fk7BRczu2lrWsg2Hyp2vILIr
+# X4V2tJgWkSMm5VSNj+Ob3IcGN562YBxzoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1NVowIwYJKoZIhvcN
-# AQkEMRYEFMa/YrKRpSSa/K0pLFscL3TlrARxMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzNVowIwYJKoZIhvcN
+# AQkEMRYEFIcWJoZMjnQBvcAf/Q8OlozmFzIBMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBsz4sOr0To6WRuCgCtebd3sbq8M8Bh7UYSuK7sPxMf/ioD
-# Q7aaMSsMIcXOxWxg/fqAf/bA1+0UdXfs733m4ucxoEMT66G3NOFWcAgTpkFjDU3+
-# ZYhLpaVamuAmpQAUoRXXIhep3etQ2Wg7S7A0dnrDi7iXQHT7lzzh6lFKY/YLa+bt
-# fhzKllUhAeoW/dW8wEMXu3CN4MsnbWunVGgE873FgX9Sk30jR1KLwgDSnn7HGBIw
-# SzHAXwfzH67IYCWIDNvlSAgSHzcu91BN8rAMPolSX+Xjehua+DaQA1GY0ua15fju
-# 4cFRutZRjiC2pNyyhd3+guWZcwckVW+WK7+SrETW
+# hkiG9w0BAQEFAASCAQB65utdK/ISjEMKKObwMdLAEOwjXDqOnS0upxfAgHwWAwYQ
+# 5q6UAgSsn5Uz3te+t1FouJ5tZWAmqxN84w273eHPshPl9RP7TWCuhxeDAGYKhlM6
+# M9Q9RR39qKnEBRJuPDxaQSk40g7ChHOEIJ7gKyo9E2mbzDrWQo6vHfMr3jX1skHT
+# PTeD4FL6LdFnmFI2FWIiKkRE9di2RZWVaBlzN+Cns/NQi17khoKaFw4ID3nzih2j
+# QaJWdig9q3RqSts2Tt8gzA2oOK1rjwtHWasti10b9mvHfa3n78fLSR39AnCSnrtn
+# BI6Kel+J6EvTwq8EQRAa6J5y3eM1iTxSEtleX0EN
 # SIG # End signature block

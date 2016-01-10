@@ -2,73 +2,73 @@
 <#
 	.SYNOPSIS
 		Decodes a UrlEncoded string.
-	
+
 	.DESCRIPTION
 		Decodes a UrlEncoded string.
-		
+
 		Input can be either a positional or named parameters of type string or an
 		array of strings. The Cmdlet accepts pipeline input.
-	
+
 	.PARAMETER InputObject
 		A description of the InputObject parameter.
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> ConvertFrom-UrlEncoded 'http%3a%2f%2fwww.d-fens.ch'
 		http://www.d-fens.ch
-		
+
 		# Encoded string is passed as a positional parameter to the Cmdlet.
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> ConvertFrom-UrlEncoded -InputObject 'http%3a%2f%2fwww.d-fens.ch'
 		http://www.d-fens.ch
-		
+
 		# Encoded string is passed as a named parameter to the Cmdlet.
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell>  ConvertFrom-UrlEncoded -InputObject 'http%3a%2f%2fwww.d-fens.ch', 'http%3a%2f%2fwww.dfch.biz%2f'
 		http://www.d-fens.ch
 		http://www.dfch.biz/
-		
+
 		# Encoded strings are passed as an implicit array to the Cmdlet.
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> ConvertFrom-UrlEncoded -InputObject @("http%3a%2f%2fwww.d-fens.ch", "http%3a%2f%2fwww.dfch.biz%2f")
 		http://www.d-fens.ch
 		http://www.dfch.biz/
-		
+
 		# Encoded strings are passed as an explicit array to the Cmdlet.
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> @("http%3a%2f%2fwww.d-fens.ch", "http%3a%2f%2fwww.dfch.biz%2f") | ConvertFrom-UrlEncoded
 		http://www.d-fens.ch
 		http://www.dfch.biz/
-		
+
 		Encoded strings are piped as an explicit array to the Cmdlet.
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> "http%3a%2f%2fwww.dfch.biz%2f" | ConvertFrom-UrlEncoded
 		http://www.dfch.biz/
-		
+
 		# Encoded string is piped to the Cmdlet.
-	
+
 	.EXAMPLE
 		PS C:\scripts\PowerShell> $r = @("http%3a%2f%2fwww.d-fens.ch", 0, "http%3a%2f%2fwww.dfch.biz%2f") | ConvertFrom-UrlEncoded
 		PS C:\scripts\PowerShell> $r
 		http://www.d-fens.ch
 		0
 		http://www.dfch.biz/
-		
+
 		# In case one of the passed strings is not a UrlEncoded encoded string, the
 		# plain string is returned. The pipeline will continue to execute and all
 		# strings are returned.
-	
+
 	.NOTES
-		
-	
+
+
 	.LINK
 		Online Version: http://dfch.biz/biz/dfch/PS/System/Utilities/ConvertFrom-UrlEncoded/
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   HelpUri = 'http://dfch.biz/biz/dfch/PS/System/Utilities/ConvertFrom-UrlEncoded/',
 				   SupportsShouldProcess = $true)]
@@ -81,25 +81,25 @@
 		[ValidateNotNullOrEmpty()]
 		$InputObject
 	)
-	
+
 	BEGIN {
 		$datBegin = [datetime]::Now;
 		[string]$fn = $MyInvocation.MyCommand.Name;
 		$OutputParameter = $null;
 		Log-Debug -fn $fn -msg ("CALL. InputObject.Count: '{0}'" -f $InputObject.Count) -fac 1;
 	}
-	
+
 	PROCESS {
 		foreach ($Object in $InputObject) {
 			$fReturn = $false;
 			$OutputParameter = $null;
-			
+
 			$OutputParameter = [System.Web.HttpUtility]::UrlDecode($InputObject);
 			$OutputParameter;
 		}
 		$fReturn = $true;
 	}
-	
+
 	END {
 		$datEnd = [datetime]::Now;
 		Log-Debug -fn $fn -msg ("RET. fReturn: [{0}]. Execution time: [{1}]ms. Started: [{2}]." -f $fReturn, ($datEnd - $datBegin).TotalMilliseconds, $datBegin.ToString('yyyy-MM-dd HH:mm:ss.fffzzz')) -fac 2;
@@ -120,19 +120,21 @@ function global:ConvertTo-UrlEncoded {
 		[string]
 		$InputObject
 	)
-	
+
 	BEGIN {
 		$datBegin = [datetime]::Now;
 		[string]$fn = $MyInvocation.MyCommand.Name;
 		Log-Debug -fn $fn -msg ("CALL. Length '{0}'" -f $InputObject.Length) -fac 1;
 	}
+
 	PROCESS {
 		$fReturn = $false;
 		$OutputParameter = $null;
-		
+
 		$OutputParameter = [System.Web.HttpUtility]::UrlEncode($InputObject);
 		return $OutputParameter;
 	}
+
 	END {
 		$datEnd = [datetime]::Now;
 		Log-Debug -fn $fn -msg ("RET. fReturn: [{0}]. Execution time: [{1}]ms. Started: [{2}]." -f $fReturn, ($datEnd - $datBegin).TotalMilliseconds, $datBegin.ToString('yyyy-MM-dd HH:mm:ss.fffzzz')) -fac 2;
@@ -142,8 +144,8 @@ function global:ConvertTo-UrlEncoded {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgpovh0jmRzC3DdqCSrq6+SfK
-# DsygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1Fn1bjZDUOLE8hPpyMm2R3Ou
+# 4OugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -286,25 +288,25 @@ function global:ConvertTo-UrlEncoded {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS2Ur8LGj4d5C5bjQjp5AfgfnHeXzANBgkqhkiG9w0B
-# AQEFAASCAQCqlnRlTfR0Sl6iUtDWhOjJ8tkvlTk8idpVMFJ/ROOUxJgz5EV3twq3
-# 9A8o/nBCjrNCu0ygXPQIuAbcs3u08O6hT4NxBjgssNjTqrhKB3VO9hvQr+QCi4Y6
-# U0jnSPpjyNTCS8pZHEkl+/hq3Rp5kElah2atriFnCSNWlYMOTD9W/pWLMh0pilQM
-# yepb/orQ0MyykOq4Z4bBL3mcg6teH9VBQwG+jqQEozK5xzYN0LUdL6mDzXiyeLel
-# LoKw+B5XM5ytOf7BkiofK/BuWySlHxjuqKGXo2iqJFiegafdKxIjkm8zKXICFFMj
-# F3j7m7uqzoenxAl6i7ibdg8vBnWKrMY+oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSC6NLcNCnwjXmsN0xl59xm8JT+LTANBgkqhkiG9w0B
+# AQEFAASCAQCNKXr3ICBEN5O+vcbBx9pgyskrJYcDSVMR3O3GcWd/A2BrpjGpqiJV
+# OtWx+stQSr3Ov/ppTtyNz/BtsfUGapWAt/ESsMMPi6sLYxFT4kFA7xcGjSgMa/sS
+# qiJzojwDgUMqoIyRCTTQXchmCqftoyB4Dd3Vov38JrMp4WRAp63EFdSndvaB6CsZ
+# QF86eunJCcDiJiveEYSpAhlrDfcOJXvSvsi9YRs+qFozt73b7jD5kTKsbe/8acsA
+# Hfg+kiL1m6z+l771YTahRbsi8UNz3t/aW23CYeUfYUUFPbilwsHKafjp0bq5Lk5H
+# xJzwRRoYgkxN2p0aAa8v2lkrO2J32MikoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1OVowIwYJKoZIhvcN
-# AQkEMRYEFECNqocmAwOP08O03LbMkThByGNVMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzOVowIwYJKoZIhvcN
+# AQkEMRYEFN20UHR+eeWjUloYp6nnOazCwozRMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAjKPh9DEwEbo+WCgnRLM9s5DbQN0WBnTOB/a0nnVAyamay
-# RfqoFTyIardr2AxMk50PGSjFdj3MUm+/gbuGrcOVmkJhXJng1kVmxGC4WH8catMi
-# w9FZlkiHM/srVDUt0fX5Oc+Thef63Bim371xx+EpO2CGG0SGXLIvDVs5fGQc28JD
-# Rb32Dli1L6wJkfxrBl/Vcmmp75Jw2QHbfwZi2YXq0YcM8HtlBxyVmfzEEIJCXCUC
-# /HqVhQVzgucMgHsTDoh5FD2KODzR75jEWS4E023Diy7NdO0IOStZ5K8ob90F8gBx
-# SuqDVceEJF2DxnY71YimzrjtyuJvvTa3AsqylCN+
+# hkiG9w0BAQEFAASCAQB1S02KbiNUEp06v/kcRBViCDTGyJrWaH337CWMT3IgEalB
+# gowcfVRbKjL5Rm7fvcX5jMw7+RlTyGTgYxJC8tHDgp1Km68Vej3+IbpXc6D+0A7j
+# SWz7Sjq9GAVH1plfP78qmxbke8DLk9s0dQzZ4S8DR9sp3NFKjm+tWKg8AbeGfIhL
+# vez0Nt+P2yoUQqthHc6mFZUSB2oNepY4hrU3mf0Dcos1WaLYQOjeZQA61qWGF1EJ
+# ak1lwwsbP2XKNIVk/aKfmssqYFK0f3cReG1WPI7Xq2wHH+5LAENW/6pGhsmPpaGo
+# ZLuVFceEr/UW4JwSqgpW7LbNw4VXR5kaFBCAAY74
 # SIG # End signature block

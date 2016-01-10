@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 # Reload-Module
 function global:Reload-Module {
 <#
@@ -70,43 +74,51 @@ function global:Reload-Module {
 		$ModuleName
 	)
 
-	# What to do?
-	if ((get-module -all | where{ $_.name -eq "$ModuleName" } | measure-object).count -gt 0) {
-		# Unload the Module
-		remove-module $ModuleName
-
-		# Verbose Message
-		Write-Verbose "Module $ModuleName Unloaded"
-
-		# Define objects
-		Set-Variable -Name pwd -Value $(Get-ScriptDirectory)
-		Set-Variable -Name file_path -Value $($ModuleName;)
-
-		# is this a module?
-		if (Test-Path (join-Path $pwd "$ModuleName.psm1")) {
-			Set-Variable -Name file_path -Value $(join-Path $pwd "$ModuleName.psm1")
-		}
-
-		# Load the module
-		import-module "$file_path" -DisableNameChecking -verbose:$false
-
-		# verbose message
-		Write-Verbose "Module $ModuleName Loaded"
-	} else {
-		Write-Warning "Module $ModuleName Doesn't Exist"
+	BEGIN {
+		#
 	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	PROCESS {
+		# What to do?
+		if ((get-module -all | where{ $_.name -eq "$ModuleName" } | measure-object).count -gt 0) {
+			# Unload the Module
+			remove-module $ModuleName
+
+			# Verbose Message
+			Write-Verbose "Module $ModuleName Unloaded"
+
+			# Define objects
+			Set-Variable -Name pwd -Value $(Get-ScriptDirectory)
+			Set-Variable -Name file_path -Value $($ModuleName;)
+
+			# is this a module?
+			if (Test-Path (join-Path $pwd "$ModuleName.psm1")) {
+				Set-Variable -Name file_path -Value $(join-Path $pwd "$ModuleName.psm1")
+			}
+
+			# Load the module
+			import-module "$file_path" -DisableNameChecking -verbose:$false
+
+			# verbose message
+			Write-Verbose "Module $ModuleName Loaded"
+		} else {
+			Write-Warning "Module $ModuleName Doesn't Exist"
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqTnzxcLZAML1UT1T7hho8paR
-# vRKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHkvaVI6NNDfeURtXeQdEsp7o
+# SZ2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -249,25 +261,25 @@ function global:Reload-Module {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQqmVKdSK6lEDMad1ATXD5MM5UuUjANBgkqhkiG9w0B
-# AQEFAASCAQA+PoMN2ig4fvyPsK/Ghm64L8cPGUx4hXjQdizu5UyCDo6CIUUS7Nnj
-# V9Id8/wkCwaayRNFKHwrxCp0oIgUkjdj+WlchA0gKUL91qMRqQFiCnb6TDE9vPMQ
-# FWRsE9ze6mKGq+Ym0OImVUL4kLlVKH9yLwZb3E/OgJtjUoBqbcRtxZUV2E8AMc2G
-# 713w1vXtepRhM8MUUhveKzQ/oLXf7hx90IDYBPnYQ6IQTl5XJyLRQSlwFNdM8d0z
-# 2+49oPzCX/3RzLL7pshWo30C3jpZsLErX87bEzGKrL+K97JKuHPn1JMtJ+0YKo4S
-# sjnFaruph97Tqt4Oz2OK+8bsIOegDnjgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBShBiwxKzGp5V3qlexJvPJHSU4HpTANBgkqhkiG9w0B
+# AQEFAASCAQBwf07dMzphEuqeEHYJAwwmvZGf9hTFvz7rdu589sGI4fV1W5oHQYWt
+# 89Tax4/Y1GMYP7h83VsXjWu7zQG/4+wfkIZRKU8MGjubRNrU06YLfc5wG6eL5Inv
+# miVQW9IAdas4V1GKMsIq/Gzo1kK9gy9wEJsoX5cCiFGV/rvIZDoTeQ5xyzoRaWTH
+# oN8JnA0MYK53tHYVlnHILLoEcfmzmBqorTImegKStkuBB3of2shMtBaUivFm9mRD
+# Pm8WNASstgni7m/bgikajoHLtVIjhtpoxtshhpoCe+qOzRg1pHoLs5cZ9kLulWRA
+# 3otsmIOiaBcqqr+1Qc+L924gIsKunUMZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1NlowIwYJKoZIhvcN
-# AQkEMRYEFIV+Ae/HJlCld0IoLDZ3rfhsLtgfMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzNlowIwYJKoZIhvcN
+# AQkEMRYEFAQBG6Hy86BOUJQzluc69lqc+S96MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCfe7dEtI7/qIPpYBPEqwja0MPu8DBpJjbWIpCymatHuIeq
-# coSUQM0td5NREe8fwHAIA2yCgsW2FYM4amjtJQuVJar4ZtbpSfusg86e5M/bejvS
-# 4OgUiosfsVhSFQIPWY7O+HCmCrEjYonNeVzMzgZVUETqtyqHSU2xLvFoY/dwGZ4y
-# VxJuHKyr/WH+WtPLcsXPZYHE6EnsZynniWwnxdvbgfqTIc7KEgDaOYkDUU1IeZ9B
-# 6ZSCkv7dqNgksJFrCINj4YU99r/7qK55P+PGIpoi8vBfLcxYjU4BXTnGNkpqR+Hq
-# 0HY48DeRMneEVRkfnUN8AjNj6/ylgz2R7RuCd2bz
+# hkiG9w0BAQEFAASCAQAkQpxVFOIaP7UHol4wpfE2X2ajDclnKnahMnh5eKDJu4R0
+# g0F1jeCyQCIm/PRZJCNEldDbk2dHF9+muUJZIdniSzfin+T6y9DR4WY11zlCXaEa
+# 1PHen32Dej79POviUvSV2KF5vhiKGPIYdzmuIVEHK8qQ9kswuVnmZ3V+o497EGJy
+# CayOr4UVN78F2ASKcTfKsNxHHPB4Jis7RQjUFzQk/vnhGRdbTtJ2/f6n/V8wWsJF
+# TRoqvi15X4+fVGk+ZT1yAvegoB4Gk0Y83VSNeJqyjSdJf7SRpFuTM+q5BJ61QKoT
+# r3dkigWEOJq5MaD1eMo9LZj92aZvrpRyGCunJdjB
 # SIG # End signature block

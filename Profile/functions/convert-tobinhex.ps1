@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function global:ConvertTo-binhex {
 <#
@@ -79,20 +83,26 @@ function global:ConvertTo-binhex {
 		$array
 	)
 
-	# Define a default
-	Set-Variable -Name str -Value $(new-object system.text.stringbuilder)
-
-	# Loop over the String
-	$array | %{
-		[void]$str.Append($_.ToString('x2'));
+	BEGIN {
+		# Define a default
+		Set-Variable -Name str -Value $(new-object system.text.stringbuilder)
 	}
 
-	# Print the String
-	return $str.ToString()
+	PROCESS {
+		# Loop over the String
+		$array | %{
+			[void]$str.Append($_.ToString('x2'));
+		}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+		# Print the String
+		return $str.ToString()
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
@@ -102,8 +112,8 @@ function global:ConvertTo-binhex {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8ftMI4G+7XcEpdA2IdIoIuy3
-# 1uigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbma6JxoVXCLdk4RWyL1TenJL
+# 3gmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -246,25 +256,25 @@ function global:ConvertTo-binhex {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSXdcO/WwX2N+R4V9yTZQsDgyTCmDANBgkqhkiG9w0B
-# AQEFAASCAQB2+5ClX4ezUJZ1+G7DQo3kihPVtfteb9tdUFj6UeFAAjW1WWhl4JWV
-# LmKX6krHwldO9Xv/V6WjlGd4BMfwtmzEaWOyE0s8FNYjxwkbprByqvhdqZ0fxW57
-# JTW+i9QgiguuGjvxqXEf/57lx/tL6GdyIEMel7ILNqe5st5OQeZkj4Ofbil0UTwM
-# cCpk5KsnBwy53EjWnSIckeVgPZ+bNaNPpqwX+e8edeImcXhGvIbsnm4NPUJYtq21
-# D9xIsShMrVbk7DBGrUSCN2c7k/XR6Ok+oFKYWQleRoh/jjwdDFJswdK5C5XEzHqo
-# Hz8Ebxe7OGe1o+znhk0kSCjaoBkPfO9poYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSl9ILHrnjyiR4txHaxcD94K0t/wTANBgkqhkiG9w0B
+# AQEFAASCAQAwvhUMdn2LP2PZMs+KRK1raLPdEW1XWESb/WxyEaSIe05F6Aq+LEmW
+# 0Bb9OBWnUTa4zI2Cwbn+DJUAYRc+0B/GIEc5v+P38eB8POI0TBRalPfJsc9UkGdv
+# 8iDmm+LiFpdObnu/c+qotR34wow5IJ16VesQfIdFpAwqXGsVex+YEycaQ3fH69oX
+# 3oC3rwC3Rg7d49gEGn8qfXtWoSzKKsfvoe0IF3UGIKqGUIWIffJnSCBHlqijTmd+
+# UJu/U03yOmUAhsJbOV1axeKMsT2rx/3OaP/GWCz/hHPBiiBzKVjM2b1d+ySZaGJz
+# R1EQAMJZXsTo6jbaIP6vOLkFaeU8e5+FoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0MlowIwYJKoZIhvcN
-# AQkEMRYEFD1fQJJLIM2ZZaQ6DJPkOmmZZcTkMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExOVowIwYJKoZIhvcN
+# AQkEMRYEFPRB2V5jt1jMN08eV1EHhLiKoedkMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAZ5S9LJoUeYSlfHc+4Da/Y1Xx8YAJqnhJTdCfIf8/Y+Pws
-# VjLPK8xUBs4IxsoysO/c1pe2r383acmF1xE1nPYKtRZ5Ac7CQ0x3ktk34lm6ruiU
-# 9MgXMUcRADF/JEO39JKT1TTy99OHEE89Ub2Xm3ReIxFysN+H3empnO9yFtkUNSyN
-# OXjY8YOenG8kceCLDhjaf1zBBfr447U1kyM4JH82Tb2ZUTzFWLLRzbKUMztsjI43
-# 5LJ977sf/szz2qxGAeqJF8OaUPnjL8YLaNcKfqXd5gXWmYgSViNZIUQ1WJNTNfJb
-# odE35W2PuiRobaaEktXADStf/WSVP0vWj0Z7Ws8y
+# hkiG9w0BAQEFAASCAQBf9vYIOHEggG+kfinR82rKytyZjHZb/PcxuxqVQF6bsAEA
+# xA94ZRelMwQv0eroRJgcW0lbx5WlP4EInQc10jQy6N4h6ML1herlJvh6CAXdzEtW
+# 493h5B8ybFAKaRPWTJP2QSnLMXQpoi+apZM2WDPNyol8RdCHLSBzvYe3BfYkBrZP
+# FQm7huHY72VHMU3QvUXXva9KZ5VQ/HTdUdCfzwhg/t/Q0wXrN4P4DpyZmdlvSAOe
+# mj5IMKK2G7GKUmQolF0FblgIT7vs5iWewuO5D6GeGtZLM3XKXQSS9HXs4kBy7qTB
+# Y73N/afwargleLiMXmSFyumlknlBpUEoOkhtCDJT
 # SIG # End signature block

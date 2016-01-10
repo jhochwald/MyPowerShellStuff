@@ -47,45 +47,56 @@ function global:Get-BingSearch {
 		$searchstring = $(throw "Please specify a search string.")
 	)
 
-	# Use the native .NET Client implementation
-	$client = New-Object System.Net.WebClient
+	BEGIN {
+		# Use the native .NET Client implementation
+		$client = New-Object System.Net.WebClient
 
-	# What to call?
-	$url = "http://www.bing.com/search?q={0}`&format=rss" -f $searchstring
+		# What to call?
+		$url = "http://www.bing.com/search?q={0}`&format=rss" -f $searchstring
+	}
 
-	# By the way: This is XML ;-)
-	[xml]$results = $client.DownloadString($url)
+	PROCESS {
+		# By the way: This is XML ;-)
+		[xml]$results = $client.DownloadString($url)
 
-	# Save the info to a variable
-	$channel = $results.rss.channel
+		# Save the info to a variable
+		$channel = $results.rss.channel
 
-	# Now we loop over the return
-	foreach ($item in $channel.item) {
-		# Create a new Object
-		$result = New-Object PSObject
+		# Now we loop over the return
+		foreach ($item in $channel.item) {
+			# Create a new Object
+			$result = New-Object PSObject
 
-		# Fill the new Object
-		$result | Add-Member NoteProperty Title -value $item.title
-		$result | Add-Member NoteProperty Link -value $item.link
-		$result | Add-Member NoteProperty Description -value $item.description
-		$result | Add-Member NoteProperty PubDate -value $item.pubdate
-		$sb = {
-			$ie = New-Object -com internetexplorer.application
-			$ie.navigate($this.link)
-			$ie.visible = $true
+			# Fill the new Object
+			$result | Add-Member NoteProperty Title -value $item.title
+			$result | Add-Member NoteProperty Link -value $item.link
+			$result | Add-Member NoteProperty Description -value $item.description
+			$result | Add-Member NoteProperty PubDate -value $item.pubdate
+			$sb = {
+				$ie = New-Object -com internetexplorer.application
+				$ie.navigate($this.link)
+				$ie.visible = $true
+			}
+			$result | Add-Member ScriptMethod Open -value $sb
+
+			# Dump it to the console
+			Write-Output $result
 		}
-		$result | Add-Member ScriptMethod Open -value $sb
+	}
 
-		# Dump it to the console
-		$result
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZ40YAWVmfdpFulc8jnVtcRqF
-# OvCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUkVpVIo/3GnVNlgw/CYgbj1qP
+# TpCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -228,25 +239,25 @@ function global:Get-BingSearch {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR3sWLgnc1Ay2GFbF1uz0bo1klzSTANBgkqhkiG9w0B
-# AQEFAASCAQCLdl20Nh6QBi9MVswJUSGxO+jIds4KFhLSEbXt5RrBvoVx97sZ/0EZ
-# XmqCzzHYLEe2MKc+qgQlS5HqrMp0RmBtKnWghKs9JUdYxr+Kn37ncYqNniivybxb
-# pLldt1a8bnlUcnXTKs8ozkyiGy1UL+0aJtjpRqBxMG5aKzfV8eZKU8cdHP2P4jwS
-# g5Isl3350Mz8Vi2fQdq5Ip5PQIE3fFPBluGbAnEfFDOoJQUZ13N+RkAX+LgVjFZw
-# r44P6cdXUxzcaIonCeQ0CPNKn/D/7DNXcpFFLD8ygvpTmBp+FR6DhBdcn/hpeinz
-# xhlBPkicUOOpwTLMBA3fsBIUQ+HXQe+uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQrdq/RdGu6a/BL47guNmqZxF482TANBgkqhkiG9w0B
+# AQEFAASCAQA7Sd3l1MHFxl3U4y24H4t/FZ5GQVmwZ6M5qlNESh7zT2a91j4CF/N9
+# hzWTaE1qCXJgBhmlkRPP5l2eaDaokyqNkdQaMQB09nUeWNTfTnEQ5IdUVErOYhM6
+# ge2yG/8tzKFNMjTa+crX3PYHvK1xb15v/0mAwVSjG/oa0XsRRiMw4OW53dTMoLSw
+# h2v6Pe++0XgGWnqU+qBWYvGSgOLF2eKbwaz4P3Sn1xGTvIKhTyo7zeE2mW29rheY
+# TozSIc2uvv++mb48w9UyE0vHsXlUoPHRedICPm0EyQLzTIW16QhCG4Oafoa0TE0V
+# XiBCK1vGZWYIYkOX8YoScYnoXwAF8ThJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0NVowIwYJKoZIhvcN
-# AQkEMRYEFJZ/ee/8bBaQ1qefKm22LB/kuWCrMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyMVowIwYJKoZIhvcN
+# AQkEMRYEFJ6TRXWl1AiF/xsD21NR8vEyVLMQMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAhfNBCYhZbg5y6sm0RNGTr47C9wEJaQACwHFAyOFyqSn85
-# ISnp7/a0Gk27HaBLoIqXKYfGJ4dl3X8zhB/EiEnCZ1hvnqFOd/f1QZF22ziXAS6s
-# KUUd1ZMnkVBa2iHXamT+8bmwOaYIsP0x87jfazohKS9BSsc+Of/HXWtyLdynB2SD
-# LEltCWCxdReB33GL6/72LDcJnFAtkctgMUkacG7xzrCqzi53je9DEYgvMsZsY/ry
-# ubvJJkaoC6Ja3NgNzROo1bJwyUeBQGimX6PzfyiZMB2VhifRlKk1UbFAwOlbiFxa
-# Mm4jUNkWOkqZUc1CxlfF6NAFztFbH5/2SB+djpJ4
+# hkiG9w0BAQEFAASCAQB5g0JqlMmlmLEN1l+P5DmBYkJBt1hJWaM2nCxE3AaqCEjr
+# 38wEfPoeTZoDLUUTxfF1gH9e2x9RMn9ITmJddMnNfgKIrnhDTlweEzrYWKuyaMF3
+# 7pmFNJTL/5way+51qPToYq3Zzr5XT1vuDiVWuXhpjBv6zMo4g90zSi7f7yRX7NtT
+# SV+3WPRJVI8OQ1DAW72JEDWdoAZ1Ej0DPsN+aL8ap0iwg/zGKsPB6/TywM4UB4Hh
+# hfu9Zi6UBqgDlQzJBMkKomCwSvksDdkyYryCIZ3G6bF+W1r8BJv4XWZfYUtp5F7k
+# yeYoz5hkauSO1KDnLaAFJf3LNayY4ArTd0u3xWlO
 # SIG # End signature block

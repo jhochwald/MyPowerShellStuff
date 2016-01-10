@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function global:Get-TempFile {
 <#
@@ -96,21 +100,23 @@ function global:Get-TempFile {
 		$Extension = 'tmp'
 	)
 
-	# Define objects
-	$elements = @()
-	$elements += [System.IO.Path]::GetTempPath()
-	$elements += [System.Guid]::NewGuid()
-	$elements += $Extension.TrimStart('.')
+	PROCESS {
+		# Define objects
+		$elements = @()
+		$elements += [System.IO.Path]::GetTempPath()
+		$elements += [System.Guid]::NewGuid()
+		$elements += $Extension.TrimStart('.')
 
-	# Here we go: This is a Teampfile
-	'{0}{1}.{2}' -f $elements
+		# Here we go: This is a Teampfile
+		'{0}{1}.{2}' -f $elements
+	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4QOE0uIhW39f8ZopsgUxT4nk
-# +TOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrz2/0Gjn5PILI4kOVqwPiPg1
+# LVugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -253,25 +259,25 @@ function global:Get-TempFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTHOFK5e5v4Lb2i6Sov0SrDmayX/TANBgkqhkiG9w0B
-# AQEFAASCAQBIzTWHSUgtIpiDSUXL6+pnDhEtRUMx79K5DHj43b7fxkMNrg/fRzdN
-# lGTRfPJQWfeAuVwFVQ1nDMTHH19X5ulaemwPhEsv4sl/WCV4ApGlN9DUmwtDvARp
-# B+y3VQEdwvCjXRfw0Js4f7n4LGdOFzQ/KzAcHnjp9G2exvDbB6pRQwUkPwFG4mg8
-# Dgki351TniT1Un3ExcfZwMgVabeK1ilOK4skBjF1QYB3RrnueRHvs8doVdzvldn+
-# vSdUmetSXt8r+5U/R0jl9SgMqTkl0llyZW3M8dam+FGOGLY4Vzw/5NCiR+XyDZrf
-# aQE0+KxP3AxkO3w0Ag2lNhGhnO+2znjGoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ0d36RZAc3Tdg3xLQrlbuNNk/FZDANBgkqhkiG9w0B
+# AQEFAASCAQAA6zHCsVGCk9wuOVSMiW0VTlksSFNPBC9BYdaZLrgEm7ErxuF6Z+yI
+# 6BupJSh99WvGTaYjt7FZyzg6Vs7d5LmhUHejyOZj1ofABir3TaPGh85GIP/JPD1x
+# ilgx4umZysFOMFiBQzjXGITryc+IviUhGnA4QnEpc/9G+kMBdIKiCFB70ZpKowo6
+# 3Qn3gNsAt9nqAb0hqML+kvlZ1uc59MBFRdNUG+/HBCDVEYdgi8GZU8ayBP/ecaBP
+# fmJrPuCRv+IQk1SvlVbGr9CI+0yye1ZzBjmcGGAUqKpRSj5KhJqOKvB1rfLan7Ih
+# AclCxgQ7u42POzm93BdkFnvhKxzqCbRboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0OFowIwYJKoZIhvcN
-# AQkEMRYEFGT0OCtA1vQgdFjaWUiV6k5JhXVSMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyN1owIwYJKoZIhvcN
+# AQkEMRYEFB20J/sa1++l8VMFmsMr98EsrcXmMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCuGNZtLp6uhPSrvclOB3CMoOFReQ1qwhW+54X41bpHjh+i
-# THLBKW/eB6Iwn608gysA82V5TPbB9BCLQC4QunOfUHIqgMi1hR5ZZfuHjRYxCdPp
-# zwzw0r3mh/BizuXErAVfLxFt3q9A+1WopayAN0E7yIeBhnIqNKNLpL8LHXim817Y
-# ibrARqDSDcZOeWAnvn9VPYy2TkunYzgbprHeJPwWEh6tiGcqNKF3Xb2wa6F5cb20
-# MBd/vPrkM4Qz1sfk+ol3yfKNBZ/YoyEYbHbGNgoyXO2VPnzHk2jUdJ4U0b4fRuXd
-# YaGyOrORh62vocvraE8ZT2yglPo3b0Qcsu5WbgI/
+# hkiG9w0BAQEFAASCAQBro8ad2h1GZbpnR8SioLB+WVWETatMUqdB7vepJlVLhA5W
+# ZwplSCTHlWHErqadaziUKGren20o72MWm5lR2tluZboXnZX/uMjGPvSJvMBDX1pV
+# zqK+SAkN5jWPIefYmhSCZoMsTHbJ7ay2Q3Mo9iDZQhTXNdSMhjfImZ57955vAlCV
+# X1ZgLgMqJyE3u2CnMt34T4LW2zCZ0KBGcrLrSkBqcMbhMVZN08s6nJDYj+amC3pW
+# wh4DcoFpNMb+lvPEXn7cY5Lvl3secsDFpPD3EgwqPkTgCumnumM1ULMehPp9sO3K
+# BV1LVw8jtNEXGAQLTdSeQi1UWU3g7T6QTVwUXvu2
 # SIG # End signature block

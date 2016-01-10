@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 # Make Powershell more Uni* like
 function global:myls {
@@ -82,9 +86,11 @@ function global:myls {
 		$loc = '.'
 	)
 
-	# Execute GCI
-	Get-ChildItem -force -att !a "$loc"
-	Get-ChildItem -force -att !d "$loc"
+	PROCESS {
+		# Execute GCI
+		Get-ChildItem -force -att !a "$loc"
+		Get-ChildItem -force -att !d "$loc"
+	}
 }
 # Set a compatibility Alias
 (set-alias ls myls -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
@@ -92,8 +98,8 @@ function global:myls {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/WnI6aG8bTZ8x/NkqW1faM/B
-# za+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9gAVxGCAzWqSfwj5gne1vzf5
+# 2vagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -236,25 +242,25 @@ function global:myls {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTTzZy7EOx4jtcWIzAqBymseV8X1jANBgkqhkiG9w0B
-# AQEFAASCAQB9WJslctT1FR1q6BkG0KBHe/KJcsCz9m73Y55hsG9W65t0IzMiPMhz
-# Mwkf9y95bEpeBLeAZ3BXeMsiJ/X11LHI3jl6OoVDY5o6v6xZIeS+R6UW46jQ9Z29
-# Q1XpIAJInpOfxqOF8chJF/GYIQu6nTlfyvjM64Z5NcujhOkfMyLaXrs8dhmAKjQ2
-# q0ApmEgTA7AcydCYjF3H6WCMFBgQl8loIlb/alxiiNyaWoaA/ZQToDmY5tlac3J6
-# N0xjtrWZzxNhMnp7I2p99WFQrEYoNeQ7bb9McRSfVefuobtS0BZcuh6lO+sCs5ti
-# rw0y5djvBB0zdBDjcyldXeUPb4z3rmACoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRZ80xcwAKNhgAO42/k461a/5xduDANBgkqhkiG9w0B
+# AQEFAASCAQCT20eN2YlH6OSkWSGZGkblJvQPs91tbMSYRwQlRsA9eNz2sMyi7TPp
+# F9669uB96H29x8GU9iCaCB1uz7IrLjzsz0kkQNkaSG63K//M4CIn/cYNUfineMK5
+# f99gsugBuxdU4H9VyDRtXg5ZdRcZO1cr+JyUHlOcjOZBANrqjGfM6md8Fkq1eWBh
+# 7z/1hmIdUEzSuYFJkiUnoSgtGyisF26VtQIxSvNxwdAGW1DArouGy8bkkWZEBQKZ
+# JU/CPaOcHaaaTch7d4xs/yTET7yRHaZsnAthW0vmmoLIH5sCzjBH7WlCz0K3d2op
+# +Zqk6uN3h1vw3TN0c7k/JWZ05wW7kxLaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1NFowIwYJKoZIhvcN
-# AQkEMRYEFB83zz8C1UJLUtnRjhYjZmoB3u+OMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzM1owIwYJKoZIhvcN
+# AQkEMRYEFHujkIJvFaMbkmUHOrjkRnJjUoA8MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBaKSka69XOPe+8T5yadWCyKEc5xKQdfWChJt15qs9TiNRs
-# RWuqRLYG/ft+bp06+uQf4/7N7hcSf/Qt2MVSIX4+7sfRw7xZk5+2rojD1EvWpOLo
-# 9FpTd2k6GvdSk6sTmcQypDsXA+NmfI2rJuJrGzj1oMV1Ei3QKDvuCzrbFQZYsA/J
-# VRZc68iFimrEUK4dtJ3XsxEkbGFQhVK26fYPkD7F1A6dexV0ZaQtFi9R13guaCuI
-# IkZzfDe/V9ap1OzpNX9+cKlk77BZJw3HYIneeA3g72MwkX5+5WEXYyY6JULjidHF
-# lAbOsrEH256sLeunXFMd+Zgcn4+8DYf14+hNn2TP
+# hkiG9w0BAQEFAASCAQAcUkIr5WMSrNN4fYmIx+LAILPS1ffgxvEDbtg1nG37QfOL
+# vzWHp8ZFywI5YixYsWrVbdJYDDtJs88laugB+e+9wb7NTxBYkdsQ8NL7HI3Q7FPQ
+# dyqxw06Nygwh2f832BiAn/PvWyxPj7QbesDFxWMqhAOUDwbUCQ0PxjQGKFe5H8Bv
+# 3UCCO6GSZ7HoainOwzmQZsBHlBB0FRMy6CatyIdJjTxZ7ng8itltluHWR0tcodCe
+# DRpGeoI8Emh4jTmyKOONi4iW+WbgmL0PdrNJVNgTZmiYVq0p/HoX7+gEgwzSpQyl
+# 7rZ+mLTGWz/FK3k2jbiTUoxEjFmbGJOr2+VGQk/S
 # SIG # End signature block

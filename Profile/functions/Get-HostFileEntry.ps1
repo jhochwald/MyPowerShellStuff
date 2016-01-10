@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function Get-HostFileEntry {
 <#
 	.SYNOPSIS
@@ -72,31 +76,35 @@ function Get-HostFileEntry {
 				   SupportsShouldProcess = $true)]
 	param ()
 
-	# Cleanup
-	$HostOutput = @()
+	BEGIN {
+		# Cleanup
+		$HostOutput = @()
 
-	# Which File to load
-	Set-Variable -Name "HostFile" -Scope:Script -Value $($env:windir + "\System32\drivers\etc\hosts")
+		# Which File to load
+		Set-Variable -Name "HostFile" -Scope:Script -Value $($env:windir + "\System32\drivers\etc\hosts")
 
-	# REGEX Filter
-	[regex]$r = "\S"
-
-	# Open the File from above
-	Get-Content $HostFile | ? {
-		(($r.Match($_)).value -ne "#") -and ($_ -notmatch "^\s+$") -and ($_.Length -gt 0)
-	} | % {
-		$_ -match "(?<IP>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(?<HOSTNAME>\S+)" | Out-Null
-		$HostOutput += New-Object -TypeName PSCustomObject -Property @{ 'IP' = $matches.ip; 'Hostname' = $matches.hostname }
+		# REGEX Filter
+		[regex]$r = "\S"
 	}
 
-	# Dump it to the Console
-	$HostOutput
+	PROCESS {
+		# Open the File from above
+		Get-Content $HostFile | ? {
+			(($r.Match($_)).value -ne "#") -and ($_ -notmatch "^\s+$") -and ($_.Length -gt 0)
+		} | % {
+			$_ -match "(?<IP>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(?<HOSTNAME>\S+)" | Out-Null
+			$HostOutput += New-Object -TypeName PSCustomObject -Property @{ 'IP' = $matches.ip; 'Hostname' = $matches.hostname }
+		}
+
+		# Dump it to the Console
+		Write-Output $HostOutput
+	}
 }
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULrCHd2SRu08fLoVAJtdPOghc
-# yjigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/FFebEUc+pxk86CBJYLMh2rz
+# D86gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -239,25 +247,25 @@ function Get-HostFileEntry {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTp84WCeFh91yKlGScGW2lBZR7HCTANBgkqhkiG9w0B
-# AQEFAASCAQBWqzC6WcIdrI9FX8droFCANcLqdw/safDOWNFEt5/NJUAK2Xz3VXcj
-# lUjgRueCHlh+Wadbw4xHvfriOCxwjZjxpl0f/WnQ2I92825mIh+ecnjqzrX8EXWK
-# v/BhP96VClfWq4yhuT1JTTgP9HlxvekRT4LRtDNQ8b+SHBKcIOxgGNnn9l0ykRHE
-# q0IJvSzJbYx4etnPWV8xLZdv9tzcBW3Pym6ZMQcEI/wLA5pOxkbTuTFwQdPYZSgU
-# mdSYRk3fRX5kWld9DV8chmBu8+0I485FSfYc/WNi3EEtxmvzRQNKIL1TSsImG1tX
-# FtD9JPiYHx3sloDWwc5NMvV4ViOlfy9soYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSZukKJdKaW7NzXymKuCyjQKi/7iDANBgkqhkiG9w0B
+# AQEFAASCAQBD8JOikcvixNKYZRSYzius5DBQbISUJnPFcurqTG+1tQyyyFn9Fc2T
+# g9xeezEfMDHZf/Hz59hBbmaoGhA+NIZQJiaK88MPB3J379kefX52L9aezaQ6G2zr
+# TzTeCOkFw64c3R52DsXh4b/gZfDonfa0zU9eatLID0RXXmZT8itq5bRJAwPs4pcC
+# /nzkEW1PYZGv8qZDRzuBGyne0fuWtmpm1MGrfJ0b7gsmIgLyYcERPmkdR2Npb/WI
+# du6m1K65g1TcsXKwiCEsrQzbWtOrdLA74WQjPFuTHQo1D0ptx4qYZuh4ZxOL98gL
+# 8oDTcpAJqLYL4ck8SWvEgcrcqJXaqftooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0NVowIwYJKoZIhvcN
-# AQkEMRYEFMd4uAtVD34jvFF13Y4zRzJnvpGQMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyMlowIwYJKoZIhvcN
+# AQkEMRYEFItinJKwZd7J08E+lsp/twnnGtNwMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAJpt/GrylSnQ1HAnqs0GF0aK2BGMCw4zMiMhUrbR0D1deT
-# pYCiEgBsZLwTjgSwkNvb8ty1kGyUX9gJ++lOq/jRNPb6RwglghwPrTFk8cCcjyAY
-# LGl5nhe8sHoNyCL//ZZxbBNE1ZwjVojQXada5wIfkKTcssbIGTabi0sz3Jxva0ej
-# Ffyt2+l1hKRVZla4ro+heYNaDlaziHoerL6E7hD4Rog35oTAUKoiPsE9UevjfOgW
-# QutrMzCiKKwlmD3AuiV16cp1iqgUNq/9SbVVe5+IxkuKd5UeJBv8VxxjK5jQMWhi
-# 9oK/EEV9eRwaBuYvlETongGJaYWGoRbEkiEMOB/o
+# hkiG9w0BAQEFAASCAQAM/3lLJtnyZuPG3vONZrl1dWPlrUPoKl2TeFdLnsE3z5Id
+# bEhix2NCEkazAJgCoh5D/EHn+Nz3YL+HMFYnSVUkna+3p4NZAp4wg7i6IS5BRhmO
+# VUxzvKWV8vgTWLKvJ1Z6K6qGeUv+O21LdLTRlDO2goZGp4eFYzyQ5giJf3wpTvVh
+# BcQxuaZ+50OrVanOEn+sgrBCYQy3GiDXEH2UPKCooVkoZEqYW2O03gpTXm8+YyDN
+# slYh0O5dGDqkQmZXixcxbpn1YLdNb7qgOq9G2r2O78hGT4H1BL061u67srM5BVLA
+# N9zOLHE/EtarerXX1GCkoDncsHcd2pSKSFReIOoS
 # SIG # End signature block

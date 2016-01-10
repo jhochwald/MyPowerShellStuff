@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function global:Get-NewPassword {
 <#
@@ -114,61 +118,74 @@ function global:Get-NewPassword {
 		$Complexity = '3'
 	)
 
-	# Delare an array holding what I need.  Here is the format
-	# The first number is a the number of characters (Ie 26 for the alphabet)
-	# The Second Number is WHERE it resides in the Ascii Character set
-	# So 26,97 will pick a random number representing a letter in Asciii
-	# and add it to 97 to produce the ASCII Character
-	#
-	[int32[]]$ArrayofAscii = 26, 97, 26, 65, 10, 48, 15, 33
-
-	# Complexity can be from 1 - 4 with the results being
-	# 1 - Pure lowercase Ascii
-	# 2 - Mix Uppercase and Lowercase Ascii
-	# 3 - Ascii Upper/Lower with Numbers
-	# 4 - Ascii Upper/Lower with Numbers and Punctuation
-	If ($Complexity -eq $NULL) {
-		Set-Variable -Name "Complexity" -Scope:Script -Value $(3)
+	BEGIN {
+		#
 	}
 
-	# Password Length can be from 1 to as Crazy as you want
-	#
-	If ($PasswordLength -eq $NULL) {
-		Set-Variable -Name "PasswordLength" -Scope:Script -Value $(10)
+	PROCESS {
+		# Delare an array holding what I need.  Here is the format
+		# The first number is a the number of characters (Ie 26 for the alphabet)
+		# The Second Number is WHERE it resides in the Ascii Character set
+		# So 26,97 will pick a random number representing a letter in Asciii
+		# and add it to 97 to produce the ASCII Character
+		#
+		[int32[]]$ArrayofAscii = 26, 97, 26, 65, 10, 48, 15, 33
+
+		# Complexity can be from 1 - 4 with the results being
+		# 1 - Pure lowercase Ascii
+		# 2 - Mix Uppercase and Lowercase Ascii
+		# 3 - Ascii Upper/Lower with Numbers
+		# 4 - Ascii Upper/Lower with Numbers and Punctuation
+		If ($Complexity -eq $NULL) {
+			Set-Variable -Name "Complexity" -Scope:Script -Value $(3)
+		}
+
+		# Password Length can be from 1 to as Crazy as you want
+		#
+		If ($PasswordLength -eq $NULL) {
+			Set-Variable -Name "PasswordLength" -Scope:Script -Value $(10)
+		}
+
+		# Nullify the Variable holding the password
+		Remove-Variable -Name "NewPassword" -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+
+		# Here is our loop
+		Foreach ($counter in 1..$PasswordLength) {
+
+			# What we do here is pick a random pair (4 possible)
+			# in the array to generate out random letters / numbers
+			Set-Variable -Name "pickSet" -Scope:Script -Value $((GET-Random $complexity) * 2)
+
+			# Pick an Ascii Character and add it to the Password
+			# Here is the original line I was testing with
+			# [char] (GET-RANDOM 26) +97 Which generates
+			# Random Lowercase ASCII Characters
+			# [char] (GET-RANDOM 26) +65 Which generates
+			# Random Uppercase ASCII Characters
+			# [char] (GET-RANDOM 10) +48 Which generates
+			# Random Numeric ASCII Characters
+			# [char] (GET-RANDOM 15) +33 Which generates
+			# Random Punctuation ASCII Characters
+			Set-Variable -Name "NewPassword" -Scope:Script -Value $($NewPassword + [char]((get-random $ArrayOfAscii[$pickset]) + $ArrayOfAscii[$pickset + 1]))
+		}
+
+		# When we're done we Return the $NewPassword
+		# BACK to the calling Party
+		Write-Output $NewPassword
 	}
 
-	# Nullify the Variable holding the password
-	Remove-Variable -Name "NewPassword" -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-
-	# Here is our loop
-	Foreach ($counter in 1..$PasswordLength) {
-
-		# What we do here is pick a random pair (4 possible)
-		# in the array to generate out random letters / numbers
-		Set-Variable -Name "pickSet" -Scope:Script -Value $((GET-Random $complexity) * 2)
-
-		# Pick an Ascii Character and add it to the Password
-		# Here is the original line I was testing with
-		# [char] (GET-RANDOM 26) +97 Which generates
-		# Random Lowercase ASCII Characters
-		# [char] (GET-RANDOM 26) +65 Which generates
-		# Random Uppercase ASCII Characters
-		# [char] (GET-RANDOM 10) +48 Which generates
-		# Random Numeric ASCII Characters
-		# [char] (GET-RANDOM 15) +33 Which generates
-		# Random Punctuation ASCII Characters
-		Set-Variable -Name "NewPassword" -Scope:Script -Value $($NewPassword + [char]((get-random $ArrayOfAscii[$pickset]) + $ArrayOfAscii[$pickset + 1]))
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
-
-	# When we're done we Return the $NewPassword
-	# BACK to the calling Party
-	Return $NewPassword
 }
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUi0VXFswITPLLeUQoJKGTT0en
-# PvOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZxE36smE+PCUGBgENMp2/X7T
+# 2dugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -311,25 +328,25 @@ function global:Get-NewPassword {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTZh/FaZg3a2YYI5MpagaoI5IWJxzANBgkqhkiG9w0B
-# AQEFAASCAQAk8ip9VWJOuInoJ+ZBW1vPAquPugtX001/n2kmrZWEsLjc8ER3+SPA
-# JhpfjYbrKNBpUrQIDk+BS3L6xeX8IRd/09AxDNJd72mO9FqskUGmzKgC6CcaWrl6
-# N1X7Jt6r3z9sS/IftuW0VlGMcCNeWpoyhpNl0l3ob0C49/o15ZxV4KIrMx4t1GuO
-# 5wXdOrEbBsSEbWFu/ngFsGSfDs2GL9dOC5nX+bOG0GbZMGc/W4WwlaTPTNimF9Ec
-# WIIPlRYegrFngbyH06l+1+uSSeAhA5vereoZt+fXuguOkYoUzCAxAzVzt6++4d4m
-# tFbN8OVqMzBNnOLEcbEfc8DlaOCry6CYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQLHOi3NmFB2UiiV457o1d/9yhLvDANBgkqhkiG9w0B
+# AQEFAASCAQA9Mcas/XPKWYFLE1psmIzmRPO+mQvH4uyxuNf7JLk+BV4tnnEh2YY+
+# KcucY6l9wzl9KvSI8RXm0Y/JQp6ySA3fkL2nqcFOERc7RHNxtv3hDFE5broMnQUo
+# IQfN3aWh2I3VUTbjkpZ9BNXDIG1hZV+CDAdYNtTz1x1jwqcF5kxVt1vSsCmWTlcc
+# xGM/329k+4TrJUaGlao5gwzMUYLcsSsbkRwfmjtz5skhgJlpePuIP6SS7o24eeC0
+# 7Y+FgTuE0BvBm9fhTJ534XXKLpkmfoQGhUdEcmLGt8PTMT3xFs4BRkH4BCDjEjse
+# 8c62sMYnuMDEwmug5ZMaiR0JbmhqHrZioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0N1owIwYJKoZIhvcN
-# AQkEMRYEFKeta0t3Setgw8mK0HfX8+xnhC52MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyNVowIwYJKoZIhvcN
+# AQkEMRYEFMevhgbxqNtrfRjPy8zaFw89NDOkMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCEVzZmEGVGgWnYdwXN6Ad0Q9PGi9r3kPbkoRqSAnYqgieT
-# OO01zzkVH9+dba467SywXoWIcStWSW7MrPv/gsASukLip21yUnH2FXHaZQKBvaLH
-# RnBW9rHl1tO+i1GIx+bLRWIVI3Vnrjm+nHCkn4wxiRdlseVhFUraxLruYcZz54ta
-# h6hlBl5i4T8xUT1d05TUiLz6X89JQIrnqwGqsvwnsvSwxdzNQ1k91zhW3lkKd3y/
-# ZUyuPIL37ObZQedXXWEgWmoqAIDCpepe18mMZjhvIv3w3fb6lfnpZy256s3fQmqt
-# 9v/9psENfFofvyrFRRAND4cxMCyscX3vtGpJ793e
+# hkiG9w0BAQEFAASCAQA96Dej4081YLhBj/DCPavW0mOpFGFRowkFOopMIHGvZtdY
+# 1x9DR5xOd0VWNLEvmwLQopelBlRhJ9V6fYl/CTEzfLtfU6JDiQ95MzHc52Ul08v2
+# nQU03DF6rqOD1Wa9IadhaEEPdVtBCBKrpJGuP8udUA+JMYnaBkgNEStuqVpxq3zp
+# Doc9pYtyoQsx7RIdhgC0V9K/j0XIs9WiJVcwDhza9zjzdfqtzKbNpHMtrivQjsBD
+# oqNXJXNDwutRGrqWyYuDlacyp3/YauPOt3j4oKXY9IIQSqLbhW73yA+a8qA0UzVo
+# gIXI4xS4m5XvGzHJ1k+5+a7klGqEGzb65iM6ruQQ
 # SIG # End signature block

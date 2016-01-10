@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function global:whoami {
 <#
 	.SYNOPSIS
@@ -69,20 +73,28 @@ function global:whoami {
 	[OutputType([string])]
 	param ()
 
-	# Call the NET function
-	[System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+	BEGIN {
+		#
+	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	PROCESS {
+		# Call the NET function
+		[System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUt9Wgi8dAHUN1A3uvYQEExsH2
-# px+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQo1bDC+EgCRIcg5O/7W9gf/+
+# SmegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -225,25 +237,25 @@ function global:whoami {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRZA/T0/i1wz30BxG2XT/L03H783zANBgkqhkiG9w0B
-# AQEFAASCAQA9CYXEBYzhpzKseVEEpywkqbvZHPHs83sNYxpzYarrQLDZoCiiaSI0
-# MKLEMyTqCA+/7dqoaWPSTtcn+XYkcSZ27BEanaJbg7I8HCAi7jBM15hElqf1/4Sf
-# I04ohnYDgV3UNJuWSTy8eQxitLmSffRgEYFnLhYm7WLYTUT8IX6g6nWLtJvom4Rx
-# +K8Eu5UbuFrlqxG26Df7ZFc1zqzr0kJBTt0vvzTHmvvxibffwiwWfSlMOew61BzQ
-# Tntz0eKOw8CzqRH3+d8F7QhjmuM/EpJxJ06ANuRE4P5hE0TlRKvjIItXgQRIAXXP
-# X61XzKPS7FbPy1rKtIYWWPEDqmqJp+YooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQZxt6SryZnsoO8r4cZ03DtZlm+CzANBgkqhkiG9w0B
+# AQEFAASCAQCuOEfkh4+EHFFmgXn8gX1MPBjt1NVC5dMtDgwibrVPw/Fb9Z+maVBl
+# uDnjJu91OlkdflzJ4K0zJ4jEuBjjekjA41ytBtWqLv5qGev3MoZb92BAEguvjhWC
+# F7/3StV3XCD7/uuYKjB9DkQMqkxaT0DGYcDD6ZesvG6hu4DDYMcFIuIkiGilTurS
+# /4xkCd/Gckkt73tZKrc8Z9xClN2q5kElb0buX4rKDnVV4JpePXxe2yU8Vzz3Zu+K
+# YUlVQSxgNxqaePtP6gYhVT2YVR243peZmDzas/8IAi2CeHcD1szkA/XDyBR5v2wR
+# T/MqklaZlHJtNHyLtu5JP/5X4fXJ43CpoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTUwMFowIwYJKoZIhvcN
-# AQkEMRYEFB8eK+anKdoPbB4EgzBTwTmYXmyoMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDE0MFowIwYJKoZIhvcN
+# AQkEMRYEFDAJrUzefC9aBDAX32my+RQvr90HMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBAXaUfQsouBGh99J/b9ib9bONxBDJpKSG/jkDbX+wSzJdv
-# yejIqRsePdNfhzVuLQvjZC1Rm4aUMAb2YlOZtWs94p92Xpoq1qZiHztEB3WCoJJw
-# eZvDzPQTlQn4CZESeXVGEAbeulkYjOYkFf7/4Dh7s/YWa2u/N6nvmp+zweEfu1zt
-# Hww1nUs1DHpJ4iOo5kjlIZB52hOPMwueojGQ7lrPRndJsQFZvc2YlQFTHPVWR9/s
-# wldZ+5mLXLhe9JMHkQeiSJV7JfW+V/TZgFX7MK6zNl6zpkoRgRIsEncSYbgNOGfo
-# /4ql3nqtyEKBfZqTEdI8J+Gm9jPY2XUtAoScJkMm
+# hkiG9w0BAQEFAASCAQBlTgXVaeFpTM5ZeSykWZWr7mDGkyxa0U3k4PzxEl8i36t3
+# fpIrrq2BZDMjXzdScRiaCyhKOwfJwKp+tAk5sZm4HXjQt4FMh8fYXDplsngZBhT0
+# ersOCwW0dLaA/Xl8MTrZxSz9WJwONq+RoEnidKMHhCP1c+ul5vEtf8IGtzV0iAGi
+# viriTpdQjjkz2Ac/GLoJ6U8Ga+Qyi9oEFQZ4rg+lB5yt9M1CReOwFhKrDtwT/swr
+# F8aD1G2tOWFtpsi/KOBun58aQ98KK7+/EJ5BAHcCke4tUnvJ2hzIT07YQQrDvMC9
+# NRdepJtFua82VRFjvhC8btRRD04AzlGDGY2o4vC6
 # SIG # End signature block

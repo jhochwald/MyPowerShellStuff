@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function Global:Get-NetFramework {
 <#
@@ -85,37 +89,42 @@ function Global:Get-NetFramework {
 		$Credentials = $Credential
 	)
 
-	$Splatting = @{
-		ComputerName = $ComputerName
+	BEGIN {
+		$Splatting = @{
+			ComputerName = $ComputerName
+		}
 	}
 
-	if ($PSBoundParameters['Credential']) { $Splatting.credential = $Credentials }
-
-	Invoke-Command @Splatting -ScriptBlock {
-		Write-Verbose -Message "$pscomputername"
-
-		# Get the Net Framework Installed
-
-		$netFramework = Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP' -recurse |
-		Get-ItemProperty -name Version -EA 0 |
-		Where-Object { $_.PSChildName -match '^(?!S)\p{L}' } |
-		Select-Object -Property PSChildName, Version
-
-		# Prepare output
-		$Properties = @{
-			ComputerName = "$($env:Computername)$($env:USERDNSDOMAIN)"
-			PowerShellVersion = $psversiontable.PSVersion.Major
-			NetFramework = $netFramework
+	PROCESS {
+		if ($PSBoundParameters['Credential']) {
+			$Splatting.credential = $Credentials
 		}
 
-		New-Object -TypeName PSObject -Property $Properties
+		Invoke-Command @Splatting -ScriptBlock {
+			Write-Verbose -Message "$pscomputername"
+
+			# Get the Net Framework Installed
+			$netFramework = Get-ChildItem -Path 'HKLM:\SOFTWARE\Microsoft\NET Framework Setup\NDP' -recurse |
+			Get-ItemProperty -name Version -EA 0 |
+			Where-Object { $_.PSChildName -match '^(?!S)\p{L}' } |
+			Select-Object -Property PSChildName, Version
+
+			# Prepare output
+			$Properties = @{
+				ComputerName = "$($env:Computername)$($env:USERDNSDOMAIN)"
+				PowerShellVersion = $psversiontable.PSVersion.Major
+				NetFramework = $netFramework
+			}
+
+			New-Object -TypeName PSObject -Property $Properties
+		}
 	}
 }
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhZUyu6kkBQgIUk5QfjW/l7DS
-# b2+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4fvLpe/ap5dKYO5gWdC8Ie11
+# g56gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -258,25 +267,25 @@ function Global:Get-NetFramework {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRvFoBYuz9RH8ZiRRFCZBgTMV9rfTANBgkqhkiG9w0B
-# AQEFAASCAQA1VVy+GJHvbNtKquFyU46HK1gSD6Cnov07ipmCLgfX28J81CdeYxEm
-# afeuPRr3bc8U4MG8ObYY9DgkJY6T/y5wpZkYueOdZ0iVhutbKvD7cqx9IcJzFqzu
-# FVmSQj/FZNH37Vb0VWLxJcESYnpubzdDpIkHs/fcmsHAVwskInruKywoljVCmuqc
-# SxZzy4eN5LQ1epgSDBCELOmDjfZ3TVAhP+JHyP5tjY5GRuCIRHOufsjSOe/tl111
-# wozevTdEU+Bg7ms7OPK5rpUZzx2htVjoepMNNS3qWQj3YuWvSuSaJsfky18ANNoB
-# CdiEjKh0cxR4UpEUYbmzhNsWvGda++cQoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTf/QerLy4hdlYK2l+fw7Q9+Pa14TANBgkqhkiG9w0B
+# AQEFAASCAQBQYaY6LBY8EKiVtzVFZhfDn7uQwfpUkETFNCusMDbeWrYRZxBu3Jb9
+# BYHjajwjx4nKXKcBsoN481t1n+iWYNKQyrQToWlazeMmL02qJeruYP/In8McYSfW
+# D2YkUQDm5cqjTn0DDJJHlZsaeibbcwU+r9sniE1NPQEJ0nKR9SNeqgCsCh1U4yv/
+# 5LBjFIeBVmIXPRwdn0iA453NH1JYj4LQ/zsovCcebO6FBtz/XW+ShHsKqCblVce4
+# aRq5rhl6b65pkGi1VNAGoXIV5OZ9CsFFFbmKN+lX8hVDIakNozRK7yN8QdJJifAY
+# RS+ReHJsdQAfW4MzfBk7fcI8kjX87HbMoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0NlowIwYJKoZIhvcN
-# AQkEMRYEFNcBp4xKuf1qLCt5Ks4poBXBMfVSMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyM1owIwYJKoZIhvcN
+# AQkEMRYEFA7tbdg9XMOqGTDfydHZg7VDV/zUMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBNCxQ2N0W4ZEcIwpF54iVvqDmmsbQvJ1U7P39QMq8y7pKj
-# LdtNTT1/8wcfEB7uqBB0N7Moi+FAPkvlYNAFiC6moW8VXsS4zyZT++tU1WpdaV54
-# MSG7fAfnq/7U11y9KbVb1xaGKjSC/bBd5Yy/AFoGOpN7eRGwQaZv713CrG/3HfE9
-# OSwZupo2x/HpJH2f/n32wmanqH3iY7kzwNOCVKtZ67eKfi8ZOebZPeRcIWhItf+L
-# vOCbpMIHhGiNZZRyjKXoJnJT1BaWAcpzOjO2u8ak8pEDpZH4b9qXjRNAcd6pfrM5
-# fxyMAyqSEu+xRwH98YUwJJIMowTzdHMPHAVXWsh2
+# hkiG9w0BAQEFAASCAQABSrWwpZXB7LcQR6aul/Nr46pseCPT2WEZ2sAMluJ3Ivjy
+# gqdZKGH/T7fQorro6TCdhRmCVoF3x+GkIIGwu+6VWqRNugPH6HbxhIxmlrxYJRi+
+# 6G4Qqrjy7tBdenZjMRM6TWOqckmiK0vMLlQ4HKldIhgaQ77QSTzOW2XYuDaJMuWh
+# SeYym9xBWsR1VAQWXZE09YlxPxv3af+biV1f+kJgk30UBviHyvd01JiJqdpKVqUO
+# CPIWmV38oWLXRiHGjbCWx7oh5jCeOBW3IK76wqWiMVWD6sdiL9Urbg1JlMg3sUOG
+# n6+jn7gjSKVuTUaTqKoevCRw01KRYJPOafYevDmX
 # SIG # End signature block

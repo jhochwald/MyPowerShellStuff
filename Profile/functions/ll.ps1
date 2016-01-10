@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 # Make Powershell more Uni* like
 function global:ll {
 <#
@@ -73,48 +77,54 @@ function global:ll {
 		$all = $false
 	)
 
-	# Define object
-	Set-Variable -Name origFg -Value $($Host.UI.RawUI.ForegroundColor)
-
-	# What to do?
-	if ($all) {
-		Set-Variable -Name toList -Value $(Get-ChildItem -force $dir)
-	} else {
-		Set-Variable -Name toList -Value $(Get-ChildItem $dir)
+	BEGIN {
+		# Define object
+		Set-Variable -Name origFg -Value $($Host.UI.RawUI.ForegroundColor)
 	}
 
-	# Define the display colors for given extensions
-	foreach ($Item in $toList) {
-		Switch ($Item.Extension) {
-			".exe" { $Host.UI.RawUI.ForegroundColor = "DarkYellow" }
-			".hta" { $Host.UI.RawUI.ForegroundColor = "DarkYellow" }
-			".cmd" { $Host.UI.RawUI.ForegroundColor = "DarkRed" }
-			".ps1" { $Host.UI.RawUI.ForegroundColor = "DarkGreen" }
-			".html" { $Host.UI.RawUI.ForegroundColor = "Cyan" }
-			".htm" { $Host.UI.RawUI.ForegroundColor = "Cyan" }
-			".7z" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
-			".zip" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
-			".gz" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
-			".rar" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
-			Default { $Host.UI.RawUI.ForegroundColor = $origFg }
+	PROCESS {
+		# What to do?
+		if ($all) {
+			Set-Variable -Name toList -Value $(Get-ChildItem -force $dir)
+		} else {
+			Set-Variable -Name toList -Value $(Get-ChildItem $dir)
 		}
 
-		# All directories a Dark Grey
-		if ($item.Mode.StartsWith("d")) {
-			$Host.UI.RawUI.ForegroundColor = "DarkGray"
-		}
+		# Define the display colors for given extensions
+		foreach ($Item in $toList) {
+			Switch ($Item.Extension) {
+				".exe" { $Host.UI.RawUI.ForegroundColor = "DarkYellow" }
+				".hta" { $Host.UI.RawUI.ForegroundColor = "DarkYellow" }
+				".cmd" { $Host.UI.RawUI.ForegroundColor = "DarkRed" }
+				".ps1" { $Host.UI.RawUI.ForegroundColor = "DarkGreen" }
+				".html" { $Host.UI.RawUI.ForegroundColor = "Cyan" }
+				".htm" { $Host.UI.RawUI.ForegroundColor = "Cyan" }
+				".7z" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
+				".zip" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
+				".gz" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
+				".rar" { $Host.UI.RawUI.ForegroundColor = "Magenta" }
+				Default { $Host.UI.RawUI.ForegroundColor = $origFg }
+			}
 
-		# Dump it
-		$item
+			# All directories a Dark Grey
+			if ($item.Mode.StartsWith("d")) {
+				$Host.UI.RawUI.ForegroundColor = "DarkGray"
+			}
+
+			# Dump it
+			$item
+		}
 	}
-	$Host.UI.RawUI.ForegroundColor = $origFg
+
+	END {
+		$Host.UI.RawUI.ForegroundColor = $origFg
+	}
 }
-
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUW6qRVDbPkwHQxwLPKjlhM8Gr
-# SyugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU14Y+8uHnhaFxRORl9i4kvTv3
+# Z8mgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -257,25 +267,25 @@ function global:ll {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQTt4nCGT3gknlg0gkWYkslTcAFmDANBgkqhkiG9w0B
-# AQEFAASCAQCYwcH1aA8BlFwDkd1YMfLWakrS05T0iqTM+NF198sZ8sDeZQhjwR+H
-# aJdsu80x5Yi/n5x80fFvPY1Xno9udigt5t2JPriQUVm70MCCpuPWfDLS4YXgGR5w
-# Wa+nhCDmpGIeHkzuPrkxXdLPeSfPfaqSiFNWdv9H9NeB+SzQ9VmixiDWhc9xn9hN
-# WzCHDIcB7ue33BU1uxer4R11zKg4nfaTMV/yMhK9aiMgnqZWWDw0BEyrA937ztq1
-# ONR98BWKlEW+ffA/jO9lhoEgiV/8A1NwcLAG4ZtL0sXH2bohroiOfSS/bv6geEWq
-# NV9XxVYb+4MC1iphz01yvffAqndkh8E6oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTiA8WLvXcWvFgoMH4msX7shGb5bTANBgkqhkiG9w0B
+# AQEFAASCAQBo2Y889jnXddpwBzTpwznggwGHILRwalzodfJWThRpyRvbMwy44jd1
+# wLDTzBg9uC0HiYV7PyggnC5Ubyk0N7uY3O5Ak/48mJk3eULGK3PX6T1XRNX7xN2C
+# oPpf0tCilptzYrDqsCNxDYpFFn4KhgjZd8ck5Wx7iwaeyjVV313rZfs/tGmKma6N
+# MitpFlIsiKW0YA6tvPLC1nDlf5UqRmI8/Gltm7ixuk1jp14kYtIqo4rhUdzPLsEo
+# CsynlxGp5ufdHvS88RTaEuRWHiUmAeVHvlMsGdU3g/XrIVCdBXaS8S21KKIsHn6q
+# 4BuBgSTD5W9UuYajFAJcPQQIjns8XPuEoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1MlowIwYJKoZIhvcN
-# AQkEMRYEFEGIzGqfIDqX0vPWF9MK2BHATYp/MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMVowIwYJKoZIhvcN
+# AQkEMRYEFPPOydV9dVbtIW6ktU8Ps5z4BNoVMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB7vLiaaJ6rI1pD/eIg9u/evKo8F91NypEkGN7qXUN1xlVJ
-# vvULqkJXfEW3kc9e1oUpIj7QlnZaMZu9UDrG6FdtOKieR+ZCchMdzXn1Dwun3Gem
-# NhC6Wg3Q/simF759geU4C2oDZ648Bdo9OuC7EhLfwhQQBVdpst9U9mOUCQE04lOs
-# YskTv+qV1Vuzk4LL8glAcpyT/+gCJozmp0tpg+bTTpmHvBnqNfeuYw7RMDGD868b
-# bVOE8qMFzDSSkj7dL8RstJhUihWtR7RBzo+5xD/GEx+kNvN32UWJ/SujetamHNVp
-# kmSVGKIOrO1cTyvZDvJOYzshQ48wzF/z6x/wROu2
+# hkiG9w0BAQEFAASCAQBBqLStlN/Wpwfie+w8rIJqTMpbBsxLVABLra/kYaRQX9bM
+# LAFwOkrp9gOWcm+Qu55+nnHwWwKd14yvItRFYUdK9CEu2LA3OWcX861GhSvyzvXi
+# /SeC9IlfioSD5E/JEZP0D3b70YadsU/k+e+6YxoZc1PVgbq2YrgJFNNnuV+EKz54
+# usvihXFfrxeueZIKERkDzmoh9biRPbltuurUyCocvs1H1Qm6960GtaWHGpTo5u+l
+# 65Yg2BXj3mv2JVCnfnzsTqHHuiQeSf+gEyL9t2as87yyzoAxEpDb48Q4B5hGsPb9
+# SB2CTJfyJMUQQ6bG+kCVijGxvnzrEMWgMj4ipc2+
 # SIG # End signature block

@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function global:Get-IsSessionElevated {
 <#
@@ -76,31 +80,35 @@ function global:Get-IsSessionElevated {
 	[OutputType([bool])]
 	param ()
 
-	# Build the current Principal variable
-	[System.Security.Principal.WindowsPrincipal]$currentPrincipal = New-Object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent());
+	BEGIN {
+		# Build the current Principal variable
+		[System.Security.Principal.WindowsPrincipal]$currentPrincipal = New-Object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent());
 
-	# Do we have admin permission?
-	[System.Security.Principal.WindowsBuiltInRole]$administratorsRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator;
+		# Do we have admin permission?
+		[System.Security.Principal.WindowsBuiltInRole]$administratorsRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator;
+	}
 
-	if ($currentPrincipal.IsInRole($administratorsRole)) {
-		# Yep! We have some power...
-		return $true;
+	PROCESS {
+		if ($currentPrincipal.IsInRole($administratorsRole)) {
+			# Yep! We have some power...
+			return $true;
 
-		# Set the Variable
-		Set-Variable -Name IsSessionElevated -Scope:Global -Value $true
-	} else {
-		# Nope! Regular User Session!
-		return $false;
+			# Set the Variable
+			Set-Variable -Name IsSessionElevated -Scope:Global -Value $true
+		} else {
+			# Nope! Regular User Session!
+			return $false;
 
-		# Set the Variable
-		Set-Variable -Name IsSessionElevated -Scope:Global -Value $false
+			# Set the Variable
+			Set-Variable -Name IsSessionElevated -Scope:Global -Value $false
+		}
 	}
 }
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsG7oWVCimvKbL/YnR5GUo7bh
-# vSmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUYMiJpQg0B/sTeVMgga9am4fX
+# xj+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -243,25 +251,25 @@ function global:Get-IsSessionElevated {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRiNHpHS2nR0QEf99gWb+TBpiIuAjANBgkqhkiG9w0B
-# AQEFAASCAQCq4pn0JchHzJcROnt5ES+aNbm5rraZUE8UDzvp27ZKAuaDAvKw3/l2
-# HlR12/tAcaYODM762kg1h/lb2NKIq8LMPXvg9jRshDsuu/fTujKaGhzWLqnVMuK7
-# +vRygx+Qw6+kTrWhq5s20HNQPz/Pa7RRjgTXOacUbnDJY2w/1wIDvZWKqownJL5e
-# /z02Vubr9fKjykTCN0K7lou+1E0GtTzhhui8QGnxqYZDL3MkyCJOpkxTPCL39QBa
-# rejioAOOPyffaBboXH4aYbV/z+ek5sgSICFhU9Lrw3HfPB5gkmxy/pIQZ2Dx9c7Q
-# g/wixXuI6dFBON2SBOYc8neayG1YMnuqoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR5gR1q0CkjR8z5crYHYw/B6MFY6DANBgkqhkiG9w0B
+# AQEFAASCAQCEralux36VBk/+6TFIkJ2QkqreuFoEGnmo4rT67bdLpeqabTykwxDr
+# xEHLPeA7Nz7+6ZjWFNv9bgl+AmISkksOc6pN/VTpXyxzZu04xgdCZnx7c3BU2xt1
+# CV4Bwhb+z4xFJcr8GR2BPD2JqdWBc44lPVZYh4mVAGa2tG/ZekcE4VoXDMBGXESO
+# HpcV+UsAglFvbAmsdO/AMlYpEkXETue7LefsY6oDb/y97+3/XUc5sozWBt+WpXN7
+# umR3VZ748q/I09ujunDj63juiSrLLpVMkI094ZplD+bP8eJlfn7ZN+0cgBYGh2y7
+# gH/Nma7ZZrt2g1TzgozYv9b64muHDLaaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0NVowIwYJKoZIhvcN
-# AQkEMRYEFJsK22qsoc0q883rAKkxjujNJIHOMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyM1owIwYJKoZIhvcN
+# AQkEMRYEFB9QVsVPuNF8Gavu6aTuvU0DJrwYMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCBromfvEejrKjrTIy77B0RpdkCmyDU4kLro+/9DOmetjPa
-# D0EwF2RKauNytLXH2ojuOZ989R9xCaogeCjYv6YOAbVBK93zfZIOXAH4Gi7mCrRs
-# bNTUKJzQTCFJRv/YmybxDC73xJJhSWFBBwjuCmCXziWuFg8qL7yzS72AUr7lZv9Z
-# rTIzm5gP+kc+ZpTDoW0EveGnM/yCUR/5I+ukmvwCow54I1VHraAt1CWZBpLf7nBV
-# k7S7A3NTWyUHMwE114ZqPnEGRkxwWaSqqRECWD+I9QLzehi82/ndYUW0mXjhhd6Z
-# hKdeb1tq/gP3J2W+/ap1MAWcFTf68rJ6andI63SL
+# hkiG9w0BAQEFAASCAQBP4CHyqBxu1rxBlTMQfJPRjK2GWexbAnzOXTU75nz9Vl1r
+# bWChEVCKcTPrxjAy82tDlgZD4E5cLTtvp5viybmbNQzK434aXMGlL0xyvEyde6Kq
+# MasFNISYIv29kI8QNgOvCeJAJxbwp7rsMhtlQiYj9jzvAKNI1h62ni/jE228P+Cj
+# TWsI24BxJsSLHGMm28Qz1JH5AXqtvxfnDA4CKQ3WtEx8CtxdWFDTx5rl6EbdP6gl
+# wvYoAX/6JTHHkKKTA9Dw6ZmZE0rbPR49FiQ9OLRxmP+Ir77FcgekqRdan3IF14Am
+# mbqpAe0Mof5/fPEVXkemNxQQwX/jEaQx0v+NBKHs
 # SIG # End signature block

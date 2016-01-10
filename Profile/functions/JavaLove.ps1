@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function global:JavaLove {
 <#
 	.SYNOPSIS
@@ -72,51 +76,57 @@ function global:JavaLove {
 				   SupportsShouldProcess = $true)]
 	param ()
 
-	# Where do we want to search for the Java crap?
-	Set-Variable -Name baseloc -Value $("$env:ProgramFiles\Java\")
-
-	# Show Java a little love...
-	# And I have no idea why I must do that!
-	if ((test-path $baseloc)) {
-		# Include JDK if found
-		Set-Variable -Name sdkdir -Value $(resolve-path "$baseloc\jdk*")
-
-		# Do we have a SDK?
-		if ($sdkdir -ne $null -and (test-path $sdkdir)) {
-			# Set the enviroment
-			$env:JDK_HOME = $sdkdir
-
-			# Tweak the PATH
-			append-path "$sdkdir\bin"
-		}
-
-		# Include JRE if found
-		$jredir = (resolve-path "$baseloc\jre*")
-
-		# Do we have a JRE?
-		if ($jredir -ne $null -and (test-path $jredir)) {
-			# Set the enviroment
-			$env:JAVA_HOME = $jredir
-
-			# Tweak the PATH
-			append-path "$jredir\bin"
-		}
-
-		# Update the Classpath
-		append-classpath "."
+	BEGIN {
+		# Where do we want to search for the Java crap?
+		Set-Variable -Name baseloc -Value $("$env:ProgramFiles\Java\")
 	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	PROCESS {
+		# Show Java a little love...
+		# And I have no idea why I must do that!
+		if ((test-path $baseloc)) {
+			# Include JDK if found
+			Set-Variable -Name sdkdir -Value $(resolve-path "$baseloc\jdk*")
+
+			# Do we have a SDK?
+			if ($sdkdir -ne $null -and (test-path $sdkdir)) {
+				# Set the enviroment
+				$env:JDK_HOME = $sdkdir
+
+				# Tweak the PATH
+				append-path "$sdkdir\bin"
+			}
+
+			# Include JRE if found
+			$jredir = (resolve-path "$baseloc\jre*")
+
+			# Do we have a JRE?
+			if ($jredir -ne $null -and (test-path $jredir)) {
+				# Set the enviroment
+				$env:JAVA_HOME = $jredir
+
+				# Tweak the PATH
+				append-path "$jredir\bin"
+			}
+
+			# Update the Classpath
+			append-classpath "."
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpJLTAcPzpeGnrDQDb0koO01l
-# NHSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrvQXf0Mr74RC/l/DSPrz1yfe
+# C4agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -259,25 +269,25 @@ function global:JavaLove {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTk5JrH/HNXF2jbGTzYyCjqPMYwIjANBgkqhkiG9w0B
-# AQEFAASCAQB2JV9phin4SzI1nr2PRyDyRNnjtFNGGyuNVb7nCmxZpZeAGAIaBZBl
-# 3jcjzc5+EyuG1xCeabYLb5GHrqzsqbK5FEWRzoY26PKZCkZ3BRrmJDfRuYmU952v
-# X9k3KAcjl//DuhkKaovHW+azcpdwtln1TkaV7qU8Nae0TG5/htLzqwwPcJdwzcE8
-# KCTmv0s5EPIrVrxM4tUD60ccOW64SzY7nFzhQH7qv/wtVkCvcJAZqJG1sTDFa6aK
-# +5a+AeOcwF7+pM/mXX+MwJLi5+e0AjfoG1+FZr8R1WXX8nVXvOxzZV+kdBP6Oj9f
-# xphUPeFG1/ZOkCfqFK/w0X1wl+1IXmNtoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSWxPpujcZR2HpbWsnbRVfabQDznTANBgkqhkiG9w0B
+# AQEFAASCAQBmV9W0Ga/py5/OyU2qmJ5fUC0YRleIfBmIu3qYCGeVqk3+VI2krhJL
+# XiUDDgZ3qowl1vJ+84tTehsVllwSUdPTOKJpr7nrEgXKZ/j/MSjQSlOgmahNHBPx
+# o117GEUFu/5vaUAS64LaWKKk96tIkkczjpUihEzTZ5samuR3xL7i4ws3AtNXljAQ
+# CYN3r0zaQ0CGHkYunnes9TxGcaZOJn0Xab0rIg3qThIr8IYRUDpaqwIfZdxMoFCF
+# TcVvxYjMVEYkdZpILjttjPhT3mOr8ivfbguVeFfw3qCXMX4F3zMTiMxclfDoMHlL
+# pasDKKb1wVGH9BgeUaY8L5/RlEZ13LogoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1MlowIwYJKoZIhvcN
-# AQkEMRYEFHxok+YVnhmXrPRqwZnKylQ6JgWuMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMFowIwYJKoZIhvcN
+# AQkEMRYEFMB00N7OkgoPsEr2A8E5nCBLEb1OMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAypA2V6PnIm3gxqWEqZwb+yGdC54z6mVdmdiZstTgn2RhG
-# Q8NNTxLHkXzb26EkRG2KL2vhB82BuPbdaJT0JvNuK4ziL0ls/ezsBWXt8yh7xZaG
-# 7Yu+lV0J3z4BpH/3j3VKL5udilJuDcbkd54Lt/KxDRWkAB1LPoTfd6Lvj9jy2cm4
-# Yhr3tRudT/vyDnO8H5GE4UH+k5tFrQz2eJIVhFsJ0tyAWLXdUAoFiQ6IBQr74/Qr
-# jA0Ge1hxkjkuvJnGhi/3noxD75DBX5vl1nUpGLqS0ViGsO5+WV+1RNeEQcPHWoyp
-# FyL7NOiXfNJmGbZMDclq+HdiGZ8WVCc/KxHXHj/u
+# hkiG9w0BAQEFAASCAQB7UkrivO/R7DlLQ0UtX+qbxatC5fXwNyRAu1GdzdOes6Zc
+# AWLgsIg5+jKFhCwizfJGcOPh01sSlXCqQDMCcH4VEzyjNZmlTeuXjt9AOodIx+zf
+# Bi5Xwap0fjYociphbuasGE0b9X8E+r4SiLSK1gGKoct3SINu+d5enq/qzjehiKnv
+# ubXpJ2MECWQYnkQewo6gIG6LS7RPdEP6Zt+2pTnBh34jKrWcA9sXRKgLuZrQWNSz
+# WFEHfJsvDFNsP/IVBHJ5ixVOT2MZZD0tqVuNU+0MtLP+6ntrYh9DEWDUKJvHzJ9v
+# nBuwXIbK3rJ1X4b9KXlWGMrQGv/0aVdPBRS5ghVg
 # SIG # End signature block

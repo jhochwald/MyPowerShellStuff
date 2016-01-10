@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 # Make Powershell more Uni* like
 function global:man {
 <#
@@ -68,23 +72,29 @@ function global:man {
 				   SupportsShouldProcess = $true)]
 	param ()
 
-	# Cleanup the console
-	clear-host
+	BEGIN {
+		# Cleanup the console
+		clear-host
+	}
 
-	# get the Help for given command-let
-	Get-Help $args[0] -full | Out-Host -paging
+	PROCESS {
+		# get the Help for given command-let
+		Get-Help $args[0] -full | Out-Host -paging
+	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHJkPZhwCCVdoXC3t4WSnSHAP
-# CUSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKNHTSVNb5HMdJDEmhbbplppW
+# TuKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -227,25 +237,25 @@ function global:man {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ2uUopqE0J/hbv/ioq1JI9OkFj4zANBgkqhkiG9w0B
-# AQEFAASCAQCZY+nTvyc5JPiwrz5AurzNd60BbsC8Ru+f1tVzkZDJ7kyAt4P2CuTm
-# g8tB5vPMwYVwLS9pwZynfizN7LAq//aZHZuD/5aimj5Lcrt8WXN1MZtnUH+5A/je
-# VYYEUj+nMWjZAV6WZZWb33gBbacz2Sz78QwoH1s2rHTpVKn5N4ybQovqGzcGyiFQ
-# gPQatVJqJTn63V27Em4xQ2wbryIF52jcoAMsRw+G/81kv7wIYPvIJjyLAvR9JV7X
-# NOdSb82bRv4kI3qjtmcoBp1/IPp9S9b1QjFBO6NA67HOtwdemZ4UQyaVSdJIPFE3
-# 4bglGfGoF34s+LrZdogyqNTu5h9GJ9rboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBShiuXW0wjtEcOCkoE3Z0C1Db7AvDANBgkqhkiG9w0B
+# AQEFAASCAQAAZ67biW2uTnHZ22v/0FnhOEQcrQG7YjFTxchT5MZzb2GO+4NACqqH
+# 1FXjEzW4sTwUpVBzAanZeh01/aaJLmq7/9hvnygbUUo+LeF3zYDM0SmDAExYmORS
+# 3jSOkZdT/WJfYK9moqGhJUGZaMZ2flNHl7FcsefRjHUoZVvO2uNpUYNSgHYuhMoW
+# 3PI5GxSsmmGBpG9K8uuliRYk3TY6ngEqaonLAx/wOMhYf/1iRcKaWq+pgwqznryz
+# BjPFr9GcKNHBl9TrK1ZDQrW8gwWYIpE1ii80dYiFFX1N7Wibiy5erMxtQKv8VdH8
+# 2vaD6gjpr0gRHrKZwzGnkl3Fk7RN602MoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1M1owIwYJKoZIhvcN
-# AQkEMRYEFD2gilgcR8gYhuOjubQoem0LpyuZMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMlowIwYJKoZIhvcN
+# AQkEMRYEFMir+tXhbU5A0Aju0tVSsAGlygH0MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBythD0N4POzmU2Nmg3T1fEjyM2n5SY/l9HxkC3BdSybw28
-# L5ykOdRY2FM75bScbcgISwhHFMYH++WXaXPDmtlBkkRol5EbOqmkTGatA7+u22NU
-# 48+RwiM5eJcrTIFs1RC6/ZDshMF5Sgc/2yBb6c0t4lQ06onVjwZg2fX9QWukaCZG
-# JK5x3IJVIwd4Y5bSRuEaZqqs8zFoi46oR7OYlS/Vh1HG+d2Js3V1jhfx0/JXicjf
-# T7E19mpvYCJcAcMs/TLrRx3YBexKHF2L+JJg3YnoT9fMMAHmGv3Y+YVHldfd2WPe
-# 7lVbAs6C7mtddDp31mGJeHvXIAc9D1q4iCsNGWAu
+# hkiG9w0BAQEFAASCAQCq3Hlx2F7zwOHX4h0oiZ9ICdHqouqBg/ppiB195UgT7GPu
+# bIz+5tbt2B1c//iK7ziedP/ZWYYbbs3ozoQgJcdrZK5xYOF0IdgCPlglzXDifKjs
+# igV5IjUJB9xXoTuVyQRJ/R9NmVrF3lXsVdIYglfOIaPgTG3Vl+34i0GHPr8sGx/R
+# hZ8n/Ul8kIOGxbM+5hhZ/WDrzGyyThK4BgHsgZFfSidQIUD+q/lPHXSzXIQ2mGbZ
+# /4vFAWuKYIxCzOBd2da1U/C1IcBq+9/xHgoB6O2J/8BC1HE2SbtcDVo6XnLpsh0B
+# 0PfpoDB5I+W+mg+EsYxd2f+WPOS+DdfV4SwlOO/l
 # SIG # End signature block

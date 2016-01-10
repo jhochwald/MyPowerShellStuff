@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function global:Get-uuid {
 <#
 	.SYNOPSIS
@@ -70,12 +74,16 @@ function global:Get-uuid {
 	[OutputType([string])]
 	param ()
 
-	# Call NET function
-	[guid]::NewGuid().ToString('d')
+	PROCESS {
+		# Call NET function
+		[guid]::NewGuid().ToString('d')
+	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
@@ -85,8 +93,8 @@ function global:Get-uuid {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXIEQV2NOQ+e0sxeaYV/bWhb/
-# 0wegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdveEmURCIvZaly0ksnSKLWQw
+# u1CgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -229,25 +237,25 @@ function global:Get-uuid {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQbzWncx+RQ5Lia/1jth/xcgRRwcjANBgkqhkiG9w0B
-# AQEFAASCAQB+RI7dSI54CKySwEIYXNIii0xsQInnGWgEROe0AKJXiIqINo5gPIXv
-# qSVDDrWmMmM2gmf81xC/nTDMr6RlyWTczfhmOLagTSXMWTEKFY2ZhkA2yoQMon3k
-# dONx8tSdyWHDHNyoPft5EajPn/sLKcTTdxdIpEpKcu6tTfTT3DCwMeG+leONW+tG
-# /LswruvAQUYipEv4kguMHjhFm9nzR8y1OT5496+Nail2f6uHv1zbfddHwv5zrary
-# fmboT4lQlkzLr+nv8+/7orxKKnGanh6fXUGK0Cshiqvq0qEjrtowbupFgg9btq9y
-# 26AwvKNnpI55KHnPNwl1yybFc1et+YzLoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQRqgf3wICTxwq8yeibL5aKyp7+HjANBgkqhkiG9w0B
+# AQEFAASCAQARvpg7dAdStocMQm091vQ35ck5XpvR+IuKArCLXJH2Yme1R/yrUEKz
+# PA4mfhSjncFChEiTOiU9WJzhZWI+yoooSM2c9IZ/vLgAx+LPTMGFvGRCaPI28Vd/
+# Y1MX38s7ObqE2GuQQqCaecPGXX+6VrSOJ50nPd+WT3tgW6kWQEp+yS3PAIdnckZk
+# 9sLMsHs37hrwcBf3aEEfqONE6xQmDTcI4uRUD8e3qMZVjFIaUA5gcbxKssGXxvcf
+# enZ0y6fpVtAQT/iKDUvFMr1hOzOcOjQt3mQj0xUiIdFwsztNuPRz5A6K7l1xQglP
+# K9jl+y+FmB7PseZ0tPkDPCE97ANeThzkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0OVowIwYJKoZIhvcN
-# AQkEMRYEFLaMhdanVCgKManbKYw0r1ssEtxfMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyOFowIwYJKoZIhvcN
+# AQkEMRYEFHe9vUAbJ+jvBfiXB1b5F7yCZxGCMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAUWC1KXvVmS2hB1E+TCi2qwjzkTJJEGkIumFbVkMSfLMdh
-# pvYZugU4ZFnaAZw2JoWbKTxT+8MHPHyHY7tf4MznqK3A7T2fXBoswBapu4zXRApr
-# fPK8Pq10a+6S3ghKuv+slaAWqmeQDdeFj6Zuh7ICjGQLO2fU1lxZxAiDrG3k/s4x
-# ZXrVNs9N081wHPoyXlN2cKx7paf/oevPaN8EotnxzBkJ+d9+46NVSbxG3oyEBFKE
-# y+9JzIpYrCyOp4yzELvCCufFLLQtwPUXRdvSEGJJ9lWnITxms1t/lMb3I+hU4MEj
-# tmkVEbd6wBA9Ihm9/dwOLuFEEmfOz+d01uMhtaC5
+# hkiG9w0BAQEFAASCAQCXRlES/E/K7rqd2I+3jHoBvvYdjesqnqqrVNhYbZ05K82I
+# ix3lEMQHJWLIoapMLjHdNlkvi6LMbRU5T6gHvesToOngJOz6zIBABSnn8pMTFvnA
+# AdAJ8dxiEXyXHSkTFGe2+0Br+C6nkqVMjN3Pr8xUUm0RwTQLEP94rG9iYS+JOZq/
+# BQDbMYQcRTMaCFu+Wt4WBcbas0cnTfsi8WJAz+ZJMiHGZrunvLxk884oArvs+YS/
+# jRdV9NEasaFxwGWywRbFYbXGGySi2g/LBcnmtmFpPqgvGgBhE2knn2uNuK22Xfex
+# zEjcSrpz4SLw/E6cJzVQvuBK3P+5dbvn4Rd1miPt
 # SIG # End signature block

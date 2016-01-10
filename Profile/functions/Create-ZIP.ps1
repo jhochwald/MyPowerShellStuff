@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function global:Create-ZIP {
 <#
@@ -133,91 +137,97 @@ function global:Create-ZIP {
 		$OutputPath
 	)
 
-	# Cleanup the variables
-	Remove-Variable MyFileName -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	Remove-Variable MyFilePath -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	Remove-Variable OutArchiv -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	Remove-Variable zip -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-
-	# Extract the Filename, without PATH and EXTENSION
-	Set-Variable -Name MyFileName -Value $((Get-Item $InputFile).Name)
-
-	# Check if the parameter "OutputFile" is given
-	if (-not ($OutputFile)) {
-		# Extract the Filename, without PATH
-		Set-Variable -Name OutputFile -Value $((Get-Item $InputFile).BaseName)
+	BEGIN {
+		# Cleanup the variables
+		Remove-Variable MyFileName -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+		Remove-Variable MyFilePath -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+		Remove-Variable OutArchiv -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+		Remove-Variable zip -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	}
 
-	# Append the ZIP extension
-	Set-Variable -Name OutputFile -Value $($OutputFile + ".zip")
+	PROCESS {
+		# Extract the Filename, without PATH and EXTENSION
+		Set-Variable -Name MyFileName -Value $((Get-Item $InputFile).Name)
 
-	# Is the OutputPath Parameter given?
-	if (-not ($OutputPath)) {
-		# Build the new Path Variable
-		Set-Variable -Name MyFilePath -Value $((Split-Path -Path $InputFile -Parent) + "\")
-	} else {
-		# Strip the trailing backslash if it exists
-		Set-Variable -Name OutputPath -Value $($OutputPath.TrimEnd("\"))
+		# Check if the parameter "OutputFile" is given
+		if (-not ($OutputFile)) {
+			# Extract the Filename, without PATH
+			Set-Variable -Name OutputFile -Value $((Get-Item $InputFile).BaseName)
+		}
 
-		# Build the new Path Variable based on the given OutputPath Parameter
-		Set-Variable -Name MyFilePath -Value $(($OutputPath) + "\")
-	}
+		# Append the ZIP extension
+		Set-Variable -Name OutputFile -Value $($OutputFile + ".zip")
 
-	# Build a new Filename with Path
-	Set-Variable -Name OutArchiv -Value $(($MyFilePath) + ($OutputFile))
+		# Is the OutputPath Parameter given?
+		if (-not ($OutputPath)) {
+			# Build the new Path Variable
+			Set-Variable -Name MyFilePath -Value $((Split-Path -Path $InputFile -Parent) + "\")
+		} else {
+			# Strip the trailing backslash if it exists
+			Set-Variable -Name OutputPath -Value $($OutputPath.TrimEnd("\"))
 
-	# Check if the Archive exists and delete it if so
-	If (Test-Path $OutArchiv) {
+			# Build the new Path Variable based on the given OutputPath Parameter
+			Set-Variable -Name MyFilePath -Value $(($OutputPath) + "\")
+		}
+
+		# Build a new Filename with Path
+		Set-Variable -Name OutArchiv -Value $(($MyFilePath) + ($OutputFile))
+
+		# Check if the Archive exists and delete it if so
+		If (Test-Path $OutArchiv) {
+			# If the File is locked, Unblock it!
+			Unblock-File -Path:$OutArchiv -Confirm:$false -ErrorAction:Ignore -WarningAction:Ignore
+
+			# Remove the Archive
+			Remove-Item -Path:$OutArchiv -Force -Confirm:$false -ErrorAction:Ignore -WarningAction:Ignore
+		}
+
+		# The ZipFile class is not available by default in Windows PowerShell because the
+		# System.IO.Compression.FileSystem assembly is not loaded by default.
+		Add-Type -AssemblyName "System.IO.Compression.FileSystem"
+
+		# Create a new Archive
+		# We use the native .NET Call to do so!
+		Set-Variable -Name zip -Value $([System.IO.Compression.ZipFile]::Open($OutArchiv, "Create"))
+
+		# Add input to the Archive
+		# We use the native .NET Call to do so!
+		$null = [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $InputFile, $MyFileName, "optimal")
+
+		# Close the archive file
+		$zip.Dispose()
+
+		# Waiting for compression to complete...
+		do {
+			# Wait 1 second and try again if working entries are not null
+			Start-sleep -Seconds:"1"
+		} while (($zip.Entries.count) -ne 0)
+
+		# Extended Support for unattended mode
+		if (($RunUnattended) -eq $true) {
+			# Inform the Robot (Just pass the Archive Filename)
+			Write-Output "$OutArchiv"
+		} else {
+			# Inform the operator
+			Write-Output "Compressed: $InputFile"
+			Write-Output "Archive: $OutArchiv"
+		}
+
 		# If the File is locked, Unblock it!
 		Unblock-File -Path:$OutArchiv -Confirm:$false -ErrorAction:Ignore -WarningAction:Ignore
 
-		# Remove the Archive
-		Remove-Item -Path:$OutArchiv -Force -Confirm:$false -ErrorAction:Ignore -WarningAction:Ignore
+		# Cleanup the variables
+		Remove-Variable MyFileName -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+		Remove-Variable MyFilePath -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+		Remove-Variable OutArchiv -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+		Remove-Variable zip -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	}
 
-	# The ZipFile class is not available by default in Windows PowerShell because the
-	# System.IO.Compression.FileSystem assembly is not loaded by default.
-	Add-Type -AssemblyName "System.IO.Compression.FileSystem"
-
-	# Create a new Archive
-	# We use the native .NET Call to do so!
-	Set-Variable -Name zip -Value $([System.IO.Compression.ZipFile]::Open($OutArchiv, "Create"))
-
-	# Add input to the Archive
-	# We use the native .NET Call to do so!
-	$null = [System.IO.Compression.ZipFileExtensions]::CreateEntryFromFile($zip, $InputFile, $MyFileName, "optimal")
-
-	# Close the archive file
-	$zip.Dispose()
-
-	# Waiting for compression to complete...
-	do {
-		# Wait 1 second and try again if working entries are not null
-		Start-sleep -Seconds:"1"
-	} while (($zip.Entries.count) -ne 0)
-
-	# Extended Support for unattended mode
-	if (($RunUnattended) -eq $true) {
-		# Inform the Robot (Just pass the Archive Filename)
-		Write-Output "$OutArchiv"
-	} else {
-		# Inform the operator
-		Write-Output "Compressed: $InputFile"
-		Write-Output "Archive: $OutArchiv"
-	}
-
-	# If the File is locked, Unblock it!
-	Unblock-File -Path:$OutArchiv -Confirm:$false -ErrorAction:Ignore -WarningAction:Ignore
-
-	# Cleanup the variables
-	Remove-Variable MyFileName -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	Remove-Variable MyFilePath -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	Remove-Variable OutArchiv -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	Remove-Variable zip -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 # Set a compatibility Alias
@@ -227,8 +237,8 @@ function global:Create-ZIP {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUEyM+Ggpya8ebXOMOaZaISFj9
-# Dc6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUU0qK5Ge7WWhs3QY6hspdGVeH
+# nhGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -371,25 +381,25 @@ function global:Create-ZIP {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTdgGsuwW8VKBDWLKXBW+A+bzijHzANBgkqhkiG9w0B
-# AQEFAASCAQAk7EdKN8tNbjODxWrRtLLPeg67zc8k1XQywLNatwFcxAUDnDT/6Rcw
-# Cs3PbgZ6fJF4dXrQ0V213OMw0rGUkZrdkaLKT4o84X7gRmrgE2Z9B/PjfIhpk8bu
-# zF4PoqAS2uJOdhUovtBYOHfvzGbzyXeG7Qln1GgcdHUbG06FOJ22/JvZ8/IFVDIT
-# 2Uv6eEG4eiRqkD3RwRm/KHDDAs/kuH90EPcFeL6jpfGaQTcVVuG7fQw9FkskVpaB
-# E1LkGFdaNk971S3U5/bSV+BwhdIH1yecpD5fJrzNL+FJs2VRTG/2S3LKVKw+RNWU
-# Q8ka+t497QRcCchI+Q50ZkRUFVp4pJ8LoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS2XOXIVPEGX/AtwvGSD/RC6mf0aTANBgkqhkiG9w0B
+# AQEFAASCAQAE0izmwWJbOx+w9VsabcE5mnKWInBy46N/6kEanG1V5kOzBdXtJQ+i
+# fFgZWmGYtDg3BISobCMmkXDkGSs/UoLXhcRNiDQfy5K80TcOq1Nc3puX94Lk7nTi
+# f3QJwi5fYsWlYEh3QNuo2RCWJQkyFgook8WlIvZx+hjtmEbLG1A+yNtB+9VvXN/Q
+# BoKwO+3w5lX1OLCAiIkD5LlRVKZnXdH7rym5HKNKtgXLX20HJvCV8VHkeqZkWhRz
+# K2w4smuuzl+TO3ofgAcLR2pCvFR/tu8fsFp78lHLeEgiqYap8LfrfUknstcWrFgN
+# juZ1zMOe2afcXDLdh8M2iuN2VGusruLaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0M1owIwYJKoZIhvcN
-# AQkEMRYEFOcIklLy3dKHNr3sc8LRxX2Rxsq0MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyMFowIwYJKoZIhvcN
+# AQkEMRYEFDdaVdZ61825rJ2XTmmyy7JJsA7UMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAGqqwrlPGYBow8+eYWr0iIzzIkKnn31frst9nkx4PXpcQb
-# w8br0vCgmF+hPglwpdfrgWL7fQoW3g6Z26fLxb67Z6OYy6Z6ssN7Sudl9x/kfqYa
-# DAN9rxKX7cr1BnWc9/06iiu9enSrOS6A3fbKZ1gCbsI/B+QeQF4aAwdPufBVFQyX
-# SND5Lz+qKKC3eW6GGJVFzQj5DeXtf7lvXK492OPkwjclldvpPNP/XrI2eK/xyUa8
-# s4LnXjfu3oj2ZQcSq+TXdf7fI57F0nA7ewJqii5ejOtLFb2vI+hv/CcqlTYd4ne0
-# MaAWsYHT2f7/8o0qzbIUgbCPPxdoFz8u0mmvsHGZ
+# hkiG9w0BAQEFAASCAQAcYTT3i06839Th47szyZplT3n0M5xC0PdsMfgLoMpeZCC1
+# uY010T41rARHdc1RgEcjScwKK6YQ7syWzVSWTlDN8c7mZAhXxwTFFcaoTZcXVkOg
+# yf5TEpt8PUlrh8xMXr/GW9VEScEDiPGAf5ObBbHgBE69kBOrZUorud9NsqfU1hXY
+# 4Xxvvn5kB+CxUWVHfnx/5LLDcv/DfLDpl7Ely87vBe/W7OIr5lMEflyWmNbPwx0H
+# 1sW92AI7z+LavYNDWEbPqwv0IpocvZqlicqX6Nt43Gx2sNAFMGdqcETnKpjtezYc
+# LPQr765Z5LrZBKZaTtBsPlBKIiO+4YZvGkY+MFKN
 # SIG # End signature block

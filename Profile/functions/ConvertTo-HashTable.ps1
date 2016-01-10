@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 Function Global:ConvertTo-HashTable {
 <#
 	.Synopsis
@@ -73,11 +77,17 @@ Function Global:ConvertTo-HashTable {
 		[ValidateRange(1,10)][Int]$MaxDepth = 4
 	)
 
-	Process {
+	BEGIN {
+		#
 		Write-Verbose "Converting to hashtable $($InputObject.GetType())"
+	}
+
+	PROCESS {
 		#$propNames = Get-Member -MemberType Properties -InputObject $InputObject | Select-Object -ExpandProperty Name
 		$propNames = $InputObject.psobject.Properties | Select-Object -ExpandProperty Name
+
 		$hash = @{}
+
 		$propNames | % {
 			if ($InputObject.$_ -ne $null) {
 				if ($InputObject.$_ -is [string] -or (Get-Member -MemberType Properties -InputObject ($InputObject.$_) ).Count -eq 0) {
@@ -91,14 +101,15 @@ Function Global:ConvertTo-HashTable {
 				}
 			}
 		}
-		$hash
+
+		Write-Output $hash
 	}
 }
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0fa5TQKkB7aYz/BN2ErC49Os
-# t9CgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUd24111mEVwU/YflC/0EDahr
+# SBigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -241,25 +252,25 @@ Function Global:ConvertTo-HashTable {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ1VoNLX4OmU1mEG2LSlogDK6T+zjANBgkqhkiG9w0B
-# AQEFAASCAQBBbOH55LUIEvTsD39KRQGWZznQwscuGyxkevVPpd3Khj6k8ap8NbQd
-# ufi5yC2zR/XhvPdR58tIvZZgXI68/xDIxr4l1tSjTAfOsG249EgITOZqRdyowhet
-# /dI0H/zincYRe/G8Z0NWYCZCT3Kgsg/jBifwy5GZqYQnvPb4BlhqUN0ZG/w0Vk9j
-# QqUiWsEd0Kv1l5nrLZJ++JccECVz6wGMtKpjVjjPe9BnvdYSm/e+l/pm3PNn8WZ+
-# PyV/Qve7/aAHAdzSJiKr/VefKdYNQH/pxk4bmsUCu6sGLA6ZS5HUEjZjiWOWlUAY
-# t0GeqzNTz3kZ/Y4LrGyAyQVDuFr+bvK2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT9+ySRL0E9w8WFQs5WdCioVPOtSzANBgkqhkiG9w0B
+# AQEFAASCAQBRTJYkV5hW5AMrCJZIcvc+7dPz7XOFwrzgolm9u920xkvPh6ppBnxn
+# girsObuEP1Ud7BSKCB2986nUM+TonH3O5udm8sCLZFc+We9yJbh+MzK2V8pMtsOi
+# te5yCW+RH8dPr3K4oVQG3bLx12Dx6XGGurawel8O2hbfjbGd2Jg8/MfH4tSsxgyj
+# qdup0lsJrdLu3Bhq1ueXMl36tOWaO3QFMNK4WtojHRVc3MGAoVT2Qw1SaFTDs8gv
+# f49VC2g7TQBPtwVYG9/eX84ItGvkfNebjlCqTbwN/i0CQ91wuHSXjdJ7BFAhEARO
+# E+f1OPUrOEN96EMvghA7l0V97+PZxbomoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0MlowIwYJKoZIhvcN
-# AQkEMRYEFL92q90Sut/kqRQOWQ0iU1jOsjwWMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExOVowIwYJKoZIhvcN
+# AQkEMRYEFP+Lwjf0jca8CtSFywr295cLpRxaMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAf2t2BodQQ9aqlU4+094MGmVQ/m60bN/wqh063kg0ScyV+
-# MYrulG04FIcQB9tFiSE8XNEZJO2bULoJNUzaZU8a2kYr45U6unNTj0lHcaGXqSlz
-# 3s5KdTwO3XFYMlMsgqAZKkrry6J4ofhwtD3qUTNgzSl6kLKGawNrYLkmQisGI6Ut
-# LvpVQbokkhSnzhVIW3e9DKQfenygQ+AyR2lMCr2UK9/H56Ng6Hl4FJlaofEwjouZ
-# kEIVoOkEXgTIrk95IuZgKwDgq2IhQwBHuOGruWy1yK63pS+HM9cPDRJQOKUM3tBw
-# 4JqClQtW9KSX0VCCZsVyO3JO7AcXAA15NZtoSSYu
+# hkiG9w0BAQEFAASCAQCUG1VhQ4VniWZhcg6Vepz6OdQvwXOBrddTlnJpo6PnHkpw
+# kwUtFScXhCkr9OOyh3u+5pTlF8lu7MTvBVR1250MnGDIZkgny7bkFnBhpFRSfVFz
+# 1yV/XWp/dYtMm7hZtOlldwCm3vHkEca5h+c8e0+YO+qaIbVxDBJ2B8sARvkYgK4o
+# bSsNef0+x/zmkGl8ZpE3ay8zvesyW3r/WUfvkZN80R23hC60qiWyVS2H92eBTMOE
+# ns97Bhwn55meLOAM4DoZv35ym3KA1pdut4B67xndJOADENOJt6LhXMxXVOwxXmqW
+# BtFn6h0UBTkYncxvQ4BP+vlFcnTAJTnzuj3s32XR
 # SIG # End signature block

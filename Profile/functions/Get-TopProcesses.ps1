@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function global:Get-TopProcesses {
 <#
 	.SYNOPSIS
@@ -59,20 +63,24 @@ function global:Get-TopProcesses {
 				   SupportsShouldProcess = $true)]
 	param ()
 
-	# Define objects
-	Set-Variable -Name SetValX -Value $([Console]::CursorLeft)
-	Set-Variable -Name SetValY -Value $([Console]::CursorTop)
+	BEGIN {
+		# Define objects
+		Set-Variable -Name SetValX -Value $([Console]::CursorLeft)
+		Set-Variable -Name SetValY -Value $([Console]::CursorTop)
+	}
 
-	# figure out what uses the most CPU Time
-	While ($true) {
-		# Get the fist 30 items
-		Get-Process | Sort-Object -Descending CPU | Select-Object -First 30;
+	PROCESS {
+		# figure out what uses the most CPU Time
+		While ($true) {
+			# Get the fist 30 items
+			Get-Process | Sort-Object -Descending CPU | Select-Object -First 30;
 
-		# Wait 2 seconds
-		Start-Sleep -Seconds 2;
+			# Wait 2 seconds
+			Start-Sleep -Seconds 2;
 
-		# Dump the Info
-		[Console]::SetCursorPosition(${SetValX}, ${SetValY} + 3)
+			# Dump the Info
+			[Console]::SetCursorPosition(${SetValX}, ${SetValY} + 3)
+		}
 	}
 }
 # Set a compatibility Alias
@@ -81,8 +89,8 @@ function global:Get-TopProcesses {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKHzwnaWZGOSCibhkq4Gp88WD
-# eZ2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqC+O67icAJKlggCpkcc2hvTD
+# T4ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -225,25 +233,25 @@ function global:Get-TopProcesses {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTnGp2FX74vF6DOqQLuoPb1l3dWDTANBgkqhkiG9w0B
-# AQEFAASCAQAcPisVo54gqbU732fsng8RbrIHVAw5/JJ7NdXgzpL55kpIXkhoM6Un
-# dQbQL9HFOnzn7o5MNGDwOPBE0IjQQG1AixX21ZcvV7oSWJjq4iteOOVnJkDWosf0
-# dptB+vTBCNGHbpbv1ClPe+1n92dKBf2joS1qrkxLS9FQbDfHHPX6xUwLZ8k7UWYg
-# PNvxrdzn4R/g1wr1Ch0qRBAtLllymdbYGpiJ/lQU18vw+Lyalb4NUsLM6m7LDEdN
-# snJsIAl0XP/d7/AfDZM7UhoQyiqgyzTsThZOZTCYwZdo8MEK0eL8geabqShzR6GS
-# w0fdHluqZ6+CoveeQTIArNqsK9JaJdcboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRVBsnU5wuqBsZmzKs0LCCdZV61KTANBgkqhkiG9w0B
+# AQEFAASCAQCDmjJVTJ+divk4y9sHt4pFKfbeDiHidomKtdI6fF0C5qGX5XPw/40S
+# jn8j408YWVjzLR2fu7+YdqPfcOV8mvxixqUfpWYoegpkleJy7m8obRqiic/BBY40
+# PPkAcxpgi9mhSV+Vzzy8hdmrguMvJdHxXEeXNUyBQAjzxsTCtgh9/uyh/JmFfYcp
+# xL5HNgBBK2XsIfJJ3eN4Vmlqp/ZkSConK6Mu4H5SybpYtMvfoKdx4GRs9Yc2PF4K
+# sRDjW47kYn3XsEz0By57x1hrc9oBWb0qp0U/uzCdsH7AHwTuHUOG6ZGra9XYmQbe
+# qu1KyZe7Evo9Qk6wF6N+GuDofJ/MOwJfoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0OVowIwYJKoZIhvcN
-# AQkEMRYEFC21FmrvKl7Zzi2prQq1M1DA8BzvMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyN1owIwYJKoZIhvcN
+# AQkEMRYEFE4K6gOZb9l0MIj3zOxI4fqu7P3dMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAftDfr55kVOAGdnDHsZf0Dxv+vokDiLi+kj4jpIrul+3Go
-# 6dKfpqrcDHb3dYw5sq6f20fKRi2LATs2QhfVmKk3JSBUNhP+6Kq/1mCMRisC1nAh
-# 8Iwax+z+MYO5LgyERcz6SbqeW9lMW45dYC/VVgFM38654m9Oha62a8pKZ2s7Dy/0
-# V7LHXo+B5QPMBRKle1FHOQCRDBylNldS2luL93yRZD9xIRZtzgs9DzN8y1FC7xHT
-# RqptOitFQ64ZZnMF9I1CnRAyawU/Sw6iZnlIgV+ZMAv4wNHix3IPa3jHALR96c8E
-# 05WpDv4lxiP92Le9HRYNGY7l1GtCqXebdqnlh5jn
+# hkiG9w0BAQEFAASCAQCDouAjAOhrtuk3wJs7JgjIEaaSH0eZu2JFG7Hbvs2qO4D+
+# yS15E0Lb1tA6EQJIzLOykvsVcibq46m4Qcyx2Wb9YmTb+lgYpoUBYBLv8/VdHZK9
+# jlpx7PdqYrDiU43z0p0vE6UQJGKTZPKwxXH8M2Qlv1e8PWvIMPHUu9hpB08Ki5/m
+# h1oV2t6Jmtasx1l3a2j2vzebtoXxtpOKbbrJCUwb+j+TwT0MtNLEvQReekpOpPJC
+# 3R3+RiQQcN6FcFvCBxK/yCNiBQfDg14DM0QIS+FOe30sse7S3R9+YOPOAsUFPCOP
+# dTcK1kcEPh3yogD6FuYzSn61hqj3JKmBWG0G2MF0
 # SIG # End signature block

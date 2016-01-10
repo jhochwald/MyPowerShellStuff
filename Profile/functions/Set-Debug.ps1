@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function Global:Set-DebugOn {
 <#
 	.SYNOPSIS
@@ -58,8 +62,10 @@ function Global:Set-DebugOn {
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
 
-	Set-Variable -Name DebugPreference -Scope:Global -Value:"Continue" -Option AllScope -Visibility Public -Confirm:$False
-	Set-Variable -Name NETXDebug -Scope:Global -Value:"$True" -Option AllScope -Visibility Public -Confirm:$False
+	PROCESS {
+		Set-Variable -Name DebugPreference -Scope:Global -Value:"Continue" -Option AllScope -Visibility Public -Confirm:$False
+		Set-Variable -Name NETXDebug -Scope:Global -Value:"$True" -Option AllScope -Visibility Public -Confirm:$False
+	}
 }
 
 function Global:Set-DebugOff {
@@ -77,14 +83,16 @@ function Global:Set-DebugOff {
 	[CmdletBinding(ConfirmImpact = 'None')]
 	param ()
 
-	Set-Variable -Name DebugPreference -Scope:Global -Value:"SilentlyContinue" -Option AllScope -Visibility Public -Confirm:$False
-	Set-Variable -Name NETXDebug -Scope:Global -Value:"$False" -Option AllScope -Visibility Public -Confirm:$False
+	PROCESS {
+		Set-Variable -Name DebugPreference -Scope:Global -Value:"SilentlyContinue" -Option AllScope -Visibility Public -Confirm:$False
+		Set-Variable -Name NETXDebug -Scope:Global -Value:"$False" -Option AllScope -Visibility Public -Confirm:$False
+	}
 }
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8EPjk0+hqVKoP8uelcdbbf7r
-# 6pWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAMSTOBAHADENKMZx5hZxIkT+
+# jxCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -227,25 +235,25 @@ function Global:Set-DebugOff {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRAGJe+oZdIxD4PRDplkD5naJ3UgzANBgkqhkiG9w0B
-# AQEFAASCAQBgwtu69/hQH+wqW1AbvQRauJ9rta2PV7mBwW+SAUnrAqVlDJrH/pAs
-# hz47Y19F8TWnOJAMy/XnCTzT5yKxs/VAavjHhAkfinBcwsZoTBGYjJkZmRRU73/v
-# E8CoGiFEjbD9U0T9EvqY8NiaZhAIKypF6LjYC6l3x+Q6Faz6duML/40QUyQFZYTu
-# SCrvUXYvhVEKKH09Z6tkxIu6l4k/kbDw6aRsZYlE40q+Ojjc2YIfFXRCLA9x7v9s
-# AW48EHgZjZc0Twa7FBsF3YW+yNgrfowTgWdMnKYWvUbQk7T/7bICirwhhhHPBDz3
-# 7eoIYDWVSr93pteiLiy9B4r71ekllNdMoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT4pkNTEPCKx+J3U8Bk/WGjN87xzDANBgkqhkiG9w0B
+# AQEFAASCAQBy1y5sk+9J8GPlxISrjO5YghNZkyo59nfKcOhPlWqKMU8VBL78qcpy
+# BFXcjTOE62ex9Ww+2822mCKo0SSuDL4URYW8ISbjD/OrI+Lo0QUhcG5Fs6dAfXkj
+# iG5D2vKl/Wr2pLleUL81471sJ8vt5mr8Mr7EFmqvvcDearXrW9WbDbrE6AW0mSHo
+# 5IBOdZxdxnwofzOTkboLY1AkmZh/iOUjJwU2HLCU1ztycopS8b1KKQBkE9/WSrnp
+# 6RPKHWciZVjSDHg8CZw/dhWWvZPg37Em6I7lrTKOKLyakky1bwcji2NoUIn+KPaj
+# qXCUM2SmBLyZeXPxgKztq55oL53dwK8OoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1NlowIwYJKoZIhvcN
-# AQkEMRYEFDEEfUZ8rUgjDXfkDhNmgji0t37GMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzNlowIwYJKoZIhvcN
+# AQkEMRYEFPQJyemZirk7GkktDIs6qpvqV9fxMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBUCSfQU6O52dORmP8YhpnbkS6c7jTHzUD+iWK3K01YsALv
-# WIIUJEBclP0aOEMAZNY1Vbkk8MrU/3z6HB/pD3b8TmvCLlt+m6qWgQ78ayNesk1H
-# cseYZQsCifmjHB5SzGsslxUERMpl/8sDwHzAXZ+pRDSG72LNb0oKfwuizWzBQv3F
-# x+xY9ebbt26aEScyJiCmDB1h5TzzyyV3//QoH+UjbPqiUQ6Tgw1owI9C17VM/szb
-# ilmXH7pzjnxvcCGBrSzMINOHZIX4UYiF5YmHnweTs2NAos2LQ+5nmM8dWb0XDQlW
-# VvVK9V+hREgWKtyb4sPch1qx5JHsVeRkxn9kM/xj
+# hkiG9w0BAQEFAASCAQCMV2b0iCLUsjTx9ptIUOIDwk3zYEmfS5A8pmSJZg/1XHLE
+# SfbVa/o/Qz7qnppYObpQduYyC85+d4Un3k6g7+kVbpBMkrl1i2pxtYOEIGPu6Gdf
+# 3UjSnMdMYYoABJWmK6A4oPalUmc00F+PpG+AmB5V5bsJ7S0uDJ2vaQdoL6aWbOO+
+# N8Kp9w79qCSLApcnf0XaBXWbg/5ZMp3LgkRtHueh8bz2c+/CG387bcZlxr1K4nK0
+# ovOePFmJ82XelTHpekJlNTuYgeWAit/HTj/aGVwxyP/6rL/KhLU4iGUUg6Y4UJkr
+# VunArwlwStCdU1hbG1ZvRsUEVI7juwlYg6+44l8E
 # SIG # End signature block

@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 function Global:Get-PendingReboot {
 <#
@@ -123,10 +127,11 @@ function Global:Get-PendingReboot {
 		$ComputerName = "$env:COMPUTERNAME"
 	)
 
-	Begin {
+	BEGIN {
 		#
 	}
-	Process {
+
+	PROCESS {
 		Foreach ($Computer in $ComputerName) {
 			Try {
 				# Setting pending values to false to cut down on the number of else statements
@@ -239,15 +244,18 @@ function Global:Get-PendingReboot {
 		}
 	}
 
-	End {
-		#
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUX4/cp5lPTreop9ZwJKx+ybHt
-# 2fegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlCM6Vjz2GEBGcCIVFcRXDtMg
+# UBOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -390,25 +398,25 @@ function Global:Get-PendingReboot {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQX2R22xjTn+BXWncfrsSfQsQvY9jANBgkqhkiG9w0B
-# AQEFAASCAQAIsMPEInTFbji32J6tVzI91r48GIW/ciOurCY9wmxGV4Gu/BbOnlCN
-# l3GyDA1gMv47dJjFsx35q2Xpmvlww3qUzHcwWDj45CpQ00tO09OHns2cD2szeB8Q
-# LZce6NVN0Ipq0ubPXq2//nE6qEyvJoZuMdwjUXCp1AAuYUT9Axgwd9wqXfxMliwo
-# vrI1e72aa+5l3R+EQb0BNP03pIRmGOMNfXV6wFBln63s1Ai2IlKAWnUb5ktJCVZw
-# Dfr3GOqR8Uro+YMdjaNenL1IxiNE//AgS4/eIjFc+NgF1xlvrMSTGlprSoaEEMyz
-# +gHf+HjIFyBmCXNyPlO78PFIJOSJ+CN5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTD1WtGFxeKPVx0V9Wm+e8r7rMZ9DANBgkqhkiG9w0B
+# AQEFAASCAQBCEKJj6tFm/JhAzNcDTkzMXXee7D1szuspVDyNQYU8tkzmtDxeCEvB
+# udZ8lnLmV4rrsBizEzc3HfrDOwyhvAf32hdQRcl2hH+9EU8NHKrFkp02vImgEIko
+# 4+uRS3vd7jeU5gLWLoU4w3WsODWrIzypkYCpY+OiPC8dtL44pTperH8D9ztLDlAp
+# pisQpIpkzBHLDwum/+ZXrb+ym11tYBH18JF38qbS3wR0pzbqcsHPorZAKXC0IOmz
+# jtsQhkNqprh4ZR0n+tUvhsc8zxXoTzC79NtfN8HeEs4TAV+ghULqUJzVcwWHYAwb
+# IiKUGeoghAuap2TyDkdZj4MtPY0zGisjoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0N1owIwYJKoZIhvcN
-# AQkEMRYEFEivk7jYaubsJnGXApnw9W+u9gW5MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyNVowIwYJKoZIhvcN
+# AQkEMRYEFFJw8cRPykFm7nbUbwmAIPt3vqMRMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBy1UcZpdKI6bDCPwEnd8GxBpOiZ6A2M2SJctdNa0JMt7xh
-# LPfCNe5+mgSxHJBl49fibWHJ30YZjQskgQuFASuRj6DFUIEwQv+qYYgLidHRHvu2
-# pYfy4yT9FQTvfNOTMgy45MUerVtwt3FpLdbhYyiDzwV9zOKR22hHJC2Tqw2NQzoo
-# GV8CGVgpjmcl/PTYPZx0f22oKHxDs9AgH6/kyqBFpnPHdjdBf4ffiHBX6tlpwV11
-# kqfDQUtN8BOmYux/j4m9MK/uFsbslaDbGvN4sFHh6HMhkB5nQTibq6/RbhMQhUAH
-# lh+zuSqgIvD3Y9ZZFYKlADDzfZ0Y9u6K4sEnhCVd
+# hkiG9w0BAQEFAASCAQCaD/zVt+QBTPjle5b7Be91ec/zHdiJJV7db5Ag2SP8MMbh
+# 693wUsfZLx5QH0/ZAyCsia8SeWnW6nMcKxZm+GNDdSjZ5T82ftpsswQZiStadUIp
+# 86rzcaPPXgx6Hz33QsT1JzED1+4nIGBwVxUTaqV1IgkU/2qCOC94Ahmxn15+mN7I
+# ncU6Je91/JNS154raLEAOjqihyAYnxa6wBuAdKRp+VA/uqOYiV/g9ir+c4Y9+oYm
+# jkvDtOFvo0TQhQOaUuPGKnDZ9oQ/SBnn/oq7q77VzXq2v8PF/iEMEZw7OQnYoIdC
+# gPukQ0LU3HhRTRhYBM7AU0ornZOUCDBfToyi/cr2
 # SIG # End signature block

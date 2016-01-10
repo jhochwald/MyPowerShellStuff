@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 function global:Edit-HostsFile {
 <#
 	.SYNOPSIS
@@ -65,29 +69,33 @@ function global:Edit-HostsFile {
 				   SupportsShouldProcess = $true)]
 	param ()
 
-	# Open the Host file with...
-	if (!($VisualEditor)) {
-		# Aw SNAP! The VisualEditor is not configured...
-		Write-PoshError -Message "System is not configured! The Visual Editor is not given..." -Stop
+	PROCESS {
+		# Open the Host file with...
+		if (!($VisualEditor)) {
+			# Aw SNAP! The VisualEditor is not configured...
+			Write-PoshError -Message "System is not configured! The Visual Editor is not given..." -Stop
 
-		# If you want to skip my VisualEditor function, add the following here instead of the Write-Error:
-		# Start-Process -FilePath notepad -ArgumentList "$env:windir\system32\drivers\etc\hosts"
-	} else {
-		# Here we go: Edit the Host file...
-		Start-Process -FilePath $VisualEditor -ArgumentList "$env:windir\system32\drivers\etc\hosts"
+			# If you want to skip my VisualEditor function, add the following here instead of the Write-Error:
+			# Start-Process -FilePath notepad -ArgumentList "$env:windir\system32\drivers\etc\hosts"
+		} else {
+			# Here we go: Edit the Host file...
+			Start-Process -FilePath $VisualEditor -ArgumentList "$env:windir\system32\drivers\etc\hosts"
+		}
 	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1YqPPHxhKYU1uY3IvytTc5AL
-# fV2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU04R3DKTiGQnIyUzHWdee5yAH
+# 6kmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -230,25 +238,25 @@ function global:Edit-HostsFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTXaMRgTktrI8RjYP1K/38mqqLbgzANBgkqhkiG9w0B
-# AQEFAASCAQAPTIsMRQOxu3y26tVjjz1yzhdRUv38taZMFfLm3lNN26McFFLPh35a
-# dILxWWPon5KtNi6FiJ4A5WB6Cci1CUv0+T0RIUSLuHCFfE2BfjJ30iu2B2XbzKKG
-# wWjyQdctBCooA5u8X2Tpptf+/ebTO7uqphFtqciYAxwlegK8k14LLx+7FIU+PLjA
-# YT6NoyAaOapC3A04QOKMTBnuPfPtEKLS4xWRr71P89EA96OyqNfMiJEBcbNWNa75
-# Sp44OXx2Q6+dPsRkbMQpnLnKhpP2IDyE0YO4ieanbr6AJTVgFuVAmLKwiJc+rpgV
-# CYgIcv4n885Ljf9SmZncgyEukqiJXX6ZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSxBkD9hZvLVaiot435xlAE7+T8mzANBgkqhkiG9w0B
+# AQEFAASCAQA2KAHHyZVcAR4Pe061eSPXKcdtTw0U4PIpwU/O6OvjhDw1eq7KNRIm
+# QcenL8VACX1Nxg4EshhapCD47l8ucsIAhHh6KUrdglwTzMCcr0s381s0YNJgNy8b
+# jU31qdcGhXVuJMDFBUCKTtW8SiMr8C1gEk3tr3e9NmiG4YmCTANyfcTYJq4yx2D6
+# cHTEA0MrgJxKZfjuy3dGZ3rHCST1RiGDAOPKyCy67RCIJ/Y/Kg7WPVysFnYry7Oi
+# dfTP3XGa25kMXLsE53gzjBHfqjzqu3zQXGdPQBmHbPqbzyKdwcTS/SBF/+b0QZXC
+# FFkodLknCMPKMT4HdxYJ6Bh/vFXtgKlVoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0NFowIwYJKoZIhvcN
-# AQkEMRYEFJHo/b2lfNZxKqm/9FnXCcZnsKlvMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyMFowIwYJKoZIhvcN
+# AQkEMRYEFFUl2WcmJ2uGd0lU10+B4LhG06VBMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCPhLg7dXV7X+RCyPjIDrhmFrz6WDzTUBF3cOQ5K0T09P2y
-# qgXBem4lBLD8AnpyrEZwGYcgznvGWmVxX/k4mWRMODrdQMiMUCAiV+jF7S9FziJ7
-# u2+RnnTq+CjvP+Ht3ngbTM6mhGOVdc3DCPkx6WgOQB6AGc3Gv7GSdh3BxPKbYqVu
-# arP72zKQX2iUJaafNi9dDIIjQd/BD9PbxGvlYYTafpIPAxJfli9rxpj31qb3XV0Y
-# 5ysVXYVwq3Q2OsMuV0tCzZhk6qI+9yq/ijWw4+iD4mFTkefYEyQSZlP6iAXcGVH6
-# cpXIpzO5cqQEBi2kQM4cKxVdqznwARdh+qzPNEng
+# hkiG9w0BAQEFAASCAQBGOoVF/EdULaueeu1oJEXtDGj71wu1nCePKcClGIahk8Ol
+# LsgFY5BRRKTFpBIF2Pkzv+1E9DoW/pJ7qO/msWFaoiw78AfoOfZBEhjNPvcabajm
+# EY+DoxMG+zU9Mr5uPsrR3dhZhmLURWI0dAPquqHVQGF9qgtnQ440yflRCYcR/Aka
+# oWXguNSsNM9WCY3atGgqZZuuAyBVc4hAy8puyA2L3TFIWwZ6dTCI/Lzt7WpQ/uDj
+# YGNYNzkTvQSYon/wG/g8LJJCAfVh+wrVBqcGH4edpqCIsW/aND47tu/X0yFOPeVf
+# mcXFtpeHKinGvHRXJ+R0JbBw9Lj/xwKh97rakkoy
 # SIG # End signature block

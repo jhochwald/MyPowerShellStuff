@@ -1,3 +1,5 @@
+#region License
+
 <#
 	{
 		"info": {
@@ -36,6 +38,8 @@
 
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
+
+#endregion License
 
 # Old implementation of the above GREP tool
 # More complex but even more UNI* like
@@ -102,41 +106,47 @@ function global:GnuGrep {
 		$l
 	)
 
-	# Define object
-	Set-Variable -Name path -Value $($pwd)
+	BEGIN {
+		# Define object
+		Set-Variable -Name path -Value $($pwd)
 
-	# need to add filter for files only, no directories
-	Set-Variable -Name files -Value $(Get-ChildItem $path -include "$filefilter" -recurse:$r)
+		# need to add filter for files only, no directories
+		Set-Variable -Name files -Value $(Get-ChildItem $path -include "$filefilter" -recurse:$r)
+	}
 
-	# What to do?
-	if ($l) {
-		# Do we need to loop?
-		$files | foreach
-		{
-			# What is it?
-			if ($(Get-Content $_ | select-string -pattern $pattern -caseSensitive:$i).Count > 0) {
-				$_ | Select-Object path
+	PROCESS {
+		# What to do?
+		if ($l) {
+			# Do we need to loop?
+			$files | foreach
+			{
+				# What is it?
+				if ($(Get-Content $_ | select-string -pattern $pattern -caseSensitive:$i).Count > 0) {
+					$_ | Select-Object path
+				}
 			}
-		}
-		select-string $pattern $files -caseSensitive:$i
-	} else {
-		$files | foreach
-		{
-			$_ | select-string -pattern $pattern -caseSensitive:$i
+			select-string $pattern $files -caseSensitive:$i
+		} else {
+			$files | foreach
+			{
+				$_ | select-string -pattern $pattern -caseSensitive:$i
+			}
 		}
 	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfTO1OJiuAsOTomtEnuwGzWAM
-# sU2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfSvAStMu726yh16zQyIdvCV8
+# 442gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -279,25 +289,25 @@ function global:GnuGrep {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQHweZ33Sirz30VJIoHckpks3JMFTANBgkqhkiG9w0B
-# AQEFAASCAQB4W2Ako87hyxyGYvzj76oR2UXArZysczwDJZajA02yh61bV+urmqfJ
-# XT42HkA/6pYuRsLTnQT37P57/IAyXbIfaO7I9Lj82Wqcx96RZgm0JxehG9MPvrfd
-# okdnVoBk5vvQISRX0XOJPO48jfCyW6eVF1qJ45KTCmxGEVvc4IJcGbFeCCdaQKkJ
-# paiJILuY+g9ENtfMAXVkWJXDmG0IRGXsDcl9w+OAUKSAtfgGT8TrvQp3RgbxUxog
-# hXkHJ6R/ymy4QHWAesa+2IGkBlJsN2ZZQJdxeIR8nAPmw9ZJbGW4myBSOTNfCbkI
-# 0PxhlGet65e/SYbw+CFrt3Aw9tJAlHI4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSfDX6MAoB5PjkZ9v0g9P9IQk0AvDANBgkqhkiG9w0B
+# AQEFAASCAQB1JS7ER2fW4L960tAqxljEaVY9uERr+uDkUKEEhkg/GPc4EdlP7Kuh
+# JWU6rWRBdM5LUCr9FD/F4S8QdxSFuQRebCLNKVf+bvyvWOOPZhmtVBE8Apy1w/t/
+# 6Bl+hGevMAWMsvQ0GF/IE6f9G2QjOdsTS82PYjtdqfAkt7TPt0gzZP4E1dq//sqP
+# OiwqMvz6MT6BucZHPP6s5VzeizfagF+of2FrF+AzGjCOLP9Faw3hB3HGildJBVrH
+# /fZfwavwzDSZ86x6HVezU3+sUSdbR8OghsyuxuDe2zkbZONcLHWeGIRPa4Y1/B69
+# BCXACpvjxdX1FIRrKuEFmiqelHEV2bWwoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ1MFowIwYJKoZIhvcN
-# AQkEMRYEFCVoY0CDvrml6zMAD7Hr7J8pnuWDMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyOFowIwYJKoZIhvcN
+# AQkEMRYEFG1yzt1mabuFkFQUxnZd7x1Zjfr3MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCJLeWnujOYlkV91AsFoVdyjcDn+JgK3WJX4d2AB+jeGbsA
-# GcwUXZMI00+UQroHSOtFknzA25bhGM7kZZltKJnt7E9KwxpcTDcmeeOEzCMTNFif
-# Cl4itSLt3rohW//5Sr+SvvZViZDxiqHKsMee/+H2vnV8hjMSZBdInhCySg+edhLE
-# EumkEk8E882jC9G0t4toHP2VZyNFS4PlJx4YK71D1vmezP0y3s+oIJTmvwYpOekh
-# yE2XuH6RxNTp9z6hY5xhsREB6/kz4wH3az1FtApssvgTk29/WX6hTpmaKyB0qXrU
-# hPjuX8aa2wK4f56qCb+JfXT0PxvZ+jwEXsZcg1UX
+# hkiG9w0BAQEFAASCAQAMTPZwqRKsyZmhh5KDRjfYnYyXQvZtBKzYCPNZPhvC1uLq
+# 0hkSEjtWi4qWd8SXvfZd3BR/vSkjREaWkteEXng6WY08yD2hGpfnvta4d7EozfPa
+# f4PN6VrNOWWbQPR3H+Aqn8wEuZ5WCn0LeIrWToh9DWoUq7fHeVICLJGF6Ankh8ZF
+# wHy/QvRcXZZkL3YoO3QQ955ipYWrAFWuXVUGtnseddwWWpFZq0CU3Noe5cNzw3BQ
+# r+qnyD2vyxZLoSKTbVs62haofwMBfXIbEEgm3t9qo8bOnib+7lU9nm0wFE89OKi0
+# OL3Kdd/4ZVQMUfEo+ostWOWrT9UcV+6QARjoT3oZ
 # SIG # End signature block

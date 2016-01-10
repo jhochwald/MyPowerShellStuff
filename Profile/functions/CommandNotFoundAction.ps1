@@ -1,4 +1,6 @@
-﻿<#
+﻿#region License
+
+<#
 	{
 		"info": {
 			"Statement": "Code is poetry",
@@ -37,6 +39,8 @@
 	By using the Software, you agree to the License, Terms and Conditions above!
 #>
 
+#endregion License
+
 <#
 	Whenever PowerShell comes across a command name that it does not know,
 	you see a red error message.
@@ -60,19 +64,23 @@ $ExecutionContext.InvokeCommand.CommandNotFoundAction =
 		$eventArgs
 	)
 
-	# What to print to the console
-	Write-Warning "Command $commandName was not found."
+	BEGIN {
+		# What to print to the console
+		Write-Warning "Command $commandName was not found."
+	}
 
-	# Here we go
-	# Let us open a nice UI for you ;-)
-	$eventArgs.CommandScriptBlock = { Show-Command }
+	PROCESS {
+		# Here we go
+		# Let us open a nice UI for you ;-)
+		$eventArgs.CommandScriptBlock = { Show-Command }
+	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUiE7PC7Lfqa/15vANZZyKMTm+
-# GJGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUurja4d1g+4Sq91V0TCYfTHlN
+# NICgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -215,25 +223,25 @@ $ExecutionContext.InvokeCommand.CommandNotFoundAction =
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTG1XQBngnbogr7Jaht4oXW2mwixDANBgkqhkiG9w0B
-# AQEFAASCAQAd64qjQRDfcs9Sl4nLJl9Ia3zYn8pmmQgJhtTJGg8QlsAwPO9DKgpV
-# c7MyPpi5/iCMn6lCjsxVzFQw9lKUIdaDT2k47tyaPa0MUWLHteLR6q4ghWrO/pAo
-# QU/NjB0fNlSq+Af+KBKDV+ncOCuqlqVRPERZVsqPXUWz83FK+5NL9axQSRjqpY6Z
-# 83hRuFe4o74h6oy3OEeQCgesQAtCxyiF4APYBABDmEHQa/KqlC3vvIx1En/qt/wp
-# q8cwxEsKeaorOa6hATlvxScC0RRuRdyl4Y4oy7GFgTCcsDCpl0FodxDmQE4wf1AQ
-# zk2yuQrOItknYfjH/e5zd7XXDxudhJUkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRkN2bQAh0Zq0QPIuYYMNNwvz4KrDANBgkqhkiG9w0B
+# AQEFAASCAQCt9XokeIVqB7C8++A5Z24klk+JPgR2LsjlI2e1HnC4IXZX6mABf3e4
+# EQ1YnGtQG3sebtHmmvTyHYbX/dQU/RQlksTR4gLgXYqiT6G9TT63cYjikf3fThUt
+# xVigktvCzvFSypYkh7M8VjLxgA2GiNuN/udEmnPpKQtkElHweIAmrmgUQ8Cb7Gn/
+# izesIhN+A/T4Uv9HKoIK4HPMhV3m6gCntTDrZ4g7gUj3n8JL62czt+0upIJ4/ywr
+# jHXLN1p11eF6/X0VHgBvG1lLQPq+ce2IjMpinG7gq5/4n+1IfnL2x6W4vwSt4/BK
+# j3gt+ULQIQuY06+DNpNKz4uiHMZbc30zoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIyMTA4MTQ0MVowIwYJKoZIhvcN
-# AQkEMRYEFJ/urpgU9aDCRc+7Ieo/3f0O6pBIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExOFowIwYJKoZIhvcN
+# AQkEMRYEFJBub50MJSZnlodrTh4zgi/CFX/SMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCXq1ak8yA6m+0wFIjQTs3ovMtg1sd+cnTZoWgkZ3uCvqk7
-# MFDxmyr4cLzFvz1LcqUVoWYXOIaQ9jMLCT7/yGYzBV4XoDWEXxcwGUvcZwxhkCn9
-# MCMns0VUWYbgCKqqaSpeEft5FEOimAy4yMBEnb/WivvOCoHEfP5pqbCekn/tdQno
-# hJcM4G9UIn4VCbMbys/RIetyHZY+D4T4dPvOBdpUWywJp38zIVVnwNe29OqmBcbc
-# X9n0itTrIvtc86v32WHQNgFV81SZgiXojcuD/SjlKOPO4/cFxW0tz1HBoueMsQs0
-# 33jQTJi5gHmCQ7Mgi3aLBYQhm2aO05cyvpkyAOZ8
+# hkiG9w0BAQEFAASCAQArobHT1QwWERjTBiJ4PP7E6fg8bBgUNsiGWaIrvIGJgXhA
+# Q+nHogWm27vO304QP7W21FHuZJf6PBLL+0zfhoUv+fU3gNOigJQZD8AFS2RPp/4g
+# TJwNPWnxQ6IYjYecKfvS8pkRi222Rmux/SAL/+8VPmsjQA78n4MkVkOi/1mH6nQz
+# OO6KClNaDB7yAvy5DvPX1AuyusrBNniJTX75XsEeE5983IY8gdD8IUZyFRdvFWXI
+# fTgvPNay2ED7BjWZwq7PfE0K6G5eauuk2hPZWPQjY5esdjv5Rtgva6qSqZQdmGOK
+# uy/eFrh6BA+ZknjYcBEzrit3mjLk9OInM6YG+lRe
 # SIG # End signature block
