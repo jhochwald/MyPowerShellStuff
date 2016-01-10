@@ -41,36 +41,52 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:Edit-HostsFile {
+<#
+	.SYNOPSIS
+		Edit the Windows Host file
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Shortcut to quickly edit the Windows host File. Might be useful for testing things without changing the regular DNS.
+		Handle with care!
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.EXAMPLE
+		PS C:\> Edit-HostsFile
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+		Opens the Editor configured within the VisualEditor variable to edit the Windows Host file
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.NOTES
+		Additional information about the function.
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	PROCESS {
+		# Open the Host file with...
+		if (!($VisualEditor)) {
+			# Aw SNAP! The VisualEditor is not configured...
+			Write-PoshError -Message "System is not configured! The Visual Editor is not given..." -Stop
+
+			# If you want to skip my VisualEditor function, add the following here instead of the Write-Error:
+			# Start-Process -FilePath notepad -ArgumentList "$env:windir\system32\drivers\etc\hosts"
+		} else {
+			# Here we go: Edit the Host file...
+			Start-Process -FilePath $VisualEditor -ArgumentList "$env:windir\system32\drivers\etc\hosts"
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,67 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:head {
+<#
+	.SYNOPSIS
+		display first lines of a file
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		This filter displays the first count lines or bytes of each of the specified files,
+		or of the standard input if no files are specified.
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+		If count is omitted it defaults to 10.
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.PARAMETER file
+		Filename
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.PARAMETER count
+		A description of the count parameter.
+	The Default is 10.
+
+	.NOTES
+		Make PowerShell a bit more like *NIX!
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   HelpMessage = 'Filename')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('FileName')]
+		[string]
+		$file,
+		[Alias('Counter')]
+		[int]
+		$count = 10
+	)
+
+	BEGIN {
+		# Does this exist?
+		if ((Test-Path $file) -eq $False) {
+			# Aw Snap!
+			Write-Error -Message:"Unable to locate file $file" -ErrorAction:Stop
+			return;
+		}
+	}
+
+	PROCESS {
+		# Show the fist X entries
+		return Get-Content $file | Select-Object -First $count
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

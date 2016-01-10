@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,57 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:ConvertTo-PlainText {
+<#
+	.SYNOPSIS
+		Convert a secure string back to plain text
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Convert a secure string back to plain text
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER secure
+		Secure String to convert
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.NOTES
+		Helper function
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   Position = 0,
+				   HelpMessage = 'Secure String to convert')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('SecureString')]
+		[security.securestring]
+		$secure
+	)
+
+	BEGIN {
+		# Define the Marshal Variable
+		# We use the native .NET Call to do so!
+		$marshal = [Runtime.InteropServices.Marshal];
+	}
+
+	PROCESS {
+		# Return what we have
+		# We use the native .NET Call to do so!
+		return $marshal::PtrToStringAuto($marshal::SecureStringToBSTR($secure));
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

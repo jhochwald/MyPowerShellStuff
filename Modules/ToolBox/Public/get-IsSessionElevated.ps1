@@ -41,36 +41,66 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:Get-IsSessionElevated {
+<#
+	.SYNOPSIS
+		Is the Session started as admin (Elevated)
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Quick Helper that return if the session is started as admin (Elevated)
+		It returns a Boolean (True or False) and sets a global variable (IsSessionElevated) with
+		this Boolean value. This might be useful for further use!
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.EXAMPLE
+		PS C:\> Get-IsSessionElevated
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+		True
+		# If the session is elevated
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.EXAMPLE
+		PS C:\> Get-IsSessionElevated
+
+		False
+		# If the session is not elevated
+
+	.OUTPUTS
+		System.Boolean
+
+	.NOTES
+		Quick Helper that return if the session is started as admin (Elevated)
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None')]
+	[OutputType([bool])]
+	param ()
+
+	BEGIN {
+		# Build the current Principal variable
+		[System.Security.Principal.WindowsPrincipal]$currentPrincipal = New-Object System.Security.Principal.WindowsPrincipal([System.Security.Principal.WindowsIdentity]::GetCurrent());
+
+		# Do we have admin permission?
+		[System.Security.Principal.WindowsBuiltInRole]$administratorsRole = [System.Security.Principal.WindowsBuiltInRole]::Administrator;
+	}
+
+	PROCESS {
+		if ($currentPrincipal.IsInRole($administratorsRole)) {
+			# Yep! We have some power...
+			return $true;
+
+			# Set the Variable
+			Set-Variable -Name IsSessionElevated -Scope:Global -Value $true
+		} else {
+			# Nope! Regular User Session!
+			return $false;
+
+			# Set the Variable
+			Set-Variable -Name IsSessionElevated -Scope:Global -Value $false
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

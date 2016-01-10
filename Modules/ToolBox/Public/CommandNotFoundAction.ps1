@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,37 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+<#
+	Whenever PowerShell comes across a command name that it does not know,
+	you see a red error message.
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	However, starting with PowerShell 3.0, there is a "CommandNotFoundHandler"
+	that you can program. It can then log things, or try and resolve the issue.
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	Here is a simple example. Once you run this code, whenever there is a
+	command that PowerShell does not know, it runs Show-Command and opens a
+	helper tool with all valid commands
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	Source: http://powershell.com/cs/blogs/tips/archive/2015/10/22/adding-command-not-found-handler.aspx
+#>
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+$ExecutionContext.InvokeCommand.CommandNotFoundAction =
+{
+	param (
+		[string]
+		$commandName,
+		[System.Management.Automation.CommandLookupEventArgs]
+		$eventArgs
+	)
+
+	BEGIN {
+		# What to print to the console
+		Write-Warning "Command $commandName was not found."
+	}
+
+	PROCESS {
+		# Here we go
+		# Let us open a nice UI for you ;-)
+		$eventArgs.CommandScriptBlock = { Show-Command }
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

@@ -41,36 +41,62 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function Get-HostFileEntry {
+<#
+	.SYNOPSIS
+		Dumps the HOSTS File to the Console
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Dumps the HOSTS File to the Console
+		It dumps the WINDIR\System32\drivers\etc\hosts
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-HostFileEntry
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+		IP                                                              Hostname
+		--                                                              --------
+		10.211.55.123                                                   GOV13714W7
+		10.211.55.10                                                    jhwsrv08R2
+		10.211.55.125                                                   KSWIN07DEV
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		Dumps the HOSTS File to the Console
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+		Sometimes I need to know what is set in the HOSTS File... So I came up with that approach.
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	BEGIN {
+		# Cleanup
+		$HostOutput = @()
+
+		# Which File to load
+		Set-Variable -Name "HostFile" -Scope:Script -Value $($env:windir + "\System32\drivers\etc\hosts")
+
+		# REGEX Filter
+		[regex]$r = "\S"
+	}
+
+	PROCESS {
+		# Open the File from above
+		Get-Content $HostFile | ? {
+			(($r.Match($_)).value -ne "#") -and ($_ -notmatch "^\s+$") -and ($_.Length -gt 0)
+		} | % {
+			$_ -match "(?<IP>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(?<HOSTNAME>\S+)" | Out-Null
+			$HostOutput += New-Object -TypeName PSCustomObject -Property @{ 'IP' = $matches.ip; 'Hostname' = $matches.hostname }
+		}
+
+		# Dump it to the Console
+		Write-Output $HostOutput
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

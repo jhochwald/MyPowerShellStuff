@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,46 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+function global:New-Guid {
+<#
+	.SYNOPSIS
+		Creates a new Guid object and displays it to the screen
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.DESCRIPTION
+		Uses static System.Guid.NewGuid() method to create a new Guid object
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.EXAMPLE
+		PS C:\scripts\PowerShell> New-Guid
+		fd6bd476-db80-44e7-ab34-47437adeb8e3
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		Creates a new Guid object and displays its GUI to the screen
+
+	.NOTES
+		This is just a quick & dirty helper function to generate GUID's
+		this is neat if you need a new GUID for an PowerShell Module.
+
+		If you have Visual Studio, you might find this function useless!
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param ()
+
+	BEGIN {
+		# Define object via NET
+		[System.Guid]$guidObject = [System.Guid]::NewGuid()
+	}
+
+	PROCESS {
+		# Dump the new Object
+		Write-Host $guidObject.Guid
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

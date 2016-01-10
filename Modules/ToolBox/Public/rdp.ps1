@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,72 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:rdp {
+<#
+	.SYNOPSIS
+		Wrapper for the Windows RDP Client
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Just a wrapper for the Windows Remote Desktop Protocol (RDP) Client.
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER rdphost
+		String
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+		The Host could be a host name or an IP address
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.EXAMPLE
+		PS C:\scripts\PowerShell> rdp SNOOPY
+
+		Opens a Remote Desktop Session to the system with the Name SNOOPY
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> rdp -host:"deepblue.fra01.kreativsign.net"
+
+		Opens a Remote Desktop Session to the system deepblue.fra01.kreativsign.net
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> rdp -host:10.10.16.10
+
+		Opens a Remote Desktop Session to the system with the IPv4 address 10.10.16.10
+
+	.NOTES
+		Additional information about the function.
+
+	.INPUTS
+		String
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   HelpMessage = 'The Host could be a host name or an IP address')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('host')]
+		[string]
+		$rdphost
+	)
+
+	PROCESS {
+		# What do we have?
+		if (!($rdphost)) {
+			Write-PoshError -Message "Mandatory Parameter HOST is missing" -Stop
+		} else {
+			Start-Process -FilePath mstsc -ArgumentList "/admin /w:1024 /h:768 /v:$rdphost"
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

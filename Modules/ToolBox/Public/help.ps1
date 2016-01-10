@@ -41,36 +41,43 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:help {
+<#
+	.SYNOPSIS
+		Wrapper that use the cmdlet Get-Help -full
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Wrapper that use the regular cmdlet Get-Help -full to show all technical informations about the given command
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.EXAMPLE
+		PS C:\scripts\PowerShell> help get-item
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+		Show the full technical informations of the get-item cmdlet
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.PARAMETER cmdlet
+		command-let
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	BEGIN {
+		# Make the console clean
+		clear-host
+	}
+
+	PROCESS {
+		# Get the FULL Help Message for the given command-let
+		Get-Help $args[0] -full
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

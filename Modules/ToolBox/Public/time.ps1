@@ -41,36 +41,78 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:time {
+<#
+	.SYNOPSIS
+		Timing How Long it Takes a Script or Command to Run
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		This is a quick wrapper for Measure-Command Cmdlet
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+		Make the PowerShell a bit more *NIX like
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+		Everyone ever used Unix or Linux known time ;-)
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.PARAMETER file
+		Script or command to execute
+
+	.EXAMPLE
+		PS C:\> time new-Bulk-devices.ps1
+
+		# Runs the script new-Bulk-devices.ps1 and shows how log it takes to execute
+
+	.EXAMPLE
+		PS C:\> time Get-Service | Export-Clixml c:\scripts\test.xml
+
+		When you run this command, service information will be saved to the file Test.xml
+		It also shows how log it takes to execute
+
+	.OUTPUTS
+		String
+
+	.NOTES
+		Make PowerShell a bit more like *NIX!
+
+	.INPUTS
+		String
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   HelpMessage = 'Script or command to execute')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('Command')]
+		$file
+	)
+
+	BEGIN {
+		#
+	}
+
+	PROCESS {
+		# Does the file exist?
+		if (!($file)) {
+			# Aw SNAP! That sucks...
+			Write-Error -Message:"Error: File to tail is missing..." -ErrorAction:Stop
+		} else {
+			# Measure the execution for you, Sir! ;-)
+			Measure-Command { $file }
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

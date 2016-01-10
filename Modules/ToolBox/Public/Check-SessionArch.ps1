@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,54 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:Check-SessionArch {
+<#
+	.SYNOPSIS
+		Show the CPU architecture
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		You want to know if this is a 64BIT or still a 32BIT system?
+		Might be useful, maybe not!
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Check-SessionArch
+		x64
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+		Shows that the architecture is 64BIT and that the session also supports X64
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.OUTPUTS
+		String
+
+	.NOTES
+		Additional information about the function.
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param ()
+
+	PROCESS {
+		# Figure out if this is a x64 or x86 system via NET call
+		if ([System.IntPtr]::Size -eq 8) {
+			Write-Output "x64"
+		} elseif ([System.IntPtr]::Size -eq 4) {
+			Write-Output "x86"
+		} else {
+			Write-Output "Unknown Type"
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

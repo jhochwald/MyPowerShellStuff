@@ -41,36 +41,64 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:ConvertFrom-binhex {
+<#
+	.SYNOPSIS
+		Convert a HEX Value to a String
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Converts a given HEX value back to human readable strings
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER HEX
+		HEX String that you like to convert
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.EXAMPLE
+		PS C:\> ConvertFrom-binhex 0c
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		# Return the regular Value (12) of the given HEX 0c
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param
+	(
+		[ValidateNotNullOrEmpty()]
+		$binhex
+	)
+
+	BEGIN {
+		# Define a default
+		Set-Variable -Name arr -Value $(new-object byte[] ($binhex.Length/2))
+	}
+
+	PROCESS {
+		# Loop over the given string
+		for ($i = 0; $i -lt $arr.Length; $i++) {
+			$arr[$i] = [Convert]::ToByte($binhex.substring($i * 2, 2), 16)
+		}
+
+		# Return the new value
+		return $arr
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
+# Set a compatibility Alias
+(set-alias convert-frombinhex ConvertFrom-binhex -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1

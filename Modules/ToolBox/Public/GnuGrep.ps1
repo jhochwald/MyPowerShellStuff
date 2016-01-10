@@ -41,36 +41,103 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+# Old implementation of the above GREP tool
+# More complex but even more UNI* like
+function global:GnuGrep {
+<#
+	.SYNOPSIS
+		File pattern searcher
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		This command emulates the well known (and loved?) GNU file pattern searcher
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER pattern
+		Pattern (STRING) - Mandatory
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.PARAMETER filefilter
+		File (STRING) - Mandatory
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.PARAMETER r
+		Recurse
+
+	.PARAMETER i
+		Ignore case
+
+	.PARAMETER l
+		List filenames
+
+	.NOTES
+		Make PowerShell a bit more like *NIX!
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   Position = 0,
+				   HelpMessage = ' Pattern (STRING) - Mandatory')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('PaternString')]
+		[string]
+		$pattern,
+		[Parameter(Mandatory = $true,
+				   Position = 1,
+				   HelpMessage = ' File (STRING) - Mandatory')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('FFilter')]
+		[string]
+		$filefilter,
+		[Alias('Recursive')]
+		[switch]
+		$r,
+		[Alias('IgnoreCase')]
+		[switch]
+		$i,
+		[Alias('ListFilenames')]
+		[switch]
+		$l
+	)
+
+	BEGIN {
+		# Define object
+		Set-Variable -Name path -Value $($pwd)
+
+		# need to add filter for files only, no directories
+		Set-Variable -Name files -Value $(Get-ChildItem $path -include "$filefilter" -recurse:$r)
+	}
+
+	PROCESS {
+		# What to do?
+		if ($l) {
+			# Do we need to loop?
+			$files | foreach
+			{
+				# What is it?
+				if ($(Get-Content $_ | select-string -pattern $pattern -caseSensitive:$i).Count > 0) {
+					$_ | Select-Object path
+				}
+			}
+			select-string $pattern $files -caseSensitive:$i
+		} else {
+			$files | foreach
+			{
+				$_ | select-string -pattern $pattern -caseSensitive:$i
+			}
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

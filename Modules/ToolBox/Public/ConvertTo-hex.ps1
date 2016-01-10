@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,61 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:ConvertTo-hex {
+<#
+	.SYNOPSIS
+		Converts a given integer to HEX
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Converts any given Integer (INT) to Hex and dumps it to the Console
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER dec
+		N.A.
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.EXAMPLE
+		PS C:\scripts\PowerShell> ConvertTo-hex "100"
+		0x64
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.OUTPUTS
+		HEX Value of the given Integer
+
+	.NOTES
+		Renamed function
+		Just a little helper function
+
+	.INPUTS
+		Integer
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([long])]
+	param
+	(
+		[Parameter(Mandatory = $true)]
+		[ValidateNotNullOrEmpty()]
+		[long]
+		$dec
+	)
+
+	PROCESS {
+		# Print
+		return "0x" + $dec.ToString("X")
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
+# Set a compatibility Alias
+(set-alias To-hex ConvertTo-hex -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1

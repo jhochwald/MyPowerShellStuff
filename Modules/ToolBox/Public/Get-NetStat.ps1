@@ -41,36 +41,58 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function Global:Get-NetStat {
+<#
+	.SYNOPSIS
+		This function will get the output of netstat -n and parse the output
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		This function will get the output of netstat -n and parse the output
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.NOTES
+		Based on an idea of Francois-Xavier Cat
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.LINK
+		Idea: http://www.lazywinadmin.com/2014/08/powershell-parse-this-netstatexe.html
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	PROCESS {
+		# Get the output of netstat
+		Set-Variable -Name "data" -Value $(netstat -n)
+
+		# Keep only the line with the data (we remove the first lines)
+		Set-Variable -Name "data" -Value $($data[4..$data.count])
+
+		# Each line need to be splitted and get rid of unnecessary spaces
+		foreach ($line in $data) {
+			# Get rid of the first whitespaces, at the beginning of the line
+			Set-Variable -Name "line" -Value $($line -replace '^\s+', '')
+
+			# Split each property on whitespaces block
+			Set-Variable -Name "line" -Value $($line -split '\s+')
+
+			# Define the properties
+			$properties = @{
+				Protocole = $line[0]
+				LocalAddressIP = ($line[1] -split ":")[0]
+				LocalAddressPort = ($line[1] -split ":")[1]
+				ForeignAddressIP = ($line[2] -split ":")[0]
+				ForeignAddressPort = ($line[2] -split ":")[1]
+				State = $line[3]
+			}
+
+			# Output the current line
+			New-Object -TypeName PSObject -Property $properties
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

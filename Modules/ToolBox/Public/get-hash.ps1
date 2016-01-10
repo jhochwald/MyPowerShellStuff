@@ -41,36 +41,74 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:get-hash {
+<#
+	.SYNOPSIS
+		Show the HASH Value of a given File
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Shows the MD5 Hash value of a given File
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER File
+		Filename that hash should be shown of
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.EXAMPLE
+		PS C:\scripts\PowerShell> get-hash .\profile.ps1
+		81d84c612566cb633aff63e3f4f27a28
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		Return the MD5 Hash of .\profile.ps1
+
+	.OUTPUTS
+		String
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   Position = 0)]
+		[Alias('File')]
+		[string]
+		$value
+	)
+
+	BEGIN {
+		# Define a Default
+		Set-Variable -Name hashalgo -Value 'MD5'
+
+		# Define a new working variable
+		Set-Variable -Name tohash -Value $($value)
+	}
+
+	PROCESS {
+		# Is this a string?
+		if ($value -is [string]) {
+			# Define a new working variable
+			Set-Variable -Name tohash -Value $([text.encoding]::UTF8.GetBytes($value))
+		}
+
+		# Define a new working variable
+		Set-Variable -Name hash -Value $([security.cryptography.hashalgorithm]::Create($hashalgo))
+
+		# What do we have?
+		return convert-tobinhex($hash.ComputeHash($tohash));
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

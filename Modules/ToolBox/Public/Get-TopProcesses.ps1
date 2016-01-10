@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,47 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:Get-TopProcesses {
+<#
+	.SYNOPSIS
+		Make the PowerShell a bit more *NIX like
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		This is a PowerShell Version of the well known *NIX like TOP
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.NOTES
+		Make PowerShell a bit more like *NIX!
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.LINK
+		Joerg Hochwald: http://hochwald.net
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	BEGIN {
+		# Define objects
+		Set-Variable -Name SetValX -Value $([Console]::CursorLeft)
+		Set-Variable -Name SetValY -Value $([Console]::CursorTop)
+	}
+
+	PROCESS {
+		# figure out what uses the most CPU Time
+		While ($true) {
+			# Get the fist 30 items
+			Get-Process | Sort-Object -Descending CPU | Select-Object -First 30;
+
+			# Wait 2 seconds
+			Start-Sleep -Seconds 2;
+
+			# Dump the Info
+			[Console]::SetCursorPosition(${SetValX}, ${SetValY} + 3)
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
+# Set a compatibility Alias
+(set-alias top Get-TopProcesses -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1

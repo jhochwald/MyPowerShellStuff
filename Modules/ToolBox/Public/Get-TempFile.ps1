@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,73 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:Get-TempFile {
+<#
+	.SYNOPSIS
+		Creates a string with a temp file
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Creates a string with a temp file
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER Extension
+		File Extension as a string.
+		The default is "tmp"
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.EXAMPLE
+		PS C:\> New-TempFile
+		C:\Users\josh\AppData\Local\Temp\332ddb9a-5e52-4687-aa01-1d67ab6ae2b1.tmp
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		Returns a String of the Temp File with the extension TMP.
+
+	.EXAMPLE
+		PS C:\> New-TempFile -Extension txt
+		C:\Users\josh\AppData\Local\Temp\332ddb9a-5e52-4687-aa01-1d67ab6ae2b1.txt
+
+		Returns a String of the Temp File with the extension TXT
+
+	.EXAMPLE
+		PS C:\> $foo = (New-TempFile)
+		PS C:\> New-Item -Path $foo -Force -Confirm:$false
+		PS C:\> Add-Content -Path:$LogPath -Value:"Test" -Encoding UTF8 -Force
+		C:\Users\josh\AppData\Local\Temp\d08cec6f-8697-44db-9fba-2c369963a017.tmp
+
+		Creates a temp File: C:\Users\josh\AppData\Local\Temp\d08cec6f-8697-44db-9fba-2c369963a017.tmp
+		And fill the newly created file with the String "Test"
+
+	.OUTPUTS
+		String
+
+	.NOTES
+		Helper to avoid "System.IO.Path]::GetTempFileName()" usage.
+
+	.LINK
+		Idea: http://powershell.com/cs/blogs/tips/archive/2015/10/15/creating-temporary-filenames.aspx
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param
+	(
+		[Parameter(HelpMessage = 'File Extension as a string. like tmp')]
+		[string]
+		$Extension = 'tmp'
+	)
+
+	PROCESS {
+		# Define objects
+		$elements = @()
+		$elements += [System.IO.Path]::GetTempPath()
+		$elements += [System.Guid]::NewGuid()
+		$elements += $Extension.TrimStart('.')
+
+		# Here we go: This is a Teampfile
+		'{0}{1}.{2}' -f $elements
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

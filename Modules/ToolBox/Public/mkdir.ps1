@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,57 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+# Make Powershell more Uni* like
+function global:mkdir {
+<#
+	.SYNOPSIS
+		Wrapper of New-Item
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Wrapper of New-Item to create a directory
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER Directory
+		Directory name to create
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.PARAMETER path
+		Name of the directory that you would like to create
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.EXAMPLE
+		PS C:\scripts\PowerShell> mkdir test
+
+		Creates a directory with the name "test"
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   ValueFromPipeline = $true,
+				   Position = 0,
+				   HelpMessage = 'Directory name to create')]
+		[Alias('dir')]
+		[string]
+		$Directory
+	)
+
+	PROCESS {
+		try {
+			# Do it: Create the directory
+			New-Item -type directory -Force -path $Directory -Confirm:$false -ErrorAction:stop -WarningAction:SilentlyContinue
+		} catch {
+			Write-Error "Sorry, we had a problem while we try to create $Directory"
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
+# Set a compatibility Alias
+(set-alias md mkdir -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1

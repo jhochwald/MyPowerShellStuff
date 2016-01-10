@@ -41,36 +41,51 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:get-syntax {
+<#
+	.SYNOPSIS
+		Get the syntax of a cmdlet, even if we have no help for it
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Helper function to get the syntax of a alias or cmdlet, even if we have no help for it
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER cmdlet
+		command-let that you want to check
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.EXAMPLE
+		PS C:\scripts\PowerShell> get-syntax get-syntax
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		# Get the syntax and parameters for the cmdlet "get-syntax".
+		# Makes no sense at all, but this is just an example!
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[ValidateNotNullOrEmpty()]
+		[Alias('Command')]
+		$cmdlet
+	)
+
+	PROCESS {
+		# Use Get-Command to show the syntax
+		Get-Command $cmdlet -syntax
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

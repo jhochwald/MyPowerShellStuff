@@ -41,36 +41,67 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+Function Global:ConvertTo-HashTable {
+<#
+	.Synopsis
+		Convert an object to a HashTable
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.Description
+		Convert an object to a HashTable excluding certain types.  For example, ListDictionaryInternal doesn't support serialization therefore
+		can't be converted to JSON.
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.Parameter InputObject
+		Object to convert
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.Parameter ExcludeTypeName
+		Array of types to skip adding to resulting HashTable.  Default is to skip ListDictionaryInternal and Object arrays.
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.Parameter MaxDepth
+		Maximum depth of embedded objects to convert.  Default is 4.
+
+	.Example
+		$bios = get-ciminstance win32_bios
+		$bios | ConvertTo-HashTable
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	Param (
+		[Parameter(Mandatory=$true,ValueFromPipeline=$true)]
+		[Object]$InputObject,
+		[string[]]$ExcludeTypeName = @("ListDictionaryInternal","Object[]"),
+		[ValidateRange(1,10)][Int]$MaxDepth = 4
+	)
+
+	BEGIN {
+		#
+		Write-Verbose "Converting to hashtable $($InputObject.GetType())"
+	}
+
+	PROCESS {
+		#$propNames = Get-Member -MemberType Properties -InputObject $InputObject | Select-Object -ExpandProperty Name
+		$propNames = $InputObject.psobject.Properties | Select-Object -ExpandProperty Name
+
+		$hash = @{}
+
+		$propNames | % {
+			if ($InputObject.$_ -ne $null) {
+				if ($InputObject.$_ -is [string] -or (Get-Member -MemberType Properties -InputObject ($InputObject.$_) ).Count -eq 0) {
+					$hash.Add($_,$InputObject.$_)
+				} else {
+					if ($InputObject.$_.GetType().Name -in $ExcludeTypeName) {
+						Write-Verbose "Skipped $_"
+					} elseif ($MaxDepth -gt 1) {
+						$hash.Add($_,(ConvertTo-HashTable -InputObject $InputObject.$_ -MaxDepth ($MaxDepth - 1)))
+					}
+				}
+			}
+		}
+
+		Write-Output $hash
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

@@ -41,36 +41,39 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function Global:which {
+<#
+	.SYNOPSIS
+		Locate a program file in the user's path
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Make PowerShell more Uni* like by set an alias to the existing get-command command let
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER command
+		Locate a program file in the path
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.NOTES
+		Make PowerShell a bit more like *NIX!
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   HelpMessage = 'Locate a program file in the path')]
+		[ValidateNotNullOrEmpty()]
+		$command
+	)
+
+	PROCESS {
+		# Easy: Just use Get-Command ;-)
+		(Get-Command -All $command).Definition
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

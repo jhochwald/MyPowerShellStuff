@@ -41,36 +41,68 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function Global:Save-CommandHistory {
+<#
+	.SYNOPSIS
+		Dump the Command History to an XML File
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Dump the Command History to an XML File.
+		This file is located in the User Profile.
+		You can then restore it via Load-CommandHistory
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.NOTES
+		Additional information about the function.
+#>
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	PROCESS {
+		# Where to store the XML History Dump
+		Set-Variable -Name "CommandHistoryDump" -Value $((Join-Path (Split-Path $profile.CurrentUserAllHosts) "commandHistory.xml") -as ([string] -as [type]))
+
+		# Be verbose
+		Write-Debug -Message "Save History to $($CommandHistoryDump)"
+
+		# Dump the History
+		Get-History | Export-Clixml -Path $CommandHistoryDump -Force -Confirm:$false -Encoding utf8
 	}
 }
 
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
+function Global:Load-CommandHistory {
+<#
+	.SYNOPSIS
+		Load the old History dumped via Save-CommandHistory
+
+	.DESCRIPTION
+		This is the companion Command for Save-CommandHistory
+		It loads the old History from a XML File in the users Profile.
+
+	.NOTES
+		Additional information about the function.
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	PROCESS {
+		# Where to Find the XML History Dump
+		Set-Variable -Name "CommandHistoryDump" -Value $((Join-Path (Split-Path $profile.CurrentUserAllHosts) "commandHistory.xml") -as ([string] -as [type]))
+
+		# Be verbose
+		Write-Debug -Message "Clear History to keep things clean"
+
+		# Clear History to keep things clean
+		# UP (Cursor) will sill show the existing command history
+		Clear-History -Confirm:$false
+
+		# Be verbose
+		Write-Debug -Message "Load History from $($CommandHistoryDump)"
+
+		# Import the History
+		Add-History -InputObject (Import-Clixml -Path $CommandHistoryDump)
+	}
 }
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

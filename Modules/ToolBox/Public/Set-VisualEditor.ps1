@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,63 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:Set-VisualEditor {
+<#
+	.SYNOPSIS
+		Set the VisualEditor variable
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Setup the VisualEditor variable. Checks if the free (GNU licensed) Notepad++ is installed,
+		if so it uses this great free editor. If not the fall back is the PowerShell ISE.
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.NOTES
+		This is just a little helper function to make the shell more flexible
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.LINK
+		Joerg Hochwald: http://hochwald.net
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	BEGIN {
+		#
+	}
+
+	PROCESS {
+		# Do we have the Sublime Editor installed?
+		Set-Variable -Name SublimeText -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "Sublime*") "Sublime_text*");)
+
+		# Check if the GNU licensed Note++ is installed
+		Set-Variable -Name NotepadPlusPlus -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "notepad*") "notepad*");)
+
+		# Do we have it?
+		(resolve-path "${env:ProgramFiles(x86)}\Notepad++\notepad++.exe" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue)
+
+		# What Editor to use?
+		if ($SublimeText -ne $null -and (test-path $SublimeText)) {
+			# We have Sublime Editor installed, so we use it
+			Set-Variable -Name VisualEditor -Scope:Global -Value $($SublimeText.Path)
+		} elseif ($NotepadPlusPlus -ne $null -and (test-path $NotepadPlusPlus)) {
+			# We have Notepad++ installed, Sublime Editor is not here... use Notepad++
+			Set-Variable -Name VisualEditor -Scope:Global -Value $($NotepadPlusPlus.Path)
+		} else {
+			# No fancy editor, so we use ISE instead
+			Set-Variable -Name VisualEditor -Scope:Global -Value $("PowerShell_ISE.exe")
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
+# Execute the function above
+Set-VisualEditor

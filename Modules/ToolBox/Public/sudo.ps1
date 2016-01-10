@@ -41,36 +41,79 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+# Uni* like SuDo
+function global:SuDo {
+<#
+	.SYNOPSIS
+		Uni* like Superuser Do (Sudo)
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Uni* like Superuser Do (Sudo)
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER file
+		Script/Program to run
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.EXAMPLE
+		PS C:\scripts\PowerShell> SuDo C:\scripts\PowerShell\profile.ps1
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.EXAMPLE
+		SuDo
+
+	.NOTES
+		Still a internal Beta function!
+		Make PowerShell a bit more like *NIX!
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $true,
+				   HelpMessage = ' Script/Program to run')]
+		[ValidateNotNullOrEmpty()]
+		[Alias('FileName')]
+		[string]
+		$file
+	)
+
+	BEGIN {
+		#
+	}
+
+	PROCESS {
+		# Define some defaults
+		$sudo = new-object System.Diagnostics.ProcessStartInfo
+		$sudo.Verb = "runas";
+		$sudo.FileName = "$pshome\PowerShell.exe"
+		$sudo.windowStyle = "Normal"
+		$sudo.WorkingDirectory = (Get-Location)
+
+		# What to execute?
+		if ($file) {
+			if ((Test-Path $file) -eq $True) {
+				$sudo.Arguments = "-executionpolicy unrestricted -NoExit -noprofile -Command $file"
+			} else {
+				write-error -Message:"Error: File does not exist - $file" -ErrorAction:Stop
+			}
+		} else {
+			# No file given, so we open a Shell (Console)
+			$sudo.Arguments = "-executionpolicy unrestricted -NoExit -Command  &{set-location '" + (get-location).Path + "'}"
+		}
+
+		# NET call to execute SuDo
+		[System.Diagnostics.Process]::Start($sudo) | out-null
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

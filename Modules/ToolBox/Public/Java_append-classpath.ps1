@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,51 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:append-classpath {
+<#
+	.SYNOPSIS
+		Append a given path to the Classpath
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Appends a given path to the Java Classpath. Useful if you still need that old java crap!
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+		By the way: I hate Java!
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.EXAMPLE
+		PS C:\scripts\PowerShell> append-classpath "."
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		Include the directory where you are to the Java Classpath
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.PARAMETER path
+		Path to include in the Java Classpath
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'Medium',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	PROCESS {
+		# Do we have a class path?
+		if ([String]::IsNullOrEmpty($env:CLASSPATH)) {
+			$env:CLASSPATH = $args
+		} else {
+			$env:CLASSPATH += ';' + $args
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

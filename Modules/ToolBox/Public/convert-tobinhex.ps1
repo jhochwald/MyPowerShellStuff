@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,70 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:ConvertTo-binhex {
+<#
+	.SYNOPSIS
+		Convert a String to HEX
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Converts a given String or Array to HEX and dumps it
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER array
+		Array that should be converted to HEX
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.EXAMPLE
+		PS C:\> ConvertTo-binhex 1234
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		# Return the HEX Value (4d2) of the String 1234
+
+	.INPUTS
+		String
+		Array
+
+	.OUTPUTS
+		String
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([string])]
+	param
+	(
+		[ValidateNotNullOrEmpty()]
+		$array
+	)
+
+	BEGIN {
+		# Define a default
+		Set-Variable -Name str -Value $(new-object system.text.stringbuilder)
+	}
+
+	PROCESS {
+		# Loop over the String
+		$array | %{
+			[void]$str.Append($_.ToString('x2'));
+		}
+
+		# Print the String
+		return $str.ToString()
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
 
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
+# Set a compatibility Alias
+(set-alias convert-tobinhex ConvertTo-binhex -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1

@@ -41,36 +41,50 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function Global:Set-DebugOn {
+<#
+	.SYNOPSIS
+		Turn Debug on
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Turn Debug on
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.NOTES
+		Just an internal function to make my life easier!
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.LINK
+		Joerg Hochwald: http://hochwald.net
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None')]
+	param ()
+
+	PROCESS {
+		Set-Variable -Name DebugPreference -Scope:Global -Value:"Continue" -Option AllScope -Visibility Public -Confirm:$False
+		Set-Variable -Name NETXDebug -Scope:Global -Value:"$True" -Option AllScope -Visibility Public -Confirm:$False
 	}
 }
 
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
+function Global:Set-DebugOff {
+<#
+	.SYNOPSIS
+		Turn Debug off
+
+	.DESCRIPTION
+		Turn Debug on
+
+	.NOTES
+		Just an internal function to make my life easier!
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None')]
+	param ()
+
+	PROCESS {
+		Set-Variable -Name DebugPreference -Scope:Global -Value:"SilentlyContinue" -Option AllScope -Visibility Public -Confirm:$False
+		Set-Variable -Name NETXDebug -Scope:Global -Value:"$False" -Option AllScope -Visibility Public -Confirm:$False
+	}
 }
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location

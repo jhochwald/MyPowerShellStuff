@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,56 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+# Make Powershell more Uni* like
+function global:myls {
+<#
+	.SYNOPSIS
+		Wrapper for Get-ChildItem
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		This wrapper for Get-ChildItem shows all directories and files (even hidden ones)
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER loc
+		A description of the loc parameter.
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.PARAMETER location
+		This optional parameters is useful if you would like to see the content of another directory
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.EXAMPLE
+		PS C:\scripts\PowerShell> myls
+
+		Show the content of the directory where you are
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> myls c:\
+
+		Show the content of "c:\"
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Alias('Location')]
+		[string]
+		$loc = '.'
+	)
+
+	PROCESS {
+		# Execute GCI
+		Get-ChildItem -force -att !a "$loc"
+		Get-ChildItem -force -att !d "$loc"
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
+# Set a compatibility Alias
+(set-alias ls myls -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1

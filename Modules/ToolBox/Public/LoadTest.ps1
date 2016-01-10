@@ -1,4 +1,4 @@
-#region License
+﻿#region License
 
 <#
 	{
@@ -41,36 +41,58 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+# Make Powershell more Uni* like
+function global:Load-Test {
+<#
+	.SYNOPSIS
+		Load Pester Module
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.DESCRIPTION
+		Load the Pester PowerShell Module to the Global context.
+		Pester is a Mockup, Unit Test and Function Test Module for PowerShell
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.NOTES
+		Pester Module must be installed
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.LINK
+		Pester: https://github.com/pester/Pester
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param ()
+
+	PROCESS {
+		# Lets check if the Pester PowerShell Module is installed
+		if (Get-Module -ListAvailable -Name Pester -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
+			try {
+				#Make sure we remove the Pester Module (if loaded)
+				Remove-Module -name [P]ester -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
+
+				# Import the Pester PowerShell Module in the Global context
+				Import-Module -Name [P]ester -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+			} catch {
+				# Sorry, Pester PowerShell Module is not here!!!
+				Write-Error -Message:"Error: Pester Module was not imported..." -ErrorAction:Stop
+
+				# Still here? Make sure we are done!
+				break
+
+				# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
+				exit 1
+			}
+		} else {
+			# Sorry, Pester PowerShell Module is not here!!!
+			Write-Warning  "Pester Module is not installed! Go to https://github.com/pester/Pester to get it!"
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
+# Set a compatibility Alias
+(set-alias Load-Pester Load-Test -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1

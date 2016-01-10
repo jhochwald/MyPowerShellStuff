@@ -41,36 +41,76 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function global:Invoke-VisualEditor {
+<#
+	.SYNOPSIS
+		Wrapper to edit files
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		This is a quick wrapper that edits files with editor from the VisualEditor variable
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER args
+		Arguments
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.PARAMETER Filename
+		File that you would like to edit
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Invoke-VisualEditor example.txt
+
+		# Invokes Note++ or ISE and edits "example.txt".
+		# This is possible, even if the File does not exists... The editor should ask you if it should create it for you
+
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Invoke-VisualEditor
+
+		Invokes Note++ or ISE without opening a file
+
+	.NOTES
+		This is just a little helper function to make the shell more flexible
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support: http://support.net-experts.net
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(Mandatory = $false,
+				   Position = 0)]
+		[Alias('File')]
+		[string]
+		$args
+	)
+
+	PROCESS {
+		# Call the newly set Editor
+		if (!($VisualEditor)) {
+			# Aw SNAP! The VisualEditor is not configured...
+			Write-PoshError -Message:"System is not configured well! The Visual Editor is not given..." -Stop
+		} else {
+			# Yeah! Do it...
+			if (-not ($args)) {
+				#
+				Start-Process -FilePath $VisualEditor
+			} else {
+				#
+				Start-Process -FilePath $VisualEditor -ArgumentList "$args"
+			}
+		}
+	}
+
+	END {
+		# Do a garbage collection
+		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
+			run-gc
+		}
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
+# Set a compatibility Alias
+(set-alias vi Invoke-VisualEditor -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(set-alias vim Invoke-VisualEditor -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1

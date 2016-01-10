@@ -41,36 +41,49 @@
 
 #endregion License
 
-# Temp Change to the Module Directory
-Push-Location $PSScriptRoot
+function Global:Get-Calendar {
+<#
+	.SYNOPSIS
+		Dumps a Calendar to the Colsole
 
-# Set a Variable
-$PackageRoot = $PSScriptRoot
+	.DESCRIPTION
+		Dumps a Calendar to the Colsole
+		You might find it handy to have that on a core Server or in a remote PowerShell Session
 
-# Start the Module Loading Mode
-$LoadingModule = $true
+	.PARAMETER StartDate
+		The Date the Calendar should start
 
-# Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+	.NOTES
+		Additional information about the function.
+#>
 
-# Dot source the files
-Foreach ($import in @($Public + $Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	param
+	(
+		[Parameter(HelpMessage = 'The Date the Calendar should start')]
+		[ValidateNotNullOrEmpty()]
+		[datetime]$StartDate = (Get-Date)
+	)
+
+	BEGIN {
+		$startDay = Get-Date (Get-Date $StartDate -Format "yyyy-MM-01")
+	}
+
+	PROCESS {
+		Write-Host (Get-Date $startDate -Format "MMMM yyyy")
+		Write-Host "Mo Tu We Th Fr Sa Su"
+		For ($i = 1; $i -lt (get-date $startDay).dayOfWeek.value__; $i++) {
+			Write-Host "   " -noNewLine
+		}
+
+		$processDate = $startDay
+		while ($processDate -lt $startDay.AddMonths(1)) {
+			Write-Host (Get-Date $processDate -Format "dd ") -NoNewLine
+
+			if ((get-date $processDate).dayOfWeek.value__ -eq 0) { Write-Host "" }
+			$processDate = $processDate.AddDays(1)
+		}
+		Write-Host ""
 	}
 }
-
-#region ExportModuleStuff
-if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
-}
-#endregion ExportModuleStuff
-
-# End the Module Loading Mode
-$LoadingModule = $false
-
-# Return to where we are before we start loading the Module
-Pop-Location
