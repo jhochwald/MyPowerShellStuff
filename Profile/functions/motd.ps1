@@ -83,7 +83,7 @@ function global:Update-SysInfo {
 		Set-Variable -Name Operating_System -Scope:Global -Value $(Get-CimInstance -ClassName Win32_OperatingSystem | Select-Object -Property LastBootUpTime, TotalVisibleMemorySize, FreePhysicalMemory, Caption, Version, SystemDrive)
 		Set-Variable -Name Processor -Scope:Global -Value $(Get-CimInstance -ClassName Win32_Processor | Select-Object -Property Name, LoadPercentage)
 		Set-Variable -Name Logical_Disk -Scope:Global -Value $(Get-CimInstance -ClassName Win32_LogicalDisk | Where-Object -Property DeviceID -eq -Value $(${Operating_System}.SystemDrive) | Select-Object -Property Size, FreeSpace)
-		Set-Variable -Name Get_Date -Scope:Global -Value $(Get-Date -format "G")
+		Set-Variable -Name Get_Date -Scope:Global -Value $(Get-Date)
 		Set-Variable -Name Get_OS_Name -Scope:Global -Value $(${Operating_System}.Caption)
 		Set-Variable -Name Get_Kernel_Info -Scope:Global -Value $(${Operating_System}.Version)
 		Set-Variable -Name Get_Uptime -Scope:Global -Value $("$((${Get_Uptime} = ${Get_Date} - $(${Operating_System}.LastBootUpTime)).Days) days, $(${Get_Uptime}.Hours) hours, $(${Get_Uptime}.Minutes) minutes")
@@ -370,8 +370,8 @@ function global:Get-SysInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/lYWx3bkoZ9il8ajWHdUeI2b
-# /GCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUesfdyhnce0JtiXcy6NyDIRX
+# 9PKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -514,25 +514,25 @@ function global:Get-SysInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQIAwJTH745aJw1NgRsbBzaIqyL+TANBgkqhkiG9w0B
-# AQEFAASCAQCG+Nry7enUSixvFSJCkuN4KDyHF5DyFUew98/1KvY8lcrM0pWkCcnk
-# 2sjr3iEygfQK2FZi0ST3E1SmoIMpOPzW48Mmht5zXffAAkWJAKH8DlQ2U2tsYt+T
-# dDBChYH2jiNABaPfC1m0pmtvkEchyGUgoL8C6gcBA+nN1Y8jXroWasnnqM6Nzozd
-# 0VoQQ3LccjzodIxKk/cwudBgMX6wYdcDSurq9LxBmi5zDYrMbqEttMUj8GuBSe6R
-# LIsWn+v5x+n6e3DJRG0GckUTvnUcwsC3jJzSoqMqo4tDkEO671KkObKzuGTfgwJ2
-# 1dITU936U2++NpC2SAEivRTJxXpGVe8IoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQI8ppo3PODeRBgM1xxnafDHIWnOTANBgkqhkiG9w0B
+# AQEFAASCAQB1mOGFwA7eIFnrzcbEUbc7Umfb7YfHsfjdx2pm7qPN6cNaqnNOazPw
+# Ntyc57Ovm547t1xa5FtigESzHIuFOz+isdba8QPXhTFU5FKmYbxCMfw+2i0otQZ9
+# O6vp2vIuxB6AfmDtFFJ4r/M/LAJmfI7Wg9Thr2QEP1dDOaLu+uM0Z0LQz6kS9Q+p
+# JwNsWFY5uh7T8VKyh4J8Ii3r+ZplA2YLLNn+b3N3QgFJSzd05OoMX4Ni+3yJ53Wn
+# wqBLAsCm/LMMTTNQQiCBWN7rt1Wbt0E2Tt94fKB0FuPaka1kMiuhxoq6Hoe8gfB8
+# tj6SzDE7Rnwced9Mx7ecb3FrybhOVsqyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMlowIwYJKoZIhvcN
-# AQkEMRYEFAkVDu6NrnY5mRQImd8Dwm4Rr04YMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMTIyNTQxMFowIwYJKoZIhvcN
+# AQkEMRYEFFfhyqbMixMMUMe6P3Tpo/lYL4WiMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBpV19nUGs12+T2p1kZFpU1IPIlyrs8BbAt1OHwp1y4kXyx
-# MI9H60gggI9b6vD9gP/Jw1qOmvwz6H2F3uWOYK3deT5ZwNtdXIJLGi99HLgA5K7E
-# MNfekUZ4+GmpCisdWW1tczPAiqSBszOXZqgNnSioltf7v3NfDiQt7ksPISY1D+yq
-# bDbuAItt3zm9W5V2TahQs0vw7xtderQgd+qwFzrd7dFpvjwAPdZUOt0yXtv19Ih/
-# eJ8L2homxvv38sx4ezx5tuZU+yd2HdK0Sfsu+kaMQnyCT87AsKH1Ri9BCzVKePj1
-# IAie1sGLm64+xUL6SeoOoNVElrW9gTjVWzI2g6P+
+# hkiG9w0BAQEFAASCAQBjNisFOYNj7Z77DzDwu5A0Aj+AriG8E68knT4N9V9K2u0r
+# JME/alfYzVNhvlZ3hXsVRgNxWZ9PNZpTdFPsL/aAovc++Ag30eRzotjkSEKXWJXM
+# KcLVaQmqo/5Ud634x8Yhp/27WgmT/XlpUCaQtgAMqVSocULfhVdEaH/uWdy9/RgU
+# PpstQRH8Vk5GMWj9nH79xveVuVMVAT7Utg4LEH9hgkpVAS9AlHem6IPNHMfFuJro
+# S5T6t5f7IfSsjdtduEv7HWW4OBtHUohQEb1ipZl39zZ7XTGrVApChizaMQijNPGO
+# TJQAD7SqXJz7+Wz5uDYfkDGx8tPSh8TAY3igXu2B
 # SIG # End signature block
