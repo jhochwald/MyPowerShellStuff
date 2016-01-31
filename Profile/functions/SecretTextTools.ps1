@@ -44,10 +44,10 @@
 function Global:Get-EncryptSecretText {
 <#
 	.SYNOPSIS
-		Encrts a given string with a given certificate
+		Encrypts a given string with a given certificate
 
 	.DESCRIPTION
-		Sometimes you might need to transfer a password via Mail (or any other insecure media) here a strong encytion is very handy.
+		Sometimes you might need to transfer a password (or another secret) via Mail (or any other insecure media) here a strong encryption is very handy.
 		Get-EncryptSecretText uses a given Certificate to encrypt a given String.
 
 	.PARAMETER CertificatePath
@@ -120,20 +120,20 @@ function Global:Get-EncryptSecretText {
 function Global:Get-DecryptSecretText {
 <#
 	.SYNOPSIS
-		Decryts a given String, encryted by Get-EncryptSecretText
+		Decrypts a given String, encrypted by Get-EncryptSecretText
 
 	.DESCRIPTION
-		Get-Decrypt makes a string encryted by Get-EncryptSecretText humnan readable again.
+		Get-Decrypt makes a string encrypted by Get-EncryptSecretText decrypts it to and humnan readable again.
 
 	.PARAMETER EncryptedText
-		The encryted test string
+		The encrypted test string
 
 	.EXAMPLE
 		PS C:\> $Foo = (Get-EncryptSecretText -CertificatePath "Cert:\CurrentUser\My\XYZ" -PlainText "My Secret Text")
 		PS C:\> Get-DecrypSecretText -EncryptedText $Foo
 		My Secret Text
 
-		Get-Decrypt makes a string encryted by Get-EncryptSecretText humnan readable again.
+		Get-Decrypt makes a string encrypted by Get-EncryptSecretText humnan readable again.
 		In this example the Certificate with the Fingerprint "XYZ" from the certificate store of the user is used.
 
 	.NOTES
@@ -151,7 +151,7 @@ function Global:Get-DecryptSecretText {
 		[Parameter(Mandatory = $true,
 				   ValueFromPipeline = $true,
 				   Position = 0,
-				   HelpMessage = 'The encryted test string')]
+				   HelpMessage = 'The encrypted test string')]
 		[ValidateNotNullOrEmpty()]
 		[System.String]$EncryptedText
 	)
@@ -182,8 +182,8 @@ function Global:Get-DecryptSecretText {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBvGSUMJA1XHxKb/eYGjI4wKO
-# 2t2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUr7b6umplu16jG9woEpaUpTHI
+# zQigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -326,25 +326,25 @@ function Global:Get-DecryptSecretText {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS59E8tHkPsogcWF+O0NGPV2REQYjANBgkqhkiG9w0B
-# AQEFAASCAQAzYq3vVL7gA93ZecC7N7Ooz8TT/FTybiwv84ruh7FDkEnQCphzLmW2
-# 9GYvCc87XUP/Wj0gHxSYi3OZpHPyr4mtqOhOAokVK+8SK5mYPdYdcXKA+Rm7mDv5
-# LAjnLCVZrR4D6AXGjtdt3zWS8JTAVTpVkZVMlWWG55JOlhLodOVEW1M9q222kA/C
-# UOg92C4jHDugL/mVge09pOpYIpgrzojUHFG9dTCUntOByIANUm+QpfUjZOqNcMnQ
-# FkM+lTw9EtiS2HFlx1U+9CRfC3Xw0jaNO/6/DdQ3DInnjxNKhroiAtMaq3z7Ulhf
-# 53TXqeI6nhpXmbEn34FyEo37H2wvfkeZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRupRL8CVSmFEUXJXLUnmPCXIjhRzANBgkqhkiG9w0B
+# AQEFAASCAQATbKdHvHUl3T+7XyPxkXM2LNA/PvWafNgTdRI+e0BNbCg7949jVEeQ
+# 8V9nlPSp8JGibU4bbtEjwlTxnsskTllyLo4cLfTcm0m+D1bbE+CCRoS7bCXMaiBy
+# MVs7597kDZFBxXMZtKRIyougY3rydorqWhcAfzty4T6hEvxeIGMlXoUcTMq73ahA
+# JqojlOBA9Gc7pAC7zIDjJfquIhvrjJhJeawOGVibcmYbfRVErAg8R+jZeBj+jc91
+# 0r3ZIOMfrNn/hOKitdjhbqDOJNBm90jfgSDGD128AwmjMwUpV2+dqZpn/GLx4w1i
+# AlIj8vVaqEuWYsmXHqoTO92WiYH/TKXioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyNlowIwYJKoZIhvcN
-# AQkEMRYEFFLwLOjwV4Lhmd40uzv2eJP0nDKqMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTIwMjYyN1owIwYJKoZIhvcN
+# AQkEMRYEFKyHFXuy56Q0PokI7RKbUmPkPfeBMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCHoDcQ86QtiMlw8ueQTfsw2LTNWGiWD0NF+cg5dIKtqu69
-# 868aA4gAnWumkH31g/YQ/Fk7ltwluEQF3KgYyA6ijceLsZEpgEWOqHX6tuU8cjkJ
-# gywJD/HskkJhAzQloO/+iwqsbIOaNExZn6y4hEsUWRL2QoJKYP1ZyaG/oeAtSynH
-# g5tbouXyaq7uHcpzFw7jdtTZtnf8AEj5V2eHWzUcpbfOvC1eyQssS8VnzmobtJAn
-# Nm/7kTTLuGaVDp0qo6HKkLre3VLw5o21Rk/D0kmCZahz6cGomagOBQDwJNKKB5dr
-# v2nB884b7FpX2u2pB//lsVS1LXWNpO7N63iSr0L3
+# hkiG9w0BAQEFAASCAQAZD1jhs8hegPbnKZ8NTc7fjrGZJtCYb6W56lnT19wxwvV+
+# tacNIBpFzaRdJM0B3qjPlAiyhiU2gIfSfmln+/8KiBtkZP3kzOaeED/xA2lryvjs
+# gEqodFKODeoVdd2Xm/NJ7sDyZeoWNPq+dPKK/lIS/UqZjLy3nHjQ39nUCCfCBscB
+# NOYzPZYm0+2XpB8LLwONzHU7B3T2SxxEEz5u6p7Ej9OdFJVjmoA3BKTFXz2CFidR
+# hA4Uri0cSfN/k419VqvSTLjq56DRwdmXosl6LwJ4VAfKeHMP3SQrrO0wV2OGIFdh
+# 9ZuWApZYm+PWV4Rq/+WyL2+dmIpX5indAhOsxD3h
 # SIG # End signature block
