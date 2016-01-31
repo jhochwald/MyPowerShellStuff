@@ -1,0 +1,12 @@
+PoSH Base Unit Tests
+
+All tests are based on Pester, a BDD based test runner for PowerShell.
+
+The tests are not documented well, but Pester uses a syntax that is very easy to understand and
+it is mostly human readable
+
+All Pester Unit Tests run during the Build process! A Build will be deployed for any further
+tests (to Lead user or test systems) if all automated Unit tests are passed (or failed if they
+should fail).
+
+More about Pester: https://github.com/pester/Pester
