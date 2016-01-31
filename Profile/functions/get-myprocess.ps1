@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -50,7 +50,7 @@ function global:get-myprocess {
 		Get our own process information about the PowerShell Session
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> get-myprocess
+		PS C:\> get-myprocess
 
 		Handles  NPM(K)    PM(K)      WS(K) VM(M)   CPU(s)     Id ProcessName
 		-------  ------    -----      ----- -----   ------     -- -----------
@@ -95,8 +95,8 @@ function global:get-myprocess {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAa7hmP3blgQvaxmESHsMZCkP
-# wyugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbkwDHW9dHaMEvzQmqt1C8Kdn
+# 20igghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -239,25 +239,25 @@ function global:get-myprocess {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQn2c24mEErB983gkqgxwtrgW31JzANBgkqhkiG9w0B
-# AQEFAASCAQCKB/GR8QlCiqv74BUARBXT4Q+IJmTgY8WOa9AOLEsNrTe+FRcNt3W0
-# qB+GZKdoqdG0ZxH3L0U472AJkAEag9+f9vzt2QMUbmGsyKduLtFp6HkqSuooirqE
-# h/9w8AV3LKzip71xte2DudX8lhsIfxH3HdpHEW9lki1DPCLc8aKO4ugF7SS8UOeq
-# RIxHae+LTyvax2oEETGhpMkC/tzbsD/+OXXQCZsQUs/qFnAoW9ZLQRTrVb6R/Gqk
-# zqOCPkAk3tNUZA2Uf6UWNAHahsMDssnDdM8bSVjomquvkJ7WoPV0Q30NIA0W4csw
-# M+sftYSkpFmnbRP27xgiyfywxr/IrmUpoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRV5Gq51uRxfHBvuFLV52H6Y+dLhTANBgkqhkiG9w0B
+# AQEFAASCAQBZ4xiegXDuQU/12EGqJgUx2fqSYGy/BqNzoh9GHpkR0ZUiiTa1Y6B0
+# ijfbAyBqrr263jWr5rQ9YXHYpJ6WZ+nLEXfPG1SiW5hszkCQwkSfacwbjDwZfgNa
+# 2OEgziAVBUjpnwFSlRn+0GE7teabwZAyNB+ZjAsjbKMZBIATFD4oMJ/gH2AmFi6A
+# bOfaj2pNxx45B1FT1qiGkvyNstOc6LuafDdKqBH+dGFnrU3rshFk4oX9nSE3Ero1
+# /gHk8OWRs0XSkMtxoF27F4L7hXCCzhrF4JDK4dKKz1o3qRl40iC3D0Vc9XHc/XzW
+# 9MT2s2BpeQR+ERP/suWeZBZj/epwSK8loYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyM1owIwYJKoZIhvcN
-# AQkEMRYEFLiYFKGqfj2Tv9h+mYFtsVb0mzI5MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxNVowIwYJKoZIhvcN
+# AQkEMRYEFIs8Yz/2hRVllz/NZ6dMypAe4L3rMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAzNaXHrp7rI6Nh50XcJaUnZQ+jBUw0X9NMXz+qJKGeyFVV
-# /VHnyBsTTOqRCH/GypEpvb+PvDArjhrnDCtpxqoFM9s3vindoSMRwj3JK7JBDcBD
-# Dgy8TfyJcsfyKYApiGbiMjcGyeq4KfZ2PpOThkXRVJkjK71dOC6sijuM/sUH3A1+
-# Kg67s7q9IylESXRRAOy0GLR1/45n18RDSNJkSEtEmMal82niMU7VHvRCHc6lzx+c
-# GpbC7vo43qqBm0BLUkS6khzQTe/q8o8F7aKIPWvkekqCtQkUDvDc083eh5bpY/Hs
-# Oov/2oRFnU+W+QM0oC/oZFusj/H77eDdRZQWoOH8
+# hkiG9w0BAQEFAASCAQCCWJ61RUgHjSUZj8fmBRlglhFoE5ZwQ7U9V9KEWRx1baAW
+# bYOzzsJ4qrdRD+kxmENY1p1JiYsNn4KQZ4CSqPr39SG5JJ3R8rUeHxFGEcaVFv1x
+# IvwrG/bfKTGkIVr26oFSMQKzLryE38DXvMFyCX4nLPBEQHU1zYKqpVrj+i8nTPKk
+# V02cPfFj8x/kbuW4mTursLcxBGqNVMnJvh5f1ZRxBt31sRGVuupu+Bh/aRaZMm9V
+# KnfR8NQpkDkkH1iD/FjNEzzdFo64VMBKePSZhCYeO3lmt2Ofhvtnvp3+jCZf2PX2
+# QeoRsnsP8RIssyQzNFCPFw4fMMKDYLkGNJxxDXzy
 # SIG # End signature block

@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -51,7 +51,7 @@ function global:New-Guid {
 		Uses static System.Guid.NewGuid() method to create a new Guid object
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> New-Guid
+		PS C:\> New-Guid
 		fd6bd476-db80-44e7-ab34-47437adeb8e3
 
 		Creates a new Guid object and displays its GUI to the screen
@@ -71,7 +71,7 @@ function global:New-Guid {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param ()
 
 	BEGIN {
@@ -87,8 +87,8 @@ function global:New-Guid {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWIG99sgPsUG5GkriQjk3yKsJ
-# RDWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULAnyRKUfzapnCn5aC4BX2xcC
+# S3ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -231,25 +231,25 @@ function global:New-Guid {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSiLZ5rJ82LKevNt7slytCtMkX+OjANBgkqhkiG9w0B
-# AQEFAASCAQClBCSWqcr+VNCm3xCHL1F2tswcsduGR899QT/J/1Z0XfxlBxbkDfN8
-# oK1jO37SRaqL7pa2cZMmRmmH1A2UciXsrhQv+RxGh9D0WUr7gKLsIDK5geK4jIax
-# d5oBYqHubXgASDZTMCKU5TKY4Z/Iifw+c7O1vzgjXb9JKKyIHusoGH4UKimcUK4s
-# qQXUSk86l0WAZnW8/G5PXgGmsUGXEhUHZDWsPebCFRTwIKg5+AEdxUQUU76h6vuh
-# v7AG3O1PiMd3Sa7wVRuXV3duF2ydpHhImWF3hZShZe0tg/yv3KYhVOcWef3YmtNw
-# Kc2PrfsDsCyp9xCCdU5o3oqVAnqtovWCoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTThOuWQpLtwJlJ0MoM3HcxPMnNqDANBgkqhkiG9w0B
+# AQEFAASCAQA3k4Sr5Ey4/LAkdj1wrEF0CDlbUBR+XJPQjFl+cjU66ByKR58QrXgy
+# qcBSyvi7BpVyxTr/RljBklNbCAbOMaW6CbjdR/3SIpuITD68PqtBcDCBghkZbgs6
+# +17WheF727yKdFKUBXoQxSDxj/FaUaDN65BmtjWyl+//ON0hnuPqZ58cWc94l61I
+# rJCY3wYm5MhiH0Jy0NoWY43ypAzdtUWgZIermGn2tOI7CbCZ3n0zqNKbt1kQaE0J
+# RrDRilLVQqRn2KrA7zvR+C0hmpH/QJjZqHqvjozg1j37SfHWRwFfFMMMsOt905n4
+# m0+q4IF2LRJiUIZLqwFLgxbXhge4v290oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzNFowIwYJKoZIhvcN
-# AQkEMRYEFGxdZXS/iKmOIMgdgw8chOFIOlWiMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyNFowIwYJKoZIhvcN
+# AQkEMRYEFNxDysr9VO8qGR710o/UQnX42CLrMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBK5AnHWthLCdm8YD9yrDDkH1nvv3FGxa6a9xB/0e3bcxW8
-# mlHXz6LNP2DSYuKmO9PA2fssTvD7BbzWKlg5pylLZQMwxP5/6PTfkMh6muFhhVYC
-# df3cZMJm4ykXYtbQTIq2eVHLPlea0y0fPzUFUDfID4je8e9+k3Mtk0TfvwuH6zFb
-# buJ4gk7qfgj9bkc6xTHAfBy/3N7OQ2n0qqCAG/pFpFazjQ4EZQ8qqTfZB0C6vdgL
-# xi4Zxa0RT/eiDyNv0qWihdUvOb2DmGGU6TdHKuaOzF6xK1ZoCMTxv8g+4swJQROm
-# MiaLXbsvNFXMv3qMWiAenDAE/MqjjtOMtue8TJyq
+# hkiG9w0BAQEFAASCAQA5EWEceNkyX8ODUaKZu4JGZpwvvQ1UN3oqRXv/6T6yQT5t
+# VHpYrlmWOZzIk1hKCL7grU+z1b8GJfHjnvcEd2UWN2fD0DXbqERAy07HMJ85hpsq
+# b4puvT/64CtfKCY6ikm7BoaP4A/qbQ30MuX6G4PPk3bEgTrxfzE8TCBeyNIJ5xAz
+# +PCvHv9mreZuPRKBqiXYW2j9nskpJCj/EgcdNgaodtvw4a2lVFr/IBYk8nXoyN4U
+# 24hop1cS8bvc3YsggcDrbNb6zvXJW6wr/Zv54q6EOFFyGIgYneyMvoZICsSNsb5Q
+# v9xrs7tNNhqmf6J6/00oMof0CiONAM8Ejd0c9a+U
 # SIG # End signature block

@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -71,10 +71,11 @@ Function Global:ConvertTo-HashTable {
 #>
 
 	Param (
-		[Parameter(Mandatory=$true,ValueFromPipeline=$true)]
+		[Parameter(Mandatory = $true, ValueFromPipeline = $true)]
 		[Object]$InputObject,
-		[string[]]$ExcludeTypeName = @("ListDictionaryInternal","Object[]"),
-		[ValidateRange(1,10)][Int]$MaxDepth = 4
+		[string[]]$ExcludeTypeName = @("ListDictionaryInternal", "Object[]"),
+		[ValidateRange(1, 10)]
+		[System.Int32]$MaxDepth = 4
 	)
 
 	BEGIN {
@@ -86,17 +87,17 @@ Function Global:ConvertTo-HashTable {
 		#$propNames = Get-Member -MemberType Properties -InputObject $InputObject | Select-Object -ExpandProperty Name
 		$propNames = $InputObject.psobject.Properties | Select-Object -ExpandProperty Name
 
-		$hash = @{}
+		$hash = @{ }
 
 		$propNames | % {
 			if ($InputObject.$_ -ne $null) {
-				if ($InputObject.$_ -is [string] -or (Get-Member -MemberType Properties -InputObject ($InputObject.$_) ).Count -eq 0) {
-					$hash.Add($_,$InputObject.$_)
+				if ($InputObject.$_ -is [System.String] -or (Get-Member -MemberType Properties -InputObject ($InputObject.$_)).Count -eq 0) {
+					$hash.Add($_, $InputObject.$_)
 				} else {
 					if ($InputObject.$_.GetType().Name -in $ExcludeTypeName) {
 						Write-Verbose "Skipped $_"
 					} elseif ($MaxDepth -gt 1) {
-						$hash.Add($_,(ConvertTo-HashTable -InputObject $InputObject.$_ -MaxDepth ($MaxDepth - 1)))
+						$hash.Add($_, (ConvertTo-HashTable -InputObject $InputObject.$_ -MaxDepth ($MaxDepth - 1)))
 					}
 				}
 			}
@@ -108,8 +109,8 @@ Function Global:ConvertTo-HashTable {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUd24111mEVwU/YflC/0EDahr
-# SBigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAYLyn1zImDyjBBDc4eU2/hDm
+# f0qgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +253,25 @@ Function Global:ConvertTo-HashTable {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT9+ySRL0E9w8WFQs5WdCioVPOtSzANBgkqhkiG9w0B
-# AQEFAASCAQBRTJYkV5hW5AMrCJZIcvc+7dPz7XOFwrzgolm9u920xkvPh6ppBnxn
-# girsObuEP1Ud7BSKCB2986nUM+TonH3O5udm8sCLZFc+We9yJbh+MzK2V8pMtsOi
-# te5yCW+RH8dPr3K4oVQG3bLx12Dx6XGGurawel8O2hbfjbGd2Jg8/MfH4tSsxgyj
-# qdup0lsJrdLu3Bhq1ueXMl36tOWaO3QFMNK4WtojHRVc3MGAoVT2Qw1SaFTDs8gv
-# f49VC2g7TQBPtwVYG9/eX84ItGvkfNebjlCqTbwN/i0CQ91wuHSXjdJ7BFAhEARO
-# E+f1OPUrOEN96EMvghA7l0V97+PZxbomoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTd7gmLfKrmzq5GHHOvjXzPsoGK/TANBgkqhkiG9w0B
+# AQEFAASCAQCh1mqerKF8x+ND86FSqaWA50+AJnn0XgJ+H7NJjcV7f9tzyx/acrTk
+# +st+iIaiJkbXxpuq79p4r7wjbAGzf++y6kFqULeshm7nuKvs7/mmZdV8FLR4kUKZ
+# ugj4OcvlvHOhcKSzphpxfLVVOPZTmPnAnwR8pDgWLszpvG5sDlJVN8fVIxtyF4m0
+# y/2dO4kLXNUM+Ps/IHvKPGmi581QFJlvo/TACcXreXsPKMEqAMuMZkkinm3OewRr
+# 8a6ruJf570gu85sRPJzeATXI9O0eUC3waxcmbiWDNiYnNxascTcjZ9KBSPvYNUlu
+# Q7qTq8wYejAdv+keDUDvifTdmHqbZDlDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExOVowIwYJKoZIhvcN
-# AQkEMRYEFP+Lwjf0jca8CtSFywr295cLpRxaMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxMFowIwYJKoZIhvcN
+# AQkEMRYEFPRHwhRciMWgA4ccOF97xACbIDqCMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCUG1VhQ4VniWZhcg6Vepz6OdQvwXOBrddTlnJpo6PnHkpw
-# kwUtFScXhCkr9OOyh3u+5pTlF8lu7MTvBVR1250MnGDIZkgny7bkFnBhpFRSfVFz
-# 1yV/XWp/dYtMm7hZtOlldwCm3vHkEca5h+c8e0+YO+qaIbVxDBJ2B8sARvkYgK4o
-# bSsNef0+x/zmkGl8ZpE3ay8zvesyW3r/WUfvkZN80R23hC60qiWyVS2H92eBTMOE
-# ns97Bhwn55meLOAM4DoZv35ym3KA1pdut4B67xndJOADENOJt6LhXMxXVOwxXmqW
-# BtFn6h0UBTkYncxvQ4BP+vlFcnTAJTnzuj3s32XR
+# hkiG9w0BAQEFAASCAQBmvxV/vBtgqctc4eROalmVLZPG2C48tXYF3ytNaqHnP5i0
+# TaQnvQflv/DKvte/33wloJ1nHa/7Go17rjOq4tH+biWzRFCLsHF+wXMLFKRFdsSb
+# 27j3IRXledNf8/LCwYZRzqefQaoZImik5gbOgaEcCbJoxXcuofXhu9YM5bXaXG5l
+# p3MptpQe1QaWsJ5hrDmL2Dk3q53TE6RdyEcYxJQUH7dvsf+I19XQiKBhvDsyDIl/
+# p/gcXumChFSFnslosdpO++PW5KA0lclhKnlsxSQNO8qcaJerhB9ugzf/xFd2WMYM
+# s+GIqnNPT031GO7o56J4TzrTa5bPGJkK4pv9dLY+
 # SIG # End signature block

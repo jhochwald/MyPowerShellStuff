@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -53,7 +53,7 @@ function global:Convert-IPtoDecimal {
 		An IP Address you want to check
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Convert-IPtoDecimal -IPAddress '127.0.0.1','192.168.0.1','10.0.0.1'
+		PS C:\> Convert-IPtoDecimal -IPAddress '127.0.0.1','192.168.0.1','10.0.0.1'
 
 		decimal		IPAddress
 		-------		---------
@@ -62,7 +62,7 @@ function global:Convert-IPtoDecimal {
 		167772161	10.0.0.1
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Convert-IPtoDecimal '127.0.0.1','192.168.0.1','10.0.0.1'
+		PS C:\> Convert-IPtoDecimal '127.0.0.1','192.168.0.1','10.0.0.1'
 
 		decimal		IPAddress
 		-------		---------
@@ -71,7 +71,7 @@ function global:Convert-IPtoDecimal {
 		167772161	10.0.0.1
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> '127.0.0.1','192.168.0.1','10.0.0.1' |  Convert-IPtoDecimal
+		PS C:\> '127.0.0.1','192.168.0.1','10.0.0.1' |  Convert-IPtoDecimal
 
 		decimal		IPAddress
 		-------		---------
@@ -98,8 +98,7 @@ function global:Convert-IPtoDecimal {
 				   Position = 0,
 				   HelpMessage = 'An IP Address you want to check')]
 		[Alias('IP')]
-		[string]
-		$IPAddress
+		[System.String]$IPAddress
 	)
 
 	BEGIN {
@@ -147,7 +146,7 @@ function global:Check-IPaddress {
 		An IP Address you want to check
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Check-IPaddress
+		PS C:\> Check-IPaddress
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
@@ -173,8 +172,7 @@ function global:Check-IPaddress {
 			$_
 		})]
 		[Alias('IP')]
-		[string]
-		$IPAddress
+		[System.String]$IPAddress
 	)
 
 	BEGIN {
@@ -229,8 +227,7 @@ function global:Get-NtpTime {
 	(
 		[Parameter(HelpMessage = 'NTP Server to use. The default is de.pool.ntp.org')]
 		[Alias('NETServer')]
-		[string]
-		$Server = 'de.pool.ntp.org'
+		[System.String]$Server = 'de.pool.ntp.org'
 	)
 
 	PROCESS {
@@ -279,8 +276,8 @@ function global:Get-NtpTime {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUib3VHiBi6Ca56BYAWLr9iVqJ
-# 2z2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFE9zXdUVYp5FreBziPaeepep
+# g1WgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -423,25 +420,25 @@ function global:Get-NtpTime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTG6JNMcLnMFfB6xwmAWyYxze0E9DANBgkqhkiG9w0B
-# AQEFAASCAQAs51WuTWOmCg9TQYeT+ZHX96K3cERCAwtjiWJGUb4oB3+c3logTcgW
-# OFGnPenu8YSwy5oBBGFFxEz2t0NKrG2DktfeiFJ6V2i7d80pvTq6F19BnfJ0QR34
-# pFUoE5kZ0DGKwCsm3Z4RynocmhIAxg0EmY8Xd5tAiyktO1uUZzQ46XohqiFGF6k/
-# 2YXaoAr7BmsE+d0n6YYmxs+AK8Tzbav8P1/DY0wthI+XbFWWB+JVhR5VDU/CvZIq
-# /fH6NQes6qvO0Ety2/8e/Qyk9cPx9fvUfKNKaJU3Qcw/3pw2oxHW8NnKbvJcPqhz
-# x/Uj1C/2XChOJX1ZqRjJOlBIddkbh+f4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRyPl/7nSyc55U7wnlW/bKxzZAj6TANBgkqhkiG9w0B
+# AQEFAASCAQAS1gPsI3uLam/p3p/lmoNIDoeQ58ev4WMKB1lxMShu0I56a5z4ndPY
+# K4wexxuNrjycYE7fufc0VsUWKIn645bmoV2u6rArR+yLzbZqBjs9oDcnH6Y1hzo0
+# SSSXsW3pXDMmy7UERmid+MoHlp+4j59J8maX33TTD+bWytImIVdQDiLUQ8I137/s
+# hgCi05Z4t4lGV85sdASHsomHMZV9U3xKpXGj4Oj7oFt/seTBgfSsOxLCLPyL2Q+E
+# SDEb4fSH3M2TYGasiZHxtvDtituHetT9SwiUn09v3bmQW6jATUdIc3hImuNT7DYq
+# nbtKvPxXCv0RgFTSS7+F6LJnXhVGkd+poYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMFowIwYJKoZIhvcN
-# AQkEMRYEFKQjFoFhnudGjg1Ynqn0LqMQvJWsMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyMVowIwYJKoZIhvcN
+# AQkEMRYEFIWML632zzk9d3004dSPqOLm61XgMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQClzCCzqXEJX0lUjSq3deONX4IJoGC6Zu5V8QVNZ3LXnuMm
-# 4itadmlpSQZ855xyQb8NnlsU3lQjavuWc8nTPzzs+nb4f7Nw6cgmA4Ac4nangNeg
-# Mv0oZp0os2sarD1tNwr3Grd1g2HSJaIo+adcDmi6yX/ZQPhEmy2ALwkqyGen9Rce
-# a93VBEtvFU25T/XiaRirI6VT9Xxo0G15jWdV32qwR4Sfyz9kfyjvhEuZ5TSQcZ6v
-# j6MIae8vVSS2BbGj5GjELWVHFgEpVKusUH7nFtpRachzkxfXyl9opXNmfVwmHJWj
-# i74bYMdNiTCe959zqcfnhhnkTQHTXfJBUoXsIuhM
+# hkiG9w0BAQEFAASCAQCE9BFRJ2Kq4Uq3mI17A6AWzUZKmHyu93uJlbPbxkELbkuL
+# jjlBuRV/vT9b8aZf8JpPA6mASJh75uUTBMT/uCH5/jvzN/U10/A9cr3FNVUi/73D
+# +PI+emoyRZZvaJk8NdRb4pUxjJkhoqStU+E2A860fmHz6Zx35/xGbU0iN/FeRRAW
+# vA4fW/qP+hQi6Wfu22OSZRUD3590a/6EBohBdpxoqnZGxhUq2shA4Z1CLM6Q0Rie
+# l6yXnhpaB3Lsm9g2+o5PvPnJKEu1g+0W3mPI0c3ChKTLYjvHThCWAO2uKrIUh1eg
+# m0bpxUpvCNAoLr1vwZQMMLDjt7gamlpuPvPedsxb
 # SIG # End signature block

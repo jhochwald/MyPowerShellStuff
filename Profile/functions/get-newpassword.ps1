@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -64,19 +64,19 @@ function global:Get-NewPassword {
 		Complexity Level
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-NewPassword
+		PS C:\> Get-NewPassword
 		zemermyya784vKx93
 
 		Create New Password based on the defaults
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-NewPassword 9 1
+		PS C:\> Get-NewPassword 9 1
 		zemermyya
 
 		Generate a Password of strictly Uppercase letters that is 9 letters long
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-NewPassword 5
+		PS C:\> Get-NewPassword 5
 		zemermyya784vKx93K2sqG
 
 		Generate a Highly Complex password 5 letters long
@@ -103,19 +103,17 @@ function global:Get-NewPassword {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(HelpMessage = 'Password Length')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('Length')]
-		[int]
-		$PasswordLength = '8',
+		[System.Int32]$PasswordLength = '8',
 		[Parameter(HelpMessage = 'Complexity Level')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('Level')]
-		[int]
-		$Complexity = '3'
+		[System.Int32]$Complexity = '3'
 	)
 
 	BEGIN {
@@ -158,15 +156,15 @@ function global:Get-NewPassword {
 
 			# Pick an Ascii Character and add it to the Password
 			# Here is the original line I was testing with
-			# [char] (GET-RANDOM 26) +97 Which generates
+			# [System.Char] (GET-RANDOM 26) +97 Which generates
 			# Random Lowercase ASCII Characters
-			# [char] (GET-RANDOM 26) +65 Which generates
+			# [System.Char] (GET-RANDOM 26) +65 Which generates
 			# Random Uppercase ASCII Characters
-			# [char] (GET-RANDOM 10) +48 Which generates
+			# [System.Char] (GET-RANDOM 10) +48 Which generates
 			# Random Numeric ASCII Characters
-			# [char] (GET-RANDOM 15) +33 Which generates
+			# [System.Char] (GET-RANDOM 15) +33 Which generates
 			# Random Punctuation ASCII Characters
-			Set-Variable -Name "NewPassword" -Scope:Script -Value $($NewPassword + [char]((get-random $ArrayOfAscii[$pickset]) + $ArrayOfAscii[$pickset + 1]))
+			Set-Variable -Name "NewPassword" -Scope:Script -Value $($NewPassword + [System.Char]((get-random $ArrayOfAscii[$pickset]) + $ArrayOfAscii[$pickset + 1]))
 		}
 
 		# When we're done we Return the $NewPassword
@@ -184,8 +182,8 @@ function global:Get-NewPassword {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZxE36smE+PCUGBgENMp2/X7T
-# 2dugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUx2PF5c/2x5As2R+33Dc65id
+# W4SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -328,25 +326,25 @@ function global:Get-NewPassword {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQLHOi3NmFB2UiiV457o1d/9yhLvDANBgkqhkiG9w0B
-# AQEFAASCAQA9Mcas/XPKWYFLE1psmIzmRPO+mQvH4uyxuNf7JLk+BV4tnnEh2YY+
-# KcucY6l9wzl9KvSI8RXm0Y/JQp6ySA3fkL2nqcFOERc7RHNxtv3hDFE5broMnQUo
-# IQfN3aWh2I3VUTbjkpZ9BNXDIG1hZV+CDAdYNtTz1x1jwqcF5kxVt1vSsCmWTlcc
-# xGM/329k+4TrJUaGlao5gwzMUYLcsSsbkRwfmjtz5skhgJlpePuIP6SS7o24eeC0
-# 7Y+FgTuE0BvBm9fhTJ534XXKLpkmfoQGhUdEcmLGt8PTMT3xFs4BRkH4BCDjEjse
-# 8c62sMYnuMDEwmug5ZMaiR0JbmhqHrZioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRMVQqV3BjyV+oVqVnh9qKmPOF9RTANBgkqhkiG9w0B
+# AQEFAASCAQCmLtqhZiBTn+9iOa7v6ZmE3NFABzyFQ8Ba4UsIEMLigDw0fRZ3AkXx
+# U+Svr3iHLnaDYiJitDZHVLpMP0hBlXla1j9n099Gjq50SPhhLb3JMcqBgItRccGn
+# Ay037htvTWTuA7lqjSM17pUAD0lQ/xDO4ZX78k5gNKFrKqiVvYSr8LYAkHj7QeCV
+# cg8KULAcmzAidVEyg7FDAe++hg6S+rUTDPfxXOUxqiCJxYK1ETmMyH1SFjQ77l4l
+# HYVVFg7giOcArIO/yh2itA9GhX2Lp8PuXaYdI3etIfVff0pJNxDco8fH9BYoInfH
+# l1LeyZfEP+kxYDZ8JOzkdEPdkN+7wITkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyNVowIwYJKoZIhvcN
-# AQkEMRYEFMevhgbxqNtrfRjPy8zaFw89NDOkMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxN1owIwYJKoZIhvcN
+# AQkEMRYEFMmjyvkzs6iA/irzZox/WTd6B4S+MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA96Dej4081YLhBj/DCPavW0mOpFGFRowkFOopMIHGvZtdY
-# 1x9DR5xOd0VWNLEvmwLQopelBlRhJ9V6fYl/CTEzfLtfU6JDiQ95MzHc52Ul08v2
-# nQU03DF6rqOD1Wa9IadhaEEPdVtBCBKrpJGuP8udUA+JMYnaBkgNEStuqVpxq3zp
-# Doc9pYtyoQsx7RIdhgC0V9K/j0XIs9WiJVcwDhza9zjzdfqtzKbNpHMtrivQjsBD
-# oqNXJXNDwutRGrqWyYuDlacyp3/YauPOt3j4oKXY9IIQSqLbhW73yA+a8qA0UzVo
-# gIXI4xS4m5XvGzHJ1k+5+a7klGqEGzb65iM6ruQQ
+# hkiG9w0BAQEFAASCAQCggCQ4S6D+uNnHWHBEq5GXainJW4RIqw6iarFXAEqC6Osc
+# +GPu53NxStQNgtJhIX62c3ErE+W9NFN5FWgxWJR8HF2xRW5+HIkp9FnSfHmKo3A6
+# v4AycW8FSEFvOS3Uz9yihaxRROGmIuv3QctKOvWYMcy8mL+jkZTovx+8B5BNmvFX
+# IgOhDiDT0pULVS9UHEwn0ZDwBqtXt3tf/yHGZ7Tpr7WKkYbONm7kHPAzqnBo9ci8
+# HFYNnRKECrZvtjqG/D+EzzHQ+Z9VJO5q+67AcQn5J+cbA8Ly06aOqLYeWJU/vauY
+# h5VCLNtZqVf/HHswKfjxX3CJk4absE0GVj8G3SCE
 # SIG # End signature block

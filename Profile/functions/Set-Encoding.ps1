@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -61,17 +61,17 @@ function global:Set-Encoding {
 		Encoding method to use for the Patch or File
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Set-Encoding -path "c:\windows\temps\folder1" -encoding "UTF8"
+		PS C:\> Set-Encoding -path "c:\windows\temps\folder1" -encoding "UTF8"
 
 		# Converts all Files in the Folder c:\windows\temps\folder1 in the UTF8 format
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Set-Encoding -path "c:\windows\temps\folder1" -dest "c:\windows\temps\folder2" -encoding "UTF8"
+		PS C:\> Set-Encoding -path "c:\windows\temps\folder1" -dest "c:\windows\temps\folder2" -encoding "UTF8"
 
 		# Converts all Files in the Folder c:\windows\temps\folder1 in the UTF8 format and save them to c:\windows\temps\folder2
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> (Get-Content -path "c:\temp\test.txt") | Set-Content -Encoding UTF8 -Path "c:\temp\test.txt"
+		PS C:\> (Get-Content -path "c:\temp\test.txt") | Set-Content -Encoding UTF8 -Path "c:\temp\test.txt"
 
 		This converts a single File via hardcore PowerShell without a Script.
 		Might be useful if you want to convert this script after a transfer!
@@ -93,16 +93,13 @@ function global:Set-Encoding {
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[Alias('PathName')]
-		[string]
-		$path,
+		[System.String]$path,
 		[Parameter(Mandatory = $false)]
 		[Alias('Destination')]
-		[string]
-		$dest = $path,
+		[System.String]$dest = $path,
 		[Parameter(Mandatory = $true)]
 		[Alias('enc')]
-		[string]
-		$encoding
+		[System.String]$encoding
 	)
 
 	BEGIN {
@@ -175,8 +172,8 @@ function global:Set-Encoding {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUSDqH0wQbBuWIX6oreNpkoL/h
-# VU2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfYF+smOHlzvbf/qgrj5qBZLR
+# wqmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -319,25 +316,25 @@ function global:Set-Encoding {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRRJJfmO/uBbnfdepEBcPGPe6gmpDANBgkqhkiG9w0B
-# AQEFAASCAQBtYYTZgVv1xWO/6e666cASluw94HkeK096MLUirOU5jiV6nE9L4ssz
-# 8lIbeX7OcH9+QtlJ9qWzEronmv0ttzOnslciEkIHHDh4Sk2SYRB1+g6tS1808QEj
-# 37CfT7p/6vjtlZ0Da/D9MGHcQxX/WIQAnKTMsKBPt0jqKmyqQ58+XgTh4mEEFo7u
-# YMJ3tmmQGBT864exHUWkcIsMK1NNCKzPfa75Bhnx5BUTbOLLMFWF6LjucMF+SW1+
-# 5DmIXuy4EB90J9cT6rW0mo4g/+0BvTh9GpIJwPxVyepSnmElJUY7Mfie6koHklHB
-# N7nygMrqa8V5bbNnjquIf9EbKaWT3FP8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTI6PqyiFSzfAyX8CFU+MEt54AyzzANBgkqhkiG9w0B
+# AQEFAASCAQB5IG7LJrLPaIL5ldB+EDJRqFCT7gil7L2kRkMmwieSgMu/VaYXLE/G
+# +xqEEe5U1Fs8MErnNAU1ezkl1dRx6Nswi5EZ6IElBOBdAhUxymjjY+UsqZtIneEF
+# 7qs0Bx3Nob7YX0TXja7b1x/LWK60n6ow7XryIktACrjvQWefsHd8hjOsR0xzuF2r
+# fXtG30c9ePBTY2tj7P4wT6jIUnleGFgHcPHMd4JhrUp1f2gHQ865o+HZvzwKu9iP
+# trhkG/XW9dsYywvm9LAX8UrIiHJSVfuMTqw6+5Cpr3qWFfy2/D1DVILCiE2/0fDG
+# iCqz2avTEjQlJswHwGWQmPAy5pdxzbXcoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzN1owIwYJKoZIhvcN
-# AQkEMRYEFKkQtz1RGJ7QaOLUzxkzhemad6+wMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyN1owIwYJKoZIhvcN
+# AQkEMRYEFEuAI3w1rq1o+rHxwae/ptY23jgVMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCWPy0hQLOG+02LARUIhP+EKF3xVJCSngD4C2ii36jVteGE
-# hggeKOz5eUMScXjJX8NTiU0TP/nMao/S+ApFQHrr7yvbt0yZBQDIA0gKlc7xNxKp
-# yXrRouUXXWY7QazRvhC4k3ClgCfnAvhDjjWUQ27NauHc1PBa9a5n1RpBzheTD94I
-# W7H/6edtR+xQVdUskE0cs5OHktR2vpH9j/DVFmI6e7sk3L+zoSRmbf3hbJfWd/Ik
-# a0vtxqFFriIppflthrIj5+ZWvfrLo/sYhgpMBu1+eqemKNmJLoSb6u4VllvjnqZv
-# cmVvgN/wyTokByL3hBS+i6RaDfnaOqiJQ/2EwvK9
+# hkiG9w0BAQEFAASCAQCfnu5wLrtammaI8gZStremS2cmY0LXUHpJ6eDOjmA6UoD1
+# qDjTWWYv++T05jJP6Qi2itACWK3+oKVeeBbhFOuAJDtj9SH2MbnQP6r06tXja+Tz
+# YZkAbfzT89eBiBhcOlNGGzMkeZGpqMe58wdSE35xhutslqDf/NAf3ybHfGVUvZv2
+# 68fZrJn0ESal/bgUUrtxv7DyfIOWVpo6tto85rcQIkIyiBDbO80mSsqyFIOOOaWb
+# DeGVFy9iJ/0NJXgypfMP96hpZ0F031zwd5gaVjwl2ixKnHPRwGbqBbMuMS6ITNsd
+# iUT926RorR+ddFD3FPWdWxGxgIz54PSYvoISvlIX
 # SIG # End signature block

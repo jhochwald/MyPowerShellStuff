@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -123,8 +123,7 @@ function Global:Get-PendingReboot {
 				   Position = 0,
 				   HelpMessage = 'A single Computer or an array of computer names.')]
 		[Alias('CN', 'Computer')]
-		[String[]]
-		$ComputerName = "$env:COMPUTERNAME"
+		[String[]]$ComputerName = "$env:COMPUTERNAME"
 	)
 
 	BEGIN {
@@ -254,8 +253,8 @@ function Global:Get-PendingReboot {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlCM6Vjz2GEBGcCIVFcRXDtMg
-# UBOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdxvoOMftyFVHXj5Goq9ZZWgb
+# BbmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -398,25 +397,25 @@ function Global:Get-PendingReboot {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTD1WtGFxeKPVx0V9Wm+e8r7rMZ9DANBgkqhkiG9w0B
-# AQEFAASCAQBCEKJj6tFm/JhAzNcDTkzMXXee7D1szuspVDyNQYU8tkzmtDxeCEvB
-# udZ8lnLmV4rrsBizEzc3HfrDOwyhvAf32hdQRcl2hH+9EU8NHKrFkp02vImgEIko
-# 4+uRS3vd7jeU5gLWLoU4w3WsODWrIzypkYCpY+OiPC8dtL44pTperH8D9ztLDlAp
-# pisQpIpkzBHLDwum/+ZXrb+ym11tYBH18JF38qbS3wR0pzbqcsHPorZAKXC0IOmz
-# jtsQhkNqprh4ZR0n+tUvhsc8zxXoTzC79NtfN8HeEs4TAV+ghULqUJzVcwWHYAwb
-# IiKUGeoghAuap2TyDkdZj4MtPY0zGisjoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRcFV80MPly8TDn5wNcF+zQQPwEXjANBgkqhkiG9w0B
+# AQEFAASCAQAcomkZI/95CM7ZnBe4Fdg1f29CFGUM8bvph77Sem1T7YKC/BcfnxsC
+# 7fZ3oGZjeHprsy8SfsTKRHwHqIwHidEFHipUlifQKqsfFTNME13KBXNUDRyNKx2V
+# +XyE1uwqFjI8B2UacpNmYTy2JEi4RU+6/IvxPgBoxNGbxd2bOGO8UHPIMajb7as9
+# wTCrfCB8+R6l5E/qLKvaIhO2Za6q0821MUeYTkI3jWs9WA5zkS9VIXJKXHW0GDEX
+# owUnBvwqyWfFxFtiRkesBExKzxSe+CJrDGDyHWAp2gnbvUJ9Rr+0re2YYL/CegM5
+# ikporhrB8My1+vnl5lWvJkLL2Fq1gFzSoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyNVowIwYJKoZIhvcN
-# AQkEMRYEFFJw8cRPykFm7nbUbwmAIPt3vqMRMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxN1owIwYJKoZIhvcN
+# AQkEMRYEFOxsVi6A2AUgOMt5x2Oul073cx7bMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCaD/zVt+QBTPjle5b7Be91ec/zHdiJJV7db5Ag2SP8MMbh
-# 693wUsfZLx5QH0/ZAyCsia8SeWnW6nMcKxZm+GNDdSjZ5T82ftpsswQZiStadUIp
-# 86rzcaPPXgx6Hz33QsT1JzED1+4nIGBwVxUTaqV1IgkU/2qCOC94Ahmxn15+mN7I
-# ncU6Je91/JNS154raLEAOjqihyAYnxa6wBuAdKRp+VA/uqOYiV/g9ir+c4Y9+oYm
-# jkvDtOFvo0TQhQOaUuPGKnDZ9oQ/SBnn/oq7q77VzXq2v8PF/iEMEZw7OQnYoIdC
-# gPukQ0LU3HhRTRhYBM7AU0ornZOUCDBfToyi/cr2
+# hkiG9w0BAQEFAASCAQBMKgRyFXIainvRaSvTEhagsW1I+Md2OuQub1TXQwQDFJLe
+# Q3qZVZHSkuzL+F4zDgaXMR3ozjgySxtYR8nd7qM6TELmDmV4oV7FCqyZLn0GI9B5
+# QyEjwK3eYt37cT4NIyJF6CClR/Fb4dUx75gc6T+O7UYMTsWwbFwcdSYirEi+sWyE
+# lWwqYc0dsdgRSrqvzAt5lkWsoBPuVXBsCDNj9xxa3zREci3B4SiLMs45xxKKxeey
+# 5nhc8uLCx57j9xuJvgjKsF+r0tITNqyZtD2E+ADUpBx2DMkzqITQ5l8YTBOzOdCF
+# qMIZJMr+wrduw3m/4AQUiiHNniTjKnmki6Fz71yy
 # SIG # End signature block

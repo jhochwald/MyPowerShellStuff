@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -56,7 +56,7 @@ function Global:Get-NetFramework {
 		Credentials to use
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-NetFramework
+		PS C:\> Get-NetFramework
 
 		PSChildName                                   Version
 		-----------                                   -------
@@ -83,8 +83,7 @@ function Global:Get-NetFramework {
 	param
 	(
 		[Parameter(HelpMessage = 'Computer Name')]
-		[String[]]
-		$ComputerName = "$env:COMPUTERNAME",
+		[String[]]$ComputerName = "$env:COMPUTERNAME",
 		[Parameter(HelpMessage = 'Credentials to use')]
 		$Credentials = $Credential
 	)
@@ -123,8 +122,8 @@ function Global:Get-NetFramework {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4fvLpe/ap5dKYO5gWdC8Ie11
-# g56gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxfBQK9FhAIgoSKa1yy0x+2vY
+# EregghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -267,25 +266,25 @@ function Global:Get-NetFramework {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTf/QerLy4hdlYK2l+fw7Q9+Pa14TANBgkqhkiG9w0B
-# AQEFAASCAQBQYaY6LBY8EKiVtzVFZhfDn7uQwfpUkETFNCusMDbeWrYRZxBu3Jb9
-# BYHjajwjx4nKXKcBsoN481t1n+iWYNKQyrQToWlazeMmL02qJeruYP/In8McYSfW
-# D2YkUQDm5cqjTn0DDJJHlZsaeibbcwU+r9sniE1NPQEJ0nKR9SNeqgCsCh1U4yv/
-# 5LBjFIeBVmIXPRwdn0iA453NH1JYj4LQ/zsovCcebO6FBtz/XW+ShHsKqCblVce4
-# aRq5rhl6b65pkGi1VNAGoXIV5OZ9CsFFFbmKN+lX8hVDIakNozRK7yN8QdJJifAY
-# RS+ReHJsdQAfW4MzfBk7fcI8kjX87HbMoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSuonvEdrAGbiSiVXhZBgi1OzXw0zANBgkqhkiG9w0B
+# AQEFAASCAQAMRdlRnSo5BuBEwjq2Pptt3JK5ZK9aMWDKg19XzUbkACjzzJpMXhkY
+# 6LlK/GGaQ68hfHkOzqSmkGM2G7VqLIjCVAxuj/eZF0vCuMroTm8eV7aVJG9SD/H4
+# W3pdfkx8G2nvO1dRME8iEaEi3+SaPsqN7Gtf7G/gHjB2wxZHAxzAhYEwYcuGepz8
+# 7RWF4fmwl1GOijQnDnAaJLgbTPgbFkpC5Irsj1R3W4RbgQxkFPHvRHq09MHIhRjb
+# B3CeJrTbzFmZ47O78c5NTtSLBmmUKQZcxeD+SbP0lHValZDnnfZxE9wfi1S46Kbm
+# /a/vMMWke7b7jh/XG/TQQhM7nHzxOiQsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyM1owIwYJKoZIhvcN
-# AQkEMRYEFA7tbdg9XMOqGTDfydHZg7VDV/zUMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxNlowIwYJKoZIhvcN
+# AQkEMRYEFGIoJ3KQclDWLDbtrPJ5rG6dvtNZMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQABSrWwpZXB7LcQR6aul/Nr46pseCPT2WEZ2sAMluJ3Ivjy
-# gqdZKGH/T7fQorro6TCdhRmCVoF3x+GkIIGwu+6VWqRNugPH6HbxhIxmlrxYJRi+
-# 6G4Qqrjy7tBdenZjMRM6TWOqckmiK0vMLlQ4HKldIhgaQ77QSTzOW2XYuDaJMuWh
-# SeYym9xBWsR1VAQWXZE09YlxPxv3af+biV1f+kJgk30UBviHyvd01JiJqdpKVqUO
-# CPIWmV38oWLXRiHGjbCWx7oh5jCeOBW3IK76wqWiMVWD6sdiL9Urbg1JlMg3sUOG
-# n6+jn7gjSKVuTUaTqKoevCRw01KRYJPOafYevDmX
+# hkiG9w0BAQEFAASCAQAC0m8ZGO+WzxrWIkmhyJo1OWNu3gPL65eHv5FI2xahBHuq
+# m1Bta6ciwIcYBLB4NSrRokRD+BUAc0LbI9rSkccFMKmGFGvbRkLNjd5jqLWMVovT
+# SVs/TWdf45hxIqXx2OGWoNUnsQRWq+afkcfj+//Kv9YNp1kzjgQpgzKIqlzuR9LS
+# Bbdp5BEL187vBqe/7raFb0XkhOCS3znaETROKTlZ8JPEX5Aa3xdku+TCUia2Rus8
+# UGeRE9VlY5m1acPBfnFO5WwY8WmRM8by0DnKCsr/blcaiNKABgaqiJGDzJeXJOsw
+# nov96Vdhpo2yyI7ocSsqKY2EFMUDJWNQAZ7l01q7
 # SIG # End signature block

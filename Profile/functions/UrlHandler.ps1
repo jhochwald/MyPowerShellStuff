@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -71,7 +71,7 @@ function global:Get-TinyURL {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -79,8 +79,7 @@ function global:Get-TinyURL {
 				   HelpMessage = 'Long URL')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('URL2Tiny')]
-		[string]
-		$URL
+		[System.String]$URL
 	)
 
 	BEGIN {
@@ -147,7 +146,7 @@ function global:Get-IsGdURL {
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -155,8 +154,7 @@ function global:Get-IsGdURL {
 				   HelpMessage = 'Long URL')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('URL2GD')]
-		[string]
-		$URL
+		[System.String]$URL
 	)
 
 	BEGIN {
@@ -219,7 +217,7 @@ function global:Get-TrImURL {
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -227,8 +225,7 @@ function global:Get-TrImURL {
 				   HelpMessage = 'Long URL')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('URL2Trim')]
-		[string]
-		$URL
+		[System.String]$URL
 	)
 
 	BEGIN {
@@ -295,7 +292,7 @@ function global:Get-LongURL {
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -303,8 +300,7 @@ function global:Get-LongURL {
 				   HelpMessage = 'Short URL')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('URL2Exapnd')]
-		[string]
-		$URL
+		[System.String]$URL
 	)
 
 	BEGIN {
@@ -344,8 +340,8 @@ function global:Get-LongURL {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUR0W1vS8/M9pZKhlGAJWJX+4T
-# a0igghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+8zLbaMs26d4hfM7VR8TPqs0
+# gvugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -488,25 +484,25 @@ function global:Get-LongURL {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS3ShI2fsij8oAAdJIIBH0yh77GhzANBgkqhkiG9w0B
-# AQEFAASCAQB4ftVdvmnE3fIsglyEWpcZQfey4uMMd6Gewz8PeoPOa8joBjfNGMYT
-# vL9Vivb1sYAVBegFm4wYqWLJ6rCZMXsFizlXfq5/QHDXcaco6B/Tg7c1mkeklwCp
-# DLwCHUDxdTJt2W9avMmomTSITJ3+ep8vCKyGJroR52MkD2nE93nf7ioDRmqdFoV4
-# 2eC6Z/Nr5I6sgBDamlrzZWBbEgvV0RKeeRAr0ShskLPXDU7vKs/I7Sd7M58bDo3O
-# CfEnvw7eQFCrR1U9iC6nyN2IrnJlyP/7T6pXCrmOWXhRPIlPEagGYshc9xp/O3Z1
-# 1OiujtUiXWIVnqqnfiGCAkczGsTqHbp1oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRDzDg8f7JLxB2Fg7hIMxrpgaZWAjANBgkqhkiG9w0B
+# AQEFAASCAQCEw7UOBNS8QyFKZwLuxb/Bx9OfFosIh4fwPBbu/8IkkkhHnTwWwp3v
+# tBvMdZRDqvSB8VdbPNwF4kL7WCZq5qktCukYdkEcI+8rilM1s6A3TwwFKEREpdKU
+# ekLgONHDqiMVH/IjLcBmAzh7/eCP6C5mfB4hpfNwy3V+9DV7bsguHzvaC7NNNjQS
+# uTKpG+9nRL9iK2wUYV1+ut2eS29Bs0iys3ucb6FvSvmjF4lEBKNhdDumV3dejcUf
+# SDYVr/kXu2D9xzb6CwX8Iz67hPghg27//8NGqZNYZhxN8Ks+DbietqYCU2H8rWbX
+# m/beVfxom137ve2/82OLIeYBl+0UugYsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzOVowIwYJKoZIhvcN
-# AQkEMRYEFGWDsBQjUEq1T4F+///Lmw32RCBCMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyOVowIwYJKoZIhvcN
+# AQkEMRYEFBvK05gcM6dZLkI99lyT2hOTEKHfMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCTBBBTr3J+ztHoe65PBaEvZey2zitcTHDuFFoVUQY0IU2b
-# Iz7Al02CFcvhmN67Qt2CTic8J2Ks0MTixcBa2K3TKAnUtdo5bmjQ1jr6QXuc+U7w
-# K6uEkoZh6L+nVnCaxg3eTXVuM6nibD67cAk7ZX0uRJ1bgr8SklF2GkF+pXNwnGgz
-# xoyj3I/Ns4PVufKN8fbXPcRKg6od8pzo4ktTvE4sDg0a4tzpbJ4XFNHzvFOXQbHa
-# eXi10M9zZXGgLsgt/DhgipvaYt1BpPvBeONdtfrdRCqCcGCCzQskdmB+fcjI3dqx
-# 8zi+lv80lLypDYKlN9a3YA0fDNgbQbGchrUmVmc+
+# hkiG9w0BAQEFAASCAQBl3uzojfrmP5UHiAJv7QDlVVZR7N/8uJVrud+kX558MsoR
+# Nhr6hCsKshq1CeszHcpxrHMry4yDqYk4NYisOtbH0N+cc6y0Wv8H/3NuEFOzflDn
+# xAizSMugN86VwD/KIFSK2E2f58PsIYfceWMYeWjgB1X4uCyZfLHuORqMakFr9SOW
+# +kvftVeFcBooi7Ku9sKwFKGHCmX46csKRSPjdfY9SAA0iUlEEOedLt31564mdVlX
+# vfYDug6NWA7MfN+SpSgVfpWM2+skCzXEg1TY5ntplKqkUQxZmFOWcAWKAuqJvnrb
+# 12hpbHo6db/9JG4YL0+11WT+WZZkw/KcBSuOS+yj
 # SIG # End signature block

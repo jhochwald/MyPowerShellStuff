@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -92,12 +92,11 @@ function global:Get-TempFile {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(HelpMessage = 'File Extension as a string. like tmp')]
-		[string]
-		$Extension = 'tmp'
+		[System.String]$Extension = 'tmp'
 	)
 
 	PROCESS {
@@ -115,8 +114,8 @@ function global:Get-TempFile {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrz2/0Gjn5PILI4kOVqwPiPg1
-# LVugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHd8qJ/cYeQvj99GeyprxinS6
+# QdKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -259,25 +258,25 @@ function global:Get-TempFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ0d36RZAc3Tdg3xLQrlbuNNk/FZDANBgkqhkiG9w0B
-# AQEFAASCAQAA6zHCsVGCk9wuOVSMiW0VTlksSFNPBC9BYdaZLrgEm7ErxuF6Z+yI
-# 6BupJSh99WvGTaYjt7FZyzg6Vs7d5LmhUHejyOZj1ofABir3TaPGh85GIP/JPD1x
-# ilgx4umZysFOMFiBQzjXGITryc+IviUhGnA4QnEpc/9G+kMBdIKiCFB70ZpKowo6
-# 3Qn3gNsAt9nqAb0hqML+kvlZ1uc59MBFRdNUG+/HBCDVEYdgi8GZU8ayBP/ecaBP
-# fmJrPuCRv+IQk1SvlVbGr9CI+0yye1ZzBjmcGGAUqKpRSj5KhJqOKvB1rfLan7Ih
-# AclCxgQ7u42POzm93BdkFnvhKxzqCbRboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQQNmzJb3tXFm+1C6G0G4nH2xaYFTANBgkqhkiG9w0B
+# AQEFAASCAQCinnOpojH54K43dLGS2N3o920UbPUMTXpC3nyBZoNgEOcuE2Q7wr2X
+# idjUmkZTTyKVmPQ4/zmfROSK5XUiKD/kaGvusytpa+ybTDYe3PLDBrdRGsVA3OJl
+# DHf/vlLiwWjbRM8GkXG5LCkIO+LExMFMO4R/0EHLYlnY//t++d8dS64HK2cb/+2f
+# jCno7fZe38+x2h5zLTkQ2NwORcPnNnOsLAZI2dIm2+oQCV2EBSiN32xsGs+OnJdc
+# v/56c4yboNNl56wZzn9V7xg8lDUvQcAYriLMjCaRl8uuCoEXPtjSH4JezehhEVk5
+# BJM7ohzdqwd19ik6HKRsJvNE00Uq0z+woYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyN1owIwYJKoZIhvcN
-# AQkEMRYEFB20J/sa1++l8VMFmsMr98EsrcXmMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxOFowIwYJKoZIhvcN
+# AQkEMRYEFG3vbfhXtzTgtoH+L1Nr8vG8G40AMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBro8ad2h1GZbpnR8SioLB+WVWETatMUqdB7vepJlVLhA5W
-# ZwplSCTHlWHErqadaziUKGren20o72MWm5lR2tluZboXnZX/uMjGPvSJvMBDX1pV
-# zqK+SAkN5jWPIefYmhSCZoMsTHbJ7ay2Q3Mo9iDZQhTXNdSMhjfImZ57955vAlCV
-# X1ZgLgMqJyE3u2CnMt34T4LW2zCZ0KBGcrLrSkBqcMbhMVZN08s6nJDYj+amC3pW
-# wh4DcoFpNMb+lvPEXn7cY5Lvl3secsDFpPD3EgwqPkTgCumnumM1ULMehPp9sO3K
-# BV1LVw8jtNEXGAQLTdSeQi1UWU3g7T6QTVwUXvu2
+# hkiG9w0BAQEFAASCAQCN/0ZFDIgDI7O8iX6JIPgwtyNDK52r38OktX2WJEuOyQVk
+# K3R3p2gNIAsA9XcwX5mLTxUl9DEm8PCOB6XyvjN6AKNO+pkZUrWev3eq7almHlIZ
+# DhploMcwpp+WDAmj49VxXouDWdl9NMw/0X2cm75K9oYjdEqxksyxKoFX68u5Kjzz
+# zaP02ZprS/4yl3lhMkYXm/FK50XanekIOoxoSCBgTTSVRXln1pd4647rOiAAmnc6
+# rr8madWzw9nDoE2qRaq0BDbDvgBt6NhYa76lMnVRYK4wyDXXCKz33O3Cectj9WE/
+# NB44lHiB22BiegEhaMILKWk8MPqVJQPw1/MDxmb1
 # SIG # End signature block

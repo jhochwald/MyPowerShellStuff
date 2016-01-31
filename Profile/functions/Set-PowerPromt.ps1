@@ -21,53 +21,53 @@ function Global:Set-PowerPrompt {
 	.LINK
 		Source: http://www.snowland.se/2010/02/23/nice-powershell-prompt/
 #>
-
+	
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param ()
-
+	
 	function Global:prompt {
 		[CmdletBinding(ConfirmImpact = 'None')]
 		param ()
-
+		
 		# New nice WindowTitle
 		$Host.UI.RawUI.WindowTitle = "PowerShell v" + (get-host).Version.Major + "." + (get-host).Version.Minor + " (" + $pwd.Provider.Name + ") " + $pwd.Path
-
+		
 		# Am I Admin?
 		if ((New-Object Security.Principal.WindowsPrincipal ([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
 			# Admin-mark in WindowTitle
 			$Host.UI.RawUI.WindowTitle = "[Admin] " + $Host.UI.RawUI.WindowTitle
-
+			
 			# Admin-mark on prompt
 			Write-Host "[" -nonewline -foregroundcolor DarkGray
 			Write-Host "Admin" -nonewline -foregroundcolor Red
 			Write-Host "] " -nonewline -foregroundcolor DarkGray
 		}
-
+		
 		# Show providername if you are outside FileSystem
 		if ($pwd.Provider.Name -ne "FileSystem") {
 			Write-Host "[" -nonewline -foregroundcolor DarkGray
 			Write-Host $pwd.Provider.Name -nonewline -foregroundcolor Gray
 			Write-Host "] " -nonewline -foregroundcolor DarkGray
 		}
-
+		
 		# Split path and write \ in a gray
 		$pwd.Path.Split("\") | foreach {
 			Write-Host $_ -nonewline -foregroundcolor Yellow
 			Write-Host "\" -nonewline -foregroundcolor Gray
 		}
-
+		
 		# Backspace last \ and write >
 		Write-Host "`b>" -nonewline -foregroundcolor Gray
-
+		
 		return " "
 	}
 }
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmnGnWiNVysp5IoyXmC5xtym2
-# o1GgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxtHI9JOS2JohQqWYoIcZXMgr
+# b9KgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -210,25 +210,25 @@ function Global:Set-PowerPrompt {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRIOljONasPtu7G62A4AB3XFn9a7TANBgkqhkiG9w0B
-# AQEFAASCAQBo/puwvbDvFlNJPUp/lM5jQsF1xCQ066unyyON0EmpSXofZN/2hXXP
-# cT5CiyURYxDTey+67cE3AN5/db7KDDfsoW2w7lHK3LO7KwcL+g2Qs4IvAST0RtUj
-# YUYXFHhBdx7uz6AmMjn/P+X/CnaKmWMxlEiB5emZNzrV9JoQD22KPKZsYeZwAXYj
-# SAV2DS35sIk1SEHLClkQ1VxbVSNwzp1vgPUNirHAH2qjwH2YQ/9NJucOuslcHKO4
-# 3LwNARR1PgqgCt2D0YqPkVu0QnfTHrxEyl3IeNXOgJ8oqbGuKWH3w2TihaAQVBUi
-# PzOx7LN1sQvBxHD8gnnEppKbsn6lPfzsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR/smkzIAvJIOoXhh85P9aF7z9rvDANBgkqhkiG9w0B
+# AQEFAASCAQCNpqdhora/hG13CMjBfgmrwJLvSQVDesDsttgSOHl2EsOs2TqwzuK4
+# ihwuvowq3oPY+KtGQwWXIn7MvDC1QUlLN35IFH+qXxWZdL7OAtICHKzMDnpyVVbe
+# /hH9D2jZ5FFmmvEboazXayl/NlaAVOm8QRtoj7TfBRsXdNvcZzadSNL+3fbAcwCd
+# Rw0mtrZDY5Et21B3BlBf6YIV7hBnmLNUuWoOMe3YXSlqoBDxU9NbT9/oc7HzB3X/
+# 6KTXXsM0t5bXP/2f3dSuxEH7iZvF51ZR1ZBNmPyzFFShICCoh0GIWnIxBJQV1D95
+# Mwg3jPdAsdDSpCRCzkkap//eaX9xT9A5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzN1owIwYJKoZIhvcN
-# AQkEMRYEFLwBoqBby8DR6fIORocL/R2/o6lrMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyN1owIwYJKoZIhvcN
+# AQkEMRYEFLIDdqbJnsrcfEP0q/Bl1I8Iv3H9MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCrnY17ySI3GmJdoOmEg1+S4e4Rw/XjaGYJLXsEe/+HyZeI
-# De4Gx2nGrsE5IGhdkuZtfDJpEbI+XAeNM0rDX0UKB5o3phB+qcWesigcqN4MivXS
-# XvNykgULGEIhmyr79m+vGZWVXGhbwnpK0DmfcAic+9Uj99Rgu3qk/XYOKVnuIq1+
-# 3wxwBzirlUidVRyT6Q3+cQWFo57ZP/LvVWJoS7odAjet8ZRnOmatdrhVHLLmOl/y
-# dFbd2tcyuxVeQjj20aDZ6B8+vG24Ja0HLRB/zRQaCfoOXCjnslljxkGs78MKsG6E
-# TNU4NoeAhSCSUxCbO48JaWLoAPToUPR+7PRxjnvy
+# hkiG9w0BAQEFAASCAQBiZnhERlSJwC3o0LR7linXI3aE3W2VCXOWmXpUfQXevR5k
+# GvjaTNuVJLAhpKVIfUmRwEUkNegZX/2jiL+dhm/vaxH68hckaD1txy5NZIOAOHII
+# RSJM3Vxs17HPIZIXRrKFau3O40v+G5nKNKMP5qyL5QsLa5Ly+HSvkaZgP2BGrzGp
+# kFhP321gy3hDNcXp9xFIPr9wZPkX14dKGgo2YeRZ+oQpMiIQ+AYq2aQrvtwBFGLL
+# xqdwXn2lw4zg2IeVy70gBnq7hi3UN9gXfbdB+b4b7X8j5xiCZQlz0nBtI8hsmuik
+# 9HQCnOEhUlUbjDB1IT3Zu1IG7sE6kZSYoCPG40+N
 # SIG # End signature block

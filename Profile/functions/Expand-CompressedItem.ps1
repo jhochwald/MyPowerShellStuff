@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -121,17 +121,14 @@ function global:Expand-CompressedItem {
 				   Position = 0,
 				   HelpMessage = 'Specifies the archive to expand. You can either pass this parameter as a path and name to the archive or as a FileInfo object. You can also pass an array of archives to the parameter. In addition you can pipe a single archive or an array of archives to this parameter as well.')]
 		[ValidateScript({ Test-Path($_); })]
-		[string]
-		$InputObject,
+		[System.String]$InputObject,
 		[Parameter(Mandatory = $false,
 				   Position = 1)]
 		[ValidateScript({ Test-Path($_); })]
-		[System.IO.DirectoryInfo]
-		$Path = $PWD.Path,
+		[System.IO.DirectoryInfo]$Path = $PWD.Path,
 		[Parameter(Mandatory = $false)]
 		[ValidateSet('default', 'ZIP')]
-		[string]
-		$Format = 'default'
+		[System.String]$Format = 'default'
 	)
 
 	BEGIN {
@@ -139,10 +136,7 @@ function global:Expand-CompressedItem {
 		$datBegin = [datetime]::Now;
 
 		# Build a string
-		[string]$fn = $MyInvocation.MyCommand.Name;
-
-		# Log to debug (if we have to)
-		Log-Debug -fn $fn -msg ("CALL. InputObject: '{0}'. Path '{1}'" -f $InputObject.FullName, $Path.FullName) -fac 1;
+		[System.String]$fn = $MyInvocation.MyCommand.Name;
 
 		# Currently only ZIP is supported
 		switch ($Format) {
@@ -175,9 +169,6 @@ function global:Expand-CompressedItem {
 
 			# Check what we have here
 			if ($PSCmdlet.ShouldProcess(("Extract '{0}' to '{1}'" -f $Object.Name, $Path.FullName))) {
-				# Log to debug (if we have to)
-				Log-Debug $fn ("Extracting '{0}' to '{1}' ..." -f $Object.Name, $Path.FullName)
-
 				# Set a new variable
 				Set-Variable -Name CompressedObject -Value $($ShellApplication.NameSpace($Object.FullName);)
 
@@ -202,9 +193,6 @@ function global:Expand-CompressedItem {
 		}
 		# Set another variable
 		Set-Variable -Name datEnd -Value $([datetime]::Now;)
-
-		# Log to debug (if we have to)
-		Log-Debug -fn $fn -msg ("RET. fReturn: [{0}]. Execution time: [{1}]ms. Started: [{2}]." -f $fReturn, ($datEnd - $datBegin).TotalMilliseconds, $datBegin.ToString('yyyy-MM-dd HH:mm:ss.fffzzz')) -fac 2;
 	}
 }
 
@@ -216,8 +204,8 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlQUMaH7c2ENJ89CFtVTReP78
-# VQGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9rftS49AutZh7+uUWCJHuHWN
+# LvygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -360,25 +348,25 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSM93H30ho903VOnsIpjdWUiIe5UDANBgkqhkiG9w0B
-# AQEFAASCAQBJIEVeGvzNn3qmY9jPayJ8lhSjve3/aQwKY6vLNdOV3AynvZ18JBxE
-# cpygl89JkllzeglJlTPou8zKqN9+EHKvzr80FQGCCKxgXnSc0PjKtgZwkzgS0J2f
-# Mo80fPL5heyVlWT5rnIZmKzE7cFdDQqgRxfN3BJzsuLiCE6nfy+UDr/py9elqTTQ
-# CLV7xeWuoKHHfX0R3tq3PMPFI9iknPmCKczjFSCavAPnJdY3XvOlZlRfpFw4Aiwa
-# lwQ8vjeoGg9k+PHG3V8RoLpofyCIIgqPcEW1ZHRthCgsQSQAOM/L1jmCxDS/mSx5
-# yRo7ElaE6+fl9ErGa9E8CVMCYEwUUlGAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT7P4IHuFut1BhFZCv3n8HWLOZIZTANBgkqhkiG9w0B
+# AQEFAASCAQAT86lWNc1x1kIhBw7NKXXRAg7F9KujBSQy1NAUxh8c6Gkk2PTDO8n3
+# LZ2q088vqWVWbsRHXrghi/cf7cigjPkkbZ7wOpIlMVftKKjEmqPS0ltSbyunHmA8
+# 5JCIsAj0B87BlfT2gPY+E2F8JbE11QWWEz6qWCOjAf2cyNZCjvA1MhWQGRii09xC
+# QSYZKYr0wGk3SVc4APeXL1VDEph9PA6aqb9wKxoWmTTv4lhe5pSEQX5ETRXkIEbG
+# yoN62zMClrx+CMY1Jw8+loWlmYohlB2nkdLP1/GdDhPujvvC6kRWSdev3AVSlGMw
+# Ix1ZJrZ6az6zcVdhNk5mHmfGqWKRMQHMoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyMVowIwYJKoZIhvcN
-# AQkEMRYEFFDOPsRY6uymACjTGqmfKGMbfKqEMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxMlowIwYJKoZIhvcN
+# AQkEMRYEFBBLOpuzakAw4wl2n2Zn7m9hq2E4MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCLgPgiL6DqI+Is0V/xquJe7+8TTP9HPCV9fIVQ67alT4/h
-# ExSWivIU1KWWYJu/3bY+O5z7SU33r/FSWdCjLxwkf2cczehK1D9Bo87ANDprmnBe
-# LzxNlo9Aak3HpyckII/kGpi3Bsvt/k57CQxpB+xniPhzOOrijZGJpAnbljqtt3dt
-# pndot7I/EwM56Y7BhQA963TgKwjwFX46A7LFQTWx+uUuN1hHP/x2mzw4CkrTqTkw
-# WNz2EbxNgiX21SPhlPegkTKOcYjt0jXi8ykZoV1sV6J5lh/AlS82oa/Wwi50kAdR
-# YLUiyXJ1hzwfbhr6JIQW8g+yqpDlTxgisCv/ya0K
+# hkiG9w0BAQEFAASCAQATsAhB5tpc+fSjXF6ixnhBRrfqYwlerDNaHaLYzlCS8dUL
+# KhaDUv60grC8yh4zen/QGl/mewWUUZyI3+7ZocLm5XL0wBLvLqvj7aPQ92SCprJc
+# DzQYcIQsB49BML1SWYsk3YgaBM5xWDa0eEhwUcGeJQh8gH7Jt0358XZ/0F+gNPHf
+# n7jUzN6ElMAblN3TX1r3bRC8BWELRvZK6C+/P/YmzsUDmzo3Ktu5Onr9god46+GV
+# jsPiMeyz3tvvocfD1ENXfUu+mc/I1KQkmmKI0NlMaYd7sFoW3tX/MvxtiFuaidJN
+# GNx/lUsraGRZnZ6XlKA233sMGrwipKOZ10zU2SSs
 # SIG # End signature block

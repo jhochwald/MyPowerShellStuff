@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -58,10 +58,8 @@
 $ExecutionContext.InvokeCommand.CommandNotFoundAction =
 {
 	param (
-		[string]
-		$commandName,
-		[System.Management.Automation.CommandLookupEventArgs]
-		$eventArgs
+		[System.String]$commandName,
+		[System.Management.Automation.CommandLookupEventArgs]$eventArgs
 	)
 
 	BEGIN {
@@ -79,8 +77,8 @@ $ExecutionContext.InvokeCommand.CommandNotFoundAction =
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUurja4d1g+4Sq91V0TCYfTHlN
-# NICgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUx4iG8FDVDDHVMfgR3J6yJn3+
+# quqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -223,25 +221,25 @@ $ExecutionContext.InvokeCommand.CommandNotFoundAction =
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRkN2bQAh0Zq0QPIuYYMNNwvz4KrDANBgkqhkiG9w0B
-# AQEFAASCAQCt9XokeIVqB7C8++A5Z24klk+JPgR2LsjlI2e1HnC4IXZX6mABf3e4
-# EQ1YnGtQG3sebtHmmvTyHYbX/dQU/RQlksTR4gLgXYqiT6G9TT63cYjikf3fThUt
-# xVigktvCzvFSypYkh7M8VjLxgA2GiNuN/udEmnPpKQtkElHweIAmrmgUQ8Cb7Gn/
-# izesIhN+A/T4Uv9HKoIK4HPMhV3m6gCntTDrZ4g7gUj3n8JL62czt+0upIJ4/ywr
-# jHXLN1p11eF6/X0VHgBvG1lLQPq+ce2IjMpinG7gq5/4n+1IfnL2x6W4vwSt4/BK
-# j3gt+ULQIQuY06+DNpNKz4uiHMZbc30zoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT4aj3RhOP3hx67xID1w/rUl+eMwjANBgkqhkiG9w0B
+# AQEFAASCAQA6czhFIyLnbGdkzXMOG3+G3XjGq3YUi5k3ok/+WzivXl32MSLnhmd/
+# lTJOYTTXpute4z/VZlTH3j15GAZUIr3ktSRQ0nWzCr+bRY/+hFUogRZDnyO07B2m
+# mLQUg6ztrbnRsnsielsZm7Ezr90fKzjzjTmfWMHrEekkaTFVGUCWwEdIu1hLByxf
+# cYwJr9JSZYec5sRJhl6+zo5jyrKdSYZFV4rkBVlOJGRq46PMxgd6ums4GG+rMcMF
+# ke68k0NsmSMMN+dje54o4eHgx2k07d6Uhdm++ZyG5hZKm6Lag+UjQg4OMVSdPZLL
+# 16Q+f2D5qg2a+QcpE7fw4JT2MGZEiJl3oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExOFowIwYJKoZIhvcN
-# AQkEMRYEFJBub50MJSZnlodrTh4zgi/CFX/SMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxMFowIwYJKoZIhvcN
+# AQkEMRYEFArJampDSWxfSzM1wvC+HzWHMetbMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQArobHT1QwWERjTBiJ4PP7E6fg8bBgUNsiGWaIrvIGJgXhA
-# Q+nHogWm27vO304QP7W21FHuZJf6PBLL+0zfhoUv+fU3gNOigJQZD8AFS2RPp/4g
-# TJwNPWnxQ6IYjYecKfvS8pkRi222Rmux/SAL/+8VPmsjQA78n4MkVkOi/1mH6nQz
-# OO6KClNaDB7yAvy5DvPX1AuyusrBNniJTX75XsEeE5983IY8gdD8IUZyFRdvFWXI
-# fTgvPNay2ED7BjWZwq7PfE0K6G5eauuk2hPZWPQjY5esdjv5Rtgva6qSqZQdmGOK
-# uy/eFrh6BA+ZknjYcBEzrit3mjLk9OInM6YG+lRe
+# hkiG9w0BAQEFAASCAQA7pCSxKObGGMhkvn47cp7LE7onZ03SFLiey0J6zRVEAkuR
+# 4I9k2QutH84uCOGdR4qTDHn5tRhHY9MuWT+CW9H/h/F0oUBmIB6vOYvxk6DP+ceM
+# DyXKFlRrPh0+QqX0VcMosalx0nsjwc8pbJYf4Slov9oqanbXowXVxpYhFXzA6Usl
+# r3heIPcl34fc081K1kL4ZquWOQ36RUE7sTFTbvzsGW+MtQsTSP4V6lUin4dwLpjc
+# rKACQUkdcv+iR8VRzEJT8WPNYcEo/h+OMWFQIz1SDPDPrXRdBc37iSOgVngFlPs1
+# tBzHSCsJtA9vlTSvY9qf33kEGVpkDgtTyEAohGyv
 # SIG # End signature block

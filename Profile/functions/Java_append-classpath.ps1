@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -52,7 +52,7 @@ function global:append-classpath {
 		By the way: I hate Java!
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> append-classpath "."
+		PS C:\> append-classpath "."
 
 		Include the directory where you are to the Java Classpath
 
@@ -75,7 +75,7 @@ function global:append-classpath {
 
 	PROCESS {
 		# Do we have a class path?
-		if ([String]::IsNullOrEmpty($env:CLASSPATH)) {
+		if ([System.String]::IsNullOrEmpty($env:CLASSPATH)) {
 			$env:CLASSPATH = $args
 		} else {
 			$env:CLASSPATH += ';' + $args
@@ -93,8 +93,8 @@ function global:append-classpath {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyrCRjRbYWM+RZ9QfpMz7liMt
-# VOSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+iGBmxO1ZkmONlZSUbXS+LsG
+# wHigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -237,25 +237,25 @@ function global:append-classpath {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRvT3AYpH4mR/5FXBpg1T62P/RLBDANBgkqhkiG9w0B
-# AQEFAASCAQAMOnJGgTIIGk5x0Vk2dDZCvkBDJshHlDODQqEQcU89vAX9HGs1RVgZ
-# c8sWxCbeaW3wl+92evghJO612AExwrmpyxQhJWlbz8erzovZHtrAwEZ8RCtaBkCR
-# b8mT/d8aFzHuHHc80F03HDOqnbYeGXFkFaFm7+v1T2D4ZenUqnK+Oed0NZkTTR55
-# EB8OfK8DcMUXBXKygtvC1vUBR2aii21dPxODahj4IKbM9QT5m973wukVTokYvPyp
-# ZZGX+priNbAuu6y5UFFvJI488Ukn6DHxR8O+9Fk/B6ZpyohL/tdDsC5xEU44NJzk
-# KQyIfLrL6N4dAEWTJ8xs4m4qZh/5Yb1SoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRejuyFX7mbyshBTf0Y/cK1EHQLwzANBgkqhkiG9w0B
+# AQEFAASCAQANzletR5mqvV6YbX7JISe+aUzRLlJUb/igAXfIdSp59hSXSnGt8oBu
+# ebuaJdDuzf2D2nk+pag6z+IJp1wbkYkTTI6tLg2dWENm2+WuiZ0S5u9uqQukSjZy
+# punapJ33DN9VyZTUlPL3oJYXTZnDT4NGEh/VNPtCeeJx6Ru0s9DDT5XEIif7wrD2
+# 5HL7marQRod+EgBDIdbxBEHFBgIZ6a+XmkAl9TIPtTZH5bkCoJdoF+yN+Jd5QYc6
+# MvhZW6YfxdKhfPOonIJFn+2rRTlMezeLX0gg/t/lAcA5U4TPhkJIYCtSDusOJC/x
+# vwkAWMpTkha9ap/kfaBwYR6yGyZDiU/eoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMVowIwYJKoZIhvcN
-# AQkEMRYEFGe2ofDdtjKu6QoCiNKrLd2eKnncMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyMlowIwYJKoZIhvcN
+# AQkEMRYEFH9L1SZV2nti+/gHj+bOBgRUBvHAMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBQV49BgdqWfMKBAeXmFrm7cbhfDJ9QyeWS1sRorbs272I/
-# Vclw7IMikY2bs7AxrEkY3VIMO8rVVU+0M5hjIYlEoa/HDX/U4RFcPosR2+RiHu/m
-# L6l0BSNP935nZW8VlsaT5beXeQm4ryOIIPsQWk04vP0+rjfEuhRTP0so0aen1cHa
-# Eu7GdmwnzxW2JDiUQ/rC6OmY5jeeAVxc2bpyaL8hfdnLcvcE4CeUP+4UWvQv8ghF
-# A4uoxZIetuOBsaqj0AGRLCybTW1z/8qZxZYXSHXLlywzZj5KbgpgPvvfxD56XLah
-# bQkP2UkShgGQNsEP8akvG20CcZMVmHRjEUd/MoOE
+# hkiG9w0BAQEFAASCAQAB+K0H6zFhBxierfd0jLrg/E/BEXnvwm/RBmPONAZEGTri
+# LtuGidJFXPSWXVBy4ZVIZZF1Y7vukDRD/urk0jtt0aYXNBzgXtYSyo5+qClgpRM3
+# ZrPci6eFLU+ZVGEq2+RQZB9kjz7+SObHd+n2Wr8EM2+4f1DsQP+/a6nIAbKcH5Fg
+# dL4m8FijaP4xjPqpZvpXgaXWJ77VyHguaPaok8UXpC49N+ghkXPT1FMFVAho9dzU
+# o84yifhT+MTiHK/EjYRSqHx+ZkJUFDdlq4u/lgI3NaxWwGqvBI8cp5iw3fL5kyjX
+# eQoZauBfQroqhk8uuH6C/2aQfm9z1YJejddBgYpE
 # SIG # End signature block

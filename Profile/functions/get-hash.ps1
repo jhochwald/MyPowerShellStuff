@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -53,7 +53,7 @@ function global:get-hash {
 		Filename that hash should be shown of
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> get-hash .\profile.ps1
+		PS C:\> get-hash .\profile.ps1
 		81d84c612566cb633aff63e3f4f27a28
 
 		Return the MD5 Hash of .\profile.ps1
@@ -73,14 +73,13 @@ function global:get-hash {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(Mandatory = $true,
 				   Position = 0)]
 		[Alias('File')]
-		[string]
-		$value
+		[System.String]$value
 	)
 
 	BEGIN {
@@ -93,7 +92,7 @@ function global:get-hash {
 
 	PROCESS {
 		# Is this a string?
-		if ($value -is [string]) {
+		if ($value -is [System.String]) {
 			# Define a new working variable
 			Set-Variable -Name tohash -Value $([text.encoding]::UTF8.GetBytes($value))
 		}
@@ -116,8 +115,8 @@ function global:get-hash {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgG1bPg5gz+iQYJ695sugPCTb
-# PGSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUEBk/xDA3WLOVU+KsXF2IRLge
+# FcWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -260,25 +259,25 @@ function global:get-hash {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSH4+HzVQyCCy3umlJOo7fG5V9vDDANBgkqhkiG9w0B
-# AQEFAASCAQBItzbl/28Y8eeSdpczgob8ae1y8MWd7yUpIgqu7gnES8Fj2gbeHbCG
-# dnM5a81ZEUMetnPcV5hkdXXf1fVzswEX2MOZGOwdXgGMCXr/rwIA89DqBBKDShd9
-# asgQhEFpnVBu4wkpE2DW7y7mpyNYfWQmGJx7OCIrxz0D16io1jvve8Agwdj/FSwT
-# WKc3OJV88lM7+g5I9p2Z/uTD+MP/yoN6pLcb+UnidbLrRMWz6QAb0r3McimmZwRa
-# Z5zvzcEmaioUnKCADcJ+D2JhKVv7beOdACN23/lnGnef7laQwFZdM7nSpRkocUZj
-# gG8EzbgTSTY6u7f0tGvcxUpIeP5C1GzloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTI+bSM/yynMaTVv4WQii+Vi4vIrzANBgkqhkiG9w0B
+# AQEFAASCAQBJsdhSTImVSACqCKDJvefBRnZSDj/RtE11I/HaeEs4Fwww3dj7nrPO
+# cgbfQRHU3gcCNGWmF7PkZws7cP7Wwb0uCmPxtZFkf9CnQewQ0x7kGxm4zIAjk4CR
+# bh9Lx8fig8RTedgv/z3hEDAbioZ2rrVNvfQeUbjE/99sOMZ78PY0VkiF/C5wnfx5
+# MEB3HTsa7/n0OEtSZltI5RgCzslpIGuqL01OuSUO1IxNiDy+s/WxzJ2FSwgMS+if
+# PO+jBbcxH+Y9ZF/58zNt+ebpUsGgZYR3HqqwY/ng+fELNP264uO5WziaLD2d92rD
+# 9gpZtE+YDp2ijkBbeOqcQD6NUkqqdHJBoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyMlowIwYJKoZIhvcN
-# AQkEMRYEFL9zYS1RPcGQqA9iDWwgyuRJi1I+MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxNFowIwYJKoZIhvcN
+# AQkEMRYEFIGr842YEKiBQc+N78xjXp2+Qd0/MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAkAuBmtaJLJh6TGxn4jDNNRsg/f8rHEvMJxHmKF4jdRCa3
-# 2sG5mH0P6Q47QCxZmTBgP30Is+L48beUhgAm6G/yJGo0UwGJcsnFILKqOQTrHJxF
-# ZQClvaqQ3np12zifs3oiShZ4l3d8+IYiC7WHkkl/7zKrH8gBvTK4RdipMwpbt/jV
-# a4/eiI30KgZJ/SuKz7lsovd6qi8pbtOd8aAYLgMD2V0tm8SgRpIlSAItR2ixpwSS
-# Jnj64CVI6XhoL0usLZ2DTe0chct5xk9PCpD97jxjXtLau/BiVfk7kNvIK/juAmlk
-# 1rmO3KRgbgli0T7/+1TJSPNYgvjSfQYKIkGR99Ga
+# hkiG9w0BAQEFAASCAQBc1U24XsUO2upi+MpS6TZkLkujjWfB0hc1/o8kSLIpfgfZ
+# MwF//qp3KVCESL5oflqIXRgUNislDO3MDkg4lW5o5HhWaP0GwPLeK57hFlVGqKM1
+# F9qk/mU7uE4/JPjQJeOSV5qPvkEIUcOTooq3axMuTkqq60hCdhiuut/TeCQhXYyb
+# W3hgAnQ0kzXF7Emu3yRkSCSTwTSNDohD0Ovs3ZDrD37gO4nmB2utNwfAFdYpyr8f
+# BddletU8LmwiSrCyTXNyGgNG+In3XbKBwRKd5LhX0SdFuue6jPO35eng33PTZbuV
+# tmPzDb00Uju1L6VkVJnVe7WdOukBqUYSYv8aGUDR
 # SIG # End signature block

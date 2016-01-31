@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -50,7 +50,7 @@ function global:Get-uuid {
 		Generates a UUID String and is a uuidgen.exe replacement
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-uuid
+		PS C:\> Get-uuid
 		a08cdabe-f598-4930-a537-80e7d9f15dc3
 
 		Generates a UUID String
@@ -71,7 +71,7 @@ function global:Get-uuid {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param ()
 
 	PROCESS {
@@ -93,8 +93,8 @@ function global:Get-uuid {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdveEmURCIvZaly0ksnSKLWQw
-# u1CgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoiPWDvsm3xUhmKjM/OmE+KnE
+# URigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -237,25 +237,25 @@ function global:Get-uuid {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQRqgf3wICTxwq8yeibL5aKyp7+HjANBgkqhkiG9w0B
-# AQEFAASCAQARvpg7dAdStocMQm091vQ35ck5XpvR+IuKArCLXJH2Yme1R/yrUEKz
-# PA4mfhSjncFChEiTOiU9WJzhZWI+yoooSM2c9IZ/vLgAx+LPTMGFvGRCaPI28Vd/
-# Y1MX38s7ObqE2GuQQqCaecPGXX+6VrSOJ50nPd+WT3tgW6kWQEp+yS3PAIdnckZk
-# 9sLMsHs37hrwcBf3aEEfqONE6xQmDTcI4uRUD8e3qMZVjFIaUA5gcbxKssGXxvcf
-# enZ0y6fpVtAQT/iKDUvFMr1hOzOcOjQt3mQj0xUiIdFwsztNuPRz5A6K7l1xQglP
-# K9jl+y+FmB7PseZ0tPkDPCE97ANeThzkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRxAtKtVnxJs0iO9wVh0ZUbToNo3DANBgkqhkiG9w0B
+# AQEFAASCAQB+V2eRtidmGCbmIwQz6hgIkoyPnGDKaIOddFLox+hpuiGt9wMYFedK
+# Fc4SyBkbFkHf8r3Vfj1sJcqfxn26O/i0MS3MXBookjsXkQE/Ahy103YSds52Qy/W
+# O+88XYnHytyYdHzVXTfq1yw4Veob3BDoFj6eExuL1Vhrznp6F0d2GWEHZw4NhoYT
+# 8HCbbU1FVMp3H+vbQXsx4Kub/rfNPwNR7sUNKou59g6FNc/zZMoJ/yEL73/bUkwI
+# 3PCFRnjnoURV0bjUbV8+5Sa2WmRsNnHcD3Ql39axPE8NffyMIWMU9d3uvtmtEKm4
+# eRXupx+echwGka1N+l4cFnMCw9tbq/ORoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyOFowIwYJKoZIhvcN
-# AQkEMRYEFHe9vUAbJ+jvBfiXB1b5F7yCZxGCMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxOVowIwYJKoZIhvcN
+# AQkEMRYEFF7CunoXD+wj3PvxIT5zhHYodDi1MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCXRlES/E/K7rqd2I+3jHoBvvYdjesqnqqrVNhYbZ05K82I
-# ix3lEMQHJWLIoapMLjHdNlkvi6LMbRU5T6gHvesToOngJOz6zIBABSnn8pMTFvnA
-# AdAJ8dxiEXyXHSkTFGe2+0Br+C6nkqVMjN3Pr8xUUm0RwTQLEP94rG9iYS+JOZq/
-# BQDbMYQcRTMaCFu+Wt4WBcbas0cnTfsi8WJAz+ZJMiHGZrunvLxk884oArvs+YS/
-# jRdV9NEasaFxwGWywRbFYbXGGySi2g/LBcnmtmFpPqgvGgBhE2knn2uNuK22Xfex
-# zEjcSrpz4SLw/E6cJzVQvuBK3P+5dbvn4Rd1miPt
+# hkiG9w0BAQEFAASCAQByLNXeBOZZ90wJBAw4v+tXOBaWwlqKzxA2JOw209Hp1rLa
+# mC+ez0bhdJ1fpC4WXFcACnmXdQnaUPCNh5TckPZ9ZbojiJmEGsP3b1pI5PhykLu4
+# 3OjoptWpW0dru07hpsqwDq/1mY4ewSKqH078/IOINsnWF7TsORLrCCw27XfwoQEt
+# OTYKD8jLIS/Lgt8ReQYgmXbwOSHCuyG3ephLs68DSqD2jKqkyfGAhe63WVvY+a8S
+# tTVYgOrWIeI/DUSmkZoA6USOH8tIlt+VzqKWXaAFh9bW72MztnNnv7A0AEtyIZqU
+# DQLPLx7syXDL94zYIyGRShM2xrPmE5RPdUmJVMkM
 # SIG # End signature block

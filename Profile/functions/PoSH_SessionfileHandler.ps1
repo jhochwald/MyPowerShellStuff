@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -56,13 +56,13 @@ function global:get-sessionfile {
 		Name of the Session you would like to dump
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> get-sessionfile $O365Session
+		PS C:\> get-sessionfile $O365Session
 		C:\Users\adm.jhochwald\AppData\Local\Temp\[PSSession]Session2
 
 		# Returns the Session File for a given Session
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> get-sessionfile
+		PS C:\> get-sessionfile
 		C:\Users\adm.jhochwald\AppData\Local\Temp\
 
 		# Returns the Session File of the running session, cloud be none!
@@ -79,14 +79,13 @@ function global:get-sessionfile {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[Alias('Session')]
-		[string]
-		$sessionName
+		[System.String]$sessionName
 	)
 
 	PROCESS {
@@ -133,8 +132,7 @@ function global:export-session {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	param ([string]
-		$sessionName = "session-$(get-date -f yyyyMMddhh)")
+	param ([System.String]$sessionName = "session-$(get-date -f yyyyMMddhh)")
 
 	# Define object
 	Set-Variable -Name file -Value $(get-sessionfile $sessionName)
@@ -185,14 +183,13 @@ function global:import-session {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[Alias('Session')]
-		[string]
-		$sessionName
+		[System.String]$sessionName
 	)
 
 	# Define object
@@ -215,8 +212,8 @@ function global:import-session {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqMHJw6qN8UM+bUFDrUHEOp8e
-# z5ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsKhQ+PsABE04U8R6oBobOLN3
+# MZGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -359,25 +356,25 @@ function global:import-session {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQZGQCCmwKJZ/xdI1387vF27KoBdzANBgkqhkiG9w0B
-# AQEFAASCAQBMau3QFrYEEya4ZfVYthNfLsdzP/egdcSnkRsqDEaRHNGkVMOxOp6u
-# bjmCGmk5u6z3TmYNo1MsApfdSZzugE6OLrFq0u/x1Pag6rc8RH0x2OTApXCo1P6x
-# zVXm9AZCBqHtfewxAKfRY97nJbs8nUT7ui95awHehZLNpgO/2MbukknNJVrDUPsV
-# FzljpizxZUWK0GvrxHyEEdKvzwnEjGKV0VWWHL7x7Ur6FG7tmUCzXnGzAW/J3J5Y
-# ZAdaAR5VXBFP2gkV00/3wmCTZcDDu/HQRSGm/45sfSy64yl1im2oKB6dD0sFQPCf
-# 0NDnWmA920Tl3pWRwm8Ajz8/sMv/WMPwoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSK0771v2ThaaXSPC1wT2xqxhInyjANBgkqhkiG9w0B
+# AQEFAASCAQAB5ZujxL5+0d7TXEdqCJbDYdCPQ9lW/5c7MWmxlbm1K/BumIFGV7fe
+# pDY+P0PGh0IwLGgFWO1ryF79x4BYB4ZuJGTi2i4lNOkilgPWDCgGXsnLUBK3hAyc
+# 6wGCHFNrSb2HzIsZUomVGM2trh197Cos/pJsfCJg8Jmsf+VUUxB6yUpFiby0ZP0L
+# DkZbW4ZfAR6ObbEsoFAbgq3DprlHzzcvKbSDH4XicJahaAJalLvf/wGE4/U3EzBt
+# PaBWsAdtB/lcr0F1lLycyxZjk7G3kfENvgWz6zxHqqz+HGck971WtkvnILQo+ZxI
+# 6UvjpEnthTps/68QqnlCWQiU9AZxcixRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzNFowIwYJKoZIhvcN
-# AQkEMRYEFAOKzHpos1M8PLeV3LBne3G8Obo2MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyNFowIwYJKoZIhvcN
+# AQkEMRYEFIkaq/J7eORESIUm4qGs7Mf6D7tfMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCXum6pLKYAHAkTsfWHhbWAXy6dQROkBF0+HKWREKYrxLq5
-# JBetf9aHQdx/n7CCpQlA2zpbjI9ha0w8Z6B4hJbGXt5DuY1Yg1Qb7eJkaZnPhjdL
-# 4H2IrWHIuT7yS70rgONhNrXksKbwkqHLeko/L4tWyQiY+j/bE79N9gbAYf43enmh
-# AvV6m6pukQO15kHT44YWwwbsRHg5X7OT08b5z4FhLLXNjsPBIEb60jgf1Ixapf/w
-# CeHWbvAOuGOMravj9cB48km9j4ai7UO74jmkqiboPeN+q+tIztQstQSPh2qWQ/Hw
-# iaMfL3XVWzIdsQJ1xAGAfXZNG2TkliEG0ygrRz4A
+# hkiG9w0BAQEFAASCAQBIkDtjkzu68k/XSwPFapyO+WtkhQm34aSuksmqqMth4Z2g
+# RpfjIy3XzqXXduVYHxm1eHJAWlERnglIlCjD96GmnMjiWy+OJ/prQscNje0qhAeU
+# E5Lny1oCg6Fs6moQ4LjYf4HDbvIvC1TLheGRUz5cylOdpj8kZWLJKjEdIiSF/7/2
+# sMzgub+4P9wjZk2MWnbdex2OspFQNGODj+iJDZ/LcKsa3XNRfGbSVGbM7phem7a5
+# hMGqfrSOl8PLjJgbXTHM86xFCmG8D30WFCzjl2yQByG0PwduhpEM/o7qhCekYdMg
+# 0woSnzCOaI7dDnu3iDgFcAl7jHVW35wRdmwfTxSY
 # SIG # End signature block

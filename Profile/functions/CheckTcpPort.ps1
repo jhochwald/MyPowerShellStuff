@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -90,12 +90,10 @@ function global:Get-TcpPortStatus {
 	(
 		[Parameter(Mandatory = $false,
 				   ValueFromPipeline = $false)]
-		[Int32]
-		$Port = 587,
+		[Int32]$Port = 587,
 		[Parameter(Mandatory = $false,
 				   ValueFromPipeline = $false)]
-		[string]
-		$Server
+		[System.String]$Server
 	)
 
 	BEGIN {
@@ -107,7 +105,7 @@ function global:Get-TcpPortStatus {
 		# Set the defaults for some stuff
 		if (!($Port)) {
 			# This is the default TCP Port to Check
-			Set-Variable -Name Port -Value $("587" -as ([int] -as [type]))
+			Set-Variable -Name Port -Value $("587" -as ([System.Int32] -as [type]))
 		}
 
 		# Server given?
@@ -115,7 +113,7 @@ function global:Get-TcpPortStatus {
 			# Do we know any defaults?
 			if (!($PSEmailServer)) {
 				# We have a default SMTP Server, use it!
-				Set-Variable -Name Server -Value $("$PSEmailServer" -as ([string] -as [type]))
+				Set-Variable -Name Server -Value $("$PSEmailServer" -as ([System.String] -as [type]))
 			} else {
 				# Aw Snap! No Server given on the command line, no Server configured as default... BAD!
 				Write-PoshError -Message "No SMTP Server given, no default configured" -Stop
@@ -163,8 +161,8 @@ function global:Get-TcpPortStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7RSy28goEgMfnH/8jG5sYjbL
-# NmCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJsk2bqXrEJqLLiO1rUHzVez4
+# PB6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -307,25 +305,25 @@ function global:Get-TcpPortStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQoiSP52qg84+njq/wfoYbly2JQrzANBgkqhkiG9w0B
-# AQEFAASCAQBVCrbDyIBhGcXc9mnj5CDqApdFDgseTE4a5ZBmnfUnUI/PK8B6nF1c
-# ExbFMg7YSqXvTBr/zvwzj3ilVvzYTcGwDrRBIIGC9xGFzo4jj2fExvnnYmSdJtoO
-# /V2w6fGmcaJ/N5c8U/2smD2ShfNnwcGSjUx9fPgPpzfFAkDBQNLBKAXOe+sstAgi
-# uuWwuAN7CZX1Y8zKUbUknx3YvnzLkEpsm8LNL8mdqazrVqYz8iZj6Jx6XKfpU7+R
-# 8+vueQwsCp3kGBj7b+Tpbe4G7Gk7qLog6nKotK+AqFCjb4YzdOvuYXLRVmahWhfS
-# miPpUSqLTUQbVy/aJAi8bc/PPyS2XKgKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ5ajlqNFRIxqQEE8Bd5L9JI8arpjANBgkqhkiG9w0B
+# AQEFAASCAQAItdZfGHukWv8OXWQM3jXd9tEX2LhgWSxcLdi+sSvWKK+x2gE8oY5T
+# k7lkCdFl8cjADgG4gMl920wCn4Rt1DQ3nMwUHSgkpLzKTxT3EW7mMLq0Jsroltuo
+# LlOQZSyvObLe194aQfGxnRRrS5hzH6pmLD589M7IpNTrNkrHRyIO7h1QtR8TRE9a
+# N+KlO3N7kKPv+oxXMbo97dVf5zA5q/JsV2tbI737aGsaCceblBonrk/WeYjVqcSN
+# m3EsBIgKDyGOhYPzJXzUeiCLqZN0Nrb1b1dmHakota83WDp6tJ5tH9rKdWTVqUW6
+# ztB/z9HMLjVJb1RANjM4Wsua1tofiVJHoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExN1owIwYJKoZIhvcN
-# AQkEMRYEFPnYJMflzOhEI7vGR7+4smgsoLyWMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkwOFowIwYJKoZIhvcN
+# AQkEMRYEFLEmduKp9nWWQQyYN9aWPNnB1AHwMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAhbe2A5bKvtoD01XYNMd3aJ6tSr4Vo0Z86gjx0bybHf+N2
-# FP0oRprwlCpulTWzphmrk6vdUNCt+P9A6IdXjyCV4JLG5RUWig9RuxgA1y5BbEm6
-# 29bWwaLrybQ4DGzCE9s1bGZQwamf2OPVVnVyLfNzfe50TxVSlUPk4D1oBUFCCyU1
-# SZkt2HDajnt58pjUNvvMkhIoP0OAT47SCdB7HW6PnvwjQbGErWRcWUw0xbrC7t7v
-# jZEs6gU6ke4hWwiLZuXCMcn4WSE9SsDwwPas3XXLUKx59Ve0HFpHtP97ewhz/V6L
-# auXPQMb2GRmWGIY8MjK1nTmjDKSs3rJhQebSMVAU
+# hkiG9w0BAQEFAASCAQB37AhCPn5ssPS6Z8QVfAxlhjW3SakniCm2HV6WIradflZA
+# omOC8qDWpmP1cRE89P4CdWMnZSqsRcA9nfL2vbref+05CSzOlHjQ4UkRArDnCH8H
+# 6WMbJ+pMeeaVNYmPdu1Yt8ueE577WJF3u/M5aBsK3bGPqubwZ1HWKlQrHTAlrMmv
+# Fi8tYy12IMLq0ANNVh2IBCt+LQktX0fHGWA1tdfLqk3lTb9xnW7YVlfhEqOeXqdk
+# UKVwOYus2PYLBL/SNT0mJ1Qvvcedw6/UmhASzMLdDaaUZK8CxOlWDt9OfrBDZigB
+# VQrmbuzlCY8T3vsswuD6hpPeZK8wpAAWvWXN0NaC
 # SIG # End signature block

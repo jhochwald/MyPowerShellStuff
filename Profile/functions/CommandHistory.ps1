@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -61,7 +61,7 @@ function Global:Save-CommandHistory {
 
 	PROCESS {
 		# Where to store the XML History Dump
-		Set-Variable -Name "CommandHistoryDump" -Value $((Join-Path (Split-Path $profile.CurrentUserAllHosts) "commandHistory.xml") -as ([string] -as [type]))
+		Set-Variable -Name "CommandHistoryDump" -Value $((Join-Path (Split-Path $profile.CurrentUserAllHosts) "commandHistory.xml") -as ([System.String] -as [type]))
 
 		# Be verbose
 		Write-Debug -Message "Save History to $($CommandHistoryDump)"
@@ -90,7 +90,7 @@ function Global:Load-CommandHistory {
 
 	PROCESS {
 		# Where to Find the XML History Dump
-		Set-Variable -Name "CommandHistoryDump" -Value $((Join-Path (Split-Path $profile.CurrentUserAllHosts) "commandHistory.xml") -as ([string] -as [type]))
+		Set-Variable -Name "CommandHistoryDump" -Value $((Join-Path (Split-Path $profile.CurrentUserAllHosts) "commandHistory.xml") -as ([System.String] -as [type]))
 
 		# Be verbose
 		Write-Debug -Message "Clear History to keep things clean"
@@ -109,8 +109,8 @@ function Global:Load-CommandHistory {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5nZ0vxUkXPDmT5pNnoniGl51
-# tTSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUSUY0gPEXNwIarOY34P6c/P4k
+# Uh2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -253,25 +253,25 @@ function Global:Load-CommandHistory {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSD0nROzrEd2fUt3HoLGDGioxgOPzANBgkqhkiG9w0B
-# AQEFAASCAQBiG8QXOKdjz/BLkq0gBGLf762Gw0wAXf0tcxoBLg3wOWGprXNzdm5I
-# xj0lwQyyCT6CEvyA/PBDPwy2Kjq0PO/PzEhcCvGJSNbAZQxFcTS16bT7JgIBoc2w
-# yW9+m1QmwcvLjU2IudOv1hQMGcZRjCoV8/k2jWs6Mth1ZNzV2FtSD+gwp+72TzV9
-# CtHrnRYnkcxd8Z1hH2NrOPGDBlHiTNhrB8AmFZ5om8JmxauzCkvybJu1y3EvjsmM
-# 1Z9uHeUqIIQaAjGw40rbUWxNtpQhgI4s3Nl8233AistZPUl1NrXHNREoToV5kN6T
-# KAC3rnTCfUeii51TTiDgneRTXBFJ5mONoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSeKHoFAnAlaQs4kDEHZbgboSV4AjANBgkqhkiG9w0B
+# AQEFAASCAQBOWNR6wxJl4r40MxzxSNxx/pWccY5L7AZWrx2hMGBDr6NvLkKUlrFj
+# 9tvfFYgcSxs8bZ0rHwTioq/UomRnLhOQzncBc01zkf1j2Kr062qcyYIWsw4o4sTx
+# wHbqezL9RqMh1o8Bzt2pOfyfNmWwmOzyd/FJJ8LK8mbG88q+pkmwyNHdSqFzGISU
+# fXvlhp2YgocmRq7Sm6zyUClqiXZ37TAf+LQrj+5xpqkQK00Q5s1tjEwkwODPNuTk
+# MrwVdIgSfWAfcRfZPdRQg4H1eW6ZSUzRcwt6L7hM0zGvUlIEXVnY+vql4kYQG5/b
+# TiAWfRZNAh6GR3MxdsXORCPBFbOQq9CuoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExOFowIwYJKoZIhvcN
-# AQkEMRYEFHjuFg9HtrEfyJiMCOb5DIzy2gN9MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkwOVowIwYJKoZIhvcN
+# AQkEMRYEFFoPaEVPYCfaqOJVMMD/H329u1ciMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAmizAgWU2GwSaqrXHhdM4soGf68XwmRYYRjxQDvk7CLvuC
-# AN6yG7BokYDj6X5Xx8ZqMIqsDuSHxvPxk9Uj5aGx0Ep1pWy7cqL4IHxwsx8E2N04
-# Pp7uoXbtOpAhvb/FZprm9fRhvGpNQ427T9dZlPuWTJ5b5oDmYj4imwPIHUfMjZc/
-# s/fF4pCrb1TOMsHS0YdmqlGcb+CrPgc04PnuF6I8Jl9t0ndhlTMWZgcyVIHMtElV
-# 9PGS93RWiIbhd8UyxolCNW8JebffuXFPwNzFbcXtEMezs5ZBqGuNPS+5NYl9lN/f
-# EM7aA3gjVen2jfUcFYJVCTvugQGR9ilZQAWvIGmG
+# hkiG9w0BAQEFAASCAQCFJe1wn8oLlZBrbxLVM5oaCN2KiI1QXhoqyVDSNMEBodSY
+# tk35Xx2XMkjX7sVk8ULHXZcVs6ZJx9ps+kLKugCFE9rsPa7qjmEMb6ohu8Kd9kYK
+# RUGHH9ULAUwYkLHs12jgiYBcPB691udna5RnOxXi2WJPeJwZ+DH8hGfbnT8zIcE1
+# rDKJ8Htn3SqEHx4g8HRLcTuuNNlN9GfLVFNTE0Nz9VFMxJGtj/uEwMqm7gbRw4CV
+# aG6TOQV1GZVF9/41Y/ZbXq39VY4k/957D2OszLMzVc6uKO9k2wIfGRMSCPByalQv
+# On3NrXFfwSY8/9bRbAvmCIygVO64yN08hjiKBAWV
 # SIG # End signature block

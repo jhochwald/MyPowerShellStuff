@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -53,7 +53,7 @@ function Global:Get-ServiceStatus {
 		Computer Name to execute the function
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-ServiceStatus
+		PS C:\> Get-ServiceStatus
 		DisplayName                                  Name                           StartMode State
 		-----------                                  ----                           --------- -----
 		Microsoft .NET Framework NGEN v4.0.30319_X86 clr_optimization_v4.0.30319_32 Auto      Stopped
@@ -76,8 +76,7 @@ function Global:Get-ServiceStatus {
 	(
 		[Parameter(Position = 0,
 				   HelpMessage = 'Computer Name to execute the function')]
-		[string]
-		$ComputerName = "$env:COMPUTERNAME"
+		[System.String]$ComputerName = "$env:COMPUTERNAME"
 	)
 
 	PROCESS {
@@ -105,8 +104,8 @@ function Global:Get-ServiceStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+9vK+xi8dxPXXlORM1gR2Mhd
-# 8l2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4m4FeaYsfH8QXudgyc4imBKj
+# 6jKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -249,25 +248,25 @@ function Global:Get-ServiceStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSOxBgZLuU3mAVR7/uIn74lGsEXFDANBgkqhkiG9w0B
-# AQEFAASCAQAZZJ92d2bvtDxRq34XDXLxkbzG2v/ZfHtTwSarKSY03mqqri+2BPvx
-# L2B47VkYCrY5xfsa+IFCpYpt844fPg4vs8EP08pwO5gUXWLq0GFmGUH2aXLKXVPh
-# ARE4DP6GW88GYWb3GDE79EsPd4CL2Mc3GfHve6QfjSUQLVy/CmkODthpX4OzLSrc
-# a6RFFS6rlv0K6tZoxGkUyXjvQpt4by21W6NI9I2MjqEY9xfZWqowAKv0Bi2eqWBE
-# AJn7wpjVQK9FnYNrzpox85JBVbjZRDpgqsZkFCfLCE7aewscqN8FzmFR1euVQ+xs
-# U3BUXEKqdShCW0mAC/u+kIxJqv5eS49CoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQLDFJBYlcPmdcXmAp2Ba3XvC2BxTANBgkqhkiG9w0B
+# AQEFAASCAQCojoDGgQafrS9gP/YOFOSkfZtMLgtHTr9iTa1iVYrEguYmhQptAFI9
+# RPXQWwJZhKVB0kWJlgWtZM1zcsdnuNfhwRqivRZ1AeoabtBB5rL8lhabEL85SmLq
+# Bi4onYC1s4m9r4wrS2BVS9goNg7AA7Ru1Sf5h028Wp9VvbDYiCxTBucLsXwV3X51
+# W2UOBSge7FS9FTFLxHgtetOxfeD7xdk+NmvsqU5/OX8KQlH6eophH+253+l6OlHY
+# 3go2RPZnc/tXfxEKonNlSfXfRb7wKq6oftl75ppSvpg8r7tKlffkjh3VOA6gB0Wg
+# 9rA7jver5LJ3qtQHAztu99faaoh0pQI7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyNlowIwYJKoZIhvcN
-# AQkEMRYEFNkUX1xuvks27bmGYeFLzRAdtlPKMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxOFowIwYJKoZIhvcN
+# AQkEMRYEFOzR1YvCWht+MCtLY8FqaIZFLKBYMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA0CBfVF9XYFs71uPtSjOeeBwWQaatgJjoEUWwmk1jEMKnz
-# pfknizxDS9IFfyBXRRAN7aDNIfK2ZYGp4TACBusTRubcKeTRX/6xSuafbrHIgO/D
-# 2+YyLFX+oJIxr78zbThUuXE5Zdfw4/1rO+oYlF3I0fMdE95oBHRYhl4pKYpT8R4n
-# hlqPUek94CKdEElSwkdG+igbpXcyWKbHFMLXVVcuc5pwpj1Ia5/VStMuOXfLOC0d
-# Drj2ej0ZhOFLrkhRIxhNRShc/RK3KTlbuOFYMVADDsdw+kY1C2/AcWOhgZOMS6zC
-# nfF2v/kVezRZb+0pYqTZq5eS0rzjLpjjoWDK2RbC
+# hkiG9w0BAQEFAASCAQATUXF8y7bRCKVtB8XGWleDQVIKyzD1Eazt0V2fvGjLLgYn
+# 4x0gj6TesfsKOxhhK0yutuHtj32r6NGiyEYg7gvcg5sD97xl3d2dWtul2ACw5KP4
+# fAKE2/lEQylqm4Fq7nGWwoLQqz9opDO0xAnDE4eZDcKELqlxvCbTZtR8GCKJOvOc
+# ZZIshhsxDq6wjc93hjrh1zonGI9OP1VA2BfZ8n62nIg3Re1StM6IuTk9GJnF3oNn
+# QLvmV6qvyI1XBBJi8CTLJcg7hAv07iDuRQ6SAHPmyk4/8yK1QUCshlo4jFnDgr+U
+# 10hryYPuVx5klv6f/ptTiW52+olutw8WfZFJhn4s
 # SIG # End signature block

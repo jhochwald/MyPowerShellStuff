@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -67,8 +67,7 @@ function Global:Get-DefaultMessage {
 	param
 	(
 		[Parameter(HelpMessage = 'Specifies the message to show')]
-		[string]
-		$Message
+		[System.String]$Message
 	)
 
 	PROCESS {
@@ -124,8 +123,7 @@ function Global:Disable-RemoteDesktop {
 				   ValueFromPipelineByPropertyName = $true,
 				   HelpMessage = 'Specifies the computername')]
 		[Alias('CN', '__SERVER', 'PSComputerName')]
-		[String[]]
-		$ComputerName = "$env:COMPUTERNAME",
+		[String[]]$ComputerName = "$env:COMPUTERNAME",
 		[Parameter(ParameterSetName = 'Main',
 				   HelpMessage = 'Specifies the credential to use')]
 		[System.Management.Automation.Credential()]
@@ -133,8 +131,7 @@ function Global:Disable-RemoteDesktop {
 		$Credential = '[System.Management.Automation.PSCredential]::Empty',
 		[Parameter(ParameterSetName = 'CimSession',
 				   HelpMessage = 'Specifies one or more existing CIM Session(s) to use')]
-		[Microsoft.Management.Infrastructure.CimSession[]]
-		$CimSession
+		[Microsoft.Management.Infrastructure.CimSession[]]$CimSession
 	)
 
 	BEGIN {
@@ -277,8 +274,7 @@ function Global:Enable-RemoteDesktop {
 				   ValueFromPipelineByPropertyName = $true,
 				   HelpMessage = 'Specifies the computername')]
 		[Alias('CN', '__SERVER', 'PSComputerName')]
-		[String[]]
-		$ComputerName = "$env:COMPUTERNAME",
+		[String[]]$ComputerName = "$env:COMPUTERNAME",
 		[Parameter(ParameterSetName = 'Main',
 				   HelpMessage = 'Specifies the credential to use')]
 		[System.Management.Automation.Credential()]
@@ -286,8 +282,7 @@ function Global:Enable-RemoteDesktop {
 		$Credential = '[System.Management.Automation.PSCredential]::Empty',
 		[Parameter(ParameterSetName = 'CimSession',
 				   HelpMessage = 'Specifies one or more existing CIM Session(s) to use')]
-		[Microsoft.Management.Infrastructure.CimSession[]]
-		$CimSession
+		[Microsoft.Management.Infrastructure.CimSession[]]$CimSession
 	)
 
 	BEGIN {
@@ -394,8 +389,8 @@ function Global:Enable-RemoteDesktop {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsotWMbf0K0gv+7VC46BqLapd
-# aRSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwlG6admRfPH1x+fD2062vMkZ
+# cMOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -538,25 +533,25 @@ function Global:Enable-RemoteDesktop {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQVaaGb5d+0zbwKsanl3gz4Ia/ikTANBgkqhkiG9w0B
-# AQEFAASCAQB/s70S/UsGqFC1JM0jpr5/DBDkn6Wv5UyIjcGBRjZ2MyQDqh45AlFv
-# SIhMZXz9FIcTkL578wsvECOhBd0uR69AcQNi86zGXokNQZYcNc65Li3udt28xWdC
-# qULXxKCCpWXwPNS1oGifIMYlNUk5rVOOBNDm3ELpWx7oV/7OAOwoWGhgMAfFBbHi
-# 8FjCaXEfm1h45W8coJucfKDSXY/XZ7YahnuK4NSg3gptCmuJ6BFfYqNFRev4Db9s
-# NQAC2hF9eRGrWHxY+hae7aY9myPZy5DaF8o19yoYq9moew3XGgN49FmcnqGDw4dn
-# 9Fxrp+7yShbDmiFHdQ/xh98Np75WkdV4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRYomywW4JFJSEHL8V/aizE/ryNKTANBgkqhkiG9w0B
+# AQEFAASCAQA0cC6rfTV7r1y2VRsEenEubjv8h9Qzinf515uRLY1M9Gnuc+ENTdYw
+# Qq3EBIlGBCSM5PQHcxXbcD76vrmBR2BYN3fPyE360SibNEW/UOvFUpY1+XrkzBzG
+# XVu8JaG4ZGTOW1VEOdhhMPKUIoYSApT6LxRUov1EdkJpCTNX0QTMAd/zXeCytJRF
+# kiLjCcL10AIifvkz8wzHIcDZUb04i3Rljn5HEFG2799+IyDtu3IL6Aqmq1Yoy9sW
+# Sgx/DOrvdenrBw+8v3eFj/bXYJrK9TqnkfJC/EiHsFPU0DARmF7qp8Z2oapEbjm1
+# c7uw3w7U+SXYsF9RYG7FHM6eiTJd5G7GoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzNVowIwYJKoZIhvcN
-# AQkEMRYEFPAK1m+kP91O7aqVCWoByNsMfyNTMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyNVowIwYJKoZIhvcN
+# AQkEMRYEFAHZO9pI/fl9vzO6T3Rr1OOo6kIDMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAwPZ5k3MHOJ7ZZaR31CTQX8IyRZQCYQKsvd1LFAPMXjmC6
-# PBcrg7vnqXyK5OsfpJ7qyb4c2oyH4+9gslWdJN1nqTWVrGtfsxt5JXRfi6sJ8+cG
-# rLzGys0jA8pheH7r09ukCaX737FRSLstKvjoA5dR6/JqjMprtFtqLz4Fj5x37Vyt
-# X89onTi+w41z73TmBxTKnCATR/igDbNVFwl32YGFff74GKXZ7D6qSEqFTn7PyuC8
-# 8cPyCuQbIaU9JCueZx1eByQ1nR57N+OJ1Ioj2v0K9sIMew7gQzZoXVwHkR/Ql72q
-# qTAs/hunubzGT4A4OlkFhuw+40j02Os4wpI9pKtZ
+# hkiG9w0BAQEFAASCAQCfSyiQecuXuz08dsm3XlUywXVDixRKzmNc81Nfuh7kmy2K
+# SrwssMTSs62HhX16A5qiM2VChurvFFxgORtbL148m9c3ngLkhlrS9CgwbBORJcMn
+# WBy6HgwAzKRXX9WqghkkAJgzWwxR5winMSgF2TFE/2WW4Gx/cONTo1v9Px+Jee91
+# E0QfFr+8s5RmTWy1ivf3Fo1/osV5YvFIecZQA/egCPQR9xoq5K2Y9UYovn0uSKt9
+# N+U8QBoJuRAiL+yCt9PEXQXab7Em1/yBOnEB1XVKlTtnjizxe9tZGQh0pBYIAwkJ
+# mJSwLqTU+9jZPQo+3BY+mdMlc8sX2rfEmcQhHLP2
 # SIG # End signature block

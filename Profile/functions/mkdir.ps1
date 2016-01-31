@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -57,7 +57,7 @@ function global:mkdir {
 		Name of the directory that you would like to create
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> mkdir test
+		PS C:\> mkdir test
 
 		Creates a directory with the name "test"
 
@@ -80,8 +80,7 @@ function global:mkdir {
 				   Position = 0,
 				   HelpMessage = 'Directory name to create')]
 		[Alias('dir')]
-		[string]
-		$Directory
+		[System.String]$Directory
 	)
 
 	PROCESS {
@@ -99,8 +98,8 @@ function global:mkdir {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUkTX9b4Ls5Hwxvmu/edYPZ80f
-# gzagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUolR5KITfNGndFuIXvk8L/jMN
+# aA2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -243,25 +242,25 @@ function global:mkdir {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRRUz9A2vV6zRsvoCZHEXqlUlC7FDANBgkqhkiG9w0B
-# AQEFAASCAQBGVLuv79f23Yiy82FHqGP+eEb9ig8kpXF02mYOXojuLG6PW51QvYmo
-# YuXAUfKjM09D4/1jDyfoGLrfevYQzOvggbRhWHIVTjU6q5PoAa0WI/L6Z+eQBZ1v
-# V4WNvgWmbt864wBMZl3rrttR9NznUkhlpOQ9AllP6AlgWZJKiTR1eG+fFr71Tusg
-# LPkzaCKSu3a+2d12CSYs3w4llI/KUMP9pfBlgcj4dUxdm2G9ugfzSmjI1qzwtMSI
-# dy3jVJs7KghUN/K25nOxnCKVKooBa2672QlSfOM4nPPvGPnB349HguRA5yMC/VmS
-# PceQ7qydoKMt3QqBojwsXoNRHBSxjNyxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS52QG3bJHjYP15J7kxlBLG6MlE2zANBgkqhkiG9w0B
+# AQEFAASCAQCQwFYD/PAnJptaCPo7ZRc2soj0KzYPwSQO1ta908uyW6H6kT6UUMEH
+# WHNZJ27SwaWBi8oozAkT2Xe040pQiuvNwWpS73DZPgNE/cLER2KcjX7E9ZCOTEhb
+# cGDuISg306oE4XFK+dSIadYtUlKS9mdPU7E9p2Y3AXj1nDHIvwyMRs1POlPtTLXZ
+# gIgSGTJy3IZigpYAMR8dNo3vdmAIycZ6DFy9Biy+36YdQmdY8TWSvNjghddZXUiR
+# M6a9Kh/P73dMAbhtf8s22TL2PPhI/8ApdkldQgN76z76bxbrReWXiLwlJEHQqS5D
+# NnFM0n0JrBa2WRsQKuGigpsaB6JYEYqFoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMlowIwYJKoZIhvcN
-# AQkEMRYEFDwVJNPEKn8KFJD9SB0bnak/eX3JMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyM1owIwYJKoZIhvcN
+# AQkEMRYEFGP2FpCOunp4SswYkEHsNiO+t9wNMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA0+enAk8jV6PJsV014AEkKC1xFSr1WsAJMVqvHiHmTVVoE
-# /Y2aWmOlaJo6QPah6I8DHqCHoa4tQ4i8GOZsNoFhOz2ceo5GZTI92B4zlAibHtUI
-# 1tLZwpStloDXGD7tL010H15vweucI+FnQl7Hnnizg39NXBlyxmz2Bs+9V7vJLn2h
-# PPmmyht2Kj4DUa4T69h/A4X4qhvFOywu/xZ9mwhuaXkBWm4f+h7xKGLbTCX1k0ob
-# nilPJktGt7BPu9DmJ/H8olifUx20gMVYPcuCG67JU6f74DL+mtOixKUwuv+lb6w4
-# dRTZnoqSbqywVTGybNKZk/NUqEoN+mTeVgG9TSIp
+# hkiG9w0BAQEFAASCAQAfIU1+jwklglbYzrXSTOmo02Z1DLUN82acOO27HVwbbYom
+# xGPKAzEZeqVzS9MVl5YSoQIb2wnrsaalRwyiNN4ic1KTmS+SJQQi1VRgHw0J4lgE
+# ix8woRifVuf0iHGVjWg/G6WTYTN8d2enPqjAO8T84jpSb1CIP+JtybFHvikZJ4tz
+# TI2B3ax+jlLjai/qmVvSJTxasV5z+2xVhMn1W9JcwGiIAQsSIHS4MGT31txakFB4
+# E8OXnc8eyZrKIOMZq6CEfVOz3lgq4rlTmUfE/etaoupx230zzfnL/8a8XPM+J1k9
+# tvky++SU/VpwexEa9NZK/xonTchZu5oG8SHA1phT
 # SIG # End signature block

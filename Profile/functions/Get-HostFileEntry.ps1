@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -51,7 +51,7 @@ function Get-HostFileEntry {
 		It dumps the WINDIR\System32\drivers\etc\hosts
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Get-HostFileEntry
+		PS C:\> Get-HostFileEntry
 
 		IP                                                              Hostname
 		--                                                              --------
@@ -103,8 +103,8 @@ function Get-HostFileEntry {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/FFebEUc+pxk86CBJYLMh2rz
-# D86gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsE5iY4ozAwBz7kkANtTxXSuk
+# gjKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -247,25 +247,25 @@ function Get-HostFileEntry {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSZukKJdKaW7NzXymKuCyjQKi/7iDANBgkqhkiG9w0B
-# AQEFAASCAQBD8JOikcvixNKYZRSYzius5DBQbISUJnPFcurqTG+1tQyyyFn9Fc2T
-# g9xeezEfMDHZf/Hz59hBbmaoGhA+NIZQJiaK88MPB3J379kefX52L9aezaQ6G2zr
-# TzTeCOkFw64c3R52DsXh4b/gZfDonfa0zU9eatLID0RXXmZT8itq5bRJAwPs4pcC
-# /nzkEW1PYZGv8qZDRzuBGyne0fuWtmpm1MGrfJ0b7gsmIgLyYcERPmkdR2Npb/WI
-# du6m1K65g1TcsXKwiCEsrQzbWtOrdLA74WQjPFuTHQo1D0ptx4qYZuh4ZxOL98gL
-# 8oDTcpAJqLYL4ck8SWvEgcrcqJXaqftooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ25Cm7/DzQu4/JjHcoM8ALcCK5JjANBgkqhkiG9w0B
+# AQEFAASCAQAr7r8lV5IDmJC3pzAby5+VhZhaSAaJH+TtTj4V9R3R5ykEnY4QUMnN
+# qwkmnPzgEB7CH9iqFqjV2YBoButpjd3aai1Y+tFwRsc3XJXqz7SP3U4zzrrezv92
+# 7j/rdELPPG4i/ZHq4khMp1ktRdunPYTYYb70g2/6ic+dGc71E0iquLCjhbXmfAkI
+# REkX2Jnm8k89N17BCq9HBFKntFsaA35XrVFRB6e1pltll1oYFsRdcwF0moy/Mo5b
+# tuRQ4sgcF3qufO/0h47CpCnFqPu7SSISZ9+wQAXO9LVGjpgXLbgeu1gFAG+RK62Y
+# V0m9rRXkgnH2GlcyRKU2Xq5xqqrgVo0BoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyMlowIwYJKoZIhvcN
-# AQkEMRYEFItinJKwZd7J08E+lsp/twnnGtNwMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxNFowIwYJKoZIhvcN
+# AQkEMRYEFLhRws4WbAsh3OtyXPV+wpsbX3gZMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAM/3lLJtnyZuPG3vONZrl1dWPlrUPoKl2TeFdLnsE3z5Id
-# bEhix2NCEkazAJgCoh5D/EHn+Nz3YL+HMFYnSVUkna+3p4NZAp4wg7i6IS5BRhmO
-# VUxzvKWV8vgTWLKvJ1Z6K6qGeUv+O21LdLTRlDO2goZGp4eFYzyQ5giJf3wpTvVh
-# BcQxuaZ+50OrVanOEn+sgrBCYQy3GiDXEH2UPKCooVkoZEqYW2O03gpTXm8+YyDN
-# slYh0O5dGDqkQmZXixcxbpn1YLdNb7qgOq9G2r2O78hGT4H1BL061u67srM5BVLA
-# N9zOLHE/EtarerXX1GCkoDncsHcd2pSKSFReIOoS
+# hkiG9w0BAQEFAASCAQBBN2IoDDlLpBCyVjA8HX7znCsqEU9qhIHsc5y+5ltRTb4x
+# XfKCTXXojjZbcs8SOSQX1EyhKL6punwCJRf7MoGEoGU3VPzR778M5+GK2fSPQPB5
+# JGEGneTkK4pYcWYMiyUvduxCMt5xgZvmGnMNnyLwK7vTAa98yVxQwTNEx+YPdC3w
+# BnVMJzHPsPgAxq4aAlQJvJX8BF+YhSHUiYOsVcoV5MtXxO5Nb52cw02Hb/02BB4X
+# Mqrw1a2k47wd0HSgR3HWOJZ3KqSa7T48RYVtVBA7oPgRhBkImd7IBB8MPPptF4k6
+# pqc4dp6XUAfX5MEuRLi8dhRjExDe3AxePT8g7I19
 # SIG # End signature block

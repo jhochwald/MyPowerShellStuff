@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -51,7 +51,7 @@ function global:man {
 		This wrapper uses Get-Help -full for a given cmdlet and shows everything paged. This is very much like the typical *nix like man
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> man get-item
+		PS C:\> man get-item
 
 		# Shows the complete help text of the cmdlet "get-item", page by page
 
@@ -93,8 +93,8 @@ function global:man {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKNHTSVNb5HMdJDEmhbbplppW
-# TuKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwoCrQUyL4sFCvdKN/vQERpJa
+# R8ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -237,25 +237,25 @@ function global:man {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBShiuXW0wjtEcOCkoE3Z0C1Db7AvDANBgkqhkiG9w0B
-# AQEFAASCAQAAZ67biW2uTnHZ22v/0FnhOEQcrQG7YjFTxchT5MZzb2GO+4NACqqH
-# 1FXjEzW4sTwUpVBzAanZeh01/aaJLmq7/9hvnygbUUo+LeF3zYDM0SmDAExYmORS
-# 3jSOkZdT/WJfYK9moqGhJUGZaMZ2flNHl7FcsefRjHUoZVvO2uNpUYNSgHYuhMoW
-# 3PI5GxSsmmGBpG9K8uuliRYk3TY6ngEqaonLAx/wOMhYf/1iRcKaWq+pgwqznryz
-# BjPFr9GcKNHBl9TrK1ZDQrW8gwWYIpE1ii80dYiFFX1N7Wibiy5erMxtQKv8VdH8
-# 2vaD6gjpr0gRHrKZwzGnkl3Fk7RN602MoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSJYQFJHs6UR8JxcFEOV1/I6rIAHTANBgkqhkiG9w0B
+# AQEFAASCAQAaXLktqSK8AINh8bHe0hcQlalnEGTj79jnAA0mUczvKZftMpupqEXX
+# MB7xocYPM/nIEHOFmL7lWvsKctIKgckqb9lJwbCWPogRDPiNQq7OdgN5FydBb/Gw
+# lCjKWJbg5IweQt3kmcLxlc1Ts8AAd0ZeNxJqcHNT3vmezaJwL+dpQ7oDj+25r+M2
+# lYzoYC4f7ydX8xYCoapNq1K4l9q9mAxWVkh4IWxuRCEywgKZuxKqA9FUznFrKQTZ
+# FJknKzXcWWMM0qj9CnUtCT3Jgc4tS280VRaiOQos8aHK0ibnV71OakQ3tuGVvrKW
+# ETYfb6gO7D3Ej+CD2es2flog8WQCOw9LoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMlowIwYJKoZIhvcN
-# AQkEMRYEFMir+tXhbU5A0Aju0tVSsAGlygH0MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyM1owIwYJKoZIhvcN
+# AQkEMRYEFEqBAhQTsnRJuumHvDc+72K4gMv3MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCq3Hlx2F7zwOHX4h0oiZ9ICdHqouqBg/ppiB195UgT7GPu
-# bIz+5tbt2B1c//iK7ziedP/ZWYYbbs3ozoQgJcdrZK5xYOF0IdgCPlglzXDifKjs
-# igV5IjUJB9xXoTuVyQRJ/R9NmVrF3lXsVdIYglfOIaPgTG3Vl+34i0GHPr8sGx/R
-# hZ8n/Ul8kIOGxbM+5hhZ/WDrzGyyThK4BgHsgZFfSidQIUD+q/lPHXSzXIQ2mGbZ
-# /4vFAWuKYIxCzOBd2da1U/C1IcBq+9/xHgoB6O2J/8BC1HE2SbtcDVo6XnLpsh0B
-# 0PfpoDB5I+W+mg+EsYxd2f+WPOS+DdfV4SwlOO/l
+# hkiG9w0BAQEFAASCAQCDa0MqnDWz4KsbHEpiF6+Zm1bw4ZQfu4METiVUcvIHmB4R
+# gB8hKTuAU4UsFNi3b05xSLxZt6i+H6PSLERc62oUcz2vqIg6r1hcaKaOsQElskC/
+# 1A2qdoJJodeN3DT4HxJTeVpXCyLW77xkuQARWAjOCXwp58FN1vONn0ARyvZ8VvZc
+# ctZDSFAM/YOn+BEuR8aLQ8EbzND8pXuDqmAPqibfOYvtPjtB90l9bfzLeehT5Cv4
+# WoEN4dgFZ8ty4oR6A7//CQgnDQ9wPWMjEJDDTw6czNdgmcnrnQin7MGafOHDf6Tf
+# 8ZyW/rNThF5XMiImxAg9THyUwoP5OXpBC24LFTRj
 # SIG # End signature block

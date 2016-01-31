@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -50,7 +50,7 @@ function global:whoami {
 		Make PowerShell a bit more like *NIX! Shows the Login info as you might know it from Unix/Linux
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> whoami
+		PS C:\> whoami
 		BART\josh
 
 		Login (User) Josh on the system named BART
@@ -70,7 +70,7 @@ function global:whoami {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param ()
 
 	BEGIN {
@@ -93,8 +93,8 @@ function global:whoami {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQo1bDC+EgCRIcg5O/7W9gf/+
-# SmegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/bRuqHwMs2GspIaj2YKiaIRM
+# bfigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -237,25 +237,25 @@ function global:whoami {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQZxt6SryZnsoO8r4cZ03DtZlm+CzANBgkqhkiG9w0B
-# AQEFAASCAQCuOEfkh4+EHFFmgXn8gX1MPBjt1NVC5dMtDgwibrVPw/Fb9Z+maVBl
-# uDnjJu91OlkdflzJ4K0zJ4jEuBjjekjA41ytBtWqLv5qGev3MoZb92BAEguvjhWC
-# F7/3StV3XCD7/uuYKjB9DkQMqkxaT0DGYcDD6ZesvG6hu4DDYMcFIuIkiGilTurS
-# /4xkCd/Gckkt73tZKrc8Z9xClN2q5kElb0buX4rKDnVV4JpePXxe2yU8Vzz3Zu+K
-# YUlVQSxgNxqaePtP6gYhVT2YVR243peZmDzas/8IAi2CeHcD1szkA/XDyBR5v2wR
-# T/MqklaZlHJtNHyLtu5JP/5X4fXJ43CpoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTuxgbkVoZTNM3uzJFSbp2LjpHLVjANBgkqhkiG9w0B
+# AQEFAASCAQBg2cZArVVb2T3SWZ8OSN0U6V8zwm7g5bXKHh3uFFIk+d9b8sWsTOAU
+# NQi6U7jnmR9VcIpx7gayBhlORy4b9luNKGmAsrL1rsNCjBuHhkl+jI3HM8aWMAaI
+# vGFPOT3QaurCZN34vs0C1AfX1D2hH3rEsc1ljeiFb+uyHCoZjoZKXppYvewpEWjn
+# h7UF+rveAEYI7y9p6unztMCW6UrTaOJMD4T79cuAqYyWgoR145kgB7rtVoA4t+ql
+# a3KivhOkRESgf3iWLyQPcjzyfewz0fMGNmo0kBckI2VV87jy4IAm+JRQTcqlNbtF
+# zo2ojOdJEXAfO4AcZ3hqOwnKxbtjObn/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDE0MFowIwYJKoZIhvcN
-# AQkEMRYEFDAJrUzefC9aBDAX32my+RQvr90HMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkzMFowIwYJKoZIhvcN
+# AQkEMRYEFFNLp81cb0z5m7zgIsx9AMbH58fdMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBlTgXVaeFpTM5ZeSykWZWr7mDGkyxa0U3k4PzxEl8i36t3
-# fpIrrq2BZDMjXzdScRiaCyhKOwfJwKp+tAk5sZm4HXjQt4FMh8fYXDplsngZBhT0
-# ersOCwW0dLaA/Xl8MTrZxSz9WJwONq+RoEnidKMHhCP1c+ul5vEtf8IGtzV0iAGi
-# viriTpdQjjkz2Ac/GLoJ6U8Ga+Qyi9oEFQZ4rg+lB5yt9M1CReOwFhKrDtwT/swr
-# F8aD1G2tOWFtpsi/KOBun58aQ98KK7+/EJ5BAHcCke4tUnvJ2hzIT07YQQrDvMC9
-# NRdepJtFua82VRFjvhC8btRRD04AzlGDGY2o4vC6
+# hkiG9w0BAQEFAASCAQB3gkcK64GfJZu+/BBgzjTHmzyfBCUTAVWos5q8qo8pnncy
+# 8yyItyMJLgYkuy5rZK+ZupPgSwOJ9p1X2TKSKx3EqOk7UOqOPUfZY9dPXvfQka6T
+# wy2FufumnBK7vbLUfmW62l+HgewK8cLJLlW/yJU0VXF+A9mqBQae2pq98kYD3Aka
+# 8juZrPt04i8+hDa0FQ6wIbE+/eWWnYyupRUWd76eJg/xqch8UdU7GlCK/lOUXcyf
+# s+PyLTRI6uNOGQpg+XkDbGsmkGqjhRNdJ40XoeB0fKoW7VnbzEJq+s5j8sYYLUNS
+# vM8DhBuzX1Ba+s2VNPttauG0ah9n8+042F5wVBKZ
 # SIG # End signature block

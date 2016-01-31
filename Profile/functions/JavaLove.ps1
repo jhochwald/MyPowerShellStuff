@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -55,7 +55,7 @@ function global:JavaLove {
 		By the way: I hate Java!
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> JavaLove
+		PS C:\> JavaLove
 
 		Find the installed JDK and/or JRE version and crate the JDK_HOME and JAVA_HOME variables for you.
 		It also appends the Path to the PATH  and CLASSPATH variable to make it easier for you.
@@ -125,8 +125,8 @@ function global:JavaLove {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrvQXf0Mr74RC/l/DSPrz1yfe
-# C4agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+uMpmZhPVEhG1/arPl+a5t2z
+# XLegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -269,25 +269,25 @@ function global:JavaLove {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSWxPpujcZR2HpbWsnbRVfabQDznTANBgkqhkiG9w0B
-# AQEFAASCAQBmV9W0Ga/py5/OyU2qmJ5fUC0YRleIfBmIu3qYCGeVqk3+VI2krhJL
-# XiUDDgZ3qowl1vJ+84tTehsVllwSUdPTOKJpr7nrEgXKZ/j/MSjQSlOgmahNHBPx
-# o117GEUFu/5vaUAS64LaWKKk96tIkkczjpUihEzTZ5samuR3xL7i4ws3AtNXljAQ
-# CYN3r0zaQ0CGHkYunnes9TxGcaZOJn0Xab0rIg3qThIr8IYRUDpaqwIfZdxMoFCF
-# TcVvxYjMVEYkdZpILjttjPhT3mOr8ivfbguVeFfw3qCXMX4F3zMTiMxclfDoMHlL
-# pasDKKb1wVGH9BgeUaY8L5/RlEZ13LogoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQfIp88wAEWoYaAGrpKmu/PIwC3eTANBgkqhkiG9w0B
+# AQEFAASCAQCffMGBuVmlmtxBq2rV8bSsvcpH+bvBioIELU/8a5PQqOqsjF0E0qRT
+# z1Zb5pCZXwH2+JF9CZNk81iPI0FMrKJ8AcoDo0BdsrnYzB0QDFaBusdBvbEd1vYE
+# y/+4xRrjD3/FGa3X+T5DTADdFcxVQFKbWtLvkHm6te8BlFNGx4Tt4g+M/wx8mes4
+# Aj3FBzICUFGpaGqDl6/ejvxNAWP+ZA8GJNSUG6FZknoBp0gytCl5OkaRvu9wBawV
+# l/C7C4+qn1G1BTV+Gx7qQj5S1LcGcZJBFwDzRERP2VnbZPJdEMuFajR2kDF0f+gN
+# SkSWkCrivJQj2dwL1L/1513eR4Z2MdWKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMFowIwYJKoZIhvcN
-# AQkEMRYEFMB00N7OkgoPsEr2A8E5nCBLEb1OMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyMVowIwYJKoZIhvcN
+# AQkEMRYEFDaVDJEdaVehHmAEdJZyt4JzPwZ8MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB7UkrivO/R7DlLQ0UtX+qbxatC5fXwNyRAu1GdzdOes6Zc
-# AWLgsIg5+jKFhCwizfJGcOPh01sSlXCqQDMCcH4VEzyjNZmlTeuXjt9AOodIx+zf
-# Bi5Xwap0fjYociphbuasGE0b9X8E+r4SiLSK1gGKoct3SINu+d5enq/qzjehiKnv
-# ubXpJ2MECWQYnkQewo6gIG6LS7RPdEP6Zt+2pTnBh34jKrWcA9sXRKgLuZrQWNSz
-# WFEHfJsvDFNsP/IVBHJ5ixVOT2MZZD0tqVuNU+0MtLP+6ntrYh9DEWDUKJvHzJ9v
-# nBuwXIbK3rJ1X4b9KXlWGMrQGv/0aVdPBRS5ghVg
+# hkiG9w0BAQEFAASCAQACmd/GKnWniCyxtm7BGDlbInkpi2aZW6PbiSSqJ7tZ42Ef
+# aYCIMbSyBXGJYffu673KETfTDr6vtAuQD9pSPDeo4Juz8rlFxMWnDZyl8+RtRBKO
+# Yo3mBMkNiz+9rcKjhLYaEQd2+x/E4Om9Eq4VlpoXWz4YYOw3zEA9tzJm3bI5mQjG
+# pD28R2nmd+6pgATAHN2yHkOH/DiTA77hXwkPlI/NvXeJHPH+qXctA+JmfJ4QawJo
+# dES0XV9uA7yBhwVN1mAem4CNfFTeLLVIe3+tTyU2Dpvv412hi4tln+BvV97wDs7X
+# +j7E0XSugD+0Gps/aFyUIsGmetrlnUR4wCD0RYvQ
 # SIG # End signature block

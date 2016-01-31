@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -124,17 +124,14 @@ function global:Create-ZIP {
 				   HelpMessage = 'The parameter InputFile is the file that should be compressed (Mandatory)')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('Input')]
-		[string]
-		$InputFile,
+		[System.String]$InputFile,
 		[Parameter(Mandatory = $false,
 				   ValueFromPipeline = $false)]
 		[Alias('Output')]
-		[string]
-		$OutputFile,
+		[System.String]$OutputFile,
 		[Parameter(Mandatory = $false,
 				   ValueFromPipeline = $false)]
-		[string]
-		$OutputPath
+		[System.String]$OutputPath
 	)
 
 	BEGIN {
@@ -237,8 +234,8 @@ function global:Create-ZIP {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUU0qK5Ge7WWhs3QY6hspdGVeH
-# nhGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4B0UBqGv8DJfECV1nZVVowjm
+# V8SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -381,25 +378,25 @@ function global:Create-ZIP {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS2XOXIVPEGX/AtwvGSD/RC6mf0aTANBgkqhkiG9w0B
-# AQEFAASCAQAE0izmwWJbOx+w9VsabcE5mnKWInBy46N/6kEanG1V5kOzBdXtJQ+i
-# fFgZWmGYtDg3BISobCMmkXDkGSs/UoLXhcRNiDQfy5K80TcOq1Nc3puX94Lk7nTi
-# f3QJwi5fYsWlYEh3QNuo2RCWJQkyFgook8WlIvZx+hjtmEbLG1A+yNtB+9VvXN/Q
-# BoKwO+3w5lX1OLCAiIkD5LlRVKZnXdH7rym5HKNKtgXLX20HJvCV8VHkeqZkWhRz
-# K2w4smuuzl+TO3ofgAcLR2pCvFR/tu8fsFp78lHLeEgiqYap8LfrfUknstcWrFgN
-# juZ1zMOe2afcXDLdh8M2iuN2VGusruLaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSWmeJ8rTBj8Y+ySe6zTuTQqNnbVDANBgkqhkiG9w0B
+# AQEFAASCAQCNtGWDmfrwlciMmczjj8BbFsrShmxPuICzKPqjRNQX5KtyU8x5c4qq
+# TnN6mnmLgpeCVVoM9r6T5ODAbgA9FhY70gNgDBUDqcx5r08CcK7T85M8p+++EnGn
+# ZTiN0XjrTdg7YlSBD6GlVO5S3EWSrTI4ufO1voLObo38cV48qccp7P65Gen8Cvb9
+# Oyr5EyaDLYmwT8KhY644cY2rjmz/1YtXN99cnq4XKy+cJF1TAT+E7Cr9FcGwtkrM
+# wUNkdsZjw2nEW3upj460VOqwxXXeHl3hrl/GGTC6YG9iX2cgzMct9hzTth1uQHpc
+# ItEaX2/RDS0669zlOSo9fM6C4QrYBloYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEyMFowIwYJKoZIhvcN
-# AQkEMRYEFDdaVdZ61825rJ2XTmmyy7JJsA7UMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxMlowIwYJKoZIhvcN
+# AQkEMRYEFNmanHmnEngqB5BbK71OLP9o2q49MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAcYTT3i06839Th47szyZplT3n0M5xC0PdsMfgLoMpeZCC1
-# uY010T41rARHdc1RgEcjScwKK6YQ7syWzVSWTlDN8c7mZAhXxwTFFcaoTZcXVkOg
-# yf5TEpt8PUlrh8xMXr/GW9VEScEDiPGAf5ObBbHgBE69kBOrZUorud9NsqfU1hXY
-# 4Xxvvn5kB+CxUWVHfnx/5LLDcv/DfLDpl7Ely87vBe/W7OIr5lMEflyWmNbPwx0H
-# 1sW92AI7z+LavYNDWEbPqwv0IpocvZqlicqX6Nt43Gx2sNAFMGdqcETnKpjtezYc
-# LPQr765Z5LrZBKZaTtBsPlBKIiO+4YZvGkY+MFKN
+# hkiG9w0BAQEFAASCAQBqod6aB18I9z1IiYyLvUFFVT75AqZwSGN3e17LlqbH0gyr
+# s0GFwgsEOfoTESBRsakD981fXZTqyQ5H2MdVfr1Sr1aq/vrBR18b6X3TSNKqQuME
+# YccnIMI9/3JHzlTRttUTGl/rm9w7Hm0+C5hW1HMhib5fhnPI/UHj0APzm8VU4aG5
+# MlNa/BlvC8alZjkXjBcheecQsF70putlpBvMpys53i3rBqr3j5r8Qv1R18k6EZgp
+# xcW55EWGo9QFOoBTmmqN0YaDp23WewCBBsR3Pz+VRRl+PjFt7JtBYzb+4rhNA+72
+# 5qUrCb0PA76QMv5JjoEkE5z8pxqBwlrrFyHnCi1B
 # SIG # End signature block

@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -56,13 +56,13 @@ function global:Invoke-VisualEditor {
 		File that you would like to edit
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Invoke-VisualEditor example.txt
+		PS C:\> Invoke-VisualEditor example.txt
 
 		# Invokes Note++ or ISE and edits "example.txt".
 		# This is possible, even if the File does not exists... The editor should ask you if it should create it for you
 
 	.EXAMPLE
-		PS C:\scripts\PowerShell> Invoke-VisualEditor
+		PS C:\> Invoke-VisualEditor
 
 		Invokes Note++ or ISE without opening a file
 
@@ -83,8 +83,7 @@ function global:Invoke-VisualEditor {
 		[Parameter(Mandatory = $false,
 				   Position = 0)]
 		[Alias('File')]
-		[string]
-		$args
+		[System.String]$args
 	)
 
 	PROCESS {
@@ -118,8 +117,8 @@ function global:Invoke-VisualEditor {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrXDIzwZ6KHktw2UssPIe6lqT
-# yligghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNsmMTVL0wPZ+oUzJWPauJt6s
+# q22gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -262,25 +261,25 @@ function global:Invoke-VisualEditor {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRLcPdi9qdqp+6AiVHkCgx7HNW9vDANBgkqhkiG9w0B
-# AQEFAASCAQBhLwV1MX5/HerZLe20mIqHzwUWHOLr3nH94z/jFVlduDZmiNE01LZ9
-# 4E8PrO8jIn5t2XGjDe9visMWuF2YQdI5V/lmwYR85Q7qmfmng/40rIbkwbA/XZwD
-# rEXnV3y9xgWm28vC48G2pce3DISrr9itv0NOZT7zf+moceFm5sCkzF2aCc4tuHVp
-# r6mJMOL0oEQEh4+3qlyc6MqmCFrMUWTYNjr3SOnHebgmEzoFOWPVMA+f9Jn5DTq1
-# YabsYvGUkrd2idQS8rGGn7trp1L5+zXR8L+Kp1EtgABkHSPUaYrlxrDsSiJXNjhU
-# WiJMldEl77O/bsB8GHOUjP3bA0exbdBLoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR8S7BC8mbURZBR53vZVs1+T3aEqTANBgkqhkiG9w0B
+# AQEFAASCAQB6FaqhTd5QWJPsx6t2IxjVTX3LGdCtWCK2YNo4VW88QIHRmxVwWGo1
+# 2y/Sgi6KrUgw8xc6ConOm6eMWWmJrDiDukpwq2Hi+pft9IUudwZhWQnAsM6knNx4
+# vgeDRUciShVAZZaFou98R5t4vCwSafqhzMza6+YUfBncqra8q0o1uedUGzGtSgGl
+# gBQ1ZUUS6FjJY8TpdpxbqqV9fD2Se+D4uTpfv6dFngk7EQ2AeD/OURfB56LV7yMd
+# yX3eh2Z/DcbPArifMc5woBBP1jjnSTVej7Z1Ow/YK8YrwNN47zkfF0iq/plVIUAj
+# Duvl0gNTKkzi05PiMPAYr+o0YtdGe+P7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDEzMFowIwYJKoZIhvcN
-# AQkEMRYEFOJgB3KAVBpgJBO4WtzmZdsX3uMyMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyMVowIwYJKoZIhvcN
+# AQkEMRYEFGmEw/u8s7czviJuXLa6QOxLstpRMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAA5yezt1LoeSCXR6yzVoeoV7NVpYZ232h606snfa87Zn2b
-# 5xeSdm/7h7q6BhoHvXDihMGyI9HQfJL9YmXEy7VZNms1bUx6jB9UdBEr+qbQduRc
-# CbYI4FgdFzz5sjeNoUIatiHY6kHSScumNqJ78Pe900BZ/7pn+M+Vtd2RbrJ1tGfq
-# rXDkrlWgBywf405nwVnntqFgDT+rThU4bjQMkZgtLv8aUBM9n2XuM1u0gMiEZNNH
-# iB/HMVkbmMioZ80VmBOxUAzGpFh8/dUpGPXvnMzYJ8M4ER7/XaxrvgaFKZlaXKT0
-# vPUFFIniMZTOif+KipYhwJX5gGiiMpnk5wA/3mtz
+# hkiG9w0BAQEFAASCAQBmS7alkZVRu2i0MfvtzqImPQh13fK3AUkNb/YDz3s6peV8
+# efE7venF9BGKeVo08iUrNTRilNqqYQg8yQHiTJh+CzRsQqp3AuiI29dPut6t18FM
+# p0CqejpQrLNvlmNMYwrdYLleGzxF3FH3hvZ4GATwViPt2BaPVMDhcdxIJishj9Sl
+# fP9dCN/FZx5Sc102rdCO5CYHIN2S2jdM7wdALLPzccaOqU6rOtv40fvj/geRS7zW
+# 1uWzG9SlXPZBgnHvGQTVZI5oyPFKHK++/gloEzFRZNrxpUEiY3ZUOWuCCacNS74z
+# 8qN10/A768uxtBXvgZzmDmEALPxq1ZMITc79QUA8
 # SIG # End signature block

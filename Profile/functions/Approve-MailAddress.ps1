@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -111,26 +111,25 @@ function global:Approve-MailAddress {
 				   HelpMessage = 'Enter the Mail Address that you would like to check (Mandatory)')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('Mail')]
-		[string]
-		$Email
+		[System.String]$Email
 	)
 
 	BEGIN {
 		# Old REGEX check
-		Set-Variable -Name EmailRegexOld -Value $("^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$" -as ([regex] -as [type]))
+		Set-Variable -Name "EmailRegexOld" -Value $("^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$" -as ([regex] -as [type]))
 
-		# New REGEX check
-		Set-Variable -Name EmailRegex -Value $('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$'  -as ([regex] -as [type]))
+		# New REGEX check (Upper and Lowercase FIX)
+		Set-Variable -Name "EmailRegex" -Value $('^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$' -as ([regex] -as [type]))
 	}
 
 	PROCESS {
 		# Check that the given Address is valid.
 		if (($Email -match $EmailRegexOld) -and ($Email -match $EmailRegex)) {
 			# Email seems to be valid
-			Write-Output "True"
+			return $true
 		} else {
 			# Wow, that looks bad!
-			Write-Output "False"
+			return $false
 		}
 	}
 
@@ -150,8 +149,8 @@ function global:Approve-MailAddress {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU06wqTRRuSacPAxbjzPiZLSRa
-# 8XSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbBHTrxDIbkWs0ImqwEMqZ49a
+# Ut2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -294,25 +293,25 @@ function global:Approve-MailAddress {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQEdL8coUsmHKriiC3TkeZf1urqzzANBgkqhkiG9w0B
-# AQEFAASCAQCKjGMGKEGWc1rhHOr5mWP3q4vK+49a24G1MPtPky71SEH9FfS8HTRW
-# I+Tn+ld953iJpTFUeAyPld7+pI4tfeFdSkxm3yE2lDBNrTSKCHyllPkWHqTFm2aF
-# HBKjrssLSABFhJourzUTCP4EMy6R0JZwZt+8GfkyaI5CDOgwgcEqcP6uzlrUxiif
-# eojCHgzvbHS6uLJWwxPkeNJvDPf0CQADxoblL+3GWaVwiM9aU1SUdZG23l1mKbTY
-# 0fWKqzBvxxNhsI1jJQCRpAhpX9/eQtgWkKLr0YOwLO2N7BrR7H0pDtSG0ZYdwS6w
-# n5HKehnMnKAd7y/rjY9SY4C3Kg4HGfWeoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRRRvPsh1ZvrBpYHzntr4g+ZzIjTjANBgkqhkiG9w0B
+# AQEFAASCAQBadSrMIkGJEZwy5swpXus7vqQxQAm2cajGa8BnDtoFsNxQKvoL/k3z
+# qzaRIpUikfhDLyEbdl1ihiA4u794tsUCI/3mYrG2iyUt/nJo4r38wHCCHpH8THZ3
+# uVNh1CHWZqohvwKBsMwTytYrcH+UOyxUsZopLUBQBamcehjDPe0DTsenLQ0VY24r
+# jws5RZRF+4aCjdQQX6D1xkNxKDSNkSP6ntVWOnkhCClp0lbF8BOEm7aMliu2BB8V
+# +YDeWEW52pnyNVouSgCDUlAGQgYLOlZ+1Mzstop51Kea1uY4hku7HoZ+w/1qeof2
+# zwzXSZaXfOl11EpzbeiNjNbqdoKmlnyHoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExNlowIwYJKoZIhvcN
-# AQkEMRYEFE7td4K/0ddKKg5gkSlqLFqfn+DXMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkwN1owIwYJKoZIhvcN
+# AQkEMRYEFARK3YlcvFGee5mCzo/r/mvCrgSPMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBIqta3JVUVwaD/A94/4VdyhkqGob40wTp9jbyz2J/DpYbC
-# w1SKTnbKPj9cJNLpwgK8ZzsUee0kvKFbteGq5uLXdriMkgnvcfQIqZCf/Ul4zdKe
-# DOfkU+bXBgkxLig42wz073MMVsIeTbwsaW7Z1nLGINzZ+Z2ONBdPjqEGjc3e5u+A
-# UucIF12qzub7+2f2uNiL9kNnZeMqG9uTdibt5L0FaGsgERzIGmhN8y9K8WFi1/Ku
-# b5onlTyi8crP1mWSIZ2l8JnW3LfdLqi4/HuqBjJG99mFHGG+TXTHfkJAQXngWIok
-# 8TbJnfpsLdgKAaOilzzR2Z3i7idCzHRkExqxhqb1
+# hkiG9w0BAQEFAASCAQCu6oRsStg6rXgKBKCagwYNv3A9f291hUZ+DHN9hmdymLvX
+# zXJgmFF/67QntghrQpW3tEq5Iyq+v8nDMtapLHggJdH3u7Q0z3j/uLXKP/rCW0PX
+# 5is3baoFaC/cO8KIMxjMQ3FzZqtttxqQzXsYoRmUQFduKyy3qnxLL8rrFWqkdpUX
+# p57sH/J3b6FXVSaC+haX1dAO03xxt2Sy9Sh01uQpbfebIKunE19QDaxh4pLJXNdW
+# +HGpSX7aga37TcQFmGGW3y6I0PgFxgYORAWaSueBKd5/ccyrur47i6cUN+xWeZRs
+# yTKOgG3A7HrrJxEvcXMDVaJYwDIR8m+vOR4R3Op+
 # SIG # End signature block

@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -70,7 +70,7 @@ function Global:ConvertTo-Base64 {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(ValueFromPipeline = $true,
@@ -131,7 +131,7 @@ function Global:ConvertFrom-Base64 {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([string])]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(ValueFromPipeline = $true,
@@ -148,7 +148,7 @@ function Global:ConvertFrom-Base64 {
 
 	PROCESS {
 		# Decode the Base64 encoded string back
-		Set-Variable -Name "DecodedString" -Value $(([System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($encoded))) -as ([string] -as [type]))
+		Set-Variable -Name "DecodedString" -Value $(([System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($encoded))) -as ([System.String] -as [type]))
 	}
 
 	END {
@@ -162,8 +162,8 @@ function Global:ConvertFrom-Base64 {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwRORdb4TkSQeocnkx5EO2Q2V
-# zZigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwK4mTDGGd+vWFh4e0KpxAPxr
+# Qj6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -306,25 +306,25 @@ function Global:ConvertFrom-Base64 {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQcHqesXhJiqnSiVeb1H1XkB2iPKTANBgkqhkiG9w0B
-# AQEFAASCAQAp0pftWqzBvu/AJvCiM5q+9+rf6643j3/ngyW8qGvTk1SBKBPeTKmO
-# iUOsFKsCrpA1ezyrKIw/twe/V0veB1qWTtmy+EwzpuoivoHXINV4KSP9kaPJgtFm
-# Bkda9F3NOvNvpgoPROSWWAmpeezspQYj7l2Ea7qZvd/gUd6eBbdgs571me2OGC6B
-# dhyOA8kxpqAok5FqQju8XsISbYxgdOFY644nkX80jqhI/QpR9+BJqhyajdrdgQ5c
-# HW6+aPvWgFKzS993Q5gaLhK6rbk46/C2DlMAnLhcqScVxAAP3E4bjPc0vS1Lu+hS
-# 4UEC7u/gXeDrODgFxvASHEkomtKZlNTPoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS4ElZByJRwA+fcEn2J+C3T6sVXGDANBgkqhkiG9w0B
+# AQEFAASCAQBiysqT+bKiaMNfWOAhrKVbDXd1S3Huz/wHXjhcMoNO315u/z8gHBi8
+# X3i//j+gbEwOhSql2DUVDDWyjqEuBitQ4ti9fnRrkJr5cYDUVNtWBf9Nc/ZfNzhz
+# +tk0JalSX8hULzkMb3l291vz/lr5C7dAM1vCc6Xbro6Lt0YXbo4pDoRbI18HDAZ4
+# +Itz+qyUxbDUo7Hb6OaFjh1r/5Go9c/mBJxEtLH60ua+vYWK6bzHTXjRcyYFk+Lc
+# 7T2SZlyuTIbCltlUt7uJUhTgTN4zM4/LGFdATBk+I52Kf1KnWOMymp1aIRmy8VwY
+# WpeEMiN7zbSnEPy5f4VrzKlPImIsv0ZyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDExNlowIwYJKoZIhvcN
-# AQkEMRYEFOYrZFXB6RxYbWaB6IBR9ZD0OaUDMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkwOFowIwYJKoZIhvcN
+# AQkEMRYEFO0jY4NtBgYJ3UPzwpz0xlxGU5UKMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAbV5mc6FifFS5X77S5FXDnPfVutvCXbPRd9NILdV5IpM+n
-# zV4oep7mptTETYAKnK9yfUBdDfIs9zH0C7tRJon1JX5hT0LH/n9sEjFy/NmeEU+H
-# TZiJcBTMxwS58PP+aIhO2mPr7StRTaFTmotj4i/HxUCSn49Sg2bwZPo3TC2NJFXg
-# Rgl69Oi2VOCUMrJCKM7B1eVoX4WUm7RFW7SLeFWhENxg0msA2fZGyZXTJBEYIZLb
-# IWTi6qgBKIklSNIbNa8hObuRzIn0jxoGzq2FoeKD7V0z+G80r33svisEeidAyyw8
-# qJkx+4F4E44xLTWau+TRUcggJIAZZVqKoBqDRmcW
+# hkiG9w0BAQEFAASCAQBVKaAs2YLoscWpSEORtetgo/tqjKqpCLsfldZ5LUxGsJi9
+# GSoQriHi8H7iZoHgTXK351pJl6DZgJRuktTqWzD3WBEFv+fusevleQqwbez6ouF7
+# IrDmCUWNEdpbS95VptfltEJ9j/XlNLFIT14BGniSw1MAsbP/IT1uMQRMiaVJ7D2Z
+# BvQceMG60Ws9LG/KhMt/lhr+9c/SUN8GIx9iA6sXTQOnSOYuZFRaV5pvK8Zci5ul
+# ZY4BWIkrU4sIdau9FDnLmSk36ltm1GJ/Y4rxNScP8baJiliARqUhBm8U3Z3IOWDA
+# LmGm6qA5XNBDRsnudStv2B6aEOaXtwCkctsvCquR
 # SIG # End signature block

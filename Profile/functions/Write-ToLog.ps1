@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald. All rights reserved."
+		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -70,7 +70,7 @@ function global:Write-ToLog {
 	(
 		[Parameter(HelpMessage = 'Name of the Logfile')]
 		[Alias('Log')]
-		[string]$LogFile
+		[System.String]$LogFile
 	)
 
 	BEGIN {
@@ -91,7 +91,7 @@ function global:Write-ToLog {
 			}
 
 			# Here is our LogFile
-			Set-Variable -Name "MyLogFileName" -Scope:Script  -Value $($LogFile)
+			Set-Variable -Name "MyLogFileName" -Scope:Script -Value $($LogFile)
 
 			# Create a start Header
 			Add-Content $Script:MyLogFileName -Value "Logging start at $UtcTime `n"
@@ -146,8 +146,8 @@ function global:Write-ToLog {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVGz5utpDsayGCs3lIxWT49dB
-# nwOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmdXj1S+D1OJk44KsyEfZ936N
+# VvOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -290,25 +290,25 @@ function global:Write-ToLog {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS1atj4S5bgpcUyogRBSzML+oBDGTANBgkqhkiG9w0B
-# AQEFAASCAQCEB7JGR6ZrJXviUBQZu8tE/wWtgb3f8993n1q3q0xOEin60rtBNvrc
-# BaXqyRB8UgArjWOlz692h0P6vy+cGBp25PE1tKJHrKjVXYwGx68lt475f0E+TYn6
-# k8q+Ks/IaDblmCvaVaT0gLq70hBAhEMrD/22rH1NyA2FYCJ5gj2JX2D6aQe+ep1n
-# KYW+Xtdyz6NrmxYPSFmPq+bKDVJ1Uxqn3n8O+nQUP3ZJ1V3IRjBvc/V+vne6SJrC
-# kZ9hXSBwwr1ODTnI+SnsryFds5cGW6jQ9/trqjh+4UfNG8YGeQ3B7wR7A+Fp7DGo
-# jELUkKu8zBzW7WVukdENbhY0agPi6qyZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRxBrFZwIgAYIUSUpLIN7bTrobrZzANBgkqhkiG9w0B
+# AQEFAASCAQB2jCY2SonDGA0BX09UX6SYgNGimb1EWQSRt0Le0vHyg3btsLQp3g3L
+# K+XCWVTPEXazHVpgHhzl01JfizQWz4YcGQ4yIzffgDER71k40TD3VEIsHpZ41nQ7
+# edtrimoQ5Xvek+I+wFk0cQ64+Y+raabMPgRg4JwFUFmv88KYtflO5MRdoDXKSD+8
+# 2la4wexJoHByWU2vUgvmAsdbz1EdAXsaXJ27aj//FVPsz/JYanV0KJAMwZa3+7d/
+# pYyVBuklS/nSR1RR0avge4mRAxyQAMmTNldkRyJuKWNDGAC5qmzl/R/tBcZWt4jg
+# iIAGcwKCxZUIaWPiWv8vGnvg98QY96IEoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDExMDE3NDE0MVowIwYJKoZIhvcN
-# AQkEMRYEFPEkNfbu7vohglhc9yULuh9plm4EMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkzMVowIwYJKoZIhvcN
+# AQkEMRYEFJBwPkD7CtKm6MWd4WEFz60PLMLxMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCpGc/dI9+M/BROMyw/9g4qFxq/wTm9BsW32Ox37p5oXrIe
-# GnceVw2SsA7lhVEVvqiVlKakamTQpPP863wqJzgxYYz84t3Eqat5ZTwPLIDANgBa
-# N724FpGK3NBygIFdlk/4JUsvLk4S6i3l9lD3B5yWh/lubEsoMLRA5cw2j3aJEoiO
-# 0sjkPFCaybfMwWhvMugBgwAMn3S3FENFl84OkoiEGHGYOFiG+CqYnhf77F5myINP
-# XNuVolxpYGH2dkgB997BaCkFBJUoTrKC9/jQ7OS9AUv2rdQ+1xkKQannGBvQCGDV
-# /5xMaDtGrSq4N4Xrk4sAovfBVF/Tw+LH1uuw9htY
+# hkiG9w0BAQEFAASCAQBrvjCj4HhbxmBaE+WcTajOFS/yBBpefyFpqjGQ+U6LwGJc
+# Ja4p9g1EV1h67RRWeBYDIITTg1r+fUIyTxto/qvwhPut8G/GUg4srHxi1Nq83oBP
+# Zal7tw7x74JPDHXLFh/oXYebyrF1idz3JsuPQVa/xjYGVfZv/+ux14kPvBjEtMeA
+# Opx+iXfylMguRUlKHISyZWVPjP5KOg4pFPLu+8KPdC6klaEcPoAYQpbNuXhq2D/2
+# xLS4ktnjqakYrGS9k0D2A9Z09/j6uTUwpeYVLmFc+/qjBn1mgb8DMA9fVDHbdlnW
+# vRv8H42GRtE60jipkwD0/HMTMssZjTFN1/UtOGkA
 # SIG # End signature block
