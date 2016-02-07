@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
+		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -67,7 +67,7 @@ Function Global:ConvertTo-HashTable {
 		Joerg Hochwald: http://hochwald.net
 
 	.LINK
-		Support: http://support.net-experts.net
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	Param (
@@ -109,8 +109,8 @@ Function Global:ConvertTo-HashTable {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAYLyn1zImDyjBBDc4eU2/hDm
-# f0qgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJMd7nBWOvai8XZSjv/cZYhJI
+# jcKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -253,25 +253,25 @@ Function Global:ConvertTo-HashTable {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTd7gmLfKrmzq5GHHOvjXzPsoGK/TANBgkqhkiG9w0B
-# AQEFAASCAQCh1mqerKF8x+ND86FSqaWA50+AJnn0XgJ+H7NJjcV7f9tzyx/acrTk
-# +st+iIaiJkbXxpuq79p4r7wjbAGzf++y6kFqULeshm7nuKvs7/mmZdV8FLR4kUKZ
-# ugj4OcvlvHOhcKSzphpxfLVVOPZTmPnAnwR8pDgWLszpvG5sDlJVN8fVIxtyF4m0
-# y/2dO4kLXNUM+Ps/IHvKPGmi581QFJlvo/TACcXreXsPKMEqAMuMZkkinm3OewRr
-# 8a6ruJf570gu85sRPJzeATXI9O0eUC3waxcmbiWDNiYnNxascTcjZ9KBSPvYNUlu
-# Q7qTq8wYejAdv+keDUDvifTdmHqbZDlDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS2VNFcdvg/HMZRbkw+Ly5C7J4JHTANBgkqhkiG9w0B
+# AQEFAASCAQCR5QWZgOjOBMzm+Szlpkw3mTHF/Aa7R1cX1BzYy77bWLhr9NWnYhie
+# X8e03De1OadSP5orA0iQDExrsDPBd2OT9puJdmseG/zAj/KkaQVkn4KN0RLIQJWb
+# qsMUX4QQE+FCe3/O8K6r4Lf+phEA4BWFDMT8ZOFX8cSbgtiEQsamOJW5ZiV4vcIG
+# aJF6XqoJCfeyY8WXwyjYBqZEvn0w2x0a+uQcSkh51k/OtKRgfG4nvzMqUlF6ciQC
+# VePHxLlzDmzp+1pNjbjj4AhqicZ6L1ztjFTJqvyF22k6kKFCe+BQU5PJUSzcXTc8
+# umqQarcEW1bskaoNBFcYtl1nrdCo92lgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxMFowIwYJKoZIhvcN
-# AQkEMRYEFPRHwhRciMWgA4ccOF97xACbIDqCMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0NFowIwYJKoZIhvcN
+# AQkEMRYEFPWLfty925vNYG7ZRqeFYzK1kWotMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBmvxV/vBtgqctc4eROalmVLZPG2C48tXYF3ytNaqHnP5i0
-# TaQnvQflv/DKvte/33wloJ1nHa/7Go17rjOq4tH+biWzRFCLsHF+wXMLFKRFdsSb
-# 27j3IRXledNf8/LCwYZRzqefQaoZImik5gbOgaEcCbJoxXcuofXhu9YM5bXaXG5l
-# p3MptpQe1QaWsJ5hrDmL2Dk3q53TE6RdyEcYxJQUH7dvsf+I19XQiKBhvDsyDIl/
-# p/gcXumChFSFnslosdpO++PW5KA0lclhKnlsxSQNO8qcaJerhB9ugzf/xFd2WMYM
-# s+GIqnNPT031GO7o56J4TzrTa5bPGJkK4pv9dLY+
+# hkiG9w0BAQEFAASCAQAvsdtPh++vJ1BGDWBs4xY+zFnMAJ/lYVastrFgtXC1SDQG
+# 9MhrcB14coiTfBtcn9vJ+tUPgI80F6fWc0D+1BY/Ool+jcM+D7FBOcYgSGGLc1sh
+# iKYUDzKg/OuJLIVghdbCsU6DqheQgNSCGM3MDjGlwUMNBJ/W++DlTUH+E54ttZ9T
+# 1tAyIrBoQTsGrGmxAgHawNnrKTQGogq+ktD/DK0Fs9UmpQX1yiFQAMNisDtQ5yv6
+# yWfSzPKEQK/9GTj4zUdm8hYIsvwYYTfNQyEKZwafepMLhVb/Ac26hA1hpzbcsx8z
+# B7uxtIkZ1ffBTVGZRQbE8vZLeaJsNGNBmCmFvCg/
 # SIG # End signature block

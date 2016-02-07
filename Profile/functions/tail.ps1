@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
+		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -76,7 +76,7 @@ function global:tail {
 		Joerg Hochwald: http://hochwald.net
 
 	.LINK
-		Support: http://support.net-experts.net
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -150,7 +150,7 @@ function global:tail2 {
 		Joerg Hochwald: http://hochwald.net
 
 	.LINK
-		Support: http://support.net-experts.net
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -190,8 +190,8 @@ function global:tail2 {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMR4k5K2S8SZrB4TKvk/rLFHy
-# juKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJG1SuUL/Bf9VL0ItkV6VBTd/
+# PYSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -334,25 +334,25 @@ function global:tail2 {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR+Fzbbb3CEDwCT9IqInSbGTzUOmjANBgkqhkiG9w0B
-# AQEFAASCAQCsefJpjgjEzP0Cp9NyerU/gXD9Zk79enFuaydReGwaXZw+36aeWK+f
-# E+7MmhfgTw+pwM4LNCeEYPFkxKimGnEK9CCp5msDrhKEUaPFJbZkNxUImPWTxTEK
-# SB9HzWNaEoLISsJDylyT53aBK1uo9pV57MDwYbBvRnfmHoxvpo21zNewzbB6hdYo
-# vlGprfOFd1+tCVvtCLqpN6xSp29FDLm5eMk2Jsz3TFw5ZilA70o8xBfF4I1189Ga
-# 2EwX6zlgq7qNIq/OdMTC31dw0ZIKC1VdaOIuubcIwRbYEsYaMCSGbEsZya4vYKtO
-# f+uipJeAK4UIVBugUWMpzHwi625wcZLXoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSBKVCnPK+juUQIftv47rX8ORFB/jANBgkqhkiG9w0B
+# AQEFAASCAQA7DlEOsNRwVMJWKYeYl7QbMwWYQAm/xU7OU4WOgIE+MVPXe/sZV+Wr
+# 9zfSAytVuMu9dn1VpktMNPi3vs9GtFRON2T0/7D9ndREmegFykruE8yyjy7U6/Nt
+# u9J/6r7Ezyz5nsARQdFF44O87yGYjD7X2LKchouoPNwckpGvS3bg+OiVsDgNV15L
+# nPum79QhNyM5JoaXEwXdTClS3fYVzR22xiQpZjBfhvEgTBeOadK9bv7gBRR8qWfB
+# qBACj+21ykg3VK3hykl1m5xnyWdt7uyqOYiLWl3hDa6IML62uhMK4s0aLQO2kjYN
+# A4FwX7zXIKANm6vBamAAiuPqv0ZDgvbgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyOFowIwYJKoZIhvcN
-# AQkEMRYEFEo/HZI9pj2uUhNVRgGRo5PuczqrMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwN1owIwYJKoZIhvcN
+# AQkEMRYEFErk7S035vBY/Y7kQ5Y5YRgcYV0jMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBuMRGgkQhcuU71CeFIzMOkHCXcjZ0JWIQwTLeam6OV3Bci
-# EEFJ02Kmy8YZ9oEgUMAFtBOnwzG7n6FtxiAnZGJ7sg7WZnu34Vpwn12ZpQhSPyVs
-# bSLFPvC6R592EKBg5aiYnfomPKrk0whXncYJLIUu1AkjDJpENhN0koHYV/3MSdCy
-# oKf3e5ZscRpPLr/LG4VYx/QaZdNcJeproVfNATPDNpKhXjKlNtICmes+xwIukJ02
-# qabPE93c7oXMF+SmZWeLjb521yFUM93dN+ryvKC9mkITJApwHW+qKOHllQ0+nVGk
-# GiYZ2FYg/+eSCHmG1JZVJqvwqu6HnHndTPctkRcS
+# hkiG9w0BAQEFAASCAQBNNsi5p/RSdn6hmQ2c7ag0NahLmsJpYkVfz6GYLV4dzrUk
+# fCXPzeGYVinlwy2THnOGhvLTcIH034HwCLa1zxhZkZbKAK/ghclMrTdBpyYYxHLA
+# LWZqY122Qfy3KB/SWc8gWXAhIbhtzE57bTte2CdAjmcVgjMImbQ1erKDfmh5hegk
+# t3WlTcNPpTT8fJ0MuGTbEjD0ECaXfydAUDrhUgPck6+nXenspsLePA5BQp1V7Duv
+# RemLr7ETWxlbDppKZX0xNe1Ol7vajF1cDDrCw2z6e6uzk9WjjqvHu5KdUDc0Vnaq
+# wdsX8Mc9d8AqXQkGHr1z02/P7jPVx29fa1i6YxJM
 # SIG # End signature block

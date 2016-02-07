@@ -34,9 +34,9 @@ function global:Get-BingSearch {
 		Joerg Hochwald: http://hochwald.net
 
 	.LINK
-		Support: http://support.net-experts.net
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
-	
+
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param
@@ -45,27 +45,27 @@ function global:Get-BingSearch {
 		[Alias('Search')]
 		[System.String]$searchstring = $(throw "Please specify a search string.")
 	)
-	
+
 	BEGIN {
 		# Use the native .NET Client implementation
 		$client = New-Object System.Net.WebClient
-		
+
 		# What to call?
 		$url = "http://www.bing.com/search?q={0}`&format=rss" -f $searchstring
 	}
-	
+
 	PROCESS {
 		# By the way: This is XML ;-)
 		[xml]$results = $client.DownloadString($url)
-		
+
 		# Save the info to a variable
 		$channel = $results.rss.channel
-		
+
 		# Now we loop over the return
 		foreach ($item in $channel.item) {
 			# Create a new Object
 			$result = New-Object PSObject
-			
+
 			# Fill the new Object
 			$result | Add-Member NoteProperty Title -value $item.title
 			$result | Add-Member NoteProperty Link -value $item.link
@@ -77,12 +77,12 @@ function global:Get-BingSearch {
 				$ie.visible = $true
 			}
 			$result | Add-Member ScriptMethod Open -value $sb
-			
+
 			# Dump it to the console
 			Write-Output $result
 		}
 	}
-	
+
 	END {
 		# Do a garbage collection
 		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
@@ -94,8 +94,8 @@ function global:Get-BingSearch {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3MlGWz4ruhuz8kF2gNTYcg2e
-# qjigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHg5/nFFfEX/FPaK8YuV+LH/k
+# wnWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -238,25 +238,25 @@ function global:Get-BingSearch {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTKRXCQEf5Dc3Tl37AKf6xRa6x25zANBgkqhkiG9w0B
-# AQEFAASCAQAuBd8XUsoNuc0SLR+FkmGiM4P+wVIHHWuZE1Hv3Ase/XwgEThVHhD6
-# VVJ0pxwtK7DXlKoWvKq07xdE80JhHNzkb7PqmEMp8AHpfT5WDBB/kLgUI5AVuyD7
-# A147VChj8QHtBHWc6hhhqrqjTHnwAEUIDZzdqWDuw38Jgn+oG0IDGY0+tJ5L0JLJ
-# zWev7W26+aUujLcmc/FonKv8vvuYG5dIu/ybaw3Tn4sgAu+ALqKWS/fmKNtg8T36
-# ot5ddP9A9wIFTnTd2ALPGiVPSOUtX47cTrberLDOAZjrwgP/6uThqn09ndSS/adW
-# jVoKyHI9C2ipu5rnffMkb5NsGQQZN6muoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRcsnSRhRAUWMjvRNqgaM9agRcpLTANBgkqhkiG9w0B
+# AQEFAASCAQCgmpuBqrRYoPV4cLJGeYQ50sC5F0HbcgicZfSofb1xu8awQbSO6zqj
+# yQ/W+3ZI67JcLoBGMlfelC389HX9JWbGHmASitMHBqp9zeJblXDGyP6NtYbPAMDS
+# wn/3X4Bdaahuy0wtBNNXt/bj+f3XvaIVou6kcIkjnwncHL8fvGxjvQoLxyMrRIWq
+# xyT60zZfvTOjPyY/SfXiRJuBEE9VPLB60YQzui40+1hhWv6ObNt+u7Nl0phN+kOf
+# jewEmWJV4OJb+s25usSpI/kvbJL9GY5lTmionJdzspVAVrAHCGV8coXyBy0qU60V
+# cl+nsV/ZfNF8SmiYH+ufSdYLVJ2hITxuoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxM1owIwYJKoZIhvcN
-# AQkEMRYEFGEr02LaSNtIjLxQVNQC5fvK8/ZHMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0N1owIwYJKoZIhvcN
+# AQkEMRYEFMkO5WmRXxSY+lsKNiIDob7QLzkmMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCF0T7KcIp7GHQVue2Zy+yWzSzegq+Ii3tdt0NNwhzMw0FV
-# yT6mUZ5cCPpsUhdZG4tC4X2fzA78ef2mZAxYo0+68mDL2WLZpY5d91/Y49biVD6b
-# TOL9vg/J2u5VAjmRhp7gh1owA2DtnK8M82dEWWOO9wuDEV8YFf+4YjRut+oh+DMx
-# CFP1kIb6ukyvA5D6uIT25cKyRIIvfeaLJFCsSQKKeWpZOywet4VCCLZdUPq5sSWS
-# SKv9oeACnC+z009mUJer0gohzPqDmj5/QRBmTE6TTSXQNnSAV27e8JojvKuYhpGY
-# LFpyuM0c7JHafzsmlcRMLXk0ACZ50Gg5UWYx8Kwy
+# hkiG9w0BAQEFAASCAQB+V9/bFh3BZJ1UIbWe0LCzNidonlXr4tJilV/59gVOgXx7
+# /5DulmmCZHu178Hq1Eq+TGxr8npbzo9sm1UxJ6cvEyvB4MYxr/OlOFngfcQokMJ3
+# 9SeOGAw39UL5H8eoQME3Wl4zKgRBXdvN3L1JAYA+Cl2paAIWEBKePlmPhzXtI8Hf
+# HIQVxl3iaOFsMDHFIRscVBzEeNq1RDLlC3cUmgyVMwNyR3/548EZrIe87aCDBTQM
+# ZtCfbXK9RR+XMvesjHs5erVmyf1sDZeGCn1cvw28+mM7nTqpKC1QVe97+jgm18MJ
+# u1Q6oCdfHdWw7Nce9U8BrBwl2VxbWhQQhvHu1TG6
 # SIG # End signature block

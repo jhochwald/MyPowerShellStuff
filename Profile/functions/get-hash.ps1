@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
+		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -44,31 +44,38 @@
 function global:get-hash {
 <#
 	.SYNOPSIS
-		Show the HASH Value of a given File
+		Dumps the MD5 hash for the given File
 
 	.DESCRIPTION
-		Shows the MD5 Hash value of a given File
+		Dumps the MD5 hash for the given File
 
 	.PARAMETER File
-		Filename that hash should be shown of
+		File or path to dum MD5 Hash for
+
+	.PARAMETER Hash
+		Specifies the cryptographic hash function to use for computing the hash value of the contents of the specified file.
 
 	.EXAMPLE
-		PS C:\> get-hash .\profile.ps1
-		81d84c612566cb633aff63e3f4f27a28
+		PS C:\> Get-FileHash -File 'C:\scripts\PowerShell\PesterDocs.ps1'
+		069DF9587DB0A8D3BA6D8E840099A2D9
 
-		Return the MD5 Hash of .\profile.ps1
+		Dumps the MD5 hash for the given File
 
-	.OUTPUTS
-		String
+	.EXAMPLE
+		PS C:\> Get-Hash -File 'C:\scripts\PowerShell\PesterDocs.ps1' -Hash SHA1
+		BC6B28A939CB3DBB82C9A7BDA5D80A191E8F06AE
+
+		Dumps the SHA1 hash for the given File
 
 	.NOTES
+		Refactored to make it more flexible (cryptographic hash is now a parameter)
 		This is just a little helper function to make the shell more flexible
 
 	.LINK
 		Joerg Hochwald: http://hochwald.net
 
 	.LINK
-		Support: http://support.net-experts.net
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -77,31 +84,24 @@ function global:get-hash {
 	param
 	(
 		[Parameter(Mandatory = $true,
-				   Position = 0)]
-		[Alias('File')]
-		[System.String]$value
+				   ValueFromPipeline = $true,
+				   Position = 0,
+				   HelpMessage = 'File or path to dum MD5 Hash for')]
+		[System.String]$File,
+		[Parameter(ValueFromPipeline = $true,
+				   Position = 1,
+				   HelpMessage = 'Specifies the cryptographic hash function to use for computing the hash value of the contents of the specified file.')]
+		[ValidateSet('SHA1', 'SHA256', 'SHA384', 'SHA512', 'MACTripleDES', 'MD5', 'RIPEMD160')]
+		[ValidateNotNullOrEmpty()]
+		[System.String]$Hash = "MD5"
 	)
 
-	BEGIN {
-		# Define a Default
-		Set-Variable -Name hashalgo -Value 'MD5'
-
-		# Define a new working variable
-		Set-Variable -Name tohash -Value $($value)
-	}
-
 	PROCESS {
-		# Is this a string?
-		if ($value -is [System.String]) {
-			# Define a new working variable
-			Set-Variable -Name tohash -Value $([text.encoding]::UTF8.GetBytes($value))
+		if (Get-Command Get-FileHash -ErrorAction SilentlyContinue) {
+			return (Get-FileHash -Algorithm $Hash -Path $File).Hash
+		} else {
+			return $false
 		}
-
-		# Define a new working variable
-		Set-Variable -Name hash -Value $([security.cryptography.hashalgorithm]::Create($hashalgo))
-
-		# What do we have?
-		return convert-tobinhex($hash.ComputeHash($tohash));
 	}
 
 	END {
@@ -115,8 +115,8 @@ function global:get-hash {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUEBk/xDA3WLOVU+KsXF2IRLge
-# FcWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpJ4AOtNhu+5ShTKe8rD+gbOO
+# USGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -259,25 +259,25 @@ function global:get-hash {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTI+bSM/yynMaTVv4WQii+Vi4vIrzANBgkqhkiG9w0B
-# AQEFAASCAQBJsdhSTImVSACqCKDJvefBRnZSDj/RtE11I/HaeEs4Fwww3dj7nrPO
-# cgbfQRHU3gcCNGWmF7PkZws7cP7Wwb0uCmPxtZFkf9CnQewQ0x7kGxm4zIAjk4CR
-# bh9Lx8fig8RTedgv/z3hEDAbioZ2rrVNvfQeUbjE/99sOMZ78PY0VkiF/C5wnfx5
-# MEB3HTsa7/n0OEtSZltI5RgCzslpIGuqL01OuSUO1IxNiDy+s/WxzJ2FSwgMS+if
-# PO+jBbcxH+Y9ZF/58zNt+ebpUsGgZYR3HqqwY/ng+fELNP264uO5WziaLD2d92rD
-# 9gpZtE+YDp2ijkBbeOqcQD6NUkqqdHJBoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTlFB2SxAqrgra1WIv72ZQhs/QRtjANBgkqhkiG9w0B
+# AQEFAASCAQCSIWFu+hETIe/mqyoWz6nNHz3I9Y5weg3b7K6wab/OgDPpUNY+w2Rp
+# FELpH3nKg8z93bD1EHmdGB8Q+eAPhkGvxABDGp55TVoiW4qZzp7LSQYrmvguecIm
+# abJGsHWUoGaJDcJM65HM8y/ZMHD/zYA0iIxHi73hy1Bl8Xt0i2xCvcwujwFRcMi5
+# KSDQBnIh3MR9qWB0KcLEFRSNzSDD494Tp3zaQCLuvBiLRPBhqUS6hmp7Nb2VPQ2C
+# /rqcHNnsrvFw/0/5hIr1DV+maIx3jchkaDdd0CLIaQprgH3RniqnHTpCpBTV/wXB
+# Mf88gn9AYYXc5m3JV5Xka+o7AAZdUxwxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkxNFowIwYJKoZIhvcN
-# AQkEMRYEFIGr842YEKiBQc+N78xjXp2+Qd0/MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0OFowIwYJKoZIhvcN
+# AQkEMRYEFNWL7qref2wPWfnCId2nfvk4g7YeMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBc1U24XsUO2upi+MpS6TZkLkujjWfB0hc1/o8kSLIpfgfZ
-# MwF//qp3KVCESL5oflqIXRgUNislDO3MDkg4lW5o5HhWaP0GwPLeK57hFlVGqKM1
-# F9qk/mU7uE4/JPjQJeOSV5qPvkEIUcOTooq3axMuTkqq60hCdhiuut/TeCQhXYyb
-# W3hgAnQ0kzXF7Emu3yRkSCSTwTSNDohD0Ovs3ZDrD37gO4nmB2utNwfAFdYpyr8f
-# BddletU8LmwiSrCyTXNyGgNG+In3XbKBwRKd5LhX0SdFuue6jPO35eng33PTZbuV
-# tmPzDb00Uju1L6VkVJnVe7WdOukBqUYSYv8aGUDR
+# hkiG9w0BAQEFAASCAQBo9G7vhIIhaIfuipm1QRzyc6tTWG3QEoxKzM+wAGHLtaip
+# 7vyjxBY0JoWYX8xK4PoCXNyTE6yIXJ4xhRlceB88qAy5N7thMQdgesP9vCws6PlS
+# oe+TFDXPrqEr+1b/7gMupmbH+ay3fb/RLwM/NRa/w9r3vcb9KNWPcFc3Of2574m/
+# 7UjMVuTDXCPeLNmR3cLVo4q9WNyLFYbR0Dz+4neptWkpx5l/0wjbaNtee2nPwvXq
+# Qy+7PpSJApMGqJbZvwyTyIxnarqadmLr9KtUFAYv6fVui57atjA0lERBAtNl36Vq
+# uc7QzqGBOqZHfZTXY2iV2KHdci1RNs2EdPPpsIxx
 # SIG # End signature block

@@ -9,7 +9,7 @@
 			"Link": "http://hochwald.net",
 			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
 		},
-		"Copyright": "(c) 2012-2015 by Joerg Hochwald & Associates. All rights reserved."
+		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
 	}
 
 	Redistribution and use in source and binary forms, with or without modification,
@@ -66,7 +66,7 @@ function global:Get-TinyURL {
 		Joerg Hochwald: http://hochwald.net
 
 	.LINK
-		Support: http://support.net-experts.net
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -142,7 +142,7 @@ function global:Get-IsGdURL {
 		Joerg Hochwald: http://hochwald.net
 
 	.LINK
-		Support: http://support.net-experts.net
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
@@ -213,7 +213,7 @@ function global:Get-TrImURL {
 		Joerg Hochwald: http://hochwald.net
 
 	.LINK
-		Support: http://support.net-experts.net
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
@@ -288,7 +288,7 @@ function global:Get-LongURL {
 		Joerg Hochwald: http://hochwald.net
 
 	.LINK
-		Support: http://support.net-experts.net
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
@@ -340,8 +340,8 @@ function global:Get-LongURL {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+8zLbaMs26d4hfM7VR8TPqs0
-# gvugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUH0jXUbpwO/A0ragJ905eCL5a
+# J+igghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -484,25 +484,25 @@ function global:Get-LongURL {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRDzDg8f7JLxB2Fg7hIMxrpgaZWAjANBgkqhkiG9w0B
-# AQEFAASCAQCEw7UOBNS8QyFKZwLuxb/Bx9OfFosIh4fwPBbu/8IkkkhHnTwWwp3v
-# tBvMdZRDqvSB8VdbPNwF4kL7WCZq5qktCukYdkEcI+8rilM1s6A3TwwFKEREpdKU
-# ekLgONHDqiMVH/IjLcBmAzh7/eCP6C5mfB4hpfNwy3V+9DV7bsguHzvaC7NNNjQS
-# uTKpG+9nRL9iK2wUYV1+ut2eS29Bs0iys3ucb6FvSvmjF4lEBKNhdDumV3dejcUf
-# SDYVr/kXu2D9xzb6CwX8Iz67hPghg27//8NGqZNYZhxN8Ks+DbietqYCU2H8rWbX
-# m/beVfxom137ve2/82OLIeYBl+0UugYsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRXD+Ag3HZexWEPGRyieB+bm0prsTANBgkqhkiG9w0B
+# AQEFAASCAQCi53RlJ03/+ugBXEbcCR4V8GE/lCMgzfuDAf83AVhZuGKc/1DFYapm
+# Vpc+YxKrjOUjr84NqOc/iufTaUrovzQhV5ej1jPaRRvuuMp18o5WHFq3rvw32KjJ
+# mJSF2GKUsn0o9rudl1BXkTurz51I0CQTpH9J2Jiz/ex9c3JpSDu5FJ5q4BIkUtZ3
+# 3hS2BNpLnBGRniVmQnl1WHyKP+aGVlXpsidKifwC3jNRkbV5XmHPgfKtqBtwn+Gl
+# rgpqkIZfZHUYvZ1lOWMoUxerVawHVPsjmqaaoOd2/HB1xbDkG8mZnErfAjIZ8RgG
+# oGn3n5qF1d0ZmZhDNglkG8r63QC2PV95oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTE5NTkyOVowIwYJKoZIhvcN
-# AQkEMRYEFBvK05gcM6dZLkI99lyT2hOTEKHfMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwOVowIwYJKoZIhvcN
+# AQkEMRYEFPfkn9ZCmpWfiLKzzAWDCD8+fgaVMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBl3uzojfrmP5UHiAJv7QDlVVZR7N/8uJVrud+kX558MsoR
-# Nhr6hCsKshq1CeszHcpxrHMry4yDqYk4NYisOtbH0N+cc6y0Wv8H/3NuEFOzflDn
-# xAizSMugN86VwD/KIFSK2E2f58PsIYfceWMYeWjgB1X4uCyZfLHuORqMakFr9SOW
-# +kvftVeFcBooi7Ku9sKwFKGHCmX46csKRSPjdfY9SAA0iUlEEOedLt31564mdVlX
-# vfYDug6NWA7MfN+SpSgVfpWM2+skCzXEg1TY5ntplKqkUQxZmFOWcAWKAuqJvnrb
-# 12hpbHo6db/9JG4YL0+11WT+WZZkw/KcBSuOS+yj
+# hkiG9w0BAQEFAASCAQBtxDjXEE5TURgpH50x57giPCRKNRhA/aRMvcIBbpQWtpcz
+# Dkyglwf/LMHQHluEDaWLIlYOrNLzr6mu86jLaFfBp0jIxKICuZE/ZXCVCAMhk7/w
+# 5fhYfWBus8/Ma+Nv5Tm6kF0OvzjYX+cMfe9KBtJKwGLtBE7tKdCN4Msuth2rnlZO
+# kqWJFzp54Hmm8fTUTxNf/SkZWOKw6XD9mWTz9/9vnxWzJu3OjD6RWepqbjWiBD50
+# 6HFMmnoaKC0wdBtsAZF4ayAD8GdNlE6O/V3yKxlXUtsznqNy2KouMz6paj2uExYe
+# TFLCi8WFd+ctmYXLCKNKbAeNg8MJ+ZnjYdbzlMSR
 # SIG # End signature block
