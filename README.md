@@ -5,6 +5,8 @@ Some are just shortcuts for stuff that I need to use often and based on the fact
 
 Other functions make Windows (or better the PowerShell) more to act like *nix! This is based on the fact that I'm a Mac guy and love to use all the nice BSD based commands.
 
+I Dump the Full functions all the time (Due to the updated signature)
+
 # Feedback
 Feedback is more then welcome!
 [https://github.com/jhochwald/MyPowerShellStuff/issues](https://github.com/jhochwald/MyPowerShellStuff/issues)
