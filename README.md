@@ -23,7 +23,8 @@ If I like it, it will be a part of the next version here (formatted to fit and s
 [https://github.com/jhochwald/MyPowerShellStuff](https://github.com/jhochwald/MyPowerShellStuff)
 
 # No Warranty
-There is no Warranty of any kind! All Scripts are provided "**as is**"!
+There is no Warranty of any kind!
+Everything is provided "**as is**"!
 
 # License
 Copyright (c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved.
@@ -33,6 +34,6 @@ and/or sell copies of the Software, and to permit persons to whom the Software i
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 *Except as contained in this notice, the name of the Software, NET-Experts or Joerg Hochwald shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from Joerg Hochwald*
