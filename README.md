@@ -26,7 +26,7 @@ If I like it, it will be a part of the next version here (formatted to fit and s
 There is no Warranty of any kind! All Scripts are provided "**as is**"!
 
 # License
-Copyright (c) 2012 - 2015 by Joerg Hochwald
+Copyright (c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
 and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
