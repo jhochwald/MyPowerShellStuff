@@ -21,15 +21,45 @@
 Describe "get-hash" {
 	Context "Must pass" {
 		It "Match" {
-			(get-hash C:\scripts\motd.txt) | Should Be "af0593932811f013b5eccf5b7f7affe2"
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'MD5') | Should Be "C06750D6CEFA11AFCD1B26C3BFA23BFA"
+		}
+		It "Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'RIPEMD160') | Should Be "6E73D5A244AF921DB2F3B0B2022656197D376A6F"
+		}
+		It "Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'SHA1') | Should Be "8E368C84B798FA4E9E7325BE9787311EECB88560"
+		}
+		It "Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'SHA256') | Should Be "FCF65357E917BFF1385A94881EBB2CB39698E04C7A9B9CB12A32E4809CDB22C9"
+		}
+		It "Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'SHA384') | Should Be "D9CF95432114A9BD19857F9721EF32005A3C97D0F1EB0F84BFA67CBAE4B36ABC0385421466A01CEF3640404831B3AEC6"
+		}
+		It "Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'SHA512') | Should Be "CE8541ADA944FA643D000E57AB79F348501BB350E9CE45C4798D4CFB19E10E0A5DFF34D6B008625135569BF8CA911EDC5AB28714BADC9586CAC09D1CF67F0AD6"
 		}
 	}
 	Context "Must fail" {
 		It "Not Match" {
-			(get-hash C:\scripts\motd.txt) | Should not Be "81d84c612566cb633aff63e3f4f27a28"
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'MACTripleDES') | Should not Be "C06750D6CEFA11AFCD1B26C3BFA23BFA"
 		}
 		It "Not Match" {
-			(get-hash C:\scripts\motd.txt) | Should not Be "af0593932811f013b5eccf5b7f7affe"
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'MD5') | Should not Be "6932B77B43B6ED0A"
+		}
+		It "Not Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'RIPEMD160') | Should not Be "6932B77B43B6ED0A"
+		}
+		It "Not Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'SHA1') | Should not Be "6932B77B43B6ED0A"
+		}
+		It "Not Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'SHA256') | Should not Be "8E368C84B798FA4E9E7325BE9787311EECB88560"
+		}
+		It "Not Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'SHA384') | Should not Be "8E368C84B798FA4E9E7325BE9787311EECB88560"
+		}
+		It "Not Match" {
+			(get-hash -File 'C:\scripts\motd.txt' -Hash 'SHA512') | Should not Be "8E368C84B798FA4E9E7325BE9787311EECB88560"
 		}
 	}
 }
@@ -37,8 +67,8 @@ Describe "get-hash" {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU3dn6ADVuBz8ciWg5Y+Ut2vLS
-# aQegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUSDIKQAUMYvKAkGTrdTCrO1ma
+# t0KgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -181,25 +211,25 @@ Describe "get-hash" {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQbZRgnvzCITmglPr3/Z5KWyuCLnDANBgkqhkiG9w0B
-# AQEFAASCAQAL+YNxncANb48LvsDtpPXmq7ajun4Ez7XVs9Jbn0lnFkdDLMhm8W+n
-# FzuJU2knfWrBjzrgfB0/VuslrQtryCZkMb+YVw88dtQjy3qXY23HxZGf4XeveI/i
-# zilnD0KCqtZTwSwuN/j3EZGdPQpDQdwX26YTImicmAKKctnrKF/nUCAisZhjyxsC
-# JQ8JiCTczEdHPK8DL7NxPjBSgm7t7P0tIGOToCXyx+1gl7vWR2/JttIHYfeRpdr8
-# CNR8tYVUljNDWY2I6Kwpq9498bfx6EICIC1Q3Hs+3MPPN6Mj3sgTutk3FSiHIR65
-# k986+RsK3rcPW9lqBCptK//Kz90bbNguoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSFWOnxclp76ybHmc2c8F25uuf4eTANBgkqhkiG9w0B
+# AQEFAASCAQCh9DtLYgloD/JoVWY7UnTa6by3TNcReLAgJjtZdFCBZiGcIUkNbaZ+
+# rSoCbngYZXIHsXSUigWXrB0d47mUCda3jv7UVDKOYG97GkWJzKRd+iY4S3+gOgup
+# hVOunqJuCYWiSVYvi4lwHvLIEKsaakl/nyYie6cbYNx2K1EQ7CDLfWSx5zL42Bx7
+# LPC0PJBwYRSkb3MjTz8ehop88dzA34JE++HB8KrKg8GizQ6uVKbOWmAFnsJj6Dwd
+# nSmEL4FZVlYHMNR0itfsm+G2OWCmfvOxfE0o1HNnweAaUqVijViLBtStUHIM/JtM
+# +f6S1KDQ/yID00i2f8ZG1GMLxJswjqUpoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDEzMTIwMjYzNFowIwYJKoZIhvcN
-# AQkEMRYEFKoMiSzcn+RZp96tfmJ1ps6eo0OrMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUxNFowIwYJKoZIhvcN
+# AQkEMRYEFDqS1q3wJxLEx5olWU8Yt80j8CTPMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA2gj2lj08gCkzUyT/23uifsfNy4i4t69/oUTWC6R3y9/Eh
-# e11APaIy8/pMWrr5HoJ36HqlKrV1Vh/yu5IOCD4xx8AFMlzGr6tZD7/cYICn0K4y
-# 2I78HxjTRjhcJqaO690QzJ1KD+JndMg/A/0bHQZg94Dld3cifIhYJBmEHukewnwH
-# tnL4tqTCgt5E9VwXiV0OepKAKuIVpEuIYzLUem8iMnCbsr1GuCFcuqLDbM8vbwAo
-# 8NXiLPsIWjlN4N5f8BidGcClupUBwy5CZP2uJE3CqWAQ/FeF+gpoy5Z4SjjcCLgj
-# //OxCdNd58IH5wN9KdcmwAnT1vL6NIQWqT1nIR4J
+# hkiG9w0BAQEFAASCAQCSATySumadrH0QUrMhnRJxlyaKIxcJ627SnyL+jYQPUZRf
+# ipTDfa1cTVAIhFK2vg/c4aGhlDKE0Y8Ef/ImtVADoQOG3XtPLTF0pcviFpL+k/tY
+# KVeuf5ph+Ajez5L4m0xUvtBATmTtkWpNQUVk7wBndfnrWe/yJGi3RpWPRC7UBZoV
+# ZqjC+/0SjRgQ+8jhSX9sXXLhrZ1iOPu/DhfBHFZY9B/FlbjZugv3cUtVFY119oey
+# bj97MGhR3CVUnNiXQ4QAVMN6i5euuyQiukTxILMVG1D/JmyEt0aF7v1CUmwt50Uv
+# F7kInNRwxcBkUHHHBM8zs3jdbc37od+E9ExMBXA4
 # SIG # End signature block
