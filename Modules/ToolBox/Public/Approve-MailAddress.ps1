@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -87,8 +92,6 @@ function global:Approve-MailAddress {
 		boolean
 
 	.NOTES
-		The Function name is changed!
-
 		Internal Helper function to check Mail addresses via REGEX to see if they are
 		RfC822 complaint before use them.
 
@@ -132,13 +135,6 @@ function global:Approve-MailAddress {
 			return $false
 		}
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 
 # Set a compatibility Alias
@@ -149,8 +145,8 @@ function global:Approve-MailAddress {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUV7m2j9TQDx5MeYlw/TfTunaa
-# p62gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOTBDqfhPBtda/Touk+wWH4nc
+# SX2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -293,25 +289,25 @@ function global:Approve-MailAddress {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRtyq8fnHLb0O0PI8A7arGh+dF5IzANBgkqhkiG9w0B
-# AQEFAASCAQCuz+5KX8nfE6ZONgi83ZnAdrgMtV/9iNjb1bOnlHDJikqmLffA9zKJ
-# Bew/EdDiGlV+cX/QK1qQAKClA/lVO67phL4xb8FU7bCp2WcWT1iUxq/bDkc/OWzM
-# q/JiYUxbakuXF921eoHMbwI6d3yfXt5VI8+Vf0C7ulu/iZ+ru3oZixOKqQNw2bdj
-# O9Myis+YqqLzHEOiZku6zt5eStmE6uZkI0Hinw5UxA2pUVkNz1OixvvacSYiLRgj
-# J0z7Cwix6vbqcADfHqjNtwoJxIwtLYxOPOu5uUXDYgJ6R2OgP2/cXi28oA5sCU76
-# aroUFHyYIE5IboQWTY/+qPrmwnD4BXtboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBReuFeljuJM0kIrCyPBu6CuioJCVzANBgkqhkiG9w0B
+# AQEFAASCAQCPxgsYhN1yzyojq8mrlW6ckH1M9djHic4gZg37ppwX5xT/uzjzRNBF
+# v0ygepEe02upUJhz0h+psh7y21r2xvTYBhSVLk8Hl+muD/ejBGd3Lrk5MBZEkcyZ
+# W3sxNNqIdMXZl8pZcepZrq0fRhIODqIbajgQXEqHBpa7KB5e7HGVUl/FmSWXUj1r
+# Ar7pDORCkcaBdd1kiHhQ0hdlg+6/Mp2JanAejoozRSx+8F3S+oZaNUi2/aOoZ7X6
+# N8YOy3i8i2eUVMpB96WJCgslet4eQ2Ar0Vdv1rJVP70IlYimsnO2KpSiZ6dXF5Qq
+# J6cWk+mtNmnndjfgbhoy/2Avliq1SYTxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0MFowIwYJKoZIhvcN
-# AQkEMRYEFIVKPBhaeevfawtdrk/P+Kvm9UYRMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI0NlowIwYJKoZIhvcN
+# AQkEMRYEFP87Xr8MzYSHv2PRlxJREdG+5vGeMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAnYd3tSDn2hpz/xFhf/HwFsSpfj9NZuYs4pEsjW8DY80d8
-# GYRybqjghxeR7z53C0r5F7tR7+WCHutxUcpCvf2El4gEje3s3oeo/iqqxrBTV3Ui
-# Z7jflia7c6tsYTjjNzm7btAwQX2qbH+cjDVUgJlsfhd2VV2rGbnp4gePB5HtDd7u
-# 8O5BpZ2OmR4th+pvOzESsxzYZqi79VmFJuy2nu7OIlTudgVO50JJvHvsoa5oLA8I
-# /WHed1T4IP8gUx/krSSI43k2T9KD2UajAQ5USQzkeZH8hxtQE4ZEK2etf0HoBAeu
-# q0LO+j0w8zaSfTCKFPRfihOKg+ibpncl5m2TRm5T
+# hkiG9w0BAQEFAASCAQCRMijkL4LAC4xdKgnsfBNoUxFu6LlVYcQ+Wc92g9f7hcqh
+# uPIe+5oB+B88zJucgvG5C+WugPwYSeFmleYiZ3v5kvZA9T5BCzific/jouphiVIs
+# ZRjL9AxyXmnIstXZODHQkOkW1LyY+1XLcO96vRwAco7BLkzaF6PMWBKkthnysiSI
+# yprPzZ6NQ4xOpywcz6Z4xQhTCeSWRJrCAhWiEXqW6bgEjf5r8xre3cLQ8o2izDRH
+# M18QjlXHSE8tiNbKTJW9dFT/CUqR6PvNO08t344iE5RzEdVFug366n4Oh9WqDfV6
+# jGVMsAbwmW2SVa5b3IwrTGMfG/0Iou7iW942BgSo
 # SIG # End signature block
