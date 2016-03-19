@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -133,10 +138,6 @@ function Global:Disable-RemoteDesktop {
 				   HelpMessage = 'Specifies one or more existing CIM Session(s) to use')]
 		[Microsoft.Management.Infrastructure.CimSession[]]$CimSession
 	)
-
-	BEGIN {
-		#
-	}
 
 	PROCESS {
 		if ($PSBoundParameters['CimSession']) {
@@ -285,10 +286,6 @@ function Global:Enable-RemoteDesktop {
 		[Microsoft.Management.Infrastructure.CimSession[]]$CimSession
 	)
 
-	BEGIN {
-		#
-	}
-
 	PROCESS {
 		if ($PSBoundParameters['CimSession']) {
 			foreach ($Cim in $CimSession) {
@@ -386,11 +383,12 @@ function Global:Enable-RemoteDesktop {
 		}
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2E429e/d8YVXZcR7tJR2WaT6
-# UT6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBtotyJY54eQCr0wuGfSR3fLm
+# xjSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -533,25 +531,25 @@ function Global:Enable-RemoteDesktop {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSYF4kh0wimnXdAsDN7IXLtCfbPfjANBgkqhkiG9w0B
-# AQEFAASCAQBiYxnQESK2oUj1hKIwCRG+Ka1kZvmv//p0zYNBovZzEj5Hu2TXxEmq
-# H/CR8ptMxY2wA566Ia6vMGCHnJZjv0AFKoG6o0ZP1iZzk1in4uFaTs8wDielZYap
-# /cQlXB/jsoSspDF1SLrf9qaztwq85pibRcYv3mRmsG8tDBUvp2B+kJdvbvgXROQ5
-# 7UowDcmAmnYXm2bei54V6zpyxaMRhRMr7yChuQHlSqDCT4iaz6b/HuN77IT1SD71
-# gbui2vplxrxwgq4Y/qAaSgUFpbxtcVccr5l2JCIMv7uPl4xx+0PkH8yY7u3bCkvm
-# E3krDxeKBTthQImSBuIuy/L0CzBlo69foYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS+uE/1SMWw01+tGvC5LAqPqu9kNDANBgkqhkiG9w0B
+# AQEFAASCAQAvBRLDHerll+DGkmPNo8nEkLYF3Lv6P+vAu0I0mu52Xcq1XaNKs3r4
+# oJje5V4qFgGhNljYhl84Wz0QPgXI9jbghb/yxxxPD8ue4PhM7Wn/t2fV5hXMh1s3
+# W820G8UXVKbANHKAsld9BX5dxRlnY+sm7lepDc3Zxm+i7ljcQSHYbad4MZ1AqkiG
+# NHGTYSxquuAECbEdbmVHbCk9SEOZ7niTdvv0jRfdGu5DGMq1wX46EPI7LBD13Z95
+# MwLmtwVl22IV2bTSv/uWkPiieAAVy8e8/k26+Rs4M2KZnkVK7e/ULC0/Bq8DMar1
+# 23FbTbIdVIM538YmU0mUZ200G1mcHP/ioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwM1owIwYJKoZIhvcN
-# AQkEMRYEFAw4l0W1zWORwM9nFKlC3SAYRsCpMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMzNlowIwYJKoZIhvcN
+# AQkEMRYEFC8/wkStFJvrbd5xTlRIevJRlr3HMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQACnOHVq3s6+oIQJA9gILvT4qawcxzGSh5XdcckbiRuALnY
-# Kt1qQ7J5l3Zd6SFhwUThDfHMmv0JDuhB6uoheVAC2uzWM+UlVnR/iKkyvOI6GnLY
-# +O7ephPJ6zHw6qlLPJ7jcG7Zz0LA1Q5jIAHwBDYsj5y1d5x8ZC6d+gT3uaOqvayz
-# juvnX4y6SEWGGVfQ8seHl7zT6xZHWT9/p1Dv9A8FkvJoWkCiKwSvsbh6Ny6rR+R4
-# PggJZrVmfSKCBxjyySknwx0X/tvJ4KlLb1aoqbrB93nW9awn9pTHLOfT8SePf62U
-# /L6Yz5gE5xBJtBAXxrOJkPOvOO93DmrhzFtwf5G+
+# hkiG9w0BAQEFAASCAQAdDoeOI+qiGwFCXehDsirhe9l3PgtI8/yK/Kmw2OB3JzOT
+# IZrTrL/OQ/FSHp2pzjge0Ht31SaVsm4KJxsr5MGlLJODgb4+YNYfJ9pFcqaT5BEO
+# 6Ez5o0bBysARrLC8CGUvMFArDL+p/lKvmBK2ANkL/QPPkZ5W2vpDupBW3PyD10xi
+# x7r54pP5Zsa71KC3+N5CICExv4Jlwa8i4X6Y9PulNDZwXHGZuJLEx9PHHVnz/cSR
+# qKBgV/l5YPWya715D2iGb3L7HDWE2HluFIC6qlA6o7Y490Mlx5N+twTlGE+q3R4h
+# pR4OTEvl4TbsTzJViDJwS5b4zWCFkv2jsMrMMbs6
 # SIG # End signature block

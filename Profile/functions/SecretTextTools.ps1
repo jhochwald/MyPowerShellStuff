@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-05
+	#################################################
 #>
 
 #endregion License
@@ -71,6 +76,12 @@ function Global:Get-EncryptSecretText {
 
 	.NOTES
 		You need Get-DecryptSecretText to make it human radable again
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -141,6 +152,12 @@ function Global:Get-DecryptSecretText {
 
 	.LINK
 		Get-EncryptSecretText
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -182,8 +199,8 @@ function Global:Get-DecryptSecretText {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHrucGuXuTc765PDvl+PiKTYi
-# uwCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBgdGX712dJz7DM4kK/illKYF
+# VU+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -326,25 +343,25 @@ function Global:Get-DecryptSecretText {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRQRFseQsVqZ8JcKnaqQ22d36GfFTANBgkqhkiG9w0B
-# AQEFAASCAQCDDo9cScMoMXEMICezVROu1Uk6K43AZW/wPjpGV/Ky6C55clYdqBct
-# EObvA/G3jJiLZZQu1JuSOTjJdb/0nafN3hm6Nn3G/f4CoUQlmcrj/ZN8EM1DM+8z
-# UDwl/kaMjd1zAiihQyQhI/CKcuzzsbF9yivIWjtX7+jedfhNPeZMu4xJluon4iLt
-# 42lgJ+9Es+4L4i0wZXU5YkYHQZ2LJ+fm8QbjU0oCJDk8cVK3RgOxJyP5xOyjHnm5
-# /2gMBl4PvBNZgzFNP0MEJ3fHQX7Xgm7EhI0KFyrtialEONlS2nIGmvJkVcVWlfDx
-# 3HUAHi9QsDluhZGyXkAIwrvpNcVjQyCHoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSjZNcz06BjC8hldGYFL4NHqIidvjANBgkqhkiG9w0B
+# AQEFAASCAQCrpW5lzrA9cR9t7a2N+dFmm8+BNvP4lZufIuagQm+j9q8cHJCiVN/V
+# JcbzNQlgQruu4UO1PnQBQt8BRqoV5aiWXlLzOfJMmmThCAynAzpoS1wymKqIfFt0
+# b3cAHX948F6E6l/DBwxgcyVuiq5no0Euq+n+/bTMvkkBmgtkO9wmyc4k7QPGRleJ
+# 0aHHh5zZokrz6LWzL5iQPBkuPef5QSfpNwXgbeyKuVpFCl4W7QX21Jky7qDmussC
+# 6AWa6r7y5kFuKdVjlUpcs89N5JiNCDw2nsAHNsFhIEo1hBbKeQQPMdrLVe8vn8DB
+# u9Afe9e8YyYse26JD7HJLUpno3IFfaVjoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwNVowIwYJKoZIhvcN
-# AQkEMRYEFBtDPqFWheA1oyJBy3y2CJk1xIsoMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMzOFowIwYJKoZIhvcN
+# AQkEMRYEFFWkPujthlqgtpP4iNJDdSjnPcchMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBO54oAaN37AYh1q8BUIZ58Gv2z3dpZYHAckN/+4oVBzLCI
-# 5sYw6ScUf/rKHBvaZf8va0wshinQX8bwBQhNsEbmh3Hr8vKKSFwttPUcQ7I2RkRp
-# qBh/YMvmzfTRHxv/tefN4JzchREhcxV8ScI0QjNU1/7T0Dkli2xtU1t33fM5sNiw
-# o/kG0m7Yjzx1OInL55zxBMna9bm9K92sPos4OOrnmE8A6IqP/OXePxeyyWaVodO2
-# 9iMM1cwOvIXCvvjaRkNJ9z2gyc75jKi0iwUZOie2hdaIa6DECuHaDfjGabMLIpGB
-# eX51K+zxkG6AkKfvlz1GsUWpEWwS9HRzKph8ZUIL
+# hkiG9w0BAQEFAASCAQA9xZCtb3P5RK9JrorfMnG1cAmdma2Ek6hUwo2oe2GXLmR0
+# AbUp13r2+zi1JCoGRNOXnipdKM9I5A4DNXtfzGQlVISpEhwDpin5KLwQIgHJFnxn
+# mXGA0mUsa4OrylH83NScMm0IiUn9n78k8Xwc0d3J1sTR6k8+rq/bvFtCfmrgqT3x
+# sTbxdhu3i6QkpLBEewlFpZJqhu6sAEpOToWW8TvSd8RJ1W0FJzSEybHIaRUxtaeD
+# woHDluigdD56GHwVD9FL71OnCdysdm4Xfe+Ft4YYJegqzAeJpKaYiz1RXFCFhVnG
+# kXkPxDrD1UzwXwEv0dik6TabQXwLeGXao+EHKWUu
 # SIG # End signature block

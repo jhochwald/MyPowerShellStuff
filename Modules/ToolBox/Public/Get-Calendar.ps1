@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -67,31 +72,35 @@ function Global:Get-Calendar {
 	)
 
 	BEGIN {
-		$startDay = Get-Date (Get-Date $StartDate -Format "yyyy-MM-01")
+		$startDay = (Get-Date (Get-Date $StartDate -Format "yyyy-MM-01"))
 	}
 
 	PROCESS {
 		Write-Host (Get-Date $startDate -Format "MMMM yyyy")
 		Write-Host "Mo Tu We Th Fr Sa Su"
+
 		For ($i = 1; $i -lt (get-date $startDay).dayOfWeek.value__; $i++) {
 			Write-Host "   " -noNewLine
 		}
 
 		$processDate = $startDay
+
 		while ($processDate -lt $startDay.AddMonths(1)) {
 			Write-Host (Get-Date $processDate -Format "dd ") -NoNewLine
 
 			if ((get-date $processDate).dayOfWeek.value__ -eq 0) { Write-Host "" }
 			$processDate = $processDate.AddDays(1)
 		}
+
 		Write-Host ""
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU51t5IBiedYo2vHcijy33apPg
-# bDOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNERZ2fZ/b/iDZ49tEs2/vJGd
+# /cygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -234,25 +243,25 @@ function Global:Get-Calendar {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSvYnuw7fQNI2DFKwHhjywEo1OAITANBgkqhkiG9w0B
-# AQEFAASCAQCT40yT9ctHID6HOAAyLuTXv9k+T4S8gohOq6PQE8JIAROHs969snNt
-# 1i4HR3Ong4e1DR+EvtlhZhknnO2W57brctM0PUgXQSfJg6Mg3Au6e2vFiaFJh0Dr
-# TLvL9kuJ/vY8tLgFoGzoutWrFElG234Kjq+aSCggR76XNsGo6JS2ErEaC2Wi5v9N
-# kCQdn/ApZ/j1uOUeCxj10GDr0EsXtZZa0MBqx+lNw+caUYCEY9kl5k7NVQvM9MV/
-# 6kgZ650ggJStSdizUY3EYuSqKclq5s7IRNhO+IMglW2b3Cwk7yku1IzXjexWdUmL
-# hnCVj4E2mAmccNfGfCY1JRo0OtKc1175oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ1B8OiPBdGeMze4gfpPpftTpTOiTANBgkqhkiG9w0B
+# AQEFAASCAQCgRXAIrPwFbhQmg/ZNd4p3TLjCDJqN42VoBX67Auw1yAMmrys56Ivc
+# i3Fkv+MjZcxCuxp/adk3rLm5y689Z9g8UodBZcASMAid6TGzKq6vtZaavDDeDRVC
+# FleUunGWpbAbHSZ4OpxOwqkQ+4lhe0tqwWwLAMB3/ik0xZC+NF1H5HMKucsE/8NG
+# /0Z/h35YLGOMN+1Ia/IPVMYkQKJrWawlUCK4tlLJ9lTkFhGl4otAjPBuJW/wBbsW
+# E0r5pCdWljCqsQ2W9fW7g4zFYOr8sU0R7Pcc7+satKm47LzhmjFCXkiiGBekG7CL
+# kMELq4pesTNOjBJ77VxSzw1t7mUGZO9ZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0OFowIwYJKoZIhvcN
-# AQkEMRYEFDAOVKXQgCJ4v2u8yVntlyGD28zcMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMwMVowIwYJKoZIhvcN
+# AQkEMRYEFBUrDZdIsRo8HetEwZ7I7BnX11QaMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBhf5qi4w9A0NJh5C91Ft+aomnNGuSb3dkoaEY2He6BUoXy
-# gEqnyfqy5bMWLBWDChqD3GeT8DnF7ZGqjgdzwsFC7y139rANzJINYa3rvGxGpp0f
-# fvFC26tRtBz6F8fLEWymnEJtBHSKcZuUbJh2V0MXfzAVpGuAay2R6O3lE7xUXv0R
-# 03gKUnpMvXTIbE7bjUYjZe2rTUAXLnPk3dCOwoCJ3XcatgALgz1a59Eg3/ROtBlL
-# R9nIO4GH5oOKWMTYbF1jMrYymXeUHmR0jiP3vF9TLWh608WTL/SZPakR4IQuL/XK
-# trvYciPXjswNTiXi3G6nYC/FjUX1+13Mb1ylGEJf
+# hkiG9w0BAQEFAASCAQAqGSJoKILmjgvcvw9bWYjCuhJaYI4qhkZyutmMWJxUUObk
+# Ha9/Rtaol9hD/xGgOWa0OjbmdydKNyZgypfsp8dKz0rOsHazm74J+hq783j3oeYy
+# PsFeFEh4vPORxhjWMH61zqJiL335VobYFKDy0TDYLtR6nwUhyQJCWpUK8IRoW7eP
+# 29nvS4M5ki4tcJi488vz4NZKhvWmCKWv2IfR76qbXf4b4Pj2EYdjSLriiWuBDG26
+# ElXPJGEE1rM3cgEBEu5F2lxUd6HieAMIGBbXljMg/PObwCwG/9KE6ijQYjdwW50W
+# IhLq+LAQaCn/lmmGwSAPhNpwcGxPX4elsCPkrlwq
 # SIG # End signature block

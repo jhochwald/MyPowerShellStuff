@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -158,13 +163,6 @@ function global:Set-Encoding {
 			}
 		}
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 # Set a compatibility Alias
 (set-alias Set-TextEncoding Set-Encoding -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
@@ -172,8 +170,8 @@ function global:Set-Encoding {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+CBoGXrtUIh34JyFfECwKCIQ
-# q2qgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqecaanuaBg3Rk9DAFNb9gWOU
+# pz2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -316,25 +314,25 @@ function global:Set-Encoding {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ+f2fTWbMHfK7KVmr5x/MzWiHPUzANBgkqhkiG9w0B
-# AQEFAASCAQB6qdhZFb/8qKfyv30DR+xrnynJFr6iAg+aVLjkKlrPTMWIsPXhugfw
-# SWSaXP0LQnk14z8qrXOZA/p/XAwD0QbDzyo1pMlMe1LS2fbd0C02PH/q+zTyXyqq
-# DIIoSW9HxOiD6O0fPpcTfaPndfeKHbpufdWz1qYNM1ap3MOS0menECSEaNF8Nig+
-# P126AlbiKWT0U9SO6295JZJ6tQMIx81Ff3/rkmkfmhDTWNKygRELdUKZhy1cS4y8
-# NB/a6qHjUB5UbRd4uXfbChyl8hxRqxNLd0OnlsguIjJab+l3UJbcLlPCiizS93Ef
-# PHaA7M+3jITvY2Lafnrc/KNhvXPnoOzJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQzOoUecT2Qz5/9aPjqudHdbp4HiDANBgkqhkiG9w0B
+# AQEFAASCAQCEm+5dHhGTmbKruYN+0iDL+kT5TeSVKd6ey7CSJpuf2LoVlcvetZwk
+# 2w4EVpYoqFZS1cE6ohwspKvbfmAYZpRqHKHT9VOBZwcwZo+nAF2L3Gzs/2knXYYa
+# dv57FeHIxFx++otCCDNSSqcT2mIybCd0eTQqUpH5N+fmCiRg1GyAs7BK7ei/Rt9d
+# Mbn3c1KEVEjEu+AOrxe+ARHnKpJpk6Yx9yhYebZ1iFjuMZKjZxePjHDH8/f6Ofal
+# 2i1/AR+rBFKg6RaP2LajRZtas2++zK49Zrf2IkSd/+e9KL29OY1wjSAWlqYAkG1A
+# mg+OHMNtaDnbuw5pCoLrjxvVNXCTayoPoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwNlowIwYJKoZIhvcN
-# AQkEMRYEFCvqaLGgML4FnMdp82a/pYo8z80aMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjM0MVowIwYJKoZIhvcN
+# AQkEMRYEFPO2eD1yTrjmSl4OqNcZ09MK3fPJMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBAOmkLqXm1PyZ6laJT1kXFyA79Uo+ZpHp3EPewIccL5Tdm
-# Hj7zgP3zIvxuoKSwlRBh6KPNNesdP/CQZpQlLQh8hfjAD5ShNjKXi/gXZmBuM3r1
-# JrUwErpkb/R+n3rqfUcbCixTV9YyyVfv/J4juOEIu8wHseFYZ1pK69apEarKy53w
-# 1tXp8Syh6vUFfx53a+fljnyH128t9F/zzDIHSDDLoRZxh7OEkyQ55ywiEx/jFd8I
-# z8r3u6kV7e2ygN6p5Kk8cF77xuLRm2lctbrqHMyZKmlEk52oaivws1kWEJjHNjeQ
-# 2tEL1cK8DK5Wgpjk2Wywtxmc4H6AK2CHyu15xonH
+# hkiG9w0BAQEFAASCAQBdtXAk/vMheL7zj/AMSs7Jt90rhIE9ZPK1IV/wRjdD653k
+# tHgqBJi1racTtH1nbovUHJyV0fozEYt3a9PaUO/U7fvnjoJF6PWxi1iXVxzzMhBx
+# K/y0hGiNpKVZI99KtaoLAvWao9yNd43lV7ztdvvgaYzwmHPjs4fKkPQzB8eOTl/x
+# quOcELiS4PX2Bfm97epeizB8cjwnNfkTLAVW+tnB0YB/HuOuifcYRgTc/7QcaqzD
+# p8FLDeKL1bBTN1Z8vTKPNuv9ZWm9wKcRwd38bAXly4goS17hMRUUsvA0YzhbO7RN
+# QteebkLOjhp9thgYPjLVz//97z3pLBqE/fqtTiFw
 # SIG # End signature block

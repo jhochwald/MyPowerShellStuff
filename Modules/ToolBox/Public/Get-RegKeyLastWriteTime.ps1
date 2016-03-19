@@ -106,7 +106,7 @@ public static extern int RegConnectRegistry(
 	int hkey,
 	ref int phkResult);
 '@
-			$type0 = Add-Type -MemberDefinition $sig0 -Name Win32Utils -Namespace RegConnectRegistry -Using System.Text -PassThru
+			$type0 = (Add-Type -MemberDefinition $sig0 -Name Win32Utils -Namespace RegConnectRegistry -Using System.Text -PassThru)
 
 			$sig1 = @'
 [DllImport("advapi32.dll", CharSet = CharSet.Auto)]
@@ -117,7 +117,7 @@ public static extern int RegOpenKeyEx(
 	int samDesired,
 	out int hkResult);
 '@
-			$type1 = Add-Type -MemberDefinition $sig1 -Name Win32Utils -Namespace RegOpenKeyEx -Using System.Text -PassThru
+			$type1 = (Add-Type -MemberDefinition $sig1 -Name Win32Utils -Namespace RegOpenKeyEx -Using System.Text -PassThru)
 
 			$sig2 = @'
 [DllImport("advapi32.dll", EntryPoint = "RegEnumKeyEx")]
@@ -131,7 +131,7 @@ extern public static int RegEnumKeyEx(
     int lpcbClass,
     out long lpftLastWriteTime);
 '@
-			$type2 = Add-Type -MemberDefinition $sig2 -Name Win32Utils -Namespace RegEnumKeyEx -Using System.Text -PassThru
+			$type2 = (Add-Type -MemberDefinition $sig2 -Name Win32Utils -Namespace RegEnumKeyEx -Using System.Text -PassThru)
 
 			$sig4 = @'
 [DllImport("advapi32.dll")]
@@ -149,24 +149,24 @@ public static extern int RegQueryInfoKey(
 	out int lpcbSecurityDescriptor,
 	out long lpftLastWriteTime);
 '@
-			$type4 = Add-Type -MemberDefinition $sig4 -Name Win32Utils -Namespace RegQueryInfoKey -Using System.Text -PassThru
+			$type4 = (Add-Type -MemberDefinition $sig4 -Name Win32Utils -Namespace RegQueryInfoKey -Using System.Text -PassThru)
 
 			$sig3 = @'
 [DllImport("advapi32.dll", SetLastError=true)]
 public static extern int RegCloseKey(
 	int hKey);
 '@
-			$type3 = Add-Type -MemberDefinition $sig3 -Name Win32Utils -Namespace RegCloseKey -Using System.Text -PassThru
+			$type3 = (Add-Type -MemberDefinition $sig3 -Name Win32Utils -Namespace RegCloseKey -Using System.Text -PassThru)
 
-			$hKey = new-object int
-			$hKeyref = new-object int
+			$hKey = (new-object int)
+			$hKeyref = (new-object int)
 			$searchKeyRemote = $type0::RegConnectRegistry($computer, $searchKey, [ref]$hKey)
 			$result = $type1::RegOpenKeyEx($hKey, $SubKey, 0, $KEYREAD, [ref]$hKeyref)
 
 			if ($NoEnumKey) {
 				#initialize variables
-				$time = New-Object Long
-				$result = $type4::RegQueryInfoKey($hKeyref, $null, [ref]$null, 0, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$time)
+				$time = (New-Object Long)
+				$result = ($type4::RegQueryInfoKey($hKeyref, $null, [ref]$null, 0, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$time))
 
 				#create output object
 				$o = "" | Select Key, LastWriteTime, ComputerName
@@ -178,10 +178,10 @@ public static extern int RegCloseKey(
 				$o
 			} else {
 				#initialize variables
-				$builder = New-Object System.Text.StringBuilder 1024
+				$builder = (New-Object System.Text.StringBuilder 1024)
 				$index = 0
 				$length = [int] 1024
-				$time = New-Object Long
+				$time = (New-Object Long)
 
 				#234 means more info, 0 means success. Either way, keep reading
 				while (0, 234 -contains $type2::RegEnumKeyEx($hKeyref, $index++, $builder, [ref]$length, $null, $null, $null, [ref]$time)) {
@@ -196,18 +196,19 @@ public static extern int RegCloseKey(
 
 					#reinitialize for next time through the loop
 					$length = [int] 1024
-					$builder = New-Object System.Text.StringBuilder 1024
+					$builder = (New-Object System.Text.StringBuilder 1024)
 				}
 			}
 			$result = $type3::RegCloseKey($hKey);
 		}
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvTf2+1XuXtoRLN5Stl1GJuo1
-# at6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUB/PVoqh0gfNMpuevg/TcI5+Q
+# 3O2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -350,25 +351,25 @@ public static extern int RegCloseKey(
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQwyVeEnL+AsXF8kHHeFhhZZTCbNTANBgkqhkiG9w0B
-# AQEFAASCAQCUbuMmuRU8QruIStvw6d7JuEDtm34x3bJuAs7c98zfrMiQ9NFivE6R
-# 6/x/9rnrn3RToWA6gEq/8mrvmAplaUT6ELamoOlHt56vH6izqWrKK3wAC/o7w1YD
-# yP8MhUmorCxXB3wik4pA4xdw+R3N26LZcCCB8FGnHiC8Yu99ohzXvdcwwi1UkhUW
-# 9itBvIb/ykzVU6knqV3QbhgeQiGjtMswoWr1K+0xC67h6aIS2TZ7RkzxNLPtjfUG
-# FWF4Ys+lFjBmEu34o6b6apUzcMd3Vl4S1SIju7auyd9WMdgDxMgltIJW79hUDPnY
-# BCy3HENW38sDGFxaOl2SQ8jPegUwkwYAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQQJmCkQgZMA0MFgpZyYRIHplK0jDANBgkqhkiG9w0B
+# AQEFAASCAQB+2X0eR27alp8i1yBl6R5yahZnEkhL72Z2oiEWH0XP8y6o/jcADEaQ
+# +MK2s3kkDp7FYaPsCzaHj8hYLFrnPcr0o+f/W31NC9HDvx8q74jjYrFDTmDOsQph
+# o/al8YioRRXmUc1OGSMAGSwBx06FrdCPVVQorVot6r1Exo6bqbuxmh1LzIOlKm4U
+# jjGBR1COHzizTVxCAhKFxRqsHnpAcgXaVE/nDD/Z8uK2jz6Jq+2PAuF9g2IFeUWf
+# qIYhW2WcfuLzT+0clTRhSjkeB5JbcxCQ6zqO8PJjzl96Y8Sgwur5p/O+4nc2A60y
+# KPe2AvKPJ8r76txGOfWHljPuG6eqL5J5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ1NFowIwYJKoZIhvcN
-# AQkEMRYEFCv4EY+t39aEFrdvIgNBFzHdkj13MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMxM1owIwYJKoZIhvcN
+# AQkEMRYEFG0H5h+1+kHEv4JwFAiP6SlMiBNoMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBWp6Q6jNDg3PeOoAzlmpz5i4ki5QTT6LKbB9fRxIO2W9M1
-# JeeqXnIPw5x7Lv8ZyMzMB5JCHhDogGcYwhvoX2xM6YgzMGWFTjaK32UDTHlt76CI
-# HDKSPk4jV/LX1va9U2Pii0AzhqABQ6EtkmlmjJzs/tLysVDfFYJXavjTH8O+72sW
-# Vkz4+ppsYnbPUKW6mfDnEyj9fIjQMhDGDNuMl8+o4UGEd2M1Oa0PpGSyb2mj+/o9
-# uXrwvLRINmcPF5q/QqrZvtj8+peF0cxkL8mdPES0N/GSYOZoq4iR/x+I2N3JQe3i
-# g89LPw8NwBHaggsgsETKYyA/xvnnPb106PfaeBxR
+# hkiG9w0BAQEFAASCAQCeKo5zHSK/dtoTHuY5J1WImvx+Lm2Fm1vXYLf10HwBjCy9
+# 0pdEQrYFCcCFvypg2gjfPjKMdiVYHy2tG+eb6fQqdMVBZZGEq7PNGUIQLv8KsXab
+# vHh6iA4Yr0IzRHk+o3fDbh9+NsBsQxl8Y7LJEGWcU6g4VFmFiliztvAbs7KJDrik
+# hRZ1ttNjH/bAs9dc7B95scQ6yAa+Sh7qk6e6XMEzYOCdlwCwrGG5eZQZu9jjpjK6
+# vno6FB+B5gnP6aFhjizU8rouBy3YaA+UirsdhEUIe2CYJ9fKQjrOVm8I34UcDLN7
+# 5eji8cOyvXDXsJ7IBO0aId2XGVnal+iLCSCHRRKl
 # SIG # End signature block

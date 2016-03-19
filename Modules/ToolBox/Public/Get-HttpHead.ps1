@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -97,8 +102,9 @@ function global:Get-HttpHead {
 	}
 
 	PROCESS {
-		$webrequest = Invoke-WebRequest -Uri $url -SessionVariable websession
-		$cookies = $websession.Cookies.GetCookies($url)
+		$webrequest = (Invoke-WebRequest -Uri $url -SessionVariable websession)
+		$cookies = ($websession.Cookies.GetCookies($url))
+
 		Write-Host -Object "`n"
 		Write-Host 'Header Information for' $url
 		Write-Host -Object ($webrequest.Headers | Out-String)
@@ -111,49 +117,58 @@ function global:Get-HttpHead {
 		} else {
 			Write-Host -ForegroundColor Red -Object 'X-XSS-Protection Header MISSING'
 		}
+
 		if ($webrequest.Headers.ContainsKey('Strict-Transport-Security')) {
 			Write-Host -ForegroundColor Green -Object 'Strict-Transport-Security Header PRESENT'
 		} else {
 			Write-Host -ForegroundColor Red -Object 'Strict-Transport-Security Header MISSING'
 		}
+
 		if ($webrequest.Headers.ContainsKey('Content-Security-Policy')) {
 			Write-Host -ForegroundColor Green -Object 'Content-Security-Policy Header PRRESENT'
 		} else {
 			Write-Host -ForegroundColor Red -Object 'Content-Security-Policy Header MISSING'
 		}
+
 		if ($webrequest.Headers.ContainsKey('X-Frame-Options')) {
 			Write-Host -ForegroundColor Green -Object 'X-Frame-Options Header PRESENT'
 		} else {
 			Write-Host -ForegroundColor Red -Object 'X-Frame-Options Header MISSING'
 		}
+
 		if ($webrequest.Headers.ContainsKey('X-Content-Type-Options')) {
 			Write-Host -ForegroundColor Green -Object 'X-Content-Type-Options Header PRESENT'
 		} else {
 			Write-Host -ForegroundColor Red -Object 'X-Content-Type-Options Header MISSING'
 		}
+
 		if ($webrequest.Headers.ContainsKey('Public-Key-Pins')) {
 			Write-Host -ForegroundColor Green -Object 'Public-Key-Pins Header PRESENT'
 		} else {
 			Write-Host -ForegroundColor Red -Object 'Public-Key-Pins Header MISSING'
 		}
-		Write-Host -Object "`n"
 
+		Write-Host -Object "`n"
 
 		Write-Host 'Cookies Set by' $url
 		Write-Host -Object "Inspect cookies that don't have the HTTPOnly and Secure flags set."
 		Write-Host -Object "`n"
+
 		foreach ($cookie in $cookies) {
 			Write-Host -Object "$($cookie.name) = $($cookie.value)"
+
 			if ($cookie.HttpOnly -eq 'True') {
 				Write-Host -ForegroundColor Green 'HTTPOnly Flag Set' = "$($cookie.HttpOnly)"
 			} else {
 				Write-Host -ForegroundColor Red 'HTTPOnly Flag Set' = "$($cookie.HttpOnly)"
 			}
+
 			if ($cookie.Secure -eq 'True') {
 				Write-Host -ForegroundColor Green 'Secure Flag Set' = "$($cookie.Secure)"
 			} else {
 				Write-Host -ForegroundColor Red 'Secure Flag Set' = "$($cookie.Secure)"
 			}
+
 			Write-Host 'Domain' = "$($cookie.Domain) `n"
 		}
 	}
@@ -163,18 +178,14 @@ function global:Get-HttpHead {
 		$webrequest = $null
 		$cookies = $null
 		$cookie = $null
-
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWp9Ps9I2QbOe9noIq7VmHMAi
-# WPKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPW15/o0r31Y7Oz/ofc8VkIcy
+# KhSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -317,25 +328,25 @@ function global:Get-HttpHead {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQwgli17BDPTcrXRT0upRoRz01apzANBgkqhkiG9w0B
-# AQEFAASCAQAVPf0a5ekv4a6+GOOCrhN32lV2OZ9bianbNY/y5dVguPAT3xBlc4po
-# ZYkEVKDW/0ztqWCe2OVL1K6Tp+cIPcEW524oZxVXBDK82ysBtwWG/6bpYlWPMQxg
-# oHDkc5RyM9eD+yYP3QPlEFt1ufAqYYRu3fk80tBv9L6bH38jaq57c3JSCGcnYWOn
-# zzW/xqpiMPQVFC1Koyr5dveRVmYIOUWUX+P1U0dTQt7AbDgLQ7Tp3d74PliyFEXs
-# fa6dg+NBlT7ih0c5W3/ZY8pUiA6C5fsux2hFDtSnLlLgNsSQM1Rid04LSw7dXKQ8
-# lpIrzLZ7Zi+FLAB/d1h5TYXsOkG+ASFvoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRvJBzkgMKlwrnhJ+PnuR/NKblcODANBgkqhkiG9w0B
+# AQEFAASCAQBQgx6jBumtvHlTiUfud9MXFVYOI9DG5RN01G9nExkGICyqK6ljuVwG
+# WUTF/fxvwKthlcilcHEGBAaBmjOZi+zOplgOGXtRswP1KPBIpq+hoIvVuvJ+OF9M
+# aI4f8sx5anKqKNUgwG2cHIfpE1jCkWIMCuIq48kafH//CHGYaBTcSiG/LqcFCUyf
+# PlF2CDhmLgGsEVt0c6J0t5f8YdocdXvS29n5hC56DYeASamlw1uZwlM0ltHffpnJ
+# 8dEWHWzyckMjzetKgqGdPPQ7+hOqzlR2+5vyEY+3/3uP5szaLSM5yho2WaB0+Nzb
+# ovFlkkoV+vCVwHzkidKlOU1DYWGFPnOkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0OVowIwYJKoZIhvcN
-# AQkEMRYEFL7Ao8oOUVsCpg65xIoB5T3k659gMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMwNVowIwYJKoZIhvcN
+# AQkEMRYEFAvK35d1j8WpmgJRUVgwpbtY01liMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCJ8xHkaxWxOzueY2g5iMrezkHHJ6HLR6aFgPi8hqY/dDLg
-# ar2KYOmQwQFYCU+bONqU4EHkwi8/oUEdI3cNiiyGz2UJNnMWRrVWztUIHp6FoVDt
-# 84l1yF29Jjvpxhk/B5DhgcorgOH8Qk7Kgbkb+Tm3ASoEzYpZuWVfp5g5Bm0pr856
-# yewwuMcNRQXIml/YR7FAjygNbPRN5Q80yjCRmXP5MK5qS0SvNWCQhGyeOWnl5lUw
-# DnO6tmbDu1LY70VoChPUUeyVq9LCiSFhosQxzOdBVvCr+leseO9od64/jsZc0ZR8
-# 0/WnZVoUuJ5tqU7UZ/JwrbSQeUtFZagIK3vv4uVv
+# hkiG9w0BAQEFAASCAQBFmvWYNXjAtGQikkZknn6blNnKHkyQIX7m1vsOUoqcZsX2
+# GtKvshGBC7BDwP+Kj/gtMyInszTCnbuUBjmg2GJ97NQYqfnMZJFPNKUR9pvNx5i9
+# W1Qe8hSmsbwM5TC6fRlu8UxEQYfYz/AKhBNIDyC+vp7wSAsJg6Kwmh19X6ec6yBv
+# Ju2iIAcTaeGPYHCZPVLyz6rBCf0bFX9/6r46teKNl8kfPbyxYU3BHZ0n2d3UczMx
+# vhVa5s90Y0kGbCA1MAkVNPYJ6giXZtZ/A0sKtJLUcnDvSC+7vcdL4/T2FxB8jedJ
+# BeKI+UvNAuHlYrMjEnVqeZGM2aHrjpHvWVFVuS0g
 # SIG # End signature block

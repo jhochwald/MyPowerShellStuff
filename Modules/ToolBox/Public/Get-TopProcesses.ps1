@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -73,10 +78,10 @@ function global:Get-TopProcesses {
 		# figure out what uses the most CPU Time
 		While ($true) {
 			# Get the fist 30 items
-			Get-Process | Sort-Object -Descending CPU | Select-Object -First 30;
+			Get-Process | Sort-Object -Descending CPU | Select-Object -First 30
 
 			# Wait 2 seconds
-			Start-Sleep -Seconds 2;
+			Start-Sleep -Seconds 2
 
 			# Dump the Info
 			[Console]::SetCursorPosition(${SetValX}, ${SetValY} + 3)
@@ -89,8 +94,8 @@ function global:Get-TopProcesses {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9RKcFnk2LsliqKVbzA4EqxAZ
-# s2egghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUi5AepL6w+CZE1R4m++1qzhyC
+# qvOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -233,25 +238,25 @@ function global:Get-TopProcesses {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQD90ajW8rv6aEwq/c3qKGWWmf0DDANBgkqhkiG9w0B
-# AQEFAASCAQB75IDnVJsd6KNIp2KVg4kxd88U7M/4RYQVriHHPngAGtb8AAvwjr6v
-# 2xsKFf94JoJ55trtGjIJwP/xnyD32gLfF4H2QBzuhqfHmfchCBjsnYPCORxsrM7B
-# 0pz+HOImlA/G2zKz7BgfbFQpT37H9QQ8sOynwJn3ati0wGAvbMxCsjnpqwiHAa3M
-# LgWJgyi8Ke1BxfzWBSSC+NrkvDbPMspfQv36/slK/xHrRkT5E2dyqTbNX10PWpdQ
-# HfSBznVV00fiAd1vAwG30ExXeW1PUigYGqzqFv2Ef5mrk+UiJjnOzkeCLMYSczkY
-# O8EDAitBPccklE24riWduIAsnQNRBLtsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTlXOsMj7u4yJYSi4+SoklQEC5bZDANBgkqhkiG9w0B
+# AQEFAASCAQAh1NY6Vc67amfkWreFBt8rMNPvivEUvHgMvAq/my+at2aGGwJ/JPqd
+# gJ5cxhd34bLCEQWfZC0Q8kkRrpv8yO4D4h+f3z0TC8X2jWI27izp6wTFwL4YAMkZ
+# Ot2EQgDZTPuqDi0SgLYzem1ZTMg7FQ6aMqmCrsxN+sAESVGBarn/AGvgu0a2/j+/
+# eYAJZ+yNUvbDwTj2Z8kUIhErDF400yMYFslng068XzCd8H+Rw9mBumwJ7HRvWFAD
+# a0Yu2JJHGYEJnH5fz+hrikuZjjZ/ANQ9gyV7mnzdi6tdlB0E1NPtw6i44d0ot+/b
+# 0G/nFSeSJxUS+WNVZ10Gx4nBIf1opIgkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ1NVowIwYJKoZIhvcN
-# AQkEMRYEFAnCyDrES7+wwjlDQv5xbd7BknBFMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMxOFowIwYJKoZIhvcN
+# AQkEMRYEFN2poTnnvpBDwXj22GqmzOXtGDOlMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBBFDTU1qNQOuc0Wz5qqMzBaW11hDMasSkMDVEpWvF7kS8/
-# G7QhW8VbdbnPzcV2GKEs0DPO9mbzNgrSuLKRO0wqKXZT4y3mkeZnvcuaZ9Rcf7ca
-# u6b0BLpRxl4DhgUPj3FnTPoUeGjrFx7UGqBGs3szuX+BSwSIB0XodJ8AecUCiKnS
-# kHhQLqohi2eOCTV2i1u5lJmNayFP7ef1ercF9FZ2gq9SDVs/codJtSWGSAcley1Q
-# fT0ildmd7Fz8kPCNlUSylFZBUtsyc7kpj4sZaXgB9kNSU1EJgOUzEgzNLU/lpreU
-# rzcV3ExSeZm8cxPDBaRTuh9ccXOeNH1OjQMyn31h
+# hkiG9w0BAQEFAASCAQCiYRbd5DMv6Ao2aNnO8X5XHp7JFzz3V5JzQWhNqvOj7dSL
+# Uc+9Ex1r+k20OO7eQhvMTHc8y7XlAPS814E42LZ28+qv1+pGf/S3GoRHXKe4d85d
+# QvXnXbR+CbBcl3yNU4FxzMu3bJmsf5wVzPLSvq2SXOG6VbgFbUCmXQZ/Y4gysJMO
+# cQr4dLszYZyKPbwhc7pHkjRoJkbF5UzREFS7FH4agARAMYMVZRO+/OuaRETMxXZd
+# j9fxp5Gnfn3WGToFTB7NR3nsthFE5wkNoILkxvn35JikmS1jBhrU1BVRr0/ceTlg
+# 7Gnj8RtxNiNu9zTRrz9KoAMLI8fv7mCDW56hy4Be
 # SIG # End signature block

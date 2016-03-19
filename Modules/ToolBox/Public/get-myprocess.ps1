@@ -37,11 +37,16 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
 
-function global:get-myprocess {
+function global:Get-myProcess {
 <#
 	.SYNOPSIS
 		Get our own process information
@@ -50,7 +55,7 @@ function global:get-myprocess {
 		Get our own process information about the PowerShell Session
 
 	.EXAMPLE
-		PS C:\> get-myprocess
+		PS C:\> Get-myProcess
 
 		Handles  NPM(K)    PM(K)      WS(K) VM(M)   CPU(s)     Id ProcessName
 		-------  ------    -----      ----- -----   ------     -- -----------
@@ -75,28 +80,21 @@ function global:get-myprocess {
 
 	BEGIN {
 		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
+		if ((Get-Command Invoke-GC -errorAction SilentlyContinue)) {
+			Invoke-GC
 		}
 	}
 	PROCESS {
 		# Get the info
 		[diagnostics.process]::GetCurrentProcess()
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOCPVEjPTK/mdsujXJ/AvmfPC
-# Wi6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0qZSclY7rVD3kLmSK8jQWIYa
+# 9nqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -239,25 +237,25 @@ function global:get-myprocess {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSHJ292AG0Rj7n9ea6g5PDoKiUFhjANBgkqhkiG9w0B
-# AQEFAASCAQBmS9d7twNOk0rs9MBrO3seUV0cHi5H2+OKDHetWAJsufKjPLog9L6R
-# cnizOZKfN84gWs4KzYvdj2cRWVZmqcpIN8CQSrnGArLqD4KLKhg3QdO5PsS/Pe5S
-# MdjDfRRGXQai5cGTbkMezJeaj8E3uIUveWTho1acO73WU89rXQroIvCl1pz8zvqX
-# 0h9x/FW+Jk4LUTg9wR09VI/JMucx0K9mYDSbvZP6EsH1N7TuxRM4ysUIlIWZH671
-# GxL89YgEqupWFQBnyp18K72oemEja2j1a0/x11cDREFuW228rFfUNiEzHR3Mho8i
-# lUQLILTzbzavS22g7YEw1UCc5uaFoukooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRgWkHpog+59HFB99Ez6b+5+MpZ9jANBgkqhkiG9w0B
+# AQEFAASCAQAH6WY4ssYz+UpfWBWkhXHh3Z2eFjVL0HbU9gtwCmbaBFbcnKRij8FM
+# bHjYZ/K9TTycP7M6Pl5e7wYB+yTPSuz1x0Bs/YlbabIu+MHouYBsuF/QxzgKfnwd
+# eI6rYWqCnDSRfGp2JjNtCm1uNJziJXHjAg7jTwAW6vwbs/xifk73zsHeYurnmw9B
+# yAvjqRElvI55flYq6TQT4O8oWj8nRD3eQb2rAaFZr9esv8VyUeNR1JUCVftp+p/y
+# +xlxki9CI5fr6rLcVNG7GCwnouCGQ+yvz1UHgydDXM9x/yLLPjQCLOPhmlFRkWCA
+# hcXQstJ6R8a2acUcnhkJiDqxURHjJ1uxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ1MVowIwYJKoZIhvcN
-# AQkEMRYEFEJrzpYI1HO1bHrTLF4bfwSt2QifMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMwOFowIwYJKoZIhvcN
+# AQkEMRYEFHyNsJwqk79uvwqUFX0nmrlmn72uMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCJfVME7tmf3dm7uKFTwLPe9jbvn4WNsdXBjEOYGH8fJ/VF
-# SM4xRa/MWXeyatBapXfvSuLGeMW06cKXQbZi3TRD3sH/cxONMlRIm2liZKRVe4fm
-# HGuFA/6Kf3mF2dLg6HSOuY3HAjl+96QY2nYOlT4zNEak9zu3o0qJ3uAm0PPyNo+1
-# mQZhwpt5WowNQxJYdXjRZveVKA4Irt+U6MzjAwkzoGnlu93GYSM+2NkofiD6yrCD
-# AAwE66MztGCB9FO7cpflJzgaA1f0Zwoxj8zCmj5yY3nEiwK6UDdBx4pER1YANtn4
-# gwdd6k/vUfraO5O37gXVb3fS5jdnRmoVyD3W4MRZ
+# hkiG9w0BAQEFAASCAQBu5GDW1+iGatRCj8IUb6NiBDPFUqiizJE4f0EhATsp1TpA
+# Xv/4iDOQAIIVAHJvEPgq1gMWdJokRTMDAghj1s47Vq3BSTAP/eUs7dtm3UnumLni
+# PnBx9A9NxaLIGCpUIqdtZIDxRRWUgCZrbv9e0JwdbFTHBDqTkP9fYbod4nmyrHnZ
+# /hja5gcXNMu79tdMXf2ttSUsK0mdxaWxfzbtfEvu54FwaRI167HcAM+t9nmAxsg7
+# HtH9T4oasRXfAuJlWYWpzt2gkSUt8KdvOVlob2GmtL/xpb856noFoUWruxDtiTRo
+# HwlX82gRA3EzYvYhLYUsruCGOBWOQQC3mIuB0D56
 # SIG # End signature block

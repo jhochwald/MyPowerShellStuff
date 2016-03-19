@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-19
+	#################################################
 #>
 
 #endregion License
@@ -77,6 +82,10 @@ function global:Get-Quote {
 	BEGIN {
 		# The quote should include the author separated by " - ".
 		$texts = @(
+		"Remember, if you ever need a helping hand, it is at the end of your arm. - Audrey Hepburn",
+		"When you talk, you are only repeating what you already know. But if you listen, you may learn something new. - Dalai Lama",
+		"Leader who don't Listen will eventually be surrounded by people who have nothing to say. - @AndyStanley",
+		"I can accept failure, but I can't accept not trying. - Michael Jordan",
 		"If you don't drive your business, you will be driven out of business. - B. C. Forbes",
 		"Good design is good business. - Thomas J. Watson",
 		"Good is the enemy of great. - Sir Jonathan Ive",
@@ -144,7 +153,7 @@ function global:Get-Quote {
 		"I have not failed. I've just found 10.000 ways that won't work. - Thomas Edison",
 		"If you don't build your dream, someone will hire you to help build theirs. - Tony Gaskin (Motivational Speaker)",
 		"Screw it. Let's do it. - Richard Branson",
-		"Don't worry about dailure; you only have to be right once. - Drew Houston",
+		"Don't worry about failure; you only have to be right once. - Drew Houston",
 		"Ideas are easy. Implementation is hard - Guy Kawasaki",
 		"Courage is grace under pressure. - Ernest Hemingway",
 		"Sometimes you can't see yourself clearly until you see yourself through the eyes of others. - Ellen DeGeneres",
@@ -237,11 +246,12 @@ function global:Get-Quote {
 		Remove-Variable -Name "arr" -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUk/oVCDjWdr0F7cr/1U0OLn4K
-# zzugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTKM9UoEn8RT5KM2eWq7uUd9i
+# /iCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -384,25 +394,25 @@ function global:Get-Quote {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTMg1NsjI4X+dhi5GXTS3A/b5OkBjANBgkqhkiG9w0B
-# AQEFAASCAQBZK3mpv17nk2EYlSXv3Xf1oNldM3IO/ZjIlR60uuiNALAhRWkkdnoa
-# vnTJuwGQaghJLbVhXiB2qcO6qVSJPfH9eJXGNjbeu2EjYrhuvRvrtUqGfCcsWf0H
-# BlIFS/j5q8QsZPmiWwvMLtpwdHD0PLcURCHQwLW//RYd3DY7PODtmBuVtP9RKGCK
-# hChhT/n1G9Mz0/jargxxgHsFxRfFKt6QI5GBjjYDHWE6NnkPIueoOP8VQve7RqGw
-# Eqis7EQjE9i6cY49dDETWccRqxz8cElCNPoIzr1I4kyJyHl3kz2eq/qnxec9Hu+J
-# WVplLdgha3yEjVl+nO9KTw7b6UEwWeWGoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTZqBOP1FHeHrrvB8RE1rt2uyexcDANBgkqhkiG9w0B
+# AQEFAASCAQCOEx4H7hhv4HvULeh2KtqckGpG5LJjRLeTOwf3wrN8IqTe6kHqtoI6
+# 97aMZQah90MKaOtUkdXHt5Z0MLh8gGJp4aG/8TK7BWvACO6KsQWZpOXU0mbpxWyS
+# CG8ltFT2FDDDS0vhauNpk+0ZJCNrgpl9Eopy2vxYUg7uR2rp3M+yHfXMoT1DiRcj
+# 4EBb9GuTRp6RQtDcbRZ7n1WJIOeOMtQSStImGefa2dxga3lR2BlSvnI7wl8HbnuN
+# ry1GwNFMSwss4WkNoNpISeKo+CW8jmoZL1vYZQaKbcxcapMCoXwSrmVZzAAQ++SQ
+# l68sUaoJZ7ygDsTWzysgwUKnt5untKd7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ1M1owIwYJKoZIhvcN
-# AQkEMRYEFBFn00Uq0M4akJ2w5E/iP3TagHocMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMxM1owIwYJKoZIhvcN
+# AQkEMRYEFCjzDOoDEbQAtCeHsbx7fOrtRMUCMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCvWT+q/ujUULhQ9VV4nfvBRUnH/pzYXsg+dbP0XbAcLjZW
-# E+F1fRP6XFtpmeYm1yeS7oMbTsJSlpR6muXC2unlhh0xoIiBO4q1GSLB+yPvspy1
-# cGlIR60kxAp7DnhV7t2ulkearlPB7dTPKK9u3KZt3JHcAiG1bLw31OlHG6YIO3fD
-# lK3beg5+9YCW8lQhxrkHMxJO5wlMcI8NAkJHC2wKduRnPlWGr9sTdYRkUtSae6mz
-# abJ/iGAXCHZVOrifHnFYTF+2pYeEO4QRXB/xuVPZcvsH4Zh5BY69hwcixpFARbMK
-# H7I25rdJvYshpPMVdRSmaFTV7f7fDWs6lGgimhrh
+# hkiG9w0BAQEFAASCAQCjBBF2YvFGT28OdAGEBu6fyXUKljH6j7xv5GDTq5OxFibG
+# XoJX0aZ8K3SDZudWuLyWmSg3D8Xaeq/Vq51AcTvcb4MLIAXd3Koa/yDUuUUquC71
+# wT9Obm/Q98vDZFGfE9EYkowX78OlJOKDKXTkcFTR39tOcxaOULtYoXJfsTos8vDW
+# 7FkkiMmX46eN/TJSWjpMU4lTyY9Kt/BCFXqqd1riQ/MJtVQHBzlZfIOkoNna6gbq
+# NCA8KqkAUJpB+2OMtfmtOBQweRmfUiJhlNgNNFAdowGFnh9dNbckWWO9gQ8mhyRL
+# aKdedf0gajcSgGCT5teb/UbUiDs5UMIVvAO5f9vG
 # SIG # End signature block

@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-06
+	#################################################
 #>
 
 #endregion License
@@ -254,7 +259,7 @@ function global:Get-MOTD {
 		Write-Host -Object ("       Uptime: ") -NoNewline -ForegroundColor DarkGray
 		Write-Host -Object ("${Get_Uptime}") -ForegroundColor Gray
 		Write-Host -Object ("") -NoNewline
-		Write-Host -Object ("                                  NETX Base: ") -NoNewline -ForegroundColor DarkGray
+		Write-Host -Object ("                                  NETX PoSH: ") -NoNewline -ForegroundColor DarkGray
 		Write-Host -Object ("${MyPoSHver} (${localDomain} - ${environment})") -ForegroundColor Gray
 		Write-Host -Object ("      ") -NoNewline
 		Write-Host -Object (" ███████████") -NoNewline -ForegroundColor Blue
@@ -342,7 +347,7 @@ function global:Get-SysInfo {
 		Write-Host -Object ("${Get_Kernel_Info} - ${CPUtype}") -ForegroundColor Gray
 		Write-Host -Object ("  Uptime:    ") -NoNewline -ForegroundColor DarkGray
 		Write-Host -Object ("${Get_Uptime}") -ForegroundColor Gray
-		Write-Host -Object ("  NETX Base: ") -NoNewline -ForegroundColor DarkGray
+		Write-Host -Object ("  NETX PoSH: ") -NoNewline -ForegroundColor DarkGray
 		Write-Host -Object ("${MyPoSHver} (${localDomain} - ${environment})") -ForegroundColor Gray
 		Write-Host -Object ("  Shell:     ") -NoNewline -ForegroundColor DarkGray
 		Write-Host -Object ("Powershell ${Get_Shell_Info} - ${MyPSMode} Mode") -ForegroundColor Gray
@@ -367,11 +372,12 @@ function global:Get-SysInfo {
 		}
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUYCPdF4d9IBE/vg1M390TIZ5B
-# 672gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUd9hoLdareV1hsnsdhUEma72q
+# uOqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -514,25 +520,25 @@ function global:Get-SysInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR1pNd+nKbi6Q+QC9hIVD0GHhsTCzANBgkqhkiG9w0B
-# AQEFAASCAQBExC48VQDDR0JQgw7LQFW4HBSmOv6K4C8Wca5N3L71KzZJ0+qWOWN3
-# 7KEvMWJ/RR2g637i8kkGvGeiwosDJRT7S6L9gZJGlEc+TL/aTJ9pTzHif/Z5vTy2
-# zNfsq6Bw41tHbdmGxmicl9S/jhaGOV2RytXndCfsvH2L6PAdogDWF43zzlTDVACs
-# gKppEoGMT9NloNDE1cT5FsdCIlpzurGrFUjiT+nHfwQhlT8E2YfiXrpsK3SsbXxe
-# eB5/nhI3shtALbwyx1FpbW6xZTRo86dimK+avYQceFx45VNGtBk3otTh6AbC4oCX
-# FGdbW/xt1tiGOhW/6D47nVPN07kWM6I8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTTvGVl1H0O1gaPTKLSGlyshnzHxjANBgkqhkiG9w0B
+# AQEFAASCAQApeziDnHgEJz/Oz++njQPOTLKMWYXx32J6GZ2Iu2aZIcWQJOl94ysm
+# Mo4BgF51KbOwOS5789oEiWTKjTHJLGoJqXLhTBWKWouCciDMO1GO7bhYjP9qFAYc
+# 73FpeknXkGwZrNrY9p+2N9XZr6IkySZNQHfAmZAlCi0xvqqB7a86prMbSq8XxVE9
+# swfudH4iR2AlA7THJ4Xm4uzRFbg/lCMOHjG3oDGGXNkGulNTK4ejF5n9Twh22jrR
+# ra6SG+si3nVvJmW+d0Zy7SjyCdtq3yd0KZ9siqj3JDm+2tkROTv+PYgxVboWIxp9
+# eQbd7Iy3vkjRi/7mhoPcC6UpzJbf4x/hoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwMVowIwYJKoZIhvcN
-# AQkEMRYEFAe0UnDLaL5sxcKHyXutV42DdpbOMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMzMVowIwYJKoZIhvcN
+# AQkEMRYEFHW0z1aUDSAqoymx8d1LCijzXS09MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCWoo5B636/AFmv3EcGg8b5C9BQu6uama8x0RRqPQWQZOL1
-# BqO59NGeaspUd5Zm+AJ96JW5QJNNq2IhcNcn3Li7KlTAtCDUIVyCoqSoB1UCGP6D
-# vvXie0Cx/k9JgQjg2FObQBrhwpkJaJ7A1bQ8RXq0wVpsH7SIG2RbfVkKtiSQd7Fh
-# L/hISFp1m/69G75ooc893jtL04DMtSjZudQI9pSZacmqG9aijawf09tA8S0LnKj3
-# Lz7oN95CyICzjjQdYvbDPAOvIMh1vc2sJO1/txblfqFM2LTX31JEqjHS4WmaCPlD
-# iHZpImzVmECqc42jwrnO436dOW9QHp7UhO+OR5vN
+# hkiG9w0BAQEFAASCAQBTemYpQqFTWmZYjf/7tgEm9uNOajGmPjzMZ7HLGVRKMSpD
+# nGs7jrsh3xlNYaU7omD9tlrEmJpRrD+4BzTkyORipwn6BFHmkf9Q9Np0Kyi9RF34
+# RPxlOmlX4I0KdBmSeoOIjbpyAfb2O10KpCihNTuTju3KpzW+gebYK00+kRWDOU9K
+# Rvh7g6MAvU9+jQ+xyKOBSNafULtX16PYXCXbXoM8uUkk3OxIjliH6LaJee+78voQ
+# xS+P9yzomvWJKyYjr9Gaj4TfzkE6XXXCd53yHLLRtqiuwHgnxQVVORoyzaAN0XbR
+# aOFJrSeKXho23xk6iXrEkvi9Yw/x2yjJuvPueWqu
 # SIG # End signature block

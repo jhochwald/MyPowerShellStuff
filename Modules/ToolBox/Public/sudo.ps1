@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -81,13 +86,9 @@ function global:SuDo {
 		[System.String]$file
 	)
 
-	BEGIN {
-		#
-	}
-
 	PROCESS {
 		# Define some defaults
-		$sudo = new-object System.Diagnostics.ProcessStartInfo
+		$sudo = (new-object System.Diagnostics.ProcessStartInfo)
 		$sudo.Verb = "runas";
 		$sudo.FileName = "$pshome\PowerShell.exe"
 		$sudo.windowStyle = "Normal"
@@ -104,24 +105,19 @@ function global:SuDo {
 			# No file given, so we open a Shell (Console)
 			$sudo.Arguments = "-executionpolicy unrestricted -NoExit -Command  &{set-location '" + (get-location).Path + "'}"
 		}
-
-		# NET call to execute SuDo
-		[System.Diagnostics.Process]::Start($sudo) | out-null
 	}
 
 	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
+		# NET call to execute SuDo
+		[System.Diagnostics.Process]::Start($sudo) | out-null
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULhBXyWAptT0W0CU+u1zdaF21
-# IyqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8rSLQm/ZqAJ5y6vqJjIkIwDS
+# Wx2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -264,25 +260,25 @@ function global:SuDo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQgspN2Vf5OqOvFny0Vfm5X1dXHpjANBgkqhkiG9w0B
-# AQEFAASCAQBkaaRgndKxs+ok4VQwZwuE979Ek+BgK+oupxqWXJpjaEGl0ES8wD06
-# r6S4lE1U6ijsKd6DDFm169RuKZXJhoHANiCMjyO9s1CCtsXhJeu8k/L8Q31hXCz6
-# yA62pIb38otxLWMSk1eppdQFKYa1AfcDGzlI1wJQjiyLIW+SV1m6usVN0xzRFy9t
-# zU7z+ODCLsST4tY+FJmJjWcQG2S8qbjga4ivWYaQNIYmLhQTN53z38lVEWxQBJ81
-# K67hcP8SOdD1I2dOdWLUZidIForOGxxgR6DyhAEuvIn8VkDVhcpzkkXaTu7YaSSn
-# o2dh/AsvDT8rZPC676koKR3LRUcC3ZpaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRfyn9+u6XhWMrGh1FHQJi1NtMWNDANBgkqhkiG9w0B
+# AQEFAASCAQBWXwtoYDJpcRIGL3Yj/IsElJP7SP9xmBXSbEy8BLus45UPNgr52vWQ
+# EwQhFz+fo7ZZNfyYg0AyROMeHOCrnK8yNYDu1Uokp9Rh9/ND932q5q5/vt6W8zG2
+# dJtWd5d4eMj5hPXPw2UV83iRJggidi7aSWWxDYtG3mJtmFtY81MKQ8aVrePieBAq
+# lUlCA74Mk79z/2Ple2AQ49Rny06F1knYbwEzwGAT5VYqeAFQcjukvx/V/S9HmQ3r
+# qTmIwJjk7BKwBWViSef5LcUe6NHrs13KiuznyidmXJfLeM3GlyAilxEeBxYla2G4
+# GCwy05T0x65MkUaHqvhQVahTiIZQ6qTOoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwN1owIwYJKoZIhvcN
-# AQkEMRYEFCI9fvDAoXEZFLM8LJsXiz2IsBnQMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjM0M1owIwYJKoZIhvcN
+# AQkEMRYEFLiT1DkWp4qMmbC2PByY9nFYy9QBMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB8X1tCPT85qL44t9Hsxy2cnscR+3/OxJJ4ZY5Oc4sMUUuh
-# M8nGWwOqINDk1ChS4u7TRPUGIHCL1biNdB/tzNIoMfZYl7yDAWBNjmhEyAHZ+jU6
-# 3bWLvnhevtAmc6CMHhS8PJEhBSBFtHXLPdyhofAMHYW8kZUTPSXsF7SUmW9N/k9l
-# OZIKSD1NJz/CyN4N031nZO2YwMW9VlAf3/3nIQMOt+sBKGcIPloPq8RdM1vm8diO
-# mYMC59aXJ/d+4xqbLOtAVq2Aa+4MXSqXJ8ux2s9rHlC6ht3vJ/27Vi8lAtAFA2p9
-# jt2AWMdtE4jS0yHRv64wcT+0T5eAqvAb2DPMmfXq
+# hkiG9w0BAQEFAASCAQANt5SJzSXtlPmJVVolcaOHdUXgSFhsHnpTcUeq1CaxPU4R
+# 3E1wixnoGP+iqIXZAo8wvhYv3/yg2JH5uKgTgbbWaqOY266C2U+hjX8adV97HgK8
+# lNOWDNF7vM1BUBdFxN6urN8BfIi9o1b2jMz7I0OqHhwGs1gwMbSG720lyhd5viSA
+# XfRtfv6NJSN/isX6jyZFE6mc5qo53yIBK9C3088gYVHTS6j4+gjjbqnW8a06TF+E
+# OrnKPMTrzoOBOaQo7Mwp26HSvS+ASxjjl05szaRFIDhwElBvB2ysKZVHuKHX1K0K
+# hj+C9Zoc+oMrddW1jki+a9ZCVMAE6ifLLZ8scTwu
 # SIG # End signature block

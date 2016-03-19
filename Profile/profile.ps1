@@ -1,45 +1,98 @@
+#region License
+
 <#
-.SYNOPSIS
-	PowerShell Profile Example
+	{
+		"info": {
+			"Statement": "Code is poetry",
+			"Author": "Joerg Hochwald",
+			"Contact": "joerg.hochwald@outlook.com",
+			"Link": "http://hochwald.net",
+			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
+		},
+		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
+	}
 
-.DESCRIPTION
-	NET-Experts example Profile Script for PowerShell Session Login
+	Redistribution and use in source and binary forms, with or without modification,
+	are permitted provided that the following conditions are met:
 
-.NOTES
-	Copyright (C) 2011-2015, Joerg Hochwald
+	1. Redistributions of source code must retain the above copyright notice, this list of
+	   conditions and the following disclaimer.
 
-	Permission is hereby granted, free of charge, to any person obtaining a copy of this
-	software and associated documentation files (the "Software"), to deal in the Software
-	without restriction, including without limitation the rights to use, copy, modify, merge,
-	publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
-	to whom the Software is furnished to do so, subject to the following conditions:
+	2. Redistributions in binary form must reproduce the above copyright notice,
+	   this list of conditions and the following disclaimer in the documentation and/or
+	   other materials provided with the distribution.
 
-	The above copyright notice and this permission notice shall be included in all copies or
-	substantial portions of the Software.
+	3. Neither the name of the copyright holder nor the names of its contributors may
+	   be used to endorse or promote products derived from this software without
+	   specific prior written permission.
 
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-	INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-	PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
-	FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-	OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-	DEALINGS IN THE SOFTWARE.
-
-	Except as contained in this notice, the name of the Software, NET-Experts or Joerg Hochwald
-	shall not be used in advertising or otherwise to promote the sale, use or other dealings in
-	this Software without prior written authorization from NET-Experts or KreativSign GmbH
+	THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR
+	IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+	AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR
+	CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+	CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+	SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+	THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR
+	OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-.LINK
-	Support Site https://support.net-experts.net
 #>
 
+#endregion License
+
+<#
+	.SYNOPSIS
+		PowerShell Profile Example
+
+	.DESCRIPTION
+		NET-Experts example Profile Script for PowerShell Session Login
+		Again, this is just an example, you might want to adopt a few things for yourself.
+
+	.NOTES
+		Just an example!
+
+		modified by     : Joerg Hochwald
+		last modified   : 2016-03-15
+
+	.LINK
+		Support Site https://github.com/jhochwald/MyPowerShellStuff/issues
+#>
+[CmdletBinding(ConfirmImpact = 'None',
+			   SupportsShouldProcess = $true)]
+param ()
+
+#Requires -Version 4
+
+function global:Get-IsWin10 {
+	# For some Workarounds!
+	if ([System.Environment]::OSVersion.Version -ge (New-Object 'Version' 10,0)) {
+		Return $true
+	} else {
+		Return $false
+	}
+}
+
+# Make this Shell clean!
+function Clear-AllVariables {
+	# Delete all variables that exists
+	(Remove-Variable -Name * -Scope Local -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+	(Remove-Variable -Name * -Scope Local -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+
+	(Remove-Variable -Name * -Scope Script -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+	(Remove-Variable -Name * -Scope Script -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+
+	(Remove-Variable -Name * -Scope Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+	(Remove-Variable -Name * -Scope Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+}
+Clear-AllVariables
+
 # By default, when you import Microsofts ActiveDirectory PowerShell module which
-# ships with Server 2008 R2 and is a part of the free RSAT tools,
+# ships with Server 2008 R2 (or later) and is a part of the free RSAT tools,
 # it will import AD cmdlets and also install an AD: PowerShell drive.
 #
 # If you do not want to install that drive set the variable to 0
-$env:ADPS_LoadDefaultDrive = 0
+$env:ADPS_LoadDefaultDrive = 1
 
 # Resetting Console Colors
 [System.Console]::ResetColor()
@@ -50,16 +103,48 @@ Set-Variable -Name RunEnv -Scope:Global -Value $("Terminal")
 # This is our Base location
 Set-Variable -Name BasePath -Scope:Global -Value $("C:\scripts\PowerShell")
 
-# Fall-back: Load the Core Module
-Set-Variable -Name BaseModule -Value $("$BasePath\modules\NETX.Core\NETX.Core.psm1")
+# Helper Function, see below
+function script:LoadScripts {
+	PROCESS {
+		# Load all the NET-Experts PowerShell functions from *.ps1 files
+		Set-Variable -Name ToolsPath -Value $("$BasePath\functions\*.ps1")
 
-if (Get-Module -ListAvailable -Name NETX.Core -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
+		# Exclude (Pester) Test scripts
+		Set-Variable -Name ExcludeName -Value $(".Tests.")
+
+		# Load them all
+		Get-ChildItem -Path $ToolsPath -ErrorAction SilentlyContinue -WarningAction SilentlyContinue | Where { $_.psIsContainer -eq $false } | Where { $_.Name -like "*.ps1" } | Where { $_.Name -ne $ExcludeName } | foreach-object -process { .$_.FullName } > $null 2>&1 3>&1
+	}
+}
+
+# Load the Functions from each file in the "functions" directory
+LoadScripts
+
+if (-not (Get-Module -ListAvailable -Name NETX.Core)) {
+	Write-Error -Message:"Error: NET-Experts Core Module missing..." -ErrorAction:Stop
+} else {
 	try {
 		# Make sure we remove the Core Module (if loaded)
 		Remove-Module -name NETX.Core -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 
 		# Import the Core PowerShell Module in the Global context
-		Import-Module -Name NETX.Core -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+		if (Get-Command Get-IsWin10 -errorAction SilentlyContinue) {
+			if ((Get-IsWin10) -eq $true) {
+				# Ok, we are using Windows 10
+				Import-Module "$BasePath\modules\NETX.Core\NETX.Core.psm1" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+			} else {
+				# Not Windows 10
+				Import-Module -Name "NETX.Core" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+			}
+		} else {
+			try {
+				# Try the known way!
+				Import-Module -Name "NETX.Core" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+			} catch {
+				# Ups, try old school...
+				Import-Module "$BasePath\modules\NETX.Core\NETX.Core.psm1" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+			}
+		}
 	} catch {
 		# Sorry, Core PowerShell Module is not here!!!
 		Write-Error -Message:"NET-Experts Core Module was not imported..." -ErrorAction:Stop
@@ -70,31 +155,11 @@ if (Get-Module -ListAvailable -Name NETX.Core -ErrorAction:SilentlyContinue -War
 		# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
 		exit 1
 	}
-} elseif (test-path $BaseModule -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) {
-	try {
-		# Make sure we remove the Core Module (if loaded)
-		Remove-Module $BaseModule -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-
-		# Import the Core PowerShell Module in the Global context
-		Import-Module $BaseModule -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-	} catch {
-		# Aw SNAP! That is so bad...
-		Write-Error -Message:"Error: NET-Experts Core Module $BaseModule was not imported..." -ErrorAction:Stop
-
-		# Still here? Make sure we are done!
-		break
-
-		# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-		exit 1
-	}
-} else {
-	# Sorry, Core PowerShell Module is not here!!!
-	Write-Warning  "NET-Experts Core Module is not installed!"
 }
 
 # Do a garbage collection
-if (Get-Command run-gc -errorAction SilentlyContinue) {
-	run-gc
+if (Get-Command Invoke-GC -errorAction SilentlyContinue) {
+	Invoke-GC
 }
 
 # Gets back the default colors parameters
@@ -102,107 +167,107 @@ if (Get-Command run-gc -errorAction SilentlyContinue) {
 
 # Change the Window
 function global:Set-WinStyle {
-	Set-Variable -Name console -Value $($host.UI.RawUI)
-	Set-Variable -Name buffer -Value $($console.BufferSize)
+	PROCESS {
+		Set-Variable -Name console -Value $($host.UI.RawUI)
+		Set-Variable -Name buffer -Value $($console.BufferSize)
 
-	$buffer.Width = 128
-	$buffer.Height = 2000
-	$console.BufferSize = $buffer
+		$buffer.Width = 128
+		$buffer.Height = 2000
+		$console.BufferSize = $buffer
 
-	Set-Variable -Name size -Value $($console.WindowSize)
+		Set-Variable -Name size -Value $($console.WindowSize)
 
-	$size.Width = 128
-	$size.Height = 50
-	$console.WindowSize = $size
+		$size.Width = 128
+		$size.Height = 50
+		$console.WindowSize = $size
+	}
 }
 
 # Make the Windows dark blue
 function global:Set-RegularMode {
-	# Reformat the Windows
-	if ((Get-Command Set-WinStyle -errorAction SilentlyContinue)) {
-		Set-WinStyle  > $null 2>&1 3>&1
-		Set-WinStyle  > $null 2>&1 3>&1
+	BEGIN {
+		# Reformat the Windows
+		if ((Get-Command Set-WinStyle -errorAction SilentlyContinue)) {
+			Set-WinStyle  > $null 2>&1 3>&1
+			Set-WinStyle  > $null 2>&1 3>&1
+		}
 	}
 
-	# Change Color
-	Set-Variable -Name console -Value $($host.UI.RawUI)
-	$console.ForegroundColor = "Gray"
-	$console.BackgroundColor = "DarkBlue"
-	$console.CursorSize = 10
+	PROCESS {
+		# Change Color
+		Set-Variable -Name console -Value $($host.UI.RawUI)
+		$console.ForegroundColor = "Gray"
+		$console.BackgroundColor = "DarkBlue"
+		$console.CursorSize = 10
 
-	# Text
-	Set-Variable -Name colors -Value $($host.PrivateData)
-	$colors.VerboseForegroundColor = "Yellow"
-	$colors.VerboseBackgroundColor = "DarkBlue"
-	$colors.WarningForegroundColor = "Yellow"
-	$colors.WarningBackgroundColor = "DarkBlue"
-	$colors.ErrorForegroundColor = "Red"
-	$colors.ErrorBackgroundColor = "DarkBlue"
+		# Text
+		Set-Variable -Name colors -Value $($host.PrivateData)
+		$colors.VerboseForegroundColor = "Yellow"
+		$colors.VerboseBackgroundColor = "DarkBlue"
+		$colors.WarningForegroundColor = "Yellow"
+		$colors.WarningBackgroundColor = "DarkBlue"
+		$colors.ErrorForegroundColor = "Red"
+		$colors.ErrorBackgroundColor = "DarkBlue"
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+		# Do a garbage collection
+		if ((Get-Command Invoke-GC -errorAction SilentlyContinue)) {
+			Invoke-GC
+		}
 	}
 
-	# Clean screen
-	Clear-Host
+	END {
+		# Clean screen
+		Clear-Host
+	}
 }
 
 # Make the window white
 function global:Set-LightMode {
-	# Reformat the Windows
-	if ((Get-Command Set-WinStyle -errorAction SilentlyContinue)) {
-		Set-WinStyle  > $null 2>&1 3>&1
-		Set-WinStyle  > $null 2>&1 3>&1
+	BEGIN {
+		# Reformat the Windows
+		if ((Get-Command Set-WinStyle -errorAction SilentlyContinue)) {
+			Set-WinStyle  > $null 2>&1 3>&1
+			Set-WinStyle  > $null 2>&1 3>&1
+		}
 	}
 
-	# Change Color
-	Set-Variable -Name console -Value $($host.UI.RawUI)
-	$console.ForegroundColor = "black"
-	$console.BackgroundColor = "white"
-	$console.CursorSize = 10
+	PROCESS {
+		# Change Color
+		Set-Variable -Name console -Value $($host.UI.RawUI)
+		$console.ForegroundColor = "black"
+		$console.BackgroundColor = "white"
+		$console.CursorSize = 10
 
-	# Text
-	Set-Variable -Name colors -Value $($host.PrivateData)
-	$colors.VerboseForegroundColor = "blue"
-	$colors.VerboseBackgroundColor = "white"
-	$colors.WarningForegroundColor = "Magenta"
-	$colors.WarningBackgroundColor = "white"
-	$colors.ErrorForegroundColor = "Red"
-	$colors.ErrorBackgroundColor = "white"
-
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+		# Text
+		Set-Variable -Name colors -Value $($host.PrivateData)
+		$colors.VerboseForegroundColor = "blue"
+		$colors.VerboseBackgroundColor = "white"
+		$colors.WarningForegroundColor = "Magenta"
+		$colors.WarningBackgroundColor = "white"
+		$colors.ErrorForegroundColor = "Red"
+		$colors.ErrorBackgroundColor = "white"
 	}
 
-	# Clean screen
-	Clear-Host
+	END {
+		# Clean screen
+		Clear-Host
+
+		# Do a garbage collection
+		if ((Get-Command Invoke-GC -errorAction SilentlyContinue)) {
+			Invoke-GC
+		}
+	}
 }
 
 # Include this to the PATH
-if ((append-path run-gc -errorAction SilentlyContinue)) {
+if ((Get-Command Add-AppendPath -errorAction SilentlyContinue)) {
 	try {
-		append-path (resolve-path "$BasePath")
+		Add-AppendPath -Path $BasePath
 	} catch {
+		# Do nothing!
 		Write-Warning "Could not append $BasePath to the Path!"
 	}
 }
-
-# Helper Function, see below
-function script:LoadScripts {
-	# Load all the NET-Experts PowerShell functions from *.ps1 files
-	Set-Variable -Name ToolsPath -Value $("$BasePath\functions\*.ps1")
-
-	# Exclude (Pester) Test scripts
-	Set-Variable -Name ExcludeName -Value $(".Tests.")
-
-	# Load them all
-	Get-ChildItem -Path $ToolsPath -ErrorAction SilentlyContinue -WarningAction SilentlyContinue | Where { $_.psIsContainer -eq $false } | Where { $_.Name -like "*.ps1" } | Where { $_.Name -ne $ExcludeName } | foreach-object -process { .$_.FullName } > $null 2>&1 3>&1
-}
-
-# Load the Functions from each file in the "functions" directory
-LoadScripts
 
 # Configure the CONSOLE itself
 If ($host.Name -eq 'ConsoleHost') {
@@ -218,14 +283,6 @@ If ($host.Name -eq 'ConsoleHost') {
 		# Set the Default Mode!
 		Set-RegularMode > $null 2>&1 3>&1
 	}
-
-	# Change Window Title
-	Set-Variable -Name a -Value $((Get-Host).UI.RawUI)
-	Set-Variable -Name WhoAmI -Value $([Environment]::UserName)
-
-	$a.WindowTitle = "$WhoAmI > Windows PoSH"
-
-	Remove-Variable WhoAmI -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 } elseif (($host.Name -eq 'Windows PowerShell ISE Host') -and ($psISE)) {
 	# Yeah, we run within the ISE
 
@@ -252,63 +309,66 @@ If ($host.Name -eq 'ConsoleHost') {
 	# Not in the Console, not ISE... Where to hell are we?
 }
 
-# Change the prompt
-function global:prompt {
-	Write ("PS " + (Get-Location) + "> ")
-	return " "
-}
+# Set the Defaults
+Set-DefaultPrompt
 
 # Where the windows Starts
 set-location $BasePath
 
 # Display some infos
 function info {
-	""
-	("Today is: " + $(Get-Date))
-	""
-	if ((Get-Command Get-NETXCoreVer -errorAction SilentlyContinue)) {
-		#Dump the Version info
-		Get-NETXCoreVer
+	PROCESS {
+		""
+		("Today is: " + $(Get-Date -format "G"))
+		""
+		if ((Get-Command Get-NETXCoreVer -errorAction SilentlyContinue)) {
+			#Dump the Version info
+			Get-NETXPoshVer
+		}
+		""
 	}
-	""
 }
 
 # The Message of the Day (MOTD) function
 function motd {
-	# Display Disk Informations
-	# We try toi display regular Disk only, no fancy disk drives
-	foreach ($HD in (GET-WMIOBJECT -query "SELECT * from win32_logicaldisk where DriveType = 3")) {
-		# Free Disk Space function
-		Set-Variable -Name Free -Value $($HD.FreeSpace / 1GB -as [int])
-		Set-Variable -Name Total -Value $($HD.Size / 1GB -as [int])
+	PROCESS {
+		# Display Disk Informations
+		# We try toi display regular Disk only, no fancy disk drives
+		foreach ($HD in (GET-WMIOBJECT -query "SELECT * from win32_logicaldisk where DriveType = 3")) {
+			# Free Disk Space function
+			Set-Variable -Name Free -Value $($HD.FreeSpace / 1GB -as [System.Int32])
+			Set-Variable -Name Total -Value $($HD.Size / 1GB -as [System.Int32])
 
-		# How much Disk Space do we have here?
-		if ($Free -le 5) {
-			# Less then 5 GB available - WARN!
-			Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available" -ForegroundColor "Yellow"
-		} elseif ($Free -le 2) {
-			# Less then 2 GB available - WARN a bit more aggresiv!!!
-			Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available" -ForegroundColor "Red"
-		} else {
-			# Regular Disk Free Space- GREAT!
-			# With more then 5 GB available
-			Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available"
+			# How much Disk Space do we have here?
+			if ($Free -le 5) {
+				# Less then 5 GB available - WARN!
+				Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available" -ForegroundColor "Yellow"
+			} elseif ($Free -le 2) {
+				# Less then 2 GB available - WARN a bit more aggresiv!!!
+				Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available" -ForegroundColor "Red"
+			} else {
+				# Regular Disk Free Space- GREAT!
+				# With more then 5 GB available
+				Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available"
+			}
 		}
+
+		Write-Host ""
+
+		#
+		if ((Get-Command Get-Uptime -errorAction SilentlyContinue)) {
+			# Get the Uptime...
+			Get-Uptime
+		}
+
+		Write-Host ""
 	}
 
-	Write-Host ""
-
-	#
-	if ((Get-Command Get-Uptime -errorAction SilentlyContinue)) {
-		# Get the Uptime...
-		Get-Uptime
-	}
-
-	Write-Host ""
-
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Do a garbage collection
+		if ((Get-Command Invoke-GC -errorAction SilentlyContinue)) {
+			Invoke-GC
+		}
 	}
 }
 
@@ -322,7 +382,7 @@ Unregister-Event TimerTick -ErrorAction SilentlyContinue
 # Try the new auto connect feature or authenticate manual via Auth-O365
 if (Get-Command tryAutoLogin -errorAction SilentlyContinue) {
 	# Lets try the new command
-	get-tryAutoLogin
+	Get-tryAutoLogin
 } elseif (Get-Command Auth-O365 -errorAction SilentlyContinue) {
 	# Fall-back to the old and manual way
 	Auth-O365
@@ -341,18 +401,18 @@ If ($host.Name -eq 'ConsoleHost') {
 	# Is this a user or an admin account?
 	# This has nothing to do with the user / User rights!
 	# We look for the Session: Is it started as Admin, or not!
-	If (-NOT ([Security.Principal.WindowsPrincipal] [Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
+	If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
 		# Make the Name ALL Lower case
 		$MyUserInfo = $env:Username.ToUpper()
 
 		# This is a regular user Account!
-		Write-Host "Entering PowerShell as $MyUserInfo with user permissions on $env:COMPUTERNAME" -ForegroundColor "White"
+		Write-Host "Entering PowerShell as $MyUserInfo with User permissions on $env:COMPUTERNAME" -ForegroundColor "White"
 	} else {
 		# Make the Name ALL Lower case
 		$MyUserInfo = $env:Username.ToUpper()
 
 		# This is an elevated session!
-		Write-Host "Entering PowerShell as $MyUserInfo with admin permissions on $env:COMPUTERNAME" -ForegroundColor "Green"
+		Write-Host "Entering PowerShell as $MyUserInfo with Admin permissions on $env:COMPUTERNAME" -ForegroundColor "Green"
 	}
 
 	# Show infos
@@ -379,23 +439,34 @@ If ($host.Name -eq 'ConsoleHost') {
 	# Not in the Console, not ISE... Where to hell are we right now?
 }
 
+if (Get-Command Get-Quote -errorAction SilentlyContinue) {
+	# Print a Quote
+	Get-Quote
+}
 
-# Workaround
-(Remove-Module -name NETX.ActiveDirectory -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-(Import-Module -Name NETX.ActiveDirectory -DisableNameChecking -force -Scope Global -ErrorAction SilentlyContinue -WarningAction SilentlyContinue) > $null 2>&1 3>&1
-(Remove-Module -name NETX.ActiveDirectory -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+# Try to check the Credentials
+if ((Get-Command Test-Credential -errorAction SilentlyContinue)) {
+	try {
+		$IsCredValid = (Test-Credential)
+	} catch {
+		# Prevent "The server could not be contacted." Error
+	}
 
+	if (($IsCredValid -eq $False) -and (-not($Environment -eq "Development"))) {
+		Write-Warning "Looks like your Credentials are not correct!!!"
+	}
+}
 
 # Do a garbage collection
-if (Get-Command run-gc -errorAction SilentlyContinue) {
-	run-gc
+if (Get-Command invoke-gc -errorAction SilentlyContinue) {
+	invoke-gc
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUF+2oWQh9m3GG4ahGsRgpioqt
-# yE6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7PkPmKcNOkhVvr0fs6LiWY2K
+# f26gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -538,25 +609,25 @@ if (Get-Command run-gc -errorAction SilentlyContinue) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTQNRgbTWyWrNIVKCDj0h/TougC+TANBgkqhkiG9w0B
-# AQEFAASCAQCoPlBnWpFIZRsW5pPs+B+AF0xnU9hcciUYp+uXi1Y1FlnFNAe9hzpB
-# 9TChVk4fILGxhiXtGaXJ+L6wfB7rh2vGlKDnQfTXt5nuXFZimZRguqeyxpwfbdR+
-# ImprgIRxF/4bbkR+rOOi9JqXzsoJkkB17lNM91OF6yNN7SdUPwIpV6lNMX8DgKRl
-# PemTm6DZdmWEbPK86sv39JGqaaiJcp0bKdHdYBKO0btSbqQavdyzt4JqDbFLJ1ll
-# 1Oa2LnovDtdaODiTdvAiZ66J9+nhGQx4OJbz7mfa7dJr6xEbjm0sUUmpfOd7bvSs
-# hKFIMUb4OHd+1WUP9GvIdv8nGDylvqzuoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR9+5W2ANEO6zk8MaydoYJhmMaIKjANBgkqhkiG9w0B
+# AQEFAASCAQBpd1oFBv0xtyWIZgnDsAk2y5KkMfIAWMEvJWk6kWPpV9UHgBxdu5eI
+# pA3VgIyDPNi/yUzZggbNsXvSMB/mMiiQ2sdAl1jD/SepX4yRAGRc29m/bnpakXc7
+# CaDJ3G9OKQct5RtYd5djqHQLOpzbx1zTQitYucoNwPymu1q+qRn8elQpl1FjX/WV
+# aQ/iZtxh9wrjoQHtOCs5k3REpHCpjEOET7zsRDorzbJrj9M/73cREfi4KLF5vL06
+# a2vpv9kc6me9HS3mVid5UaF1DbG8RXxHbS+V1NI7d0hsUMiDc25jtLIWC62pcL08
+# ItLOhU+igit69oBfjSwsDmAWWFtTZKdNoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE1MTIxODEwNDMyOVowIwYJKoZIhvcN
-# AQkEMRYEFP2YUfElw8bDFeJTJiq7+ruAy/NNMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI0NVowIwYJKoZIhvcN
+# AQkEMRYEFHsPjJcUUFFtLDAJ+hi/h0XydxT1MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQApV+u04lK+U/GTACDHBuFi5w6rVOVRIVEEso0x1KOqmbH8
-# yMeUJhvsVreaZdf3/O3FWvKCPtABnKXsPQqFuY0kQRg8c5jRRSmeBa/jL6rT/Mll
-# USfNdHVzXANTG5ZIS6EpmffiuiEZPft1cjxAp5wO6oHxKgiMMZGXBPnwniyb8I8b
-# U1q3ph3XUFOsePlFIUx6ExhUSb7brcSMtpmClTZIS/BTv/hzGE0cQRfklM6sK47f
-# JAe1cWNiVYZDczFcVlCQ54MyOBbuFwRSvwJBzMIh9i9ngKLvYQpCUU10PAwFJ+h0
-# OgEjGk/O3E9vD+HbFIWLqC7HldDYJa2NObLtJfiv
+# hkiG9w0BAQEFAASCAQArPlodUr4DFF5nY9/try5yWhrbgRYCP4yfeQF3bFEr7yLy
+# ZBiAuQiyYHOWIyqtK6bgbGoGH9EYdHtO00Cw2RzdB+jDXnnhhD6Si3lgp14A7+x1
+# VPyNF62Ar7HJeDfhk+cEfqweoYvCYhD6G1D0aEqG2Ys7J0hbqco3TtzSl6D4wu2F
+# ySNwzVOxRB13+1b54sKWXKTeHYI175jC5RxubZVy0Kj6GK56o3EgVW7rd4x4j7Mw
+# w+MBU/EWJ1wLT6kJYQLfc3WHdV4sMZovE5pYxYGrkQIZKxo2tsnfurakZ1gxF1N/
+# 3I6YvXvTCQT6m6Jya41+Knoo00kg87CKCEzFbXIw
 # SIG # End signature block

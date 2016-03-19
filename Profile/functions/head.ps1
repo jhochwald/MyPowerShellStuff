@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -95,20 +100,13 @@ function global:head {
 		# Show the fist X entries
 		return Get-Content $file | Select-Object -First $count
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4WcSisPKwOMBAURf/uzRDQ/9
-# wrKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/wfkbd+49qg6YBrtnd1Pfcaj
+# njCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -251,25 +249,25 @@ function global:head {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTb8gyLnM3Wb+K1BjyX1usSvWoEdzANBgkqhkiG9w0B
-# AQEFAASCAQBpbRbdy07DFAn2/DPlj/vnXA8YXth4xLduWWOuh3sS3Xz4217IHGMB
-# ifmmnEtgvDxMQhH27RSNO1MHm+GbmX+6o3OuiciT4IsYGo5Z4e6QEemHsUVOV4BM
-# kloM+Sc33halqLWqu6k2okJ1VVLUHpcjWLqRyjor79rOPIRRgh/kGVY7nManPiHu
-# z5UC56p5TiToMfdmvk36WkCIrCNh/6oYec1EnR0QGaDB+uDQ5H12qhA6JRNckEhf
-# OjzzdDD5/9KIzakT97TTzIILmMeftWySBoXRnp/iHGiaH1nD371jLOQNfnjI4hEi
-# sW1z/z+Rps+EMa2mp0sFTsAOKM0LLh9LoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTT/qCxr69hFVhpynRa+6P9o/hdmzANBgkqhkiG9w0B
+# AQEFAASCAQBZw5wxNKlkjHCtrrilxHWtjo5OfnpDwW2Yn4WkMMaTKTyi2cap0nfY
+# sHCnRWiFHCxtKqG6vMzpE6bv7IkZCUiDOxFPcFdfYN3Ib7PG9Yjmw/DHGJscp2+0
+# EdxMYn+Mg83rVCaI/2T5Bs2Xh8lDBNhueZoGmwvgplbpBZgn+A+jrDH/rV/IrHVn
+# IA2Io1F7+WbdwEGUAmgJce+sSvxfK6DstF/ZxNPv0LCGfPwGQiDYPqhAc7G7PNac
+# CfXFmZkouPEX7bKHlTzPY/iCVpI5uk/LuYxxk02dNNikcioIsEqQ23CNet3Ti5Ji
+# 24D7A4xM6mn/TAxt/s5eBBXsiWQ4GJn4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ1N1owIwYJKoZIhvcN
-# AQkEMRYEFB98gVYGVAdpa+ehJc8/SAZ1PhFIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMyMlowIwYJKoZIhvcN
+# AQkEMRYEFJKQnZQA+fDCxx95N2jYQr6pHj2DMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBOnaNeN1TqVNMmDqjPC44FTguPQw9TPgn7VG8G1oNIwHx9
-# cAxr9+ThOC96hy5O39TwPBbyjiIW6HjGeLLeMrkdtyVdqSPmg7slwJ3seH9MA7JG
-# 7aUcF3iCKFQ/q+uayLQRpsuCR6ljSywP35Nuxy1gKLyGR4hTcvVdgVAuUqDlzwnY
-# HpkhaHZQMUYqrfn4i0CwTprzcvTZ7RXxiuw9ss1sim4LVGS8CrYucMd2cN3Pfe8S
-# uNP+ab1r0i+ADAf+QXLZ7MEAhTRUNdOA1EwgHFXhwSb7WongQr22EaOtWfz5Sw3k
-# XG7ddN6hPp5wYAzrHJ/j/tzsub+3ymQ+5+V6XY+W
+# hkiG9w0BAQEFAASCAQBRVLghtlQ06SX/up6MB49F1FvwTL30gRyDthrdjtKWcZNP
+# hInRr6OJ1mqezDcCGw9utcgeScAOR7kRVC1IQsBBSxfFsKgWaLcwTereH7BX1Wz+
+# r3H0iP4c1g+H2lo1+ym+SEc+1PRx+8oIeccSzhs/UE9KsSiHwpj4q1vMRUoBqJxA
+# kwt4RxqGoWixTVIyyo5+attGdTVzSZ1PvK8SnPaA/KWkiuU+vblwooKOVduft27r
+# QwOXC3AxDJ2Dsvdq+/lYwySnjrWFUloZqwJjw6BTs2toGHvpaPqSkwMbvam6GdkN
+# BxotJJm8FB/Vd+enl4Al4iL9Q8W2RycF8cpsCjsj
 # SIG # End signature block

@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -92,13 +97,6 @@ function global:get-sessionfile {
 		# DUMP
 		return "$([io.path]::GetTempPath())$sessionName";
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 
 function global:export-session {
@@ -134,21 +132,22 @@ function global:export-session {
 				   SupportsShouldProcess = $true)]
 	param ([System.String]$sessionName = "session-$(get-date -f yyyyMMddhh)")
 
-	# Define object
-	Set-Variable -Name file -Value $(get-sessionfile $sessionName)
+	BEGIN {
+		# Define object
+		Set-Variable -Name file -Value $(get-sessionfile $sessionName)
+	}
 
-	#
-	(pwd).Path > "$file-pwd.ps1session"
+	PROCESS {
+		#
+		(pwd).Path > "$file-pwd.ps1session"
 
-	#
-	get-history | export-csv "$file-hist.ps1session"
+		#
+		get-history | export-csv "$file-hist.ps1session"
+	}
 
-	# Dump what we have
-	Write-Output "Session $sessionName saved"
-
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	END {
+		# Dump what we have
+		Write-Output "Session $sessionName saved"
 	}
 }
 
@@ -192,28 +191,27 @@ function global:import-session {
 		[System.String]$sessionName
 	)
 
-	# Define object
-	Set-Variable -Name file -Value $(get-sessionfile $sessionName)
-
-	# What do we have?
-	if (-not [io.file]::Exists("$file-pwd.ps1session")) {
-		write-error -Message:"Session file doesn't exist" -ErrorAction:Stop
-	} else {
-		cd (gc "$file-pwd.ps1session")
-		import-csv "$file-hist.ps1session" | add-history
+	BEGIN {
+		# Define object
+		Set-Variable -Name file -Value $(get-sessionfile $sessionName)
 	}
 
-	# Do a garbage collection
-	if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-		run-gc
+	PROCESS {
+		# What do we have?
+		if (-not [io.file]::Exists("$file-pwd.ps1session")) {
+			write-error -Message:"Session file doesn't exist" -ErrorAction:Stop
+		} else {
+			cd (gc "$file-pwd.ps1session")
+			import-csv "$file-hist.ps1session" | add-history
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnMrGEaKPLgUunKgEk/M5Med6
-# Pu+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUzJFC19pcXOvfAaVa9AQtPWK
+# hmOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -356,25 +354,25 @@ function global:import-session {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQBHEMRrfEJzO8jQ2Ec7cIJXhEt1zANBgkqhkiG9w0B
-# AQEFAASCAQBT57xWRdngxOaK9eL8x+EdP/ur+Z70OVJH3GCGNM4EV4pMCEqKo11c
-# xkesAeMujir6e58CiRCinz7+aiQUNmsICl0fnr+79pEc5CcHrSHkL7dfuta4aOLt
-# vtx5mgMhInuc2FyxMZEjerbPYnCe4JphBbUQ/kixHXXJxOECOO5WKdSKJvYFG9iQ
-# t1yYA51Ypi/Zd5RfDRYhB5dRS/hOpS/zCndKsDcEFR2Yt9c5n2bE10qzWnr8/LjH
-# Gz+cveh1mtymCzE6+YK6ySxXRzz6DC4hBe5aI5llioTbVOspgD+HhD5Y6kZIacPp
-# QU3D90SzkkswuypMBiFJ2W/Dj4UCUuYKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQrea/GZYHzdcFxLGvM/Jxk1yfhTjANBgkqhkiG9w0B
+# AQEFAASCAQBS+H3O3wUdlbtgZuTXhE9urzpuR1ZW41lTk9bhb09kbPSi0RHolT6q
+# PGguOLLSTln6ycZICWbEU6H48u6Y0K8Dumc++YL3OOtkKb7pP5qtrukuBSB47xdx
+# ZMwyVonpfaLT3PD36Z2yqpiiI3dMszj6MfNvpcWpWCZOxw4ixS12OHKCbtPn+PlJ
+# 5RRwbIQF9WoA2jcdLJlUpZy8PU9+D3wEbUw6NTPOIeuvQ7THF3ec8w8i8M/mXYmP
+# GLfoFETjC8BpGd0SCH1ztd26a+u0rspOiBpeiMYBRXDNDAZVScuVhhXUyZDsLkpI
+# BOflZ9jIBXz96DXpSgJTSaLm87tZGMJAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwMlowIwYJKoZIhvcN
-# AQkEMRYEFCZ05skjMcl/7yOGSIEvbyJweDFxMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMzNVowIwYJKoZIhvcN
+# AQkEMRYEFBnPh213wIXXbTTJLL4iqfdfC8w/MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBJKef9DHAEN+X2CV69zatXEB+3CYR4G6StORwTNFGzNVCu
-# U3Aqlqub1bQHZpeRxXa+lLH441rQv3KEFMYl6XLj/ximy9af/dRKoXSqAZajj6ff
-# SgzafUTuT4Xu+x0VCx6/eSw7xMWcSNM+rjMCw1KBN4VrR6VhL5pa/clXIXkA7t1L
-# 3QJ1izFKp2+Bgf2cw7BPYDfBVIv78+kuqCrkv4fSlHkYKXBBpOhfgA6nW9ZwZ9FZ
-# aBhZTejPlHewMPLYcy6/2mMueLm8XCfquv1KtOUUwneEZsXPF/aweX/b7RVkYf+H
-# Iu7Tp2UFp4WbNKpsIIEH/2SrRbkXCCo2Sqn56oHK
+# hkiG9w0BAQEFAASCAQBBpvXd22kJqSE29/sQZs0KCAf2Kj5w5VK13F8990xgx5LY
+# FLS8DKDQfA+NCFAxdObLhFb+LdMZBecplbIs8ESCTIzzZ6R6+Z/Um7IasZTxUU6R
+# 5OXvcQaSNVnZku9Olk4/czcNZEJU3d2dLvpjcDosS92y2TRYBJ55VldulSqfJ0Sm
+# mUiwGJhn21zc1LSONComHx27r32jDrzX9wK8BTzOSoU5BI4FqseqgQiDD1mu24/o
+# bmdF8X4K4/T5q3z+SioRPVdotjR2moT6hOKoG+gfX3Z1/waOGQwX0d+KHFG3bgYd
+# 4pyS4zVbWuMV9yRGzvYiHcZxxdKPc513f7wGTx1d
 # SIG # End signature block

@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -73,9 +78,9 @@ function global:Get-ExternalIP {
 		try {
 			# Use the native Web call function
 			$beginbrowser = (new-object System.Net.WebClient)
-			$get = $beginbrowser.downloadString($site)
+			$get = ($beginbrowser.downloadString($site))
 		} catch {
-			Write-Warning "Unable to get the external IP address!"
+			Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
 
 			# Done!!!
 			break
@@ -87,11 +92,12 @@ function global:Get-ExternalIP {
 		return $get
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULq6Z0s1/Xo2gnK3qwD21ZhRY
-# xMmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwW3t7Y1a9zdt9p/dvU58w+N0
+# pwOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -234,25 +240,25 @@ function global:Get-ExternalIP {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQPOcE18oQVqVT+V59NcH3XsRNfVzANBgkqhkiG9w0B
-# AQEFAASCAQA36tk7ec2pjB0oYH/Us8EY+NMmsxSOQ0JjmMNuxayaoJtn8L0fZ/vN
-# eBwqcXfl8qmVOQSwiPTNhCCaWbFnfsMgUwOf1UBI338v9MLHtGHkXlNH3hQKoTTe
-# 6ci6yVfYLo2iLbDFSXM77yrVipd4g/04aPcYVMwtrn5N5xLwnVhkoG+TcaFepAGk
-# Jk70KZ0ceuTyq8E6lFcZ03D8tHoGvp9ot3m7jH9yhR/9t3AvWwN6X/sOD9ElfNg2
-# eQS0xpy4cUtXLbPjusaCumsQgH2h/LtQBV5fAY9u0X1MZ7EXuVRWnaXijZx/iygj
-# c/iUjoQu3gVhi1arhpXQ1DnhLAlld/VkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTGe2JbhbVcJkkWEHs/DiVXB5SNrjANBgkqhkiG9w0B
+# AQEFAASCAQBQtHP4K1FLXBZVl/BKrqcV4FmbL5+D9NExTVDC6JI/f9Jt7HcSLqIs
+# LqWlW+S3gyaU4Y5s+X8p0wd1QTJGZe3qZxoKnOtw5oeFmbeCV3EH0jxLmTnD/62A
+# akZ8iNd9YrlMrvF945KTFZZjCvRc6MCHb51O5M7rnLJCRYxZU1riSdwHgfl6dbCM
+# C4mh0wxknN2BvUceXKxC+ELe4JpxSv8nzUe4GNx2I/e1XGk/as6y5XowfI19jpo+
+# bid0rCWwtG58QGz4JeJiFwToFeLkF4Ds7UrPFLFc9ZdGFy0vGxygjzT+HjqykkXc
+# zYJ4oZNqbx9OEQ38BG9FgYMXkWan4q1NoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0OFowIwYJKoZIhvcN
-# AQkEMRYEFDdXVYg6PQrJTkzuMbN8lpZ1+gvbMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMwMlowIwYJKoZIhvcN
+# AQkEMRYEFKuHs6j+caZMPRfh9W4T3bnfgLUDMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCX++vzIflJfW06N241bSHSG3cR9mNZbIXcBqqYrPwURAD9
-# gZ0AuYefUAxsvEx5jd/2qtG1iPlnjmtW7Xx2P7v/ziGu+m7eYTu7A+HaucsuVfd2
-# fO75I9uRK8Ou7COBvf/WGzRutiaGKQDwRAWghbqnz5zBnqsxE8GRGokExG+26wmw
-# 5w12HjsQm3uIuhmMSnmrMOcjD+lfA8ALfzW7yRXjYIrE0Pf6EsXJ46awmgFAPtV9
-# nPZcqPEnC5bDKCMR/DyXw6rnT9CeFXLAgG4wmJVA6/jKiU1p5JmLZRkffU4ceaz2
-# 9graxKcuQwUjMwYX2W/+Ne00PdtQKQFCUfh6kauq
+# hkiG9w0BAQEFAASCAQCWo+inowpgJVoNgc5gvp7zeZ28Sft6u0foT4iayPbtObhk
+# A+8wXh3+kfu1smWR70vspAZljel6mlzm/emnK4uqVKG0XQL1V+uajH3MNGxTDqnj
+# HpLyQ34TI1CLUIk+PEwpQbjNxLvrYcNZVzH1NGqLgsf0e+YHZ7PJzabAZwqiny0/
+# PKT4rEZw3hISaXM9YnIRxCjNBBvZhtpETVnxM5C3bi4U8NjRH6nm5Y80FfHl9W0U
+# 50bA+vIseQPzN6B1zMvrIP5OY9PZAYgTtH7ddRTPyE+TMxM0PXBTpLXralKqTMm5
+# rO/9btBlKXtim3uSmgPbNHX4fF6ephZIhfYmMF8t
 # SIG # End signature block

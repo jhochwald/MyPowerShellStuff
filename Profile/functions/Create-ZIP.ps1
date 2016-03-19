@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -99,15 +104,6 @@ function global:Create-ZIP {
 		This will create the archive "NewClutterReport.zip" from the given input file
 		"C:\scripts\PowerShell\export\ClutterReport-20150617171648.csv".
 		The new archive will be located in "C:\temp\"! The directory must exist!
-
-	.OUTPUTS
-		Compress File
-
-	.NOTES
-		Notes
-
-	.INPUTS
-		Parameters above
 
 	.LINK
 		Joerg Hochwald: http://hochwald.net
@@ -212,19 +208,14 @@ function global:Create-ZIP {
 
 		# If the File is locked, Unblock it!
 		Unblock-File -Path:$OutArchiv -Confirm:$false -ErrorAction:Ignore -WarningAction:Ignore
+	}
 
+	END {
 		# Cleanup the variables
 		Remove-Variable MyFileName -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 		Remove-Variable MyFilePath -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 		Remove-Variable OutArchiv -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 		Remove-Variable zip -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
 	}
 }
 # Set a compatibility Alias
@@ -234,8 +225,8 @@ function global:Create-ZIP {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJxCN7VKR1rOUsUhkGoJV/xDw
-# PLigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4RDUGdEEzDov8wJ3BVPzWvHP
+# aeugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -378,25 +369,25 @@ function global:Create-ZIP {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQkfnAP8hLg7YgyoepO2oUHmw//cTANBgkqhkiG9w0B
-# AQEFAASCAQCe3ga6uSH9+PgT3guvAcK9VNtpS9v1IumdsuQjPoF/AGmj6lKhAapn
-# iBO1JrpS1ISuPD4JoLGNvgn4ggtGEQ9CSu8wxdpY+2PQ02EK3QltcyNz4fXyqP6B
-# DDwp1vpmUs4b0MT3jXT7sPOkbGFknuo0yLqdEt/Cjyb5EJKS32sInQ+fHe42CQjP
-# DGnpxLuCTxp51CN5pzBRFYaSUzi25bRRM94TLwMTVCHgKGV+8Ev4o9+6afrW/INW
-# 8Cle3QYR49dG5C3nKCggqKxuzDNb4NwW3lRjhVzlhuAeBefYBlVinIsSfRYLhJog
-# PyMP3G4KcdBN5XKQadEqB3j5Lq0qwVVVoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRAf+QLaledkA0hWZrLy6Kuo3c8rDANBgkqhkiG9w0B
+# AQEFAASCAQCUMxh/+QQQq66KVdrGpP6dTkJPuYZgP7XeQSMS6o+dF7lqJRBKTlZg
+# ep+zxADkWTdsyBVjoByRKMJAupgpd3uuHZ/97PL7yrcf3B5Z9PZpNBTlyyrzkLro
+# KpkxPHr7tbGGLCad9ry5IHxN0SJqxP8MY+f+UIaK1m734X3MJnmdKlvxKWMHg2Z2
+# +EAYDIddZy4+vHqdVE9Uj0FOHtUCwkFhT8nk/mZkaM2sVmdZB0iZdlF0qep3w7R9
+# mRWejqAqEbqNrfn0cCVO/JBG2MwhanlaKludsFsdKIH6PT0u89OvEYLhZkGRfnaQ
+# biT1KpCT4f01q3PHv0iSG4WGCtGKOlMkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0NVowIwYJKoZIhvcN
-# AQkEMRYEFP0dvvL2FEbHCIdAHyzJ2P16bCu3MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI1NlowIwYJKoZIhvcN
+# AQkEMRYEFLzIK2VoFjv2NfzcOY5LRLLNbSVGMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCWST5kXhmc4HEYxXvdP8PANADDQe9CZTXJtvds+D0aRwa6
-# 2UCcEbLC7/j8UMikc4NEt6GSgXYCLeNim0WBcQcnrMGVdPa5iIFiKNQOHsbVwqjn
-# wJ2NMbA7HFHnLJaVJsUJJfEwrcaSkXdu9CBKCwakoCyu0vY06emAK0hsD7UcDIlT
-# vZKkZLvbvYRs4r7f/eqXzSDPYztAmDhLenhJ6ZwRCvr1xsuWFk+xYjBXExFw5CcH
-# 7cMRjDxRiXhHZ80oeDXB9dCEewgyqKHgOSDuhq097ZQ/BKWYxpWYlZUmmoR0El6X
-# iLDoWC4a+o4msfc4AawY1arNCzgE2WohjfWUbOsW
+# hkiG9w0BAQEFAASCAQAUkYRJo+uxzZBqkGgaxCio2zS5yeZGvu6azm8rM9zjYyIl
+# GL2SVrPkNrNaVL14w6ZgDlsSHvuma/5dfDVHWvI2gDM6B/JrKLHS+5GRr5hwMXtQ
+# pLflzqbODLoxUXy3y7iWoiAGL7PDsUUXZkLudz3mgyotfP+vS1uuokyirqf+szRX
+# dsQDkb18V80j81bWZppsJ547EUrMaGaHy0GZ6DDi1ZE8ANLcVU5ONrHixdRrdGqF
+# 9DwFOUS8T+7Fv8mfJEH+oxrePMxsiFPS6sNb0RFi14/r7yZbxU3K4M9nnVkl6erW
+# XSfey6cEvAxtgsoZZRMe5cqDo48sXOtZPl44P0d7
 # SIG # End signature block

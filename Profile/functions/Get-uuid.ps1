@@ -37,11 +37,16 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
 
-function global:Get-uuid {
+function global:Get-UUID {
 <#
 	.SYNOPSIS
 		Generates a UUID String
@@ -50,7 +55,7 @@ function global:Get-uuid {
 		Generates a UUID String and is a uuidgen.exe replacement
 
 	.EXAMPLE
-		PS C:\> Get-uuid
+		PS C:\> Get-UUID
 		a08cdabe-f598-4930-a537-80e7d9f15dc3
 
 		Generates a UUID String
@@ -78,13 +83,6 @@ function global:Get-uuid {
 		# Call NET function
 		[guid]::NewGuid().ToString('d')
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 
 # Set a compatibility Alias
@@ -93,8 +91,8 @@ function global:Get-uuid {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6uG8Ab1Xk46cDC8/IW8Yu/Mr
-# d1qgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9hVmyLs+RGuYH5uLyLs+gr48
+# v3ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -237,25 +235,25 @@ function global:Get-uuid {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTBN5rz8BKhBPWfsfe/9jpur7dTFDANBgkqhkiG9w0B
-# AQEFAASCAQAHwi9IQC5KsZ7xx3UiVf1vt3XDzUzC0R0hAplvhZ4DUi7rmuw9OrBz
-# zhCpJVaOJv89qvaRtP1FO2a+oiBETLPibaQ50UFLkOzeJ/5rMSO3V6KwEy392cG3
-# PxOzuhLUxRuzkwPR03u1cJ6IKf96rcBawouHWibnlW/cX3WhxoIQlnrvh6034Akf
-# tas0GqfXPxCao10Ui7x8ueUwPJriL/A/udtgsBna2AuEYnMg5SU3SsQIKeDrvzhr
-# 9iJwKrDzyTGaefxxOpGj8jCinqY5alzuaUG3rcGSKkwRns4NLeXqi1jURzJcluGI
-# KhoqaVJpdH7Z8OY3ahhPjNE1g1JL/HIRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ79Vh3HKDEZtkw1Eg2stDFgjKrUjANBgkqhkiG9w0B
+# AQEFAASCAQCpc0S1YshLMyfzQ57gvENbpUUS5CUYUVGgr1ThXBlf7Mdf6q2kQ757
+# 7PCYdCoM59CWtajOo+eJOzJJAKzXCN6gtRW9cvB3oNYLY7RxImpY3dc7s7/Ru2qm
+# 4bfZY4rBR74MxAgKUqsUIi6a+0SARgTStdDK55M7mbMoUkvKMRfnyfPPTlsA06WV
+# yalFlDabUYHnp6GYhBcidTBhdLXf+NTsaBl09jWUpY3lmHrn8aL4fn/gpjoUINRR
+# HCo+EC3Ptw0Df90D+wJgLIlemxBaTlhQnu/UEk7xN3/0qkf/CtdU2hy5HMG7gxVe
+# vqiP1e1fOnHsN1AXu4RimYpFu+kV4dphoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ1NlowIwYJKoZIhvcN
-# AQkEMRYEFKy/HHat0bh7zVkvYZP2fPqc3AVEMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMxOVowIwYJKoZIhvcN
+# AQkEMRYEFP/k0iuuDT+kqYmoMkb52MKcXAfrMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCrvo07b7IIo9nXiGu48bXZXwctcVkpmz4ymjMzK2XU4wsf
-# DKZmBjOqG6V0OO+HNMwlkc2HIQYQUEVi4A4f2akxHbDtzmqVyMMALK/JwMZkC/hI
-# xN/T4zLEiB+rpe9JoFxen7my7w0D5PybcL17b5G0FtPRIvR8CsAQWXxDg4q1SGF1
-# rCe8tkXI1lX42jNWCaPaQQAcZsP3Kdvc1zqVY51HIt6u15Jn4iN6PJIgFtn7qn3H
-# UN+9gXj2RRbhiquaSRwabXIl4sQyBHm2cuXzdoAcySKx75SBXFtMiykvijqibv2i
-# g3Zh3HN/0Q9GDt9DCKlhWClkmx1ftBQNpPHuiifJ
+# hkiG9w0BAQEFAASCAQBBp9WS0k2s0lBB6Gw2czkC7bU7SQ3U5cDPkUkKRH4Z2Vml
+# ChouxZYthCoGUYoyTTWsAp6PNZXxw628w9DaHj3dxCJz54hZWmOBzf9ECBiPM4Tx
+# 8NR/6DANywrO4O1gv8p2WljKjZpCgWKtBFEhxupL7fNWnADyL9fDvOJUueLxj8mq
+# z8Eq7RGMasPNw+polY6l7V7D4Zq0OM1leUcVnjRVSYOd2I8uY3I/EbPe4H7dK0Vk
+# Kj76NlGO1uageohaKapN4Hvj7IyE9psavkRHh6noMmx5aaDEZw/ldBPi0gtACjxV
+# BZ2M77je8DWIxYY6ZiqM70sTDL/rdMsaC7exl2oW
 # SIG # End signature block

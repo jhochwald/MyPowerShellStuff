@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -84,7 +89,8 @@ function Global:ConvertTo-Objects {
 			# We load the results in order and loop over what we have then
 			foreach ($item in $Input) {
 				$count++
-				$obj = new-Object PSObject
+				$obj = (new-Object PSObject)
+
 				# List all the fields that are in the query
 				$obj | Add-Member Noteproperty N $count
 				for ($i = 0; $i -lt $item.FieldCount; $i++) { $obj | Add-Member Noteproperty $item.GetName($i) $item[$i] }
@@ -98,11 +104,12 @@ function Global:ConvertTo-Objects {
 		$arr
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2lvoIRtTWnabItJ8R1tCDrhw
-# I/OgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHA9xPmCFElAeI5OU0jzBepqb
+# LxCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -245,25 +252,25 @@ function Global:ConvertTo-Objects {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTs4KA3Xkjads5eSfgTtEzRSmkt3jANBgkqhkiG9w0B
-# AQEFAASCAQCf9fWcTMZY1NmX2BsNBSGXCtkjABTPzPQvPVTXfPwwrhf0fAs8Z4NW
-# ywastp8NWxftCHibw6jIahC2aJtstUqPhF/9AEw+l6nTudlFJimjUNzlB0Si1rOS
-# iHG5atlDNJ8Bi2vOpz/bgc/qWhYKfE6kF4WVzHvI64fHWOYtQvG7wQkc1mkgxabh
-# HqoGrtAsdZPyCTH1s3gcNZ40uzP+JslcY3BcKoru+Zvr/DU5A7kO3R+iVwux/Ds1
-# MRmZr3nhjHnf5as3LXI+f5Nb0H+Dx9dolIk4kGOBQO7nLkvsrr5qgsifWrUxJ26L
-# TZ8CyxNqdKS5eZIYPdZvTD0R7mOjFU0roYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSMS2ZF5E2zv0ruoHxlwoRy5zMbBTANBgkqhkiG9w0B
+# AQEFAASCAQCGEDdyRu+b24vh1nbVPyQlEpwVYWXc2LrfSS2ZmT0aHIxd1VdKFHOB
+# KT6gznWI+6w3t+7aakEFWGjWjD1bRkjHotRpBTGjLkjGa5M+QnUWdVG5Nd8p+JfI
+# K4schdkHYynvDyG/QOL7XE3oYsYmhYFVtO7qPTyuPNC/03qs35cK0MBERJl/8ffm
+# UGgx8UU6pmEQe1zTT7pkOPNF0e5/ZFcRlvFVXV/1qPdxBs/ckx0rVRGul6NptwIl
+# JwmNWFJRnknaNR7zqKFAwdg7m7Q/yxB6X+4NWk/RlJZRlRcBMPbWVoUFbvSABdXq
+# r0lCILwwcYs9LiG+xw1VJJoWPo8ZztRMoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0NVowIwYJKoZIhvcN
-# AQkEMRYEFIR9T/th6qxpH1kwbyO1apoaZFxxMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI1NFowIwYJKoZIhvcN
+# AQkEMRYEFFq+A7GXnVaKgTTw+s9l1rrORfeCMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCNqCwpbk1qvnGWlzFYx1F6tzsFp9o6VJsWqmx0PnM6MMuz
-# mMPHXcZKRyTRM2QthKJgPoHIviWEpzJHDyzOgM+6DAgyWc0gv6sOFpFu1LqkD/kU
-# DTb8ysCoPscmmIAbBFByUveGY5xcc+hHpsxyzVWn6A6dUGi5tEUoARejdzQGcyPE
-# Lgszs2alLOwq8SLD2bVnH1w50hQY+pH6lP+8FqfBhbn5U92f9I+tNs1XNXJEAafz
-# dlbfIIVw1I2dnRowZjcgqf6JXFHuR4u8TL5+O4mxuWNjBl3+TILYntbx3rp2sKFN
-# KkaTv+G//jtm3lzpLdtX+BtYTkLTVe/CQl3bDuqb
+# hkiG9w0BAQEFAASCAQCEPWmHtyXDPWhDUeBGqgFukuaDJvjvb6c8V42Uk3kjncvl
+# o2H6SdXTOKFrBHKBYszlC3RzIVHRZT2tgtirKGOAawQzWlDEUoUs75MjwyBEPShz
+# N0PZOhWMtw9eLJYxvro7A8m1t4R+pBvgZ7yp42AJF7wQJYPnrSjGgUZOEwAROZw0
+# m/iKdnM62qX4gji3Afj9CHmTkrhpW8IxzK49sgdxyT2mfLaAS3/F4mJKwJQkz5uk
+# oj6zcU6VGN77BmSw/TEXmcQ/fG+bjvlKosuEyuhbM+BZbhxAKmVh5TfkenaDIV67
+# AdtsHvKP8YBh8CLuk9LwrW9uuVNFhXGTp5B7r9z0
 # SIG # End signature block

@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -89,16 +94,11 @@ function global:ConvertFrom-binhex {
 		for ($i = 0; $i -lt $arr.Length; $i++) {
 			$arr[$i] = [Convert]::ToByte($binhex.substring($i * 2, 2), 16)
 		}
-
-		# Return the new value
-		return $arr
 	}
 
 	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
+		# Return the new value
+		return $arr
 	}
 }
 
@@ -153,16 +153,11 @@ function global:ConvertTo-binhex {
 		$array | %{
 			[void]$str.Append($_.ToString('x2'));
 		}
-
-		# Print the String
-		return $str.ToString()
 	}
 
 	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
+		# Print the String
+		return $str.ToString()
 	}
 }
 
@@ -172,8 +167,8 @@ function global:ConvertTo-binhex {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUu2dC6bUkjIa8PVsltDeaenDg
-# 8wWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxH7a7KGFQrs87ymlwe57Zgm5
+# Eo+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -316,25 +311,25 @@ function global:ConvertTo-binhex {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR9iFC0SAHQqEGQAyWZE8uLnst34TANBgkqhkiG9w0B
-# AQEFAASCAQAhDw+Kh1SmgTEc+DXWUe0qOAL6/uLyEG+H4I0kRoGsHtLAeNA8qFjb
-# zQ9IEMgAZ+dS/pLhHMvVum0nn+gRASgyHupSbpHK1QIvDh0RNJx238Lpy0HpKL4H
-# t6xJ2qcInZtQKGchBag5eTzm7JgTMH0+a5mGKrEaEJhBM5odut2FTHpBke3XZhL6
-# VyaVV4hy3OTVAIMXyi6ytQCgDSjEuXJ3UPGR5NDTtLZ4y7H0krrgObvm4UU8AKng
-# xgVu0UxiTB99YEW/+CvijKMNy2abFBi0pdkzLSzpZDDYAcUeak8Ntm2NvtT7BZFb
-# CMebFJBp6PSNB3BF2x9iHD/rK0chgbyjoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTrHV6AzWEMtCZ0hXW6YgzJnXZUtDANBgkqhkiG9w0B
+# AQEFAASCAQB7yZFFWBGV6mqYEuyLa4Jjwojz8n98L4qMCdEHR234nDnqye01UAww
+# +cEExIpVerCpyPDCNlzy6hbl0oeB0vhA195YdBqlxGvNiIZpdJqSzQ7OJ+xcGpRJ
+# uYy28egXKwVFv5VipwSiJBhvfuY8M6zZ92aXanXN6W4xr9LvnaMHHHnerMXB5KOk
+# fm46Mkpp4+e1O+5LMqBNc5qAr2g3T1q1vS7qFZw/cUWgNX1rIIZiMnHrcXO1R3Nm
+# Q9i1NGbr+J9jtONoATD1Ry9ME/K96WuGmihXuUeymO7Z1gqRi/MSujMJCFyCzudt
+# grNuWDqpfx7Sa/C4NfAKK1AGOKKfAkfnoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0MFowIwYJKoZIhvcN
-# AQkEMRYEFGQMp9/7FlnuO1hI8iEZutRqhHf7MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI0N1owIwYJKoZIhvcN
+# AQkEMRYEFIu7LB9RLmhG462Bt/W356EXudZoMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBpyb7MJvBoEG+oXPnz08eq+3pfC27xZamfONKuBPrdJz5B
-# Uu93TMhuNn82IEytlpcafxfBP+7IpIhJGrqI1iAVH/m4lXzl/AuhLM6K2y+nZpF/
-# kXgNyiThZ601z1upM7nEXPdK15P3SdBF0DrUPCjRfm4OaG0lZnAGXCAR5bomcPj/
-# 4/xgoxNLc8ELo6OS7GfOTKy9gHCrd0JYFniedKLd4dNgdgZ+Nm74+spmFsaq27+4
-# KMICjiUcQSW2MqrpDHq91pirvS/c++luf0raOPFDxaevh0Is9K3lEyF5o8ttH9va
-# KRSK5aH/Pb4BVRueHQpd/HT9ZzWIja2kN1kW0bOC
+# hkiG9w0BAQEFAASCAQA8CgEZfzQY2B6lw1fCqnV5m0KJTinZA5LnSzamKX3pattE
+# 2+gSVStZTpc8rBrg/mHYl+m2knoCmADU3A+vpRrNZYqEPGy/VRCLwy8IZRLiAiSG
+# MEm/iYuBchq0hKF/1LW05I2QfiV2nou9ikXJ2Coq1T4fvDJ7dXp2TQbXsEt/wW9W
+# QCylIFSe2qqFy6cKOTL5ZcwfSEkoJLFtOIB0TT1ajYUgZDhnvYPqiRM8bZQhLq7m
+# tIl5EyOZpCXsz4NtQzAAWv0hZOmwRhOEGG9rzc66DMWv28VxS9nYqZqQvg9sD9Xi
+# g144wa9+jimTzG2VKRduwbW0/OkGHQPq6cJTBoFj
 # SIG # End signature block

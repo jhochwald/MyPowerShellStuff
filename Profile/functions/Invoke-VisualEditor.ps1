@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -88,9 +93,9 @@ function global:Invoke-VisualEditor {
 
 	PROCESS {
 		# Call the newly set Editor
-		if (!($VisualEditor)) {
+		if (-not ($VisualEditor)) {
 			# Aw SNAP! The VisualEditor is not configured...
-			Write-PoshError -Message:"System is not configured well! The Visual Editor is not given..." -Stop
+			Write-Error -Message:"System is not configured well! The Visual Editor is not given..." -ErrorAction Stop
 		} else {
 			# Yeah! Do it...
 			if (-not ($args)) {
@@ -102,13 +107,6 @@ function global:Invoke-VisualEditor {
 			}
 		}
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 # Set a compatibility Alias
 (set-alias vi Invoke-VisualEditor -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
@@ -117,8 +115,8 @@ function global:Invoke-VisualEditor {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGfyleJj328AvSCfaNaiXoQGL
-# rG2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKmWAgWYN4rjOqxTbGbtLzgEo
+# 7FqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -261,25 +259,25 @@ function global:Invoke-VisualEditor {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRqJrzKiE9KMAm80GSNyihuhpGMWTANBgkqhkiG9w0B
-# AQEFAASCAQAKRN+n+VBfvS2lxG81w1HsShwMUJ+SmT/SYZ28QoF2HKg5S7f8u5PU
-# IYxSldQoWlfqoVTf3Ube6Qw7XKjNaFI346ocC2iVGWNDT5LdI+lGuv3NmA9bcwVX
-# vtegMkPhmdRJAspwUoXiTVPdeeVdLpjgknA8LKCYsgLsSm+ZHKlwL/HGbYkjtkQg
-# zXF+xx8EBUcMkhGlRCqExaZgw8+LocGmm9Bt2oQ6ZABY/6ctNaxJkUGpgKUNe4v6
-# LcQ70OC7eumFdhpMCFoFuBzolENIHOpu24v+lCHnSBxS6J/p7FswACkgJMxqc04T
-# fK+DAjNQB8P+n9gPj6aT/GjJjwzUM4BtoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR0VFHUA4JMCQkxSQk7YdJuIptnNDANBgkqhkiG9w0B
+# AQEFAASCAQABIAMWfg1Xvy0JwK5mGhr5ck7LSK7YcxriMz5wNQgXXKpvmIp5OKSn
+# yX0YK0ibDDQFDordh24STikc7QHmCu7vXl3qDxFFvq0Y4MfCon/VRr/xCfKOXxOW
+# 3xGfcqArYcmzl+Suk7evQfMvMFHBtK3jE18e1KhciNsRZ72Bqntrlj6XstR+q7TC
+# IGXmTb2mCBYgxp4/msNNuT7tOTTPxIAhM7cbcMMxA0/qHghmQEpbmUGrY4U4HqOU
+# Ir0sfQym/HLYIZeZAeXZiE0Dv0Z7jfQ6jOYS5M7aYIpucZSFN1ky0LmAr+vSYdo3
+# KfhGxg7J+XKZooe/Qrj1EtralQGHwffWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ1OFowIwYJKoZIhvcN
-# AQkEMRYEFA8dA091ySK8lP1COghVUNGtIMBoMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMyNlowIwYJKoZIhvcN
+# AQkEMRYEFENpvp3w0bctLGp0iKRl/0MPj+YPMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB5PigAssOQYnIdxGx3Y/U4207jCWiTwOABxKgWHpDZ6qhX
-# J7KNqV5DvKcP/FF1fPfJd3jFCRWovfd9A8Hu9Gg8ULvdfqRz7fcjKQHGXR8bPDzz
-# 1UxPXt5H6x5sjXphXj+PEge7V0+OVnwP9ecQ7T/+qU7aih7IjflCaQvEvlbUisCK
-# BcFbhI2OseH7JrmmrNYTUyqF9cg0GAhc/kKvYhRT3+yPg3m2hHWfeaDZu9B1cH/D
-# KaDCGbxl/o5MFna6wgtooNxOhkMfhanRPV3kZNGG9UQGuV3NeRIx20p1fpOj0m9o
-# Fa5NyFr6FNaMknoJ8OPcoR1Z9ceUFybDcTkBws9s
+# hkiG9w0BAQEFAASCAQABqWEidzNZP/Zb03e4AO82sMQeG6wXKAkZh8fqhoBcQZW/
+# /pNABnRohLi2EMB/VEp1Ex8J4w+Jr8LMJwrKkgMx4DXfyXJMJRdE3sv8TLm6z+AZ
+# +D7gQaGlnf54iL+toqDHwrCXFGQuqvDluOpjVGUZpg/t5jbJXl2x5diot3TqYmqJ
+# f7d0YtZFx8RvDtKzPe9Wp3XdFVwQg84qVDlapkBj/Y3TKoswQJLYm3UXCBBTUK8h
+# hkJ8s90r2iEOWZ+8xtJXlbudaEt6UqlRrF36/7a5au0D2y0sXILXOi2j7xYveWbq
+# VaCTAoIiA1Wr1rTILnMWiV9oPwQRB0Phlq6dsovC
 # SIG # End signature block

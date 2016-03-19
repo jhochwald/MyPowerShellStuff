@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-05
+	#################################################
 #>
 
 #endregion License
@@ -51,6 +56,12 @@ function Global:Enable-WinRM {
 
 	.NOTES
 		Additional information about the function.
+
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'Medium',
@@ -98,8 +109,11 @@ function Global:Get-NewPsSession {
 	.PARAMETER UserName
 		A description of the UserName parameter.
 
-	.NOTES
-		Additional information about the function.
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -134,8 +148,11 @@ function Global:Set-CurrentSession {
 	.PARAMETER session
 		Session to use
 
-	.NOTES
-		Additional information about the function.
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -163,8 +180,11 @@ function Global:Send-Command {
 	.PARAMETER script
 		Script Block
 
-	.NOTES
-		Additional information about the function.
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -191,8 +211,11 @@ function Global:Enable-Scritps {
 	.DESCRIPTION
 		Enable a script to use in the remote PowerShell session
 
-	.NOTES
-		Additional information about the function.
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -219,8 +242,11 @@ function Global:Register-Script {
 	.PARAMETER path
 		Script (Path) to register
 
-	.NOTES
-		Additional information about the function.
+	.LINK
+		Joerg Hochwald: http://hochwald.net
+
+	.LINK
+		Support https://github.com/jhochwald/MyPowerShellStuff/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -237,11 +263,12 @@ function Global:Register-Script {
 		Invoke-Command -Session $global:remoteSession -FilePath $path
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTUMzjVL6Qi5Q3BI5c/QMR7py
-# bzagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUp/cSEW1J1ePZXh9JYAa5iptK
+# TBOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -384,25 +411,25 @@ function Global:Register-Script {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSmPuaCnHbXINgQuJz2D2C8jLRswTANBgkqhkiG9w0B
-# AQEFAASCAQBr99lxIsgQ7C07dB6aUIn0TGQG5IypvObpgGncbjF8kKZUfPsmRKv7
-# B65dlBrlnMi4l2WyPqnhOJZ5o5s764GA4ULlzCAiK7TgfTafvD2hRwmm/zM808V3
-# 8kRjXjOAVtIAs6Dtx3JIniLj1Ur97BUl65VlrWhIrgTZI4Xd7B2Papsn42XGZ6MA
-# 8iLJaoqfP0FEwbaYPllZk+C5BCU38HlPZaU9d7SZVlXJWfrQI3DF3ZhGhCc8yS4+
-# G0LytBBeUzGiPepyohWop+8w4CZzZwuehpvkWqlJe8WUyO5m2eOTZMO+EkpgiGVB
-# bHpCABAzErhvLIJCAHWuRdQQSZmCHwyJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTyqf1ydZ22W5y4cbT2dO0PMYPRfTANBgkqhkiG9w0B
+# AQEFAASCAQBh2hUmAoqSgfBbPH026SMA0wSUtR8uZl3ShKRFuUReJue2LD5Li+mY
+# PHWISBiXbc7Oa5XhrCJxvi9ZEvLMIpXNA32brLP9h+p/O6yW2bxtGGVTL98LlxyY
+# 2Rn18PLS7QBArku1iq0WC5TAIp8lkYfvUVktEkSeG0UvmdMXsjANAldVc6WphMsK
+# A050VF84WoOH+8ollDP04pK1GcrGxkodTK4fUrgTWsyUZj87fAdv35MFXTb7mIT0
+# Kal5a7Y4SJ+wMs1PVhs2d2BmBUoqB5kbzAjjXYR8FYsKFKKz84TTZFhMU0xpa3B+
+# iou20hTM9oQ4+cFoeLWpUnmBoct/Qrv/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwMlowIwYJKoZIhvcN
-# AQkEMRYEFA5gR7o+DEn6eEwGYTAv2Ic1JC9FMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMzNVowIwYJKoZIhvcN
+# AQkEMRYEFLBFCfKoP7tU+0x6ulii0xbHS3dyMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA/XUnWCZG5PgLxwx98oMx6XDTqQRIeajtXtG083dRkz70o
-# cLolXVjYvIJBu/g3ltX6t0ctjkckfmff46n3HgRMRArPnDdiGHdDbNPNikUPYcoR
-# GQkKdb+41cftMj/3Ap8mBJev6JoX2FuGlnTztxpQFQJJg1vjMDCQfUuKwM7Rb4VQ
-# WQPBV1/O0xV/+mcEtNUjGjFeBU+C5CBtiwh9VEIgfU0d3LPuiSKyZZqyewiFDzCF
-# U4a7Ufwk188gSQYmWFsCGQXVlyH8m7CFoRGBdMY2XnBmPF28apJwn7BqVAS+R2qL
-# pLBtGuTFDsCeygF/JdnBDYJo0Bk+WdGmsDNqCaZM
+# hkiG9w0BAQEFAASCAQCuaaWnUmjmZUqbHaL6/6bxnpnXxru5gN9jPfK9MMWYinXG
+# ffZgR1RCwmzFXoSDhs0tjQEQPsFdLzFfCoeRd1OUM2WdV0Y2rT+rlPk+Cq3Y5b/F
+# g57CLawBJfx+cdrCikvG067jL8+hiGgltUdCALl9yhQpwR3m2xpT7DdbB7SlJlbY
+# hJ6sSMS610IUQj1QsXpqolqADfOnlUHLUxoOS2646176d5qyUpr+xqsTyi5cHZiS
+# aKeJYREsFaf1DzSeGNJ2VhcAYZfyUnQpYppz07KQ5PEcfHuEJR75ZNuLe1231qHo
+# g3ai059BwF8wfnZKmTNQOEGoe5CXtducLoPQ/JKj
 # SIG # End signature block

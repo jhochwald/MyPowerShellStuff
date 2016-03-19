@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -99,13 +104,19 @@ function global:Get-TempFile {
 		[System.String]$Extension = 'tmp'
 	)
 
+	BEGIN {
+		$elements = @()
+	}
+
+
 	PROCESS {
 		# Define objects
-		$elements = @()
 		$elements += [System.IO.Path]::GetTempPath()
 		$elements += [System.Guid]::NewGuid()
 		$elements += $Extension.TrimStart('.')
+	}
 
+	END {
 		# Here we go: This is a Teampfile
 		'{0}{1}.{2}' -f $elements
 	}
@@ -114,8 +125,8 @@ function global:Get-TempFile {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPbwKQUjVzQsM9rAj5jrfjNc+
-# sQSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1Xfw0cg6taeU3UplBizSl4ei
+# IN6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -258,25 +269,25 @@ function global:Get-TempFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS+QwMq6dGelrO9WNzSyJv3ayRrFTANBgkqhkiG9w0B
-# AQEFAASCAQB83ROUvNjItLTobKPiMLeGrFDaukB6YzXE9agGqhlOC9L83gF/b0MR
-# E0lVODk+/VxgfFcpvdSSXgmm72HLDCswVR0lOfQ7z2K+trFO3Kk0MpvpA0cFcI0J
-# sIX0hN7Fh8K7o4DCRMtXZHrftE/NJK5ZWDa+zxaTusuT+vYP8XIAyLe5cHeEb9SO
-# Fj9V1ufWCmYL4Kx3bhysvxVPyX8yNQi1Q01HPIQzAHhsNTfyBv25jYbkkdvsSWn2
-# OPsB8oWNYpdymo+1qNGkhDoSFOnz1gAGSYEuZAksVqjR7GSanmEG1B23GjYAp36N
-# mXj8oZ6lFRN34xma27klTGMm3BkKsWiRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSvhwrQKitw1AqcddIQ2h7YmQRcsTANBgkqhkiG9w0B
+# AQEFAASCAQBoVQDaK48B3cuI4S+SWoN9OuE/2eoWJvAZpYBt5BWL50QkCpFeAamj
+# vouUVRpwEM40H3qrjdmAzeOaqwgTUgf7DkKqos+bLhzTlVgbUc2dvESFVluLUXfg
+# BBZaQ2SOJsPCxPQHlG236ld0wVW7Nzm3EbXeAb/YmPdWxhm35P5VeFcIPM0cTBy5
+# qOJWRxHPkeeUFxwQUf6XLaGsTtFxGGihhQk0DUz0vVhXDDwLTpBrOW2QxzKo66hB
+# 37jR7bUZpisPfC+i9yWcXPg1YPYEdl5W4pUwCNMuf/VArdnHQ8w3/uAsXkwZmbqO
+# LuMHWFIxEG3rfNGUCDFs16R7Uox00Q6zoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ1NVowIwYJKoZIhvcN
-# AQkEMRYEFO0njOhVBFAjOpbklwMHFfl0uma2MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMxOFowIwYJKoZIhvcN
+# AQkEMRYEFPSWkaRP8cOM3UEKIoU12wTOC9lrMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA4gpWA4omVN0zjROo1jBCFrVEsez4d88tw0Cm5bitWLi1a
-# pe411CaMYwZUtATWAZejpssfE//zRZaivhNeMf4mJQg/H/MBEs0JBDNynSWYWV+J
-# uhS7qXwNDGeo+cCsp/TP8wln40J3XWEnKd91iwSqHMHuCS+TwiUNd2SNfOpPtA3N
-# JG+eHrh9OFJOZJit7N5d+SLwdUBaBnfrpryHCFf4jxSRr43OLAfyIGbr+TJtt4RF
-# WTotsXDVlULMKvpiXjqioVxZqSRYBU3zrFVdHTWLAN2ggOEvbCqCbr0oQpoeXQIR
-# JQS1HSfRws66dZa4d/gmfTMqSIixGDbVsvAQjW0R
+# hkiG9w0BAQEFAASCAQAQk3uXmQc3oWT8jE/n85uljHP9UMsqvSG2r1pqXep82EWg
+# qretGaFe2yOKJ8mpz0mMNApht5IcKOMXgTj05HBSOKJN2LCMvqZ9msxrjmhVVtOO
+# zknT4947tSyeJdwWk4A5VigETY/9VJrP8FctafWnnoK3MepxE6i/3Banhk+FjIq7
+# 7SIz4EqW475s3Hi76Q0vYPPYLeGiqvDbHKGrEv1IiWOBgQzjKC8T/WfdwEZFkbCc
+# aPJw6EXT0djUejyI1ZspCMlElszIeKoE0oVthkOWE8SSWQ6hxbqxco5/15dlxOgM
+# 4bGYdRVWQGFu/ol+YjL5e7+HJNayMMOdJIwg6HiC
 # SIG # End signature block

@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -85,13 +90,17 @@ function Global:Expand-ArrayObject {
 		[System.Char]$delimiter = ';'
 	)
 
-	PROCESS {
+	BEGIN {
 		[PSObject[]]$array_result = @()
+	}
 
+	PROCESS {
 		foreach ($item in $array) {
 			$item."$field" -split $delimiter | %{ $newItem = $item.PSObject.Copy(); $newItem."$field" = $_; $array_result += $newItem }
 		}
+	}
 
+	END {
 		return $array_result
 	}
 }
@@ -99,8 +108,8 @@ function Global:Expand-ArrayObject {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULJ/iY3ppUE2Dho4k0ipHCZYY
-# GgagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUm8uFp2lQrv3rEzVxMaNgh1Wu
+# UHagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -243,25 +252,25 @@ function Global:Expand-ArrayObject {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBREo10FMBG5li+snorzIq1V/sBt7zANBgkqhkiG9w0B
-# AQEFAASCAQAP7I+IkzQOvObIeAldN+SVIsVJB2oYoO5WxiGFhPiMeShhR+AuqArM
-# qsrO2FFIU8fJsWsjOAegRa4Mhfu3TOPyLr2g7NTTYOLmG+Bj10b+INmbzYy1pwRY
-# bmdOIaFbrqJs7Zq7FlBq8YFtAjSDpY8wALP5+7d+04Jsm52bILAkVI/5uyDkMB2p
-# VAr7G2VU1GHwzV6hdrZfIzwswgrV7f+Wx/+6bcUfNzDVBkYlPwIKUXevJcBFxXzr
-# ZbKUKntZ/gl7l4SdAhCq6Z3VV27WLG9SO3tf7dcqGIuYC2sp/Bh6p3eESHuYRRLJ
-# tISGYODVhCoXVnZhXYbvBBqnjcVgAEZ/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQV91SXwfDQd6iZNSpkIc1C4uaebjANBgkqhkiG9w0B
+# AQEFAASCAQBQ8W8a1z3xqdvQXKWTg5nip6wn2XRpwsY2v2Wq2qpjjRs6bGFKzljr
+# RykJsnJvNPe4FcUzJmK8cY2/xW/zP6yaWEgHnHV3EJb1vp9yMEfgIlEaPt1k+QA4
+# 7+LbWPFd835qYbqJRKY747Vcjyzp91Y/xBivMGUUN3n9GNZ+TqPLkWAEzGqS+xWI
+# eEnTDReChqIiUBbxk/cNAkPsUcgrnbqJgpY11E1D6zeeW4KQxnuc1N4lWbYIyw4f
+# re4XuwOeOhpFN4u7TAJXgbwjLyXFJiRwp33n46CVw9i8kcKLnSQXSEzo/wCpAMSI
+# PqBcB3FgYTCtj4qdpEyoyRDeKCocy7s5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0NlowIwYJKoZIhvcN
-# AQkEMRYEFG1jXeJvGa73+mi03dhpw7SiORC8MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI1N1owIwYJKoZIhvcN
+# AQkEMRYEFGnAMcTKLW5SSORHToKv+VSCVHHyMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBRSfcchf1JcAQT/bzC/9ppocu7f02vFeJy3KAAWT4rwPFf
-# T+chSv207RlCl15zJ3YmtN+2QtGYq3HwFlep5JN7pslQ4XpYq4Go/5CE9lpU34Wv
-# 32xTLT1JguIVCBTVS6uRTQtMV6TTTOC0vcDf3SEKJKyE7X3FKSyVuWKTJRLa1C7E
-# V2KssQRStqJnaAbkhy0MPghisltJl7ah9b/4p3Ccl1NehXjeCMnYdQ0eUmZS18Tf
-# O7SkIePlh6a183OPOyrXIidlf+mOmLIygVJyZaXlTs/ldxMQdn/MJ5736GukPilc
-# sNfhHFeLXaIlOuxYKcxEWH3KKw4zIGlfGQjJ0b43
+# hkiG9w0BAQEFAASCAQCwCQwIzbDAcz91R6bAJhoMgDvNNL5Jpnisfmt27ia19iKN
+# zOpxdLYmFFuWFpbF4H5ZqfWpZ9TpLF+W4ZpIa4CDlaRsiCfK2gVCng7WgoUA+mBS
+# nRKvRQTxT8y5a87liKFOk+PVFnjePKHXWsSGMCO4a5Ae/halTTCvlfZ889/acwPN
+# lwr3VVd3lXcwZIhThr40Zkl/rbGsNehN1AsppIpFsaSGSQZjFaavyWFt+7WQl6jH
+# hXpZHM2l7aukErAw4ve2FT92K2rlefwQbCp1J4WJU5nnCJpVtClo9nhILiF42434
+# 36wOV2LuP7b74nfATCvISWxorsJeznYm3rqBzmeZ
 # SIG # End signature block

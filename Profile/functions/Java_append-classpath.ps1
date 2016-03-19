@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -76,16 +81,9 @@ function global:append-classpath {
 	PROCESS {
 		# Do we have a class path?
 		if ([System.String]::IsNullOrEmpty($env:CLASSPATH)) {
-			$env:CLASSPATH = $args
+			$env:CLASSPATH = ($args)
 		} else {
 			$env:CLASSPATH += ';' + $args
-		}
-	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
 		}
 	}
 }
@@ -93,8 +91,8 @@ function global:append-classpath {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJcDa0OJnlgbGL+a18SbGJKCz
-# 6qugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUezXUnYQUdD2x0k/UiotaDby+
+# UqCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -237,25 +235,25 @@ function global:append-classpath {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTKdmpvcI2pgVMv6gn3E6Mq7bXMIjANBgkqhkiG9w0B
-# AQEFAASCAQCqnahXE/bE74OVzONuoY/mfWCLx+qkOqc4gMT+JH/XfOxRlTvdPAJt
-# WkYPhUnt90h3Bo2trVV92+34PNmWPH0Z/1f6+PQFfi2PArc1EglPLfwtArePR8CD
-# RXHpCsgFXWUfWYh+wwxllvkOsLuDpFRTyL8VT8WKkjB8SB6VCwbxlozhcgrg/eE2
-# /PCBNTxIKcqIUajFfumdzTJd3F5Ip2QqkkM9XY8pbLYZcS+tWXeWNJ0JvwMOmJca
-# qEOLdbZQLiSUNUHz/bKAIBbE+7z+hgG98KpjIjXi0vnG3+2mTSkBpS1da2tliQBY
-# c5emALE5dUVeC16+FPrTph2M/3j+a+feoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSF0drGpzvuQT1GbKWk9gXCju1ygzANBgkqhkiG9w0B
+# AQEFAASCAQA3JWkiwLeWsO5pc1/O+kZXVi0m5j21bv5tnGM01ysJT/awAHVUnBhP
+# 2DytRA2+BsUe0x7dVzPfKADPjS2oigHmsngPU4lAfktHxLDb9IW69YW3pQAFywf1
+# WSEWHRrGa3hl8Ko1gBnnyCwmJLy3xquI6JOFFSDcbI96C5bVLqrFhlgSRXJizLQ5
+# Otf7GyrU6o7SKQauRFosXNs4m5ddF8Y+6H/Go8Iawd//IvNaruwOdFNkCD5uJR+b
+# 0QZFJE4TvoHeOj2m1aXfaQFazr2P0ABynZDBxn3hxSweF//EUfF0NhVTW1KCFZLh
+# b4nabEJU4q+AmWlYHxo9gh5l+YeM4VPIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ1OVowIwYJKoZIhvcN
-# AQkEMRYEFKP010AxiZv0X6VPftlWYOc8lUDzMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMyN1owIwYJKoZIhvcN
+# AQkEMRYEFLeL5Zz423NVCHdoKmEJa7j53RqZMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBAvNz5ycP2qf8Wuaqfx/0eowYp8OG7gTyCbrqvTyTuuR7D
-# iNsH881hLpjuA+AO/KTlWvbRxP05QcTtr1f0KeK/ljqmT+mOXeBZS7ZXsL7jexNy
-# s5213Jj7kbsdvpIu47sWdl70hQ06Nt66jm3jB55iurnawtmtrKVCWNLvXkiig2hQ
-# XLlKF2V9Lch8XSAeJvID4FFJUVUNM8VCK/zU627KJR/b6+3HIJnDitseMZR0Ag0D
-# F8jEFIa7S2BJ+yzLLLID1PNY0witojBn2t6/t3BjzXvyPIuXiC8gLu7fj9dZoVLQ
-# O2vhNfSgQS9Y6lho+SLHCZ7I5zY+rd5IZAfNd3zo
+# hkiG9w0BAQEFAASCAQCniQgDQdQdI6Gg2jiJdt0iEOk4negzv+Jy2HRP+HFLKh2g
+# uhbMxSXQriItHH01dkqyN1UtaE84F+HR1Nzhlz371qIoXFFLBowsQwSb0OiJKR17
+# m+2lPWt4Jx26FaTovBZe7SMny3mePcJuRDDSdsOVcSj26xj7GPtAYA1KRH281v4f
+# HxTyBiSg3gKlMudxUjjjgcEIcNGBLVBzDJzC7pTokhg2U3TwDS6NFRdAFqL1YH1e
+# 46T5Uiwbzl+GB4xNuQw4FLyvPlQkhKvo6RsvgBp2BA1lQbQXDY9nJeWHs4GmhmZX
+# OKlUeGYAbtKvHbmmZtH7wQKc/KsHYSSRks51AFDi
 # SIG # End signature block

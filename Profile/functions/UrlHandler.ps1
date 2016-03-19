@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -102,17 +107,10 @@ function global:Get-TinyURL {
 			}
 		} catch {
 			# Something bad happed
-			Write-Output "Whoopsie... Houston, we have a problem!"
+			Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
 		} finally {
 			# Cleanup
 			Remove-Variable tinyURL -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-		}
-	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
 		}
 	}
 }
@@ -170,7 +168,7 @@ function global:Get-IsGdURL {
 			# Do we have the short URL?
 			if (($isgdURL)) {
 				# Dump to the Console
-				write-output "$isgdURL"
+				Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
 			} else {
 				# Aw Snap!
 				throw
@@ -181,13 +179,6 @@ function global:Get-IsGdURL {
 		} finally {
 			# Cleanup
 			Remove-Variable isgdURL -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-		}
-	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
 		}
 	}
 }
@@ -248,17 +239,10 @@ function global:Get-TrImURL {
 			}
 		} catch {
 			# Something bad happed
-			Write-Output "Whoopsie... Houston, we have a problem!"
+			Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
 		} finally {
 			# Cleanup
 			Remove-Variable trimURL -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-		}
-	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
 		}
 	}
 }
@@ -323,25 +307,19 @@ function global:Get-LongURL {
 			}
 		} catch {
 			# Something bad happed
-			Write-Output "Whoopsie... Houston, we have a problem!"
+			Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
 		} finally {
 			# Cleanup
 			Remove-Variable longURL -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 		}
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUH0jXUbpwO/A0ragJ905eCL5a
-# J+igghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjfujFv1JFd9RRM8y2XJs4aLt
+# hlugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -484,25 +462,25 @@ function global:Get-LongURL {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRXD+Ag3HZexWEPGRyieB+bm0prsTANBgkqhkiG9w0B
-# AQEFAASCAQCi53RlJ03/+ugBXEbcCR4V8GE/lCMgzfuDAf83AVhZuGKc/1DFYapm
-# Vpc+YxKrjOUjr84NqOc/iufTaUrovzQhV5ej1jPaRRvuuMp18o5WHFq3rvw32KjJ
-# mJSF2GKUsn0o9rudl1BXkTurz51I0CQTpH9J2Jiz/ex9c3JpSDu5FJ5q4BIkUtZ3
-# 3hS2BNpLnBGRniVmQnl1WHyKP+aGVlXpsidKifwC3jNRkbV5XmHPgfKtqBtwn+Gl
-# rgpqkIZfZHUYvZ1lOWMoUxerVawHVPsjmqaaoOd2/HB1xbDkG8mZnErfAjIZ8RgG
-# oGn3n5qF1d0ZmZhDNglkG8r63QC2PV95oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR8ZqiweqFuNf4V3uzyiUtXi5Y3bDANBgkqhkiG9w0B
+# AQEFAASCAQABf8VpNnwndrkNJK7HNmSvqCY4Cuhk6Jy/urE5tMIP+4TR7S2mOpVI
+# 6FGKPNYlpbHfdEOzM1Pd49eOb+2mUGvbYIsiIDDsvp4IwNN0Rt/dChj6mvz3Y2TK
+# nuqxK6zKuQmt0s9mUO/CWuvrX7IE3Vv+7V0dmIcc/qt+UwBne8lKlXI/OwjPTUbI
+# sBfYrfmLBp8A25nz5aSOAovXRflXWNHL6dZKpVBPFbKLedyCLvhIFnNDJv8KSYD3
+# vsYXneri/Lv/HZfNw1HM/jvoSWmZIAZbN5LuD7y+MmrwbeExueKhBe7whX29xWn3
+# FOe/aqxmbW38tyXy01AnjefdwQlJAN+koYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwOVowIwYJKoZIhvcN
-# AQkEMRYEFPfkn9ZCmpWfiLKzzAWDCD8+fgaVMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjM0OVowIwYJKoZIhvcN
+# AQkEMRYEFInxUXKN4pyX3Z4ef9TV9WIfGpu0MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBtxDjXEE5TURgpH50x57giPCRKNRhA/aRMvcIBbpQWtpcz
-# Dkyglwf/LMHQHluEDaWLIlYOrNLzr6mu86jLaFfBp0jIxKICuZE/ZXCVCAMhk7/w
-# 5fhYfWBus8/Ma+Nv5Tm6kF0OvzjYX+cMfe9KBtJKwGLtBE7tKdCN4Msuth2rnlZO
-# kqWJFzp54Hmm8fTUTxNf/SkZWOKw6XD9mWTz9/9vnxWzJu3OjD6RWepqbjWiBD50
-# 6HFMmnoaKC0wdBtsAZF4ayAD8GdNlE6O/V3yKxlXUtsznqNy2KouMz6paj2uExYe
-# TFLCi8WFd+ctmYXLCKNKbAeNg8MJ+ZnjYdbzlMSR
+# hkiG9w0BAQEFAASCAQBFeG9cGR3yN53cVfewelWFtBRf3rLfWbPYAOju9cvm0y4S
+# mqsreZeFM1dmxbjPoVVHDgA+8prL/5pzSKQ5uYUpnvNuqtLmWrPT5gur85EXrloy
+# R6GS6/gxPDLI2msRtQ7O4Q/4QNmr4A3YyaiibGRy7LUI4V8IvtpPOZzb5grOx+ij
+# DwVvotTUku9PvNSW30vXDZJ7kc82v2vwIlDpeZIHZ8kupelHSlYnv37QIiB4CRyh
+# L7otx20RBQIgeoQaQU2Z4cHdzc8i4jqCJ2y0eHUVi9R0DYUX1Tr8hlU5XsTjRzFP
+# s3ULLOV5M0//iHJ3NJ7tU/EKKHfX+8j67GH1vMyQ
 # SIG # End signature block

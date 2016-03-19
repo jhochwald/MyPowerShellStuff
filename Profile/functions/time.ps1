@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -94,13 +99,9 @@ function global:time {
 		$file
 	)
 
-	BEGIN {
-		#
-	}
-
 	PROCESS {
 		# Does the file exist?
-		if (!($file)) {
+		if (-not ($file)) {
 			# Aw SNAP! That sucks...
 			Write-Error -Message:"Error: File to tail is missing..." -ErrorAction:Stop
 		} else {
@@ -108,20 +109,13 @@ function global:time {
 			Measure-Command { $file }
 		}
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUoKwe9WBAg9+TnWOfZFf21nMG
-# 8PmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQ3zbY9ks3cDmv6Dz4zuZG0MY
+# Jh2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -264,25 +258,25 @@ function global:time {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSevtL1PMIicbSSCm9QCBm4xggeJDANBgkqhkiG9w0B
-# AQEFAASCAQA2YVxzu4/GJDMCeBMyt8oC49fckb2JkWoZjWZu5coML7GKL/x9Tf0v
-# Q9TP4PsD4dR0oELQDr/zSHGp2HEwOObnVnNg75GdvOR3T8Re8gAXmBJiJYCrXzD0
-# iWkdPjeAyJe+TEcgHwDRx4cSbn3JOfsDA5TlCoOu3RnJFZ/CVKgVKxlLyCI4SS2e
-# MuP2vbpHbnLCzOEf7Twj51BLHvVJunzTOMW22SentxAwaQYayilSqTm4Z6JdI1ZM
-# FMB1BS/ybkPgoCsvnTaNIVMP2qATAUXRV72irg5v0Xl9nek12ABDuHNkk2NdiSt3
-# Rg6QWW1xP0sSD0tMUyOgDf2CASrzr/VyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS2khO3eNTA0EzrXh07EbHsb+xA4DANBgkqhkiG9w0B
+# AQEFAASCAQA//TKJL1dVDh4IFaQ5mXqcXEiqiPdlx57Ev5MZMcpBUtmydw1zzO2e
+# oU3baevqnH62QaGev7JWRsMTH5I55q5GZC9XDi97J7gHhunPAp6uTqeaMXQ0uM6H
+# /OYGrEkq+7PY8nxU3gcqHt/u2KgLK7Y4P/xdopiCKHjEy3D/nIlVBR45cws5LEBe
+# culIvff5r3+fhWumYWx+sHVsp5fxuALYz3MeYC2vSalQ3z3EisJ8yO090PeUTXLH
+# OA7xKDDDgE4sGUpOXyYqFesOg4pwdqnB95E+mdLZrSro/CrHD27nY6fKju+jFqy4
+# VVTDlRTuo4y2weKiEpBupWmreZxeVDGVoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwOFowIwYJKoZIhvcN
-# AQkEMRYEFF4FPQRwGUF6B9ESqEMUdHUmh3stMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjM0N1owIwYJKoZIhvcN
+# AQkEMRYEFDC72K1b5I3nWcAffmABXeT3gDmyMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAsGLS3bVBXsE1FxSsC27LpTxy2BDZpmxoeiHH8H55iPh0/
-# Ra/52NuFzUY0HJvrw1GarP0dnbfRonm1zNWGCjT1YCwKbdXPr/aTm7mvFRDarwrR
-# +8t13FbgH3k5j5bImS9Xbo14kSYVSad5hUqLKBVC+JUzNySJZGMcTJxNhhqeViTj
-# jcZjxQj3GxetJyFjWFT0pyB9LcNc0cBF6i0sXhf8LMcblWAIfGoa5htdKPcLSfgA
-# cYuXgrRpzN5yuOI4RmgDziZWzjGg09Hq/eaTSFapitBFo3GXShH/iAo2zJmxLk6M
-# ueET8hJOAjqAER524hXTg+RRzRFcBg6ICpAMWEEP
+# hkiG9w0BAQEFAASCAQA/3wjZD0hj8KgNntTdotaXObP4K4V9B70bhfcxsJdlzO5v
+# SDAleq5lFLcVw67GyR3FB/2fHRfWExG7V5qiFGWokg4cNmcbzF9u5caZ8iq7rhpJ
+# 0QpYJW3gspX86i6hyRAcUMWNEmcEDM+0oW3v6k67MDbmzUw4nkYhgrr703EqyJp+
+# 6bHl3XEnpBbL56fFcXaA6IoNXSExth2XStt1zqDvofFI51Ovm/E2ihw5gduQ5Fgf
+# bUrN0NZ9w6t8NyuMkLmZAoAUEayrxsBWK3xtVYPLmGzwp4qMmRnph2IVgZGtwVFS
+# Rdk8xv1pDT55aaiEiZPsPuD4pSzzH6rgxX9NoKQn
 # SIG # End signature block

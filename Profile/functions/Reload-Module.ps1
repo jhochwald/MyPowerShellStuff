@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -74,10 +79,6 @@ function global:Reload-Module {
 		$ModuleName
 	)
 
-	BEGIN {
-		#
-	}
-
 	PROCESS {
 		# What to do?
 		if ((get-module -all | where{ $_.name -eq "$ModuleName" } | measure-object).count -gt 0) {
@@ -105,20 +106,13 @@ function global:Reload-Module {
 			Write-Warning "Module $ModuleName Doesn't Exist"
 		}
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUf/VkGXBKve5zAKbiF7gvjeO7
-# 7uqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1g+vTDpFzOM2LbDQ42kqesO3
+# kDSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -261,25 +255,25 @@ function global:Reload-Module {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT3Q5Uz1kJeb9WgO7n7GSzqiutRDjANBgkqhkiG9w0B
-# AQEFAASCAQCdKEwTzXDaO4vSmbmKo9ojk3SnXD0TXY/R3gx7qaUFxdOfoyrSm74O
-# xJ3sQYb2Nqn8PFXe/jV6TpuXx5ST+XKbHqy8Xtn3+T5bRQzn2TesWtrfRzS8JEkq
-# Mtp3hqjtnDIKbe8SW929OdiepUByRof71TVTryVcx8NL+BhsRUXC/K0eKPVIE8TM
-# YWBtYPFlrwuLyVGA1jfTgZ0J3IDra8FEbPC2stQzdmDQetqtxN0FjncjYsns6GQP
-# RR2gb9IIEZbRdyLk+q4tB7ko2C7+6t+FDmPpjKZjz95my9ktS3sA+96z9Pr47Mkc
-# ZR/ub76Z3u7Qm+UVqHj32lEFcEULQ0D+oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRSNjSa5KLlazOS5LkWqNtraIr1RDANBgkqhkiG9w0B
+# AQEFAASCAQBWEL0LRT5NLt1kf44VgvpJqvRZ7EjXP0t7M6GzLJoHJNqMT+edBrII
+# ddWT1A1MX0orNhyCm1sGAHyqn9mB5LEyk6eRZUr6t7Mu3YR/TU8xdPBjMdGs0Da1
+# KA4zfw8DFplLcloac173ih0BaUc19Cnbz1mrFnAr0tUgTZpP4h8rvHX6pi0w03T7
+# z7s/AfC5bIhdCeEjgG2Ep+ptvhJmEudlhr8umuq4l1bttpNtWocnzCGWadRU8udb
+# luHMRcPcQ/H1dhwhmj9rZljVtNoDNLvyAkmkXU7fYnqAkTMU+UpnLdbqDKgff466
+# 9QWIROjzoEKlhdgIoJYfY2vdw53vfTEFoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwNFowIwYJKoZIhvcN
-# AQkEMRYEFK76lx2Cn+zjyVl26rk+NDYUvA0AMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMzNlowIwYJKoZIhvcN
+# AQkEMRYEFNdBVq07nzMHEutrnx52E1Od62KqMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBr/m6FCB3ZVc3BZx9hqoOSmWnT9WUwHAyePs8HHezzi1u+
-# JjlVg+sPhCFUECxTjVfX/VevzpOXHEoruDWApiPhHOkLS/72lYRTjuDYEn1gnSFB
-# BhAS5hSJxAgNcIRSYbHgg3b3B7ipFyMXlXUcCL9T+Z3WLmI61IGJdSFwmNhWfR9J
-# +MjgVvKOuST5aY/fMDtNjZk2eiOFplGFMd2Lc0HtI63UgMTaXLrHV4FiK3CwEj+T
-# Ih9FByOq+YO7Tgpc8WdeA9lBVlEfn5KaHbYVEp4JaeXrx8w/p8lx3SfBbGtp9A8O
-# 8EbK7/3ev5HdnXLaxYzRdRo0U53ZjfmF0zUZyWv4
+# hkiG9w0BAQEFAASCAQCKDxw3DR4GmbLV56OB8ngcXOtjwG+YCWd8LM7ZDdzoOab6
+# EWn5wSO69J6RLjomN7HTXvBjZIFWwoMJQrB5/kYiPRraW7rq6TqhqNyLVe7GBprq
+# AT6gx+E6Mf3cRDqnin6m+PXxlCxEFJSufW33PGaRt6x5M+ajK1CB9H1N0vCo1JRU
+# XLajpkQgRbNMLXCAxJ4iKiFJLMvE53EJ3tjaV+57S8pJ5cgszZc9OhPoGYLpQno7
+# GlZ289CfsEGntgf1OphSvXa/RDi/HLjieps+EKHgedMB0QmRdWbaZWnuy2lK7KD/
+# FFh/whiXIVvBzu98ljTdnF9iWQuq75jOaSxuh+D7
 # SIG # End signature block

@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -133,10 +138,10 @@ function global:Expand-CompressedItem {
 
 	BEGIN {
 		# Define the Date
-		$datBegin = [datetime]::Now;
+		$datBegin = ([datetime]::Now)
 
 		# Build a string
-		[System.String]$fn = $MyInvocation.MyCommand.Name;
+		[System.String]$fn = ($MyInvocation.MyCommand.Name)
 
 		# Currently only ZIP is supported
 		switch ($Format) {
@@ -204,8 +209,8 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURfRMGVEoheaPjPtAaDwoYLcB
-# xHqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzn2llTyCGSimyI0drPzvvR0U
+# kJ2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -348,25 +353,25 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRW7z1AbA6G7J1bAM9+Ve5ffhzFkjANBgkqhkiG9w0B
-# AQEFAASCAQA9lLCWepGXtFbBHO4CetGS/AfO8syNlpy3YNYa/cgw3wtqVgVY0kVL
-# a7zQ1VwZhKKNzHmMLhcvZvYuo1Hl89EbBuHBAKKDyvwxy5cW0JRkKu8zSRkO48NH
-# MHAWHVibyPfV1XfTtVuRtCc5ncAA7PWIE9fccHfVhOt11ZxpnpHhjyvhfPaYtDPh
-# 7qmrgQiNjhX63o3nmHP+aB/Ww1c3r6vdihfNE0vbQV+lYKi0GdvKhzJ+MMr+KSc0
-# 3UZaqONnLlW6FwNvGx/aGj2YdMXRBMtcjc3yrrRFHOJ1ijnn3oSz/PlQAHtsv38U
-# lI+HIy/nbyXQJL1l8XI35ndJlQUTluCboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRRZqte/JhwlsnJ4mBCRJqiiWlCDjANBgkqhkiG9w0B
+# AQEFAASCAQArjlE+MJozo2vmqORJZ4Ad5nDI4dQER45kDi5WokUT7U75tkaYlkWU
+# OUupq3WO+F6xklcWJGG4e6yzQOkCaq6Jd4k+KL4iDe+YMnCeLAyJ4Q5z54haA4RZ
+# 1Z70Bin/M/rhk1La9TIUAIRhKcqYn+8IgfTw5JYzbfeqroaB+4tv63yb3j6u7lef
+# Yyq10fgxlwV3Tl0raCgqgrxud5K8vk7yptQWxXFs68VfpoDch1B/fwDQ/CenTC+z
+# tTGpbbGu9U819BHfdkDkJ+qkniLQW0/0Ndm2LKlJpBmtyPPimFd0XEN0dWm5EWxt
+# nQ0N1yNnsURHs8EKpVH6VyuICEx04SotoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0NlowIwYJKoZIhvcN
-# AQkEMRYEFE9tntv4Sj/1ikbtyBQb/9sQqQ2EMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI1N1owIwYJKoZIhvcN
+# AQkEMRYEFIBuqhCh/eNwX8INiZIXMxrVX/ByMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCLYd9POa18XFYO0ABMIMzKttQsxKl/khFVgCSRmLQ7wUgT
-# ELTAtULTDap9NZB0xIj/kedjBHPm711xHrBqTz8cTVHP6+ZlmmBbzdvKZt8eCC25
-# S32Ps2legVNy9WosC/1tgUBb2WErPsIW0Rbs3n1OugeZberXrsoFPDm/3vaBKRuw
-# RnTXncbi/xPUXrD+in16LolF+GKScLEdbS9XJXgQ0kk9sF/fwUmzCYVUm3q74Su2
-# y6N93zTBfpBHMIIoo4/kJiHY0LD2YCwXp6q5+6iFhmZFWRdGLBzuUBQWUFJUBWuK
-# BN69xRwaDWzX87iWll60LR46z2WOgncRqiKZVXQd
+# hkiG9w0BAQEFAASCAQAT4sTJwC3I07DI+dSXSUUFYTRTlWXtd7OjFGGZOEXeMSYg
+# dNrGxzYYIcJAR3XiOVRyV6lSSzqg46+qEhuVjSPNEqr6RxRE8g1jKp0uSV4dRjaJ
+# IbBgw8PD27mR+hMnZ4r758yUOsCy+YQ0qwbW8t25EyM/j6cCNDNsKXfUhJ/YxkY4
+# nPt6NWh180OfpOID7yCoynpE4z3XxjM5l1J0xKr3IMLt+gRZpwJy2e4c5aymtjmS
+# T0OnxcAY3tBrLs4zSaod/ZGNk3FLFA4VPefRm6xpTFFL+zRva2AGsHl/NA69w8/n
+# WDOU5CT8/R5V3bcCWuaOEgxQJfrR1yghLrLHfFTL
 # SIG # End signature block

@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-17
+	#################################################
 #>
 
 #endregion License
@@ -198,7 +203,7 @@ function global:Get-ASCBanner {
 		@(0x38, 0x04, 0x04, 0x06, 0x04, 0x04, 0x38), # '}'
 		@(0x60, 0x92, 0x0C, 0x00, 0x00, 0x00, 0x00) # '~'
 		);
-		$o = new-object -TypeName psobject
+		$o = (new-object -TypeName psobject)
 		$o | add-member -MemberType NoteProperty -Name OriginalStrings -Value @()
 		$o.psobject.typenames.Insert(0, "Banner")
 	}
@@ -218,20 +223,24 @@ function global:Get-ASCBanner {
 			for ($r = 0; $r -lt 7; $r++) {
 				foreach ($c in $substring.ToCharArray()) {
 					$bitmap = 0
+
 					if (($c -ge " ") -and ($c -le [char]"~")) {
-						$offset = ([int]$c) - 32
-						$bitmap = $chars[$offset][$r]
+						$offset = (([int]$c) - 32)
+						$bitmap = ($chars[$offset][$r])
 					}
+
 					for ($c = 0; $c -lt 8; $c++) {
 						if ($bitmap -band $bit[$c]) { $output += $ASCChar } else { $output += " " }
 					}
 				}
+
 				$output += "`n"
 			}
 		}
 		#$output
-		$sb = $executioncontext.invokecommand.NewScriptBlock("'$output'")
+		$sb = ($executioncontext.invokecommand.NewScriptBlock("'$output'"))
 		$o | add-member -force -MemberType ScriptMethod -Name ToString -Value $sb
+
 		if ($IsString) {
 			$o.ToString()
 		} else {
@@ -239,11 +248,12 @@ function global:Get-ASCBanner {
 		}
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCFum3qYeYclGR53rg70ArdHe
-# fpGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdb93zMeu3eirSbZaBtFadCsn
+# GnigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -386,25 +396,25 @@ function global:Get-ASCBanner {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSlTjZp2MLRFGrrE63tiy6r1PROJDANBgkqhkiG9w0B
-# AQEFAASCAQBkCA4nmcyqrj4iqqdeRUUyC2pT7H2kWaG3e+a4EeZnzPsCQUT9xDJQ
-# hmM7LWITqg/aZ7lFDDKA+uPkKjVeF3oXYh6T7zWNOad6ludOTXEZZPa3i5736WkO
-# ULJFo1EPvRHoFpWex+LOiavv9keKa/wjsjjgNeyJwFB9pg3gxsKpTExxTzUIr3bJ
-# +lr0Jl1RdwLL8qfT43WNv4eX/EL6vadl3E6EcYLtvnV8r9hC4ZM7gd2SXU84ZW6Q
-# 2CrMQT24mGv36LnPGgwucjCH2FyccwM/vM9hTql11cSq6WA3j+A/YLhY646CW9dY
-# nAgcP99yV/GOcPZtugMULFl/FckQQovaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQRpbk+XUNNrGVz2SetT+1XSW+VSjANBgkqhkiG9w0B
+# AQEFAASCAQBx8uExIxW/zJrWkXhRIVWCiAKyQwVf+V9RWe1nZx1s+zc7AQI3gkXO
+# Iv01X4hiGa7fNEMNPR3g/MAyTfSHy3DFF4vTSnZpJrTthg3FGBxNVUEHM1+fT3Pt
+# F08M4bgIrRYfE3hfJmd0VrGD9vG62s7NNXPa2It6uCsIZE+72zNRPbMEUiGiw1cs
+# D+DhBKndbFcYNoHC4Y/4uzNP8Y/NTPDJ2h2m1EJ/lOJKySE2Nuv1ZTFZnErK7Gre
+# QZvQ9pp2XhUYlE8LbT/7wk489/e5KUtdjMEtaGvUwKG5UOxo0izoEqR8H9NqUO2T
+# 8k0T0xz3dNvortWx52Nh+uOP7bJxG6cmoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzQ0N1owIwYJKoZIhvcN
-# AQkEMRYEFJyTTT+oUTQjTJraiIeoXB8kOQQJMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMwMFowIwYJKoZIhvcN
+# AQkEMRYEFMMayz6b5uEKNW60x6OqbZQ0s/kZMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB6hpa6WTkVuXbxY9jrerl/EasIJxITR456QZWmugsFOtjF
-# OdtZ8/CTkHYyWDH//AmcXG7tVvafcfhajnHv7eZePEIesWZTOBCgo6hRsqc53g4t
-# nSmxLd1Jwryx/rDWwuPxMJIs7DpIf8x5ccpR8P1AJBMtwCF4BQCdD9PFwfPdN9Rv
-# OKsL6LDkUtr69JItWTLdFHqFTJlpCBugPow9jatv8SSgo0AXeIDUeIYn5NNp7HKo
-# dzlP0NN4mnsa1w3R0rs1ZFfM9wSFb8mb66JjtAjrYhO4Fdtiw43W18k8yvpsyETt
-# XfjTN/pqDe5QIJGhONFUlyDDZW/WNh4mGzGZvnFB
+# hkiG9w0BAQEFAASCAQARI87TGtmxZMVeofIk9rNtAFInN24y5Cz0u7LKvYeu3Gfg
+# 54jsaWi4+QUdB8yCTqM5Rc8mxABfwUX2B/G6udsInSkTiToG+4qx2/H2pkmsv5Pr
+# TCM1r8QegCG+Sf9XM8sw8jEv0AMrY98eQgL+w4y7JURGTmWqAkccnZt39BhLE42s
+# +cPA9jlv+XJIAp0GkEbJEvwc/3h2tCCi+hTDq6iKo62fcvbANeq7CPcF3+zdVZMO
+# movnONVfmQOZ6XWX0raVMpyL+haDf1qeHyrF3YGkoGCbAoAuX/qnByuEnXF+Zue6
+# 03603mWMjEsAIH0GPD21fk0MkyTHMCug5ybpGJfr
 # SIG # End signature block

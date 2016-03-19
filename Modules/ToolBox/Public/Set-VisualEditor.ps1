@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -64,10 +69,6 @@ function global:Set-VisualEditor {
 				   SupportsShouldProcess = $true)]
 	param ()
 
-	BEGIN {
-		#
-	}
-
 	PROCESS {
 		# Do we have the Sublime Editor installed?
 		Set-Variable -Name SublimeText -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "Sublime*") "Sublime_text*");)
@@ -90,13 +91,6 @@ function global:Set-VisualEditor {
 			Set-Variable -Name VisualEditor -Scope:Global -Value $("PowerShell_ISE.exe")
 		}
 	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
-	}
 }
 
 # Execute the function above
@@ -105,8 +99,8 @@ Set-VisualEditor
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFNYLwfMWv8IvY7hMKeOTqssN
-# uhmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHAlB57NsNIIdUym09EKYnp4m
+# oeagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -249,25 +243,25 @@ Set-VisualEditor
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTnIVe/2y9nZNneDF41yPtcF+cHXTANBgkqhkiG9w0B
-# AQEFAASCAQBD/BEp4GbEK3BMjwc59PALvyfnMZPoScLfGAAL6pnMsKLa/Nyqlu8M
-# 31WdYW5rLVi1DgS8b+8M+C2JgvuVFh76XkXXAhnvmPZo9SeBx5r2JKICHlIpn+DO
-# IJnOdCNsvVqTd2/swp1H/nOqzKZlee9ZxJEBQzsIVVwDRxV036QSMiq93mmRf73a
-# i97To1qI3yVbGkW77w6pi1tURi+r48iRNoAD4QGYpPHCg2XoL8TRfnOuyCNGHU5y
-# af38P18545VBHsUIxBADZZ80g+4zSvkiR2cD1kFCGOZBhc7GtpEVF5a2ZxO4oumI
-# mjal9U2gzSM98/9bWVK+bUGp1bGJcKoboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSlWbCpVMY2fdCGUghyBokPvVQRXTANBgkqhkiG9w0B
+# AQEFAASCAQAmyTSZwQzbynUZJ9ABYWMcHi7DYFMX0JcTjMA98EPk4nPSHwcAW/gw
+# OR/TQaR2TNAjW6h4xKMw67kreRSronZaCZsv6PFPW6JJ0pBNKlDTu+Bkoc085vfh
+# RZQDeCgGykeh4TU1897rlskL94Uz0mchJ/tLGivwzP2izQ3tkqW1khY08HpdZUBs
+# GFqpyKV3shzEScVxlO3pHjfBkYnOqE6XoM8UqoZTeQQg9hRhDi/t7pghXiTYB/nF
+# 5mXnxCg0FUSRnNwbAh5QxaSXXAR5UUsCkvDJJgg000iidkuvZhicmLU0+75OUrys
+# CrNZvzZjlgYZXLK+jNxu1ARjXxKshrsYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUwN1owIwYJKoZIhvcN
-# AQkEMRYEFAkdD/FAuQ5OmqFAbvVZ+K6V9VCLMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjM0M1owIwYJKoZIhvcN
+# AQkEMRYEFCIfb5tHFhxEFvXmZJjgrad5ogfZMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAq9qguR+MXjvBLudxQ0XX3T/OmeTCshS38A+kM+VctCr2v
-# y3L3aP9m8DtRuIv15SQbwJnYrRvIgELdJEsByfRXIkQE6JMTIrGak+Jzb8XqfKal
-# sshLwWDw663gDCikGRUBythlY2jP0tkQk0POgMe0Cp3reznNlz0hKaEKPXPW6UDU
-# 55vmxJfXqvIG5SvhcVNa5iZAVNXxJ4ap8Zg3r7IG38sUnCkSL+CPYiMcgdtv9kvH
-# q1uWIi8HyxZIVzPHQb1UZrv7gtslfUQucg2RiGQy+QTgb24E12h253hLLN3uukCP
-# p5kxQszErTtF1tbZ4PdzRwUK0H0JsOCvL2xKQse4
+# hkiG9w0BAQEFAASCAQBbNXKJjhuj9m7bvZZYrRfKkms6Hg6ZBtOzwhXNxG4GPjWd
+# hauK11uuNCxs0k8O2ezDbqxJABytUCGG8PGjs6oJya0nJqnFzscXfKmtzVAaQmTV
+# T6cVetUl2gQcWdpOTcbDae8xDz0zTqC3Aj8vKZ1b97AkDKSVPMr06nx89n20BfD9
+# wzBR1Asy5AZAAFYJ/QuxdyaRm6yn9umfBdma18JDPKy8bvbtnYl5wz0ogtJKpDt6
+# Jjx3+LoRoqlKrCt2cMECFA6g3heoNC4cG6gpKpy+JIXWLL+s8XUsvHxrdoXXNmke
+# ibzIeG9zx7BFjycm7A2lE2LEDkILqVvtAMq7XAqi
 # SIG # End signature block

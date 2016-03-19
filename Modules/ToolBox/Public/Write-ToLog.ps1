@@ -37,6 +37,11 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-16
+	#################################################
 #>
 
 #endregion License
@@ -131,23 +136,19 @@ function global:Write-ToLog {
 			$Script:MyLogBuffer | Add-Content $Script:MyLogFileName
 		} catch {
 			# Whoopsie!
-			Write-PoshError -Message "Cannot write log into $MyLogFileName" -Stop
+			Write-Error -Message "Cannot write log into $MyLogFileName" -ErrorAction Stop
 		}
 
 		# Remove the Variable
 		Remove-Variable -Name "MyLogBuffer" -Scope:Script -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-
-		# Do a garbage collection
-		if ((Get-Command run-gc -errorAction SilentlyContinue)) {
-			run-gc
-		}
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUT3e+p14eo//TWcfXNuFa+jYL
-# F4qgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9xmc+/7JaEtTpVF0+8zo3nvf
+# 21igghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -290,25 +291,25 @@ function global:Write-ToLog {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR7SVRwvj+CROaLNTI34+BZvKEKqjANBgkqhkiG9w0B
-# AQEFAASCAQBIVctXfpDnYZDzFPIFV6FRahvY2jFcylXQ3nLF65ytdpCQoetX3RJw
-# IXHUpPxodgwvVntto6R+ZGCgfZzRcuCrEiEBnvNglWUqLcQR0Ce1bCFxiQ8C+YLp
-# mGqVoqZSW4EmfHORhTFtWQArNxQal+T4f/YUdlnC/3As8gIyP8Di8grJ/DkItV9m
-# rhOZxKgPs4BoCQQdAs/xCzWFHHbYFfzzU9oArCksUg2ktn898fRv3sVlmTtVY5qI
-# GKaGksLmKwEc03p9mh3ntZsLc6riNu6TA7btAOo+Oo4DKkQYdU5X+D6aA0p0obVO
-# QKu0ofP9MI3WAu+YeaCZoJurUxtbNPWkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRjb/FSrUuXg4UF66u3eTi0MqbJ1DANBgkqhkiG9w0B
+# AQEFAASCAQCC6NPIgM+9UKPUBtQjFHgT5mvAKn+t80u+a93srwIlQrabQZK6CBDx
+# WY6opqTa4xIPWhJspDhBv1eHzqufMzMKTTIItyYiNV8X7AUbOa3G4fygUgshkbtn
+# 2Hh/KOnTFfWU7fFj6reNonIkrIv/LZc4SYDI3B/nj7JS7lHmwJUPjgj9ascLRWz4
+# zD0U3v/Ksxm/3YkAsQM0awwSG0OvKVMDygRmInc+jcJAGTqtGP0s4yzYCeL6n3Cs
+# aZTeWUpeE8fx7bXIvohaKf7eDhx4xR2Qv5KUy/RpE8WCdqOhWeSKzAj3UZTY1Erp
+# SwRVBaouhrTtCBqfM0y7x7EUMGvZaMFJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDIwNzIxMzUxMVowIwYJKoZIhvcN
-# AQkEMRYEFFlkEh9nRuu31JrhejG5GHk/1E4gMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjM1MVowIwYJKoZIhvcN
+# AQkEMRYEFE97bZHUwBaepO70k7ViKMyjabLcMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBmmTlwGNuUOX7X66tKiyrit6EL4+W7yb6WZLN8yVIxXnpf
-# L+gVpE980Zbf+J1z30N52d98lTQgXm6VuFK17rBkpWXhZ1OIeQI7YTuVvmNmfspp
-# eyJBC1+PvREihjShrxUeMlwtaYnJy7ZoB2cQAgq5JQtYnQmQofqqqjZnL/6LeYsT
-# DibRLlub64t6BiQ5rjYF9CZ3m64nwufl+lzpoqNUqF5eCv1XWAkTfhcyWx7T/1+I
-# HCB6HeT5FXjrvvbkgYsuD9UKLYFLz8+GbiQFPXJZ4r+eFHXOuZYwtWzWVmmBEfAC
-# yOjNO8KlcSeKg2XrsLpc4vFPqtFtdromuE85D0Up
+# hkiG9w0BAQEFAASCAQARGY4Lg2UzRHkF/+TYjoIBKt4MOJ/YMHmZH6lTQFdtfQiM
+# uY5GSRRumWZRgg6AbnzVHP+XD3V5s/QivTS0GH9hUMVw+wdYzCe1ZK0u45A1ox0q
+# 3p896Z4UYntYRQWtt4WEWKvlFBjijMxKuEtza2/hvUP8yNBlnkdB7mz4XlL2NnoG
+# Az5enNdsAkekQuemMZ75HYBFOdMQQcel+TySaaXvczWd8dyLKD1I/brOolIszOUs
+# dUUl9GCZ71vX+clkQzgY0CqfjM2U5mkCdGaKgyPQMI7Qsxhkeouyna7r3upTtuOm
+# zjzi8rzgmmcrRnk8glCAVU8h9zkcyr5uYODg911E
 # SIG # End signature block
