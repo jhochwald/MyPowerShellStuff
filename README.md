@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/jhochwald/MyPowerShellStuff.png?label=ready&title=Ready)](https://waffle.io/jhochwald/MyPowerShellStuff)
 # MyPowerShellStuff
 PowerShell Stuff that I use on a regular/daily base.
 
