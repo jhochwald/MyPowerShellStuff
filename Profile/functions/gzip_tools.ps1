@@ -97,12 +97,12 @@ function Global:Compress-GZip {
 			# Be Verbose
 			Write-Verbose "Opening streams and file to save compressed version to..."
 
-			$input = (New-Object System.IO.FileStream (Get-ChildItem -path $FullName).FullName, ([IO.FileMode]::Open), ([IO.FileAccess]::Read), ([IO.FileShare]::Read);)
+			$input = (New-Object System.IO.FileStream (Get-ChildItem -path $FullName).FullName, ([IO.FileMode]::Open), ([IO.FileAccess]::Read), ([IO.FileShare]::Read))
 			$output = (New-Object System.IO.FileStream (Get-ChildItem -path $GZipPath).FullName, ([IO.FileMode]::Create), ([IO.FileAccess]::Write), ([IO.FileShare]::None))
 			$gzipStream = (New-Object System.IO.Compression.GzipStream $output, ([IO.Compression.CompressionMode]::Compress))
 
 			try {
-				$buffer = (New-Object byte[]($_BufferSize);)
+				$buffer = (New-Object byte[]($_BufferSize))
 				while ($true) {
 					$read = ($input.Read($buffer, 0, ($_BufferSize)))
 					if ($read -le 0) {
@@ -209,12 +209,12 @@ function Global:Expand-GZip {
 			# Be Verbose
 			Write-Verbose "Opening streams and file to save compressed version to..."
 
-			$input = (New-Object System.IO.FileStream (Get-ChildItem -path $FullName).FullName, ([IO.FileMode]::Open), ([IO.FileAccess]::Read), ([IO.FileShare]::Read);)
+			$input = (New-Object System.IO.FileStream (Get-ChildItem -path $FullName).FullName, ([IO.FileMode]::Open), ([IO.FileAccess]::Read), ([IO.FileShare]::Read))
 			$output = (New-Object System.IO.FileStream (Get-ChildItem -path $GZipPath).FullName, ([IO.FileMode]::Create), ([IO.FileAccess]::Write), ([IO.FileShare]::None))
 			$gzipStream = (New-Object System.IO.Compression.GzipStream $input, ([IO.Compression.CompressionMode]::Decompress))
 
 			try {
-				$buffer = (New-Object byte[](1024);)
+				$buffer = (New-Object byte[](1024))
 				while ($true) {
 					$read = ($gzipStream.Read($buffer, 0, 1024))
 					if ($read -le 0) {
@@ -237,8 +237,8 @@ function Global:Expand-GZip {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXQYyCBQlkYejr76i+8F727ir
-# almgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUp3O0FIQG1gEyF8DL3CChERlv
+# 6RagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -381,25 +381,25 @@ function Global:Expand-GZip {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSVNvzo/pYqBpnzQ+aq1Ez9/vxNVjANBgkqhkiG9w0B
-# AQEFAASCAQAUmKbRcYmIK/2kU5KUvr80WKT2yp+79sWwDvaQR/ue19CsFWWELiNz
-# SyAmnhK4yFCKe7QBkbkK953q2z6HNT0mw8ezA1SN7nqhJ88S44kIShxXssTceGkf
-# sp410EBObKQffoV9XZPq2NGYGUr/BHP5QahhgL94UDBI2w+nbM9AG7SwL9+0hn0P
-# JWL0rQ/tJ/typcjgj0i67yptHZaq/aRJz2OdfFPc/OuSXm0oo129x7lLCT5dUgmD
-# GJASsnebm5rqbVbFgePSkwUpkInHe719WRE1W6+D/PLUm92jhneBh2W8/emt0xYV
-# 9yVKc9PWEMJj9c4ogaNELlZ8MeCvhoOCoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQa5pBupWCFht//4Rag5fjlrSL9UTANBgkqhkiG9w0B
+# AQEFAASCAQADC+FZGsmguQSPR12TTqmUWPe7tJhtNiavzAEivE7PTvPX16C+DW/h
+# dI4r0YOXfRs2CtD22tRTWNtnIrrxWWEbiwmQqxIaXhHpreNsKCma6ynJvTRg1evS
+# 3CnoOp6gembBIhC/+v1uBhUR+SZD5Q84t14/xajzxrlgKRR+RWcGqD+KNBPMPkDK
+# H8442lC00ofaKP37EqnKqFqtte093+vsGM5jsSw+qTe4qXIxUVUbamJCP87QnzCW
+# UOvnA90/MKSLYyU3aQ7l4qANwfPxB3yncYZGosz0VnYF71XrNQUHRAFwNU/izNMM
+# ogS4C5+8YvJvObVBE7Hw4p0KqvhkXy7GoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkzMFowIwYJKoZIhvcN
-# AQkEMRYEFOPPGz9XmgqcI/StoA0C3UIvFG7jMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTE5NDAyOVowIwYJKoZIhvcN
+# AQkEMRYEFCSlyOsb8858r9e5ehLKtGytyhWaMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB2Eaf+WqUrBZxhEJNsNimA9n+1O3vF8FLvi+NEfONKn2Th
-# PpEv7A4nkIG4ha3T+mLxjQTUcVf4i2L6YbDuxRhM8f5yXaoSBrBWFsOJ0IxrjUnJ
-# pJtBwszQQfzdQqRdius+1hlQ80XNjharyLW4SUH0mPhOk++b5rEUrThvHE3qbK+M
-# mUfV6Dg2KDOTG6v8LqzZLY8mn05H8SC1WBu/Q4/W4or3HBAveMz9ttHz3DZsa+YF
-# /3VGLa/lv9RjG5+12aoIVM+BkWxAcdZ94dgC4jaJcG1leGI3hFke1r5SwfIF8WmB
-# g/8wXY2vkMdtrUCa4M2MjKe62eq3D4A0NAB0f8JJ
+# hkiG9w0BAQEFAASCAQBVMdbPZ8+zIuTRCsLrLjLjevup0A34Nyogd6vtHyrDeAV2
+# VZW89XEO92n1yzLSdM8Y/d6FpRpiVHrkubZbB6+11Nkr+CoiFYxRuxDU3UuUVbW0
+# owa+9oLhq2rb92yQkV4S/a3CoBJHlunK3EqYHzPMatg3IGFR9ojRunqwegOQMxql
+# kcSNEqhCujz23ktyNL7a6rTPho5m5HEXRbj+3cmNj5uernSI+EBQQ8Y3dr3RRBbZ
+# aU9i2Nx5rglGO0K7sFvpJJbF0tMnLBG0gCqqfp4Kp1w+aAxB+Z9oSyszoJ1NpXYw
+# PDyXGnLHK71+fvLiMOUPvOnZwgJahT2xTLhLV0Ld
 # SIG # End signature block

@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-20
+	# last modified   : 2016-03-29
 	#################################################
 #>
 
@@ -166,7 +166,7 @@ function global:Expand-CompressedItem {
 			# Check what we have here
 			if ($PSCmdlet.ShouldProcess(("Extract '{0}' to '{1}'" -f $Object.Name, $Path.FullName))) {
 				# Set a new variable
-				Set-Variable -Name CompressedObject -Value $($ShellApplication.NameSpace($Object.FullName);)
+				Set-Variable -Name CompressedObject -Value $($ShellApplication.NameSpace($Object.FullName))
 
 				# Loop over what we have
 				foreach ($Item in $CompressedObject.Items()) {
@@ -200,8 +200,8 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhjDLcx4pZItrxNyDJxB9H358
-# 4Y6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOySlola4HZtMPp9IIFOpW0wP
+# CFWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -344,25 +344,25 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRjGVbBl06UQ58caUif+x3k/zdZijANBgkqhkiG9w0B
-# AQEFAASCAQCHWBNgAuRbAVRYUZB+ayItPBN3LNArb7SB09uXLwkvLIXBoucPMPRB
-# 4fJrSJKAYzzUVVOA2F1oa1OrWnTHhmN03Ii3hw6KnE1ItqS1ik0X5oKH2tOqqYZT
-# zY+OtGE9VWcYIS0tbNKdB7vWpcxpTeSIvCTiLD2cZW7E87+fDTuzFzfpU9o9axb6
-# /eC70wIZaty4EzXE64IgkOSpd+Z2Bva4L3Ex8tb3YNBZWoHKYIecP5iaLAN6YkZ7
-# fzYJRcSvuqdkZXi56q3QNsfEMxK4jgPj4qsF+xiEy8eGjA6cVld4WNOApgKMLeNy
-# rivo/nBShZ6thPs/T63Pxt1BKt6xZ2cyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTm7Ldr0Z0tljVe/XUh37dBARr02DANBgkqhkiG9w0B
+# AQEFAASCAQAwzdphdIk1vaSnkAHUam5qkyLlT15Y7Iq9C/9lREhwGnj1eZSRIiiG
+# jK79LsBNZRsNbmjJyX2ieN6YIW18A9y+zq3jN2o93FyzQnerT+dpONEUWqPUh65T
+# klKJ8U4XD9HJnhemMpRajhLXdgl6QiH8mJfNUCIEkPg2xf3hMbUwHRMcAwb13EK/
+# 5TM+pkuXFplz+Zewdxv0HeGjdRzjtS+Jkfhw1jeLD8vh3Il9xpkTG1+JiShnEVZt
+# vsacoTM69SjtftolB5aFDFl5LyNf+3kCmxe6MTyNUQiiFXGAhzeeSWjX80tSR6rg
+# b25ruve3nL0jamKISSuSPMqoD6MA4eOooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkxMFowIwYJKoZIhvcN
-# AQkEMRYEFHl0HugM1JRrc1En2uWq6RmFHQzwMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTE5NDAxNFowIwYJKoZIhvcN
+# AQkEMRYEFDJdL1zLIzZAScJ2aHoO8PhGPOKHMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBiFfwdMIb4S2zaNShJlic5qAXslAX8Un21niwWGYTRQDbp
-# 7VYqwoaxrfbU+BVD2Z65VtF1lmQBNZRIF1JhsioM27NQvB8L3MW5E726TtF3bveM
-# 9gp6mLTOYgRgLhheL7YyX65nJTNVAmM001/ZYXGiCCs4bkul/hSxJWTQQvdJKHYl
-# 8wNwjPb4TEDAjfI3hxT8x3iuoD99wpH0E6VwNHLQLowWkcJQBY6I+IvVeVmK0/fn
-# Ce7A6gbGR05p27TUluMD0vvPdgXaQ6TL+TgPQiZzhvqMzfbPKU1pluf+ocgJWfH5
-# h75SC9+5Obo9oCqnLcdnkbQuirBO/IQQFDsUnnUz
+# hkiG9w0BAQEFAASCAQB4dUamrf3NsDqsa3mHBc4i6fINhS4MvF/zFuDb+DdnB+bl
+# 56X9+RVNQSF0YJp83KWs3ALfQXKN3sB0E2g6eQuJg4eHlnPeQpQuX5l5pgi7zR1e
+# rXxg8eeY3V++O6aZa0SA2/kn/YQIkUYzPBjgyVhm+/ajHf7V6pCrnHSj+/WsC2Gl
+# EsFTMeY1YUbjCXMUyuARBoo0sJnqXMUg0ZhBDnWBonCLtcpMWI1FVpG0GIzk/ii0
+# Q2UfYHKeSDgTatUI+tczY69yk65RbCHt03akDrMlvNzCguShgRRYdBXrA1k1U+wm
+# qspI/rkCSCgCiFVYjKtZhw6O9fTd4d50Uv2EVsBB
 # SIG # End signature block
