@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-20
 	#################################################
 #>
 
@@ -97,20 +97,11 @@ function global:Expand-CompressedItem {
 
 		Expands archives 'data1.zip' and 'data2.zip' to the current directory.
 
-	.OUTPUTS
-		This Cmdlet has no return value.
-
 	.NOTES
 		See module manifest for required software versions and dependencies at:
 		http://dfch.biz/biz/dfch/PS/System/Utilities/biz.dfch.PS.System.Utilities.psd1/
 
 		.HELPURI
-
-	.INPUTS
-		InputObject can either be a full path to an archive or a FileInfo object. In
-		addition it can also be an array of these objects.
-
-		Path expects a directory or a DirectoryInfo object.
 
 	.LINK
 		Online Version: http://dfch.biz/biz/dfch/PS/System/Utilities/Expand-CompressedItem/
@@ -209,8 +200,8 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzn2llTyCGSimyI0drPzvvR0U
-# kJ2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhjDLcx4pZItrxNyDJxB9H358
+# 4Y6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -353,25 +344,25 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRRZqte/JhwlsnJ4mBCRJqiiWlCDjANBgkqhkiG9w0B
-# AQEFAASCAQArjlE+MJozo2vmqORJZ4Ad5nDI4dQER45kDi5WokUT7U75tkaYlkWU
-# OUupq3WO+F6xklcWJGG4e6yzQOkCaq6Jd4k+KL4iDe+YMnCeLAyJ4Q5z54haA4RZ
-# 1Z70Bin/M/rhk1La9TIUAIRhKcqYn+8IgfTw5JYzbfeqroaB+4tv63yb3j6u7lef
-# Yyq10fgxlwV3Tl0raCgqgrxud5K8vk7yptQWxXFs68VfpoDch1B/fwDQ/CenTC+z
-# tTGpbbGu9U819BHfdkDkJ+qkniLQW0/0Ndm2LKlJpBmtyPPimFd0XEN0dWm5EWxt
-# nQ0N1yNnsURHs8EKpVH6VyuICEx04SotoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRjGVbBl06UQ58caUif+x3k/zdZijANBgkqhkiG9w0B
+# AQEFAASCAQCHWBNgAuRbAVRYUZB+ayItPBN3LNArb7SB09uXLwkvLIXBoucPMPRB
+# 4fJrSJKAYzzUVVOA2F1oa1OrWnTHhmN03Ii3hw6KnE1ItqS1ik0X5oKH2tOqqYZT
+# zY+OtGE9VWcYIS0tbNKdB7vWpcxpTeSIvCTiLD2cZW7E87+fDTuzFzfpU9o9axb6
+# /eC70wIZaty4EzXE64IgkOSpd+Z2Bva4L3Ex8tb3YNBZWoHKYIecP5iaLAN6YkZ7
+# fzYJRcSvuqdkZXi56q3QNsfEMxK4jgPj4qsF+xiEy8eGjA6cVld4WNOApgKMLeNy
+# rivo/nBShZ6thPs/T63Pxt1BKt6xZ2cyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI1N1owIwYJKoZIhvcN
-# AQkEMRYEFIBuqhCh/eNwX8INiZIXMxrVX/ByMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkxMFowIwYJKoZIhvcN
+# AQkEMRYEFHl0HugM1JRrc1En2uWq6RmFHQzwMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAT4sTJwC3I07DI+dSXSUUFYTRTlWXtd7OjFGGZOEXeMSYg
-# dNrGxzYYIcJAR3XiOVRyV6lSSzqg46+qEhuVjSPNEqr6RxRE8g1jKp0uSV4dRjaJ
-# IbBgw8PD27mR+hMnZ4r758yUOsCy+YQ0qwbW8t25EyM/j6cCNDNsKXfUhJ/YxkY4
-# nPt6NWh180OfpOID7yCoynpE4z3XxjM5l1J0xKr3IMLt+gRZpwJy2e4c5aymtjmS
-# T0OnxcAY3tBrLs4zSaod/ZGNk3FLFA4VPefRm6xpTFFL+zRva2AGsHl/NA69w8/n
-# WDOU5CT8/R5V3bcCWuaOEgxQJfrR1yghLrLHfFTL
+# hkiG9w0BAQEFAASCAQBiFfwdMIb4S2zaNShJlic5qAXslAX8Un21niwWGYTRQDbp
+# 7VYqwoaxrfbU+BVD2Z65VtF1lmQBNZRIF1JhsioM27NQvB8L3MW5E726TtF3bveM
+# 9gp6mLTOYgRgLhheL7YyX65nJTNVAmM001/ZYXGiCCs4bkul/hSxJWTQQvdJKHYl
+# 8wNwjPb4TEDAjfI3hxT8x3iuoD99wpH0E6VwNHLQLowWkcJQBY6I+IvVeVmK0/fn
+# Ce7A6gbGR05p27TUluMD0vvPdgXaQ6TL+TgPQiZzhvqMzfbPKU1pluf+ocgJWfH5
+# h75SC9+5Obo9oCqnLcdnkbQuirBO/IQQFDsUnnUz
 # SIG # End signature block
