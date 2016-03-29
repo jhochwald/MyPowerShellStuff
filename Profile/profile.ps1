@@ -53,7 +53,7 @@
 		Just an example!
 
 		modified by     : Joerg Hochwald
-		last modified   : 2016-03-15
+		last modified   : 2016-03-27
 
 	.LINK
 		Support Site https://github.com/jhochwald/MyPowerShellStuff/issues
@@ -66,7 +66,7 @@ param ()
 
 function global:Get-IsWin10 {
 	# For some Workarounds!
-	if ([System.Environment]::OSVersion.Version -ge (New-Object 'Version' 10,0)) {
+	if ([System.Environment]::OSVersion.Version -ge (New-Object 'Version' 10, 0)) {
 		Return $true
 	} else {
 		Return $false
@@ -87,9 +87,9 @@ function Clear-AllVariables {
 }
 Clear-AllVariables
 
-# By default, when you import Microsofts ActiveDirectory PowerShell module which
+# By default, when you import Microsoft's ActiveDirectory PowerShell module which
 # ships with Server 2008 R2 (or later) and is a part of the free RSAT tools,
-# it will import AD cmdlets and also install an AD: PowerShell drive.
+# it will import AD command lets and also install an AD: PowerShell drive.
 #
 # If you do not want to install that drive set the variable to 0
 $env:ADPS_LoadDefaultDrive = 1
@@ -120,46 +120,59 @@ function script:LoadScripts {
 # Load the Functions from each file in the "functions" directory
 LoadScripts
 
-if (-not (Get-Module -ListAvailable -Name NETX.Core)) {
-	Write-Error -Message:"Error: NET-Experts Core Module missing..." -ErrorAction:Stop
-} else {
+# Make em English!
+if ((Get-Command Set-Culture -errorAction SilentlyContinue)) {
 	try {
-		# Make sure we remove the Core Module (if loaded)
-		Remove-Module -name NETX.Core -force -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
-
-		# Import the Core PowerShell Module in the Global context
-		if (Get-Command Get-IsWin10 -errorAction SilentlyContinue) {
-			if ((Get-IsWin10) -eq $true) {
-				# Ok, we are using Windows 10
-				Import-Module "$BasePath\modules\NETX.Core\NETX.Core.psm1" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-			} else {
-				# Not Windows 10
-				Import-Module -Name "NETX.Core" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-			}
-		} else {
-			try {
-				# Try the known way!
-				Import-Module -Name "NETX.Core" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-			} catch {
-				# Ups, try old school...
-				Import-Module "$BasePath\modules\NETX.Core\NETX.Core.psm1" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
-			}
-		}
+		Set-Culture -culture "en-US"
 	} catch {
-		# Sorry, Core PowerShell Module is not here!!!
-		Write-Error -Message:"NET-Experts Core Module was not imported..." -ErrorAction:Stop
-
-		# Still here? Make sure we are done!
-		break
-
-		# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
-		exit 1
+		# Do nothing!
 	}
 }
 
-# Do a garbage collection
-if (Get-Command Invoke-GC -errorAction SilentlyContinue) {
-	Invoke-GC
+#region WorkAround
+$MyModules = @("NETX.Core","NETX.AD","NETX.Exchange","NETX.Hybrid","NETX.Legacy","NETX.Logger","NETX.MIMDM","NETX.O365","NETX.Tools")
+foreach ($MyModule in $MyModules) {
+	if ((((Get-Module $MyModule -ListAvailable).ModuleType) -eq "Manifest") -or ((((Get-Module $MyModule -ListAvailable).Version).ToString()) -eq "0.0")) {
+		(Import-Module $MyModule -DisableNameChecking -force -Scope Global -ErrorAction SilentlyContinue -WarningAction SilentlyContinue) > $null 2>&1 3>&1
+		(Remove-Module $MyModule -force -confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+	}
+}
+#endregion WorkAround
+
+if (-not (Get-Module -ListAvailable -Name NETX.Core)) {
+	Write-Error -Message:"Error: NET-Experts Core Module missing..." -ErrorAction:Stop
+} else {
+	if (-not (Get-Module -Name "NETX.Core")) {
+		try {
+			# Import the Core PowerShell Module in the Global context
+			if (Get-Command Get-IsWin10 -errorAction SilentlyContinue) {
+				if ((Get-IsWin10) -eq $true) {
+					# Ok, we are using Windows 10
+					Import-Module "$BasePath\modules\NETX.Core\NETX.Core.psm1" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+				} else {
+					# Not Windows 10
+					Import-Module -Name "NETX.Core" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+				}
+			} else {
+				try {
+					# Try the known way!
+					Import-Module -Name "NETX.Core" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+				} catch {
+					# Ups, try old school...
+					Import-Module "$BasePath\modules\NETX.Core\NETX.Core.psm1" -DisableNameChecking -force -Scope Global -ErrorAction stop -WarningAction SilentlyContinue
+				}
+			}
+		} catch {
+			# Sorry, Core PowerShell Module is not here!!!
+			Write-Error -Message:"NET-Experts Core Module was not imported..." -ErrorAction:Stop
+
+			# Still here? Make sure we are done!
+			break
+
+			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
+			exit 1
+		}
+	}
 }
 
 # Gets back the default colors parameters
@@ -208,11 +221,6 @@ function global:Set-RegularMode {
 		$colors.WarningBackgroundColor = "DarkBlue"
 		$colors.ErrorForegroundColor = "Red"
 		$colors.ErrorBackgroundColor = "DarkBlue"
-
-		# Do a garbage collection
-		if ((Get-Command Invoke-GC -errorAction SilentlyContinue)) {
-			Invoke-GC
-		}
 	}
 
 	END {
@@ -251,11 +259,6 @@ function global:Set-LightMode {
 	END {
 		# Clean screen
 		Clear-Host
-
-		# Do a garbage collection
-		if ((Get-Command Invoke-GC -errorAction SilentlyContinue)) {
-			Invoke-GC
-		}
 	}
 }
 
@@ -333,7 +336,7 @@ function info {
 function motd {
 	PROCESS {
 		# Display Disk Informations
-		# We try toi display regular Disk only, no fancy disk drives
+		# We try to display regular Disk only, no fancy disk drives
 		foreach ($HD in (GET-WMIOBJECT -query "SELECT * from win32_logicaldisk where DriveType = 3")) {
 			# Free Disk Space function
 			Set-Variable -Name Free -Value $($HD.FreeSpace / 1GB -as [System.Int32])
@@ -344,7 +347,7 @@ function motd {
 				# Less then 5 GB available - WARN!
 				Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available" -ForegroundColor "Yellow"
 			} elseif ($Free -le 2) {
-				# Less then 2 GB available - WARN a bit more aggresiv!!!
+				# Less then 2 GB available - WARN a bit more aggressive!!!
 				Write-Host "Drive $($HD.DeviceID) has $($Free)GB of $($Total)GB available" -ForegroundColor "Red"
 			} else {
 				# Regular Disk Free Space- GREAT!
@@ -362,13 +365,6 @@ function motd {
 		}
 
 		Write-Host ""
-	}
-
-	END {
-		# Do a garbage collection
-		if ((Get-Command Invoke-GC -errorAction SilentlyContinue)) {
-			Invoke-GC
-		}
 	}
 }
 
@@ -398,7 +394,7 @@ If ($host.Name -eq 'ConsoleHost') {
 	# Console Mode - Make a clean screen
 	Clear-Host
 
-	# Is this a user or an admin account?
+	# Is this a user or an Admin account?
 	# This has nothing to do with the user / User rights!
 	# We look for the Session: Is it started as Admin, or not!
 	If (-NOT ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole] "Administrator")) {
@@ -452,7 +448,7 @@ if ((Get-Command Test-Credential -errorAction SilentlyContinue)) {
 		# Prevent "The server could not be contacted." Error
 	}
 
-	if (($IsCredValid -eq $False) -and (-not($Environment -eq "Development"))) {
+	if (($IsCredValid -eq $False) -and (-not ($Environment -eq "Development"))) {
 		Write-Warning "Looks like your Credentials are not correct!!!"
 	}
 }
@@ -465,8 +461,8 @@ if (Get-Command invoke-gc -errorAction SilentlyContinue) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7PkPmKcNOkhVvr0fs6LiWY2K
-# f26gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzQ0UMlS661CXMD1NOvmLjwhG
+# CMagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -609,25 +605,25 @@ if (Get-Command invoke-gc -errorAction SilentlyContinue) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR9+5W2ANEO6zk8MaydoYJhmMaIKjANBgkqhkiG9w0B
-# AQEFAASCAQBpd1oFBv0xtyWIZgnDsAk2y5KkMfIAWMEvJWk6kWPpV9UHgBxdu5eI
-# pA3VgIyDPNi/yUzZggbNsXvSMB/mMiiQ2sdAl1jD/SepX4yRAGRc29m/bnpakXc7
-# CaDJ3G9OKQct5RtYd5djqHQLOpzbx1zTQitYucoNwPymu1q+qRn8elQpl1FjX/WV
-# aQ/iZtxh9wrjoQHtOCs5k3REpHCpjEOET7zsRDorzbJrj9M/73cREfi4KLF5vL06
-# a2vpv9kc6me9HS3mVid5UaF1DbG8RXxHbS+V1NI7d0hsUMiDc25jtLIWC62pcL08
-# ItLOhU+igit69oBfjSwsDmAWWFtTZKdNoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSn6/lLjqoy90i3PjxWFigW911iFjANBgkqhkiG9w0B
+# AQEFAASCAQAMAIyP7E2nVlkgbdmSF0DcskBwjqRBBxlTNTzHVSjAXhV5tr9cs5kE
+# siBC/cv17nEaDelckjBWZVI02DOmJKZAz8mLpPGUTeT+wHnA1k/qlg+LIxDeHT1b
+# +AIsm138NvOyhVTgnfM722cB4ZTAPF14YPPGlPy3v+kNW5P/vM2zcVk0mUdIzOjI
+# 3Aueyb+ETfBCOlRgabYZy7PtM5v98cxugikP8oNUYoI0uHGOF793BwCChB50fyU9
+# x9DHVMk9dPkRRncxcmlAx7iGtZWWpM2PRvL0fanmwNzMvpShXE8w3PAfGrKKHIFt
+# xx8UUF3ty1K/Kghy17+Mlfq2GQwvwLq/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI0NVowIwYJKoZIhvcN
-# AQkEMRYEFHsPjJcUUFFtLDAJ+hi/h0XydxT1MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTg1OVowIwYJKoZIhvcN
+# AQkEMRYEFBZjxrHhpOJO8tVjsuemdiOO/fSxMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQArPlodUr4DFF5nY9/try5yWhrbgRYCP4yfeQF3bFEr7yLy
-# ZBiAuQiyYHOWIyqtK6bgbGoGH9EYdHtO00Cw2RzdB+jDXnnhhD6Si3lgp14A7+x1
-# VPyNF62Ar7HJeDfhk+cEfqweoYvCYhD6G1D0aEqG2Ys7J0hbqco3TtzSl6D4wu2F
-# ySNwzVOxRB13+1b54sKWXKTeHYI175jC5RxubZVy0Kj6GK56o3EgVW7rd4x4j7Mw
-# w+MBU/EWJ1wLT6kJYQLfc3WHdV4sMZovE5pYxYGrkQIZKxo2tsnfurakZ1gxF1N/
-# 3I6YvXvTCQT6m6Jya41+Knoo00kg87CKCEzFbXIw
+# hkiG9w0BAQEFAASCAQAjfkivTkPcfviFAF8JnZfWU9tw2fPMalLeuC9uAN58qPYf
+# Z4tyYo4KTEm2NAwu8cAq0rmIQBcKZI6SAIXqC1wxPSzvNaZSQ3fO+i3igCuxpr4q
+# XYuXfdMau0FypLT9VOZaO70JVGdfii4WLdN/nN1zO3hqHpN4Pw7Y9qMamE1JYQ69
+# DFQwReO4u2Kjwd3SbGwJMiG8q0MjyhGDI1wL6X/+8RGhRMVjZNzzPdwHqmXhmRWp
+# 8sWk3PcscRO/vTC8lFtcGZFHu/KkzGbqtuogAyFSqBfdWttVu+3nLy8WG9rq8Lnv
+# qUh4o5gRQFGIZehg+0+DnI+5QnuNEMEVI7p2ngYx
 # SIG # End signature block
