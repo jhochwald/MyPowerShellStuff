@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-20
 	#################################################
 #>
 
@@ -88,15 +88,9 @@ function global:Approve-MailAddress {
 		Checks a given Mail Address (Joerg.hochwald@gmail) against a REGEX Filter to see
 		if it is RfC822 complaint, and it is NOT
 
-	.OUTPUTS
-		boolean
-
 	.NOTES
 		Internal Helper function to check Mail addresses via REGEX to see if they are
 		RfC822 complaint before use them.
-
-	.INPUTS
-		Mail Address to check against the RfC822 REGEX Filter
 
 	.LINK
 		Joerg Hochwald: http://hochwald.net
@@ -145,8 +139,8 @@ function global:Approve-MailAddress {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOTBDqfhPBtda/Touk+wWH4nc
-# SX2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzP7QiPIDwHlAfdtwAetSnxSg
+# Q/ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -289,25 +283,25 @@ function global:Approve-MailAddress {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBReuFeljuJM0kIrCyPBu6CuioJCVzANBgkqhkiG9w0B
-# AQEFAASCAQCPxgsYhN1yzyojq8mrlW6ckH1M9djHic4gZg37ppwX5xT/uzjzRNBF
-# v0ygepEe02upUJhz0h+psh7y21r2xvTYBhSVLk8Hl+muD/ejBGd3Lrk5MBZEkcyZ
-# W3sxNNqIdMXZl8pZcepZrq0fRhIODqIbajgQXEqHBpa7KB5e7HGVUl/FmSWXUj1r
-# Ar7pDORCkcaBdd1kiHhQ0hdlg+6/Mp2JanAejoozRSx+8F3S+oZaNUi2/aOoZ7X6
-# N8YOy3i8i2eUVMpB96WJCgslet4eQ2Ar0Vdv1rJVP70IlYimsnO2KpSiZ6dXF5Qq
-# J6cWk+mtNmnndjfgbhoy/2Avliq1SYTxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTxhc51hYyLLSCYBeg9Rs2MQRGy+zANBgkqhkiG9w0B
+# AQEFAASCAQAuNGlE5SrkbhoVGUzi4cDmDfJxIdEzO3b93OXV8kthDzvz7VDoxR9w
+# 5iXWSWkA3TqE3a0rvaX5eEjDiThT1i1SzBHjrF9Bibz4zZWKTwc+vpVdVXPdevah
+# XAn7K9E2bymGc1671ozG0lWbyTHhGQT0yeADkQAfzAobCs3gXY7OhOKRt9lF4ggg
+# 87Hbkkac7uHIkdOJnP7QxZIghmMQLDoYChQUGUyAJppSMaBB/jZPxuu2V5UjNOxy
+# 10XQckfGi1nQ3djWlB5+xIpEO5knDChaax2wnq9jpVqN3zFVRbxiau/uuUbfiu67
+# 8qZt6F5lOINlglLotWli7AQUgHUQp+EJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjI0NlowIwYJKoZIhvcN
-# AQkEMRYEFP87Xr8MzYSHv2PRlxJREdG+5vGeMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkwMFowIwYJKoZIhvcN
+# AQkEMRYEFFBr2TQ49+IHVPMThlSZ5jxQD2KJMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCRMijkL4LAC4xdKgnsfBNoUxFu6LlVYcQ+Wc92g9f7hcqh
-# uPIe+5oB+B88zJucgvG5C+WugPwYSeFmleYiZ3v5kvZA9T5BCzific/jouphiVIs
-# ZRjL9AxyXmnIstXZODHQkOkW1LyY+1XLcO96vRwAco7BLkzaF6PMWBKkthnysiSI
-# yprPzZ6NQ4xOpywcz6Z4xQhTCeSWRJrCAhWiEXqW6bgEjf5r8xre3cLQ8o2izDRH
-# M18QjlXHSE8tiNbKTJW9dFT/CUqR6PvNO08t344iE5RzEdVFug366n4Oh9WqDfV6
-# jGVMsAbwmW2SVa5b3IwrTGMfG/0Iou7iW942BgSo
+# hkiG9w0BAQEFAASCAQB3g4fE18WzqcfaZCMPuKtlCJx6XXjOdsd6N7ectOdpnKgM
+# nEtcfUKcCFGvOLECqqwbWcFLASagMyjAuOW5LjauAlh/eb7IaCYR4xtfv9t/23r7
+# XSu955O/fOqEw+XKZnDi+5H8hAJ8+rUuoUoffdJztJYNjWW89VCi8/ut2lxU5k3v
+# O+2iBS70eX1Ek2F8YjH/pl9kpCapeZfpmcgMMkmOEYHlik1H6+i6Im5ay7q5QfLV
+# 6EdZiV0NHK4wP9sjIR8NvMjpLt5oXc/wcCU6WBbXYA3XdWgdVHOkKTONgTdRB1s1
+# tZm3WTxVJ2P96Wai/8Gy5YGWujCP18abKvQwRh4g
 # SIG # End signature block

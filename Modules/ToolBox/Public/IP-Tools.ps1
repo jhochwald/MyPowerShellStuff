@@ -40,11 +40,89 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-25
 	#################################################
 #>
 
 #endregion License
+
+Function Global:Convert-IPToBinary {
+<#
+	.SYNOPSIS
+		Converts an IP address string to it's binary string equivalent
+
+	.DESCRIPTION
+		Takes a IP as a string and returns the same IP address as a binary string with no decimal points
+
+	.PARAMETER IP
+		The IP address which will be converted to a binary string
+
+	.EXAMPLE
+				PS C:\> Convert-IPToBinary -IP '10.211.55.1'
+
+				Binary                                                          IPAddress
+				------                                                          ---------
+				00001010110100110011011100000001                                10.211.55.1
+
+		Converts 10.211.55.1 to it's binary string equivalent 00001010110100110011011100000001
+
+	.NOTES
+		Works with IPv4 addresses only!
+#>
+
+	[CmdletBinding(ConfirmImpact = 'None',
+				   SupportsShouldProcess = $true)]
+	[OutputType([psobject])]
+	param
+	(
+		[Parameter(ValueFromPipeline = $true,
+				   Position = 1,
+				   HelpMessage = 'The IP address which will be converted to a binary string')]
+		[ValidateNotNullOrEmpty()]
+		[ValidatePattern('\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}')]
+		[Alias('IPAddress')]
+		[String]$IP
+	)
+
+	BEGIN {
+		$Binary = $null
+		$Result = $null
+		$SingleIP = $null
+	}
+
+	PROCESS {
+		foreach ($SingleIP in $IP) {
+			try {
+				$SingleIP.split(".") | %{ $Binary = $Binary + $([convert]::toString($_, 2).padleft(8, "0")) }
+			} catch [System.Exception] {
+				Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)" -ErrorAction Stop
+
+				# Still here? Make sure we are done!
+				break
+
+				# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
+				exit 1
+			} catch {
+				Write-Error -Message "Could not convert $SingleIP!" -ErrorAction Stop
+
+				# Still here? Make sure we are done!
+				break
+
+				# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
+				exit 1
+			}
+
+			$Result = new-object PSObject -Property @{
+				IPAddress = $SingleIP
+				Binary = $Binary
+			}
+		}
+	}
+
+	END {
+		Return $Result
+	}
+}
 
 function global:Convert-IPtoDecimal {
 <#
@@ -277,8 +355,8 @@ function global:Get-NtpTime {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPP40ZiptdW9rfSdA9VWtxTLQ
-# qkqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzxUeZUoz+w/GfG14cOmmxq2l
+# D4OgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -421,25 +499,25 @@ function global:Get-NtpTime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT7KbxB/DWF2gg+79x8mF9H+9RhEzANBgkqhkiG9w0B
-# AQEFAASCAQCTf0YFAouNJ4xbRI02EfNyVwyVphhBr01Nnncb5oQR2eEa5Rbno95u
-# bV0Pl+KnFs9AQsO7PHBVvJns6PxGf2RPPT1aeGioBzMUM4nwMwKs6WlqBWycZ7gW
-# 55+0DVWNx5bDbXVZzMC58DZXTRubsoBbjGXYIfl1JvFCoPc/oXQ5uJEgZYAkuqUs
-# 0+VzEJT1adX68Le36H63FRIcBB0slXo0pFovYi+sa9JhhkdPW/9FaomrRzxxACId
-# kSYmZqbYVKW+PrrpgWcRxIqD0WOavlr08kM6dZXQpdf87p0gGWGRDQBTAWy1CjEs
-# SAC4cr67CSU0zsnUA7XVfF9BCHpyVVVfoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTyE57WT/E0do1c97JDdQxqGffj7DANBgkqhkiG9w0B
+# AQEFAASCAQCnbB6FPAxpppIAq5oLNEn/LSpZCufqNDymC/TvJN4a4ihZyfoJ2MnV
+# 39klVkETpuo5fmfa6zHkh+q1Zd/3WUZKhX9VZ0+0hcceJ8lkxIj7FEDAxeyMEmiR
+# gkfmvfOD4l7JZHa+V0dc1Cx6yjCltlAj/pqe1SZJGt71qSlyL0WEF2BEvKguJi/b
+# sk1cqmTbMfEPhUe/flt2OUE2vypgrPtQc0H0WL9bJr9U0OAOqdDz43nlN0ntcn0y
+# scbf3tGD5Q1jDd7m4qKiE9XC5WuXMx/J7N9v9HsPPnbxCAvB2DCWbGe3/vC3b3gs
+# piN0Qs4BK+NkZhgcuEis6UCzAPwxenVOoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMxOTIyMjMyNlowIwYJKoZIhvcN
-# AQkEMRYEFHTxHzPmBA/BoDxah92whqZFn77CMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkzNVowIwYJKoZIhvcN
+# AQkEMRYEFHjbMJCOFJyh1GsMzMD+hqbn1Q/sMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBs8sw3FbA22QV8fk/M8x9Z0uLRQhCo2t9b6+3VNshZJjlI
-# D3Jcfmz+IJFfSdphLcOih+61rMBKlXkIx1giH/Ld78nxO1wsbHhgbxuUltSjNmt6
-# N7qiHr6U4+9HlvljA1WrfGZDMZPWeRsOAsNlQ81Or4569YKNaYn7kpUR906DeZdR
-# YaJPcCemyq6hb2VFYKy0Zp/ILWICD8sEh/ltSJpRpdRJWwACQ9s9pjZGE1rQBaUk
-# YFrkyvUyDTWhOh9APC7SRoUV9nOVIi6F2r8cY3zXIwOhPo0PQSKynoTG6u6C34p5
-# d8ulUIv+kRm81URJ8FRssYOur3kMxTt58jWC8HFx
+# hkiG9w0BAQEFAASCAQCD0mKv0Wa9NhxQ4/TZ3qkQPApd3ItNSwhrchvY4FEZfpjm
+# 3pz1SolWktOIascUyIYGNk29TQgncs2vY36ucZ1KIQDeSX5TXdUx/yMTyX5tEPPx
+# o6R/fzXMzDfiJd7WgD2Ha/N8rUEgbOs1XIvbV5U+gM8QsmDAZUcSE9pHPMF78NE4
+# Dl6vpizvDTLONVlRU1pATNvK+yQqJpjF0USR00V/BaiteCo2X/Vcl+ZWdu6MaXWw
+# 8rmigKIgZ/C1IV1/9x3PcJ5GaKVsQFSw0ERwnvh9Z6VtX5Nbjk5bK58e/SXNgL93
+# AMUyc8MOx1Vko33pTiHurRodC+BxY7D5V0LYX+MO
 # SIG # End signature block
