@@ -1,0 +1,2616 @@
+﻿ToolBox
+
+List of Commands that the ToolBox Module provides:
+
+Name:
+Add-AppendPath
+
+Short Description:
+Appends a given folder (Directory) to the Path
+
+Long Description:
+Appends a given folder (Directory) to the Path
+
+Syntax:
+Add-AppendPath [[-Path] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+append-classpath
+
+Short Description:
+Append a given path to the Classpath
+
+Long Description:
+Appends a given path to the Java Classpath. Useful if you still need that old java crap!
+
+By the way: I hate Java!
+
+Syntax:
+append-classpath [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Approve-MailAddress
+
+Short Description:
+REGEX check to see if a given Email address is valid
+
+Long Description:
+Checks a given Mail Address against a REGEX Filter to see if it is RfC822 complaint
+Not directly related is the REGEX check. Most mailer will not be able to handle it if there
+are non standard chars within the Mail Address...
+
+Syntax:
+Approve-MailAddress [-Email] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Boolean
+
+Name:
+Check-IPaddress
+
+Short Description:
+Check if a given IP Address seems to be valid
+
+Long Description:
+Check if a given IP Address seems to be valid.
+We use the .NET function to do so. This is not 100% reliable,
+but is enough most times.
+
+Syntax:
+Check-IPaddress [-IPAddress] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Boolean
+
+Name:
+Check-SessionArch
+
+Short Description:
+Show the CPU architecture
+
+Long Description:
+You want to know if this is a 64BIT or still a 32BIT system?
+Might be useful, maybe not!
+
+Syntax:
+Check-SessionArch [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Clean-SysInfo
+
+Short Description:
+Companion for Update-SysInfo
+
+Long Description:
+Cleanup for variables from the Update-SysInfo function
+
+Syntax:
+Clean-SysInfo [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Clear-AllEventLogs
+
+Short Description:
+Delete all EventLog entries
+
+Long Description:
+Delete all EventLog entries
+
+Syntax:
+Clear-AllEventLogs [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Clear-OldFiles
+
+Short Description:
+Removes old Logfiles
+
+Long Description:
+Convenience function to cleanup old Files (House Keeping)
+
+Syntax:
+Clear-OldFiles [[-Days] <Int32>] [[-Path] <String>] [[-Extension] <String>] [<CommonParameters>]
+
+Output:None
+
+Name:
+Clear-TempDir
+
+Short Description:
+Cleanup the TEMP Directory
+
+Long Description:
+Cleanup the TEMP Directory
+
+Syntax:
+Clear-TempDir [[-Days] <Int32>] [-Confirm] [-Whatif] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Compress-GZip
+
+Short Description:
+GZip Compress (.gz)
+
+Long Description:
+A buffered GZip (.gz) Compress function that support pipelined input
+
+Syntax:
+Compress-GZip [-FullName] <String> [[-GZipPath] <String>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+ConvertFrom-Base64
+
+Short Description:
+Decode a Base64 encoded String back to a plain String
+
+Long Description:
+Decode a Base64 encoded String back to a plain String
+
+Syntax:
+ConvertFrom-Base64 [[-encoded] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+ConvertFrom-binhex
+
+Short Description:
+Convert a HEX Value to a String
+
+Long Description:
+Converts a given HEX value back to human readable strings
+
+Syntax:
+ConvertFrom-binhex [[-binhex] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+ConvertFrom-EscapedString
+
+Short Description:
+Convert an encoded (escaped) string back into the original representation
+
+Long Description:
+If you have a escaped String this function make it human readable again.
+Some Webservices returns strings an escaped format, so we convert an encoded (escaped) string back into the original representation
+
+Syntax:
+ConvertFrom-EscapedString [-String] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+ConvertFrom-UnixDate
+
+Short Description:
+Convert from Unix time to DateTime
+
+Long Description:
+Convert from Unix time to DateTime
+
+Syntax:
+ConvertFrom-UnixDate [[-Date] <Int32>] [[-UTC] <Boolean>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+ConvertFrom-UrlEncoded
+
+Short Description:
+Decodes a UrlEncoded string.
+
+Long Description:
+Decodes a UrlEncoded string.
+
+Input can be either a positional or named parameters of type string or an
+array of strings. The Cmdlet accepts pipeline input.
+
+Syntax:
+ConvertFrom-UrlEncoded [-InputObject] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Convert-IPToBinary
+
+Short Description:
+Converts an IP address string to it's binary string equivalent
+
+Long Description:
+Takes a IP as a string and returns the same IP address as a binary string with no decimal points
+
+Syntax:
+Convert-IPToBinary [[-IP] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Management.Automation.PSObject
+
+Name:
+Convert-IPtoDecimal
+
+Short Description:
+Converts an IP address to decimal.
+
+Long Description:
+Converts an IP address to decimal value.
+
+Syntax:
+Convert-IPtoDecimal [-IPAddress] <String> [<CommonParameters>]
+
+Output:
+System.Management.Automation.PSObject
+
+Name:
+ConvertTo-Base64
+
+Short Description:
+Convert a String to a Base 64 encoded String
+
+Long Description:
+Convert a String to a Base 64 encoded String
+
+Syntax:
+ConvertTo-Base64 [[-plain] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+ConvertTo-binhex
+
+Short Description:
+Convert a String to HEX
+
+Long Description:
+Converts a given String or Array to HEX and dumps it
+
+Syntax:
+ConvertTo-binhex [[-array] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+ConvertTo-EscapeString
+
+Short Description:
+HTML on web pages uses tags and other special characters to define the page.
+
+Long Description:
+HTML on web pages uses tags and other special characters to define the page.
+To make sure text is not misinterpreted as HTML tags, you may want to escape text and automatically convert any ambiguous text character in an encoded format.
+
+Syntax:
+ConvertTo-EscapeString [-String] <String> [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+ConvertTo-HashTable
+
+Short Description:
+Convert an object to a HashTable
+
+Long Description:
+Convert an object to a HashTable excluding certain types.  For example, ListDictionaryInternal doesn't support serialization therefore
+can't be converted to JSON.
+
+Syntax:
+ConvertTo-HashTable [-InputObject] <Object> [[-ExcludeTypeName] <String[]>] [[-MaxDepth] <Int32>] [<CommonParameters>]
+
+Output:None
+
+Name:
+ConvertTo-hex
+
+Short Description:
+Converts a given integer to HEX
+
+Long Description:
+Converts any given Integer (INT) to Hex and dumps it to the Console
+
+Syntax:
+ConvertTo-hex [-dec] <Int64> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Int64
+
+Name:
+ConvertTo-HumanReadable
+
+Short Description:
+Converts a given number to a more human readable format
+
+Long Description:
+Converts a given number to a more human readable format, it conerts 1024 to 1KB as example.
+
+Syntax:
+ConvertTo-HumanReadable [-num] <Int64> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+ConvertTo-Objects
+
+Short Description:
+You receive a result of a query and converts it to an array of objects which is
+
+Long Description:
+You receive a result of a query and converts it to an array of objects which is
+more legible to understand
+
+Syntax:
+ConvertTo-Objects [-Input] <Object[]> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Array
+
+Name:
+ConvertTo-PlainText
+
+Short Description:
+Convert a secure string back to plain text
+
+Long Description:
+Convert a secure string back to plain text
+
+Syntax:
+ConvertTo-PlainText [-secure] <SecureString> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+ConvertTo-StringList
+
+Short Description:
+Function to convert an array into a string list with a delimiter.
+
+Long Description:
+Function to convert an array into a string list with a delimiter.
+
+Syntax:
+ConvertTo-StringList [-Array] <Array> [[-Delimiter] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+ConvertTo-UnixDate
+
+Short Description:
+Convert from DateTime to Unix date
+
+Long Description:
+Convert from DateTime to Unix date
+
+Syntax:
+ConvertTo-UnixDate [[-Date] <DateTime>] [[-UTC] <Boolean>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+ConvertTo-UrlEncoded
+
+Short Description:
+
+ConvertTo-UrlEncoded [[-InputObject] <string>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+
+Long Description:
+
+Syntax:
+syntaxItem                                                                                                             
+----------                                                                                                             
+{@{name=ConvertTo-UrlEncoded; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}
+
+Output:
+returnValue                                                                                                            
+-----------                                                                                                            
+@{type=}
+
+Name:
+Create-ZIP
+
+Short Description:
+Create a ZIP archive of a given file
+
+Long Description:
+Create a ZIP archive of a given file.
+By default within the same directory and the same name as the input file.
+This can be changed via command line parameters
+
+Syntax:
+Create-ZIP [-InputFile] <String> [[-OutputFile] <String>] [[-OutputPath] <String>] [-WhatIf] [-Confirm] 
+[<CommonParameters>]
+
+Output:None
+
+Name:
+Disable-IEESEC
+
+Short Description:
+Disabling IE Enhanced Security Configuration (IE ESC)
+
+Long Description:
+Disabling IE Enhanced Security Configuration (IE ESC)
+
+Syntax:
+Disable-IEESEC [-Users] [-Admins] [-All] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Disable-RemoteDesktop
+
+Short Description:
+The function Disable-RemoteDesktop will disable RemoteDesktop on a local or remote machine.
+
+Long Description:
+The function Disable-RemoteDesktop will disable RemoteDesktop on a local or remote machine.
+
+Syntax:
+Disable-RemoteDesktop [-CimSession <CimSession[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Disable-RemoteDesktop [-ComputerName <String[]>] [-Credential <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Edit-HostsFile
+
+Short Description:
+Edit the Windows Host file
+
+Long Description:
+Shortcut to quickly edit the Windows host File. Might be useful for testing things without changing the regular DNS.
+Handle with care!
+
+Syntax:
+Edit-HostsFile [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Enable-RemoteDesktop
+
+Short Description:
+The function Enable-RemoteDesktop will enable RemoteDesktop on a local or remote machine.
+
+Long Description:
+The function Enable-RemoteDesktop will enable RemoteDesktop on a local or remote machine.
+
+Syntax:
+Enable-RemoteDesktop [-CimSession <CimSession[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
+Enable-RemoteDesktop [-ComputerName <String[]>] [-Credential <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Enable-Scritps
+
+Short Description:
+Enable a script to use in the remote PowerShell session
+
+Long Description:
+Enable a script to use in the remote PowerShell session
+
+Syntax:
+Enable-Scritps [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Enable-WinRM
+
+Short Description:
+Enables Remote PowerShell
+
+Long Description:
+Enables Remote PowerShell on the local host
+
+Syntax:
+Enable-WinRM [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Expand-ArrayObject
+
+Short Description:
+You get an array of objects and performs an expansion of data separated by a spacer
+
+Long Description:
+You get an array of objects and performs an expansion of data separated by a spacer
+
+Syntax:
+Expand-ArrayObject [-array] <Array> [-field] <String> [-delimiter <Char>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Expand-CompressedItem
+
+Short Description:
+
+Expand-CompressedItem [-InputObject] <string> [[-Path] <DirectoryInfo>] [-Format <string>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+
+Long Description:
+
+Syntax:
+syntaxItem                                                                                                             
+----------                                                                                                             
+{@{name=Expand-CompressedItem; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}
+
+Output:
+returnValue                                                                                                            
+-----------                                                                                                            
+@{type=}
+
+Name:
+Expand-GZip
+
+Short Description:
+GZip Decompress (.gz)
+
+Long Description:
+A buffered GZip (.gz) Decompress function that support pipelined input
+
+Syntax:
+Expand-GZip [-FullName] <String> [[-GZipPath] <String>] [-Force] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Explore
+
+Short Description:
+Open explorer in this directory
+
+Long Description:
+Open the Windows Explorer in this directory
+
+Syntax:
+Explore [[-loc] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+export-session
+
+Short Description:
+Export PowerShell session info to a file
+
+Long Description:
+This is a (very) poor man approach to save some session infos
+
+Our concept of session is simple and only considers:
+- history
+- The current directory
+
+But still can be very handy and useful. If you type in some sneaky commands,
+or some very complex things and you did not copied these to another file or script
+it can save you a lot of time if you need to do it again (And this is often the case)
+
+Even if you just want to dump it quick to copy it some when later to a documentation or
+script this might be useful.
+
+Syntax:
+export-session [[-sessionName] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Find-String
+
+Short Description:
+Searches text files by pattern and displays the results.
+
+Long Description:
+Searches text files by pattern and displays the results.
+
+Syntax:
+Find-String [-pattern] <Regex> [[-include] <String[]>] [-recurse] [-caseSensitive] [[-directoryExclude] <String[]>] 
+[[-context] <Int32[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-Accelerators
+
+Short Description:
+Get a list of all .NET functions
+
+Long Description:
+Get a list of all .NET functions
+
+Syntax:
+Get-Accelerators [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-AdminUser
+
+Short Description:
+Small function to see if we are Admin
+
+Long Description:
+Check if the user have started the PowerShell Session as Admin
+
+Syntax:
+Get-AdminUser [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Boolean
+
+Name:
+Get-ASCBanner
+
+Short Description:
+A brief description of the Format-Banner function.
+
+Long Description:
+A detailed description of the Format-Banner function.
+
+Syntax:
+Get-ASCBanner [-InputString] <String[]> [[-IsString]] [[-ASCChar] <Char>] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-BingSearch
+
+Short Description:
+Get the Bing results for a string
+
+Long Description:
+Get the latest Bin search results for a given string and presents it on the console
+
+Syntax:
+Get-BingSearch [[-searchstring] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-Calendar
+
+Short Description:
+Dumps a Calendar to the Colsole
+
+Long Description:
+Dumps a Calendar to the Colsole
+You might find it handy to have that on a core Server or in a remote PowerShell Session
+
+Syntax:
+Get-Calendar [[-StartDate] <DateTime>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-Clipboard
+
+Short Description:
+Get the content of the Clipboard
+
+Long Description:
+Get the content of the Clipboard
+
+Syntax:
+Get-Clipboard [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-DecryptSecretText
+
+Short Description:
+Decrypts a given String, encrypted by Get-EncryptSecretText
+
+Long Description:
+Get-Decrypt makes a string encrypted by Get-EncryptSecretText decrypts it to and humnan readable again.
+
+Syntax:
+Get-DecryptSecretText [-EncryptedText] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-DefaultMessage
+
+Short Description:
+Helper Function to show default message used in VERBOSE/DEBUG/WARNING
+
+Long Description:
+Helper Function to show default message used in VERBOSE/DEBUG/WARNING
+and... HOST in some case.
+This is helpful to standardize the output messages
+
+Syntax:
+Get-DefaultMessage [[-Message] <String>] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-DiskInfo
+
+Short Description:
+Show free Diskspace for all Disks
+
+Long Description:
+This function gets your System Disk Information
+
+Syntax:
+Get-DiskInfo [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-EncryptSecretText
+
+Short Description:
+Encrypts a given string with a given certificate
+
+Long Description:
+Sometimes you might need to transfer a password (or another secret) via Mail (or any other insecure media) here a strong encryption is very handy.
+Get-EncryptSecretText uses a given Certificate to encrypt a given String.
+
+Syntax:
+Get-EncryptSecretText [-CertificatePath] <String> [-PlainText] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-EnvironmentVariables
+
+Short Description:
+Get and list all Environment Variables
+
+Long Description:
+Dum all existing Environment Variables.
+Sometimes this comes handy if you do something that changes them an you want to compare the before and after values (See examples)
+
+Syntax:
+Get-EnvironmentVariables [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-ExternalIP
+
+Short Description:
+Gets the current external IP address.
+
+Long Description:
+Gets the current external IP address.
+
+Syntax:
+Get-ExternalIP [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-FreeDiskSpace
+
+Short Description:
+Show the Free Disk Space of all Disks
+
+Long Description:
+This is a Uni* DF like command that shows the available Disk space.
+It's human readable (e.g. more like df -h)
+
+Syntax:
+Get-FreeDiskSpace [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Array
+
+Name:
+Get-Hash
+
+Short Description:
+Dumps the MD5 hash for the given File
+
+Long Description:
+Dumps the MD5 hash for the given File
+
+Syntax:
+Get-Hash [-File] <String> [[-Hash] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-HostFileEntry
+
+Short Description:
+Dumps the HOSTS File to the Console
+
+Long Description:
+Dumps the HOSTS File to the Console
+It dumps the WINDIR\System32\drivers\etc\hosts
+
+Syntax:
+Get-HostFileEntry [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-HttpHead
+
+Short Description:
+Retrive HTTP Headers from target webserver
+
+Long Description:
+This command will get the HTTP headers from the target webserver and test for the presence of variuos security related HTTP headers and also display the cookie information.
+
+Syntax:
+Get-HttpHead [-url] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-IsGdURL
+
+Short Description:
+Get a Short URL
+
+Long Description:
+Get a Short URL using the IS.GD Service
+
+Syntax:
+Get-IsGdURL [-URL] <String> [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-IsSessionElevated
+
+Short Description:
+Is the Session started as admin (Elevated)
+
+Long Description:
+Quick Helper that return if the session is started as admin (Elevated)
+It returns a Boolean (True or False) and sets a global variable (IsSessionElevated) with
+this Boolean value. This might be useful for further use!
+
+Syntax:
+Get-IsSessionElevated [<CommonParameters>]
+
+Output:
+System.Boolean
+
+Name:
+Get-IsVirtual
+
+Short Description:
+Check if this is a Virtual Machine
+
+Long Description:
+If this is a virtual System the Boolean is True, if not it is False
+
+Syntax:
+Get-IsVirtual [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Boolean
+
+Name:
+Get-LocalListenPort
+
+Short Description:
+This parses the native netstat.exe output using the command line "netstat -anb" to find all of the network ports in use on a local machine and all associated processes and services
+
+Long Description:
+This parses the native netstat.exe output using the command line "netstat -anb" to find all of the network ports in use on a local machine and all associated processes and services
+
+Syntax:
+Get-LocalListenPort [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-LongURL
+
+Short Description:
+Expand a Short URL
+
+Long Description:
+Expand a Short URL via the untiny.me
+This service supports all well known (and a lot other) short UR L services!
+
+Syntax:
+Get-LongURL [-URL] <String> [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-MaskedJson
+
+Short Description:
+Maks all special characters within a JSON File
+
+Long Description:
+Maks all special characters within a JSON File.
+mostly used with C# or some other windows tools.
+
+Syntax:
+Get-MaskedJson [-json] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-MicrosoftUpdateInfo
+
+Short Description:
+Gives a list of all Microsoft Updates sorted by KB number/HotfixID
+
+Long Description:
+Gives a list of all Microsoft Updates sorted by KB number/HotfixID
+
+Syntax:
+Get-MicrosoftUpdateInfo [[-raw]] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-MOTD
+
+Short Description:
+Displays system information to a host.
+
+Long Description:
+The Get-MOTD cmdlet is a system information tool written in PowerShell.
+
+Syntax:
+Get-MOTD [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-myProcess
+
+Short Description:
+Get our own process information
+
+Long Description:
+Get our own process information about the PowerShell Session
+
+Syntax:
+Get-myProcess [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-NetFramework
+
+Short Description:
+This function will retrieve the list of Framework Installed on the computer.
+
+Long Description:
+A detailed description of the Get-NetFramework function.
+
+Syntax:
+Get-NetFramework [[-ComputerName] <String[]>] [[-Credentials] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-NetStat
+
+Short Description:
+This function will get the output of netstat -n and parse the output
+
+Long Description:
+This function will get the output of netstat -n and parse the output
+
+Syntax:
+Get-NetStat [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-NewAesKey
+
+Short Description:
+Get a AES Key
+
+Long Description:
+Get a AES Key
+
+Syntax:
+Get-NewAesKey [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-NewPassword
+
+Short Description:
+Generates a New password with varying length and Complexity,
+
+Long Description:
+Generate a New Password for a User.  Defaults to 8 Characters
+with Moderate Complexity.  Usage
+
+GET-NEWPASSWORD or
+
+GET-NEWPASSWORD $Length $Complexity
+
+Where $Length is an integer from 1 to as high as you want
+and $Complexity is an Integer from 1 to 4
+
+Syntax:
+Get-NewPassword [[-PasswordLength] <Int32>] [[-Complexity] <Int32>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-NewPsSession
+
+Short Description:
+Create a session where the given credentials are used
+
+Long Description:
+Create a session where the given credentials are used
+
+Syntax:
+Get-NewPsSession [[-ComputerName] <Object>] [-PsCredentials <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-NtpTime
+
+Short Description:
+Get the NTP Time from a given Server
+
+Long Description:
+Get the NTP Time from a given Server.
+
+Syntax:
+Get-NtpTime [[-Server] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.DateTime
+
+Name:
+Get-Pause
+
+Short Description:
+Wait for user to press any key
+
+Long Description:
+Shows a console message and waits for user to press any key.
+
+Optional: The message to display could be set by a command line parameter.
+
+Syntax:
+Get-Pause [[-PauseMessage] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-PendingReboot
+
+Short Description:
+Gets the pending reboot status on a local or remote computer.
+
+Long Description:
+This function will query the registry on a local or remote computer and determine if the
+system is pending a reboot, from either Microsoft Patching or a Software Installation.
+For Windows 2008+ the function will query the CBS registry key as another factor in determining
+pending reboot state.  "PendingFileRenameOperations" and "Auto Update\RebootRequired" are observed
+as being consistant across Windows Server 2003 & 2008.
+
+CBServicing = Component Based Servicing (Windows 2008)
+WindowsUpdate = Windows Update / Auto Update (Windows 2003 / 2008)
+CCMClientSDK = SCCM 2012 Clients only (DetermineIfRebootPending method) otherwise $null value
+PendFileRename = PendingFileRenameOperations (Windows 2003 / 2008)
+
+Syntax:
+Get-PendingReboot [[-ComputerName] <String[]>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-PreReqModules
+
+Short Description:
+
+Get-PreReqModules [[-Path] <string>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+
+Long Description:
+
+Syntax:
+syntaxItem                                                                                                             
+----------                                                                                                             
+{@{name=Get-PreReqModules; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}
+
+Output:
+returnValue                                                                                                            
+-----------                                                                                                            
+@{type=}
+
+Name:
+Get-PushoverUserDeviceInfo
+
+Short Description:
+Retrieves a list of registered devices with Pushover
+
+Long Description:
+Perfect in combination with the Send-Pushover command to send a notification using the "device" parameter of Send-Pushover
+
+Syntax:
+Get-PushoverUserDeviceInfo [-User] <String> [[-token] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-Quote
+
+Short Description:
+Get a random Quote from an Array
+
+Long Description:
+Get a random Quote from an Array of Quotes I like.
+I like to put Quotes in slides and presentations, here is a collection of whose I used...
+
+Syntax:
+Get-Quote [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-RegKeyLastWriteTime
+
+Short Description:
+Retrieves the last write time of the supplied registry key
+
+Long Description:
+The Registry data that a hive stores in containers are called cells.
+A cell can hold a key, a value, a security descriptor, a list of subkeys, or a list of key values.
+Get-RegKeyLastWriteTime retrieves the LastWriteTime through a pointer to the FILETIME structure that receives the time at which the enumerated subkey was last written. Values do not contain a LastWriteTime	property, but changes to child values update the parent keys lpftLastWriteTime.
+
+The LastWriteTime is updated when a key is created, modified, accessed, or deleted.
+
+Syntax:
+Get-RegKeyLastWriteTime [[-ComputerName] <String>] [[-Key] <String>] [[-SubKey] <String>] [[-NoEnumKey]] [-WhatIf] 
+[-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-RegularJson
+
+Short Description:
+Converts a C# dumped JSON to regular JSON
+
+Long Description:
+A detailed description of the Get-RegularJson function.
+
+Syntax:
+Get-RegularJson [-csjson] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-RelativePath
+
+Short Description:
+Get a path to a file (or folder) relative to another folder
+
+Long Description:
+Converts the FilePath to a relative path rooted in the specified Folder
+
+Syntax:
+Get-RelativePath [-Folder] <String> [-FilePath] <String> [-Resolve] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-ScriptDirectory
+
+Short Description:
+Get the Directory of the Script that invokes this function
+
+Long Description:
+Get the Directory of the Script that invokes this function
+
+Syntax:
+Get-ScriptDirectory [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-ServiceStatus
+
+Short Description:
+List Services where StartMode is AUTOMATIC that are NOT running
+
+Long Description:
+This functionwill list services from a local or remote computer where the StartMode property is set to "Automatic" and where the state is different from RUNNING (so mostly where the state is NOT RUNNING)
+
+Syntax:
+Get-ServiceStatus [[-ComputerName] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-ServiceStatusInfo
+
+Short Description:
+This function identifies all services that are configured to auto start with system but are in stopped state
+
+Long Description:
+This function identifies all services that are configured to auto start with system but are in stopped state
+
+Syntax:
+Get-ServiceStatusInfo [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+get-sessionfile
+
+Short Description:
+Restore PowerShell Session information
+
+Long Description:
+This command shows many PowerShell Session informations.
+
+Syntax:
+get-sessionfile [-sessionName] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-ShortDate
+
+Short Description:
+Get the Date as short String
+
+Long Description:
+Get the Date as short String
+
+Syntax:
+Get-ShortDate [[-FilenameCompatibleFormat]] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-ShortTime
+
+Short Description:
+Get the Time as short String
+
+Long Description:
+Get the Time as short String
+
+Syntax:
+Get-ShortTime [[-FilenameCompatibleFormat]] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-Syntax
+
+Short Description:
+Get the syntax of a cmdlet, even if we have no help for it
+
+Long Description:
+Helper function to get the syntax of a alias or cmdlet, even if we have no help for it
+
+Syntax:
+Get-Syntax [[-cmdlet] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-SysInfo
+
+Short Description:
+Displays Information about the system
+
+Long Description:
+Displays Information about the system it is started on
+
+Syntax:
+Get-SysInfo [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-SysType
+
+Short Description:
+Show if the system is Workstation or a Server
+
+Long Description:
+This function shows of the system is a server or a workstation.
+Additionally it can show more detailed infos (like Domain Membership)
+
+Syntax:
+Get-SysType [[-d]] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-TcpPortStatus
+
+Short Description:
+Check a TCP Port
+
+Long Description:
+Opens a connection to a given (or default) TCP Port to a given (or default) server.
+This is not a simple port ping, it creates a real connection to see if the port is alive!
+
+Syntax:
+Get-TcpPortStatus [[-Port] <Int32>] [[-Server] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Boolean
+
+Name:
+Get-TempFile
+
+Short Description:
+Creates a string with a temp file
+
+Long Description:
+Creates a string with a temp file
+
+Syntax:
+Get-TempFile [[-Extension] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-TimeStamp
+
+Short Description:
+Get-TimeStamp
+
+Long Description:
+Get-TimeStamp
+
+Syntax:
+Get-TimeStamp [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-TinyURL
+
+Short Description:
+Get a Short URL
+
+Long Description:
+Get a Short URL using the TINYURL.COM Service
+
+Syntax:
+Get-TinyURL [-URL] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-TopProcesses
+
+Short Description:
+Make the PowerShell a bit more *NIX like
+
+Long Description:
+This is a PowerShell Version of the well known *NIX like TOP
+
+Syntax:
+Get-TopProcesses [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Get-TrImURL
+
+Short Description:
+Get a Short URL
+
+Long Description:
+Get a Short URL using the TR.IM Service
+
+Syntax:
+Get-TrImURL [-URL] <String> [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-Uptime
+
+Short Description:
+Show how long system has been running
+
+Long Description:
+Uni* like Uptime - The uptime utility displays the current time,
+the length of time the system has been up
+
+Syntax:
+Get-Uptime [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-UUID
+
+Short Description:
+Generates a UUID String
+
+Long Description:
+Generates a UUID String and is a uuidgen.exe replacement
+
+Syntax:
+Get-UUID [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Get-Whois
+
+Short Description:
+Script to retrieve WhoIs information from a list of domains
+
+Long Description:
+This script will, by default, create a report of WhoIs information on 1 or more Internet domains.
+Not all Top-Level Domains support Whois queries! e.g. .de (Germany) domains!
+
+Report options are CSV, Json, XML, HTML, and object (default) output.
+Dates in the CSV, Json, and HTML options are formatted for the culture settings on the PC.
+Columns in HTML report are also sortable, just click on the headers.
+
+Syntax:
+Get-Whois [-Domain] <String> [-Path <String>] [-RedThresold <Int32>] [-YellowThresold <Int32>] [-GreyThresold <Int32>] 
+[[-OutputType] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+GnuGrep
+
+Short Description:
+File pattern searcher
+
+Long Description:
+This command emulates the well known (and loved?) GNU file pattern searcher
+
+Syntax:
+GnuGrep [-pattern] <String> [-filefilter] <String> [-r] [-i] [-l] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Grant-PathFullPermission
+
+Short Description:
+Grant Full Access Permission for a given user to a given Path
+
+Long Description:
+Grant Full Access Permission for a given user to a given Path
+
+Syntax:
+Grant-PathFullPermission [-path] <String> [-user] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+head
+
+Short Description:
+display first lines of a file
+
+Long Description:
+This filter displays the first count lines or bytes of each of the specified files,
+or of the standard input if no files are specified.
+
+If count is omitted it defaults to 10.
+
+Syntax:
+head [-file] <String> [[-count] <Int32>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+help
+
+Short Description:
+Wrapper that use the cmdlet Get-Help -full
+
+Long Description:
+Wrapper that use the regular cmdlet Get-Help -full to show all technical informations about the given command
+
+Syntax:
+help [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+import-session
+
+Short Description:
+Import a PowerShell session info from file
+
+Long Description:
+This is a (very) poor man approach to restore some session infos
+
+Our concept of session is simple and only considers:
+- history
+- The current directory
+
+But still can be very handy and useful. If you type in some sneaky commands,
+or some very complex things and you did not copied these to another file or script
+it can save you a lot of time if you need to do it again (And this is often the case)
+
+Even if you just want to dump it quick to copy it some when later to a documentation or
+script this might be useful.
+
+Syntax:
+import-session [-sessionName] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Initialize-Modules
+
+Short Description:
+Initialize PowerShell Modules
+
+Long Description:
+Initialize PowerShell Modules
+
+Syntax:
+Initialize-Modules [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Initialize-ModuleUpdate
+
+Short Description:
+Initialize PowerShell Modules
+
+Long Description:
+Initialize PowerShell Modules
+
+Syntax:
+Initialize-Modules [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Invoke-AnimatedSleep
+
+Short Description:
+Animated sleep
+
+Long Description:
+Takes the title and displays a looping animation for a given number of seconds.
+The animation will delete itself once it's finished, to save on console scrolling.
+
+Syntax:
+Invoke-AnimatedSleep [[-seconds] <Int32>] [[-title] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Invoke-baloonTip
+
+Short Description:
+Shows a Windows Ballon notification
+
+Long Description:
+Shows a Windows Ballon notification
+
+Syntax:
+Invoke-baloonTip [[-Title] <String>] [[-Message] <String>] [[-Icon] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Invoke-CreateMissingRegistryDrives
+
+Short Description:
+Create Missing Registry Drives
+
+Long Description:
+Create Missing Registry Drives
+
+Syntax:
+Invoke-CreateMissingRegistryDrives [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Invoke-GC
+
+Short Description:
+Do a garbage collection
+
+Long Description:
+Do a garbage collection within the PowerShell Session
+
+Syntax:
+Invoke-GC [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Invoke-NTFSFilesCompression
+
+Short Description:
+Compress files with given extension older than given amount of time
+
+Long Description:
+The function is intended for compressing (using the NTFS compression) all files with particular extensions older than given time unit
+
+Syntax:
+Invoke-NTFSFilesCompression [-Path] <String[]> [-OlderThan] <Int32> [[-TimeUnit] <String[]>] [[-Extension] <String[]>] 
+[-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Invoke-RemoteScript
+
+Short Description:
+A brief description of the Invoke-RemoteScript function.
+
+Long Description:
+A detailed description of the Invoke-RemoteScript function.
+
+Syntax:
+Invoke-RemoteScript [-Computer] <String> [-Folder] <String> [-Script] <String> [[-Drive] <String>] [<CommonParameters>]
+
+Output:None
+
+Name:
+Invoke-VisualEditor
+
+Short Description:
+Wrapper to edit files
+
+Long Description:
+This is a quick wrapper that edits files with editor from the VisualEditor variable
+
+Syntax:
+Invoke-VisualEditor [[-args] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+JavaLove
+
+Short Description:
+Set the JAVAHOME Variable to use JDK and/or JRE instances withing the Session
+
+Long Description:
+You are still using Java Stuff?
+OK... Your choice, so we do you the favor and create/fill the variable JAVAHOME based on the JDK/JRE that we found.
+It also append the Info to the PATH variable to make things easier for you.
+But think about dropping the buggy Java crap as soon as you can. Java is not only buggy, there are also many Security issues with it!
+
+By the way: I hate Java!
+
+Syntax:
+JavaLove [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+ll
+
+Short Description:
+Quick helper to make my PowerShell a bit more like *nix
+
+Long Description:
+Everyone ever used a modern Unix and/or Linux system knows and love the colored output of LL
+This function is hack to emulate that on PowerShell.
+
+Syntax:
+ll [[-dir] <Object>] [[-all] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Load-CommandHistory
+
+Short Description:
+Load the old History dumped via Save-CommandHistory
+
+Long Description:
+This is the companion Command for Save-CommandHistory
+It loads the old History from a XML File in the users Profile.
+
+Syntax:
+Load-CommandHistory [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Load-Test
+
+Short Description:
+Load Pester Module
+
+Long Description:
+Load the Pester PowerShell Module to the Global context.
+Pester is a Mockup, Unit Test and Function Test Module for PowerShell
+
+Syntax:
+Load-Test [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+man
+
+Short Description:
+Wrapper that use the cmdlet Get-Help -full
+
+Long Description:
+Wrapper that use the regular cmdlet Get-Help -full to show all technical informations about the given command
+
+Syntax:
+help [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+mkdir
+
+Short Description:
+Wrapper of New-Item
+
+Long Description:
+Wrapper of New-Item to create a directory
+
+Syntax:
+mkdir [-Directory] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+myls
+
+Short Description:
+Wrapper for Get-ChildItem
+
+Long Description:
+This wrapper for Get-ChildItem shows all directories and files (even hidden ones)
+
+Syntax:
+myls [[-loc] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+New-Gitignore
+
+Short Description:
+Create a new .gitignore file with my default settings
+
+Long Description:
+Downloads my default .gitignore from GitHub and creates it within the directory from where this function is called.
+
+Syntax:
+New-Gitignore [[-Source] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+New-Guid
+
+Short Description:
+Creates a new Guid object and displays it to the screen
+
+Long Description:
+Uses static System.Guid.NewGuid() method to create a new Guid object
+
+Syntax:
+New-Guid [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Open-InternetExplorer
+
+Short Description:
+Workaround for buggy internetexplorer.application
+
+Long Description:
+This Workaround is neat, because the native implementation is unable to bring the new Internet Explorer Window to the front (give em focus).
+It needs his companion: Add-NativeHelperType
+
+Syntax:
+Open-InternetExplorer [[-Url] <String>] [-Foreground] [-FullScreen] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Out-ColorMatchInfo
+
+Short Description:
+Highlights MatchInfo objects similar to the output from grep.
+
+Long Description:
+Highlights MatchInfo objects similar to the output from grep.
+
+Syntax:
+Out-ColorMatchInfo [-match] <MatchInfo> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+PoSHModuleLoader
+
+Short Description:
+Loads all Script modules
+
+Long Description:
+Loads all Script modules
+
+Syntax:
+PoSHModuleLoader [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+rdp
+
+Short Description:
+Wrapper for the Windows RDP Client
+
+Long Description:
+Just a wrapper for the Windows Remote Desktop Protocol (RDP) Client.
+
+Syntax:
+rdp [-rdphost] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Register-Script
+
+Short Description:
+Registers a script for use in remote PowerShell session
+
+Long Description:
+Registers a script for use in remote PowerShell session
+
+Syntax:
+Register-Script [[-path] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Reload-Module
+
+Short Description:
+Reloads a PowerShell Module
+
+Long Description:
+Reloads a PowerShell Module
+
+Syntax:
+Reload-Module [-ModuleName] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Remove-FromPath
+
+Short Description:
+Removes given Directory or Directories from the PATH
+
+Long Description:
+Removes given Directory or Directories from the PATH
+
+Syntax:
+Remove-FromPath [[-path] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Remove-ItemSafely
+
+Short Description:
+Deletes files and folders into the Recycle Bin
+
+Long Description:
+Deletes the file or folder as if it had been done via File Explorer.
+
+Syntax:
+Remove-ItemSafely [-Path] <Object> [-DeletePermanently] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Repair-DotNetFrameWorks
+
+Short Description:
+Optimize all installed NET Frameworks
+
+Long Description:
+Optimize all installed NET Frameworks by executing NGEN.EXE for each.
+
+This could be useful to improve the performance and sometimes the
+installation of new NET Frameworks, or even patches, makes them use
+a single (the first) core only.
+
+Why Microsoft does not execute the NGEN.EXE with each installation... no idea!
+
+Syntax:
+Repair-DotNetFrameWorks [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Save-CommandHistory
+
+Short Description:
+Dump the Command History to an XML File
+
+Long Description:
+Dump the Command History to an XML File.
+This file is located in the User Profile.
+You can then restore it via Load-CommandHistory
+
+Syntax:
+Save-CommandHistory [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Send-Command
+
+Short Description:
+Run a script in the remote PowerShell session
+
+Long Description:
+Run a script in the remote PowerShell session
+
+Syntax:
+Send-Command [[-script] <ScriptBlock>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Send-HipChat
+
+Short Description:
+Send a notification message to a HipChat room.
+
+Long Description:
+Send a notification message to a HipChat room via a RESTful Call to the HipChat API V2 Atlassian requires a separate token for each room within HipChat!
+So please note, that the Room and the Token parameter must match.
+
+Syntax:
+Send-HipChat [[-Token] <String>] [[-Room] <String>] [[-notify] <Boolean>] [[-color] <String>] [[-Message] <String>] 
+[[-Format] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Send-Packet
+
+Short Description:
+Send a packet via IP, TCP or UDP
+
+Long Description:
+Send a packet via IP, TCP or UDP
+Found this useful to test firewall configurations and routing. Or even to test some services.
+
+Syntax:
+Send-Packet [-Target] <String> [[-Protocol] <String>] [-TargetPort] <Int32> [[-SourcePort] <Int32>] [[-TTL] <Int32>] 
+[[-Count] <Int32>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Send-Prowl
+
+Short Description:
+Prowl is the Growl client for iOS.
+
+Long Description:
+Prowl is the Growl client for iOS. Push to your iPhone, iPod touch, or iPad notifications from a Mac or Windows computer, or from a multitude of apps and services.
+Easily integrate the Prowl API into your applications.
+
+Syntax:
+Send-Prowl [-Event] <String> [[-Description] <String>] [[-ApplicationName] <String>] [[-Priority] <Int32>] [[-url] 
+<String>] [-apiKey] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Send-Pushover
+
+Short Description:
+Sends a push message via Pushover
+
+Long Description:
+We established a lot of automated messaging and push services, Pushover was missing!
+We do not use Pushover that much, but sometimes it is just nice to have the function ready...
+
+Syntax:
+Send-Pushover [-User] <String> [-Message] <String> [[-token] <String>] [-device <Object>] [-title <Object>] [-url 
+<Object>] [-url_title <Object>] [-priority <Object>] [-sound <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Send-SlackChat
+
+Short Description:
+Sends a chat message to a Slack organization
+
+Long Description:
+The Post-ToSlack cmdlet is used to send a chat message to a Slack channel, group, or person.
+Slack requires a token to authenticate to an organization within Slack.
+
+Syntax:
+Send-SlackChat [-Channel] <String> [-Message] <String> [[-token] <String>] [[-BotName] <String>] [-WhatIf] [-Confirm] 
+[<CommonParameters>]
+
+Output:None
+
+Name:
+Set-AcceptProtocolViolation
+
+Short Description:
+Workaround for servers with SSL header problems
+
+Long Description:
+Workaround for the following Exception "DownloadString" with "1" argument(s):
+"The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel."
+
+Syntax:
+Set-AcceptProtocolViolation [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-Clipboard
+
+Short Description:
+Copy Content to the Clipboard
+
+Long Description:
+Copy Content to the Clipboard
+
+Syntax:
+Set-Clipboard [-Import] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-Culture
+
+Short Description:
+Set the PowerShell culture to a given culture
+
+Long Description:
+Set the PowerShell culture to a given culture
+
+Syntax:
+Set-Culture [[-culture] <CultureInfo>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-CurrentSession
+
+Short Description:
+Make the Session availible
+
+Long Description:
+Make the Session availible
+
+Syntax:
+Set-CurrentSession [[-session] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-DebugOff
+
+Short Description:
+Turn Debug off
+
+Long Description:
+Turn Debug on
+
+Syntax:
+Set-DebugOff [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-DebugOn
+
+Short Description:
+Turn Debug on
+
+Long Description:
+Turn Debug on
+
+Syntax:
+Set-DebugOn [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-Encoding
+
+Short Description:
+Converts Encoding of text files
+
+Long Description:
+Allows you to change the encoding of files and folders.
+It supports file extension agnostic
+Please note: Overwrites original file if destination equals the path
+
+Syntax:
+Set-Encoding [-path] <String> [[-dest] <String>] [-encoding] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-FileTime
+
+Short Description:
+Change file Creation + Modification + Last Access times
+
+Long Description:
+The touch utility sets the Creation + Modification + Last Access times of files.
+
+If any file does not exist, it is created with default permissions by default.
+To prevent this, please use the -NoCreate parameter!
+
+Syntax:
+Set-FileTime [-Path] <String> [-AccessTime] [-WriteTime] [-CreationTime] [-NoCreate] [[-Date] <DateTime>] [-WhatIf] 
+[-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-FirewallExceptionFileSharing
+
+Short Description:
+Enable File Sharing via Windows Firewall
+
+Long Description:
+Enable File Sharing via Windows Firewall
+
+Syntax:
+Set-FirewallExceptionFileSharing [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-FirewallExceptionRDP
+
+Short Description:
+Enable RDP via Windows Firewall
+
+Long Description:
+Enable RDP via Windows Firewall
+
+Syntax:
+Set-FirewallExceptionRDP [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-FolderDate
+
+Short Description:
+Change a folder last-write time based on the latest last-write of the included files
+
+Long Description:
+Change a folder last-write time based on the latest last-write of the included files
+Makes windows a lot more Uni* like and have some Convenience.
+
+Syntax:
+Set-FolderDate [[-Path] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-IgnoreSslTrust
+
+Short Description:
+This workaround completely disables SSL certificate checks
+
+Long Description:
+This workaround disables the SSL certificate trust checking. This seems to be useful if you need to use self signed SSL certificates.
+But there is a string attached:
+This is very dangerous.
+
+And this is not a joke, it is dangerous, because you leave the door wide open (and honestly it means completely open) for bad certificates, hijacked certificates and even Man-In-The-middle attacks!
+
+So really think twice before you use this in a production environment!
+
+Syntax:
+Set-IgnoreSslTrust [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-NotIgnoreSslTrust
+
+Short Description:
+Enables the SSL certificate checks
+
+Long Description:
+This is a companion function for the usage of the "Set-IgnoreSslTrust" function
+It might be a great idea to disable the SSL Trust check for a single call (If you real need to do it) via the "Set-IgnoreSslTrust" function and then enable it directly after the call via "Set-NotIgnoreSslTrust"
+
+Syntax:
+Set-NotIgnoreSslTrust [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-PowerPrompt
+
+Short Description:
+Multicolored prompt with marker for windows started as Admin and marker for providers outside filesystem
+
+Long Description:
+Multicolored prompt with marker for windows started as Admin and marker for providers outside filesystem
+
+Syntax:
+Set-PowerPrompt [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Set-VisualEditor
+
+Short Description:
+Set the VisualEditor variable
+
+Long Description:
+Setup the VisualEditor variable. Checks if the free (GNU licensed) Notepad++ is installed,
+if so it uses this great free editor. If not the fall back is the PowerShell ISE.
+
+Syntax:
+Set-VisualEditor [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+SuDo
+
+Short Description:
+Uni* like Superuser Do (Sudo)
+
+Long Description:
+Uni* like Superuser Do (Sudo)
+
+Syntax:
+SuDo [-file] <String> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+tail
+
+Short Description:
+Make the PowerShell a bit more *NIX like
+
+Long Description:
+Wrapper for the PowerShell command Get-Content. It opens a given file and shows the content...
+Get-Content normally exists as soon as the end of the given file is reached, this wrapper keeps it open and display every new informations as soon as it appears. This could be very useful for parsing log files.
+
+Everyone ever used Unix or Linux known tail ;-)
+
+Syntax:
+tail [-f] [-file] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+tail2
+
+Short Description:
+Make the PowerShell a bit more *NIX like
+
+Long Description:
+Wrapper for the PowerShell command Get-Content. It opens a given file and shows the content...
+Get-Content normally exists as soon as the end of the given file is reached, this wrapper keeps it open
+and display every new informations as soon as it appears. This could be very useful for parsing log files.
+
+Everyone ever used Unix or Linux known tail ;-)
+
+Syntax:
+tail2 [-file] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Test-Method
+
+Short Description:
+Short description
+
+Long Description:
+Detailed description
+
+Syntax:
+Test-Method [[-moduleName] <String>] [[-functionName] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Test-ModuleAvailableToLoad
+
+Short Description:
+Test if the given Module exists
+
+Long Description:
+Test if the given Module exists
+
+Syntax:
+Test-ModuleAvailableToLoad [-modname] <String[]> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Boolean
+
+Name:
+Test-ProxyBypass
+
+Short Description:
+Testing URLs for Proxy Bypass
+
+Long Description:
+If you'd like to find out whether a given URL goes through a proxy or is accessed directly
+
+Syntax:
+Test-ProxyBypass [[-url] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Boolean
+
+Name:
+Test-RemotePOSH
+
+Short Description:
+Check if PSRemoting (Remote execution of PowerShell) is enabled on a given Host
+
+Long Description:
+Check if PSRemoting (Remote execution of PowerShell) is enabled on a given Host
+
+Syntax:
+Test-RemotePOSH [[-Computer] <String[]>] [-POSHcred <PSCredential>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Test-TCPPort
+
+Short Description:
+TCP Port Ping
+
+Long Description:
+This function is used to see if a TCP Port is answering
+
+Syntax:
+Test-TCPPort [-target] <String> [-Port] <String> [[-TimeOut] <Int32>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.Boolean
+
+Name:
+time
+
+Short Description:
+Timing How Long it Takes a Script or Command to Run
+
+Long Description:
+This is a quick wrapper for Measure-Command Cmdlet
+
+Make the PowerShell a bit more *NIX like
+
+Everyone ever used Unix or Linux known time ;-)
+
+Syntax:
+time [-file] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Update-SysInfo
+
+Short Description:
+Update Information about the system
+
+Long Description:
+This function updates the informations about the systems it runs on
+
+Syntax:
+Update-SysInfo [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+Validate-Xml
+
+Short Description:
+
+Validate-Xml [[-XmlFilePath] <string>]
+
+
+Long Description:
+
+Syntax:
+syntaxItem                                                                                                             
+----------                                                                                                             
+{@{name=Validate-Xml; CommonParameters=False; WorkflowCommonParameters=False; parameter=System.Object[]}}
+
+Output:
+returnValue                                                                                                            
+-----------                                                                                                            
+@{type=}
+
+Name:
+wc
+
+Short Description:
+Word, line, character, and byte count
+
+Long Description:
+The wc utility displays the number of lines, words, and bytes contained in each input file, or standard input (if no file is specified) to the standard output.  A line
+is defined as a string of characters delimited by a <newline> character.  Characters beyond the final <newline> character will not be included in the line count.
+
+A word is defined as a string of characters delimited by white space characters.  White space characters are the set of characters for which the iswspace(3) function
+returns true.  If more than one input file is specified, a line of cumulative counts for all the files is displayed on a separate line after the output for the last
+file.
+
+Syntax:
+wc [[-object] <Object>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+which
+
+Short Description:
+Locate a program file in the user's path
+
+Long Description:
+Make PowerShell more Uni* like by set an alias to the existing get-command command let
+
+Syntax:
+which [-command] <Object> [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+Name:
+whoami
+
+Short Description:
+Shows the windows login info
+
+Long Description:
+Make PowerShell a bit more like *NIX! Shows the Login info as you might know it from Unix/Linux
+
+Syntax:
+whoami [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:
+System.String
+
+Name:
+Write-ToLog
+
+Short Description:
+Write Log to file and screen
+
+Long Description:
+Write Log to file and screen
+Each line has a UTC Timestamp
+
+Syntax:
+Write-ToLog [[-LogFile] <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
+
+Output:None
+
+List of Aliases that the ToolBox Module provides:
+
+Alias:	convert-frombinhex
+Real:	ConvertFrom-binhex
+
+Alias:	ConvertFrom-UnixTime
+Real:	ConvertFrom-UnixDate
+
+Alias:	convert-tobinhex
+Real:	ConvertTo-binhex
+
+Alias:	Create-Archive
+Real:	Create-ZIP
+
+Alias:	Get-AtomicTime
+Real:	Get-NtpTime
+
+Alias:	Load-Pester
+Real:	Load-Test
+
+Alias:	run-gc
+Real:	Invoke-GC
+
+Alias:	run-psgc
+Real:	Invoke-GC
+
+Alias:	Set-TextEncoding
+Real:	Set-Encoding
+
+Alias:	To-hex
+Real:	ConvertTo-hex
+
+Alias:	Validate-Email
+Real:	Approve-MailAddress
+
+Alias:	Write-ZIP
+Real:	Create-ZIP

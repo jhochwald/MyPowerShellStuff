@@ -1,0 +1,3516 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ToolBox documentation</title>
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> <![endif]-->
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<meta http-equiv="imagetoolbar" content="no">
+<meta name="resource-type" content="document">
+<meta name="copyright" content="Copyright (c) 2015 by NET-Experts - All rights reserved.">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+<body>
+<h1 align="center">ToolBox</h1>
+<div class="container">List of Commands that the ToolBox Module provides:</div>
+<!-- -->
+<div class="container-fluid">
+<h4>Add-AppendPath</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Appends a given folder (Directory) to the Path</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Appends a given folder (Directory) to the Path</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Add-AppendPath [[-Path] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>append-classpath</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Append a given path to the Classpath</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Appends a given path to the Java Classpath. Useful if you still need that old java crap!
+
+By the way: I hate Java!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+append-classpath [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Approve-MailAddress</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">REGEX check to see if a given Email address is valid</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Checks a given Mail Address against a REGEX Filter to see if it is RfC822 complaint
+Not directly related is the REGEX check. Most mailer will not be able to handle it if there
+are non standard chars within the Mail Address...</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Approve-MailAddress [-Email] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Boolean
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Check-IPaddress</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Check if a given IP Address seems to be valid</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Check if a given IP Address seems to be valid.
+We use the .NET function to do so. This is not 100% reliable,
+but is enough most times.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Check-IPaddress [-IPAddress] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Boolean
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Check-SessionArch</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Show the CPU architecture</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">You want to know if this is a 64BIT or still a 32BIT system?
+Might be useful, maybe not!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Check-SessionArch [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Clean-SysInfo</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Companion for Update-SysInfo</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Cleanup for variables from the Update-SysInfo function</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Clean-SysInfo [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Clear-AllEventLogs</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Delete all EventLog entries</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Delete all EventLog entries</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Clear-AllEventLogs [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Clear-OldFiles</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Removes old Logfiles</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Convenience function to cleanup old Files (House Keeping)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Clear-OldFiles [[-Days] &lt;Int32&gt;] [[-Path] &lt;String&gt;] [[-Extension] &lt;String&gt;] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Clear-TempDir</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Cleanup the TEMP Directory</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Cleanup the TEMP Directory</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Clear-TempDir [[-Days] &lt;Int32&gt;] [-Confirm] [-Whatif] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Compress-GZip</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">GZip Compress (.gz)</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">A buffered GZip (.gz) Compress function that support pipelined input</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Compress-GZip [-FullName] &lt;String&gt; [[-GZipPath] &lt;String&gt;] [-Force] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertFrom-Base64</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Decode a Base64 encoded String back to a plain String</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Decode a Base64 encoded String back to a plain String</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertFrom-Base64 [[-encoded] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertFrom-binhex</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Convert a HEX Value to a String</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Converts a given HEX value back to human readable strings</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertFrom-binhex [[-binhex] &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertFrom-EscapedString</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Convert an encoded (escaped) string back into the original representation</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">If you have a escaped String this function make it human readable again.
+Some Webservices returns strings an escaped format, so we convert an encoded (escaped) string back into the original representation</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertFrom-EscapedString [-String] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertFrom-UnixDate</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Convert from Unix time to DateTime</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Convert from Unix time to DateTime</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertFrom-UnixDate [[-Date] &lt;Int32&gt;] [[-UTC] &lt;Boolean&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertFrom-UrlEncoded</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Decodes a UrlEncoded string.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Decodes a UrlEncoded string.
+
+Input can be either a positional or named parameters of type string or an
+array of strings. The Cmdlet accepts pipeline input.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertFrom-UrlEncoded [-InputObject] &lt;Object&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Convert-IPToBinary</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Converts an IP address string to it&#39;s binary string equivalent</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Takes a IP as a string and returns the same IP address as a binary string with no decimal points</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Convert-IPToBinary [[-IP] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Management.Automation.PSObject
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Convert-IPtoDecimal</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Converts an IP address to decimal.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Converts an IP address to decimal value.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Convert-IPtoDecimal [-IPAddress] &lt;String&gt; [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Management.Automation.PSObject
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-Base64</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Convert a String to a Base 64 encoded String</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Convert a String to a Base 64 encoded String</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-Base64 [[-plain] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-binhex</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Convert a String to HEX</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Converts a given String or Array to HEX and dumps it</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-binhex [[-array] &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-EscapeString</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">HTML on web pages uses tags and other special characters to define the page.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">HTML on web pages uses tags and other special characters to define the page.
+To make sure text is not misinterpreted as HTML tags, you may want to escape text and automatically convert any ambiguous text character in an encoded format.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-EscapeString [-String] &lt;String&gt; [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-HashTable</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Convert an object to a HashTable</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Convert an object to a HashTable excluding certain types.  For example, ListDictionaryInternal doesn&#39;t support serialization therefore
+can&#39;t be converted to JSON.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-HashTable [-InputObject] &lt;Object&gt; [[-ExcludeTypeName] &lt;String[]&gt;] [[-MaxDepth] &lt;Int32&gt;] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-hex</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Converts a given integer to HEX</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Converts any given Integer (INT) to Hex and dumps it to the Console</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-hex [-dec] &lt;Int64&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Int64
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-HumanReadable</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Converts a given number to a more human readable format</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Converts a given number to a more human readable format, it conerts 1024 to 1KB as example.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-HumanReadable [-num] &lt;Int64&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-Objects</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">You receive a result of a query and converts it to an array of objects which is</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">You receive a result of a query and converts it to an array of objects which is
+more legible to understand</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-Objects [-Input] &lt;Object[]&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Array
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-PlainText</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Convert a secure string back to plain text</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Convert a secure string back to plain text</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-PlainText [-secure] &lt;SecureString&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-StringList</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Function to convert an array into a string list with a delimiter.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Function to convert an array into a string list with a delimiter.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-StringList [-Array] &lt;Array&gt; [[-Delimiter] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-UnixDate</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Convert from DateTime to Unix date</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Convert from DateTime to Unix date</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ConvertTo-UnixDate [[-Date] &lt;DateTime&gt;] [[-UTC] &lt;Boolean&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ConvertTo-UrlEncoded</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">
+ConvertTo-UrlEncoded [[-InputObject] &lt;string&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify"></div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+syntaxItem                                                                                                             
+----------                                                                                                             
+{@{name=ConvertTo-UrlEncoded; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}       
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+returnValue                                                                                                            
+-----------                                                                                                            
+@{type=}                                                                                                               
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Create-ZIP</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Create a ZIP archive of a given file</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Create a ZIP archive of a given file.
+By default within the same directory and the same name as the input file.
+This can be changed via command line parameters</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Create-ZIP [-InputFile] &lt;String&gt; [[-OutputFile] &lt;String&gt;] [[-OutputPath] &lt;String&gt;] [-WhatIf] [-Confirm] 
+[&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Disable-IEESEC</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Disabling IE Enhanced Security Configuration (IE ESC)</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Disabling IE Enhanced Security Configuration (IE ESC)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Disable-IEESEC [-Users] [-Admins] [-All] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Disable-RemoteDesktop</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">The function Disable-RemoteDesktop will disable RemoteDesktop on a local or remote machine.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">The function Disable-RemoteDesktop will disable RemoteDesktop on a local or remote machine.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Disable-RemoteDesktop [-CimSession &lt;CimSession[]&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+Disable-RemoteDesktop [-ComputerName &lt;String[]&gt;] [-Credential &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Edit-HostsFile</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Edit the Windows Host file</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Shortcut to quickly edit the Windows host File. Might be useful for testing things without changing the regular DNS.
+Handle with care!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Edit-HostsFile [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Enable-RemoteDesktop</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">The function Enable-RemoteDesktop will enable RemoteDesktop on a local or remote machine.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">The function Enable-RemoteDesktop will enable RemoteDesktop on a local or remote machine.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Enable-RemoteDesktop [-CimSession &lt;CimSession[]&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+Enable-RemoteDesktop [-ComputerName &lt;String[]&gt;] [-Credential &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Enable-Scritps</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Enable a script to use in the remote PowerShell session</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Enable a script to use in the remote PowerShell session</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Enable-Scritps [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Enable-WinRM</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Enables Remote PowerShell</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Enables Remote PowerShell on the local host</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Enable-WinRM [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Expand-ArrayObject</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">You get an array of objects and performs an expansion of data separated by a spacer</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">You get an array of objects and performs an expansion of data separated by a spacer</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Expand-ArrayObject [-array] &lt;Array&gt; [-field] &lt;String&gt; [-delimiter &lt;Char&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Expand-CompressedItem</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">
+Expand-CompressedItem [-InputObject] &lt;string&gt; [[-Path] &lt;DirectoryInfo&gt;] [-Format &lt;string&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify"></div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+syntaxItem                                                                                                             
+----------                                                                                                             
+{@{name=Expand-CompressedItem; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}      
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+returnValue                                                                                                            
+-----------                                                                                                            
+@{type=}                                                                                                               
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Expand-GZip</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">GZip Decompress (.gz)</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">A buffered GZip (.gz) Decompress function that support pipelined input</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Expand-GZip [-FullName] &lt;String&gt; [[-GZipPath] &lt;String&gt;] [-Force] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Explore</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Open explorer in this directory</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Open the Windows Explorer in this directory</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Explore [[-loc] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>export-session</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Export PowerShell session info to a file</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This is a (very) poor man approach to save some session infos
+
+Our concept of session is simple and only considers:
+- history
+- The current directory
+
+But still can be very handy and useful. If you type in some sneaky commands,
+or some very complex things and you did not copied these to another file or script
+it can save you a lot of time if you need to do it again (And this is often the case)
+
+Even if you just want to dump it quick to copy it some when later to a documentation or
+script this might be useful.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+export-session [[-sessionName] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Find-String</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Searches text files by pattern and displays the results.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Searches text files by pattern and displays the results.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Find-String [-pattern] &lt;Regex&gt; [[-include] &lt;String[]&gt;] [-recurse] [-caseSensitive] [[-directoryExclude] &lt;String[]&gt;] 
+[[-context] &lt;Int32[]&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-Accelerators</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get a list of all .NET functions</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get a list of all .NET functions</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-Accelerators [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-AdminUser</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Small function to see if we are Admin</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Check if the user have started the PowerShell Session as Admin</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-AdminUser [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Boolean
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-ASCBanner</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">A brief description of the Format-Banner function.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">A detailed description of the Format-Banner function.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-ASCBanner [-InputString] &lt;String[]&gt; [[-IsString]] [[-ASCChar] &lt;Char&gt;] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-BingSearch</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get the Bing results for a string</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get the latest Bin search results for a given string and presents it on the console</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-BingSearch [[-searchstring] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-Calendar</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Dumps a Calendar to the Colsole</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Dumps a Calendar to the Colsole
+You might find it handy to have that on a core Server or in a remote PowerShell Session</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-Calendar [[-StartDate] &lt;DateTime&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-Clipboard</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get the content of the Clipboard</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get the content of the Clipboard</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-Clipboard [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-DecryptSecretText</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Decrypts a given String, encrypted by Get-EncryptSecretText</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get-Decrypt makes a string encrypted by Get-EncryptSecretText decrypts it to and humnan readable again.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-DecryptSecretText [-EncryptedText] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-DefaultMessage</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Helper Function to show default message used in VERBOSE/DEBUG/WARNING</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Helper Function to show default message used in VERBOSE/DEBUG/WARNING
+and... HOST in some case.
+This is helpful to standardize the output messages</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-DefaultMessage [[-Message] &lt;String&gt;] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-DiskInfo</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Show free Diskspace for all Disks</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This function gets your System Disk Information</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-DiskInfo [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-EncryptSecretText</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Encrypts a given string with a given certificate</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Sometimes you might need to transfer a password (or another secret) via Mail (or any other insecure media) here a strong encryption is very handy.
+Get-EncryptSecretText uses a given Certificate to encrypt a given String.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-EncryptSecretText [-CertificatePath] &lt;String&gt; [-PlainText] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-EnvironmentVariables</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get and list all Environment Variables</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Dum all existing Environment Variables.
+Sometimes this comes handy if you do something that changes them an you want to compare the before and after values (See examples)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-EnvironmentVariables [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-ExternalIP</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Gets the current external IP address.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Gets the current external IP address.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-ExternalIP [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-FreeDiskSpace</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Show the Free Disk Space of all Disks</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This is a Uni* DF like command that shows the available Disk space.
+It&#39;s human readable (e.g. more like df -h)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-FreeDiskSpace [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Array
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-Hash</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Dumps the MD5 hash for the given File</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Dumps the MD5 hash for the given File</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-Hash [-File] &lt;String&gt; [[-Hash] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-HostFileEntry</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Dumps the HOSTS File to the Console</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Dumps the HOSTS File to the Console
+It dumps the WINDIR\System32\drivers\etc\hosts</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-HostFileEntry [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-HttpHead</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Retrive HTTP Headers from target webserver</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This command will get the HTTP headers from the target webserver and test for the presence of variuos security related HTTP headers and also display the cookie information.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-HttpHead [-url] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-IsGdURL</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get a Short URL</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get a Short URL using the IS.GD Service</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-IsGdURL [-URL] &lt;String&gt; [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-IsSessionElevated</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Is the Session started as admin (Elevated)</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Quick Helper that return if the session is started as admin (Elevated)
+It returns a Boolean (True or False) and sets a global variable (IsSessionElevated) with
+this Boolean value. This might be useful for further use!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-IsSessionElevated [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Boolean
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-IsVirtual</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Check if this is a Virtual Machine</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">If this is a virtual System the Boolean is True, if not it is False</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-IsVirtual [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Boolean
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-LocalListenPort</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">This parses the native netstat.exe output using the command line &quot;netstat -anb&quot; to find all of the network ports in use on a local machine and all associated processes and services</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This parses the native netstat.exe output using the command line &quot;netstat -anb&quot; to find all of the network ports in use on a local machine and all associated processes and services</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-LocalListenPort [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-LongURL</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Expand a Short URL</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Expand a Short URL via the untiny.me
+This service supports all well known (and a lot other) short UR L services!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-LongURL [-URL] &lt;String&gt; [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-MaskedJson</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Maks all special characters within a JSON File</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Maks all special characters within a JSON File.
+mostly used with C# or some other windows tools.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-MaskedJson [-json] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-MicrosoftUpdateInfo</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Gives a list of all Microsoft Updates sorted by KB number/HotfixID</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Gives a list of all Microsoft Updates sorted by KB number/HotfixID</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-MicrosoftUpdateInfo [[-raw]] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-MOTD</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Displays system information to a host.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">The Get-MOTD cmdlet is a system information tool written in PowerShell.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-MOTD [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-myProcess</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get our own process information</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get our own process information about the PowerShell Session</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-myProcess [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-NetFramework</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">This function will retrieve the list of Framework Installed on the computer.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">A detailed description of the Get-NetFramework function.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-NetFramework [[-ComputerName] &lt;String[]&gt;] [[-Credentials] &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-NetStat</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">This function will get the output of netstat -n and parse the output</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This function will get the output of netstat -n and parse the output</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-NetStat [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-NewAesKey</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get a AES Key</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get a AES Key</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-NewAesKey [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-NewPassword</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Generates a New password with varying length and Complexity,</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Generate a New Password for a User.  Defaults to 8 Characters
+with Moderate Complexity.  Usage
+
+GET-NEWPASSWORD or
+
+GET-NEWPASSWORD $Length $Complexity
+
+Where $Length is an integer from 1 to as high as you want
+and $Complexity is an Integer from 1 to 4</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-NewPassword [[-PasswordLength] &lt;Int32&gt;] [[-Complexity] &lt;Int32&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-NewPsSession</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Create a session where the given credentials are used</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Create a session where the given credentials are used</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-NewPsSession [[-ComputerName] &lt;Object&gt;] [-PsCredentials &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-NtpTime</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get the NTP Time from a given Server</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get the NTP Time from a given Server.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-NtpTime [[-Server] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.DateTime
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-Pause</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Wait for user to press any key</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Shows a console message and waits for user to press any key.
+
+Optional: The message to display could be set by a command line parameter.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-Pause [[-PauseMessage] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-PendingReboot</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Gets the pending reboot status on a local or remote computer.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This function will query the registry on a local or remote computer and determine if the
+system is pending a reboot, from either Microsoft Patching or a Software Installation.
+For Windows 2008+ the function will query the CBS registry key as another factor in determining
+pending reboot state.  &quot;PendingFileRenameOperations&quot; and &quot;Auto Update\RebootRequired&quot; are observed
+as being consistant across Windows Server 2003 &amp; 2008.
+
+CBServicing = Component Based Servicing (Windows 2008)
+WindowsUpdate = Windows Update / Auto Update (Windows 2003 / 2008)
+CCMClientSDK = SCCM 2012 Clients only (DetermineIfRebootPending method) otherwise $null value
+PendFileRename = PendingFileRenameOperations (Windows 2003 / 2008)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-PendingReboot [[-ComputerName] &lt;String[]&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-PreReqModules</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">
+Get-PreReqModules [[-Path] &lt;string&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify"></div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+syntaxItem                                                                                                             
+----------                                                                                                             
+{@{name=Get-PreReqModules; CommonParameters=True; WorkflowCommonParameters=False; parameter=System.Object[]}}          
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+returnValue                                                                                                            
+-----------                                                                                                            
+@{type=}                                                                                                               
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-PushoverUserDeviceInfo</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Retrieves a list of registered devices with Pushover</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Perfect in combination with the Send-Pushover command to send a notification using the &quot;device&quot; parameter of Send-Pushover</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-PushoverUserDeviceInfo [-User] &lt;String&gt; [[-token] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-Quote</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get a random Quote from an Array</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get a random Quote from an Array of Quotes I like.
+I like to put Quotes in slides and presentations, here is a collection of whose I used...</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-Quote [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-RegKeyLastWriteTime</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Retrieves the last write time of the supplied registry key</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">The Registry data that a hive stores in containers are called cells.
+A cell can hold a key, a value, a security descriptor, a list of subkeys, or a list of key values.
+Get-RegKeyLastWriteTime retrieves the LastWriteTime through a pointer to the FILETIME structure that receives the time at which the enumerated subkey was last written. Values do not contain a LastWriteTime	property, but changes to child values update the parent keys lpftLastWriteTime.
+
+The LastWriteTime is updated when a key is created, modified, accessed, or deleted.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-RegKeyLastWriteTime [[-ComputerName] &lt;String&gt;] [[-Key] &lt;String&gt;] [[-SubKey] &lt;String&gt;] [[-NoEnumKey]] [-WhatIf] 
+[-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-RegularJson</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Converts a C# dumped JSON to regular JSON</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">A detailed description of the Get-RegularJson function.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-RegularJson [-csjson] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-RelativePath</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get a path to a file (or folder) relative to another folder</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Converts the FilePath to a relative path rooted in the specified Folder</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-RelativePath [-Folder] &lt;String&gt; [-FilePath] &lt;String&gt; [-Resolve] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-ScriptDirectory</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get the Directory of the Script that invokes this function</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get the Directory of the Script that invokes this function</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-ScriptDirectory [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-ServiceStatus</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">List Services where StartMode is AUTOMATIC that are NOT running</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This functionwill list services from a local or remote computer where the StartMode property is set to &quot;Automatic&quot; and where the state is different from RUNNING (so mostly where the state is NOT RUNNING)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-ServiceStatus [[-ComputerName] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-ServiceStatusInfo</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">This function identifies all services that are configured to auto start with system but are in stopped state</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This function identifies all services that are configured to auto start with system but are in stopped state</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-ServiceStatusInfo [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>get-sessionfile</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Restore PowerShell Session information</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This command shows many PowerShell Session informations.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+get-sessionfile [-sessionName] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-ShortDate</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get the Date as short String</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get the Date as short String</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-ShortDate [[-FilenameCompatibleFormat]] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-ShortTime</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get the Time as short String</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get the Time as short String</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-ShortTime [[-FilenameCompatibleFormat]] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-Syntax</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get the syntax of a cmdlet, even if we have no help for it</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Helper function to get the syntax of a alias or cmdlet, even if we have no help for it</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-Syntax [[-cmdlet] &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-SysInfo</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Displays Information about the system</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Displays Information about the system it is started on</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-SysInfo [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-SysType</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Show if the system is Workstation or a Server</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This function shows of the system is a server or a workstation.
+Additionally it can show more detailed infos (like Domain Membership)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-SysType [[-d]] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-TcpPortStatus</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Check a TCP Port</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Opens a connection to a given (or default) TCP Port to a given (or default) server.
+This is not a simple port ping, it creates a real connection to see if the port is alive!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-TcpPortStatus [[-Port] &lt;Int32&gt;] [[-Server] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Boolean
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-TempFile</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Creates a string with a temp file</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Creates a string with a temp file</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-TempFile [[-Extension] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-TimeStamp</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get-TimeStamp</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get-TimeStamp</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-TimeStamp [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-TinyURL</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get a Short URL</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get a Short URL using the TINYURL.COM Service</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-TinyURL [-URL] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-TopProcesses</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Make the PowerShell a bit more *NIX like</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This is a PowerShell Version of the well known *NIX like TOP</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-TopProcesses [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-TrImURL</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Get a Short URL</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Get a Short URL using the TR.IM Service</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-TrImURL [-URL] &lt;String&gt; [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-Uptime</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Show how long system has been running</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Uni* like Uptime - The uptime utility displays the current time,
+the length of time the system has been up</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-Uptime [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-UUID</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Generates a UUID String</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Generates a UUID String and is a uuidgen.exe replacement</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-UUID [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Get-Whois</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Script to retrieve WhoIs information from a list of domains</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This script will, by default, create a report of WhoIs information on 1 or more Internet domains.
+Not all Top-Level Domains support Whois queries! e.g. .de (Germany) domains!
+
+Report options are CSV, Json, XML, HTML, and object (default) output.
+Dates in the CSV, Json, and HTML options are formatted for the culture settings on the PC.
+Columns in HTML report are also sortable, just click on the headers.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Get-Whois [-Domain] &lt;String&gt; [-Path &lt;String&gt;] [-RedThresold &lt;Int32&gt;] [-YellowThresold &lt;Int32&gt;] [-GreyThresold &lt;Int32&gt;] 
+[[-OutputType] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>GnuGrep</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">File pattern searcher</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This command emulates the well known (and loved?) GNU file pattern searcher</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+GnuGrep [-pattern] &lt;String&gt; [-filefilter] &lt;String&gt; [-r] [-i] [-l] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Grant-PathFullPermission</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Grant Full Access Permission for a given user to a given Path</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Grant Full Access Permission for a given user to a given Path</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Grant-PathFullPermission [-path] &lt;String&gt; [-user] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>head</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">display first lines of a file</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This filter displays the first count lines or bytes of each of the specified files,
+or of the standard input if no files are specified.
+
+If count is omitted it defaults to 10.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+head [-file] &lt;String&gt; [[-count] &lt;Int32&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>help</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Wrapper that use the cmdlet Get-Help -full</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Wrapper that use the regular cmdlet Get-Help -full to show all technical informations about the given command</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+help [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>import-session</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Import a PowerShell session info from file</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This is a (very) poor man approach to restore some session infos
+
+Our concept of session is simple and only considers:
+- history
+- The current directory
+
+But still can be very handy and useful. If you type in some sneaky commands,
+or some very complex things and you did not copied these to another file or script
+it can save you a lot of time if you need to do it again (And this is often the case)
+
+Even if you just want to dump it quick to copy it some when later to a documentation or
+script this might be useful.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+import-session [-sessionName] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Initialize-Modules</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Initialize PowerShell Modules</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Initialize PowerShell Modules</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Initialize-Modules [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Initialize-ModuleUpdate</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Initialize PowerShell Modules</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Initialize PowerShell Modules</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Initialize-Modules [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Invoke-AnimatedSleep</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Animated sleep</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Takes the title and displays a looping animation for a given number of seconds.
+The animation will delete itself once it&#39;s finished, to save on console scrolling.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Invoke-AnimatedSleep [[-seconds] &lt;Int32&gt;] [[-title] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Invoke-baloonTip</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Shows a Windows Ballon notification</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Shows a Windows Ballon notification</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Invoke-baloonTip [[-Title] &lt;String&gt;] [[-Message] &lt;String&gt;] [[-Icon] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Invoke-CreateMissingRegistryDrives</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Create Missing Registry Drives</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Create Missing Registry Drives</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Invoke-CreateMissingRegistryDrives [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Invoke-GC</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Do a garbage collection</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Do a garbage collection within the PowerShell Session</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Invoke-GC [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Invoke-NTFSFilesCompression</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Compress files with given extension older than given amount of time</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">The function is intended for compressing (using the NTFS compression) all files with particular extensions older than given time unit</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Invoke-NTFSFilesCompression [-Path] &lt;String[]&gt; [-OlderThan] &lt;Int32&gt; [[-TimeUnit] &lt;String[]&gt;] [[-Extension] &lt;String[]&gt;] 
+[-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Invoke-RemoteScript</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">A brief description of the Invoke-RemoteScript function.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">A detailed description of the Invoke-RemoteScript function.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Invoke-RemoteScript [-Computer] &lt;String&gt; [-Folder] &lt;String&gt; [-Script] &lt;String&gt; [[-Drive] &lt;String&gt;] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Invoke-VisualEditor</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Wrapper to edit files</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This is a quick wrapper that edits files with editor from the VisualEditor variable</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Invoke-VisualEditor [[-args] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>JavaLove</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Set the JAVAHOME Variable to use JDK and/or JRE instances withing the Session</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">You are still using Java Stuff?
+OK... Your choice, so we do you the favor and create/fill the variable JAVAHOME based on the JDK/JRE that we found.
+It also append the Info to the PATH variable to make things easier for you.
+But think about dropping the buggy Java crap as soon as you can. Java is not only buggy, there are also many Security issues with it!
+
+By the way: I hate Java!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+JavaLove [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>ll</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Quick helper to make my PowerShell a bit more like *nix</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Everyone ever used a modern Unix and/or Linux system knows and love the colored output of LL
+This function is hack to emulate that on PowerShell.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+ll [[-dir] &lt;Object&gt;] [[-all] &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Load-CommandHistory</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Load the old History dumped via Save-CommandHistory</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This is the companion Command for Save-CommandHistory
+It loads the old History from a XML File in the users Profile.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Load-CommandHistory [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Load-Test</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Load Pester Module</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Load the Pester PowerShell Module to the Global context.
+Pester is a Mockup, Unit Test and Function Test Module for PowerShell</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Load-Test [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>man</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Wrapper that use the cmdlet Get-Help -full</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Wrapper that use the regular cmdlet Get-Help -full to show all technical informations about the given command</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+help [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>mkdir</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Wrapper of New-Item</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Wrapper of New-Item to create a directory</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+mkdir [-Directory] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>myls</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Wrapper for Get-ChildItem</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This wrapper for Get-ChildItem shows all directories and files (even hidden ones)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+myls [[-loc] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>New-Gitignore</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Create a new .gitignore file with my default settings</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Downloads my default .gitignore from GitHub and creates it within the directory from where this function is called.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+New-Gitignore [[-Source] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>New-Guid</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Creates a new Guid object and displays it to the screen</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Uses static System.Guid.NewGuid() method to create a new Guid object</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+New-Guid [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Open-InternetExplorer</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Workaround for buggy internetexplorer.application</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This Workaround is neat, because the native implementation is unable to bring the new Internet Explorer Window to the front (give em focus).
+It needs his companion: Add-NativeHelperType</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Open-InternetExplorer [[-Url] &lt;String&gt;] [-Foreground] [-FullScreen] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Out-ColorMatchInfo</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Highlights MatchInfo objects similar to the output from grep.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Highlights MatchInfo objects similar to the output from grep.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Out-ColorMatchInfo [-match] &lt;MatchInfo&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>PoSHModuleLoader</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Loads all Script modules</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Loads all Script modules</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+PoSHModuleLoader [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>rdp</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Wrapper for the Windows RDP Client</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Just a wrapper for the Windows Remote Desktop Protocol (RDP) Client.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+rdp [-rdphost] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Register-Script</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Registers a script for use in remote PowerShell session</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Registers a script for use in remote PowerShell session</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Register-Script [[-path] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Reload-Module</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Reloads a PowerShell Module</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Reloads a PowerShell Module</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Reload-Module [-ModuleName] &lt;Object&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Remove-FromPath</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Removes given Directory or Directories from the PATH</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Removes given Directory or Directories from the PATH</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Remove-FromPath [[-path] &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Remove-ItemSafely</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Deletes files and folders into the Recycle Bin</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Deletes the file or folder as if it had been done via File Explorer.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Remove-ItemSafely [-Path] &lt;Object&gt; [-DeletePermanently] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Repair-DotNetFrameWorks</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Optimize all installed NET Frameworks</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Optimize all installed NET Frameworks by executing NGEN.EXE for each.
+
+This could be useful to improve the performance and sometimes the
+installation of new NET Frameworks, or even patches, makes them use
+a single (the first) core only.
+
+Why Microsoft does not execute the NGEN.EXE with each installation... no idea!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Repair-DotNetFrameWorks [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Save-CommandHistory</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Dump the Command History to an XML File</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Dump the Command History to an XML File.
+This file is located in the User Profile.
+You can then restore it via Load-CommandHistory</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Save-CommandHistory [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Send-Command</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Run a script in the remote PowerShell session</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Run a script in the remote PowerShell session</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Send-Command [[-script] &lt;ScriptBlock&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Send-HipChat</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Send a notification message to a HipChat room.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Send a notification message to a HipChat room via a RESTful Call to the HipChat API V2 Atlassian requires a separate token for each room within HipChat!
+So please note, that the Room and the Token parameter must match.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Send-HipChat [[-Token] &lt;String&gt;] [[-Room] &lt;String&gt;] [[-notify] &lt;Boolean&gt;] [[-color] &lt;String&gt;] [[-Message] &lt;String&gt;] 
+[[-Format] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Send-Packet</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Send a packet via IP, TCP or UDP</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Send a packet via IP, TCP or UDP
+Found this useful to test firewall configurations and routing. Or even to test some services.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Send-Packet [-Target] &lt;String&gt; [[-Protocol] &lt;String&gt;] [-TargetPort] &lt;Int32&gt; [[-SourcePort] &lt;Int32&gt;] [[-TTL] &lt;Int32&gt;] 
+[[-Count] &lt;Int32&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Send-Prowl</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Prowl is the Growl client for iOS.</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Prowl is the Growl client for iOS. Push to your iPhone, iPod touch, or iPad notifications from a Mac or Windows computer, or from a multitude of apps and services.
+Easily integrate the Prowl API into your applications.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Send-Prowl [-Event] &lt;String&gt; [[-Description] &lt;String&gt;] [[-ApplicationName] &lt;String&gt;] [[-Priority] &lt;Int32&gt;] [[-url] 
+&lt;String&gt;] [-apiKey] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Send-Pushover</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Sends a push message via Pushover</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">We established a lot of automated messaging and push services, Pushover was missing!
+We do not use Pushover that much, but sometimes it is just nice to have the function ready...</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Send-Pushover [-User] &lt;String&gt; [-Message] &lt;String&gt; [[-token] &lt;String&gt;] [-device &lt;Object&gt;] [-title &lt;Object&gt;] [-url 
+&lt;Object&gt;] [-url_title &lt;Object&gt;] [-priority &lt;Object&gt;] [-sound &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Send-SlackChat</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Sends a chat message to a Slack organization</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">The Post-ToSlack cmdlet is used to send a chat message to a Slack channel, group, or person.
+Slack requires a token to authenticate to an organization within Slack.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Send-SlackChat [-Channel] &lt;String&gt; [-Message] &lt;String&gt; [[-token] &lt;String&gt;] [[-BotName] &lt;String&gt;] [-WhatIf] [-Confirm] 
+[&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-AcceptProtocolViolation</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Workaround for servers with SSL header problems</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Workaround for the following Exception &quot;DownloadString&quot; with &quot;1&quot; argument(s):
+&quot;The underlying connection was closed: Could not establish trust relationship for the SSL/TLS secure channel.&quot;</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-AcceptProtocolViolation [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-Clipboard</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Copy Content to the Clipboard</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Copy Content to the Clipboard</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-Clipboard [-Import] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-Culture</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Set the PowerShell culture to a given culture</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Set the PowerShell culture to a given culture</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-Culture [[-culture] &lt;CultureInfo&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-CurrentSession</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Make the Session availible</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Make the Session availible</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-CurrentSession [[-session] &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-DebugOff</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Turn Debug off</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Turn Debug on</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-DebugOff [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-DebugOn</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Turn Debug on</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Turn Debug on</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-DebugOn [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-Encoding</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Converts Encoding of text files</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Allows you to change the encoding of files and folders.
+It supports file extension agnostic
+Please note: Overwrites original file if destination equals the path</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-Encoding [-path] &lt;String&gt; [[-dest] &lt;String&gt;] [-encoding] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-FileTime</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Change file Creation + Modification + Last Access times</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">The touch utility sets the Creation + Modification + Last Access times of files.
+
+If any file does not exist, it is created with default permissions by default.
+To prevent this, please use the -NoCreate parameter!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-FileTime [-Path] &lt;String&gt; [-AccessTime] [-WriteTime] [-CreationTime] [-NoCreate] [[-Date] &lt;DateTime&gt;] [-WhatIf] 
+[-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-FirewallExceptionFileSharing</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Enable File Sharing via Windows Firewall</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Enable File Sharing via Windows Firewall</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-FirewallExceptionFileSharing [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-FirewallExceptionRDP</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Enable RDP via Windows Firewall</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Enable RDP via Windows Firewall</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-FirewallExceptionRDP [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-FolderDate</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Change a folder last-write time based on the latest last-write of the included files</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Change a folder last-write time based on the latest last-write of the included files
+Makes windows a lot more Uni* like and have some Convenience.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-FolderDate [[-Path] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-IgnoreSslTrust</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">This workaround completely disables SSL certificate checks</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This workaround disables the SSL certificate trust checking. This seems to be useful if you need to use self signed SSL certificates.
+But there is a string attached:
+This is very dangerous.
+
+And this is not a joke, it is dangerous, because you leave the door wide open (and honestly it means completely open) for bad certificates, hijacked certificates and even Man-In-The-middle attacks!
+
+So really think twice before you use this in a production environment!</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-IgnoreSslTrust [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-NotIgnoreSslTrust</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Enables the SSL certificate checks</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This is a companion function for the usage of the &quot;Set-IgnoreSslTrust&quot; function
+It might be a great idea to disable the SSL Trust check for a single call (If you real need to do it) via the &quot;Set-IgnoreSslTrust&quot; function and then enable it directly after the call via &quot;Set-NotIgnoreSslTrust&quot;</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-NotIgnoreSslTrust [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-PowerPrompt</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Multicolored prompt with marker for windows started as Admin and marker for providers outside filesystem</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Multicolored prompt with marker for windows started as Admin and marker for providers outside filesystem</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-PowerPrompt [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Set-VisualEditor</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Set the VisualEditor variable</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Setup the VisualEditor variable. Checks if the free (GNU licensed) Notepad++ is installed,
+if so it uses this great free editor. If not the fall back is the PowerShell ISE.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Set-VisualEditor [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>SuDo</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Uni* like Superuser Do (Sudo)</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Uni* like Superuser Do (Sudo)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+SuDo [-file] &lt;String&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>tail</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Make the PowerShell a bit more *NIX like</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Wrapper for the PowerShell command Get-Content. It opens a given file and shows the content...
+Get-Content normally exists as soon as the end of the given file is reached, this wrapper keeps it open and display every new informations as soon as it appears. This could be very useful for parsing log files.
+
+Everyone ever used Unix or Linux known tail ;-)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+tail [-f] [-file] &lt;Object&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>tail2</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Make the PowerShell a bit more *NIX like</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Wrapper for the PowerShell command Get-Content. It opens a given file and shows the content...
+Get-Content normally exists as soon as the end of the given file is reached, this wrapper keeps it open
+and display every new informations as soon as it appears. This could be very useful for parsing log files.
+
+Everyone ever used Unix or Linux known tail ;-)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+tail2 [-file] &lt;Object&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Test-Method</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Short description</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Detailed description</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Test-Method [[-moduleName] &lt;String&gt;] [[-functionName] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Test-ModuleAvailableToLoad</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Test if the given Module exists</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Test if the given Module exists</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Test-ModuleAvailableToLoad [-modname] &lt;String[]&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Boolean
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Test-ProxyBypass</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Testing URLs for Proxy Bypass</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">If you&#39;d like to find out whether a given URL goes through a proxy or is accessed directly</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Test-ProxyBypass [[-url] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Boolean
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Test-RemotePOSH</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Check if PSRemoting (Remote execution of PowerShell) is enabled on a given Host</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Check if PSRemoting (Remote execution of PowerShell) is enabled on a given Host</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Test-RemotePOSH [[-Computer] &lt;String[]&gt;] [-POSHcred &lt;PSCredential&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Test-TCPPort</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">TCP Port Ping</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This function is used to see if a TCP Port is answering</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Test-TCPPort [-target] &lt;String&gt; [-Port] &lt;String&gt; [[-TimeOut] &lt;Int32&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.Boolean
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>time</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Timing How Long it Takes a Script or Command to Run</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This is a quick wrapper for Measure-Command Cmdlet
+
+Make the PowerShell a bit more *NIX like
+
+Everyone ever used Unix or Linux known time ;-)</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+time [-file] &lt;Object&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Update-SysInfo</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Update Information about the system</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">This function updates the informations about the systems it runs on</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Update-SysInfo [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Validate-Xml</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">
+Validate-Xml [[-XmlFilePath] &lt;string&gt;]
+</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify"></div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+syntaxItem                                                                                                             
+----------                                                                                                             
+{@{name=Validate-Xml; CommonParameters=False; WorkflowCommonParameters=False; parameter=System.Object[]}}              
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+returnValue                                                                                                            
+-----------                                                                                                            
+@{type=}                                                                                                               
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>wc</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Word, line, character, and byte count</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">The wc utility displays the number of lines, words, and bytes contained in each input file, or standard input (if no file is specified) to the standard output.  A line
+is defined as a string of characters delimited by a &lt;newline&gt; character.  Characters beyond the final &lt;newline&gt; character will not be included in the line count.
+
+A word is defined as a string of characters delimited by white space characters.  White space characters are the set of characters for which the iswspace(3) function
+returns true.  If more than one input file is specified, a line of cumulative counts for all the files is displayed on a separate line after the output for the last
+file.</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+wc [[-object] &lt;Object&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>which</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Locate a program file in the user&#39;s path</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Make PowerShell more Uni* like by set an alias to the existing get-command command let</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+which [-command] &lt;Object&gt; [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>whoami</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Shows the windows login info</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Make PowerShell a bit more like *NIX! Shows the Login info as you might know it from Unix/Linux</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+whoami [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">
+System.String
+    
+
+
+
+
+</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<h4>Write-ToLog</h4>
+<div class="row"><div class="col-md-1">Description:</div>
+<div class="col-md-11">Write Log to file and screen</div></div>
+<div class="row"><div class="col-md-1">Details:</div>
+<div class="col-md-11" align="justify">Write Log to file and screen
+Each line has a UTC Timestamp</div></div>
+<div class="row"><div class="col-md-1">Syntax:</div>
+<div class="col-md-11">
+Write-ToLog [[-LogFile] &lt;String&gt;] [-WhatIf] [-Confirm] [&lt;CommonParameters&gt;]
+
+
+
+</div></div>
+<div class="row"><div class="col-md-1">Output:</div>
+<div class="col-md-11">None</div></div>
+</div>
+<p>&nbsp;</p>
+<div class="container-fluid">
+<p>List of Aliases that the ToolBox Module provides:</p>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>convert-frombinhex</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>ConvertFrom-binhex</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>ConvertFrom-UnixTime</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>ConvertFrom-UnixDate</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>convert-tobinhex</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>ConvertTo-binhex</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>Create-Archive</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>Create-ZIP</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>Get-AtomicTime</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>Get-NtpTime</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>Load-Pester</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>Load-Test</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>run-gc</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>Invoke-GC</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>run-psgc</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>Invoke-GC</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>Set-TextEncoding</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>Set-Encoding</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>To-hex</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>ConvertTo-hex</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>Validate-Email</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>Approve-MailAddress</strong></div></div>
+<br>
+<div class="row"><div class="col-md-1">Alias:</div><div class="col-md-6"><em>Write-ZIP</em></div></div>
+<div class="row"><div class="col-md-1">Real:</div><div class="col-md-6"><strong>Create-ZIP</strong></div></div>
+<br>
+</div>
+<div class="container" align="center"><font size="-3">Copyright &copy; 2015 by NET-Experts - All rights reserved.</font></div>
+</body>
+</html>
