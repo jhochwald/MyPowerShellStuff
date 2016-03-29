@@ -37,9 +37,16 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
+
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-03-29
+	#################################################
 #>
 
 #endregion License
+
+#region ModuleDefaults
 
 # Temp Change to the Module Directory
 Push-Location $PSScriptRoot
@@ -50,27 +57,51 @@ $PackageRoot = $PSScriptRoot
 # Start the Module Loading Mode
 $LoadingModule = $true
 
+#endregion ModuleDefaults
+
+#region Externals
+
+#endregion Externals
+
+#region Functions
+
+#endregion Functions
+
+#region ExportModuleStuff
+
 # Get public and private function definition files.
-$Public = @(Get-ChildItem -Path $PSScriptRoot\Public\*.ps1 -ErrorAction SilentlyContinue)
-$Private = @(Get-ChildItem -Path $PSScriptRoot\Private\*.ps1 -ErrorAction SilentlyContinue)
+$Public = @( Get-ChildItem -Path (Join-Path $PSScriptRoot 'Public') -Exclude "*.tests.*" -Recurse -ErrorAction SilentlyContinue -WarningAction:SilentlyContinue )
+$Private = @( Get-ChildItem -Path (Join-Path $PSScriptRoot 'Private') -Exclude "*.tests.*" -Recurse -ErrorAction SilentlyContinue -WarningAction:SilentlyContinue )
 
 # Dot source the files
-Foreach ($import in @($Public + $Private)) {
+foreach ($import in @($Public)) {
 	Try {
 		. $import.fullname
 	} Catch {
-		Write-Error -Message "Failed to import function $($import.fullname): $_"
+		Write-Error -Message "Failed to import Public function $($import.fullname): $_"
 	}
 }
 
-#region ExportModuleStuff
 if ($loadingModule) {
-	Export-ModuleMember -Function * -Alias *
+	Export-ModuleMember -Function "*" -Alias "*" -Cmdlet "*" -Variable "*"
 }
-#endregion ExportModuleStuff
+
+foreach ($import in @($Private)) {
+	Try {
+		. $import.fullname
+	} Catch {
+		Write-Error -Message "Failed to import Private function $($import.fullname): $_"
+	}
+}
 
 # End the Module Loading Mode
 $LoadingModule = $false
 
 # Return to where we are before we start loading the Module
 Pop-Location
+
+#endregion ExportModuleStuff
+
+<#
+	Execute some stuff here
+#>
