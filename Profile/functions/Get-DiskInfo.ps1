@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -74,8 +74,8 @@ function Global:Get-DiskInfo {
 
 	PROCESS {
 		$wmio = (Get-WmiObject -class win32_logicaldisk)
-		$Drives = ($wmio | ?{ $_.size -ne $null } | Select Deviceid, @{ name = 'Free Space'; Expression = { ($_.freespace/1gb) } })
-		$DrivesString = (0..$($drives.count - 1) | %{ " $(($drives[$_]).Deviceid.Replace(':', ' Drive')) has $("{0:N2}" -f $(($Drives[$_]).'free space')) GB of free space.`r`n" })
+		$Drives = ($wmio | Where-Object { ($_.size) } | Select-Object Deviceid, @{ name = 'Free Space'; Expression = { ($_.freespace/1gb) } })
+		$DrivesString = (0..$($drives.count - 1) | ForEach-Object { " $(($drives[$_]).Deviceid.Replace(':', ' Drive')) has $("{0:N2}" -f $(($Drives[$_]).'free space')) GB of free space.`r`n" })
 		$DrivesString = "`r`nLoading system disk free space information...`r`n" + $DrivesString
 	}
 
@@ -87,8 +87,8 @@ function Global:Get-DiskInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUio+ApPScg4EG4vzGJEEp5WOJ
-# pAugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1SXlPoeHj7GeYAQDZ6TdN2tU
+# N/agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -231,25 +231,25 @@ function Global:Get-DiskInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBStQ+BqdbHizlrODvLiXGOGicLbYDANBgkqhkiG9w0B
-# AQEFAASCAQCLxXtgfsyxIunGICInVMyC9EooUkTRDHyBwsSO1zjD1JMgpiDwC5Ao
-# 4/5ijDU79pDzU6UYSaZ72chwsZuwFpaaNkTQpZWGNp1PkqWJUlADXGZ5F0uSCE70
-# XKPku7ATqZikTYliitJnJO32rrCOt0SHSt5EwB/ePMe8wYfLmeyMGWgQcy0WmcvJ
-# AlsCZPp6Ak/dgSV5BMp3n825hcV3Qftnme5KP7Ws2iHLcjEI2t7GE9I5Qfq7C8j4
-# iX7U0zlSFWuKejQxqG7oEy+Qg9ESYAFscon0OwF0Xi+4h1qlBZxuAdQA/sX3ypeE
-# ZMUQUtQk/z7vlU8Iuh1WToIvKe6W2dA8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTuOtZo+yULhey2Ils6lOblbDIPyDANBgkqhkiG9w0B
+# AQEFAASCAQBC3X7nlSFWlogHqweCGuEGcU8nuutkpmrKO3wJv2mCs4ZtbSFtKj8x
+# Xk+/IP9EOxG/5kSkOsfrMoPbqxGRd7UkwvZtRNQGCLFAhdjCjuC8t2rUw5zUBqz6
+# WR+7v4iw2QF2nhNCTD/ELYtdhl1+inU31p9j0rmAJqk1P1xjWgu3oH/X73AIABX8
+# XrRWX+buC8nhM2WYiWpH8AfUEAUO/zLw3C2pTgKxS4Qh22rK827Sx04ZZq9h60fh
+# 5dcZxXKiKLHPxIR5GUufEi5KPW5A75evW8jJZzN0lxo2hp+xNQihhKhxm6544rbP
+# BnZE1dkGvN8uSkCPJkcbcwaDLJubUTTsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkxM1owIwYJKoZIhvcN
-# AQkEMRYEFPMFLQj3MvIuFIxSLbKkL8Ru3XwzMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxMFowIwYJKoZIhvcN
+# AQkEMRYEFA/sMRtNmccGDxTF3txc+Sd9sFYaMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCjysqAhWBUd+pi8caCKafSkVMubf0M/kDw3XLE6b4h++d4
-# PJPPm1ldD4CoDzDq489+60cgbqKh4DXmlPG+St4n7d3OPK0f4ukeln0bU9fk2K6y
-# NSHyFwls89b5Z8jM3ALGmftVRq1Y2YDKPQwK6W8yrO9Ws6BRvt0sVQaPnt11aiWu
-# X+2pbjgkg9d5vQjKn5SJ93W+4aIU0YZuheA2paPYjiRC77+ISfCqC2neqSiCI17N
-# FSk6rzJySPBOkH/4JHeSqKcPIarQIPaQ7ukSY3fYO17GM5ri/ohOkDwJycsnk9ZK
-# au3urhYBu4eQkx4utfv87pyG6Tg3jv/SGcxk85ke
+# hkiG9w0BAQEFAASCAQAJcHmQAXVxYQclX78YKJg3BnbILI3iRGNnNsyvSpmt7gob
+# ipvzuZwx8frP9i6a/8LmfNByBJ2sErlDROAZk9NWlOIUGWHOGKfU+2sNWYEyhBGr
+# Wbgo6mUjRZpy6G5s1XDnZY8YhwK/ZnzCJP4Obag1Ip2AqNCehifqpMraw+LVc8J0
+# uNxhtwpaJ/qrr4KPFphDInvXNdVNya3vZGLTTf7DDymmtiqDvMChrLckvSSB4eUg
+# 8Htc490FFG3C92moucqfDGX0vevAnbwNW389GR90dWCQy1MP1nnSNXGwZFG36A6U
+# e++UzREo5Z2ush5np9aLsOYfQ6++ZTCk6ZCI1eEL
 # SIG # End signature block

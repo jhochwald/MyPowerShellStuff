@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-02-09
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -120,7 +120,7 @@ function global:Clear-TempDir {
 
 	# Find all Files within the TEMP Directory and process them
 	Get-ChildItem $env:temp |
-	Where-Object { $_.Length -ne $null } |
+	Where-Object { ($_.Length) } |
 	Where-Object { $_.LastWriteTime -lt $cutoff } |
 	Remove-Item -Recurse -Force -ErrorAction SilentlyContinue -Confirm:$_Confirm
 
@@ -129,11 +129,12 @@ function global:Clear-TempDir {
 
 	'Freed {0:0.00} MB disk space' -f (($before - $after)/1MB)
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7UkFsdz92ObulIbcrwIPF6LH
-# KSegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmkV1fHcycCFW1HT7nKd/p0Zw
+# Bl2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -276,25 +277,25 @@ function global:Clear-TempDir {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTm3QFn/h5oB/LqBtkI2+1pp526UTANBgkqhkiG9w0B
-# AQEFAASCAQB3TSlzado6ExagaMaXClJV8uqNMaM39qhVzds+FOWHxbR5z8NibHG9
-# 4QJFY6WsFVwXUnvygWeOZhfxxMKSPUKCODj5uVk/Af/b67UofAzQc1JvpcgSA9IZ
-# FTXqbL8uXpR6gC6NRDB5XwhqE8stLEYaWCeWJzvD71+NsZguWhqDd1t7Gx9ySocL
-# TgIpY43Zv2cauPjxYmJ5amjSe9ZDNSMbQhMJr4oKnadqMTEzxq2P2Xd3JM5pCUho
-# qK0pf/ejaiqpoG8fgSsEObIcVZcP6HsPNuQvfZDGXjsX00Tavkkskmi4rYgYmYpr
-# cIXzUEni64iytJTYfQ5kPswUl/OUa0e2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSPe9IU0BeD9pTG/BX8jGKWsgpK1TANBgkqhkiG9w0B
+# AQEFAASCAQCnvo6G2EAE6ftkaMZbbA/tlwkTOwPbIDtQJ6S26H62SwFH5S2zMFIO
+# tj+iJu83wlPnGdDLet8lKcNfzpum0tjQTB24PCEcdhJe6PrZF/+b0Jn+9nVoPD/s
+# T4XIGhj+Fw8a6PGzAw9a2fqbBpxRR5cmwx5o+9xZ2gAy3axsxIXLUrZrPOFV1TQ1
+# 8KQcRNk20QIKAZRgPzP0AWTvGgGsLirWDfIc8sEgcWBNjleVrcy+SXS/A4Wpu5xL
+# pQh4+LRw+ImmQZzzqdgyuDxsCRTY2xsmi62mTj6q3JXCaHe5JeJkvLUI5ok2oKBf
+# gGG1jZfAMmuChxPCGj4Mmpjzk59bpsN2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkwM1owIwYJKoZIhvcN
-# AQkEMRYEFFDg12Du3cbnN5Hae2T8xUhog6+MMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwM1owIwYJKoZIhvcN
+# AQkEMRYEFPW4fuHmi2Rl/0Hy/GXoRq2FqSfMMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBCkbODjHBalIeOV6hVP4CVAd95HZHcNuCmUsRObEm0/ROI
-# mizwp8uDH7BtxNVv1JSPOp9gsMSlE0Kp50SoSL5WIxBI+zsMGq3S0S5kbk8D5n5S
-# H1em+pjT62uh/Vk5juH85Eiagh2UbmD3ld+MU/b8Ni9bUCTPY7AnaHGpSY80h5FK
-# axPEkV1B1dTNaUoMOW6sjfB+cwOXQ2Cv6ZZrU5amyjuXrtcH93Isw+FL6jpUmC7P
-# rxyOOuL6sWJckfMDs+9lUI+hkS+TclAbCQS0rpSfSmDkylerlrXKKfi74H3VTccn
-# r9y6pwRzUfeiN3jJn44cHSjgJa8jq3IiHiL+skxw
+# hkiG9w0BAQEFAASCAQBtp8sHtfn7oCBQIt+fwJkL026UwDOj7/PrOP4Wn2/aw4RT
+# 6TyrBxrvRbV0ZRglZIDRMksJeiPrhPOqx5JdAjyEPkNiw1fd3F0eqv46izTqFHkl
+# c39OFwWhR4WPCXrpJzVrXDvG3Wc4rrCibzHIVHPk6Zzm3D80hpNMUUQDce3CrVra
+# Oc1sDx00Q4jkVKT4Yv5nX6TSPe+sbx6lY44XoDcpsA/S5RbZaqIe3gxnzsXojwiG
+# V7ZWC0Ov1Yl9lWOpTIU2pCRadZqStyrGGct72QZmzsI/j6lRSZss8T7W+DKxwFRs
+# LyeniCp8fEZ3QXjfyUffm8UlYi3bPQLV52bYG/LS
 # SIG # End signature block

@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-24
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -116,6 +116,7 @@ function global:Disable-IEESEC {
 					Set-ItemProperty -Path $Key -Name "IsInstalled" -Value 0 -Scope:Script -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 				} catch {
 					# Do nothing
+					Write-Debug "Minor Exception catched!"
 				}
 			}
 
@@ -126,6 +127,7 @@ function global:Disable-IEESEC {
 					Set-ItemProperty -Path $Key -Name "IsInstalled" -Value 0 -Scope:Script -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 				} catch {
 					# Do nothing
+					Write-Debug "Minor Exception catched!"
 				}
 			}
 
@@ -138,8 +140,8 @@ function global:Disable-IEESEC {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAQ/NrxyobtuZ3COH0grIYVr8
-# i2igghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU93/tGlDsTbUsfiLnGOJKwr86
+# fgOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -282,25 +284,25 @@ function global:Disable-IEESEC {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTlkIu9ER/EqopKdO81z4avH7ANRDANBgkqhkiG9w0B
-# AQEFAASCAQCC9Dsk3tTEmj4H/lO2kLISxSeYX/pLUDXwVv1d6S3FzORoftLhEAi9
-# XV/veVTwWn/h0VVDivtyRFNt0UruIail+t9d/VBfnoWWirIWEvpz+e584nAWByto
-# uAz+/VIjBxrFGYw63A8e12Qyl0hH6G5PNaWNVFCejd6x0jSwzdvZgGP1tCwdssfa
-# oPa6EEcWSml4mOCjYQ4gGMUfcWwE15wQwTPORvB5DirMc4S8ueTxUo1JSimK5Yx2
-# tcIlTBLmm4e5Z1JBm7Xe3Q7WmNvo4lV5hXssKxXj9yuayNPnTJ9tNi6oCKBpwo2P
-# AJ+i4RHMCRFEyfpr8aKBsoXldCnIg1l1oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQYzH9tp4aTVpHgrI3MNHtHMP5l3jANBgkqhkiG9w0B
+# AQEFAASCAQBLA8TFbLfx07+Zma6+DaJpO5ftxJ9zCylrQbpNFrv+Nj6TgEVkZqei
+# zKA5gSjASmyugLXCgl7QZ7umfGg6nI8NCvnum36Kdj4X054VW6zzoDq5ajoUrKmc
+# lwIMTtyZSjjddcy97TRDne3BSzZ/p+Y5W5xvwVLj5YNoip7gUG0DD0VJWPgnAxk+
+# PXPdAHpjZvSwd6JCo1WoB6tcoBbBW7USK+SI6NiPdJfmTgHvmPe35RZZXMZClHMw
+# RtdIm2qq4TBsfzg0FirPjxZjtiu5c0m8daVkhqHvOsBlkwdNKkjmvpL77ZNhdVns
+# qXtYHw1PUAGs/DFqXcdA1cnSlphhxHjeoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkwOFowIwYJKoZIhvcN
-# AQkEMRYEFIZxJLAheMDyz3egbTBZf1/CMVZZMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwNlowIwYJKoZIhvcN
+# AQkEMRYEFOMxj26naAnRmkk33ISGmHnt0MsqMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCKTxpeDC7roycgBS1JJuRM1h08DEA4QlSNfyeo6pTTp6Z9
-# W2BZJiuBtn0w+RdiprzpbaW4eLptHaHxQRzQGdEdkdLscHg1yx+QPfNaA3gBdcpR
-# INdQXY2EdJgQxl5PK5BC0zpL7NfUbSHbKYmi3zrasfcFMFGiw6I9cc/rExuZdZdu
-# ZfLER35M4nm+Jg4D+xauXC4FXIrdBHqxPFg3nr+ECLYaAL5/aVOMLmw5D3Lb1uDX
-# KQIoB0wawSXSzNPWKUtzFmdF2oKRp4ItmwTs63x6kL0UPfAifwbuJoCvbB4ImF+1
-# uH029shsqP8ykeAXnGwzczWqHHIUBpUifCU654Yp
+# hkiG9w0BAQEFAASCAQB5+ig69mGSSL+wlfGkNLN6bvBCcF7aJNk5wYd4Q0L54SkX
+# YC+FH1FNx+2c4wsIjqW8evSjzcUWUaq94Gg/eqT4hkgKXw94k2VzqzgjddFw/F+M
+# QqraDwSqRZj6xfCCE/7OuUEAaPSDzhyumEv/hAjjT68S1VdN7jLzIgWFAJAlxGO0
+# ZdISQIJg3yKzcqW/sDVEkWIOeoiv550FG3xIkTrTEUS0ZYpzWV44JvnJnmNx48o0
+# Kv4hPzTbTuwd+TA1WQuGEwfNlIcQ9yZ3kOqt6SXErQROjM5w01stPonGQ7lYDaPk
+# SBkeDPHKLrcXEf0ZNr1ngsT3EfHdrlQGcgqx9OzU
 # SIG # End signature block

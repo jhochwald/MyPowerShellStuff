@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -124,7 +124,7 @@ function global:Get-NewPassword {
 	PROCESS {
 		# Delare an array holding what I need.  Here is the format
 		# The first number is a the number of characters (Ie 26 for the alphabet)
-		# The Second Number is WHERE it resides in the Ascii Character set
+		# The Second Number is Where-Object it resides in the Ascii Character set
 		# So 26,97 will pick a random number representing a letter in Asciii
 		# and add it to 97 to produce the ASCII Character
 		#
@@ -179,8 +179,8 @@ function global:Get-NewPassword {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUc/mTAkiI85KAs5QMWJ0TrND6
-# /A6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURqYWKIlS2SjYZvvt1TW9l5+Z
+# gt2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -323,25 +323,25 @@ function global:Get-NewPassword {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQDraaQJwjNqrZrOt2BnqbqOmMF4jANBgkqhkiG9w0B
-# AQEFAASCAQCpjwdUlOmlRh6MZUyHV7HEyQF+9P6Xw70a1ZM3bGTbasVeXiaYEKZC
-# Y8Aec0HnBgB8VvojX/vngmyBk0G7qZvT4B5CPZpcOD+JfNALd1mBa07VSoXZCWv8
-# u5Onxvp5r/y3iogZARHgSqTg/XciZzXZ2D+JOGQ3Fm429/tbfmwvFspbuxU9t/TF
-# r5Wc/Bi7xxTAbkWQNq8U/VugGNyPapsQYd4Y8yhdIXyPLLT2zMTI9a/UN6vCnZuk
-# /LimM+3inAAZJtWrcC2a6u+dL+8/WL/3P4D/3CnKMbqwq5gvkgaIo27WXakAqHcu
-# F9hEH1xwIopGyxah8MSydqeNLc6cDN9MoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRNPLE3xHe1cfK1yRvXdRrOFEzUFDANBgkqhkiG9w0B
+# AQEFAASCAQAQUQq5HOICGGDP8zbEpAFOpSH05iggeJuMWXdgIj8aWTaikVvff5SY
+# ADAIXuxGoAcocGKIpPTRWVJM0xDNkU6TSkJNWF1hC2ukXXashN6vooPNUhgFGw0r
+# O+F9O+d0dJnBhJx5yBK1i/+CQdr++JpAz84IA6PLDCwqv9oHLSvGsxBIWcmZEHCV
+# BKCcUXU68DY9qePsmmZAA1fT3j1WKWVlaC6evaBkZk9XCQoitSTVFwYlnU31GK0a
+# 4MNB/mvroNwRtLzl4d8fwDJ0+e+w3aEtGvVCc1TBVTikw23KZ8vdEE/cy6Gts9/L
+# EFPvKvcc9+GQZ6zJ7LuRu0HzgV8DZriuoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkyMFowIwYJKoZIhvcN
-# AQkEMRYEFDTRYz6o9HpmGihjzM1a9WKPp2cZMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxNFowIwYJKoZIhvcN
+# AQkEMRYEFD4G9ZHgEkWA6KbVP0EQUUO452dNMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAwrMkm/5GbfI8NI235awX4Wp0rVAhZOyyj+wm+z7piwqq9
-# dTf22H50580VftPsZb8gBsx0LoSTXlWUU8MyheNf9G7roF/hL1HfBxddnnM4gomf
-# 0yLnSM+wQIjEseaThtRVrkDJ9Fw+dym/KnVcNeutcVZ8P9hM6v+GBE/flFgwbde4
-# s7+onW07Ja7RrdhkH8oTiXT/c9bLDBoZZO3UBeM9pcYZq0KCAoNFCjB544rWFmhg
-# coDKTbidfN/KHV4lfzzBOQa37BYtGsmChX0St20yBICfXiAIImojMbeo+NqS8cjm
-# 84bitVdEEcYOyb7Dcku8qvjcP3tqDcb28hG/C1JT
+# hkiG9w0BAQEFAASCAQBMZ4j9Lb7dJaX+p9UZrKkjIO8L6/f8jh/AqwfNNmKq6UVK
+# b5Hv6iA+BI32HrtvlywoGF+YIyJkI9b4ASH6qcp+IIo78/GTeLxHnm6HSD5UWy5D
+# WcvvW564DwCXKLVEECmaLYM+YUZ7pBFBxKMmUNA7HMZCUnud8ZkbxBoMGUh7r9vx
+# 8Jr6jyOZcVpa7zcUw1aPoOJhjUeHNT3GF52raej8ACCv+UJ4wOIQDQZCQWxWMM8R
+# KF/hnN7+5tc5gsmtcH0+xW2Zx8OVq0tjsFj+216Y07N+7xVW/WfCThjhCdNvi36W
+# /aE0o6PE9vwTXgZSEeZLtsoTcBhNonAlWovXWBTd
 # SIG # End signature block

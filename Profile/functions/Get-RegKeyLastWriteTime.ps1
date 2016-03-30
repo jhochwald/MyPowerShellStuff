@@ -92,9 +92,9 @@ Function Global:Get-RegKeyLastWriteTime {
 			}
 		}
 
-		$KEYQUERYVALUE = 0x1
+		#$KEYQUERYVALUE = 0x1
 		$KEYREAD = 0x19
-		$KEYALLACCESS = 0x3F
+		#$KEYALLACCESS = 0x3F
 	}
 	PROCESS {
 		foreach ($computer in $ComputerName) {
@@ -107,6 +107,8 @@ public static extern int RegConnectRegistry(
 	ref int phkResult);
 '@
 			$type0 = (Add-Type -MemberDefinition $sig0 -Name Win32Utils -Namespace RegConnectRegistry -Using System.Text -PassThru)
+
+			Write-Debug "$type0"
 
 			$sig1 = @'
 [DllImport("advapi32.dll", CharSet = CharSet.Auto)]
@@ -160,7 +162,7 @@ public static extern int RegCloseKey(
 
 			$hKey = (new-object int)
 			$hKeyref = (new-object int)
-			$searchKeyRemote = $type0::RegConnectRegistry($computer, $searchKey, [ref]$hKey)
+			#$searchKeyRemote = $type0::RegConnectRegistry($computer, $searchKey, [ref]$hKey)
 			$result = $type1::RegOpenKeyEx($hKey, $SubKey, 0, $KEYREAD, [ref]$hKeyref)
 
 			if ($NoEnumKey) {
@@ -169,7 +171,7 @@ public static extern int RegCloseKey(
 				$result = ($type4::RegQueryInfoKey($hKeyref, $null, [ref]$null, 0, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$null, [ref]$time))
 
 				#create output object
-				$o = "" | Select Key, LastWriteTime, ComputerName
+				$o = "" | Select-Object Key, LastWriteTime, ComputerName
 				$o.ComputerName = "$computer"
 				$o.Key = "$Key\$SubKey"
 
@@ -186,7 +188,7 @@ public static extern int RegCloseKey(
 				#234 means more info, 0 means success. Either way, keep reading
 				while (0, 234 -contains $type2::RegEnumKeyEx($hKeyref, $index++, $builder, [ref]$length, $null, $null, $null, [ref]$time)) {
 					#create output object
-					$o = "" | Select Key, LastWriteTime, ComputerName
+					$o = "" | Select-Object Key, LastWriteTime, ComputerName
 					$o.ComputerName = "$computer"
 					$o.Key = $builder.ToString()
 
@@ -207,8 +209,8 @@ public static extern int RegCloseKey(
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUB/PVoqh0gfNMpuevg/TcI5+Q
-# 3O2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8SjAVREl9PFoG8prKFuOSvFa
+# SSGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -351,25 +353,25 @@ public static extern int RegCloseKey(
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQQJmCkQgZMA0MFgpZyYRIHplK0jDANBgkqhkiG9w0B
-# AQEFAASCAQB+2X0eR27alp8i1yBl6R5yahZnEkhL72Z2oiEWH0XP8y6o/jcADEaQ
-# +MK2s3kkDp7FYaPsCzaHj8hYLFrnPcr0o+f/W31NC9HDvx8q74jjYrFDTmDOsQph
-# o/al8YioRRXmUc1OGSMAGSwBx06FrdCPVVQorVot6r1Exo6bqbuxmh1LzIOlKm4U
-# jjGBR1COHzizTVxCAhKFxRqsHnpAcgXaVE/nDD/Z8uK2jz6Jq+2PAuF9g2IFeUWf
-# qIYhW2WcfuLzT+0clTRhSjkeB5JbcxCQ6zqO8PJjzl96Y8Sgwur5p/O+4nc2A60y
-# KPe2AvKPJ8r76txGOfWHljPuG6eqL5J5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSSPjY2hT1S3p4vP66cUju3P33qlzANBgkqhkiG9w0B
+# AQEFAASCAQCB6b222G3VVe1w8elEvMdNQNNfWR4mmi/1YTs7jocPB1ITcKpmhn1a
+# BNzDZpxAbi0Yvh69w6P5pxxGGYQvkgjk2q0OK2TLXrO7RYHQFJbAK3547ryOXN7M
+# rC9T96DVh0nr6qPZIvwQjM11cgHLPRUMs6ke/JB3+NSJLKIp1QcnkZFg4sTIRuCl
+# gbP6U8yTSwvd+2O2kjh+ASbn2ShOSAVhUsixdiemt0RQAFEfygHrYKk3kR/qxdRF
+# YJjJBaZsfhbdcw7aRk5Ik2zIE8rNR/AD09ioVib/Y1uUaJuRIiJW90GQTPK50ZY1
+# +OQsGnszplEJ84RmmiJYkPpoNSBYAFyToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkyMlowIwYJKoZIhvcN
-# AQkEMRYEFG0H5h+1+kHEv4JwFAiP6SlMiBNoMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxNlowIwYJKoZIhvcN
+# AQkEMRYEFLVuyChKktXEOMPRGItbENeuCHsLMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB+Tdt+TnqOlfwU4h5om6jEPNMuMKBSeUH50sbp+Gec7Ydp
-# SDNhK0toWUGRvJ1jQVrWUIr/QzPF1VtH5RWyxjV37gZR/x3n1S8Y43I8MUQd4PUZ
-# 7ollJtVjjRlRwTjAsjFi05sfYd5TwwDtaoHxqfX3MVj0O6/svbohywpJ4q3CiMDH
-# DTsXhP2Tly8/iWOoMt997T0L4do4NrE0qKgvl8h5pCz9U8RpePX6keroqjnL9lId
-# D4XixiwMnTEVzVMCVCjs8dMCuIhdUckcQFfmdFamFJDFF6M5X7hE8uvVhjFpjK6D
-# xQAWd0dlvSyrpnOae7o+66b4TkJKqaEb6vHGiX4U
+# hkiG9w0BAQEFAASCAQBfnY4Plp3KAkUDuC75D2VAthd9dxzp+8ZaZok1rD4aLt6C
+# WXJ4d2ZsZbf6boArkxV2CBJsawsDOTzboimBM3PVj4Yk4bp9VasOOSLIziCLzogQ
+# hEAum6GYY/6hMQlXh5OOLV3PL6FaajrgZ5sAFjA/JdE7B1ZxHF9XgCvPEfp2KNHa
+# bsJqdoRnSAy0aPHaDom5LJIfN1D3RqiEYZxFTIcSo4b07v99iT8CEtJMW72nNsI+
+# +tTh6Dow/yfOPA+AArz6AA3F8vp5E6et8ahs62Ohhzsz5zworwS8/NGgRmNsMbp1
+# kJIvMf2sbf7ip54LrdGD2osHIB3PkZw+qI4IRaLd
 # SIG # End signature block

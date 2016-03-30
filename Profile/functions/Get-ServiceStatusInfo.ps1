@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-15
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -76,10 +76,10 @@ function Global:Get-ServiceStatusInfo {
 	param ()
 
 	PROCESS {
-		$Services = $(Get-WmiObject -Class win32_service | ?{ $_.startmode -eq 'Auto' -and $_.State -eq 'Stopped' } | select displayname -ExpandProperty displayname)
+		$Services = $(Get-WmiObject -Class win32_service | Where-Object { $_.startmode -eq 'Auto' -and $_.State -eq 'Stopped' } | Select-Object displayname -ExpandProperty displayname)
 		$count = ($Services.count)
 		$ServicesString = "`r`nChecking System Service status...`r`nTotal $count services identified that have startup type configured to Auto start, but are in stopped state."
-		$ServicesString = ($ServicesString + $(1..$count | %{ "`r`n $_. $($services[$($_) - 1]) ." }))
+		$ServicesString = ($ServicesString + $(1..$count | ForEach-Object { "`r`n $_. $($services[$($_) - 1]) ." }))
 	}
 
 	END {
@@ -90,8 +90,8 @@ function Global:Get-ServiceStatusInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFdD8iE3McSqmMqDtv7Xqqkph
-# b76gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpykcaBJk4CrdI1mSUNvrhszt
+# ZZCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -234,25 +234,25 @@ function Global:Get-ServiceStatusInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRqrf02kpJm5NRc1bcZnZDkmo2kiTANBgkqhkiG9w0B
-# AQEFAASCAQBl2KaG0Gmz5NuzuxUgPDVu4YnMObvtRY4huriXnKRa4306Uyc/vriC
-# EMZY+hyMRXqWSclfs31bGgf9fhCWTGThQ6Fsg3bTMYmskgqWHVeFdovX67qULTj4
-# 5dP35A5//DklOkEIzweC/UMIlsl38DjkdbFjpwqdn3qaFYlpSQull03HFXMvgywH
-# 52nLhT7NhKruGIRld3pFwSfSRLrRcKjP2ZVfK6APGGWw9GIFDLvGnrOljjC6KY6d
-# yzO02MuNrFlAja2N9FwLgQpQx28VSaI2BodmwHhGgHuCQsV3aLFn9W/6ewcrNCJQ
-# Q3gwC03D7Tfl4Ed3DOMhlhYaeT1pO8hYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSdIOcwVn59EIFI6Me8jIzGnZinGjANBgkqhkiG9w0B
+# AQEFAASCAQCS/6iTy8EFLGsAm3P7FMjYzRuXVdNWJQujeccRMWk/a3Zd0lEaHeHs
+# LbiLSTiCTSOJe5/MMUKVwkf5K+OEvUuIB3Cub1xroMLdkpyN6G9nr7lAi9dbORdc
+# H0cgCupomiTSU2+aogIQ8BgqZUUvVCifot84aoFvOh0GZW2XpAtOoOISDColsXih
+# qNOvM6Mi41T6FK4jbi3vBjzSY6s2qufeyJA56x3DW0l8QbU2959PXlWIoX4j2OBP
+# fuwYHdV3vFl2kbzwd6WHjEwUnepYZFUfF/M+sLvXyAyekpEvaIbMQhZi/A5C3FIn
+# qGU7FNmgXWjE5WLOq6j2ROGECsQw8RRNoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkyNFowIwYJKoZIhvcN
-# AQkEMRYEFF/UFrSlm+MaGzsS+e9F+XqNZhV3MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxN1owIwYJKoZIhvcN
+# AQkEMRYEFCJLkNQodOQUTLO92bvQ/EuwpdxcMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBZzPwWE83ehKowP2rI37Xrw9k7mepHjpKq6itM/Zq7wfom
-# KJieMtix/eA68yNLg+2uOtK3VMJLuzLlqbe1aeyl0ZdPEYwvfYKwmwILpn2dgN6O
-# QrtQECgLLd/WSaVJf95mMNFYZs9b6kTLDKi8zfWh0qEFIjP4tZZnM3Ys0oNGyACL
-# aXVlNdsZ/TMnIKngKvMz+HM5lCFar9jdw/phgk4aizjuX6IPjamLrEjDaBtUJE0q
-# MivKeFgLPiPgiugCE/qeRlw4qsgP9gOWwszc1TTjpM0sRlySzJOElTfTkhZYO6EP
-# mwcYUTc4wVox0Oz3FbrscvbAO3l54gIjQlCz9I7c
+# hkiG9w0BAQEFAASCAQCCa6/Gli/n7w9Vurshl9EjLwvg3uaHD684CkPQr1Id6yVx
+# nGi4SBsk3VGQITfubSF3Szhyds9G9kRMLic21qHZaIJIRbv5nN18SClrrg5uDw8y
+# M8Jx0bWLZeUQ0J53as3THqB+7KUFZuEzy9T+njvWYW5vS9yTmYYVPqmhdsTIanv3
+# tRSme3CKO1Yf6wMBx8VT/EaLWBQ6Nplagv14ZxtKpvxgAlVmOwymkh4O0Eir1MNd
+# yKezF7wNWSjTwsewX6HPs3EAABKEHnRCVokZMGkb9MEaazNUNzLnFb0Qp4yUjbCt
+# CHo3z5O5J1uMGr7NANXObyqz5jdgWGzzzdYC1cSm
 # SIG # End signature block

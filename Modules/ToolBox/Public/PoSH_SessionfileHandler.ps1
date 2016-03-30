@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -139,7 +139,7 @@ function global:export-session {
 
 	PROCESS {
 		#
-		(pwd).Path > "$file-pwd.ps1session"
+		(Get-Location).Path > "$file-pwd.ps1session"
 
 		#
 		get-history | export-csv "$file-hist.ps1session"
@@ -201,7 +201,7 @@ function global:import-session {
 		if (-not [io.file]::Exists("$file-pwd.ps1session")) {
 			write-error -Message:"Session file doesn't exist" -ErrorAction:Stop
 		} else {
-			cd (gc "$file-pwd.ps1session")
+			Set-Location (Get-Content "$file-pwd.ps1session")
 			import-csv "$file-hist.ps1session" | add-history
 		}
 	}
@@ -210,8 +210,8 @@ function global:import-session {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUzJFC19pcXOvfAaVa9AQtPWK
-# hmOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUaRVx69zMRUIrdFD3YIupFKAH
+# t+SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -354,25 +354,25 @@ function global:import-session {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQrea/GZYHzdcFxLGvM/Jxk1yfhTjANBgkqhkiG9w0B
-# AQEFAASCAQBS+H3O3wUdlbtgZuTXhE9urzpuR1ZW41lTk9bhb09kbPSi0RHolT6q
-# PGguOLLSTln6ycZICWbEU6H48u6Y0K8Dumc++YL3OOtkKb7pP5qtrukuBSB47xdx
-# ZMwyVonpfaLT3PD36Z2yqpiiI3dMszj6MfNvpcWpWCZOxw4ixS12OHKCbtPn+PlJ
-# 5RRwbIQF9WoA2jcdLJlUpZy8PU9+D3wEbUw6NTPOIeuvQ7THF3ec8w8i8M/mXYmP
-# GLfoFETjC8BpGd0SCH1ztd26a+u0rspOiBpeiMYBRXDNDAZVScuVhhXUyZDsLkpI
-# BOflZ9jIBXz96DXpSgJTSaLm87tZGMJAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ5sf4O2Sxjntr2dR5d104ZOdTU8TANBgkqhkiG9w0B
+# AQEFAASCAQAnXew60R7Awbs0SnwmW9p1GjXrs3+5ZzbNgnYM2BcL0uvpz1nmRApx
+# LL2fdH6aGj0erQ7k6qOXUickwSEDFbEqXo6zCn1g40cw0PUTn24lFRA9/l1t69Zz
+# 6FNwzEhuEIHj7UxTB7gQKbxviTh7GMjox/CzT3KOlCzz/UaegkZgu7FbdO85G3Tz
+# 6/asl55enMoGCrj1DNlz2LBPdmKHhr5Jgrnm3JR2IKAgLT8TAgByGdBEFNZyKS09
+# u7CSE/nrZFW2RrKghFXwjYQOnB3maougMbu9UKxQEpxse44rOI8HKVklelHfaSVl
+# tBrVDzoE6v7ug/vYOqdKxXLwT5hqJynhoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTk0M1owIwYJKoZIhvcN
-# AQkEMRYEFBnPh213wIXXbTTJLL4iqfdfC8w/MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzMFowIwYJKoZIhvcN
+# AQkEMRYEFLxC/S5doQz/C1yGD1rNYE3cuR6dMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCEgWWfhGOci6Fkz42uXmuiWqcmcHP3I0/E8ndfMZnyVGEE
-# APYqizkQvaseVVjU1AiYeDfHRCo5tgWu7LShdBzAVrYjNTuyLIm71fmSXHputwa7
-# sRwn+ZrmCbz9vUOr6KFJ53BkKKP2JIzivVDmcKV7lja0lZi7/4WbEPvJMEFvaylQ
-# J7xNoGSig2CjYf52jcwCqylk6HWkOc8S8HzoPmRNOhNKYFSllmoWfumx0S9sJXjT
-# tWPYCTiujJTHiKgfoWs4DoB/sPdxtlIJmHsa1G2vMuMC0BDxGvpMLNEjOTD2supy
-# ZAJRpm4OqdMffXkl3MKEcE/plU7B5V4Ms5rhTbgk
+# hkiG9w0BAQEFAASCAQARBX6+kNM9YmbrGQHFHjZqyhPhvV2gvQQz026+SKeIcWGj
+# HAA4x5qoMZWJ04yksZaCuJ4CPoPQAPjt3GiOQeYOwzX5hB3/TPoN4VXl3Dt2FvRO
+# PshEWqkNi7Dbo5oHKIYteFAQ879r8PNCjCq8pswwOrOql1nC9xd1OI8zzyu54PcV
+# WfSyVBL+iAtQoLgbXlgBNTpNnleJAHGfAfUks2KEEltZriWdm7f7n//PDGRUbXAI
+# dC29xWAUuGpJrs6uwzCvy/hKleOPb8VmEsL+3CRS5Gh9MI2hEjZUD0/TqmTtykSD
+# wEbAQqgigh/DszFchP719xSVBFKAHMcM0vBZl6Da
 # SIG # End signature block

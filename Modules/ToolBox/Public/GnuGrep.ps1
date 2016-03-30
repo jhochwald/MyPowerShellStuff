@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -118,7 +118,7 @@ function global:GnuGrep {
 		# What to do?
 		if ($l) {
 			# Do we need to loop?
-			$files | foreach {
+			$files | ForEach-Object {
 				# What is it?
 				if ($(Get-Content $_ | select-string -pattern $pattern -caseSensitive:$i).Count > 0) {
 					$_ | Select-Object path
@@ -126,7 +126,7 @@ function global:GnuGrep {
 			}
 			select-string $pattern $files -caseSensitive:$i
 		} else {
-			$files | foreach {
+			$files | ForEach-Object {
 				$_ | select-string -pattern $pattern -caseSensitive:$i
 			}
 		}
@@ -136,8 +136,8 @@ function global:GnuGrep {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUN6fvSKtVcOwYNtuvlkNIsDX6
-# 1KegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUH2UUC3y/D3IAc4kp4KA9oyqG
+# ZC+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -280,25 +280,25 @@ function global:GnuGrep {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS+2Qhu6zb1WP+HWhUSmpTViJeV7TANBgkqhkiG9w0B
-# AQEFAASCAQAc+5dW/dTJqNdiaAUhwna3lPk2Hh3HQhBBu3il8YS0wifsGfMpjwis
-# QK/zyv03bwUoioToAquqjs8XGduHuRAhEoNOlriqrF9BPU09njdfND8LU6tcvLiF
-# eEf7BHDoGpBZ+kDI2HAC1VhTg3UbyyWs6roySyUAdx+iZZ5E7vZCktVoon1qs6fS
-# SpF8OXjwf2s19vYXWHmKTOVGszYFxQeph90AuZkNEhZ4iWDPaigofUjOc92d0q2w
-# TnAh19rxQ/lCjLfs0T6pBPRG5QHGulHbezRZ1cJvdisqLuvRjerN/0bk/wo8naiH
-# yleBtZHst2WRMeSA1zRVTHLhWVzbM82uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ8qgw4VHqp2iQGewBI+Y9np89V2DANBgkqhkiG9w0B
+# AQEFAASCAQCdsDmNqYx0mDTSGUMxZrQD7GMu9j/Rq07qoSatPKYShe41KOJ26AOY
+# kPBuXjJ03tzTz+XJ7xnTdJRqkZuA21wLQGCVYb9iDJg2dM/fg7fwZB1nO93HXu4V
+# ZDqn06otU1Wb+Zb5WKKW4Ky+uGqe0zbPdtqVfx+Cd+VycfsqPOtl/de5ublzovUx
+# JYlsd60Yge+/lIdvzj6RMS477sh4DuH8jRzD3y+2t6+pinsCDh3AiTR6aU2+oT1C
+# 5xBngOJDsZ02ln0yhxXGd936WMNdltMU6VfC4wN/H8NN1lI5zg1i35YJNY/C4x4L
+# OSncHP4fzwAdw5iq5FTKxbRMQPAcyn/MoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkyOFowIwYJKoZIhvcN
-# AQkEMRYEFOr7hH8jEpYloIW0UWbQ+sGYvfq6MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyMFowIwYJKoZIhvcN
+# AQkEMRYEFM14lBTPb03tWVD7lBFJdw7oqT6WMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBiLS2sGdBVLbGm42pZBKI7SsONl7tew5/mR67pyi8vpKAe
-# qG5RKgNdWtLvP9+ASCQuoEuFCHbLyurOMbQAL0j/fATh7hGi1j6jh3527GZGJQ2H
-# fuPvjmhK1SaxWnfn54/zSLbXzL/etYEX3ISVgFvzf+JH6lq3j77+EpCbGGV08roE
-# eyN/ZFVuQYHiKPuuhUEMqXS+n+hiWQ6DlcymeEsRbw6O6zv89ukGLPxc8TCfDmHr
-# Z5oeVyli4Oso0PM93UaUjDFenmwKL2hfo9KWbTw6GojVmohFGOF47zcqtTsO7KBu
-# IqTp3sE/IlrUIXaia0NIvonUoptzwCoxa/43Dw+Z
+# hkiG9w0BAQEFAASCAQA+iKfcOAtud+jGhQHAwx7DD0O31xsq87TfOy7Jx2xIEw8m
+# I3PUuuPkolnQP0aHJj5i09dT6UWTOcxiOPBV/jWyUoUOkj7+I/gvlY/x+I2AgisN
+# GyNvDPECuVDMt3Q99jbQWQo8xTYtwq8SLZYKN49C5LvznesnB2KZ4ay9TI3greuV
+# CR0hAY2Heo0B/w/xHUxJSFbUFfnu40OYngRfyYa6Kv/86QlCl3XakP3aY1oLeeeq
+# IWEcdAr97gHosoflbUm22bOWRN7a0oPMOfPG6zdt4ErhCFBKDeuYiR1Xp3yeXqqx
+# /VbMjGh5bGJoAU/PiMjaPSV0XtqMSgPWjPfUS976
 # SIG # End signature block

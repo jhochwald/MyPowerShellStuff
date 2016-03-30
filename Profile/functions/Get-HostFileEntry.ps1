@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-02-09
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -94,9 +94,9 @@ function Get-HostFileEntry {
 
 	PROCESS {
 		# Open the File from above
-		Get-Content $HostFile | ? {
+		Get-Content $HostFile | Where-Object {
 			(($r.Match($_)).value -ne "#") -and ($_ -notmatch "^\s+$") -and ($_.Length -gt 0)
-		} | % {
+		} | ForEach-Object {
 			$_ -match "(?<IP>\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\s+(?<HOSTNAME>\S+)" | Out-Null
 			$HostOutput += New-Object -TypeName PSCustomObject -Property @{ 'IP' = $matches.ip; 'Hostname' = $matches.hostname }
 		}
@@ -105,11 +105,12 @@ function Get-HostFileEntry {
 		Write-Output $HostOutput
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgEJIUnGDdZBJQRy9OiioXuZB
-# GuigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+LAcmcQrK+godikgpbmiAVOD
+# TdagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +253,25 @@ function Get-HostFileEntry {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS64rj8AVfGwn3ua6ty/ZEKzTvy+jANBgkqhkiG9w0B
-# AQEFAASCAQCmPhrK77NBU2L00rBR95OMnQxqSZ3/9zs6Hnivmt2f6jfHu3XneDCI
-# K5Qog1gK0hL1B6NGdqDZyOaMZ6nN0w3SQx1nn5UIM5fxsjbfXHHDixs/NJIsl+Gm
-# x8CQ+E+beyoZ2zMlDfEhCFRqvwEmOrl8SB0OxtK8EKWH0rh3xQy5dp82gObK5dFg
-# A7jaHSYr5TTgtiK4Kt8Oeg/Y1bx+7CVZ2WDUVi2ji4nsQO9LAx+rrtNXhn91ftzw
-# 1x06wGUjFDm2QhpXD9/Mi5BmCpWrXxxg2uk6Ap4IW7Mu42b1+qMjPCeJuvwOtPvQ
-# bfAbSFgH8aw7VJ8LuANE6JklwUKsakJJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQkTp8XSMAKTHGVbjsLTkxEcZTqfTANBgkqhkiG9w0B
+# AQEFAASCAQCfyV21awD98UUY8DXYBlX5m1cKqpR6IUJKgVem9gqOt5mQX+YZNrbo
+# iJ0Hr6CpGJ8/0B+GvA/oLURV9CEh6+gN8Gv6rcmnARryVc88/4e5DU+cvqTBn+J4
+# w3bxs38HGDe8ESO3pKG0ALqutqKecu3XsZSZnL61ntRlP6HgjhYe3Ks2vmmwrwLQ
+# g0o5ZHmKUnzhDngsc27Yz0XAUimHYT2WyftyxzfigIopMXFItswwbAOMCl64K2UL
+# amV1w6yyHhvIxFljUxBAqCJIbRDnwZMwRsQzcwCGjGNFsENoCgio3pqKTMaueCtI
+# LlmYv+hYHr6hN6ePfBjXR/0CF9T+y8aLoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkxNVowIwYJKoZIhvcN
-# AQkEMRYEFEZUZSSa0ESm1Pj7bit3hHeANcUfMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxMVowIwYJKoZIhvcN
+# AQkEMRYEFEhytrOmE9bAGkoaTQuGqvdJW3jnMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQApam2TkgbK8xxYVZ1gHvEy+8zY0U2KUfVrGL7aV5kCg8nx
-# vo8PS+FSveVQI1X34zgf6OZPEssBThTvzT8f4/zdoRBtRRi504UaeiErgejWC+KX
-# J6uWGdhNTTIF1JdYv8gtSM6JAlwwFsxqbLoknttc8vHsH/BDB2uLaLIcrAbN60Dz
-# n84rUmGjNLB45vcEtYliM4sVXLmSnkbm4lqiiELSMgmQvkoatqYg1FoervDmjRzy
-# MwBUTc1hjVi3AC/FTNAphbZUciiamZMaXUqKOcwewnMvkXJVVSCwyWNuZeqbeoDv
-# ooNPYljg6UJXs2E96Sb36Y+X7pyu3CnNCe50bpnn
+# hkiG9w0BAQEFAASCAQAzLIEOVGXBBwFH+uJFE8uIkDi1M3FJp0BV/MWderbeLFdQ
+# EVxX5LYuqXR3sss0Az88uqOxh9e/73m2iDN529zOILwfb2W88T/X/94YF/dIxftN
+# kfgk/xOPLbVGQ0V0mCdgvz7vq0uU3MVO4w8nnVF6y7vroe2ib9Z8TeuTLZbcQJW+
+# 1c/SsnpcOz7tkEqN4EJq5rYICNoybHMXBeB69Mx2LMwFYoLV1+LQqtM0wiwte+N/
+# wdBjcbwukUmH9MsdiVTts9ZwLBCOLiy4y3Wvwu7KcjWtXF73BLRTF1ZRjxJOZqGL
+# 5OJUMzTqrmYex9xXml1F4ITl6xFfvGduA3xrKaPa
 # SIG # End signature block

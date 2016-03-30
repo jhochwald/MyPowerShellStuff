@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-29
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -80,10 +80,10 @@ function global:Set-VisualEditor {
 		(resolve-path "${env:ProgramFiles(x86)}\Notepad++\notepad++.exe" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue)
 
 		# What Editor to use?
-		if ($SublimeText -ne $null -and (test-path $SublimeText)) {
+		if (($SublimeText) -and (test-path $SublimeText)) {
 			# We have Sublime Editor installed, so we use it
 			Set-Variable -Name VisualEditor -Scope:Global -Value $($SublimeText.Path)
-		} elseif ($NotepadPlusPlus -ne $null -and (test-path $NotepadPlusPlus)) {
+		} elseif (($NotepadPlusPlus) -and (test-path $NotepadPlusPlus)) {
 			# We have Notepad++ installed, Sublime Editor is not here... use Notepad++
 			Set-Variable -Name VisualEditor -Scope:Global -Value $($NotepadPlusPlus.Path)
 		} else {
@@ -99,8 +99,8 @@ Set-VisualEditor
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOBz+kRRI7IHrQhmpNVCbmUvC
-# /nOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1uvBEFDn+JN0rgSWVeeQsBUr
+# 052gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -243,25 +243,25 @@ Set-VisualEditor
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQcpm5gEr7AiBDYQDVbcR6R/zI8mjANBgkqhkiG9w0B
-# AQEFAASCAQCfvWNVYOSbZ3vgOaDMhkAvDUKqcnxO8lOSEsW1UEHoNs34QM+3+b7d
-# SHINcEpOrPtyF670gg44uM08Qzy3/CYJWgoFlxYOtDKW7zBEMoVUrNeZws4ZvSGh
-# aXJ8e809DpTczySj6eL3un6i5/d0T4bv9bSI/O9tMCbX+7fu7DyRP0KeDe598uxZ
-# cp6uF8w4dx4J4MPKh9saw5eebhiGK6lrjnXlCKWfRy8DqqB8tZ36vubIqnwlzcCB
-# YjA7FvsaMTkoL/DRE1ptC4EKYmpL+kCnp8sQb6VZ/xjz3jFKX92MPafePMa4MPWb
-# IdSJiQsVUV04Sj20AXFuxxj/HIg7vCkkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBThZPcCU3TCkjN6pWCIh+CO1qusDDANBgkqhkiG9w0B
+# AQEFAASCAQBiMjX3WmotHU7wauC4KwuTAJisiLPOf9uparNtEst0GUFxCHdA4s/R
+# I2ZuV07OzyY9ezA50oAyUVp8r75uZ8T4yTzBIGnwPoUcR6p7/lzmF+SwB/c4tXnf
+# r+c/eEsDl6aftH7LC1biSIPRNbFctiG52M3SL2+O2bAsIVcpVISvmGlQcbqkcmXP
+# mem6AIcRi0IiRMW2are4JJQmzKryCjyf3f5nH7raLj7V/qIx5CIkCRQMpq/tDhHT
+# E2e/7mht+1GEemZByy6Lde7XZftk1UbS9Go3+Jzm0zniAWzK+QpnaiTUfWDg6/SK
+# iA5HT+64eXONoGJKm2fEez3Nl3PKTyi1oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTE5NDA0NlowIwYJKoZIhvcN
-# AQkEMRYEFBJ63IPYYd5fLPkhjw3c4l6FZAutMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzNlowIwYJKoZIhvcN
+# AQkEMRYEFHb02C1MOWi9+QP64jCuDe/C3r61MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBRNbBBy5Yv61XxpCXHt6CcHJ7dRZiJ/KUaXqQREhQnziL2
-# /ZT1wLyf3sDVTHmSXhneV14rhExC8Mx5sXv31OgELZ+nqC/nfG/V2xoNdJsJueaE
-# Wap++IkPHl352H5QYZtIDo4yRX9HdKPRGzJ0i6AWMpotH4wQ5/jEDLm7dKRkx3NI
-# O39jR53w05flhHLL5RrVkjtGnymvKJnH8DJm3AdoVE2w/HLwXuD2aUsyre2ASaKB
-# MGgLZkrPw0mCcNWpQf/Dy7ZSgIDsmF3yekuSVJspT6b8WGPcrufCZsC5rMaFKPBg
-# dcNjC/HLLUfpAYfYprfJfVnoR2YlOetNHrxbQs2L
+# hkiG9w0BAQEFAASCAQBMvTeU19TsuUoCoZ8ULMllWYRlNTe4A7ttd+EgIwfAAQ5a
+# cPIeXjXfZsT/JaZjPC1jhb72J0BBFBFc+h5o0FlD3CIXEBjhpAmMXx0C3KYvO0PC
+# u/ElpFEwY1+hwI6fEVFwqL6q6P6GC7KQOUEqrIib1mtZC++fkdEGcBiUhLA4hSc0
+# lAMJRdd42BhDaX72875Tr8TsxIlCKzK1flQ8NmQyKajl7KsNx+GQZ5AjUYX0S2Yo
+# 1G4L+dBc0KkhA6/OocSoCZ048BqtBHHlBkChBbT1blOxKbebVcmgqaoZJAG0EmMS
+# 5caefa28ZpIxpyNet7nAm2jzWl8XacToJbhEKTDL
 # SIG # End signature block

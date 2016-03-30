@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-02-09
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -65,7 +65,7 @@ function Global:Save-CommandHistory {
 	param ()
 
 	PROCESS {
-		# Where to store the XML History Dump
+		# Where-Object to store the XML History Dump
 		Set-Variable -Name "CommandHistoryDump" -Value $((Join-Path (Split-Path $profile.CurrentUserAllHosts) "commandHistory.xml") -as ([System.String] -as [type]))
 
 		# Be verbose
@@ -94,7 +94,7 @@ function Global:Load-CommandHistory {
 	param ()
 
 	PROCESS {
-		# Where to Find the XML History Dump
+		# Where-Object to Find the XML History Dump
 		Set-Variable -Name "CommandHistoryDump" -Value $((Join-Path (Split-Path $profile.CurrentUserAllHosts) "commandHistory.xml") -as ([System.String] -as [type]))
 
 		# Be verbose
@@ -111,11 +111,12 @@ function Global:Load-CommandHistory {
 		Add-History -InputObject (Import-Clixml -Path $CommandHistoryDump)
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULow6eIKHwm+r8eQMgw7pGbx/
-# I1ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIxMrKLJZNN/ru1AhwEWHFLZd
+# 3tWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -258,25 +259,25 @@ function Global:Load-CommandHistory {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSwf2jHNcNLKRtzZMNWUahlUSSrLDANBgkqhkiG9w0B
-# AQEFAASCAQAr71s4gLk8X+sNGP02MWinuiIcvar9JDx/btPc1Io49yxZXTpsrLpJ
-# UnM2PpIWUpJDqtnlHBUlU/TbnpLBqLtZxefLqxWawdlOKFBKxssIG8X8MF4CG2XN
-# nOj/N0xhSDhJyhgMEhs0wkB/GZl4cLHNGJA73xErA1jnbKo4B1nQfMZ7hDfjwEE2
-# e3qQ+vq+CXhki9I+14Ejc4U9O3QCbeYgbtZVwuJTOH8tSdovv6RYDjuP7HEFeQCs
-# UlvtkRygJ2zwdtE96kJkqi1CmDmEXVt0praR0rYGjX15URLrWUxq+ZV5mh44MB2a
-# X766bN9AzJ4DfFDHEUP4+ie2zq1Qc56xoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTTH65xutaHALkewYFi817T/9FSRzANBgkqhkiG9w0B
+# AQEFAASCAQASdwlk4rLMKVxjl4MBBaftPP9P5/XuQsR7TubVs0Km6DR6oyjRnIx6
+# M2u3vNcsXrYynjRm1J5Sc+WdonPloGks3DBLqjpoLntpUbUjr3Quu+0IvRMgv3s4
+# cua+TjSr3xwp+d44eosNA0pxOfm6Nnfn1aA3iKRLOt0sjlRCD2/2XkxHfIYTrXJY
+# oWcDcZYPzvB4GA12jR3IEdh4qUMRo3u8KLg0H97XwK534OP0gcnm0z39Df163HLi
+# Xsxj0jOSIbIqh5tMvWXnXDjS6KdBhnMxXJcaMjHLdecPrvEv7aRvP6IwxDz8i7Dc
+# 1PewdWoiT983mebNwbEEcTbTXuENq5cvoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkwNFowIwYJKoZIhvcN
-# AQkEMRYEFPAsRHTpVnkST7VU3Aj/AlEmTd7RMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwM1owIwYJKoZIhvcN
+# AQkEMRYEFGtHguNndlC8hN1Ck0RJ/PJFOEwsMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCJ2Tpm8RbW50X+NKfbY/Vp44m3HaSmfo9LBeCwf0Av6l6e
-# 3dUJ3tzrVCs+FxDmBtLvh8xSaiDpj/vxjUfaUt3DrfCsWDtapyCa3haK21kiPxEh
-# op07cqiEHL2v6uTFExwkNo1hqnwOfjxoaNYk8QMTlqOitDCFngxCRIdp0PRIvoC/
-# YvO/z9EPHkn+mLn/nQC6alDT8+FOBGeK96Av3yBRbabo2auWtOOYHSta1HV1ZQYt
-# pwn9f+42hdEsz3FLinNE+sF9pXYNKPoHifwoc5MjsaNdupcggTRNTzDbKtCxU0jA
-# LivLvKv3BDjR23KUrcXEliMAMl0wWRqKL9l2lojv
+# hkiG9w0BAQEFAASCAQBx5VzmtxAJLG7CO4deM6DmKHh3YNVArPEL2aQF0axG4uGB
+# //l/VX7iA4s5xCBZCJ6WZgKnVJGazEWRJIGK28edRmxCevNF2H+h2wl51PoTX4NO
+# 5IigJes07ajZqnOdFH5xGWm2pFvzWjz1P7FeJ9q7uW7X8zTD/6UfGzaA5ovwMWMr
+# itelnf2abezbdpQRzfT41dRaT9jRNQ1vidOWWVpD2TZLsmIQ/AtIi5pP8A0zPerm
+# I0hDI+agXge2wPOdAFFs+aktTMvKyF8yGJIThstl7YhXzXh/FF+szqaSINRpyzYr
+# FT/Wha1MliIo7gh5i+I9L6IGE7qsqFs9+k4GasWX
 # SIG # End signature block

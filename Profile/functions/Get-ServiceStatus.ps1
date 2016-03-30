@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -49,10 +49,10 @@
 function Global:Get-ServiceStatus {
 <#
 	.SYNOPSIS
-		List Services where StartMode is AUTOMATIC that are NOT running
+		List Services Where-Object StartMode is AUTOMATIC that are NOT running
 
 	.DESCRIPTION
-		This functionwill list services from a local or remote computer where the StartMode property is set to "Automatic" and where the state is different from RUNNING (so mostly where the state is NOT RUNNING)
+		This functionwill list services from a local or remote computer Where-Object the StartMode property is set to "Automatic" and Where-Object the state is different from RUNNING (so mostly Where-Object the state is NOT RUNNING)
 
 	.PARAMETER ComputerName
 		Computer Name to execute the function
@@ -91,7 +91,7 @@ function Global:Get-ServiceStatus {
 			Remove-Variable -Name "ServiceStatus" -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 
 			# Get the Infos
-			Set-Variable -Name "ServiceStatus" -Value $(Get-WmiObject Win32_Service -ComputerName $ComputerName | where { ($_.startmode -like "*auto*") -and ($_.state -notlike "*running*") } | select DisplayName, Name, StartMode, State | ft -AutoSize)
+			Set-Variable -Name "ServiceStatus" -Value $(Get-WmiObject Win32_Service -ComputerName $ComputerName | Where-Object { ($_.startmode -like "*auto*") -and ($_.state -notlike "*running*") } | Select-Object DisplayName, Name, StartMode, State | Format-Table -AutoSize)
 
 			# Dump it to the Console
 			Write-Output -InputObject $ServiceStatus
@@ -108,8 +108,8 @@ function Global:Get-ServiceStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhvdXzzKmwh6KFSgZjvRmflje
-# w12gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUD760DX1HsZ7TFwjA6dZcU/ZP
+# EtCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +252,25 @@ function Global:Get-ServiceStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRuy2m1cZaxtMbW1bPkFaG91is43zANBgkqhkiG9w0B
-# AQEFAASCAQBVuEBbP0PEmbkTV3c2Rc2Q2SrNpoNQdo5M4ccm9oWGXc5SInX92e62
-# LxlzYAkoGOagvXKdv2fVB/bAqcMSuXuWXkgZDfW+5R+E/6akZb5X3L/QF5f/lTpE
-# SetWXo0MO3FJ64hJnFf33AFEoaPUIf2Gw5xAI30ih4+gFkCMFStjkCHOXZTq04Sm
-# 7TpbAi4bKIlrz/k9yN3jD8pn+BC2EshCECIDrpTqYZGJscv824JYUGukL63VyjmH
-# gA4Ylhm5V6/LVf5nssA4l4gB2ttRkWKCMiGeyvCSXNy6Gi3GrvGQjiKcuOIiGl3d
-# Azisu0VIa03TnEAhB1f9NeFUAGymlq78oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQWnqvnku4dNNOBzHywFKCYqUF8lzANBgkqhkiG9w0B
+# AQEFAASCAQB7ToDrmK8ZRUGdCTh+uVoKjEUZTtjpXYIXqzDXnKWE1KCrdRMDRfhq
+# i9axqqc3dVUoSd64SOcE7qM3v1vk0iN4mKr7NSzaXJfFf80GI8VMOD5K9KyHuxvt
+# Kt4qeSws4qnr44Y2KzcPGkgbaFwNgTRahNUevfydLy9l4I2FiWbck4EBwa1SorD7
+# q0PzHLLEhvx7eCULpnV+qfwiBHC6crxeeEyG3znEwjGx20XKp4AfCJLg4wbrELKZ
+# 1oEotk5zWJMN6v8cbAPaIka48kq6kPmFH/A2qCvMpYfPqof3sDFLs2EbyvJwmkBk
+# vkKG/4AmVVaYOjISfoZJZ/zH24Ji9tJ3oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkyM1owIwYJKoZIhvcN
-# AQkEMRYEFITamgaDrqUfA4T46MfzNHwAHAiOMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxN1owIwYJKoZIhvcN
+# AQkEMRYEFAh6lQW/lGivy3KPNrBTcNdGs7D/MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB7yp8W1u9PNnSVyhfGmLBdO/gdrc75+vLpCi3zaI2ce2a9
-# kHjGu3R3/JM9gRjl9HkarOyD8IrH1R7L3/obVMhaiy1r54Xrta4GR9LRn7JP/YPE
-# 3T+UORrFns9AwX5BHVpQcrgSiaGKDbU068ZNAO7wpACD/YdXb9jCb0tpIB2CQuwN
-# P7np9logxsvqWL0QYTCOogCHFmZpsoctRgXuTS1SOXr+TnTLCXrRlFyGQNkURTj8
-# EiKKpNeWSRr8ueB31FTBga6kfcGJvBImyHdJXbkvssl6VIm2lRDvWfmPE5evL4K/
-# zyMSHCqoJDfhCd1lJN026x8fRll93GfIaWJ41UZK
+# hkiG9w0BAQEFAASCAQAaqFw1fHEku5JljC53P0h22Oj4jxWrkVu4w/anY4OijzqA
+# lOY90vT5LYMTVXm8NZPOQh9IUxECuwP9eZ/Y2hRB9YXj5UZ/Dm6RS8ZngPl+Ilvb
+# YJS1btyUSTEXMeKTd/2Xs2wWJH9wuiVm4detMLzOVLPg0wqrOiK1s+dkx85yjloi
+# ErJZu0jr/vT8GszZEMaxprRpV5in0nboh6YCA0/y9K2who60Hh3oee+HuZGU0o6/
+# K+KneQsGFVQN96yjAzF+7k2ehgiRr8w5ADkeS6ScIc0oms8bxyTXITiJSNz+MXU1
+# 3bBDq1KMVGJ2sKj5/BBxyssWg5pBqKKjJB8mwVGw
 # SIG # End signature block

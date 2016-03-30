@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -96,7 +96,7 @@ function Global:Expand-ArrayObject {
 
 	PROCESS {
 		foreach ($item in $array) {
-			$item."$field" -split $delimiter | %{ $newItem = $item.PSObject.Copy(); $newItem."$field" = $_; $array_result += $newItem }
+			$item."$field" -split $delimiter | ForEach-Object { $newItem = $item.PSObject.Copy(); $newItem."$field" = $_; $array_result += $newItem }
 		}
 	}
 
@@ -108,8 +108,8 @@ function Global:Expand-ArrayObject {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUm8uFp2lQrv3rEzVxMaNgh1Wu
-# UHagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUk+I8cc9R2mhrmz+krHCt9GvD
+# Z82gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +252,25 @@ function Global:Expand-ArrayObject {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQV91SXwfDQd6iZNSpkIc1C4uaebjANBgkqhkiG9w0B
-# AQEFAASCAQBQ8W8a1z3xqdvQXKWTg5nip6wn2XRpwsY2v2Wq2qpjjRs6bGFKzljr
-# RykJsnJvNPe4FcUzJmK8cY2/xW/zP6yaWEgHnHV3EJb1vp9yMEfgIlEaPt1k+QA4
-# 7+LbWPFd835qYbqJRKY747Vcjyzp91Y/xBivMGUUN3n9GNZ+TqPLkWAEzGqS+xWI
-# eEnTDReChqIiUBbxk/cNAkPsUcgrnbqJgpY11E1D6zeeW4KQxnuc1N4lWbYIyw4f
-# re4XuwOeOhpFN4u7TAJXgbwjLyXFJiRwp33n46CVw9i8kcKLnSQXSEzo/wCpAMSI
-# PqBcB3FgYTCtj4qdpEyoyRDeKCocy7s5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRFM1wR2swzrKat0sJPvYFfUuJlKjANBgkqhkiG9w0B
+# AQEFAASCAQCs8kdQer+X+QgQ9qCUonKT0sQoIRYsg0ucZDYCH+irU5X9288cxSbh
+# rlw1ILbzuux2QxiqgYxwa+7PHecRbCxUc9QahmLZimgY2//aghZWnU7hcNEZ4GOy
+# YcUKaUs1gEfKMbR2TeC49Ppj3G0H0OmRz+5y7KDT6Z8x/l9i44mVj/IVwCoSbLR6
+# jjWJDkQhlVqwOD26OQ3vxldaVq0whRGQ8ciC3e+a7fri83BR3kT51zsQFbMKTc7T
+# LC0PHIvaxAirzaJJ3uCGM8HjrlW/LFi266ZtqN86ZFtMuxVeSjC+MFP3x5RT0Pco
+# 9eCFhvcvoek3BVOyE2Y2dOfd2TL+MNAboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkwOVowIwYJKoZIhvcN
-# AQkEMRYEFGnAMcTKLW5SSORHToKv+VSCVHHyMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwN1owIwYJKoZIhvcN
+# AQkEMRYEFH0K83YTSP8YWnxJolFVpsMbchX1MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAyem1nwdNEhUIcuQfLhDxFLAUzUG9JYyBvmpUxapeJUt3v
-# 7C2kVlIcsVmerqeRnavZ0OvoiEAyd9ZzvKzYpg2BJU7GdknZtLNsGwqbwFUllEh4
-# eo0D43WRMGeatoydWaD7rSO6kOyIznqv/JfmSBTynIrOE7FejrSYBB3Qp5atlbJw
-# Se77NPVCiRZklTDX19d7Fzkl4mUoiWK2fWcEbWGJ8/BRWGuUrxYmK4kGCPA90DE0
-# bnXAgk/tMJcSpIM0PP5Q5CLIjSGfayu0QVHNweTDDneFMkH7ATBgu3YA3/tQtGNd
-# Ccq8qMptxDqEGPx7ZNFcZoypxCjlbKB9yF0sWOmt
+# hkiG9w0BAQEFAASCAQCpkcraisSvCkeGKKCDR4b/3/4Rur34fmUEQ3VXlCgnHz9A
+# qf+zhH/b9WDTEe1H6VZV6gENDfyv/SJpr7Os7/owwNjsApyWXKjYL/8ezTGXrzA2
+# S2oqkQhudIiuaYzshGELqfdsSNDqh3uRx0w+9pDjTlaVe60d315NK3xg/lmRSBjQ
+# AnDot6BVSR/p2R93V+HvnwwDaYHfvH5yTlz7UZagSYIeLveTyKDlGdKgxjxYXJru
+# mYmYwGVA9BBHXWY2AZCm7SbMMu7T44VL514pd0k+vs7NEBwl07qBxIwEcQUPomB5
+# 6+/zlmlGFQGcYqBcu14mXKj5Pwo4RDMHSxH/SfJt
 # SIG # End signature block

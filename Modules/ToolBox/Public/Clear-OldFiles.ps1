@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -58,7 +58,7 @@ function Global:Clear-OldFiles {
 		Files older then this will be deleted, the Default is 7 (For 7 Days)
 
 	.PARAMETER Path
-		The Path where the Logs are located, default is C:\scripts\PowerShell\log
+		The Path Where-Object the Logs are located, default is C:\scripts\PowerShell\log
 
 	.PARAMETER Extension
 		The File Extension that you would like to remove, the drfault is ALL (*)
@@ -98,7 +98,7 @@ function Global:Clear-OldFiles {
 		[Parameter(HelpMessage = 'Files older then this will be deleted, the Default is 7 (For 7 Days)')]
 		[ValidateNotNullOrEmpty()]
 		[System.Int32]$Days = 7,
-		[Parameter(HelpMessage = 'The Path where the Logs are located, default is C:\scripts\PowerShell\log')]
+		[Parameter(HelpMessage = 'The Path Where-Object the Logs are located, default is C:\scripts\PowerShell\log')]
 		[ValidateNotNullOrEmpty()]
 		[System.String]$Path = "C:\scripts\PowerShell\log",
 		[Parameter(HelpMessage = 'The File Extension that you would like to remove, the drfault is ALL (*)')]
@@ -109,9 +109,6 @@ function Global:Clear-OldFiles {
 
 	PROCESS {
 		Get-ChildItem $Path -Recurse -Include $Extension | Where-Object { $_.CreationTime -lt (Get-Date).AddDays(0 - $days) } | ForEach-Object {
-			# Generate the TimeStamp
-			$TimeStamp = (New-TimeSpan $_.CreationTime $(get-date))
-
 			try {
 				Remove-Item $_.FullName -Force -ErrorAction:Stop
 				Write-Output "Deleted $_.FullName"
@@ -125,8 +122,8 @@ function Global:Clear-OldFiles {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU31iby5mIYFavWNXvFzDoEQGe
-# UAigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBFqqAintzH1+iP1cZsW5XYC/
+# DyqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -269,25 +266,25 @@ function Global:Clear-OldFiles {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ1MK7l7OpoyfWUcKfIZQcX+1CpdzANBgkqhkiG9w0B
-# AQEFAASCAQAna7HgAGlgbAUsQPYbvLvWEXkCbcZcSNRUqYbmLZa3UCLPRwxWPeRc
-# OGTsrcdLm5KV8GIobnE0pSOH1SLqtqbyfuuoyjSB12K2ghB5VoxB5Fi4hoCMieJH
-# +b58EePDOuQX5+OL8yhKVd/yqjd2Y2bfwQcJbqrSa6Mfhy3eo1IkuuyWx3JuHnBb
-# TQ7OZz+QMCvM5OwtGCuqhWZntE07Pf0nh4vMv9vTgoKcnXig9diCEzakb4AxKDTV
-# EQ0ZBLsoBPWrgr7f2kGM2KnjZLlfdNqP9tLndtnOxTe2v5uj8FBv5HUpvo15w8ux
-# yn6VRg7xynTxYwBqgOcnmGUkYYKlRodKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTj6sBwLodO7vC+HY11HMpT/9v27jANBgkqhkiG9w0B
+# AQEFAASCAQBfk8AU8rotV0Dq9qW9Ol1XjG8sFgHuZ/pLWdnfxCaRL1VLK67CyD/y
+# ffNsloOuXtj0UaESRJ15lHoz7SjbkpOHzdC0ORvN8DV9dEFRkOxh0wyktu+LqDW/
+# +nsSLQvw2Pdqvf58U037VNoKOwRFz0s5ZN0N/bphBOQqUhvlG65hE7iM4NTH5mG8
+# xZNLgQHKg+fQdO9acIlYK6dMq9LPIHLGte4zXFSZUsua2J32/A1JeC/urTxdFZBZ
+# aDXK7bM2i3hmC4Nf+n9UuMEjxn76N3zu8Wpuym4xnrqgA/28zWBZGCqIc8d1V1+m
+# b51qz0NceQ+m7c7/S/jWWJ53+GBzRsKDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkwM1owIwYJKoZIhvcN
-# AQkEMRYEFPezsDcKxfOrgJt7X6DxyvXL/UiqMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwMlowIwYJKoZIhvcN
+# AQkEMRYEFOAuPeRhx1E1lB5VY9ehfI2hgGRTMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB/y65K0u8KONDqW7eK8ZIMbrhY9HJKG3fUgOPu92oneudj
-# zhAGi/kvJoQVYYPgSPyQ8wLv5p5ygQ4nDzFPQDVEdi+tztlbSWjYJoyBZ34N/g/d
-# /dVrK9sgrnlfIHQtxN3C9hgOghwwJlKwxWicjeP8l+zYwqa1QBSfvdEJRn5xi5Mt
-# +t8wosbUI5zdOCZNHMXGIwkMo8t4Z/8tE8d439LOSDi9WpFWRHBGHK6TKW9lKkNl
-# OUeS/n25otcqep95T79vNg1vdrYfrfAzCCEuqCmO6gTiTUM9SlHUT2OI9aoFjjee
-# yf7PEHVpM1+CVHJ66gojLeWYe3q+3QUKaV5w3kxa
+# hkiG9w0BAQEFAASCAQAiiSm4Xb5VaD/ZuXN107dFoBaE9XqLPdS79C/ieGRTcbd+
+# u30x99E1X/FFqXIkuFNhmuUD/n51Lko1IiQBV5Gn4AZgXNwBOeQMpnl7lGV32ueA
+# 0HsknXwcjtpsE9snHY+YmVcDAkh5QFz0zHvowvoGPeqnWJIzjsiPn5nxRyp05GRc
+# XGRorqgaRNYn5hcbi3ntpgNmB+fD8StYyp44XmbM5G06WCiOi3BQulNXVmZibfAO
+# ukpeItdgyffwbMnvQN3jnIb3/HHb6+DSwyTU0/2RyMafp7ZCeNl9gDIJMptZEawR
+# N3qdug5zOLFU+MOZ2xVKWmBzAxGgVPm67S4lZV9r
 # SIG # End signature block

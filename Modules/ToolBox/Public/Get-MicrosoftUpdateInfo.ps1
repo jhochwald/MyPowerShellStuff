@@ -23,14 +23,14 @@ function Global:Get-MicrosoftUpdateInfo {
 
 	.EXAMPLE
 		PS C:\> $MicrosoftUpdateInfo = (Get-MicrosoftUpdateInfo -raw)
-		$MicrosoftUpdateInfo | where { $_.HotFixID -eq "KB3121461" }
+		$MicrosoftUpdateInfo | Where-Object { $_.HotFixID -eq "KB3121461" }
 
 		Return the installed Microsoft Updates in a more raw format, this might be handy if you want to reuse it!
 		In this example we search for the Update "KB3121461" only and displays that info.
 
 	.EXAMPLE
 		PS C:\> $MicrosoftUpdateInfo = (Get-MicrosoftUpdateInfo -raw)
-		[System.String](($MicrosoftUpdateInfo | where { $_.HotFixID -eq "KB3121461" }).Title)
+		[System.String](($MicrosoftUpdateInfo | Where-Object { $_.HotFixID -eq "KB3121461" }).Title)
 
 		Return the installed Microsoft Updates in a more raw format, this might be handy if you want to reuse it!
 		In this example we search for the Update "KB3121461" only and displays the info about that Update as String.
@@ -106,8 +106,8 @@ function Global:Get-MicrosoftUpdateInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIYthOl+y9JWB3gpxldjfJ2+a
-# GHSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwudQcdBmGMGbJSu2WVu/0ZQv
+# 6eWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -250,25 +250,25 @@ function Global:Get-MicrosoftUpdateInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSzhM1K6V86hJdd+Yi22hkFmE8SnTANBgkqhkiG9w0B
-# AQEFAASCAQCj0bv7lZd1ozQ7jnI+rQv/uazO8llBq6qNhCFuHeU9c6HlsUhEoBJ8
-# 1LzR9Iv8Puk+kpiyGXN5aA2wKB2tq5KlYIq6ZPzEt4/FxvrFxLpCUinDmXc1w2v5
-# o1Hy+wuqUgCySZHbDCwAxY699Ve8HXgARjykFKrHTmfZMabkrMK1G2jKbSYnsyV/
-# wM9woUAM3U0lyd+EYO86v3ueRGppWLeg96pMAHj/6BEs7XwlCaSPwDd8RoHj5N6M
-# uhv1vCdNTwm4dKpYxLfyzYltAhj7Xm+eMFa7clQW6jBuZLYc8y7fkZPnWOaAdQIe
-# iojTjjTl081kFGXUGqzNDLLlXCW45oDIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRGpFSrhh/1uUgPQi5f2PHg3S3KPzANBgkqhkiG9w0B
+# AQEFAASCAQBepBQXo6ilNao+IpXNc1kUX/CDMjc0d1WX0534Aze4GCB0rSy8rv6+
+# oEIxUXTza/P+F5c5HCP7/YeAQFphWypcogEz3CyrIEiGh33RNFQQm2jh9HFp8YaL
+# 6YI1QCwl1mnFK/QnavmqfMCqxoNK85CW1qEO2kGfV9AU4VqLRUqZ8icqQuw27T6p
+# rSI1bqq6GPxbcUQ5LG6ps2F4QKIg9165RR89uSMAp/sQkmfdDT70Rteduyj2UfFf
+# BFEfXkvdchCxDYDyLK75YJHKRkSw48Q1Bxf+uui6jmBHc8tikH6zSz9XZ2oz4F/p
+# eH3Ow7N3Xx0GhcxMjkeJQcbJQt1eIQINoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkxOFowIwYJKoZIhvcN
-# AQkEMRYEFHCbSmLBU89OlB1WEuf204JF2lugMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxM1owIwYJKoZIhvcN
+# AQkEMRYEFDGc0HaU0IERNcT/eu2pObkK3w5DMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQADefqi+w3jatqcWnrkBR4lAjC21HBjysIZ8ryNLNtZr991
-# SGdwERZ5JDa+JLJEjed3KxZ0/RAi7tfGNWIUS6qmOI/t7QVov78nW3POV3xUlHEI
-# 73UsAU8B2BTA2bn0c8p+XMQXbOFzOb/NDO9SZuYJ9IQIG7JlokCU8xeMrAAsHVOg
-# pnRjonnFQT2H/EQHV+3ED2gW40SGMFEdUESs4bTVPKM83NlOXsmGbGR3i1lCATYa
-# nuXo/g6BQZfFduCpiW7ijZilYiPTjOd0SZGAVBgDh8Fg3GXqG54Je76gVpGk0mL9
-# YNFgT57fUlPapO0LW1tlSXQhhjrvH6KNNwchodov
+# hkiG9w0BAQEFAASCAQCA4Rhzz415HBLSCYT/hgKGvHBvS1oz0XZX6/v0zZcnsGuB
+# toMMzHp9rvlwhhNy7SM32Dpnl1A8j5vjtBdboYlQia7UUbt1+CHscRa+HtTeWh+m
+# mXp9VsYpTTif2vj/VJV/kSGyy4TMUIv4QqifBejnwsGdqPpLSVMybuVtrcxplKnn
+# OfBBb20nsmTt8ojKB8Yexcq0e0xHF3LruFOhqq4wpUV0mjrLlSZZtoopk0UNzuuP
+# rweW2Vr4r63NnyPqLP3mJsL1hOb24y9kBedMPtiWfr+o11RKy8UnbkjbCOi4WSMj
+# jeGwmOo5wfoijELQvRd0fWMhDFOtlhivxVCdjo+x
 # SIG # End signature block

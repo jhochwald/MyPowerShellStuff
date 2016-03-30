@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-02-09
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -178,7 +178,7 @@ function Global:Find-String {
 
 	PROCESS {
 	$allExclude = $directoryExclude -join "|"
-	Get-ChildItem -recurse:$recurse -include:$include | where { $_.FullName -notmatch $allExclude } | Select-String -caseSensitive:$caseSensitive -pattern:$pattern -AllMatches -context $context | Out-ColorMatchInfo
+	Get-ChildItem -recurse:$recurse -include:$include | Where-Object { $_.FullName -notmatch $allExclude } | Select-String -caseSensitive:$caseSensitive -pattern:$pattern -AllMatches -context $context | Out-ColorMatchInfo
 	}
 
 	END {
@@ -190,8 +190,8 @@ function Global:Find-String {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4Eo50tcgCrUxgSl9hvtHb4xv
-# SdCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgtzeDpdW5Sic+rzo7cZ4eWtJ
+# igegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -334,25 +334,25 @@ function Global:Find-String {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQjcuG9bfk05ecmFxmra4XoHg47ejANBgkqhkiG9w0B
-# AQEFAASCAQATuV4XNNgjwHzM8HrCUEO54em6oCP5uo+1KVi3Lv1n5zp30M7qLUso
-# Ti9mvogE6IXguIpFtTQj2p+abb/0dbnzzV3nPw8h/7Xub7/iISbC6Vc299ZT1Fo4
-# EyhKt4Mm5bQmsAcsXKnbELOwPpbPAhQn6z6cmNVt0D7dGDTruONiv6mbR6/6pxQr
-# /yuRy+c0uegY74kEPYPxyT/8OlLtEJzlYOwfQ08q31noLJz06GapslKCSvGM+p4n
-# 0n3FKAiXuW1xmqEX4OexkHzndz7FYGVKnu7MaczPwQDbdubCRyjvtHj4vCb/15BB
-# vLndwQJlSdogF0DIeK1BZJcFXaD1a5weoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRJbJXKcszk5eVp6zSOzb/986EIojANBgkqhkiG9w0B
+# AQEFAASCAQAh8U8agd2SZplwW41jWJLEmOnOO+aeAUjsSSudfqRsZd278KlmrMm1
+# 4FeoTewo7rJIwO30ViogR+ZzWpFlpbkfpoasJ+VCqU4v4l6umlD7YoHDnQiT8Cu7
+# GCi9EAd7VKCxDIxRqRAx76blbt9hk/vLaPas72e/GDL/ua+kkuMTN2HDNvmE0811
+# kfG2IpIpendwct/iMMSNIvz9wrmgHSQ7UmYBH/unrhe15s2wgsTyyriPhBZ2fxT0
+# 6exEU7+m+UfeSJ+CcxG64Ts1GExJh3RsvmACNCAtBke0t9vwCKxYgfud+A7KDrvW
+# kr8CfWXc4Sle5f7YAVvGVNWNlQOD+tf/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTk0MlowIwYJKoZIhvcN
-# AQkEMRYEFIWsHthcPjv09lxG0fVUJFX/jFchMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzMFowIwYJKoZIhvcN
+# AQkEMRYEFBwnOd5MzqKDnvOOjMEM9JQ0gPl2MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCXyKOde6s+KVtbfqwXfZl8xcEW0X0dXD1ADCmRjC/LS+97
-# tP9mm+P2CdvWZjmETHYkzDxa7vY431bjgBFH20VG06zeZbKCQPOjAkWQlos03gCQ
-# 1AcartrLvAWVhljG2/zFMnXTiiUtzX8MvMzOiSPVvRpHkEKr0vc8f399L6wEq984
-# NTx+G4aeIbPdAR13F/7DqmmysNMGOWv9Za7WWoqHfXCZNxOi2ntcKF7h9iOJNVv8
-# Bx3Mx0KKEggawEqk51Zqj+JrgoLljZDWRpcY7dIZ1h1EGt9nC5ZEKeu3khMaJ9Fg
-# JyGrlbEXQNwKkX/0ZER893R/ahtn8nRAmC5TISqX
+# hkiG9w0BAQEFAASCAQBDVYr8/K/WiWHgmvjS2wPOvYMEbmBdtLFHL5wnW9+EEnN0
+# CY3jh1uZObcQB+g4kOR6/tpDNUSlQw4vrYutmlw1j0/uyrzM9WgaKt99DW8CIUCq
+# eDLeLiZQPYIKlwtvtj47scvweqxbbXWcb6XnJtQieDqNjDS0cuV4On5huEh4klc7
+# W2RU/ry80mo6rMI6DAydfpmt6/+snbW7pxoWEzdG20EDOjlf6hQi4nO+uzFt+ne9
+# p2hZLei+y3X3YVufyWgT69mUqSkDiSpkOurx8WJmNsDqYqttx4o1nYTd7VpCI1Iv
+# fjUxsxcOKBfftOmlV7nZl/JXXMQefQw5s1//m/V4
 # SIG # End signature block

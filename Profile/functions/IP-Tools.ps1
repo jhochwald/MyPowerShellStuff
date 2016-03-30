@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-25
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -93,7 +93,7 @@ Function Global:Convert-IPToBinary {
 	PROCESS {
 		foreach ($SingleIP in $IP) {
 			try {
-				$SingleIP.split(".") | %{ $Binary = $Binary + $([convert]::toString($_, 2).padleft(8, "0")) }
+				$SingleIP.split(".") | ForEach-Object { $Binary = $Binary + $([convert]::toString($_, 2).padleft(8, "0")) }
 			} catch [System.Exception] {
 				Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)" -ErrorAction Stop
 
@@ -288,7 +288,7 @@ function global:Get-NtpTime {
 		Because the function makes a single call to a single server this is strictly a
 		SNTP client (rfc-2030).
 		Although the SNTP protocol data is similar (and can be identical) and the clients
-		and servers are often unable to distinguish the difference.  Where SNTP differs is that
+		and servers are often unable to distinguish the difference.  Where-Object SNTP differs is that
 		is does not accumulate historical data (to enable statistical averaging) and does not
 		retain a session between client and server.
 
@@ -338,8 +338,17 @@ function global:Get-NtpTime {
 		#>
 
 		# Convert Integer and Fractional parts of 64-bit NTP time from byte array
-		$IntPart = 0; Foreach ($Byte in $NtpData[40..43]) { $IntPart = $IntPart * 256 + $Byte }
-		$FracPart = 0; Foreach ($Byte in $NtpData[44..47]) { $FracPart = $FracPart * 256 + $Byte }
+		$IntPart = 0
+
+		foreach ($Byte in $NtpData[40..43]) {
+			$IntPart = ($IntPart * 256 + $Byte)
+		}
+
+		$FracPart = 0
+
+		foreach ($Byte in $NtpData[44..47]) {
+			$FracPart = ($FracPart * 256 + $Byte)
+		}
 
 		# Convert to Millseconds (convert fractional part by dividing value by 2^32)
 		[UInt64]$Milliseconds = $IntPart * 1000 + ($FracPart * 1000 / 0x100000000)
@@ -355,8 +364,8 @@ function global:Get-NtpTime {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzxUeZUoz+w/GfG14cOmmxq2l
-# D4OgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHvJ8YfSHvaZqfbO1r1O/4i7O
+# QemgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -499,25 +508,25 @@ function global:Get-NtpTime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTyE57WT/E0do1c97JDdQxqGffj7DANBgkqhkiG9w0B
-# AQEFAASCAQCnbB6FPAxpppIAq5oLNEn/LSpZCufqNDymC/TvJN4a4ihZyfoJ2MnV
-# 39klVkETpuo5fmfa6zHkh+q1Zd/3WUZKhX9VZ0+0hcceJ8lkxIj7FEDAxeyMEmiR
-# gkfmvfOD4l7JZHa+V0dc1Cx6yjCltlAj/pqe1SZJGt71qSlyL0WEF2BEvKguJi/b
-# sk1cqmTbMfEPhUe/flt2OUE2vypgrPtQc0H0WL9bJr9U0OAOqdDz43nlN0ntcn0y
-# scbf3tGD5Q1jDd7m4qKiE9XC5WuXMx/J7N9v9HsPPnbxCAvB2DCWbGe3/vC3b3gs
-# piN0Qs4BK+NkZhgcuEis6UCzAPwxenVOoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT7ullDbZNEjqmX49S28g1ZjY3mOTANBgkqhkiG9w0B
+# AQEFAASCAQAE5fMOdVncisCZFE23G8hufj4QFGMqPxLgc163jWhpbZxslAxYtRrR
+# f8n4m5Okla+M2UlF+U6/DSihXlFqDUqv1eXabCFrjrSWshvozcIfzcp3K2OlZEe6
+# rbeJQsLse9EbGfnpdshXW3cIKcil5cBP70TtGeIM8sL3R3rPCa+MvbN6hVnMbiCh
+# H598waUoAV98it31KXBFqBIWdhPeLUo8HbwJLmxUS97yXSBiT45CQ98wo30ViQlf
+# HjREx3MUw0oMPksCNFESiNQONO8AezhabKKlsHXj3L/6YnqHZC5Xy2DyM5cxMR5C
+# DGtesg6sx7ndMgz0j2P37yByRT3jxaJhoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkzNVowIwYJKoZIhvcN
-# AQkEMRYEFHjbMJCOFJyh1GsMzMD+hqbn1Q/sMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyNVowIwYJKoZIhvcN
+# AQkEMRYEFJLB6EcDivpVVR/mVkDBwQvdt4qfMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCD0mKv0Wa9NhxQ4/TZ3qkQPApd3ItNSwhrchvY4FEZfpjm
-# 3pz1SolWktOIascUyIYGNk29TQgncs2vY36ucZ1KIQDeSX5TXdUx/yMTyX5tEPPx
-# o6R/fzXMzDfiJd7WgD2Ha/N8rUEgbOs1XIvbV5U+gM8QsmDAZUcSE9pHPMF78NE4
-# Dl6vpizvDTLONVlRU1pATNvK+yQqJpjF0USR00V/BaiteCo2X/Vcl+ZWdu6MaXWw
-# 8rmigKIgZ/C1IV1/9x3PcJ5GaKVsQFSw0ERwnvh9Z6VtX5Nbjk5bK58e/SXNgL93
-# AMUyc8MOx1Vko33pTiHurRodC+BxY7D5V0LYX+MO
+# hkiG9w0BAQEFAASCAQACuDhdk4//dnbAV8zPE7fPIEUuv9uVyoiIHe8n3ScRSp9l
+# Iw8lG/gvp2zXjiP8GL/BE3u6eRXYaDJZyZgBYfuX+OHDVHMVRUDhM9X7+e3Y16Sj
+# LQVSFCUnEzHzwb+wmM06XKu7DigJfHpvOV7IAh+MnAY6Q5NjOuvwctUDlFoczSJF
+# BT+hlW9t/8j7iYMZmj0O3zrCI30IRW3nzN1JF5r8pymBWCrtdIuBJ6eLkmGw87B2
+# lwowEJQ/gGPvOacVg2FIjktcIT9J5em78N8SOZpWcY8TZwTS4UrL/iVgB7awNjDl
+# oyNqU0Z+ua1h8E2cn12rRItfEPknWLej9SBU/Nl0
 # SIG # End signature block

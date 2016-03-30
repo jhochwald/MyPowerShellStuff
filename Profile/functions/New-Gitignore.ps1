@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-02-09
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -52,7 +52,7 @@ function global:New-Gitignore {
 		Create a new .gitignore file with my default settings
 
 	.DESCRIPTION
-		Downloads my default .gitignore from GitHub and creates it within the directory from where this function is called.
+		Downloads my default .gitignore from GitHub and creates it within the directory from Where-Object this function is called.
 
 	.PARAMETER Source
 		The Source for the .gitignore
@@ -157,11 +157,12 @@ function global:New-Gitignore {
 		#
 	}
 }
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWNDyZ/N5NrdXNzJ1gqzoOmR+
-# wvSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUuThzpsUjRWMlLx+np9vVcrhk
+# tTegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -304,25 +305,25 @@ function global:New-Gitignore {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQmjMLM+8ozyUWd2sYx1fhdJiCrMDANBgkqhkiG9w0B
-# AQEFAASCAQAneffd90jdJBsIm2kGzdYY7EqD5aYhPCeFriJTsQ/FeZBhiyxC3mQ7
-# iLpP5/7GrsgPDyjH8oV3akuUDSWYg6OfG6Syjpl/DNC5egINoJHUfMvHCtd4iyUD
-# 0T0jg363bldw7tOi2rZiyCwXTMNV8gXOqSeKJRPY1ZE7HJUfvel4Nr/dkNUwEWOz
-# oo3Lal9Z2EVrJnNjRceWalp5xdfpjIPpDhTNZrv0FHgbQ9xEWFwYohBrif1fEmpo
-# WP5h49MuFnpjEf6+JT/Pi/XNTC9rI94ail+AweZgZG96Sr1DBuECX8GP5/+0GA0r
-# 3hL4oGboO0FnItN8icVRyF9XV1mP5p6yoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSQRvzWfTcMGpeNZOEXB6rWKrotXTANBgkqhkiG9w0B
+# AQEFAASCAQAjlPM/WSpZWqsPALv6tz5/P9lZOvjFwE2O3kJbnnaUU1GZ+rwEKvkJ
+# PL6fhOHbd5wGT1v+nz/JWfaCL43pO6hkNfxuHL2TpJzAe7WcY4ICkOpd7sFaDiwQ
+# 0OCSLvHIyf5Ch5+HeAMM1aTTdjBR6YHF8fVHTNQ6NuUjedr8Z+0tBXEuw/1/auC9
+# elH8tR0FVtqvdO27tNjLlO/X97U2h6q88t1XZIhoWLAnVkszeDIHlsGEZs7klP9y
+# ZdcD34vkBcEqfuO8SX73kmIaHLJ3C1uWdAJcZeer0Y5SxNKdsMfsKIBCcn8PkXDG
+# KimON0CBiBNtBuCz5OIE0nq8dAYOnqtvoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTk0MVowIwYJKoZIhvcN
-# AQkEMRYEFKR3afB2lTP0saFsVavgPbFF095eMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyOVowIwYJKoZIhvcN
+# AQkEMRYEFEQWsDhQ95YcloFOdUO6R4693qQTMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCgR0+nvNOYZrTU4W7VZq2jiir6c/eQkixPYkdepeChIQyQ
-# i+u4JDi0RMeKZ4V4dg4ivZpXR3e9wHmMxejtkI0t7C2urT0JVqLdUYzBFsUhcUiG
-# 5tdP+5lkKjLvVFKeeuLbydX+IXTRRtn4FKmBuWGRsSm2MjCrfuOArmnNf3DZLShi
-# J2CS5WHtZBxMS2/0QLfyJZzfX14Ik/XWqloEBW9elSPD1VQS9lmzs+odr2LtqgGW
-# N1LsQVf8Puok34zv5iieUeDAdzS63jhmesYTDS/r52xzvtcxhe9AVor6PlP2c2t5
-# AerBq5NVqPnPQLe4KnfPEh6cFXZ/5fkQo5pkwzV9
+# hkiG9w0BAQEFAASCAQBYAOuxfdECmDqcoQkSXboyMCOyyrhiQGBA5xVN5dCdVkhP
+# 01n9ti33qbJNyLRj3nh3oOOu0jzNVPaDp7LtHWk+6Xxk2Omn7ox2DJWOT1tNTNpF
+# Z7fVilFo0fiSomww0HxuS4cGz/JWzDg4YYuVbTfFF2+6zWlT7SyAKZB6RqW2yLem
+# +hBQ2Wb9gJ8f+vzQoN6pmhkdn9x0TiS0Ir1niQxUDEc5cVtXOYRUbTQbzsExT3CW
+# +dRGJjP/Cqz+gb3xadLfy9OjNRga0+a+CJX89QeYVJE13YF46CV1FCEn3Q6ZSJKa
+# t2fgO6Q41qUUjviF194ecRiFNNoyKtXUWn3dC1tR
 # SIG # End signature block

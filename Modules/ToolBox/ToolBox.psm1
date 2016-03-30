@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-29
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -50,9 +50,6 @@
 
 # Temp Change to the Module Directory
 Push-Location $PSScriptRoot
-
-# Set a Variable
-$PackageRoot = $PSScriptRoot
 
 # Start the Module Loading Mode
 $LoadingModule = $true

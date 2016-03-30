@@ -53,7 +53,7 @@
 		Just an example!
 
 		modified by     : Joerg Hochwald
-		last modified   : 2016-03-27
+		last modified   : 2016-03-30
 
 	.LINK
 		Support Site https://github.com/jhochwald/MyPowerShellStuff/issues
@@ -113,7 +113,7 @@ function script:LoadScripts {
 		Set-Variable -Name ExcludeName -Value $(".Tests.")
 
 		# Load them all
-		Get-ChildItem -Path $ToolsPath -ErrorAction SilentlyContinue -WarningAction SilentlyContinue | Where { $_.psIsContainer -eq $false } | Where { $_.Name -like "*.ps1" } | Where { $_.Name -ne $ExcludeName } | foreach-object -process { .$_.FullName } > $null 2>&1 3>&1
+		Get-ChildItem -Path $ToolsPath -ErrorAction SilentlyContinue -WarningAction SilentlyContinue | Where-Object { $_.psIsContainer -eq $false } | Where-Object { $_.Name -like "*.ps1" } | Where-Object { $_.Name -ne $ExcludeName } | foreach-object -process { .$_.FullName } > $null 2>&1 3>&1
 	}
 }
 
@@ -126,17 +126,24 @@ if ((Get-Command Set-Culture -errorAction SilentlyContinue)) {
 		Set-Culture -culture "en-US"
 	} catch {
 		# Do nothing!
+		Write-Debug "We had an Error"
 	}
 }
 
 #region WorkAround
-$MyModules = @("NETX.Core","NETX.AD","NETX.Exchange","NETX.Hybrid","NETX.Legacy","NETX.Logger","NETX.MIMDM","NETX.O365","NETX.Tools")
+
+# Search for all NET-Experts Modules
+$MyModules = @((Get-Module NETX.* -ListAvailable).Name)
+
+# Loop over the List of modules
 foreach ($MyModule in $MyModules) {
-	if ((((Get-Module $MyModule -ListAvailable).ModuleType) -eq "Manifest") -or ((((Get-Module $MyModule -ListAvailable).Version).ToString()) -eq "0.0")) {
+	# Search for Modules not exported correct
+	if ((((Get-Module $MyModule -ListAvailable).ModuleType) -eq "Manifest") -and ((((Get-Module $MyModule -ListAvailable).Version).ToString()) -eq "0.0")) {
 		(Import-Module $MyModule -DisableNameChecking -force -Scope Global -ErrorAction SilentlyContinue -WarningAction SilentlyContinue) > $null 2>&1 3>&1
 		(Remove-Module $MyModule -force -confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 	}
 }
+
 #endregion WorkAround
 
 if (-not (Get-Module -ListAvailable -Name NETX.Core)) {
@@ -375,13 +382,13 @@ Unregister-Event FileCreated -ErrorAction SilentlyContinue
 Unregister-Event FileChanged -ErrorAction SilentlyContinue
 Unregister-Event TimerTick -ErrorAction SilentlyContinue
 
-# Try the new auto connect feature or authenticate manual via Auth-O365
+# Try the new auto connect feature or authenticate manual via invoke-AuthO365
 if (Get-Command tryAutoLogin -errorAction SilentlyContinue) {
 	# Lets try the new command
 	Get-tryAutoLogin
-} elseif (Get-Command Auth-O365 -errorAction SilentlyContinue) {
+} elseif (Get-Command invoke-AuthO365 -errorAction SilentlyContinue) {
 	# Fall-back to the old and manual way
-	Auth-O365
+	invoke-AuthO365
 }
 
 # Enable strict mode
@@ -446,6 +453,7 @@ if ((Get-Command Test-Credential -errorAction SilentlyContinue)) {
 		$IsCredValid = (Test-Credential)
 	} catch {
 		# Prevent "The server could not be contacted." Error
+		Write-Debug "We had an Error"
 	}
 
 	if (($IsCredValid -eq $False) -and (-not ($Environment -eq "Development"))) {
@@ -461,8 +469,8 @@ if (Get-Command invoke-gc -errorAction SilentlyContinue) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzQ0UMlS661CXMD1NOvmLjwhG
-# CMagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUP6vjbeiSP8Wx5P05hKo3eHrp
+# 8XigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -605,25 +613,25 @@ if (Get-Command invoke-gc -errorAction SilentlyContinue) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSn6/lLjqoy90i3PjxWFigW911iFjANBgkqhkiG9w0B
-# AQEFAASCAQAMAIyP7E2nVlkgbdmSF0DcskBwjqRBBxlTNTzHVSjAXhV5tr9cs5kE
-# siBC/cv17nEaDelckjBWZVI02DOmJKZAz8mLpPGUTeT+wHnA1k/qlg+LIxDeHT1b
-# +AIsm138NvOyhVTgnfM722cB4ZTAPF14YPPGlPy3v+kNW5P/vM2zcVk0mUdIzOjI
-# 3Aueyb+ETfBCOlRgabYZy7PtM5v98cxugikP8oNUYoI0uHGOF793BwCChB50fyU9
-# x9DHVMk9dPkRRncxcmlAx7iGtZWWpM2PRvL0fanmwNzMvpShXE8w3PAfGrKKHIFt
-# xx8UUF3ty1K/Kghy17+Mlfq2GQwvwLq/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRa+JBTQiEBCba8SwOu70lpJVJ1gDANBgkqhkiG9w0B
+# AQEFAASCAQAGxY2L6+4MUaIiy20yOL4hxIxPQdLyGh91FOVMBy0QIIIJG1OMkxtw
+# hNj0Agr6GG8XjnkuwIMOeAdgA+a7jIZDgPOPA6FVq6JC0NB+h2s9e2h9k4Mn5PSB
+# Yr45FaWCcUoBKNCILZhHpjtYEYVPKg4X+n6P6dS9zuF8tQZVvn/9YjViT58YrJ3L
+# sL9O7E3J6OwOrcaQT/roU7kTDYUgkFyRPipvnFWWdBx2gtmKNTN/ZuV2u6SngCdF
+# MYXNDNnd371B45x2hCjIyvMlTvtW8p4BxX3vbW1mZ9eosuUZqQUJdf4gYCCxfD6f
+# S7OC3fJApXaWQRDPKXFvEq5cSX6FkxvuoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTg1OVowIwYJKoZIhvcN
-# AQkEMRYEFBZjxrHhpOJO8tVjsuemdiOO/fSxMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwMFowIwYJKoZIhvcN
+# AQkEMRYEFAvIHyi+FpC0CO9izxZKKm3KnjceMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAjfkivTkPcfviFAF8JnZfWU9tw2fPMalLeuC9uAN58qPYf
-# Z4tyYo4KTEm2NAwu8cAq0rmIQBcKZI6SAIXqC1wxPSzvNaZSQ3fO+i3igCuxpr4q
-# XYuXfdMau0FypLT9VOZaO70JVGdfii4WLdN/nN1zO3hqHpN4Pw7Y9qMamE1JYQ69
-# DFQwReO4u2Kjwd3SbGwJMiG8q0MjyhGDI1wL6X/+8RGhRMVjZNzzPdwHqmXhmRWp
-# 8sWk3PcscRO/vTC8lFtcGZFHu/KkzGbqtuogAyFSqBfdWttVu+3nLy8WG9rq8Lnv
-# qUh4o5gRQFGIZehg+0+DnI+5QnuNEMEVI7p2ngYx
+# hkiG9w0BAQEFAASCAQBHLEnu6WBrEu7GKoafnSJAeM9xSBU/DP8xfbOV0oj0fDDe
+# SgyiSCg+WPeZneQF0MMkz+A3Q9Rf2ftSqfTxmplhM8a8l4vUKhaXOlwmhyHwjlOa
+# 2cJlOHDYfHklxlA8C94VmGfnIo4WjsFvpMNwNNq0R8BudSffnp5KG26K5zFhArYk
+# Zv1o7zZs6jpdmBkYzHtmM+S5K1CvnKLq6W0Efm9OG8VWwbHGviRN/YB8TELC4AbC
+# i5gXMrYurGo4TChWaHN0E6aHkFplS9S4iJrT+PBsWmwYYxLmb4kG43d760xw8Li/
+# IPAcHOURiwDk5Sx5B3u47zNK0IhbEgKs98M7w9a0
 # SIG # End signature block

@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-15
+	# last modified   : 2016-03-30
 	#################################################
 #>
 
@@ -134,7 +134,7 @@ function Global:Invoke-NTFSFilesCompression {
 		ForEach ($i in $files) {
 			if ($i.Name -notin $excludedfiles) {
 				$filepathforquery = $($i.FullName).Replace("\", "\\")
-				$file = (Get-WmiObject -Query "SELECT * FROM CIM_DataFile WHERE Name='$filepathforquery'")
+				$file = (Get-WmiObject -Query "SELECT * FROM CIM_DataFile Where-Object Name='$filepathforquery'")
 
 				if ($file.compressed -eq $false -and $i.LastWriteTime -lt $compressolder) {
 					Write-Verbose "Start compressing file $i.name"
@@ -150,8 +150,8 @@ function Global:Invoke-NTFSFilesCompression {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHzV85FQNYQli8CW6RWZa/saM
-# GO6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4qTsaI8J+fwqgOSMc3yLdYHk
+# VzCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -294,25 +294,25 @@ function Global:Invoke-NTFSFilesCompression {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTpROabwcKyW3jRqMyi+50z0BzdYzANBgkqhkiG9w0B
-# AQEFAASCAQBivrzFzvrB4ncFkpDH4+4w9e4wk1JvM6w7TA+jvHSn8gjj2rQNH9V+
-# PZg0R/yU1u5u6xo4iGQVhxZ3ELcr5MbS9hz7bo4ZmOqMDLuXxUD6dPJFhcYcPqEd
-# Mu51XSZTe69xXJuVJrc9iXoMzBEDIxbJ5FcaktKf7jFk4pJ9EugejlDbcZkItuc9
-# 67/RwFNJRtuhvi3T08Df/0vgFNHeZwhftoxjceZ2C8hz0UhviipjIipGfPpVxCw+
-# v0WgvukiX+t44ATVshIRV9TlwUOrDVF0oSuPlhnoBP+XSspApAiuMRUsHaV45zN2
-# Fv1xCOCAb3nQ+Hrvcknx4BYRTtOz05XLoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBStmkWXj+lRy4zypkWZIXWSIzw6TzANBgkqhkiG9w0B
+# AQEFAASCAQBvQjPq6YFWjsIWP94EHfNWw0mJehPqBi9ZxCBkNtPbMF+MgRTI9tMD
+# hG2YSXckGT46XMl8TJCKVOqZZPgl1ismS6MyYSNvihC7yCay6YMFsbytHjfDFl6E
+# exGfav6HjPM90kn7gXz70eMzAOPQMTUPgGT2takxA44v6bwkOn4ZEkT7C/asU2+/
+# x3fXPDEwO3YybiwZNuvggyvTXHzJWYAVN9CrtcJONP/vDJQY+TdD3oSVj/kTfc2C
+# ZI719mUICYRCuDjHh1KjFao+mdENnBfoXZ/3O6z+VKoV3Cn9BfmOYbltshyAZ1Q9
+# zqEhAc2UC/bhxKniq9+I7wmfW6pylgrjoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMyOTEzMTkzNFowIwYJKoZIhvcN
-# AQkEMRYEFPp47DXjH6M8WJm/ImhHpJnGAHlIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyNFowIwYJKoZIhvcN
+# AQkEMRYEFIAgukpOoUGfxXjO2z9C9M/Jj93AMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQADSonT7bM/N+Acgi+MK4SYDC7uX9rJj+IdSokKxN0h/4li
-# 5xHp4OoOErCrZoWUhBi0GoHGqNOlwahYZaFjihWox803SkuWLSrYBCAlMAKzAApE
-# 8kquOKi8DMhTb5gnqaOsum9g79BlNbxYPgchAQrUqxyBjYtZuxlyvZUtmpnvJSdi
-# PVyOY2jVg6leJ1j7oXVN/XP8jrY+tjNUFArHGCYjpMspk++1mVTQmMkssocmbILy
-# WopA5Xmhg9cV/xsm65uZdK3Gpj/A1B5pNUGLsKD1nzvUWpg6EWWgZ7z3sXfnuObJ
-# aVs0VhLph2Fx/HW0pGvryiz7vwCKokExkgNmt4fZ
+# hkiG9w0BAQEFAASCAQCKmxH4ryuES5BYInzit8snsWvnXjlu1Xg7BSLPI3qQhcG7
+# XVq8Y6OBvsdIh5IR9xbG3lp//TIasQOFUZdevR7CmrR0F/ZNn9o7M63WTDZgHMwS
+# B4VrQvvU2tnCzCYWjq9iuNM7pIgUze834HnxupFOonNnO8T1o0dlPDo+ZGCGlFJL
+# DGnfZCTusk4nb3/htI2ODiqxbNG46i9hihR9KdXimZX7X3dcwnV0CgMPxbi2G7ov
+# LJnZNUjPP5Q4oxlGFDo0qs7u+20LL8lJrIHDLRgRNKM68a9YcYY0b6+b5lDtjGed
+# RILl+Kmhn21+TdOAXVrlE7OMj/eAqPxtGs7mpSN3
 # SIG # End signature block
