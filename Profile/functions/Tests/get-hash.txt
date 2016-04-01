@@ -1,3 +1,0 @@
-This is just a dummy file to run some tests with Get-Hash
-
-It is safe to ignoe this file, but please do not delete it!
