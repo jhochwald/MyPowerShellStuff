@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -171,7 +171,7 @@ function global:Send-HipChat {
 		# Use the API via RESTful call
 		try {
 			# We fake the User Agent here!
-			(Invoke-RestMethod -Uri $uri -Method $myMethod -Headers $headers -Body $myBody -UserAgent "Mozilla/5.0 (Windows NT; Windows NT 6.1; en-US) NET-Experts WindowsPowerShell Service $CoreVersion" -ErrorAction Stop -WarningAction SilentlyContinue)
+			(Invoke-RestMethod -Uri $uri -Method $myMethod -Headers $headers -Body $myBody -UserAgent "Mozilla/5.0 (Windows NT; Windows NT 6.1; en-US) NET-Experts WindowsPowerShell Service $CoreVersion" -ErrorAction:Stop -WarningAction:SilentlyContinue)
 		} catch [System.Exception] {
 			<#
 				Argh! Catched an Exception...
@@ -206,8 +206,8 @@ function global:Send-HipChat {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2kwMjGlKEPfy9eCz5bD/B+Iu
-# gOKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKmy7tvxCgtaLa9O0YxU5jXY2
+# urGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -350,25 +350,25 @@ function global:Send-HipChat {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTaZmhVU1Gnq3jVUvf3SCDc6ZApsjANBgkqhkiG9w0B
-# AQEFAASCAQCWCH26NfjxAgCnL1/j2kfEhSKsyxwxMkth9qkTXLZ1XSvzotXIvYL/
-# eWUy2XLKHEJE2mNNxfl5kAaAV1wRHPekaWScpQieBPt5zngpEjW6Tn2ZCnJH0aWy
-# 3yoe35Vk12LYtyIE4MwjHAC1tAPqP15+sAwAO9Ufo3xrk+km4HVf0zAulbFqNtWL
-# mDVeXh0aOXWMefnOzvdLvp3g8dVH2et8FKxNQ0YZJ9/jCbL9ykBUqRKIdujmk77M
-# aAEJdjTCP1Wo8DkDzhsyEa2+GcICCLRU/y7XNaQjerTJhTmwjT7ZtuLynKC8FCnL
-# UGnA76L2qXczh8u7uLOY94M/sMYDBHgcoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTf+rPSRekV66ofzzmmrzeCFBd5ejANBgkqhkiG9w0B
+# AQEFAASCAQA8jKHMqc4ZtTLedCgQ+9fXVYPcpTAioDyDIZwjSGPK4+I+IaoNhR+8
+# uUN4pNWfEnxsDOYktMk1g2hNBVWvLu2NWXOPl1KqiYDlmxMSgl6fKlofCG/DBVvF
+# +5U61rY31xTmhVsHEHEx2uFp3W0zQXnraQNfYIquwo8hXGDD2/Vo8hBx12u6rf1w
+# gMwPX9p/0FqiQPwEObH8WYOOO0cHyCpFrKvBDYt0NzvaF0Kyrm9Xu+9jImgFGPSJ
+# sfGR4Wcet9OAdgy4aAH19uoMElM552WxcWypSuuJhz1JOoBSigq74dz+gYoO99HC
+# /ua7EO3V5X1DgkZ8OQS62Xg/5ok7ovvqoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzM1owIwYJKoZIhvcN
-# AQkEMRYEFNddvq/lkF03zQg9RpgcKci5aoDgMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyNFowIwYJKoZIhvcN
+# AQkEMRYEFJfqLjKIjcLf+QoZdEzJjI0b9mWYMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAtpDBGfThJMg00kk7ZFE76786fnBXBkBujHUTgFUA8slAD
-# lKUP3m2mPXeYGInIxhI7ZyrmccIrTxmiLyOBGA0P9xhPe4PeT5J3aQWXrTbRhHwq
-# kv99iwoEtm9sGVJQGa9TMU0ihGmNqL0yHWBzCJmvV05LDFh13O6dEeuarzE05q/l
-# Ahj94TbG2kQO6B4AVSe3joNWgB3dmEMn95OnKTk9R3LNOnd/EFut5E4dsj/WBXSr
-# Aa3s8FISk0hHcDy8pMHW+xozcbOYFexrfJu7crUTHRf8HYTNLMmKg26ledd5R2zj
-# bjlRRR2v+noSq3JBD8Gxg0u+MVpvSA5E0OvLDM3z
+# hkiG9w0BAQEFAASCAQAcvYaIrLmHrmj/Q/0I+MCxdVQ4cTgB7lfV4S8k6AdQwPYY
+# r+0MAPUhO+WEaR/JybRCrPwvMEXqYEKWko4Dt2X0kW1+f9wV8x3AYxx+Qi2IE/qN
+# T73YjZOQhrhsHwVfHvAs68Dy6ue8k10W13o9JAtslDt5q/Wy4AqfYsF4LcWdanKx
+# fLOi7VVJnJ03OyAFJhag9j5TmcEU87UwMHprii9S9r6d4Hb96RJhbmHrUDsrt2DV
+# JvF6jHusKEBt1Dm9plmaB5td1atWzRtm2jCi22hwHm0jhVMOWTKUj0KsEcKRvRbu
+# 9/lm99A8DLaQha+mgklwV7i1WIgL/voJGLLH65pc
 # SIG # End signature block

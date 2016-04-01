@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -89,12 +89,12 @@ function global:JavaLove {
 	PROCESS {
 		# Show Java a little love...
 		# And I have no idea why I must do that!
-		if ((test-path $baseloc)) {
+		if ((Test-Path $baseloc)) {
 			# Include JDK if found
 			Set-Variable -Name sdkdir -Value $(resolve-path "$baseloc\jdk*")
 
 			# Do we have a SDK?
-			if (($sdkdir) -and (test-path $sdkdir)) {
+			if (($sdkdir) -and (Test-Path $sdkdir)) {
 				# Set the enviroment
 				$env:JDK_HOME = $sdkdir
 
@@ -106,7 +106,7 @@ function global:JavaLove {
 			$jredir = (resolve-path "$baseloc\jre*")
 
 			# Do we have a JRE?
-			if (($jredir) -and (test-path $jredir)) {
+			if (($jredir) -and (Test-Path $jredir)) {
 				# Set the enviroment
 				$env:JAVA_HOME = $jredir
 
@@ -123,8 +123,8 @@ function global:JavaLove {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0qGhnvCv5kUddlfqOOZYzfx0
-# x3egghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfjZNl4IO8TckiO8Ckr6iQZKk
+# teagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -267,25 +267,25 @@ function global:JavaLove {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR5BUu8U/HUNi3dWnyQ50gIkP2ArjANBgkqhkiG9w0B
-# AQEFAASCAQB/GTOMzs8jdvKMe/vXsvJytezroxx0E5M+68/agH2V3hfGU1J68iko
-# hYg1dk1wPmbi5d1DWiDF4dGcN3jBuw2BFrbJMM7V9VTqOXlMcQcJC93tQwCowktd
-# VD+Y60lnL+aYUPzZxpLBgHW3vhh/PhLtDfvXDQDMNAio1co+RU7vrHwLe8wG+AlN
-# i4kg2hXd3f8X+VeyCfaIMJC6W8rLPgFATLK+XdSd08UJ0S8sT7+bLF4Pz8Br/9jq
-# MdMBcVx40dKG7mLSH2LVxdsIAZku2thDYaceF4kA6U9R1WUzbaFeD1TroRFpsInC
-# tcQXNO9BCcQUCAKywAVSrb8bp6yTc8zIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSbU3CrKexUukryTVKTjig+67lYUjANBgkqhkiG9w0B
+# AQEFAASCAQBb/Cj9RZyRWGm3rqMnTLtUb5l+z35dSA3H0fvEe9bjUDzBqlvg7xl0
+# 7C4lWbF3QW2KyRNy3ZIh6X9J2BJ/0wUWMRmholoyuIohvPt76f+UKXsdzSxTrd4b
+# y97oSOezUw2Ou2B82Ynt8pyxDdtnZOKol14LhhlmQjbLih7m+BBzhZqT3Yf2J5T/
+# w7gNx4xWcJMetNr4hH4yVb/Lhc+AS6A+N4iJVUiMXmKzjsK+YWVAd+S1xRJ4s+/3
+# cLrMLqS4H5SkLkxK7mLNA6FbeCZi2gUvEXH1UgBS9+cJ1yFRUkruMZsG/VKXu6GL
+# 3iajV6RY0/y+H6EAHXx71ryqoGeETUh6oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyNVowIwYJKoZIhvcN
-# AQkEMRYEFDhdq7yeZIW91igYk1vsXaiMVv8nMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxNlowIwYJKoZIhvcN
+# AQkEMRYEFLd9lgecgUC/rE6sZY5VzsyLfK5mMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA1FOge7bB5+mVsUncRhM/hN7rUDmnpyFANnt3y66TaaNS+
-# ZRdqmpJ09oRE4LXDqdXUDJ76C3NC/iVLQIafDalWSLzTeCHpze+GI+8eu0X4NzsC
-# /FQBumiLQlLrAEXQi/v82+9XIUhsnOIIuNAuJpEpwg4ACHFqYG8KbYdzqmxjoefs
-# 0VPl1xIM+kFXQpfdtGeug9zZK8J+HKWuAY1NT+qP2Cs1XSFA0Ae1ZYqjC5DMmKdT
-# Yki3RcaNbRJVaGo98iI8qBCeT9r7QJdfgdJgIc8QCe0o3jr4HK0gMHPDICgYfyZQ
-# Tel9djmPpN9OYgoVgmtGkXG7pSM+WsK6+k0Cnzpy
+# hkiG9w0BAQEFAASCAQA83G50EimbuqfvN+Q/DFCy9B5RQxcEcqA4NXPJcK/b5Rqz
+# 6o80Zfllz3NW/oOLBAtDJK4bMVwNqlRRv2Y98arR8khBzgFjEN4gyLPttDgvSykV
+# tg10XOX7srrC47aBbN3zGASXBY7R0jmQlwUaLMA3YiiHjYqpWXpgISEKR5wO27QB
+# g9C/UiiMMUVR96pDzgxjxjdrVR6ZmAO9+xbQBUwhDXKGgVngrzwZTD4uR9pqQX5A
+# UPLG9bndZBnwPop6B3T7aae5CCLVt6lqIV4M7wAv9Ei3N2Xuk+IbiXacrd2YUTky
+# eoDpIw3iGRg8ymXi2IX4iuHM6SOwkhhZvZDTo2So
 # SIG # End signature block

@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-20
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -60,7 +60,7 @@ function global:Get-AdminUser {
 		Return a boolean (True if the user is Admin and False if not)
 
 	.EXAMPLE
-		PS C:\> if ( Get-AdminUser ) {write-Output "Hello Admin User"}
+		PS C:\> if ( Get-AdminUser ) {Write-Output "Hello Admin User"}
 
 		Prints "Hello Admin User" to the Console if the session is started as Admin!
 
@@ -87,15 +87,15 @@ function global:Get-AdminUser {
 
 	PROCESS {
 		# Return what we have
-		return $IdWindowsPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
+		Return $IdWindowsPrincipal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbvizL0ajuT/aSDV9xvpOwngk
-# vL6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUiDt7XLRzgnvs7uMYrrT745hG
+# 20WgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -238,25 +238,25 @@ function global:Get-AdminUser {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSWP6ZyccYYStDRH91BgNWOwwOzJTANBgkqhkiG9w0B
-# AQEFAASCAQCEBS/BnJjR52xz1ZJ4XJld69/yLFUgxTouDp0BdM/wGc8s96fFwf/2
-# wjzKMhijpVACSw/9rRpxPrn3Ep7PQyCx9IEkx9rnipGIUOAocCYnfFg3rVV5KARt
-# JASfJpVQIEVGOyClEltyIaK07A14VdcKf7ZsWoRpj5EZnEEtYSU43DBPTnLX3mWV
-# pCBz+wCTjmmlzXFhpUxYe60BauOWSRv+k+L76vSF4YwTf7nx+nY7dp0Q1vp/GctK
-# uKVUUrrOl7d9iSBREjvdBm1ZmMibUSne57mPYBIJEdGqJRWMUF0drNboxEle/OtL
-# +6PrDrgL3IEjP419XG+PurlM3HZ9LkkAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTwk6mAIpOxEnXLo8Sig6Cl/V4RIzANBgkqhkiG9w0B
+# AQEFAASCAQCbwmLlLb9Sm1KpetmVv5EafxY1yfTSMwFGtyQNM8+pY64WmzhXQYNB
+# 8TGZQEDUPjuHt78EYPwCtGbE5Gzd0Sblzr92DuF65PiPYIXBSZb3eFo44yU0ZiVu
+# WnKq8Hh8Up2vfhLiB7foLjjaeQxrBL5ocTfGHgzBW9qZKlzXCcCS9bqKvUbWXmd6
+# sijlgz8WvNJ26yyQdLlhVReM2Pqqnq3zpwZJbmSFnxpIm/u1aOJZAdjn9P7QUJSV
+# cFF2JoeyKgMJQ/cX6TuiDSjusu3KLChnqQ5nTpPAXqBYuoG4iplrnuoeCo+diJI0
+# azkJMaN6pTd0+KFwokUqeqMPK+Y4m5sxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwOFowIwYJKoZIhvcN
-# AQkEMRYEFKoOj1xsw8rStr8gIIK8NdMgVsMVMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1OVowIwYJKoZIhvcN
+# AQkEMRYEFI/Y2f9GVzkdqrgHptXwsuHg1sJTMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQATXwOjQLG+vYMT0x1Wm3Ue7l488gGAxiuL1S/UMLpLlNaA
-# qhoHnw9bnlQWd2cn5vvXaoRRATeuSCpeB/30maSiQ0ooJ526UzLMMN9/BscxUg/E
-# VEgTwewmJyMof4gE+ztKf0p6GGHfGNICa/UdGkYYLIJQMmhQ2dZmfth8DmetMhYM
-# yezuw9Z9uIQKK2hBea3GwDByDpTi5d5f26TlhSeYhXkq+rE5rLaT9Yyt9M28RNsI
-# x/Na2Bseo9Wcdq08G5WZGab7C5iowyc9dYwwis9XPZSKL/ls0IWhkvaWT3LDt53K
-# G1iTY7iu1yz0Z8FcVGCWCCb8xqujn8WKYY9thIrL
+# hkiG9w0BAQEFAASCAQAJuq8iHPVNg+gDfZ+iJElS4wsa6IqVnJNF6xa97zTi19V4
+# 2jFZ1nZIuPFcdj0ymKSz3LDEHU8jaCiygiSiDYglMGXZmqrN/nAV/HCM53Wz6Mry
+# V+NGevLJq+gUA/EMMGpP47LZ2kXQkFeEQWggLGxZPpEl73xMeD7vfEGFonF5A0EG
+# ArrckEyYSIQcPBV0t2+jqtNRFIsspTg7fhPRUBHlpKLNZNyj7oMKuM6ox2lasH0H
+# Rzk7HH1m3GBQBbCW8s5mMrJwQ+Zjt+OOHwTTqMdf/oKDV1Lk3tY/vOvSHRF2M/fC
+# 8tL/yP8DGYLoQ67g/6+FMaaszKP1PIZ8QN/SHGcf
 # SIG # End signature block

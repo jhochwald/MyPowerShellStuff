@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-26
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -70,10 +70,10 @@ function global:Get-TcpPortStatus {
 		Check port 587/TCP on the default Server
 
 	.EXAMPLE
-		PS C:\> Get-TcpPortStatus -Port:25 -Server:mx.net-experts.net
+		PS C:\> Get-TcpPortStatus -Port:25 -Server:mx.NET-Experts.net
 		True
 
-		Check port 25/TCP on Server mx.net-experts.net
+		Check port 25/TCP on Server mx.NET-Experts.net
 
 	.NOTES
 		Internal Helper function to check if we can reach a server via a TCP connection on a given port
@@ -118,12 +118,12 @@ function global:Get-TcpPortStatus {
 				Set-Variable -Name Server -Value $("$PSEmailServer" -as ([System.String] -as [type]))
 			} else {
 				# Aw Snap! No Server given on the command line, no Server configured as default... BAD!
-				Write-Error -Message "No SMTP Server given, no default configured" -ErrorAction Stop
+				Write-Error -Message "No SMTP Server given, no default configured" -ErrorAction:Stop
 			}
 		}
 
 		# Create a function to open a TCP connection
-		Set-Variable -Name ThePortStatus -Value $(New-Object Net.Sockets.TcpClient -ErrorAction SilentlyContinue)
+		Set-Variable -Name ThePortStatus -Value $(New-Object Net.Sockets.TcpClient -ErrorAction:SilentlyContinue)
 
 		# Look if the Server is Online and the port is open
 		try {
@@ -152,14 +152,14 @@ function global:Get-TcpPortStatus {
 	}
 }
 # Set a compatibility Alias
-(set-alias IsSmtpMessageAlive Get-TcpPortStatus -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-(set-alias CheckTcpPort Get-TcpPortStatus -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias IsSmtpMessageAlive Get-TcpPortStatus -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias CheckTcpPort Get-TcpPortStatus -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjpELBwZ5UwVUFi8wIB/EK6lT
-# XAWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtS7niJ8Qcq6PblSQWRRkXmkN
+# 7OKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -302,25 +302,25 @@ function global:Get-TcpPortStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQXRoz9khLaGZUjTQYHvAvyIF/03zANBgkqhkiG9w0B
-# AQEFAASCAQBjLYtQPHEK0jvmmrisPWftp8yKfdA8ceDA1PttFSmTIQ/LCq+CuaW/
-# vNFGj2aoaBlOEHsyZunIVautVDGCZ5gnrAT9YndVY6T8OSXohzAf7RRecvlw107h
-# JRv17J6hX1+52Nxq14GhYR4bRRgXMxFJGtdJbQGoI30SCXVDO+atlw/bcNv39nwM
-# Rc4wN+kP1UqnvsfUzoWAt3Z7DrQDB/LeKvXL9O1Av4c3kQDdhQPT+S3haMbS1RnI
-# MXv6s10YqD6M4tDQ1ZShN/I50QlnjUGuRe2+CetxNiZbRgFcObSsu5rEvrzhfxRM
-# KhlU0NfzsnWZMPc29/+YGvwG8jW1RCPEoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQaSwTfNl9WdRu2fmz7pLKFDoNxOjANBgkqhkiG9w0B
+# AQEFAASCAQBDylsE/pKhE7PGvXDb+xTyBTz3Oq7P6ZOS9LyLVlAahrMwwawKt3wq
+# Ntk4ewhzQUAO/My+vD0//SEyb/S9RRgKAKbDv8Xqqzm+wIH3EKN4DvmNLDAPfUzD
+# UOWqFYSxYxEpTubZsxxGmep0Uz+wZqlE4IIH+HGPyt8OvA3KXpzb4S6iUYET2/8n
+# aF9+kP9Xkb5Yo8G9K8EBXdWXppAYuSt0n3aMb60ZNTWH16lqG03UY9K2LzqizUFx
+# LgjjjY0WrLsWq9tgCsyW/v57BfJJCRZXEqrqiJx0xPmEM6tM/STDrHL0WqDSsQCW
+# WzPUpJX6KUJwM3eo2hDwvUNBaAvWnGGYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwMlowIwYJKoZIhvcN
-# AQkEMRYEFIyvYBSOiVivZ95OSDMW/YdoNnPKMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1M1owIwYJKoZIhvcN
+# AQkEMRYEFLyGYgg+lYNjvjOFqVB9a28Dd23FMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAWQMPeWtFMO7frJRodhS0C26nmD2Rvxt6Du/wq26bMZKqL
-# 5WEjtlUFk80dcrB8L6hiagUsWCMxx7u8nFo8eZrlvxokfPza0i23RlZ8ZJrxMqbO
-# U26tDiJ9T19S19L4PUqsoXdjJ5qiScnJLztEgihZMvdcdpS39ByWTeaHGmiRtqp7
-# G6kfSqptYIh3UDvpE6vH7YuYYi6pW+UAkSPvjdJt5q6RNEqvIHULFeYT6Y/N2MEN
-# quW/0L5mfroog8+0F1lRcsSCkFD4yCN6mf6W2702gWSYtnzX6KuXbPAc7M34zdXF
-# dwPVkLHdLxwr3VbjbGqQx3lOuOHTQabiFNNTHQQS
+# hkiG9w0BAQEFAASCAQCd6pIDQwuDWZZeGifw5sWwhj3OC8MsEg38wwGUWjfmeNLo
+# BhqogJyl0Uxkl2uv0HJjr1Xm9rihp5nEvjchbrN2R2twlVl11wRj5GFfT0x6BRPC
+# rjLfCdEBL4WGyQYlXXufY/p+KisOdp2aSIl0bLLvhDFK6eRa00Cd6ltVtvEUlVXh
+# 8Y4zvdmxso8ZIlGgOAWZRtGzE2k2OZ6WUDLeZsldwlRA8m2VKJkdDUTLHvgLzz6Y
+# /vx/OUAxm+p/bcurx7IqfM3xUkUaMt0IdIqiMG7rIR7o+XiahaNi28F8CmSPADX1
+# OURTgFLH/gJWSjAts2VHxhDVJWqnA8bUH5doD3nw
 # SIG # End signature block

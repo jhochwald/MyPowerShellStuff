@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-06
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -78,7 +78,7 @@ function global:Update-SysInfo {
 
 	BEGIN {
 		# Call Companion to Cleanup
-		if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
+		if ((Get-Command Clean-SysInfo -ErrorAction:SilentlyContinue)) {
 			Clean-SysInfo
 		}
 	}
@@ -100,7 +100,7 @@ function global:Update-SysInfo {
 		Set-Variable -Name Get_Disk_Size -Scope:Global -Value $("{0}gb/{1}gb Used" -f (([math]::round(${Logical_Disk}.Size/1GB)) - ([math]::round(${Logical_Disk}.FreeSpace/1GB))), ([math]::round(${Logical_Disk}.Size/1GB)))
 
 		# Do we have the NET-Experts Base Module?
-		if ((Get-Command Get-NETXCoreVer -errorAction SilentlyContinue)) {
+		if ((Get-Command Get-NETXCoreVer -ErrorAction:SilentlyContinue)) {
 			Set-Variable -Name MyPoSHver -Scope:Global -Value $(Get-NETXCoreVer -s)
 		} else {
 			Set-Variable -Name MyPoSHver -Scope:Global -Value $("Unknown")
@@ -114,7 +114,7 @@ function global:Update-SysInfo {
 		}
 
 		# Is this a Virtual or a Real System?
-		if ((Get-Command Get-IsVirtual -errorAction SilentlyContinue)) {
+		if ((Get-Command Get-IsVirtual -ErrorAction:SilentlyContinue)) {
 			if ((Get-IsVirtual) -eq $true) {
 				Set-Variable -Name IsVirtual -Scope:Global -Value $("(Virtual)")
 			} else {
@@ -127,10 +127,10 @@ function global:Update-SysInfo {
 
 	<#
 		# This is the old way (Will be removed soon)
-		if (get-adminuser -errorAction SilentlyContinue) {
-			if (get-adminuser -eq $true) {
+		if (Get-adminuser -ErrorAction:SilentlyContinue) {
+			if (Get-adminuser -eq $true) {
 				Set-Variable -Name AmIAdmin -Scope:Global -Value $("(Admin)")
-			} elseif (get-adminuser -eq $false) {
+			} elseif (Get-adminuser -eq $false) {
 				Set-Variable -Name AmIAdmin -Scope:Global -Value $("(User)")
 			} else {
 				Set-Variable -Name AmIAdmin -Scope:Global -Value $("")
@@ -139,7 +139,7 @@ function global:Update-SysInfo {
 	#>
 
 		# What CPU type do we have here?
-		if ((Check-SessionArch -errorAction SilentlyContinue)) {
+		if ((Check-SessionArch -ErrorAction:SilentlyContinue)) {
 			Set-Variable -Name CPUtype -Scope:Global -Value $(Check-SessionArch)
 		}
 
@@ -299,7 +299,7 @@ function global:Get-MOTD {
 
 	END {
 		# Call Cleanup
-		if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
+		if ((Get-Command Clean-SysInfo -ErrorAction:SilentlyContinue)) {
 			Clean-SysInfo
 		}
 	}
@@ -367,7 +367,7 @@ function global:Get-SysInfo {
 
 	END {
 		# Call Cleanup
-		if ((Get-Command Clean-SysInfo -errorAction SilentlyContinue)) {
+		if ((Get-Command Clean-SysInfo -ErrorAction:SilentlyContinue)) {
 			Clean-SysInfo
 		}
 	}
@@ -376,8 +376,8 @@ function global:Get-SysInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUd9hoLdareV1hsnsdhUEma72q
-# uOqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1YDZ2coxrm99G/G147s/PX0K
+# AOagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -520,25 +520,25 @@ function global:Get-SysInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTTvGVl1H0O1gaPTKLSGlyshnzHxjANBgkqhkiG9w0B
-# AQEFAASCAQApeziDnHgEJz/Oz++njQPOTLKMWYXx32J6GZ2Iu2aZIcWQJOl94ysm
-# Mo4BgF51KbOwOS5789oEiWTKjTHJLGoJqXLhTBWKWouCciDMO1GO7bhYjP9qFAYc
-# 73FpeknXkGwZrNrY9p+2N9XZr6IkySZNQHfAmZAlCi0xvqqB7a86prMbSq8XxVE9
-# swfudH4iR2AlA7THJ4Xm4uzRFbg/lCMOHjG3oDGGXNkGulNTK4ejF5n9Twh22jrR
-# ra6SG+si3nVvJmW+d0Zy7SjyCdtq3yd0KZ9siqj3JDm+2tkROTv+PYgxVboWIxp9
-# eQbd7Iy3vkjRi/7mhoPcC6UpzJbf4x/hoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR1E/9vgHxGgt/V8G9av7B5PWjXlzANBgkqhkiG9w0B
+# AQEFAASCAQBRuwMnOpJKiU5gYuFO05fqys6LfzEJ3tRFBMYlEzxib2+6d170iWdG
+# gFZMv5aTY6QGm+pmnWiqu6dzSzQbsKCASqFBSqyYt26k9Glkd0UvzBIFUfZnTyfz
+# ZnW4kFPDgImBDYBdLpzqHWxaUIZjQxJPqtcq7emYjN2c8UabHN7UAmm8TmtrIj6+
+# 1/FVCqst0R4z91YMdygtMGPw3QicN8AVpo1j7HJ6lFvNcJCgDst4PgWIz6+UN/OB
+# YGdXIHZn7zyarqTt9gtxiRXvQVg0lONxsrOPpGZsE3xSCxFY+ppzUb4Whs51HLTF
+# lxexjaKO+0w8Bq9tYcWDLt6HEmyhqMnLoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyOFowIwYJKoZIhvcN
-# AQkEMRYEFHW0z1aUDSAqoymx8d1LCijzXS09MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxOFowIwYJKoZIhvcN
+# AQkEMRYEFPldB/ComLr7tkXofoMR+vV4vUoTMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBBoD0Ust9aAAlIN4GxbZV2l9AbbkQACjlIT2eiWUYR8CPL
-# ch8YSZgEzK3Wq7r6rC6cTHlCKsnDukPdxNDc2Wwf1GbXyQSrCXiSqF8LmaXENcPo
-# ewJS2fLLpB7IflsCmlC7ZDfF3DXs3W+OXjOTqOJssHvQXGP8OvCEX//F+nvSSHjF
-# wwNqgrTlQ2e0AUgaDlTCJp0TKe7lx9NYF1mjZkomXuw1hifWjfwXvy57py3o4Xxc
-# CyzsvsFN4TmICBJJBTdaFx+jDVdtnz1BrAQUdyzjmsTBg5w/bS/kfSyhEnYbyHvE
-# 3X6SwxSl9dQGGcpD8grFehE0GdUhIyHcinzn7h4m
+# hkiG9w0BAQEFAASCAQBaoCfDKuP3/IdvZTZduuFpdouPfc2So5IJXvIs7etMnW7h
+# lOVCDYmSz49k6mIPxxrk4mtv2Ut4lShZgDGVlm/0ekQtw+NV2BoqY2HyEI1uWz5+
+# OchPGwp9aOuQjtXuiMXDSTRRfjm5Kr2uLtxJwe7Eop8PVtMvENROLgq7QzbSB+K+
+# UAnURsc25YKVtqoAXPRjneSVKsPfNjuJxiiHisorw5ypRw/FaO7CafLzo4qRl0xc
+# 4mwMD6HcE3Kzh34kl5CoVhZFJ4A5F7Ne8Fimb5Ylg8t6qUIc/mwhM5E2poukmNTn
+# G3IlyIbhR343k4p1ytG1C4G2X3pwbQvEa1/bKEYA
 # SIG # End signature block

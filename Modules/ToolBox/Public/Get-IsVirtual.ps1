@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-20
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -91,8 +91,8 @@ function global:Get-IsVirtual {
 
 	PROCESS {
 		# Get some System infos via NET (WMI) call
-		Set-Variable -Name "WMI_BIOS" -Scope:Script -Value $($WMI_BIOS = (Get-WmiObject -Class 'Win32_BIOS' -ErrorAction Stop | Select-Object -Property 'Version', 'SerialNumber'))
-		Set-Variable -Name "WMI_ComputerSystem" -Scope:Script -Value $((Get-WmiObject -Class 'Win32_ComputerSystem' -ErrorAction Stop | Select-Object -Property 'Model', 'Manufacturer'))
+		Set-Variable -Name "WMI_BIOS" -Scope:Script -Value $($WMI_BIOS = (Get-WmiObject -Class 'Win32_BIOS' -ErrorAction:Stop | Select-Object -Property 'Version', 'SerialNumber'))
+		Set-Variable -Name "WMI_ComputerSystem" -Scope:Script -Value $((Get-WmiObject -Class 'Win32_ComputerSystem' -ErrorAction:Stop | Select-Object -Property 'Model', 'Manufacturer'))
 
 		# First we try to figure out if this is a Virtual Machine based on the
 		# Bios Serial information that we get via WMI
@@ -159,8 +159,8 @@ function global:Get-IsVirtual {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUms8i53EJT/6d4JV1gEfAu8YY
-# I0ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCyeUicX/XY5wXwdzKlwFehJn
+# TaOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -303,25 +303,25 @@ function global:Get-IsVirtual {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSubDpd4WzP3jR1pdZPprWW2XpOojANBgkqhkiG9w0B
-# AQEFAASCAQCboMTfjsHi+ZBZ2olP9ASi0KCHoV3i+BVlM6Z2NovrpgOz5NerRsF3
-# N6RfnTxMGppzG8JR6TVuTizms0LMvd68d1qdinNgtseWZreDEtsMUJMbJKdoazIP
-# 91tumq6x+5rMWAYyzUuk0xlyH91rXxBeZDXeopfXich3f7RDoxBdgpjhoXXNUivk
-# 8J7e47QDH4QM0xikDb91TCi3SxDsS7E+zvpCwvsqvu+Jkk5bugUAGGDVDya/+UPM
-# Keym1jM21NNdhcFrd46vVzCjXnQo/2dQdHZ7ZVC+b8+DdwPuVFdPvEgAHl+Yw2Y9
-# KPcX2gR4MmjNI9ToTKu9relYVqdxtaXWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTOB7YuI4gTbtJ/i+AkDiSYpmOpJzANBgkqhkiG9w0B
+# AQEFAASCAQAl2As+97A14qn8WEO08R2Sle/i3AdVkUG4AL+NOkk3o52E88gGAjDm
+# 0TXBH1G5lNVj8P+hyF0aYyVWWWKhulveXX68Y0kNayVe/ViQjddKsfFhsWQley1P
+# tWMeJSn4aaYpZrhvyzDSV6eNHEg8BPvVyh6eV3fkmrV6TFOxZqIHKrd6kXdaQ7P0
+# 9N30pJ0e0kJ5yX/YRqqe6GpTozilUR9k0Q5/vgk1rPN8xQv0NPy9eBJeQXTTCL8p
+# szJm0Kv1N3eR+OyvgzANtSi6xxhmA1Ab5a3HtkAXB7jqNYDB3NZu5YW75pWdrhoQ
+# rxs8d4xR4Xg15a44QBuEMu8c3BNX8IRCoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxMlowIwYJKoZIhvcN
-# AQkEMRYEFC6FhJ4YfocmY2hLdWSmj6f5VaWoMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwMlowIwYJKoZIhvcN
+# AQkEMRYEFN6ksHPZhkmCsy7pAFhBF6XvGepvMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCdEpk+txV66OLWLUjBtTMfS50xsCJoasfVz7EXrYyt/Evn
-# FocU1NUElvV/kIzioe5qMTWqD7LR2CJvAC18H+gaxNe8PGWqI4YKFj1lUFwz2Clu
-# tgRyr3DgpDcy0M8iLYosptSQtsFRoj4hl3LH760ihjpmYzEGWEA/aSfC4rHXyA15
-# w9WRTwPMGXtJkqz6mg33syknLk4qz79XEAcbaCBp4wAcrnhloua2RnUC8LT4I+wk
-# mhqgG66NCuLBrq42gEElC5TmmWisVYAHj37kWGNmVyjGSrCrufnuIHDe3ZMbBVDH
-# FNDOXL7al3qd8Vs9YYp9ESS1RJB83RDp/oqlITQg
+# hkiG9w0BAQEFAASCAQA1fB1zyRECUzf1XY7AMar4lRcrGY7/8yrOT9Gh5gB6eZf+
+# ipqcsFZuWP5qQESm2+S29AR2rJDmDnPy9v+37RDwT3eo0+Mx083mA2LExL/ITMnR
+# 18Ngby+/kQWeuawYdSoFhhUHDUkl051zqalXZsHOl5p+R9A7yABAO1hD8vDOBIUt
+# MAOM3za4YN8VcBnvsWxGQOdIvdxAFCRidIed+q0X/N7RWEtdQiSF2NpMZ7YIuBiN
+# XunrddTtp9EnMm+05mtmROV+ApiH+TT4l1di+r8pnWZPaiWlfO0MaDhXeibxGGvG
+# zWCRD6NqrjZhV9ia5V2VMpv07v4BfZ2ea1qabTD3
 # SIG # End signature block

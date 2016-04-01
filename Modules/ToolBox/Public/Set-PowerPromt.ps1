@@ -37,7 +37,7 @@ function Global:Set-PowerPrompt {
 		param ()
 
 		# New nice WindowTitle
-		$Host.UI.RawUI.WindowTitle = "PowerShell v" + (get-host).Version.Major + "." + (get-host).Version.Minor + " (" + $pwd.Provider.Name + ") " + $pwd.Path
+		$Host.UI.RawUI.WindowTitle = "PowerShell v" + (Get-host).Version.Major + "." + (Get-host).Version.Minor + " (" + $pwd.Provider.Name + ") " + $pwd.Path
 
 		# Am I Admin?
 		if ((New-Object Security.Principal.WindowsPrincipal ([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
@@ -66,15 +66,15 @@ function Global:Set-PowerPrompt {
 		# Backspace last \ and write >
 		Write-Host "`b>" -nonewline -foregroundcolor Gray
 
-		return " "
+		Return " "
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUD6RQ3r6kHbkC8UTavH587e+O
-# BwOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNTYM4StfXFukv2HPiSiZOjkl
+# OiqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -217,25 +217,25 @@ function Global:Set-PowerPrompt {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQzJ1VGElkKr2v0kDP6EAItn0b7OTANBgkqhkiG9w0B
-# AQEFAASCAQAIDujSuJw2DZ/8brlgf0IoZaL9BiU9zG4jsfGIwmTXfbCtqVyQ72qx
-# IpvJoz0Kge7YAh8dV72n5XX2ykxvrCwxJnb++wtOWu/GTJVmicHRV+fi1kB9pFUn
-# PGfS/F6mD62ePmfkgKMRtOC3+pfqoCnXEBLGNfg2dgMOOWirSNbMLC7ihhafgFpA
-# iPjDy5BegF2/HchzEwcEg9U3rZsgWxHCHOOw0iHBDxWwFS2niMMjSHx0AP1Wpvjg
-# xoaXe2phHjC0elyTJgjHGpsxOzKF6/tu/DQcMlJRQhKJWZnTmYEAyCUy4u49JaOA
-# Plx6HUILB3MUC19WWasq9rwtKMbMzDXpoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSeAdURCdvSOIBVzi3l4Al60OEmgTANBgkqhkiG9w0B
+# AQEFAASCAQBvsaTqHRfU9ljvGJoiuCVg3Nq5PFcGcDG3WSsL2Hwv/CSzwSH1eJqD
+# p0z6dvxQwPQmvdEUm7ihEuzJmGFvVeZV+LMeujTguvK7SgmpmaE1+GICDmnwvHvQ
+# YSxQn4PelTsvKjQ3g42OBArhbiFNIPfRjmEIXaToGmm9WT/MQEEpQ10m+WSwc6vY
+# SYTH7IzT9nzKUty7EMnEWcXqOP+bgb/t4gHu3u4q7hu0qkuMqyJQomZCt8rA1Hu5
+# gBZYTzGprOPsh8GCtqc9RzJi3cib/N4u+QgWxqwtE5pfwPCs5tcur5HPvjoFl6jg
+# n/1sBe1qNloJg49Yd2HjlQODi5betj/zoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzNlowIwYJKoZIhvcN
-# AQkEMRYEFOkm7jforCPW3OnOBxnR9pMz7OwkMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyN1owIwYJKoZIhvcN
+# AQkEMRYEFK75k9oBzaW7oVKTDrgOVWFGkdheMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCR0pBCAf9IZ2l4JtU7QAGfBDrutFGrFuKOd1/o9ZBekpvA
-# M4PCixWUOLME0yol4a7nnwC9t+asRrEpEF60Vzz7lNJz0hs+44+sMMUuQDjDxzsl
-# Djbr9WW4W/Ns5ybI/ma0BrVdQUX0eCO/zNmKIlepy7OK7cE231NfEbYxDCYnWPDe
-# rnLxkUQi/RM6m4GL+sjGf0qhGV3pwTYoEFWsqi5OMFmtCXNY6QZDkMpiSWOBkJzk
-# QIb9+UNKSFOSHfTG0o7y3P1YMWnLAaVDxGUGW2W/KyqKXa8L/SLDhap+gB6C51Rz
-# D583DBcVdP9Hwnxtw6GuvKrgCwH/JWA+JySwnLlf
+# hkiG9w0BAQEFAASCAQAXLwY8fqsc+qtB6FqSEJUwHNl1zpRni3HnaY5pX5DujxCM
+# zbO7V5V03dP+X02F6dXgebicsJn4PUNmTRrPpNa9S4NQcM8KS0rd9nEIhq88yTO6
+# l1ghvEzEBfJ7C6XSg8KbVb8L/tBihNcCZU3ww/omKTLqC2k1R/vARPdmPs4ntiIT
+# 5q0obeo0zSjDw9CKXiVyTIhb21pyn6q9FyU0vVkGSiCqqy1Ggzjq6hHnDo/Zg5aw
+# p6c7U8SFyvzQOakkWF/2+SJYjaUYorbIaJ0R9te6Xe4lF0kyRjrbKUxabOUVEc7o
+# lENW41X3cWGKxbjVkGF9pKRhlOMIsxVy1wU4zlTL
 # SIG # End signature block

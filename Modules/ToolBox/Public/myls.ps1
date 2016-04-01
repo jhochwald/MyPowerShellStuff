@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -92,18 +92,18 @@ function global:myls {
 
 	PROCESS {
 		# Execute GCI
-		Get-ChildItem -force -att !a "$loc"
-		Get-ChildItem -force -att !d "$loc"
+		Get-ChildItem -Force -att !a "$loc"
+		Get-ChildItem -Force -att !d "$loc"
 	}
 }
 # Set a compatibility Alias
-(set-alias ls myls -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias ls myls -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqffKetumAUgFAlheiujyi47X
-# jEagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUn/rxew8BxwPwfV7Xe+CnsfLl
+# 5fKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -246,25 +246,25 @@ function global:myls {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ+lcy0qDZPT7jah7VnWwRINZotrTANBgkqhkiG9w0B
-# AQEFAASCAQCZ0oOvMGXLv44gMuclCQcT/q1Ij3eZvxCT1Su5ncjUaj/ONEnAxvrg
-# CikY/37SNmBJbIicHOzRgI00z9DvSbHwc4+5HvyoqFrvO3KPAuBkLdBFOYq5fcWM
-# la/WR2pZGpvDFmGSorrajYshldhyZntYbNRBO7FS1M8ISA0pbd1AB0gkMuxFfhXq
-# tH4fu2FLE4o2DricQnKLJTTVaKC9rVpzgX8HBtdshikaU5XXIw7BcMZjkrkbzAgg
-# DvzT7wF0gHHOoktVw6idCMalsq61oxjCiiWPCK9mKjKm2JGS/lFoJZXDFGH42ht4
-# SoZ6eFgsvPReSAxji+d01CmIZ9u23tFEoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTGGM+k2DV9A6A6Wlu26ixh7F7Z6TANBgkqhkiG9w0B
+# AQEFAASCAQCqBOQc5w8cJ+ERxY+PrzhhcVPWZUgbH5KvHqGrrdarn+eJpz9sfVuZ
+# mWZzJtSXzQTrvOc46S9NKw7slTHrdfXp4YRUSKXswjptvKvZNlYQJkwsmAiM4QB4
+# u8esj3UU54KmlfkyYahOMHSQR3t5rs7BxIChDvtvzKS9txxvLTSQL26Mv4CCPai3
+# a15S5RIWERGOlHt+4mcjyYmxM0jSc3xLvdo0gQ/hpHBOuWY9xdYzhXl93ovJRT8l
+# iHXMaMcHgeafMOGq+a5jiAIZ98LlBKL05+b85a0f4s/lcvYk6129L9iGsdPK/AOM
+# PAGQsmfWDbAvmWGpFGSCPf+BJkzk0GF8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyOFowIwYJKoZIhvcN
-# AQkEMRYEFE0xaIjfq0Db93VqTEKCdetd1iuwMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxOVowIwYJKoZIhvcN
+# AQkEMRYEFNAl5r8qaxMdAQi8B/DBhZ1E69S1MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA2CczShBKo4NaXCLinU6QITLFcP3WzeoMlKDuCrhRjoC1z
-# OOPCGEvP1+Pp/W244sEYtEOBUGM5bTKkJn7EpotLWgUeNTuP0R6NlOEh7E4lkH7U
-# LAYGkiv5mpGtdqqYCNaeDlKkzyNyfddH+5sR2oQc9O/cnBJpARC1gx3btihRaOmt
-# qLdGSFuIpqxinXOilUUsOzMDUAnjjud6Lkc/kzhBJJ6LXYEglfyOxlKRXHA7qEnL
-# 8IQKGwK00t9mRjWCs1AoOXdFLgv5d+kBqhaWFyt7BVe02KfTFMPPcfArH+AifT8p
-# HndLlgAckxU3Y2rOER9p2ayT54Ox3iwyqbFUtEoT
+# hkiG9w0BAQEFAASCAQCC7HHkeMtnLpwi2+dfKGQo8DKbGYCnQZjOxpPoC/IioFq8
+# UbXQeHVfSPc6VT2yC8gwa7GNyzcdsY9qZYdSt6FrCwU95e+SW4HjxnkGP2zf7TaW
+# fC7NQQ9M4eNp0yaWgMsxolP5vdskdE1a3FCJ/6WyhuPVAcLowghmA7tXV0RSjw3U
+# tjx8SukISMdkB9HfIAEDOcRzIBPZnH9Ft8tdIpSyM0x3XMt4lva+xFro5bwX+r/Q
+# 5jjIq3ZAt78HoKgITETAuB/Cws+8uZ2V8pQH+rCQBW9JRc/0PvM22zbMqHbWKY0K
+# 7NqeC41O90fl8MYjlIORl+1jxIQNUMi2GOSo6JA9
 # SIG # End signature block

@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -141,7 +141,7 @@ function Global:Get-PendingReboot {
 				Remove-Variable -Name "CBSRebootPend" -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 
 				# Querying WMI for build version
-				$WMI_OS = (Get-WmiObject -Class Win32_OperatingSystem -Property BuildNumber, CSName -ComputerName $Computer -ErrorAction Stop)
+				$WMI_OS = (Get-WmiObject -Class Win32_OperatingSystem -Property BuildNumber, CSName -ComputerName $Computer -ErrorAction:Stop)
 
 				# Making registry connection to the local/remote computer
 				Set-Variable -Name "HKLM" -Value $([UInt32] "0x80000002")
@@ -191,7 +191,7 @@ function Global:Get-PendingReboot {
 				Try {
 					Set-Variable -Name "CCMClientSDK" -Value $(Invoke-WmiMethod @CCMSplat)
 				} Catch [System.UnauthorizedAccessException] {
-					Set-Variable -Name "CcmStatus" -Value $(Get-Service -Name CcmExec -ComputerName $Computer -ErrorAction SilentlyContinue)
+					Set-Variable -Name "CcmStatus" -Value $(Get-Service -Name CcmExec -ComputerName $Computer -ErrorAction:SilentlyContinue)
 
 					If ($CcmStatus.Status -ne 'Running') {
 						Write-Warning "$Computer`: Error - CcmExec service is not running."
@@ -248,8 +248,8 @@ function Global:Get-PendingReboot {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfqiTWiiRbEIQ0CBQQd56YXqI
-# qD2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUq5iau24ey3OQaTkm4TvAk1nR
+# wYWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -392,25 +392,25 @@ function Global:Get-PendingReboot {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRh0gN8WwS39Zu0iObS3/E7D236fTANBgkqhkiG9w0B
-# AQEFAASCAQAruf9D/bzp0tAJXCyiEq0/4eMiQYgpqi4y4wQCemxlifJIk7FqwgGY
-# YLz78fKETXpJ9AyuWTlGLzLmF4RO6S/LEeoH2wltBYZtL4r6xRVAcu6y4gCRplWZ
-# KhUhQipX28NdEOEYapoBJbHW6NJCF19J0j3TYwtEWFE3noDUC7SgyIpJQSYCEHnj
-# d38ZsDokfZt2vPRyVmcYJ/OPuIJwVD+NtHC78y41DEqoOqdB6KWswm2TH28cpMYE
-# vTpL4liFvrGWHlg22BhM+prZpqGvsu8kKnwLwgYGQ5yhtxHyIAUqAfDHPWqajXnA
-# WtjdWq7SMUni0XwIi2eANzaU8rfP/ZWjoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTvGfWQsujrZC/r1gelygedx6ACSjANBgkqhkiG9w0B
+# AQEFAASCAQCrd0AV7dZWLJhLXfHAYLOeYEwAM9Me/HFoy1VFmdeFmWix9OgmS7Rg
+# 3516B8pr6pZE272XCh2Ux4Jx6xrcpA5wKmbKQzkSAaNuRQUnRwMHa+c05qarcohA
+# md+bqd49UV6IZ4Ryh30FVn+KPGHVHi9AjoX7t4McTQDNfSGC8FqguC9NyYxEa0jl
+# Gr8QXmgokpdHdzG0DaazlIGZ5BexkH7+ZXPLmczh6RNP7tPBv5yaJ6+p675uKEMj
+# H4GylD/8wzmQGQK3ZG6IjdKoufcIfALrDbI1XqildHVbxhqyiezg7C2YtIrElq/p
+# c60lOYXNmM1x1753SgxYj/4kEzpfvsGOoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxNVowIwYJKoZIhvcN
-# AQkEMRYEFNswDL3fmxewILuqEcCSteCp8tDkMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwNVowIwYJKoZIhvcN
+# AQkEMRYEFOxVyOOnL4fqr3pi8YAST2oAQjwxMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBumuwy0hrcSTrmwu5yALxHLemeYASB48kjJw8w1h/FcsmE
-# u4a2oG9EJ6gwf+LDd0TmhM0z5WjAeguw+y+hVefDIMxhTVuppdAvqkpYdIC40i50
-# ZoONboNi2ni3keR03MGP32K6NT52jhC8PtdW+Yym9cnUNS2nnbrO7+XunGoZZQZb
-# ttsjWORDnVzBmPBp88jEm42RQBeCrw9A5+IZOurdJhvNOX/d2ynZxKxJ/+RVHXd9
-# ptRVizBmkYKzOnIagDJ3wWlGMq55GjP65X9l/l2TNt798zZ/K2SpD0Ncy2vP33QM
-# ItFQBf6G2M8FqMibfrRBPQnmZUGeICOBGyJktitc
+# hkiG9w0BAQEFAASCAQB2RBQzx6yGuJqsP1R4IrCvKtpX4rFyh2MdkUPzvZNVkAGt
+# KC8ysrRqNvZPp160CCETkxLTukRLfp+qY45wJyeizgg+PxaAwufs4QTpbFft48Dd
+# g+FAwLoLs/Ni/RqCySTb84Cg5L5Vlfrjcn94nqnG4FNO3X/qkvrU9HOKp7Pp6RMM
+# RFoh3Gq+mtYrHjcQtFneSB0SD9UAke/55keSlqoVv8WDmT3hWdFBCoRaiihUUGxL
+# wKAGUHD9x8kApp3fkFPL/jKq3sbH4vXq1ZKcpNi6RrBEVlb3qf03o4Gfgz9Qa5oG
+# FjvlEKw717xi7UwxnS2o9ICC+S3e9YAxffPBJPp4
 # SIG # End signature block

@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -203,7 +203,7 @@ function global:Get-ASCBanner {
 		@(0x38, 0x04, 0x04, 0x06, 0x04, 0x04, 0x38), # '}'
 		@(0x60, 0x92, 0x0C, 0x00, 0x00, 0x00, 0x00) # '~'
 		);
-		$o = (new-object -TypeName psobject)
+		$o = (New-Object -TypeName psobject)
 		$o | add-member -MemberType NoteProperty -Name OriginalStrings -Value @()
 		$o.psobject.typenames.Insert(0, "Banner")
 	}
@@ -238,7 +238,7 @@ function global:Get-ASCBanner {
 		}
 		#$output
 		$sb = ($executioncontext.invokecommand.NewScriptBlock("'$output'"))
-		$o | add-member -force -MemberType ScriptMethod -Name ToString -Value $sb
+		$o | add-member -Force -MemberType ScriptMethod -Name ToString -Value $sb
 
 		if ($IsString) {
 			$o.ToString()
@@ -251,8 +251,8 @@ function global:Get-ASCBanner {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxN3JMu3i9Uu+lgdzgIHM6FlR
-# oj+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbGXvVAo1oxhFjUM7Q8xUEaHy
+# vCCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -395,25 +395,25 @@ function global:Get-ASCBanner {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSL2x8aso+IojVCbqk+zYIN6JoDHTANBgkqhkiG9w0B
-# AQEFAASCAQABvU9hGRswwRDELjey5UVNFuSuCF3zaicFCLHHA+0d+YWY39zXU64E
-# jSGGq0yyftSiRFIBbA9skAKMB6wgYZa793e6UmvGm4QTCxzcBHC/pAxeiX/I8r7P
-# O5CcVPo9Y0rG+xCi5MSBwgmLgHpsdq7vXy+GwPegsG1ceXEVJI83n3ZYbKv2bGbs
-# yQylYC1bcEKUnMguTXfYvOYD5eYE8iLCwsrL0icH2uwoYHFpmcJcN1VypcTcIwaP
-# lmfhhJDFIgcHBCT82C+wLqWHrbxxEECeC1icErrIcq9Rmr8N5bMhzSLQdhwGRyR3
-# jJ+A7XqMe/QURomyI7w2omipLW39e0+OoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQE2t8pY3Z7+SF5VmScaL7RaHbuATANBgkqhkiG9w0B
+# AQEFAASCAQAlSEHk1aE9p0QsieBIHD/nIEcX3U+xzjNVrBBZm6oBOgGAhHxL40uY
+# IXqV4/Kq8u4taPEWfAde+67g4UIxXXIBm9+EzXCqObgrx+dzY98Eo+zsexgxmjQ8
+# KV/bV5QsbPvFOHUthnaohEOkwmBrZqMgAf5lCOgIRem4LOM0olnuu8Ji5gWv3YR2
+# AlD+oUJhtgCtE1aYE4iUDSGD1IBmfqPNC2oziC/nOvOWztwxGQ0DNLvUbfLr4enC
+# RRYSdo8W98jG8I5JW6dF9mrPTzj6bzVuvBGPDFGrnMxjkO7SE0RfDpeVU6cpbZOF
+# DvXV0fe8Tzyzmvci0D/tXN/lmWvXwsUboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwOVowIwYJKoZIhvcN
-# AQkEMRYEFGRADp952CXQ7z9Lxr92bK2cJqxkMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1OVowIwYJKoZIhvcN
+# AQkEMRYEFK+EosHwYBTQl9uyKc5ws/jW+9PTMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA1Xu7wPLg/FqDhqBI5sMpOQcHbMHOMTHRXxksngGjDrsqK
-# eXrBEgVQe3tmUWct6DdSl3RvsEvS8MmGur4M/fhPimh5/J4vc8m8NeipqQQejokS
-# Oj00TXQbfU+GfFhZ7kMQQZ+wCMywx2dBlnbyUkEQMi2U/gUwKnWYkkXFWTH1m3LV
-# Aqmg5lPE9FnNrkNyIAegGQC/2rOLkHN+pYxSDvEZ+NVPjoJx1Z272SXJQdIQxEft
-# RwZPf6Q3DxQWsV6R5TDsoWdlCnTBC8hDhRrYwJ6s4DUArWXljn/UifoQrATppp3z
-# yElDbi29Bo7TrdyZ2jliCCV8yhjVWg77zKw1YRIj
+# hkiG9w0BAQEFAASCAQCMNE17P3AnDZ7difsxC2PL1Mf2fbiQAGnE9H25qq27dYOU
+# ROdm7oWPP7omZngB2kJPKKFwJj8/UNRHTB05YyiS9MQo2M657ljBdXuQxWJnnq0F
+# X8YPIe0tynhU0c234t4mtDQuIFg4HlourRdq3vCDKudwAuA7OuqPIRrP2Vp80+S6
+# F5fIYYt0bnisf/ICJopsg7Yr61F0K2Fdy5lsr8Cnu52TBlXUT+sdtnsdqpFQQvi3
+# 5k/+Tf7Bded0Xhf6zl6KyYmdjh6K1X/KohiBbVZnrYX90G4tOnV+r0I1W4XwY8fC
+# eAwKBVVwRowvJiADouyfQjXkecc3bLR+GsVDQySp
 # SIG # End signature block

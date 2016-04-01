@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -87,7 +87,7 @@ function global:Get-NewPassword {
 		Generate a Highly Complex password 5 letters long
 
 	.EXAMPLE
-		$MYPASSWORD=ConvertTo-SecureString (Get-NewPassword 8 2) -asplaintext -force
+		$MYPASSWORD=ConvertTo-SecureString (Get-NewPassword 8 2) -asplaintext -Force
 
 		Create a new 8 Character Password of Uppercase/Lowercase and store
 		as a Secure.String in Variable called $MYPASSWORD
@@ -165,7 +165,7 @@ function global:Get-NewPassword {
 			# Random Numeric ASCII Characters
 			# [System.Char] (GET-RANDOM 15) +33 Which generates
 			# Random Punctuation ASCII Characters
-			Set-Variable -Name "NewPassword" -Scope:Script -Value $($NewPassword + [System.Char]((get-random $ArrayOfAscii[$pickset]) + $ArrayOfAscii[$pickset + 1]))
+			Set-Variable -Name "NewPassword" -Scope:Script -Value $($NewPassword + [System.Char]((Get-random $ArrayOfAscii[$pickset]) + $ArrayOfAscii[$pickset + 1]))
 		}
 	}
 
@@ -179,8 +179,8 @@ function global:Get-NewPassword {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURqYWKIlS2SjYZvvt1TW9l5+Z
-# gt2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUizAwn2jwkfFipSNZs3LNsSFB
+# nyigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -323,25 +323,25 @@ function global:Get-NewPassword {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRNPLE3xHe1cfK1yRvXdRrOFEzUFDANBgkqhkiG9w0B
-# AQEFAASCAQAQUQq5HOICGGDP8zbEpAFOpSH05iggeJuMWXdgIj8aWTaikVvff5SY
-# ADAIXuxGoAcocGKIpPTRWVJM0xDNkU6TSkJNWF1hC2ukXXashN6vooPNUhgFGw0r
-# O+F9O+d0dJnBhJx5yBK1i/+CQdr++JpAz84IA6PLDCwqv9oHLSvGsxBIWcmZEHCV
-# BKCcUXU68DY9qePsmmZAA1fT3j1WKWVlaC6evaBkZk9XCQoitSTVFwYlnU31GK0a
-# 4MNB/mvroNwRtLzl4d8fwDJ0+e+w3aEtGvVCc1TBVTikw23KZ8vdEE/cy6Gts9/L
-# EFPvKvcc9+GQZ6zJ7LuRu0HzgV8DZriuoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRXbOxaAPbIU5dWOdu0CKX1DluYiDANBgkqhkiG9w0B
+# AQEFAASCAQAca6jssoaZ3WEsLqjafKJJtFp26DdnhZsaDPtNhjt0SNupeaT2jOPK
+# Da2DKAXfNr6kLPXWBUuapeYv3Y6Q0u+lyNMH9Y2RscLYEwIZvW4RMk0n8nGeYTBJ
+# 6IWUeGdvZpykUSaD1QvzeT2fBgi62CQz27IQ5jSLMwFZ3xzQUwfifgyHPRUVKiyl
+# ZOXl8jvuGqNnyECigKvn+sBTqOdbwfJ3HBOVINjwDL9hnSRqoPq2Qa5jJ2PzzZJR
+# nfKjMv0EVb/61CzUFcvgws+zd0gr/RQRG2Td4IASnROGS4yYoRL10iQp3aXMDuaX
+# m2KjUqtcg62WpXMPw6Sm/iLkogMXvgaxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxNFowIwYJKoZIhvcN
-# AQkEMRYEFD4G9ZHgEkWA6KbVP0EQUUO452dNMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwNVowIwYJKoZIhvcN
+# AQkEMRYEFBMx3lEIw9z6SclyhEiVvfYF3aa+MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBMZ4j9Lb7dJaX+p9UZrKkjIO8L6/f8jh/AqwfNNmKq6UVK
-# b5Hv6iA+BI32HrtvlywoGF+YIyJkI9b4ASH6qcp+IIo78/GTeLxHnm6HSD5UWy5D
-# WcvvW564DwCXKLVEECmaLYM+YUZ7pBFBxKMmUNA7HMZCUnud8ZkbxBoMGUh7r9vx
-# 8Jr6jyOZcVpa7zcUw1aPoOJhjUeHNT3GF52raej8ACCv+UJ4wOIQDQZCQWxWMM8R
-# KF/hnN7+5tc5gsmtcH0+xW2Zx8OVq0tjsFj+216Y07N+7xVW/WfCThjhCdNvi36W
-# /aE0o6PE9vwTXgZSEeZLtsoTcBhNonAlWovXWBTd
+# hkiG9w0BAQEFAASCAQAeWwlwsiMyXtM/OrpozdbqJVj0paQZvsbe0ixHIWCKXgRy
+# fLwK8DGzuLH3+IRZbSKLRbeyXOYPUirwrB92Dt6yzanwnSH1AsgEhULJI1Ahc4/5
+# 1yOGpQFSH1nfj5Zbk8rEhZzVD+r4LsUUMoBj8gkv7MZRKz9uy/hmuGHJKMOR/eOa
+# lbXK13hJqG9/aCFnhO4kHyIrzeYXUJaJq2PnLArN9CC2wa9Ao34fmvFsgjw52AaJ
+# 0oE8XxSAGqWjbfLoqRoOkFg6UycscY/spfHA4Kg4dQQX6djlp4zzr4mX3W0NDYLe
+# d8GvWBI+BV+avMNaFES2AoinogdslW7DHaZ40sXh
 # SIG # End signature block

@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -83,7 +83,7 @@ function global:Test-ProxyBypass {
 				   HelpMessage = 'URL to check for Proxy Bypass')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('uri')]
-		[System.String]$url = "http://support.net-experts.net"
+		[System.String]$url = "http://support.NET-Experts.net"
 	)
 
 	BEGIN {
@@ -95,7 +95,7 @@ function global:Test-ProxyBypass {
 		if ($pscmdlet.ShouldProcess("Target", "Operation")) {
 			$webclient = (New-Object System.Net.WebClient)
 
-			return $webclient.Proxy.IsBypassed($url)
+			Return $webclient.Proxy.IsBypassed($url)
 		}
 	}
 
@@ -108,8 +108,8 @@ function global:Test-ProxyBypass {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdI9M74Yyn0wuRnTTnKCwZmXP
-# QxqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXDMyX0dZ80vuu4u85dEoE4PZ
+# zyygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +252,25 @@ function global:Test-ProxyBypass {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTE1lkqs+bnN92a+ZMzk4N+Iw/IVjANBgkqhkiG9w0B
-# AQEFAASCAQBv5srkNJyIUPgmgnZj1JXQgbMp7oBfoeP+VSjybuI1GLGA4SLMiaAC
-# 7VuysYg0rE6fuv5V+5FMHospQa6GniXH7+EmiaQzablXV0V1Iz0xl10oAVFaOSSy
-# fM1ZhLn9P53XjwEVLJfO2AwimKpdZyL2mN4xW8S5qtOxdQNJLZAe5YWbReMssjVA
-# +YTmFPUMGwzafyvYX0156oKDZyRf5L6jBiZtxeMlfyVCysAr+IpeMbZO+OA5LScM
-# UtO+8c6fV6CPpZzHTU+2qKioFX1WgqpzE9ZNdfjfs948R8ZQgIhk6NnFO8emnt0R
-# oKSLdcBVECzmyFhn6ReQnTja0/GjX4O/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRaR6TkGAkCxgqWfCZb8N5K+2M6wTANBgkqhkiG9w0B
+# AQEFAASCAQBG28g6GA88iFBBLX28pxrhpSbQo4xy3MJjmX/HpLJdWxCc56taykl3
+# nLgyeMgpqrleS7ug3Smf4na402Uiv6vf7eDl3j3lNnJGRM+j8gWI/zNGuvoOBF4O
+# WPXf52XgVU0dbCwnYFDHaM0oXT4AuNl5BPWwDBN3/aks6FHtFI94Oaes5sr90J11
+# B2dlvvJfiIJYlki8ImkQ3k8Zj80Qrei/CezZOceawhiSDK9feUcXS7SeSJXipn6B
+# XShb65pJKtJSvoXf7Rk0PyrPcCWnlzym4kOHW1cJ9sqjN0abY3S8WsF9lmRYC2nl
+# aRCCZJBB5h+JphQJyKE5OCNtVhst+hBgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzOFowIwYJKoZIhvcN
-# AQkEMRYEFAulmTchL4vg3KlOT0FTJTnq2/YQMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyOVowIwYJKoZIhvcN
+# AQkEMRYEFAPEQQ0r27G/igGZyPOhJs4+FauQMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCIj4ZpY5ei0Czo98owQOl3+hoXPq6fHXYEjVqugPZWax60
-# X/iRAp9ICl9Jyz0zQWfFUYDsSbDrFa0fxrFj0J1T1n5/VpGSiRLhkycPe8sfadln
-# 2JdkzJGHT5f/DLKElSRmkHOdHIkohlvf47JXoe9EBTaiaSIXvMZyQ0kVTSMOHFEr
-# z1ABKgEbrD6gYuexx9UcH4K+Ob4huARIGyWZ5k/Ac59WbUGCWeLXsHQ2SPDB8okd
-# 0XqDmXRsdrGTXvCFoxMvlo4DEpEmieodg6Sp97wRWzwx22VuP5XU6nkwlz/tPyyP
-# bmcVcpofUH2/p5j/2pEUIN+zN0ix0fvp+pFWu06Z
+# hkiG9w0BAQEFAASCAQCrRD414WJkl3s6Qw88EmWNUk/jcwkM9XlcbM9X2vx4SPQF
+# dfGq0QohvjojqjeMEJPm+GkKpYI9aUB0WcxVCyQLhRXYUlUiCIk2mBzUTSjcY1IB
+# nDx3JRbJemprW3JCHWHGAmOXBB4ZOLW6SobGieZCHThHPwMAlh0Ud6tk2uJRPhG4
+# dRswv78HnlwYunxP2CN+s1NNjxl2S/fBxBEn7J8kvG6FfHkgU99vPQ4NwUbiqttW
+# 9ueXkR0aO5D2DjBUBYhh3oUOHrTAAABlRvxm7Lo3LVUgwxzt6Y4wOmT7J2Th9cvq
+# W71/yJ8DAhOpfVZpbcWENVF54MC6UGM5ueqx/a6w
 # SIG # End signature block

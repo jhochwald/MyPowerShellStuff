@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -80,7 +80,7 @@ function global:Send-Prowl {
 		Send-Prowl -apiKey "1234567890" -Event "Call the Helpdesk!" -Priority 2 -Description "Call the Helpdesk, we need your feedback!!!" -url "tel:1234567890"
 
 	.EXAMPLE
-		Send-Prowl -apiKey "1234567890" -Event "Your Ticket is updated" -Priority 1 -Description "The Helpdesk Team updated your ticket!" -url "http://support.net-experts.net/"
+		Send-Prowl -apiKey "1234567890" -Event "Your Ticket is updated" -Priority 1 -Description "The Helpdesk Team updated your ticket!" -url "http://support.NET-Experts.net/"
 
 	.LINK
 		Info: http://www.prowlapp.com
@@ -173,8 +173,8 @@ function global:Send-Prowl {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUceQzfuSVS/EjoxzonDBhwAlR
-# l9OgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJpGwMTpX0FSN1ejeCNbCYXvd
+# HM2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -317,25 +317,25 @@ function global:Send-Prowl {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTIXmpaBwd5eeQKJNeRcMrpjjlqgzANBgkqhkiG9w0B
-# AQEFAASCAQAf+hVKNHdL+O7JKN92c1TX990Dmv8y72XhqgTAVXuq8Hmq5bK7tHL3
-# AorweVVBuq6awxSC0XWIBlrl/RgkTEtNs8Yddn4NT+e/QWFAsjFaVFo/L0/LL+7z
-# q2fDQbYG5m0DIIgSH9NgIWRJ5O0yS3c9k1+XFCqMP94NpMkkna9PtXe9rP8o4hRe
-# a+kJHGnAqkiEEG0fnc5uV+288N8JN75qR8ec3DtAUYV7TwL9EwK9bqDjOCQImfOn
-# qW1tFWhFGhRUMIOdlHwqDJ7j2zGGtOO9ny1TZ/ozwrXYGYoadv0FJon8Lsy8qV6E
-# sulQdwB8EeTSfm0Rf94T5pTaLmsOhus2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRLYU6OZlw9hPWO2ehpQsO0tn8JJTANBgkqhkiG9w0B
+# AQEFAASCAQCX9ajTzlA5ZEMLudCIXNw0amTgPqUo7WtWCaapRwArB7oUs7vtThFG
+# aPWFLSS8QSBxkpNkESFuKJuIfOjfp+X9c7mClQhsG2VQuvTDyyUdsGHWBlyI0F5r
+# XKOcgahK6vvxw8WLOZmAhXko2sEKGkA40JJ8eocTbVK+TgDfBLN+HIWhxpjOvf9H
+# KKu43GJZoZxqftbSwiGNrMqvpZcoc01XrN8/F7czBjx+UcSlfJotDUOI3kpBDE3h
+# mnSvamSUHEa724dYx7+J9HcTXh0SPGpsb5xw1+1+FPGDo+LwU0vuQrjKplmq3Mg3
+# +pqXt7m7TVhWxnYhkE4rG3nPevRtFSozoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzNFowIwYJKoZIhvcN
-# AQkEMRYEFGmzr066mFb5Vyas1ojXG6WkMQDfMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyNFowIwYJKoZIhvcN
+# AQkEMRYEFLkptKdySoVdT58I9wBgWHC1KWiXMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAl/z0K3+o/MJl7cJWImcQ0TvL2tl91W/97rDsPIL1DPkhh
-# LeHU7AIfhIZVZSGl0gYlHl1+mdXhrirwyMooRTxmZm7LRukNwplbSie536R72pHI
-# 2pJvEE+8dBjyFKAvuIoN/OH05v/tmF2NP+huydkD+JGCQES1GQ4nutpI9IdLFjrc
-# rtuU9qyZdf2+NNmUsKN58jCbsYD1bybmKUAbOPKOxbw5J70wJ2dECrcHOz6BYuy3
-# AaIwWzCuVcoBmyGwp+qN0k4yeFGqADjqp1r5fqhwtuW9vthaiBW3OmLAdYqXOudH
-# lchm+Dv1ts66IKSTPthPW0EFpAEesV3Q0HLnXjLw
+# hkiG9w0BAQEFAASCAQBkNYYuEN8WDcH8B8zAYB6AcjDNDBbPJDeMXHRmxN2KkZFH
+# 6GVRsI/fKEfOa8Z4xG/XRRDhXI9p9/epWTZHQvJJ0TK5b30Bd2XyyWfuhonCNIsl
+# 7HVylZwJqEIRz4+ENMpAQ3Stz0kljGP9SvKAXi4aygsYLWTe9EfqzFfbwzmCpdpw
+# 8UF+OoBv2GS2glGD7WUSbv/QTqZ+/zl9jugJtqyQTIYkCfk4V9wN8FySKXere3rL
+# kPyBNBWm27sC6riF0h+N2p9Gylggs+qe2n9oAZJIJPJX+r0UqNYPCuoP2DFsEWoW
+# s2n0usPGiYC5twq4vdArlH4g8dlhz7oJlv/VZNYB
 # SIG # End signature block

@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -56,9 +56,9 @@ function global:man {
 		This wrapper uses Get-Help -full for a given cmdlet and shows everything paged. This is very much like the typical *nix like man
 
 	.EXAMPLE
-		PS C:\> man get-item
+		PS C:\> man Get-item
 
-		# Shows the complete help text of the cmdlet "get-item", page by page
+		# Shows the complete help text of the cmdlet "Get-item", page by page
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
@@ -91,8 +91,8 @@ function global:man {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9ZbxucFg2d1Bu9LUAUvX5LSs
-# K1agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGyQz/9aojkWxHC2TvFT7x69B
+# q/GgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -235,25 +235,25 @@ function global:man {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQn2WdKQ3lPxOCQSCrzvXz2J8KZFTANBgkqhkiG9w0B
-# AQEFAASCAQAmyxAYLf8QP5jto0MzAQc3qHLs/hBKNJFPYvAVvICIxUA6+pFhhKNK
-# fphIoom4TNSr9w8OPMCNij+jYGb8ecTwQNDIM1sT5mNCVRzceV78n7tdfrMTHEWO
-# 0axh1Kv1RQA3eg2368gFuVf3eBahYH7pqHlqyWAMHXoocWmIoadQWOLcNKYAJJTY
-# wKwtl6jyZGNCoQ/tpCox5vf52Yw1x776haWs3RPf1RwEHE5SBeaKEPPPai3M5s0I
-# 99Td+aCxohfVnQB2thgXkuTPqzaEyOrWXVpCOP1uo4/kT5A9G9AUMKTIEdTKo26I
-# ZguTAl3hG1fsgap5aaKrFLnV77l+8N3DoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRqHDfGU6UTZ7jh3uzucfc/oyFbzzANBgkqhkiG9w0B
+# AQEFAASCAQCifOKHb+235dUHaFDZYpDfjJPaSNItTMKeySwM3sJAhA8bk37yHSNO
+# VfSCYI3FGFT1W0XK6Hcs4baLHOABQHP3IjwLuke57o/ZEcceQh6CoXQSN/RjAmSo
+# 5fTBKgXnXM6299yRPAfjVVmRoFzH7PQZLEFK6bNX//8h8IomdbslLVHHmQxXK3Eu
+# K6VVpNakPRKOWgasIfGASc+xSYDZItl0vzg9LuNbzVggshA/4e2BMvTl+XOJMgZG
+# m+Bja14d+UTSJvE2zlI31mCpoWkoLdFia+wIXbqR4n7vauUqmc0dCC0KaGmON1/c
+# GGo2BFXK/L/HSaSIUVbs0GFcRXrvKjxeoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyN1owIwYJKoZIhvcN
-# AQkEMRYEFOPzQ8NH447gZiarPCiR7TEd2zwXMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxOFowIwYJKoZIhvcN
+# AQkEMRYEFMmgDpWGHkYWpkDh4x/+Ka5FZBKSMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQALqeEjKR2jGvfvaPJA4C9z/CNtJbs0zpBplTO0nWpd0Muo
-# JHX1+7nzR+djaDQa+FXSpZk1lhsFXEeLSzJpqMagoF7dksyATHnki/gbshC/UrzS
-# 96xVM704YHpJ77pANc9G8vTaNyZ274oNq0altLfRtIZ+xGBrmHaalMQJV9gpkLKJ
-# ha9C/t4okJF7V9IFubomSMsh3T+u8XfvQLk156IR8Az2I3nCvGdH+lH2t9Qr64xF
-# 1BMQpb3j1M/e1cmFgk/S1YBXdSyytIl9P+XaNbcfJKn49HD3PQN+1TMh9uXiJG+h
-# fdGpSUQvTASNufGzQ6RgPPYhW87UtJR/DV1fBq6j
+# hkiG9w0BAQEFAASCAQAQSjmqcrelCCzTNvWpQVqMtnXlSUDfDDUxv4AK+uDVaM5L
+# Q3bVll30UQx1Knlzazhtai6dADI2gcjfRrmDm0otL957YhAa/Bqa3zUaQMe06djn
+# qvPw58oknSQ/jHKlRyEvZzPWu5qrE/O9YlrPiFvBXQLrT8QL1tezGOJQM2oAfy8d
+# wZxtnoA9XKqUXCtR/7DBvPouY4AD2sJLx8aihtj4hBx/X0AmzIWcfnfSUQqbRXOQ
+# tSy+abLG3gyyRB5giHa9Rcc2ALiJwf9nYD30ssEcOYG9NR48/guXJv56MTT5OmVn
+# jSAg0QCrCDj9o98SOl2cUZejxz97WPHdToBnI5ED
 # SIG # End signature block

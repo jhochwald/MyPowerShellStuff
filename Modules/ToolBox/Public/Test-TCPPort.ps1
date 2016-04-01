@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-10
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -118,7 +118,7 @@ function Global:Test-TCPPort {
 			$Socket = (New-Object System.Net.Sockets.TCPClient)
 			$Connect = ($Socket.BeginConnect($Address, $Port, $null, $null))
 		} catch {
-			return "Host unreachable"
+			Return "Host unreachable"
 		}
 
 		# Wait a few ticks (Just a few!!!)
@@ -130,13 +130,13 @@ function Global:Test-TCPPort {
 			if ($Wait -eq $true) {
 				$Socket.EndConnect($Connect)
 				$Socket.Close()
-				return $true
+				Return $true
 			} else {
 				$Socket.Close()
-				return $false
+				Return $false
 			}
 		} else {
-			return $false
+			Return $false
 		}
 	}
 
@@ -152,8 +152,8 @@ function Global:Test-TCPPort {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvGMtvyRGElcegrusGl3zX73J
-# ZyWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6w9+AHgTMnzzdzwof8xsnunK
+# nQWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -296,25 +296,25 @@ function Global:Test-TCPPort {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT4qEm2QDEmE1FFbsX50ApdouKk9DANBgkqhkiG9w0B
-# AQEFAASCAQCOqKcMDlgG0TXXZ/ePbVsU5clst1yyK6ZEUTzwfgJzXWKtMGos0eLO
-# 65ZRdqJmFofYifwJQPqwohSjV4+EtfzpggeD275epgtCFwzyacCOfoI5a3FV68cR
-# ZmyyXa8L5Ab5f7pP+CoxeemtpHKIxh33u3s+let8rYsKxDW1wWlvLcri85SXvJ5W
-# oxUhDxvZj7Us1j2n6UcR1gEPHAavy+cQC8UWd98Oxw9K1CtGBjuVGeotDlGOyvPQ
-# ygqcKrkxs1JQsdBM4vIZkd5CBgy7gNXOPNCEGr3kRme23i0WX6LXrq3P78ZRDQ2e
-# CcfQMx+TYIMg/I/BEB69ROem+BYRhhSFoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRUX1yEvjjhsGnKh2A/LDuoqvw+7TANBgkqhkiG9w0B
+# AQEFAASCAQAUCNPgAHJUaB6oHzJ4FAmZqOAzozSKCuXu/VG4dapk8Z7CB4UA41zO
+# q89opEb7aaMvbRKAj5OdiBqeO3H4lhl5OS554qS2JK8L/yfU7sNTdqYhaUGfTwAQ
+# 1e9b50tiiWg2K8ji3P069oZ7C2wBXWZshPySCuS8Ft7lAOj3vL5Ng2yGOEZvShMr
+# DIkxboKRM+zQsxI/xu0lXH53nBFMPAPGgradMoQAryvi3ErxFXitDSXHOoNM5JdU
+# sT2d3tIFsDUe/ia7yBGAzg+h+qvIhlTJg/tCVCAWe53Pc22b3Npj4DmTI1RpDFAy
+# w55bKgkhxzVEkM8O77RfXP6Aa8VXFkCooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzOVowIwYJKoZIhvcN
-# AQkEMRYEFNbHFy0OQeNf5WHezb7AIXIqU9SUMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAzMFowIwYJKoZIhvcN
+# AQkEMRYEFEAUu7CUQpEOB5BNaQaAYCzJUdV2MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCGonmpgWZeSRuTMLz1fuLu1II5l1rMAVYzG2t9Bq5Evaec
-# HTuwJCJbAkkEsIXB9maNvT79cd9fs8Zn2fP1EJ/zpf31bh9QoV/zNf3t4oVcK5AT
-# EZ61DuvoHmMOUnXlXBR3TqSIJhqrtdRNKxezZ2j1WbQDJXiwjXub55HYwbD5IvWt
-# P2jh5L6V/aBh2sw40zsGpognK4CdhSJAvwsKWwQr+KgBxn396927u+WitXTZ3sCE
-# wQvlRI18yASyzgyVm0z3sBYfL/paNa9KE1/iuRsgEwsNTN2R1pA6/DuDKK7urzPh
-# 8f11eHKEHCraLVS2Grmdmf7yRNvdslG7yn9YN4XM
+# hkiG9w0BAQEFAASCAQAdP3UoGJ30O9uVazDKK5RKTZb1085VraxZKgQ4mXhHTPAC
+# PvixES//LoMBy1WDKeVj1YC5QYrw28UXpo8KOFtmBrLQSjxCpc5V9vlK04JBXP34
+# eTBPGz7nhDnNEyQWlwR7zFzZJbCUP6sM2J5Ii9VRivwpNYsTHSpxUraONa5+gdT5
+# IE9tAFn693eHLJl+m/vVLCQooskypombmYTtHPXA8AjicDid7rnSu8aFQRLbwBLC
+# sDP6ZjMFkasXh4OC2VIooQkaPw5NzCJVBN7lf78Yoia66M4rL5hr59qih81ZbfaL
+# W+DwFP9hwXdjIcLxDT9NQvqVPKLMwoqFFKZgxr6A
 # SIG # End signature block

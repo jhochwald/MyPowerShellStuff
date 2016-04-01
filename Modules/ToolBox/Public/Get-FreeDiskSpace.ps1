@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -79,7 +79,7 @@ function Get-FreeDiskSpace {
 
 	PROCESS {
 		# Get all Disks (Only logical drives of type 3)
-		$Disks = ((get-wmiobject win32_logicaldisk | Where-Object { $_.DriveType -eq 3 }).DeviceID)
+		$Disks = ((Get-wmiobject win32_logicaldisk | Where-Object { $_.DriveType -eq 3 }).DeviceID)
 
 		# remove the ":" from the windows like Drive letter
 		$Disks = ($Disks -replace '[:]', '')
@@ -90,13 +90,13 @@ function Get-FreeDiskSpace {
 	}
 }
 # Set a compatibility Alias
-(set-alias df Get-FreeDiskSpace -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias df Get-FreeDiskSpace -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUF+aBjiXiLxjGEJpjs4q8SvX1
-# sIOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMDymJ3dnEy5o6h+97imUBPiO
+# uwOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -239,25 +239,25 @@ function Get-FreeDiskSpace {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTDtNKh8LTYXqjw4MOy6OpUNn8gJjANBgkqhkiG9w0B
-# AQEFAASCAQBk2RFiNtNKNdfkmKGpU+qDtpeRMZ2GB7fNtq3KyOOcThakeLDniNA1
-# l9xoksNdE2boKQ7/INh5TAVoEI6kxaQSC9AkglO5hoevl0DqSLRAHyZv8jHfy7Hr
-# tjwMZS6B1aMthYsJr2bvehc+Ip1Tu36ozjyZQwWojTNTVESAh1R1Gq+bEXHO/G56
-# LBtm51EPLSRL1H4KQDiDvzMldb0QPiHPLDa8s5SceNApMsiBcG+STs7yICgwdzRv
-# LL2ds+4ksT8J6CWrJOhY2tSxfArsILRyVOkCOoU92mXTDZLardtx9RVNmMPAlPdB
-# ZXIjTyiGMXFSfN/nu5Wh9iLbKroiqowCoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRhXSNXbE7Nyf08+xS76nr/BAyKejANBgkqhkiG9w0B
+# AQEFAASCAQBl4eXLCyC1pG2ufWbHGUu1TUVctHUUKaHY6OD4t5gskgmgDZIkgVFl
+# DaWHKOPrJabEkldRURjClhOSJOi8jH5QieeLV+MFQvQGwgop7Sun5idQBzJ+bEP2
+# jAhWt0xnO6o0EmZborxIY55Depb5CVIhMi597/CbCucPj0bPjanZH6V6CUwLbhN6
+# shkPZP9hqzHla5N/e9Ufxp0Oh0kqJIRgNlnxHMrOWuYpc5+SMmQGLfvUXXZ/5FlT
+# WIziwTWYgDoz/+CPOqUptlFU2GKcHBnaVEs9BkFosS0t6o/TksfTvz7kJ2rwaFqq
+# nNP6hit+djVLKUpIJoKVPNRfYvsPKi/goYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxMVowIwYJKoZIhvcN
-# AQkEMRYEFNqGiG9jomEwGofXZSomAes+oGFgMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwMVowIwYJKoZIhvcN
+# AQkEMRYEFIy//7s6LAtCOu8aAx57Kmmrvf79MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA/JZj0OuqZ6zrcaPvZxbdDh/FcsvR1SWTHlYiEuvDrS2wn
-# KZsCFxYKp6UWKY4QGOvYFoS2ryyiC0o/QZGbdHtJlCJ0QjZndEVELvHMC/PRFnxA
-# xbN9xwCiCWn/OFQdsYVaqH3iulJDrbwO8GHPEAk5582oIAe259hmCk9OONKeeIVL
-# BqzkI8NMNjMqbbPG0zDyHqd9hgecNNG8LEhXUMMWTb3VFey5G0EbAG5+G9qUF7FW
-# MmSu+aEtD4NX4pG3yx5+wIT9fzyRK8pJXVrv4y8cittSbql89BCrkkYDoYviakwM
-# YFreS4dWGUoGgpFKlL9ouUkq/VusSi9jex+dr0nd
+# hkiG9w0BAQEFAASCAQAHejv3yEA2LRsp3ek6FMrfs4J+sps34FbPa9RdpZNxgYbl
+# mMNdxPt9vJ0ksxUh5ybz1dDaZoImy33FFM4JlG4FsGDMWyTQ+RlClPUkKlsR8Rpg
+# 4lpmUpHM8cfnQuRnGyuorUY3Bx7bG6b/eLZRFXHE+zL5rNtJFGPqz+cExOfomckL
+# 4KRu+Kvv/4mKXiCyp49sO8M7pxbYY1B2Lus8L9vHP7g6woBtoORShZk44F6HiYje
+# QsRUwSIudUuUWK9AyU66Rbyxeph5X4OI3zTPVjyO6xwU0LxLTeLdB3bcU/J3YNV1
+# 9jKMo5+HQsn5ebho9+yOS4hDRSlV3FLjFiqVeeq7
 # SIG # End signature block

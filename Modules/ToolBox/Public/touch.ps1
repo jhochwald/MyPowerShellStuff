@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -139,7 +139,7 @@ function global:Set-FileTime {
 			if ($Path -is [System.IO.FileSystemInfo]) {
 				Set-Variable -Name "FileSystemInfoObjects" -Scope:Global -Value $($Path)
 			} else {
-				Set-Variable -Name "FileSystemInfoObjects" -Scope:Global -Value $($Path | Resolve-Path -erroraction SilentlyContinue | Get-Item)
+				Set-Variable -Name "FileSystemInfoObjects" -Scope:Global -Value $($Path | Resolve-Path -ErrorAction:SilentlyContinue | Get-Item)
 			}
 
 			# Now we loop over all objects
@@ -175,7 +175,7 @@ function global:Set-FileTime {
 		} elseif (-not $NoCreate) {
 			# Let us create the file for ya!
 			Set-Content -Path $Path -Value $null
-			Set-Variable -Name "fsInfo" -Scope:Global -Value $($Path | Resolve-Path -erroraction SilentlyContinue | Get-Item)
+			Set-Variable -Name "fsInfo" -Scope:Global -Value $($Path | Resolve-Path -ErrorAction:SilentlyContinue | Get-Item)
 
 			# OK, now we set the date to the given one
 			# We ignore all given parameters here an set all time stamps!
@@ -189,13 +189,13 @@ function global:Set-FileTime {
 	}
 }
 # Every *NIX user known touch and we miss that on PowerShell ;-)
-(set-alias touch Set-FileTime -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias touch Set-FileTime -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULO/gi8HxA4cy0RG+sJNFmk0A
-# 5gagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtmJGe7g1tnw9S2POVmernW0p
+# 9SagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -338,25 +338,25 @@ function global:Set-FileTime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSJyhqP3lPbn/fDSoxQYK7FwvG87TANBgkqhkiG9w0B
-# AQEFAASCAQCMuZQIrbQLOyT5A/23dc5PLWtQ2oxxywZ0uHNhmmZuVLGnXyMdwz6v
-# 1tRIuxc0fY5ooZ0F9IiV8y93EMh9z5Q5/LH6i0xEwzb+g93ZlUEBY1JsyJIFiLxs
-# i6y1zDx3l1xPRTHXFxBF7RufjLBrV3bSDFYCLOmBB3HKwNcocReQY8pe8Ia+j4us
-# sxKShdjUEf4WCMC3mSFch1ixfFBIM2yYp2FCbojFJsoz1l+TPVcfqWC3zPXk9gIi
-# ipngRfRfgwrpDwkP8RWKwiNR1AkDXhluSEfIwViALZCuulAPpNJWRUlfJRxwpx/8
-# xFwsKioU6/PIqe0LUw7AmWxKzh05YkXBoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTcefZRSZ22IERYhksx/u6i3FblkTANBgkqhkiG9w0B
+# AQEFAASCAQBZ3g6DLKJGqAgYoN8PQuAq4kzMWn2tS4zsA/Y8BOdQVYLm98bniTGi
+# 8XIzfngL+0TwR0ggmKnaF07jcXMi3JF/8hHcSh+eZaealjefOOpKj5DSx+CTNG6V
+# NxYXc5BA2GUy02QTb4c4VAMoOpqlItjxNnqbm/GLi9/EUFwYhc3/pU0f+l33B7yW
+# khcRhGDfsGhIN0atleVBpIO3YBDVVZl+tkqS6ypTg1Tb+pCvecWbO2mD2z+uy1hp
+# C1dGeqOz+5Mx9n8sgLs8X/q6veWN07uVTcF+BNcgZr91rDlEs4Dx/WNa/NTYx+Rv
+# mMwbWQtJubUGMhvUc2MPf6aIxpRqDYiUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzOVowIwYJKoZIhvcN
-# AQkEMRYEFFZ9NMGhYQV6s9pqYf0QxGelCFDHMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAzMFowIwYJKoZIhvcN
+# AQkEMRYEFNRtFRrAusnw168i8shanPkVGi0FMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQASqLLkmegeCxSjojP6UQAxlnZuyDJ6oZ2ISz60qU4qVOzj
-# D5SxgqiU7xu9j5nw+2p+nm8+WK2QxSlburM2yKZLDhJ73hV9ozYhAn0+x8xKTTOn
-# GBgUVNu42NqCM2bcXz0yAtT0rp7EQwvYpUmC7E8Bam3iXEk4n+lQN9P9HXuRArSX
-# Pb+rGx65wOu84sYRCZFlZwz9Gj6KFv36s0pnV+azS6G9vE+ubmHtmb86IesgA3X6
-# KZnZBvsOjpSiYPCHSMqTqml51Mya/9ylzAYR3Y2e9stexrXfpaV63SAz2W0/PmRE
-# Gr4pG085/qyeMXKHvV3gxyDpqGYpX1iEyANgqJMW
+# hkiG9w0BAQEFAASCAQAYP0p7a38WpI7xkkCAw/GxQl6FvFdn/0hK9F43W28RBcy+
+# JHHfjM3YuplO8oXVEZMTgw2E8QEUJvxAb1E1+eNDt143g1WbLzBxCHtmDISSt4zp
+# bFPsMqeyX4cxnn69g9tCh97tt9MkrPe6x7cT9bA8tALp8r9fOQNaoKS3WN1UPhRD
+# 49s6iM28mGiuk5KvXtankELOtrcn7JZNR/tlSri/LAD0m6ClOahnp9ivwpqJTjJE
+# kpdEqsqea+Cxt1StFPXS7cgWe1WNwFEmrsAjJ4YMETPe+CQKNaED3gDzPfzZjQTz
+# E5d7S2tpxZMRnzzPaDFfUpARvwRJAZKNWGfDXUW6
 # SIG # End signature block

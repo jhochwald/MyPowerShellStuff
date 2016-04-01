@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -78,7 +78,7 @@ function global:Edit-HostsFile {
 		# Open the Host file with...
 		if (-not ($VisualEditor)) {
 			# Aw SNAP! The VisualEditor is not configured...
-			Write-Error -Message "System is not configured! The Visual Editor is not given..." -ErrorAction Stop
+			Write-Error -Message "System is not configured! The Visual Editor is not given..." -ErrorAction:Stop
 
 			# If you want to skip my VisualEditor function, add the following here instead of the Write-Error:
 			# Start-Process -FilePath notepad -ArgumentList "$env:windir\system32\drivers\etc\hosts"
@@ -92,8 +92,8 @@ function global:Edit-HostsFile {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXMbUwV9SvCJ8y9f07cvxbDtu
-# s6CgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1lQWzCMRL6JxKpiwXjRt1Csl
+# LYagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -236,25 +236,25 @@ function global:Edit-HostsFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQfyvR2JX9yM7pb6CKUKibFsIUeKjANBgkqhkiG9w0B
-# AQEFAASCAQBya2Nmh9mpyoWzKzxwV43tP4J8D2qo748MVoFc7lkC+aXgBd3+yDk9
-# 5GT1UW9nvcPBQbABjjOuFSp1qHYxcdl1dQscaqSGYOU+lSSdE2Q24sJUMjvao4b7
-# CZMcwnxVbHVNUiOJEooXVaFHCOMuC2GDs9yux6sUmAB63heqERF1S4nC3UuFZqZv
-# RUEM7khgQXJTqfHf5wAJIQyvFdqaZ6wBBadlK0eqq6KXknYwS0zPL5Um+x2TM1W1
-# z9i+FFIUwaSZ3hs5RbI+Jql9Pyhjh1gyTMq/pPNDub5ywaE7pmBJuhULcCaCprvP
-# lYG1snQWafhm9jwYDeqotGw9tvr5+98QoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQlt4q21f/y1OeGExYAlP+oxqe+VzANBgkqhkiG9w0B
+# AQEFAASCAQAlj6eWZ0Lq1W4A9bQaANoDHEjXpogC487CukRzVmOkiWILCD5VTQTj
+# aJpgBqCY9c+jgvhzV1XTJ0WpGOKmDLIpY3cRt8+Ys+fnDihOcYqUKLnrHI+gmd73
+# FzSwLViVpQx2k3kmBilIsV1L0s4fRu6BLsBE6eGWKwAUVENMxGmGHlvirN/MEFr8
+# w01idHbTdO8RCjzci839VLR1Lh0OrYq3N5EWZWLzzR8ukKdpYNj2gUK8hqVNiOOx
+# cKQ3dOZGftD36TdXFcFBpPmwd+5vdXfrSvPCXdzFXntuOH35gJNSC6tAJO9kYsiC
+# C1JaFHQfOQW+oyYtB0Lbh1FbeZsfVc+noYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwNlowIwYJKoZIhvcN
-# AQkEMRYEFK1+elm4JAd6eRH42+B1TJwmwKfVMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1N1owIwYJKoZIhvcN
+# AQkEMRYEFLbDyb9oFt4my86jnGiPjXVgMM2cMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBEEWUHdkSI5J2hiQDrTk4a5mYX9Bl4GJv7K3CXeovK4TAp
-# cG2w15U/n4Yv6TK9c2XrNrSykUKI+LzPDF1DokimA5rEeZCZfALSJNVzpgdScuFM
-# wbP2osMXHIuQLW0micbf6ACQCwMqAj1JrRAnDFhkjfBP12fx38fYEGuZjIyNaXty
-# ge5MHWU8vjNNnq9aNjfCR0jYATv9in7v7rOA9+fKPGXb5zuWyYckBccBdFvO+fnk
-# kz3JjU1SZPf2myh/Z2SquRZx4l4EUQIjCrMiTZZSdvtNLanWgyFOqOrTmrMUNf22
-# TZvbmeZAk08fWHrMt7dS9DuRg2zzuJY4XTrCVRtN
+# hkiG9w0BAQEFAASCAQASIjHoGDpeFtPAa7FX6vyJGliFnJI2hozqnnnv0a2ki3t8
+# zUXePyEMd1byjSntZYUro+YZcBILqpXqa3n8mgDyFHVYQTt+700+Sy04MWVIuNFk
+# LJrlpy1WXKl/RhwpGYTNAyA9mXyNrEo6+4SvzXz9ssR+koalCfneC802s9znaTMU
+# R0lmI2rBXHA6L2zNkqgbIh8kYG3B/F5Pl/YPA1Ssu7mjgPdsWZX9QugdLCZi4eKD
+# iGBO+lpw+CMzOmytDmakNPQVt8zj0fFwV3ho0IrE+MZnilkKPSLC4lmzJ4ZbsG7Y
+# aemXWRaNtChojoXCn+yb0bFM1k5J18wBa2GZ63ZE
 # SIG # End signature block

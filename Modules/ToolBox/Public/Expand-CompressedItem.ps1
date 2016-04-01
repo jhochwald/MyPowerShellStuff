@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -136,11 +136,11 @@ function global:Expand-CompressedItem {
 			"ZIP"
 			{
 				# We use the Shell to extract the ZIP file. If using .NET v4.5 we could have used .NET classes directly more easily.
-				Set-Variable -Name ShellApplication -Value $(new-object -com Shell.Application;)
+				Set-Variable -Name ShellApplication -Value $(New-Object -com Shell.Application;)
 			}
 			default {
 				# We use the Shell to extract the ZIP file. If using .NET v4.5 we could have used .NET classes directly more easily.
-				Set-Variable -Name ShellApplication -Value $(new-object -com Shell.Application;)
+				Set-Variable -Name ShellApplication -Value $(New-Object -com Shell.Application;)
 			}
 		}
 
@@ -175,7 +175,7 @@ function global:Expand-CompressedItem {
 		}
 
 		# Show what we have
-		return $OutputParameter;
+		Return $OutputParameter;
 	}
 
 	END {
@@ -197,8 +197,8 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2N1JzwDgahj/b1Uiw0vrjlGg
-# b8igghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUY3WdWkl7qQgoJG7Dj9Y/8klC
+# zpmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -341,25 +341,25 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSkF6LD/ABxpmIB+d/0AhUDSITP7TANBgkqhkiG9w0B
-# AQEFAASCAQB+0Cqnu0X+n2APllciIox2gXTSbbbYiuu/0NAqmUde1tC7AunTHJGY
-# gV5G+qvjfjtZ3l4fWECLf8IAwFaAUw8EEpGKBpcW/cu9wRNJWyE1G7iQyoJ14Ltw
-# 7DgIlRstEzGGzD0bZG4803W6/7MpDrdonP7QVygB+Iu+JUWYKhThIOfyfXUsBd/C
-# 24/OhqAd8VcFFHSYv2dIfDbYtQ0DVhFgK029ybfs67jkRTdk5Eju0o72cD4dCe9n
-# x8K+d57mtw3wUxwFcYKEdceGH0Hi6ZpVTIfhArKyUqZbiphfB3QpUnJM+6awKWTy
-# /SGNW/BpO070HGlygbnZIiaLix8zZaqGoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS6QVuMJTauPr9jj0+xJICKHSuj+TANBgkqhkiG9w0B
+# AQEFAASCAQAr+uPiCRuBZP6S7PO9t1uJYvpQSPziDgW283kfMw+7+qGyk+Ya7uB8
+# CoIGB8HT0ozhQ1fY9pd7ZAtvyDipbeOol/bnHb5+Tf8QUAkmQNpJzhPfQJGS/HRm
+# QhannBp9/FYXs5wmF2N5iInrejQpNM5L5IdLp97BNXMTjPYaRm0bXazmRteylkbh
+# YQ640zu/Ld5ph30yJBVP2KtEtotgSn4uCvwqU6WcbLns5wc/moJ1x0qiwcqjsRhc
+# zjqjWMfN8HB8olqCDk3JyvLW7vMROpW6c629YcoXq2MYRVsVfj6XN+bK/QkKyDpb
+# zuTiJaQ75JM/P3DxaoWy7jwyDMoFgz4OoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwN1owIwYJKoZIhvcN
-# AQkEMRYEFBwGl3d/NZ1iEcJVH3o3oBoQyb1sMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1OFowIwYJKoZIhvcN
+# AQkEMRYEFKBDZFWALmYMgjQVkxqiRvuYiwtOMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAF6B/fnKZFxBkOoGPk7PZOOPCK2287gYJRw+uP6K0+hzHg
-# rkwoU4eUVjz0HVK2eJiO0UvXVJd/WJJc3Cqz8M1hYDy5xnRo70LOG7c9YEPLlV4c
-# WHqwKYSRrxzDO6Ez6IX/DdLB8OzegleW8jL9J46vpVROFSkzxYWrKw8XmuvRzMGA
-# EsksVJv8pjfLEMr0pl+WJMI0Sm1bQPFWhpQHZQrtLPxljGqZ5ADPZC0FmY0WVMwB
-# iwBEjeeziwJhKbZR9gjXq3aDsvfHywKyTDl1E4YGS9nYXHExXuJKB7UqrpuHtnwR
-# xXtZwAfnvWE0lrvPra1DIaHymFY57RjGXR5eeQFC
+# hkiG9w0BAQEFAASCAQCCWBDRF9C7YaTnK8Q8WSZuJI7Y/M80Fxyoir7Fh2AxFOxq
+# JtApCHLf6Mg//KqsKOsE4bdw9MT5b0I5bz8dOrbWJv1YnNFqnP8/358UqJq9kDJk
+# iIJTkplvwdNzUkE54fJYuXoswhVcEz5X7kNKTrOgqQlpzGLNRPLe0f/Od6Zcp5u6
+# ffoA+9etBHpyGO2RjP/G/EZOuCp9y/QDDwFULvPf8061FWhxQmzokfrytVhdRNZC
+# KGVVix7qSpFtEr5+qgKD3s4Je9Lst3pLNacrjCsk91aYJ6RGpLql/F9jZEwHPOx5
+# VV9u/6ucWKAoP9iKPPuSRChELKgNaadl98G1HqM1
 # SIG # End signature block
