@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-04-01
 	#################################################
 #>
 
@@ -66,16 +66,17 @@ $LoadingModule = $true
 
 #region ExportModuleStuff
 
-# Get public and private function definition files.
-$Public = @( Get-ChildItem -Path (Join-Path $PSScriptRoot 'Public') -Exclude "*.tests.*" -Recurse -ErrorAction SilentlyContinue -WarningAction:SilentlyContinue )
-$Private = @( Get-ChildItem -Path (Join-Path $PSScriptRoot 'Private') -Exclude "*.tests.*" -Recurse -ErrorAction SilentlyContinue -WarningAction:SilentlyContinue )
+# Get public function definition files.
+if (Test-Path -Path (Join-Path $PSScriptRoot 'Public')) {
+	$Public = @(Get-ChildItem -Path (Join-Path $PSScriptRoot 'Public') -Exclude "*.tests.*" -Recurse -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue)
 
-# Dot source the files
-foreach ($import in @($Public)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import Public function $($import.fullname): $_"
+	# Dot source the files
+	foreach ($import in @($Public)) {
+		Try {
+			. $import.fullname
+		} Catch {
+			Write-Error -Message "Failed to import Public function $($import.fullname): $_"
+		}
 	}
 }
 
@@ -83,11 +84,16 @@ if ($loadingModule) {
 	Export-ModuleMember -Function "*" -Alias "*" -Cmdlet "*" -Variable "*"
 }
 
-foreach ($import in @($Private)) {
-	Try {
-		. $import.fullname
-	} Catch {
-		Write-Error -Message "Failed to import Private function $($import.fullname): $_"
+if (Test-Path -Path (Join-Path $PSScriptRoot 'Private')) {
+	# Get public and private function definition files.
+	$Private = @(Get-ChildItem -Path (Join-Path $PSScriptRoot 'Private') -Exclude "*.tests.*" -Recurse -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue)
+
+	foreach ($import in @($Private)) {
+		Try {
+			. $import.fullname
+		} Catch {
+			Write-Error -Message "Failed to import Private function $($import.fullname): $_"
+		}
 	}
 }
 
