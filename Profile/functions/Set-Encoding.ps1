@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -165,13 +165,13 @@ function global:Set-Encoding {
 	}
 }
 # Set a compatibility Alias
-(set-alias Set-TextEncoding Set-Encoding -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias Set-TextEncoding Set-Encoding -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqecaanuaBg3Rk9DAFNb9gWOU
-# pz2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUA63zDQ5DpVuj+KWR+11uyCZc
+# pJCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -314,25 +314,25 @@ function global:Set-Encoding {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQzOoUecT2Qz5/9aPjqudHdbp4HiDANBgkqhkiG9w0B
-# AQEFAASCAQCEm+5dHhGTmbKruYN+0iDL+kT5TeSVKd6ey7CSJpuf2LoVlcvetZwk
-# 2w4EVpYoqFZS1cE6ohwspKvbfmAYZpRqHKHT9VOBZwcwZo+nAF2L3Gzs/2knXYYa
-# dv57FeHIxFx++otCCDNSSqcT2mIybCd0eTQqUpH5N+fmCiRg1GyAs7BK7ei/Rt9d
-# Mbn3c1KEVEjEu+AOrxe+ARHnKpJpk6Yx9yhYebZ1iFjuMZKjZxePjHDH8/f6Ofal
-# 2i1/AR+rBFKg6RaP2LajRZtas2++zK49Zrf2IkSd/+e9KL29OY1wjSAWlqYAkG1A
-# mg+OHMNtaDnbuw5pCoLrjxvVNXCTayoPoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSN7hF8tqpvasHVZS42iIndIaTj1jANBgkqhkiG9w0B
+# AQEFAASCAQCUCjbaxglDlvmDl0rY4rnNSI+mp/Q2OwyIT8LvXubEr5ZlSTZKSMdA
+# wES9dbeeOb7u0JWXDjB+fL/+rbo//ZXJeD2vA9RZ/qzCts50xSavnY3akzKg7kws
+# z3L0iH6UH5nYLbb+6M4xV4VnGLhZPGsT9PoSoE6dqfSl6UUUQq142+3W8hN1QKLU
+# uzt8cLuFC+eBwm9M0PydL7HxUTLw+3HSC/io56vIhhoTPb8tx5aDUmLumsMocvnL
+# eZniJ8VUgPt031sbv8Y+OGkylERteXS+Gs12CXJTodGIBW2v4Y4oFc4O7I0dUaH9
+# p7pUbKEe131lmWtUSa/J5Dx+kRSfHukRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzNlowIwYJKoZIhvcN
-# AQkEMRYEFPO2eD1yTrjmSl4OqNcZ09MK3fPJMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyNlowIwYJKoZIhvcN
+# AQkEMRYEFFX+XEV2/WeHR9cLKpIobqQCg5KoMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAp9gifvagS1oCzwQzrTb9keV6wq1v5AWTqSIYYV9/GSyEb
-# Ohw6Sevs8NQkHeMncgjkff8pnSu6nyS46oqCBxl871PamnMuz/Y/AKvRsOsV9/vq
-# uWPIA4d3opQBTtaxifv440A5LXffqnyM681ErRYNcrEe8IaGXsncpRBXJX5lCQPE
-# f9JD4SZ2gGZyU0mGtK8cnN5TAQU1VC2CCi6kCh2pgcH1W52TikI3fsrGyL25qb0N
-# gZ+oEaMh01fVB0Qq1yVyCee21UZDks5/y2JjEJg4hXDBX65yqjgGTGWvFmw3jVaQ
-# k8MMEjPIUve/InSpyvAY7qpXtZ5UrEoO7biAg2v4
+# hkiG9w0BAQEFAASCAQBB0jvzESQ+mXQzuCmNtv9b/ymP8zzYlirB9sHXfLW9rbGZ
+# PLbpKLuR5oS+Nc9zvyP6hpqC0G9L4N15L0S3JV04zhYuLLFLd4qUK2IqAUyOQUUw
+# Ft6psW7cacdTZrrr5GkxbKzzeiQ2Bg9/hL5woUbiCiVKyF0ge/67ZsHM72ipAWQQ
+# zFUSx4u1/BFsX0MHNE3vY2+cx5GlxTlZ3W2fwg3Lp6BTxvkN8d4EyI7JsGANq4dz
+# n+w7tzQIDAanIkJ2fays3VUpdh/f5ungPeVJq/KYctZ4BEeX2iGCmAIJ9eyJEBmU
+# 7aIskLmF5D0PL8arz2m3BxvjupFzX/KDyTX8czDP
 # SIG # End signature block

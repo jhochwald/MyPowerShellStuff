@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -95,7 +95,7 @@ function global:Invoke-VisualEditor {
 		# Call the newly set Editor
 		if (-not ($VisualEditor)) {
 			# Aw SNAP! The VisualEditor is not configured...
-			Write-Error -Message:"System is not configured well! The Visual Editor is not given..." -ErrorAction Stop
+			Write-Error -Message:"System is not configured well! The Visual Editor is not given..." -ErrorAction:Stop
 		} else {
 			# Yeah! Do it...
 			if (-not ($args)) {
@@ -109,14 +109,14 @@ function global:Invoke-VisualEditor {
 	}
 }
 # Set a compatibility Alias
-(set-alias vi Invoke-VisualEditor -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-(set-alias vim Invoke-VisualEditor -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias vi Invoke-VisualEditor -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias vim Invoke-VisualEditor -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKmWAgWYN4rjOqxTbGbtLzgEo
-# 7FqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrIRVpADAVQ7+HX77t+aSeZEV
+# AwagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -259,25 +259,25 @@ function global:Invoke-VisualEditor {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR0VFHUA4JMCQkxSQk7YdJuIptnNDANBgkqhkiG9w0B
-# AQEFAASCAQABIAMWfg1Xvy0JwK5mGhr5ck7LSK7YcxriMz5wNQgXXKpvmIp5OKSn
-# yX0YK0ibDDQFDordh24STikc7QHmCu7vXl3qDxFFvq0Y4MfCon/VRr/xCfKOXxOW
-# 3xGfcqArYcmzl+Suk7evQfMvMFHBtK3jE18e1KhciNsRZ72Bqntrlj6XstR+q7TC
-# IGXmTb2mCBYgxp4/msNNuT7tOTTPxIAhM7cbcMMxA0/qHghmQEpbmUGrY4U4HqOU
-# Ir0sfQym/HLYIZeZAeXZiE0Dv0Z7jfQ6jOYS5M7aYIpucZSFN1ky0LmAr+vSYdo3
-# KfhGxg7J+XKZooe/Qrj1EtralQGHwffWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRFpWuvRuBn0q+PLgVnR0FTUr1UVTANBgkqhkiG9w0B
+# AQEFAASCAQCnt8ZAs3FgT/I8IlstfvHlxsG0SafiWVHTtH/gGMtMate65f6j120w
+# jQf1n4Wdra8Jei0UcddTNfqlkz1CYKMUQ4OLnb8hU9oJYbqISuQPm7BonDDpLb0B
+# zTTokuCrC5duJRudmIQcE8ANUYiCm16l/V3GFSbT95fTCL6LPMnijIQqcrEG4ZzR
+# C8h8cpDEl+DVc6Ij1YiERoQVDQqpbi1ZACUUekaXNMl8qdTcQkYCNNbuJ/FGFxjZ
+# OGM+c0HEy8v9ka45BjzD3hUYLLV5wF0pTuz9L/+BQiMlqmzlXLnzkZAds1HT0YeW
+# vXDGCxKR0KbrGlNyO8wfzweR12bmY/+BoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyNFowIwYJKoZIhvcN
-# AQkEMRYEFENpvp3w0bctLGp0iKRl/0MPj+YPMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxNVowIwYJKoZIhvcN
+# AQkEMRYEFGVy5e1+bPyD0QxklAM495IfmyH3MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAuDFw3g4bxD6lm0va8j3ADaWGj0/DlNshBntNkPZ9HxUvW
-# WTaGoKNdf7U79J8T3vQODMGmKnLZEQuVtxzAxr4iEx4oZOKXMDyugRYiI5EqabR1
-# BvziqqOV3bA8qmecMtE2ai0SIJIOoVnkeRArVyS9Us1/RAcPj+jmgQEpHd0E/EGj
-# Geh2C5rntZ488EZy+VdoMsxoqXAMkmwcRz4cy+E36a3WIta9Otw61tEoK3LTUvY9
-# 7aTQxGKvHk8O82dJBjr/EBTvJgUc25uBU3Vo8z9OWIqfoGmE4S5VMptFk8vTswZo
-# FEIvcB+Gx1zcL3k48IIz9O6eZJ9hxd6/aBwPnhvC
+# hkiG9w0BAQEFAASCAQB6mOF3BtaIJGTTQGV6j3tB6DTs+K+dgCwAmIdaNbWHRzfo
+# Xg3/66t0w3MRi9Hu2XSSYgPxTJQZm+2/CNXsDh0CGH7ibxNFSKovQrQmhynlsFOB
+# mGM4VPwLbr+obWwzdBPp0Y+jZ4wL0G0CiKuAmne/IT9KBsJM7no5OruVCGJvtawO
+# gU2RYs8sJSGP502KuiowgVoY/h1vZPQEYUbHHUyw0A8yLWwj8PtDDUePOEgoUBYK
+# tiL52olSpSS4s7U/FVkZPF6lWhujsMiHllOAWt4uUbzzwijk9eTQKiWbqCxGVXgC
+# 2IXEOX94WrnJGHVUprBtxZQnjTdON9huiElcdH6Z
 # SIG # End signature block

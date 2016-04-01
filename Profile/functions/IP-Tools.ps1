@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -95,7 +95,7 @@ Function Global:Convert-IPToBinary {
 			try {
 				$SingleIP.split(".") | ForEach-Object { $Binary = $Binary + $([convert]::toString($_, 2).padleft(8, "0")) }
 			} catch [System.Exception] {
-				Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)" -ErrorAction Stop
+				Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)" -ErrorAction:Stop
 
 				# Still here? Make sure we are done!
 				break
@@ -103,7 +103,7 @@ Function Global:Convert-IPToBinary {
 				# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
 				exit 1
 			} catch {
-				Write-Error -Message "Could not convert $SingleIP!" -ErrorAction Stop
+				Write-Error -Message "Could not convert $SingleIP!" -ErrorAction:Stop
 
 				# Still here? Make sure we are done!
 				break
@@ -112,7 +112,7 @@ Function Global:Convert-IPToBinary {
 				exit 1
 			}
 
-			$Result = new-object PSObject -Property @{
+			$Result = New-Object PSObject -Property @{
 				IPAddress = $SingleIP
 				Binary = $Binary
 			}
@@ -359,13 +359,13 @@ function global:Get-NtpTime {
 	}
 }
 # Set a compatibility Alias
-(set-alias Get-AtomicTime Get-NtpTime -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias Get-AtomicTime Get-NtpTime -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHvJ8YfSHvaZqfbO1r1O/4i7O
-# QemgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2oSjy4pFA3SvB7sRyEW21kLf
+# UGSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -508,25 +508,25 @@ function global:Get-NtpTime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT7ullDbZNEjqmX49S28g1ZjY3mOTANBgkqhkiG9w0B
-# AQEFAASCAQAE5fMOdVncisCZFE23G8hufj4QFGMqPxLgc163jWhpbZxslAxYtRrR
-# f8n4m5Okla+M2UlF+U6/DSihXlFqDUqv1eXabCFrjrSWshvozcIfzcp3K2OlZEe6
-# rbeJQsLse9EbGfnpdshXW3cIKcil5cBP70TtGeIM8sL3R3rPCa+MvbN6hVnMbiCh
-# H598waUoAV98it31KXBFqBIWdhPeLUo8HbwJLmxUS97yXSBiT45CQ98wo30ViQlf
-# HjREx3MUw0oMPksCNFESiNQONO8AezhabKKlsHXj3L/6YnqHZC5Xy2DyM5cxMR5C
-# DGtesg6sx7ndMgz0j2P37yByRT3jxaJhoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSKvW10cSe6pJ204STdf+4J3Q75YzANBgkqhkiG9w0B
+# AQEFAASCAQBOdfhbBVonfSUk2W6YXXDNkU2f+zqToavunRsQDQEry1Ntq6v5NMc0
+# F1/cuwSbzX7TGEhycEukhZXPdRQrkQskkmu0Utaa53TbxZJENnLDaUZB9SQ/103m
+# jFd4+YnfVKGkuZA5ERcxxBvvnsTFDt2XjYsmxXlxwC2ty3YEtSJnyAuuLjxaQYsn
+# 6kYKjZEJ/kMBjA7GZsMIifCZ0VfoHRAjJm4dmg8VVvijlpNpqvZmpt9o//OqnDHF
+# tbsXHdKgJN/UxExcy45ajpm0X8clkitNjfSqSQLy3BQpeoceuZd0Dwj8Fr2SGWna
+# wfaOlvcGWW4ed9LZXk60TYkEAmMhTfPIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyNVowIwYJKoZIhvcN
-# AQkEMRYEFJLB6EcDivpVVR/mVkDBwQvdt4qfMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxNlowIwYJKoZIhvcN
+# AQkEMRYEFAoZsjJNaoc2iPAT5vM9EmUD3+qYMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQACuDhdk4//dnbAV8zPE7fPIEUuv9uVyoiIHe8n3ScRSp9l
-# Iw8lG/gvp2zXjiP8GL/BE3u6eRXYaDJZyZgBYfuX+OHDVHMVRUDhM9X7+e3Y16Sj
-# LQVSFCUnEzHzwb+wmM06XKu7DigJfHpvOV7IAh+MnAY6Q5NjOuvwctUDlFoczSJF
-# BT+hlW9t/8j7iYMZmj0O3zrCI30IRW3nzN1JF5r8pymBWCrtdIuBJ6eLkmGw87B2
-# lwowEJQ/gGPvOacVg2FIjktcIT9J5em78N8SOZpWcY8TZwTS4UrL/iVgB7awNjDl
-# oyNqU0Z+ua1h8E2cn12rRItfEPknWLej9SBU/Nl0
+# hkiG9w0BAQEFAASCAQAEeFvAZFCTHQ46ha9ejYuBT4jmUVyyzqZ5pjLSBsILEa2Y
+# M000q7xww/8azQSikcmYcGLFG0RDmdiPfZA6xzBjyv4vUp6Eppb0dVTxXdJ9INvm
+# Y3T55xJMNaayA48FHEEygrpORVlNSmylMUjiVJ+IJ7yfWtOaxmfRwMU2eFwq2ffn
+# vugiHiMS8aOKwkNtYkOxlSqMKpymcUwhSsYk0R0v4EbeXgQRm3tW8MTldplTI1+w
+# HMbhfu9NZcKTvXiq0I98AyQlObjofVVn4RRequsKOf9f5laXFf0LcP5lasBM4xKh
+# tAdNuX8gyPCzFeVAFUR4Lx5PaguKpD2pT6NoKoRV
 # SIG # End signature block

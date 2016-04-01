@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -96,7 +96,7 @@ function global:Remove-ItemSafely {
 
 		$item = (Get-Item $Path)
 		$directoryPath = (Split-Path $item -Parent)
-		$shell = (new-object -comobject "Shell.Application")
+		$shell = (New-Object -comobject "Shell.Application")
 		$shellFolder = ($shell.Namespace($directoryPath))
 		$shellItem = ($shellFolder.ParseName($item.Name))
 		$shellItem.InvokeVerb("delete")
@@ -106,8 +106,8 @@ function global:Remove-ItemSafely {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8bqdg/VAPst4lBRcwY1SH76j
-# MHqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUz+XX+Qgf9pIkCOD7jZ1928Z+
+# H7qgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -250,25 +250,25 @@ function global:Remove-ItemSafely {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBThg10ncV9ihzcflGg8DCBEw8UjTzANBgkqhkiG9w0B
-# AQEFAASCAQBWBkVo3sP+v3Nuiyhvp6eSLMkE8o2CVHHSqgggyQAZAFGfVV3HsPgE
-# qf8MQw9hzx6UZ4F7yOFokXt3eQsthzfMlVcg2kuAMXuXMn64RgJDH9G6VqoAuw/D
-# u/+1g2Qml33tMoq8HLgh0giie5JxrqgbQz9esOK+IYKa3X5VoBwEXZqYV6WImGRv
-# OgW12vQKYD+SQriPSD9TzpeEja7hDOiJv6TwSH7tybtjelEF7ngGcBcrLV0MCGWR
-# pPcXwI6zJ3DROndu3gNkYab1Y5K/QjKxJRS22mi3syFT1MUzbagFiJ1R/cFw6sYW
-# D2OUD2ea5o6mOFRh4sOKYV0hSQeaxCK1oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSwOxr861Eu6R52jlgUSFUt8Kgk7TANBgkqhkiG9w0B
+# AQEFAASCAQAnIjBgYEOL9kgi7J2SuC5IlO9M8EfBlWOgJMOHDB99yIZ/n/Pj8Xo/
+# +YqiyfrGfaH7QPdTQtfhWoUVvN9X0NWPrKBuVqHfUbI4/kb0GTJltrIGBw+1sLIA
+# d8YaZ5bZxh2F6qW/pXhZ/B50stzs+uzL5/x58XnHIwoqkiH9kALS5VItxekpih55
+# k52devuaD3Ux5ygOlBtl+vSM0GTnXiVBCJXixcFJ22PHEK+9HI7XD3wvf0gqlgws
+# 2Hi0qq2qXZwACXgCSJ+0Wf+Fv+2MqUzud8kqs67D1a7fl5sghlTcmjuPzDXToQgt
+# pfBiVbfwFb6Fn+fLySXdohvJOw4ksE6YoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzMlowIwYJKoZIhvcN
-# AQkEMRYEFKt0BNxtQoP59JJa7A+l45newiQbMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyM1owIwYJKoZIhvcN
+# AQkEMRYEFNZngZiKQCANOy5MlL2ZmTBkUDWjMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCnbp5wU68oFfZN0SXp9VG6fu2Z37pl769ghMRob0VJZgNQ
-# idGsWUewME/r9QndYwUJpXvq5bC/lINLk1n4V9wBWjxZXXpYGWid/RnWtC9SFHrE
-# LkW/I+R895xO9DreU7N8RUhw2t53Soh8n7AKjcd5zAhWpOAC/XUqmkmOSDPjnMQ1
-# Db4kpZ5JNvG3XIhrVArGELSpLslXtQSVl/wqFmRLvmASejDdJKIwqmp9KXtmYwjd
-# E3qIIYM3V2A7K9MNXVQEBcSqdQtW5oosGlSHz7NhFPW62F6JfD2JOed1dI5guQ+/
-# Sr0tl7C/9VQT7l1reEjQbS1sfCHPPbxAeQcYoISL
+# hkiG9w0BAQEFAASCAQBM0krB3a5r6oV+x6oWyeKtebS7qdqqhdWLKpaBsGl3Mgrl
+# 7qj0mVZ5F7q+IsS6+bz4mb1frcvnGJTNNmbRxwvH/gZ17gvjyr6eSwj/8RzfavW8
+# aNHM7AmtngaFF8hKjAEJPSTX1HWu18O7XjMvctunk6e9x18RAD4Gf3NwiHW0fEAW
+# p+Pc1Rd9nuRYhaC7ikBfBFDpQ5vINSo/z6ieMrPR6CXcEkIkSDcPj8EsmWVA3Q8E
+# vm+Ay3GcTEue/3awEoPEP1VOxAQj4B2u5erLioLnLD/u3A/x8ebO/t5gMIsh8rnw
+# 2uBDwy2Scyb8Ezx1n5sjJp/sAbdBzOITKxEbToGl
 # SIG # End signature block

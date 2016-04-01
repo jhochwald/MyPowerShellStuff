@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -62,7 +62,7 @@ function global:Get-TinyURL {
 		http://tinyurl.com/yc63nbh
 
 		Request the TINYURL for http://hochwald.net.
-		In this example the return is http://tinyurl.com/yc63nbh
+		In this example the Return is http://tinyurl.com/yc63nbh
 
 	.NOTES
 		Still a beta Version!
@@ -100,7 +100,7 @@ function global:Get-TinyURL {
 			# Do we have the TinyURL?
 			if (($tinyURL)) {
 				# Dump to the Console
-				write-output "$tinyURL"
+				Write-Output "$tinyURL"
 			} else {
 				# Aw Snap!
 				throw
@@ -131,7 +131,7 @@ function global:Get-IsGdURL {
 		http://is.gd/FkMP5v
 
 		Request the IS.GD for http://hochwald.net.
-		In this example the return is http://is.gd/FkMP5v
+		In this example the Return is http://is.gd/FkMP5v
 
 	.NOTES
 		Additional information about the function.
@@ -232,7 +232,7 @@ function global:Get-TrImURL {
 			# Do we have a trim URL?
 			if (($trimURL)) {
 				# Dump to the Console
-				write-output "$trimURL"
+				Write-Output "$trimURL"
 			} else {
 				# Aw Snap!
 				throw
@@ -300,7 +300,7 @@ function global:Get-LongURL {
 			# Do we have the long URL?
 			if (($longURL)) {
 				# Dump to the Console
-				write-output "$longURL"
+				Write-Output "$longURL"
 			} else {
 				# Aw Snap!
 				throw
@@ -318,8 +318,8 @@ function global:Get-LongURL {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjfujFv1JFd9RRM8y2XJs4aLt
-# hlugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUS8rje8+gpklGLdWUd5MFcnqy
+# b8agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -462,25 +462,25 @@ function global:Get-LongURL {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR8ZqiweqFuNf4V3uzyiUtXi5Y3bDANBgkqhkiG9w0B
-# AQEFAASCAQABf8VpNnwndrkNJK7HNmSvqCY4Cuhk6Jy/urE5tMIP+4TR7S2mOpVI
-# 6FGKPNYlpbHfdEOzM1Pd49eOb+2mUGvbYIsiIDDsvp4IwNN0Rt/dChj6mvz3Y2TK
-# nuqxK6zKuQmt0s9mUO/CWuvrX7IE3Vv+7V0dmIcc/qt+UwBne8lKlXI/OwjPTUbI
-# sBfYrfmLBp8A25nz5aSOAovXRflXWNHL6dZKpVBPFbKLedyCLvhIFnNDJv8KSYD3
-# vsYXneri/Lv/HZfNw1HM/jvoSWmZIAZbN5LuD7y+MmrwbeExueKhBe7whX29xWn3
-# FOe/aqxmbW38tyXy01AnjefdwQlJAN+koYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRuf8VLzPTKJTGaJea0r0IZ2Pa2lTANBgkqhkiG9w0B
+# AQEFAASCAQB4GZ3hTcA3SrsaEfgC1Dv6lJVJc+hW5aNojL8BOj6stCQk+KoY7Ikc
+# lqcosCTHYu9W7AiVAdY/+tWS9/p0wyxnRy9XZi5Lwzi5hb3zw8IXL4tOu9gY7/c4
+# yA+eqjuFrZm0C82wmIS4pRMRFT7H2GxTPAwM2rglztbnZP6QfQ841149q10H90hL
+# cG3KkT2COtosI3oVfzITstzISiOrCJ3ducF9TRL+4ihJrl7NDslkhOSAMo8e/2bn
+# 4koeuNeLLsnyO6IYiRG+OWvb/4gaPxtsgqPPetXm601YJfp6raTlT35RQChvt2o2
+# hVBC5zMqP2lLlHOfeb4tK3MExi2jut1ZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDM0MVowIwYJKoZIhvcN
-# AQkEMRYEFInxUXKN4pyX3Z4ef9TV9WIfGpu0MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAzMVowIwYJKoZIhvcN
+# AQkEMRYEFA9zMBH61RVkmmneIXmzXAvNU5W0MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCOWsH4ol7kgwupWGH7ZU163j4OBRTZv7G7Dn3tqjm982Nk
-# 7iSIHK1DYRBZok9lrYAYoCrO9iF/zhZ1N7bSV47dlg/fEnRPBsQTzCzfB9qXPtCF
-# oTPqgpAp+//7CIwcFy2TjaGDQKaHEfFpfpl4FR409xD4VqQuyYtP056PhUJjbbzO
-# Dd4+3YFQp5RTDpNDuOW+e0+OVeS6O8Y7Nw/BlaHmlABsCPArukF7FacGtE6cr2H2
-# oDbwxM69Wp4JXg1ymee4tu3KZUGPgAHaJWt8C3dJc5GG9CzdHEGzFvSNhdfvNwXA
-# W7QnALTGCdfwNDzy42thr3eSfZhtkx9JmC8s/juL
+# hkiG9w0BAQEFAASCAQBirb5b9wS5Vn7m3TRplNVQcScI/q0tIZ0lg7klrpUWq3qs
+# 3j+/XE2b4TJBC5vCo1wISgyxJQHPYcsPctHz/WkSvgrya+SPAUGVwWUCDywBml+y
+# 6UKX1FjIo/qZc1btI3lcfUNhPpWrGOJwuP5qn2d0CI5CrGq4bPnRW7OQgh/lws+A
+# MGQTH4vIKkmiQk498FzeZx7416xjE7m22qlHQDrW1O3TJ8QDFXfnL8CwxfWp84jO
+# BDP2LBpaU6KAIpWNVOxAuI5gilxfhFs1wFxcLcOEp2/jmFr9V9nSQFnVyysALeV9
+# C+jbbkPFB8izJOFhqQ4Co9bnqcfaVVgP9iUF4Uob
 # SIG # End signature block

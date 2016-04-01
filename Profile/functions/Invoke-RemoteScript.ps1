@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -116,15 +116,15 @@ function Global:Invoke-RemoteScript {
 				$result = Invoke-Command -ComputerName $computername { 1 }
 			} catch {
 				Write-Verbose $_
-				return $false
+				Return $false
 			}
 
 			# What?
 			if ($result -ne 1) {
 				Write-Verbose "Remoting to $computerName returned an unexpected result."
-				return $false
+				Return $false
 			}
-			return $true
+			Return $true
 		}
 
 		# Be Verbose
@@ -164,8 +164,8 @@ function Global:Invoke-RemoteScript {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzloWR+jAMjrPuUnHvhxmV0s2
-# WZKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7YsoOKKnjMubF5inu/+EtGIk
+# IEygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -308,25 +308,25 @@ function Global:Invoke-RemoteScript {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT1PaSAalwQjRlDbbM+lDwKUtHD/DANBgkqhkiG9w0B
-# AQEFAASCAQBjyZKuRZUeRpZv+HQ+on68ZlujB1sw9Ehh+1mbKzHsMMqlSleI3S3W
-# 6tSqbX1+FUYPGL7/xTofrZ0Ct0gbwz3YsVxuvtsA/j3N9M7F0q/GH5PiDy0Zo9FH
-# UQ/yreZoCJODvqcF4eUfrXtSGAH1vywzv86k2ovxW9uHsPPjay3n6RqgU5PAkYia
-# zU5l7LloffLCUbYwu2NS4R7i+RzFPLYnb8f1syVJPfXvM/P+DFW8xEcNhrHSwI9N
-# ahSQw8KfOLXmPKeBQs6RvKriXkbxqmpuZ4BqoHe7nR0PT5iA6DalE9wjqVngIg1V
-# qSnygNmS8J23I70bwcGUuzBa65XxN+fnoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSoo+UOkWIbQ91GQbgkPoNXx/X7IzANBgkqhkiG9w0B
+# AQEFAASCAQAUutwnRBdkrdLRs2aUggbwuhAMCyWvMDMI0AcUitbr6AB3ovzz/Yw1
+# Bh/MG/FpTsGTBzri5/ydG56z58lT6gGDYEWXiuwaC4KV4Bra+ehEUpnX6Y6YpH04
+# aeqXeagV4zIbVSCZXb3jk5v5vJPF7SgxMQ3kUCuAoX1RPly1NBC//2ILDBtplF4Y
+# BsNAKD7WcBWWEyayeDCKJ5+10vXga6ZR0wO7rm3yDUGiJoodMD5qWzRS6XN+V+zP
+# P+uiRYVUKa3c1oFdlM5YPfqD7kPb8a/pgxQgmITuqXCGZYcu0ztMSwU1uv7WXUG/
+# U8K6Py33t9dwaDKUlXdh7ILncv+Zhd56oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyNFowIwYJKoZIhvcN
-# AQkEMRYEFHpmG9QI0balKVMtfMAAhhS+Jz/dMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxNVowIwYJKoZIhvcN
+# AQkEMRYEFOt3UbF2Wy/FdjPpkTQrdeqUvJGSMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBMkA92o9V+A7yAwLop4m//J6iNBRWcmP/Eh3A8ompJB6Nj
-# 6fIlRLOo/+gMYQn0QnJfmGZXVzEAsNTOX287Jlzw0mZiI3POj69sYvdsWx6bkppG
-# CxwwF90C5csWXg3RSfMpCLHV+jernB28SrHeU+ZOa1qUDrGHHk9pxUnCIKJ1hY3c
-# aYRfyUoz1q48gB7CPGJVHrFgXuDaB4WTcF4WugExBxO3TWlnJ1LO3oEnznzl6I/s
-# RZsRE1bYGyWhtRYIdmWbLT2RrGskTU+ST0x7BWfQ6a2UyvMyQfoJk6rkbDbLf6jt
-# 9kGwNScPcUtW5Tg+GgXWG1btL/RvDKYtGvmBLY0c
+# hkiG9w0BAQEFAASCAQAa5e0qEToYtKkteyV2SGobt0P5TWpp1ikuc9+lAklHEDnM
+# zmxoEz7luc9yh84PaWpYaP8stvol0Yliq/rcwwztJB3uzoGdmgtcfq9njbLwfg1h
+# IUOj9QXuA3T+wS6/mIhuulyAEAxA3oDE9sXUv41GMNLuo80fdWf3j5ynIxI/UplU
+# /OiATtsz7WuSgppQiZoWS4dh5Smdgal94+mN3g/euB+FAeH1oZc21+WqwWhlIjV/
+# 3qdMG0DvtFlVccxJ5SqgJkIypMEQddxVYktbo0NvI8rCjHMO9Gy1nzscKAGuZABT
+# 3aBFqKlVgMwF7SQUH+mxR7LaMw98XInBOy0hnUdh
 # SIG # End signature block

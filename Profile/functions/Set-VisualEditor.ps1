@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -77,13 +77,13 @@ function global:Set-VisualEditor {
 		Set-Variable -Name NotepadPlusPlus -Value $(Resolve-Path (join-path (join-path "$env:PROGRAMW6432*" "notepad*") "notepad*"))
 
 		# Do we have it?
-		(resolve-path "${env:ProgramFiles(x86)}\Notepad++\notepad++.exe" -ErrorAction SilentlyContinue -WarningAction SilentlyContinue)
+		(resolve-path "${env:ProgramFiles(x86)}\Notepad++\notepad++.exe" -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue)
 
 		# What Editor to use?
-		if (($SublimeText) -and (test-path $SublimeText)) {
+		if (($SublimeText) -and (Test-Path $SublimeText)) {
 			# We have Sublime Editor installed, so we use it
 			Set-Variable -Name VisualEditor -Scope:Global -Value $($SublimeText.Path)
-		} elseif (($NotepadPlusPlus) -and (test-path $NotepadPlusPlus)) {
+		} elseif (($NotepadPlusPlus) -and (Test-Path $NotepadPlusPlus)) {
 			# We have Notepad++ installed, Sublime Editor is not here... use Notepad++
 			Set-Variable -Name VisualEditor -Scope:Global -Value $($NotepadPlusPlus.Path)
 		} else {
@@ -99,8 +99,8 @@ Set-VisualEditor
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1uvBEFDn+JN0rgSWVeeQsBUr
-# 052gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdlOvJQMeq9RyVpA9yh9Po+Hv
+# 4XugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -243,25 +243,25 @@ Set-VisualEditor
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBThZPcCU3TCkjN6pWCIh+CO1qusDDANBgkqhkiG9w0B
-# AQEFAASCAQBiMjX3WmotHU7wauC4KwuTAJisiLPOf9uparNtEst0GUFxCHdA4s/R
-# I2ZuV07OzyY9ezA50oAyUVp8r75uZ8T4yTzBIGnwPoUcR6p7/lzmF+SwB/c4tXnf
-# r+c/eEsDl6aftH7LC1biSIPRNbFctiG52M3SL2+O2bAsIVcpVISvmGlQcbqkcmXP
-# mem6AIcRi0IiRMW2are4JJQmzKryCjyf3f5nH7raLj7V/qIx5CIkCRQMpq/tDhHT
-# E2e/7mht+1GEemZByy6Lde7XZftk1UbS9Go3+Jzm0zniAWzK+QpnaiTUfWDg6/SK
-# iA5HT+64eXONoGJKm2fEez3Nl3PKTyi1oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRJ+z6SFAloEFwtxr/OvHvA5iXIgTANBgkqhkiG9w0B
+# AQEFAASCAQCMx5cyYsSdnV+W1HJI25hNLXEE0FYbkU028SWyLpZDL2H0LayLHyHE
+# WibdA5kWLYqzvBn0E7H+CvekDIsXPP0EXdd2Sg8q4bgdyijNp18hzk7ScuOCHtEi
+# 5+vPDgdy26g5WXYIvEGQ/3rjAbH2TpCzGyIqJgE0T0sF3uZq2ks/3BOiOxryqlC7
+# vEy/edTEHJyYG6eEtuapcf3jW7QoS1COcaq7UHqPvmF4Tv5522UpaZyOpl2H94gH
+# 1YGCFqjHPeqNuPRUJyB9urceFIzmwdJHhiSE+WfQMR89IuKk4t5bVt46dSjAHOun
+# 2T4i7P72ceEqfqrvdagqCndSXZSkTgitoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzNlowIwYJKoZIhvcN
-# AQkEMRYEFHb02C1MOWi9+QP64jCuDe/C3r61MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyN1owIwYJKoZIhvcN
+# AQkEMRYEFFSy6lT5PmzlmBB6TQcVnhp6xKfxMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBMvTeU19TsuUoCoZ8ULMllWYRlNTe4A7ttd+EgIwfAAQ5a
-# cPIeXjXfZsT/JaZjPC1jhb72J0BBFBFc+h5o0FlD3CIXEBjhpAmMXx0C3KYvO0PC
-# u/ElpFEwY1+hwI6fEVFwqL6q6P6GC7KQOUEqrIib1mtZC++fkdEGcBiUhLA4hSc0
-# lAMJRdd42BhDaX72875Tr8TsxIlCKzK1flQ8NmQyKajl7KsNx+GQZ5AjUYX0S2Yo
-# 1G4L+dBc0KkhA6/OocSoCZ048BqtBHHlBkChBbT1blOxKbebVcmgqaoZJAG0EmMS
-# 5caefa28ZpIxpyNet7nAm2jzWl8XacToJbhEKTDL
+# hkiG9w0BAQEFAASCAQCtVro84stdKwFydaoF1jfZWki4XcFTeledL9Ey7p0IiXm3
+# 4YMYu8VaM7LHFWJUB31c4+utu1+f5CGfH4lJ+cN7s155Em0LaJk+D0Yr8tM4l2LA
+# ae6CIsTDEG7PdaxnK0WxL/C4UO+utzz0SnMsF++e+D3LWHbUpSX5L/wfa5CFit/n
+# Fg03a6FsQPiXxSUegFOerx6d2+t+gVaWobkXkJ/0AuFjrrasKzbEai6T4n6XVPL4
+# oWw+0+tQqQ/pBlR6YXqlYYDeq19ZCVqzuQffbDXc2IQEEf3Xpn0RjkmyzMCQHPMg
+# MIHEH6XFiFHOfm6Xx1eSJ1oJxC6VHIRf0kHyM3dK
 # SIG # End signature block

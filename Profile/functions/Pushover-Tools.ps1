@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-27
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -195,7 +195,7 @@ function global:Send-Pushover {
 		# Attach a URL to the push?
 		if ($url) {
 			# Encode the URL if possible
-			if ((Get-Command ConvertTo-UrlEncoded -errorAction SilentlyContinue)) {
+			if ((Get-Command ConvertTo-UrlEncoded -ErrorAction:SilentlyContinue)) {
 				try {
 					$url = (ConvertTo-UrlEncoded $url)
 				} catch {
@@ -241,7 +241,7 @@ function global:Send-Pushover {
 
 		# Use the API via RESTful call
 		try {
-			(Invoke-RestMethod -Uri $uri -Method $myMethod -Body $body -UserAgent "Mozilla/5.0 (Windows NT; Windows NT 6.1; en-US) NET-Experts WindowsPowerShell Service $CoreVersion" -ErrorAction Stop -WarningAction SilentlyContinue)
+			(Invoke-RestMethod -Uri $uri -Method $myMethod -Body $body -UserAgent "Mozilla/5.0 (Windows NT; Windows NT 6.1; en-US) NET-Experts WindowsPowerShell Service $CoreVersion" -ErrorAction:Stop -WarningAction:SilentlyContinue)
 		} catch [System.Exception] {
 			<#
 				Argh!
@@ -346,7 +346,7 @@ function global:Get-PushoverUserDeviceInfo {
 
 		# Use the API via RESTful call
 		try {
-			$PushoverUserDeviceInfo = (Invoke-RestMethod -Uri $uri -Method $myMethod -Body $body -UserAgent "Mozilla/5.0 (Windows NT; Windows NT 6.1; en-US) NET-Experts WindowsPowerShell Service $CoreVersion" -ErrorAction Stop -WarningAction SilentlyContinue)
+			$PushoverUserDeviceInfo = (Invoke-RestMethod -Uri $uri -Method $myMethod -Body $body -UserAgent "Mozilla/5.0 (Windows NT; Windows NT 6.1; en-US) NET-Experts WindowsPowerShell Service $CoreVersion" -ErrorAction:Stop -WarningAction:SilentlyContinue)
 		} catch [System.Exception] {
 			<#
 				Argh!
@@ -376,8 +376,8 @@ function global:Get-PushoverUserDeviceInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUt8n8MO5QCI+9FEWFk8A598sp
-# 79agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHtpREOBOwOfhTc7dV4blBjGn
+# fASgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -520,25 +520,25 @@ function global:Get-PushoverUserDeviceInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ9XbH6Ck+cFrSHI9K0ZP+Yag5t2DANBgkqhkiG9w0B
-# AQEFAASCAQB+9gpwkE4SE1jPhbsP3K41Dl0EMK5rybfPsfQlMc7F38qA5JEH8++6
-# xGiffYGh68TVaPmX7b+oLaW0suO7B2bSzcqKWvS55JBt5U3p6jMhBpN0UQP7fCAA
-# Nc7jGyIC7d4BEmqC/pZ6DvINqp0Q3rfyhPpNpvJrxLjxcBXHyIG7q8fH84JWzemK
-# u/XXWXx2ZbdU9QVzPjrydhv6O4xIaNNPXzc4O0bE9ctkJ+GvE3g7U5MPdvPFFGMF
-# MZF9w88uS1t8nQ5D1U+tZLOukO638ICiWezwU6orxWakjwqAJa5PyL/1LKvwjaXo
-# u69CAsS9TMvRYNb07pS5bj6MYzkW3RxPoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSPJ7Ssx4y2gDL7W22cC/xUeOD9xjANBgkqhkiG9w0B
+# AQEFAASCAQANNZufMzyYAlj3jWrlZEge8HtUtTHCOHnaU8B2eVnIFsVd0oZ+CM6/
+# ce1seiMTp+Byo1k0kr55Q6My+XYX6+Hll2mI/7fxc0l2K3En3disga7fD3419+U5
+# jckjAJIsk6LZW4AIyKvfpYzUiBUOa2bGp/tCM1PjQmF/lti1JD4BqK8jpLixMP/2
+# f6+1Qtuy8mfO36vauU8WMtDqA84AVNr75yzWsTYgmuPQ16j/PLFBN66ZGN+Ol1Tq
+# m+qbYZHtPaGJI4sEwKSRuy10Ab6AgyPV+NBFok5l4/+k3wR7v6raLx/C5UuNeMPo
+# MXnH/5nI2wq6+oMxoWuqxUtL6bUqHXvEoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzMVowIwYJKoZIhvcN
-# AQkEMRYEFCgbczImfAKtcBA3Weh4zscG7btGMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyMVowIwYJKoZIhvcN
+# AQkEMRYEFMKDdb5fawhmUcw+e2bUTPyRJhSLMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBiNEUMH0X8fnhe2b3VF/zInuP0XxA+qs17Rwh3ZB8KLV1B
-# rmjTJ5s83pdywv9xSrBND45qQCR1jFOLQKvaN67+Hfm+weMbSkMur9yMMO288sNP
-# ufZMUmEwm+suZMMhN08Ur6ObEKN7lqyMt6aAtnUEoj2DZFgezlaaHBDJetQ3OK5g
-# sSxFXV/DI/JK+eqXJjWhhtQ7fYYx9Az9Ut9xYisQ1yTYX25OmVqN2C/qV+lAvA17
-# e3cXSUOFRa1SP9R3k86rsYFhvwrAIrdqm4W8yqNHFj07aOZSVjrrV1VXhd97Zvah
-# +lN8+2+qSlbd2+sWBEdHKO+avvpqCnAsUQG6jg/5
+# hkiG9w0BAQEFAASCAQBTPmeDuL5+VDooFEhOQwGaxuAJ+9Vkm0AFJoJ+rL3aNHgu
+# HhPtCKFYoggjHni5UmcnDVYJKDIv0j+9jbdmMh/3GX8aKlMhi18jIUYJvFFoQ/uM
+# Eu6/SR3/tRI7+f1bV/c+sR4wjSDUN70U257Zxz0azonU0PmeRWMa8/CvUUhf1HGX
+# 8xhtGyiKCziVOiCoq8ptjmlKibPqamjEUwojp37JoZA/K2UmJhZd/l4dHFNaVJq7
+# t+Ct2yxzWrRnTcaGCZTK7f8Q47+8qO/gUmlT6bqnRaKiH5MgUlfkd0W9U0YPVks2
+# g7qVXLhaPWO02u3e30WnCcZY/jjMzwTSbckUKK+A
 # SIG # End signature block

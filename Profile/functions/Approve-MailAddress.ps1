@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-20
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -123,24 +123,24 @@ function global:Approve-MailAddress {
 		# Check that the given Address is valid.
 		if (($Email -match $EmailRegexOld) -and ($Email -match $EmailRegex)) {
 			# Email seems to be valid
-			return $true
+			Return $true
 		} else {
 			# Wow, that looks bad!
-			return $false
+			Return $false
 		}
 	}
 }
 
 # Set a compatibility Alias
-(set-alias ValidateEmailAddress Approve-MailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-(set-alias ValidateEmailAddress Approve-MailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-(set-alias Validate-Email Approve-MailAddress -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias ValidateEmailAddress Approve-MailAddress -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias ValidateEmailAddress Approve-MailAddress -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias Validate-Email Approve-MailAddress -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzP7QiPIDwHlAfdtwAetSnxSg
-# Q/ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtqHa27BYhVo62rJF77lCLLB9
+# Up6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -283,25 +283,25 @@ function global:Approve-MailAddress {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTxhc51hYyLLSCYBeg9Rs2MQRGy+zANBgkqhkiG9w0B
-# AQEFAASCAQAuNGlE5SrkbhoVGUzi4cDmDfJxIdEzO3b93OXV8kthDzvz7VDoxR9w
-# 5iXWSWkA3TqE3a0rvaX5eEjDiThT1i1SzBHjrF9Bibz4zZWKTwc+vpVdVXPdevah
-# XAn7K9E2bymGc1671ozG0lWbyTHhGQT0yeADkQAfzAobCs3gXY7OhOKRt9lF4ggg
-# 87Hbkkac7uHIkdOJnP7QxZIghmMQLDoYChQUGUyAJppSMaBB/jZPxuu2V5UjNOxy
-# 10XQckfGi1nQ3djWlB5+xIpEO5knDChaax2wnq9jpVqN3zFVRbxiau/uuUbfiu67
-# 8qZt6F5lOINlglLotWli7AQUgHUQp+EJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSsgcv27aV1+hwaS5Pl+BgR6/Z29TANBgkqhkiG9w0B
+# AQEFAASCAQB8tu4j70lR63AFOIZDQnQbXfbrbe+nerhXvewgZeElzs47cVNmUuh8
+# ygTlexBacadYT7BTt/PJJXjiA+iJXf4GLITpzaUWC3IcPd7jPICmyVaFA4QqzL3r
+# Zu0geMO4/zp4avjYrfWxBdRmZMd1WV86biClr0TyiUhV++VI2MPyLrSOK/y9Q/4V
+# 7yTJWCZbj2/D3bEE5Dw/Alw434xPXTMJLVDlG1esSKlaSr9mr6DML6Wy8bvTNEzy
+# 59nYWFt143dgwQhmq1WjOzF2d0k2DyPDU7aisN18ff8n4BQejQqYyyJFEkGKIB6G
+# mTRJYqoqtj+8et5qX1Qhih9QerIl2RGRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwMVowIwYJKoZIhvcN
-# AQkEMRYEFFBr2TQ49+IHVPMThlSZ5jxQD2KJMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1MVowIwYJKoZIhvcN
+# AQkEMRYEFLIc1PwqJ1DrRXCBxz1QTBXTUF6mMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA75jMD3aJQCAKPc5aLh9xSNH11DPiLKUBTVg8c9QyFdpM+
-# fELrtyhBKtj0ejhVK1SgoP4+FjFhnSzYD//PmHFW5+MXVi2fhl2XsVAV5ujNW9St
-# kDqSM4+WT1hrfZMbW8vpzMv983eBekb7YI9fjMxPa6BfqRof4DtiPP3Az3ezug1R
-# oF3lGnwS8keHMQ2kl+TJLgQHc3l+coLshSL+O57orWbPFiPfNFAazR3vG34EszMX
-# mHUjlbrDzI9zldmBlLRCU/+sZ+fTm+k2B0AaCRFrO8Lk3KxbbO0OaumNfz2hO5/X
-# xJem4ErKqkXX5QcGpCJsDA2JtJ3WSvzOkdasqVvE
+# hkiG9w0BAQEFAASCAQAGXHJfjB0EH59ufmopWJfyfySvkfPqb07fCE1xjJtTPisD
+# 0wKpi6taFZw9a4yhmS9n7pza1usI/lbT82JuEHaiIyNbhlo3YF4G6wI0FaIIk+L/
+# ca1Drvp3YwAknNFWl05yI0cWf5W1AvbY6lWwZVyI9ELzE1p9dXYAvZ/rDGAMQOp3
+# jc8+8HijZXdPJ9PreEOcSPY6JhvRvj0JvP+cY3E7+E69JFNHRmG5UWT9a4xbWo/9
+# gmvA+Z6E7RynwlqHzK4dbrMEePNwYpM2HQ/AsirTW3Eq3DJrN9reZAPT9+Kf8f4I
+# o+1xcDh9ZPmSwpT2hT7hgM8peqVSo+O1wUq1trMy
 # SIG # End signature block

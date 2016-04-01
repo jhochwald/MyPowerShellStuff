@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -193,7 +193,7 @@ function global:Create-ZIP {
 		# Waiting for compression to complete...
 		do {
 			# Wait 1 second and try again if working entries are not null
-			Start-sleep -Seconds:"1"
+			Start-Sleep -Seconds:"1"
 		} while (($zip.Entries.count) -ne 0)
 
 		# Extended Support for unattended mode
@@ -219,14 +219,14 @@ function global:Create-ZIP {
 	}
 }
 # Set a compatibility Alias
-(set-alias Create-Archive Create-ZIP -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
-(set-alias Write-ZIP Create-ZIP -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias Create-Archive Create-ZIP -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias Write-ZIP Create-ZIP -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4RDUGdEEzDov8wJ3BVPzWvHP
-# aeugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIwyYeRWpkpKc+shOzNxSzx5G
+# 6JagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -369,25 +369,25 @@ function global:Create-ZIP {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRAf+QLaledkA0hWZrLy6Kuo3c8rDANBgkqhkiG9w0B
-# AQEFAASCAQCUMxh/+QQQq66KVdrGpP6dTkJPuYZgP7XeQSMS6o+dF7lqJRBKTlZg
-# ep+zxADkWTdsyBVjoByRKMJAupgpd3uuHZ/97PL7yrcf3B5Z9PZpNBTlyyrzkLro
-# KpkxPHr7tbGGLCad9ry5IHxN0SJqxP8MY+f+UIaK1m734X3MJnmdKlvxKWMHg2Z2
-# +EAYDIddZy4+vHqdVE9Uj0FOHtUCwkFhT8nk/mZkaM2sVmdZB0iZdlF0qep3w7R9
-# mRWejqAqEbqNrfn0cCVO/JBG2MwhanlaKludsFsdKIH6PT0u89OvEYLhZkGRfnaQ
-# biT1KpCT4f01q3PHv0iSG4WGCtGKOlMkoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRz8HYxYAsSwM3ZBNdtfF3bRFd9WjANBgkqhkiG9w0B
+# AQEFAASCAQCCLYJEn5jSn/0sYh86jXWwdtRjlF3tUOGQOVJML7SAQlwwH0unELr9
+# c1tw6rM7sVQh3ZyMZSPN6fnf4VwJb7cKnbhNsf60t1uNAAA8oBq8H64M6Tffq3G/
+# DFaLnosqBAOLgoW+mC+GCUVa75ABc/iQFyLPNUKtLP5eXaOZOdi8TYDzWm9oAmDa
+# 0lQ4mmShd4FG6jIj5aAjsxBjUcRNAhBxClbNX39zrvtFshJyIgv3ZC+nbugULkpn
+# ex/uQAS443my/afEi14YorLI7/O0AJlEBxnrb/HovWyJfb4N0XfTlFUc3WAuOI6f
+# K5d2G9GLqdeT04xn4S9paRYgJVNx9oGAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwNlowIwYJKoZIhvcN
-# AQkEMRYEFLzIK2VoFjv2NfzcOY5LRLLNbSVGMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1NlowIwYJKoZIhvcN
+# AQkEMRYEFJmz6QXgXNyFODtf3ZhaSB9AcoM3MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCaMFx/QyfjndUQdh0pq664UyvkRNiAlqKx6Pzck2J8Jx9p
-# z/4jRsUNhMUwXbvr8gu1QqoYJl5U4nY/OwHqoTOddamGcym74Vq+pCR0oO3aiZtI
-# YI3R63RSt3o7UL8lQM0MmytCcOQiTbX1c7LVJ+E7+GIZFgAcZbgRuYN+tFm4VViE
-# X+GD7KxNUp0jhZhUaO1OySfb8sNGckWqOE5FNjhEUq6lSlt4rm4jVCH6J0hH46wj
-# hKm0kc2fIAB9bbSqBf1olhNjkRHm7tA0swkDVaTo4O04pKfnU16jcnb873mb4vkK
-# 6BFVwjAQlD0JcKCyOXY0rWxwI3xcoUyQf3kPo33c
+# hkiG9w0BAQEFAASCAQBL0Y+Y1lh1+aEMuBCXHErtczHWk5KnbH1a2KZ6YlTjyuf9
+# MdWHujktuqWdRfyHVNV3fiKMZLJ32AA05jBjo7LWxl0WOBcuGtzKI9IngoEiUM2P
+# 8IvDBgQdj6Bsn/W1LVN2Fa2r7OCbfzjsQY1tRLZ3qacOMxNET4DOGuaOAwcxx7Ao
+# O1iJpko3ka88HkGgq7yzJSi9oBbLyfWc5rwvMxV2e+0efxJ4Xnktmaf52DU2fVSF
+# 1+vncDHGCG7SQ6TF4p9W76H+XlfcCXvEloww5i0NsBtP4ehMbjoZrbrU7CBGC1IC
+# TOOOktZfl2PkGDO+F35Qfl6Uvx8PY3xyl75n3TVB
 # SIG # End signature block

@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -91,14 +91,14 @@ function global:Set-IgnoreSslTrust {
 		if ($IgnoreSslTrust -eq $true) {
 			# AGAIN:
 			# Think before you enable this! It could be very dangerous!!!
-			[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { return $true }
+			[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { Return $true }
 
 			# Be Verbose
 			Write-Debug -message:"SSL Trust IS ignored - BAD IDEA"
 
 			Write-Warning -message:"SSL Trust IS ignored - BAD IDEA"
 		} else {
-			[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { return $false }
+			[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { Return $false }
 
 			# Be Verbose
 			Write-Debug -message:"SSL Trust is NOT ignored - GOOD IDEA"
@@ -106,7 +106,7 @@ function global:Set-IgnoreSslTrust {
 	}
 }
 # Set a compatibility Alias
-(set-alias IgnoreSslTrust Set-IgnoreSslTrust -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias IgnoreSslTrust Set-IgnoreSslTrust -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 function global:Set-NotIgnoreSslTrust {
 <#
@@ -135,7 +135,7 @@ function global:Set-NotIgnoreSslTrust {
 	param ()
 
 	PROCESS {
-		[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { return $false }
+		[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { Return $false }
 
 		# Be Verbose
 		Write-Debug -message:"SSL Trust is NOT ignored - GOOD IDEA"
@@ -143,13 +143,13 @@ function global:Set-NotIgnoreSslTrust {
 }
 
 # Set a compatibility Alias
-(set-alias NotIgnoreSslTrust Set-NotIgnoreSslTrust -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias NotIgnoreSslTrust Set-NotIgnoreSslTrust -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0I4g3LfEdgu15NSDAibOF0l1
-# xZqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVNYOt9x5B0mK9x8c77juJmAG
+# WVWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -292,25 +292,25 @@ function global:Set-NotIgnoreSslTrust {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQvXrMIFQmGqF3+MqvMcZIZ0lmLQjANBgkqhkiG9w0B
-# AQEFAASCAQAniL9NXJI5uaP+ot7VbuPJKS4PFOa0xlYuJrfoWBUgKOToMWEt3sDK
-# NPGjHVhq6rjmDroEu3QM431uwN8ArVFgQqIcI/LP32bZZi0DPsNOGb8qo4lV2lJn
-# pFQ5bsc7fkLH1/TZO7ouL4xacbcI2BxJ+69qjAzrNLTxHEtk+P1mw3QR0eM3Hm7W
-# EVpYksiLt8s9P2LYQnoVYVo5FxuoZ1Zp3TUHlX1TQMQiA8QK85Q/ySw3DB3lmeXO
-# e3nQLl0XMoeUTCtT+3C/H3NCiQDn89rSBhhVAkt6yI6LxZZr+u59UfM3cdz50P+S
-# cjFYBRhq7nRDko5DT7yGrHc5vEtSkpsJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRrz0qUAYR/jWD1UGtXLTd5gJicJDANBgkqhkiG9w0B
+# AQEFAASCAQBgbqRMxPm0qRCAHwMZU4BMZLW/dhgEqyQ6oEJNFXb/VELFNy8kK7sf
+# 3fyiVljyRCOInb6OEOrV0IV7MsBWJg/2vJs/EtYRhSli2lV87JGMj9MhKLqROQtY
+# eqRUBdjMFkKUkFtKm5lImjxyXT+UbUYQlPbJV5U8setgyuj6Q6lFlOa1+5IhaM2H
+# bZtKER8C86IrieCOuYZEqQtFAU9llCdOTNxZMeWTCdHYgRRoW7Jl0npAGIn8+aYX
+# ksaNiEdn8g2/3jYkJC++q7Ythk5AMZzdFN05Zgb8vFdt5lJO9UzApO1GlahMQ1UO
+# DamdKhrshzHnqyfH2C14dqLVjObuUu3AoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyMlowIwYJKoZIhvcN
-# AQkEMRYEFNlFyC4Kce43KdS6iIni/OEimo+jMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxMlowIwYJKoZIhvcN
+# AQkEMRYEFHapCmHZgr8/S2rjXFVfHGeCZvPzMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAxvLenJWZ5MdfLLg4WauLMe9Wt4i9V4rGK+8u8IwJBpeRX
-# S0kEzWnwlQ3sEm0ycZT9gjQobgrGFsGVm6aMOkI9aqZLY/8hzrdQmXG/iciptNY9
-# kcBKew/uyLytBBBIWJriJAi/Ul6Pt7vQ7+l2oosyRJhymYMDy1cgzm5VmyoAiwOs
-# ihHwnGC43ctiV1m+odZxq215v5liTUZ8EHv+J8xAHGV6Svije0CtvpSevWtxHJiI
-# xoG7mWmBxF6ymFnwJWM4CU8ubCE7LtFGath1db3ceKOEFOHgCK48L8yHIt6ODKPd
-# v6TyQsZso4tnG1ByP6ZLj2J5r/Pt1vCj1PohUXVG
+# hkiG9w0BAQEFAASCAQCsgl0XaSzO+9qmZDcYscJBP32KIMxifQ7QOdsyBMxo+Zsu
+# wLGydanJUoUC0QD8KkcRAi0+1uqSz7IQQEPl2KyF5weTjMKQjM/0O121Rosq5oDH
+# hqVsjNa9cleYHDol+uH7NNP2Y6z6a2TqGaAA5q1Gd3QGel5tgnLeUCnZr2D7aujF
+# r1kfBt7t1Tf4ivewya3x1CdcxBonxUkNauYYRyYtJ3eF66/3FGFUdjuQ+FHH3wet
+# 6MIQ5yZWI+UAEfX8APnI0TxX6zcazwyusiUYNlT0/yvcDz20JwJWUppN1gxMdBL5
+# bJgKmPpr+aR0oabO1gMKN27NXkW5BcEk4fcN2uaM
 # SIG # End signature block

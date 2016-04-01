@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -88,7 +88,7 @@ function global:SuDo {
 
 	PROCESS {
 		# Define some defaults
-		$sudo = (new-object System.Diagnostics.ProcessStartInfo)
+		$sudo = (New-Object System.Diagnostics.ProcessStartInfo)
 		$sudo.Verb = "runas";
 		$sudo.FileName = "$pshome\PowerShell.exe"
 		$sudo.windowStyle = "Normal"
@@ -99,11 +99,11 @@ function global:SuDo {
 			if ((Test-Path $file) -eq $True) {
 				$sudo.Arguments = "-executionpolicy unrestricted -NoExit -noprofile -Command $file"
 			} else {
-				write-error -Message:"Error: File does not exist - $file" -ErrorAction:Stop
+				Write-Error -Message:"Error: File does not exist - $file" -ErrorAction:Stop
 			}
 		} else {
 			# No file given, so we open a Shell (Console)
-			$sudo.Arguments = "-executionpolicy unrestricted -NoExit -Command  &{set-location '" + (get-location).Path + "'}"
+			$sudo.Arguments = "-executionpolicy unrestricted -NoExit -Command  &{Set-Location '" + (Get-location).Path + "'}"
 		}
 	}
 
@@ -116,8 +116,8 @@ function global:SuDo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8rSLQm/ZqAJ5y6vqJjIkIwDS
-# Wx2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUrLDtl+bqn6LfhGcT4W2tkTpt
+# 3jmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -260,25 +260,25 @@ function global:SuDo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRfyn9+u6XhWMrGh1FHQJi1NtMWNDANBgkqhkiG9w0B
-# AQEFAASCAQBWXwtoYDJpcRIGL3Yj/IsElJP7SP9xmBXSbEy8BLus45UPNgr52vWQ
-# EwQhFz+fo7ZZNfyYg0AyROMeHOCrnK8yNYDu1Uokp9Rh9/ND932q5q5/vt6W8zG2
-# dJtWd5d4eMj5hPXPw2UV83iRJggidi7aSWWxDYtG3mJtmFtY81MKQ8aVrePieBAq
-# lUlCA74Mk79z/2Ple2AQ49Rny06F1knYbwEzwGAT5VYqeAFQcjukvx/V/S9HmQ3r
-# qTmIwJjk7BKwBWViSef5LcUe6NHrs13KiuznyidmXJfLeM3GlyAilxEeBxYla2G4
-# GCwy05T0x65MkUaHqvhQVahTiIZQ6qTOoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQS2Ei9SSXoVaOCxBOEEKXGZRDtfjANBgkqhkiG9w0B
+# AQEFAASCAQAG1DQ144a7AyoTIBADUSM6D0WJFtTnujob5HwABECN2OqWFS0ZKwWn
+# 1rJbbWjcsGIQaYkzwna1U+ag2L4VXkqxt2Mb8fHOzl6HVtellaHvXfMjdW4odoW/
+# LubJwRq8JgBrKpMmbMIPV3T+SmRiueVaTu8adssPya5mDFaqUNImi4tGUU7y6s+9
+# KML7cud/yKj4CLHFYuvc+3E3IXQ3ydhCs2FuE7MnPNt4u5xWMvclczxYOpSPsN+f
+# MFbMCtqNd2GRpRgAmCLJvDdzP58qPD4Rj7fvqAr9RVytpuVlEujTF/91DXBRaUMG
+# pBm/F1UCVjizUNPjhHTYmTRgXD1NtewvoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMzN1owIwYJKoZIhvcN
-# AQkEMRYEFLiT1DkWp4qMmbC2PByY9nFYy9QBMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyOFowIwYJKoZIhvcN
+# AQkEMRYEFOkbWsW+RnZGKUupMi3t4A+eD6wXMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCDozZE+rtRQBpENjf/3lXUslgOgvLTyUfZiHbHWHJlZWZq
-# X5/8Bjk74iiBkIa6VlaaLr85U9BO38KdhdoHAAlfzwM+OTD2akhWPg57liyyNTla
-# azFUdftp8W2tWcXyq3hywFZLHtK3JR7PkVmMkiA5CQpNXbUiKfCx1rTLBtbUT4nZ
-# 05ufTCUD3xNMhTP/OU/giuEWPcUdqT7+jtT/mtCOoI/lxJeBv2oGcEfVEjueGyFQ
-# 98/V6b9pm9ARML+IvogGud/gSR8wJuy3ZuvUMr1mJ3jVBoHNup0+8vuovooQxHPS
-# n+NqDV9qod4yjD0SFSJvF6vmOvl/qUixjT3RdZVl
+# hkiG9w0BAQEFAASCAQABMQ7DegqFnKaQRN8Ry+t8a0wIUQSNo2jAQOM38q2bFBK4
+# sVoUIsZRM0zFIF9e8YkauCdr3eEUZ7idEGNrPS6e5Ltd1plOAazXqCoKfOCCsuXH
+# X/9w2HpEimgvrMYfmx0IcznnP/VOgNVHij5sIxVE897f2Vy5YbzYAEZLnUvUuhF6
+# 9wA0yQ9Zt+4smoKHWTfMj9JxQuooX2hsreBZ5ak7C6GEkKjEch9uN8TZop95c9v+
+# OsOzecG5iqACYasS0mzq3QEp2rAXbd/Mp9gHgX1JGMTpCxVYAyPHEsVlnnB9az4t
+# nsq1rkBdCfSDcv0YxBh/DHBunrjx9RqHySk/sRQE
 # SIG # End signature block

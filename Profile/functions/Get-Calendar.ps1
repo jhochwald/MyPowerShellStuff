@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -79,7 +79,7 @@ function Global:Get-Calendar {
 		Write-Host (Get-Date $startDate -Format "MMMM yyyy")
 		Write-Host "Mo Tu We Th Fr Sa Su"
 
-		For ($i = 1; $i -lt (get-date $startDay).dayOfWeek.value__; $i++) {
+		For ($i = 1; $i -lt (Get-date $startDay).dayOfWeek.value__; $i++) {
 			Write-Host "   " -noNewLine
 		}
 
@@ -88,7 +88,7 @@ function Global:Get-Calendar {
 		while ($processDate -lt $startDay.AddMonths(1)) {
 			Write-Host (Get-Date $processDate -Format "dd ") -NoNewLine
 
-			if ((get-date $processDate).dayOfWeek.value__ -eq 0) { Write-Host "" }
+			if ((Get-date $processDate).dayOfWeek.value__ -eq 0) { Write-Host "" }
 			$processDate = $processDate.AddDays(1)
 		}
 
@@ -99,8 +99,8 @@ function Global:Get-Calendar {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNERZ2fZ/b/iDZ49tEs2/vJGd
-# /cygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULKjNI1vr6CfYRpNhSlGF1BG9
+# 2xOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -243,25 +243,25 @@ function Global:Get-Calendar {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ1B8OiPBdGeMze4gfpPpftTpTOiTANBgkqhkiG9w0B
-# AQEFAASCAQCgRXAIrPwFbhQmg/ZNd4p3TLjCDJqN42VoBX67Auw1yAMmrys56Ivc
-# i3Fkv+MjZcxCuxp/adk3rLm5y689Z9g8UodBZcASMAid6TGzKq6vtZaavDDeDRVC
-# FleUunGWpbAbHSZ4OpxOwqkQ+4lhe0tqwWwLAMB3/ik0xZC+NF1H5HMKucsE/8NG
-# /0Z/h35YLGOMN+1Ia/IPVMYkQKJrWawlUCK4tlLJ9lTkFhGl4otAjPBuJW/wBbsW
-# E0r5pCdWljCqsQ2W9fW7g4zFYOr8sU0R7Pcc7+satKm47LzhmjFCXkiiGBekG7CL
-# kMELq4pesTNOjBJ77VxSzw1t7mUGZO9ZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTSQyOs9Pe1za0HrgB9QxyfRvNGpTANBgkqhkiG9w0B
+# AQEFAASCAQAhOuQwUo0B98uyl4qJ1fzMPVBg+Fi9sG7uWlLtGibn0hh0EF3XEeSw
+# 7O/Txcd4u2aQN955tNnMsAPiVzq5PiEoJKJIXC1gP6yaJ+N4tkceZUrDPfCXFF5G
+# 1bPU3gJ5OsqwXkewn25eSuNCvm2pHyGPQCQL/5L1oz58t9St1xRM9R5A7hgdBZxU
+# C1cubKpBVrO2KwqsLdCE7fG2QgQByApKNJXeM1tf15lj4kECmPjgIn+OKx0SMn9h
+# ffAuZ6fx41IQu9k0kTeVz+iwNHRVKEl2RMIRKBi0vVWLqz+ofT6wSd7PUv4+p5k6
+# YbhQhd46qLIhMQQ+Ec/Q2H5Q573Se4xioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMwOVowIwYJKoZIhvcN
-# AQkEMRYEFBUrDZdIsRo8HetEwZ7I7BnX11QaMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwMFowIwYJKoZIhvcN
+# AQkEMRYEFMayCoSXHqhtpstFdlfrdHXvdnPUMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCPlqvplikN08h1ZnC+q6TuoZ3ycvGtQpqpwpphPbYA78DZ
-# yIpp4L4CEOHY8DUPk0WgluWKM5Xa4lpH8vovl1JdVcuLs0Mo2xJsHnzAnFdoVeuJ
-# ySqE78H3f93Ofb7QGxn4RijUidgoUg75Eo9eJURyJXO/UBCR5QBED/rkqcwssN2k
-# 7dgK2Pe2uiiBsJeLon+AhRZw4UbB0I+PNFd78rC7Sld2S6hSTN/t30wx0Tf3JoqM
-# 1re/YC472Yl8vE/7o8fP8iITopbHRkjix3eKtfDHFX/iOkOpTJjTQJr9JT90KBwu
-# Xee0mZqOQYw6gWTbTAium/enEDxT/M1nzKjISJc1
+# hkiG9w0BAQEFAASCAQCXHqG3DqwuUJgzu2PPayQ70hEJDozbFtdMuJHT0dEOJniV
+# SDUFmxq17I4GAs12iz8zCA3kx3lmP3g7qa6fYJOkjfUBGOXV9md6WLfLbl+/rQgt
+# EiNPUmbCf6TUiwowHtOG7fSnIr0bXkgmqLnIqnSZHLeVNorhIyWoMZWrI2L7W+eN
+# HMCwrn5XMjy7FSuIDj6Pnuu22zvkFxHPp1aRRu83nT+K556Wvf0G6XvPoDOGR7oj
+# rbamjwgYZe+uPOnsm9BEKj3zIbrxZ1CzF8pXLSprzkgOrhqr6cZDGPucHSPDxiPV
+# khI/3NAa1QcmsRLRxayTT/UPd7Q5g+h37q5K6D92
 # SIG # End signature block

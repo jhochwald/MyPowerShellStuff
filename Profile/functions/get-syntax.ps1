@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-16
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -58,9 +58,9 @@ function global:Get-Syntax {
 		command-let that you want to check
 
 	.EXAMPLE
-		PS C:\> get-syntax get-syntax
+		PS C:\> Get-syntax Get-syntax
 
-		# Get the syntax and parameters for the cmdlet "get-syntax".
+		# Get the syntax and parameters for the cmdlet "Get-syntax".
 		# Makes no sense at all, but this is just an example!
 
 	.NOTES
@@ -91,8 +91,8 @@ function global:Get-Syntax {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBiUCxTgt9/tml52Nmi1ozRNo
-# X7agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZemB/o6PcgAUQWu3MnsGPzId
+# 5SagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -235,25 +235,25 @@ function global:Get-Syntax {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQrwC51klYnmb1XyUr8WSwHo1OhbjANBgkqhkiG9w0B
-# AQEFAASCAQBRLrt4y53fPdaVWEzQOzt3ivjNK/nCL9ppSCRl15i3TQGIcq7MkJg3
-# Ib8dyLFGFFk1olv5bmShGjPFuYn82tFfnBQ50I5ztvaTlVwMADaoAhB7mORyIigN
-# OWNiYtc4kVvp/YVVfqkQX0Oq7lFgURcek2x938sg1IJfn4mgGvFuMsvSuq9vmcrB
-# 2zG2lUhEnLG0cPu7sJL14bXkd8L2GnfOsFN12qtgswhHD8oF+1zxNOG3ixJ+aOmK
-# lCkKze+D4XUzeXfbMlcI42MxiYvzFmDagNn+0OKLohsbZgsj9km4d8eyPySQbntC
-# LGcbp3ZJogvN1eeSjZpDY7myxjQa5MBnoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSHiG+yewBBAoxLkxYwQtXoIrkAqzANBgkqhkiG9w0B
+# AQEFAASCAQCpe3nVvqYiwmQ8TXvw0GVIlskyJ9tmsupXqnjUi+BpNNqFvcRVAW/X
+# CS6jVbcQq6x0gPSIGFO5TCXE+PhEcEh8czuCse8nQFOf6421VCAmuFcLF4mUIPUI
+# tNhkc+xQYsjy7PRIKY7IJaQ1bf7Zbm3xdg+bDTl8YfsQdJwBAh4qU8RNV1b4hmnD
+# 1REPr+zj1lLRKP0k7Qi35nXlKRoLw+wYb7qPVejB9owpKBe4+DqwAuO4v/8i5RPv
+# ZbqJ1Ah3GbYQpBKiNB/s4wnUkzYdssU765p6FPye00lbl2OejDr3UARhCuqE++PU
+# kG48s57BL72m0Yp8k4vx15gJmnrg+wfRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxOFowIwYJKoZIhvcN
-# AQkEMRYEFMtEAZaJm0mnb1hiwlvk+Cf0HyyMMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwOFowIwYJKoZIhvcN
+# AQkEMRYEFHpFD58T6VcUpk7FXhEnedAp48JAMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCkYfe1hjvpQ4TOHMv0FS9oXmMtzIxilNjCj2eSekQ9DYxJ
-# GkcWIROFrcspMIZ1Iam1kCb3dhPytiZumhehDqyIP/yyf6mqJ2mDhqprIhdgDGXv
-# f3Jf3U1xvYa604YzlPwBUAKvMCO87Od+9uZwLBToQd40Tm0134Z7Kj1aaaIF8Q6I
-# X+xfBRsYBZSFRDW/XNef6BwErIe/Z1VCe+bmEDnRFbV+p35nxX+cVEfM7Bo3caxO
-# /OGS4ojRCZ2jgT94y/1l16shnFTsV0QALb5XZzj3gZ5V1VFMjhb/yeNo6bPLpWcI
-# fcMm4QTasBEdoHsJ97I5B2hHJ0bKV9WxRY9m0ZpG
+# hkiG9w0BAQEFAASCAQAUY62Gk3z0KhIhoaS23Scra7Kb5fDy8CcC3WX3r1URSbVu
+# KzzyYIcqiQZEAHJPwgdhfqhJWWCaWF6P9xF2ivfknhDjdMGRXPhjJdzBdjWlSa9M
+# p3IJ1NJHypmSWamPqs80WQ2LnHX++RKjsvHJmMiffMWjdoCrmr9F1c0iYL5k3T4R
+# 9D3YuUxWgvOJe6tLh6KbCFUscgLuxJcFSQ4un0BLaYWwJvEqCBJBeMKbUy48qZDq
+# ibS1/lQ+VsiQFhb29ZR+B0ipR3rmzUfuD+4VsjPxbGtPfZehDkqJoZOx8VDdiARL
+# k/kcWCpTen7JbIOJplvDIVzR/oYJvn6C+QX1DoLe
 # SIG # End signature block

@@ -1,5 +1,5 @@
 ﻿<#
-	Basic Function found here: http://tomtalks.uk/2013/09/list-all-microsoftwindows-updates-with-powershell-sorted-by-kbhotfixid-get-microsoftupdate/
+	Basic Function found here: http://tomtalks.uk/2013/09/list-all-microsoftwindows-updates-with-powershell-sorted-by-kbhotfixid-Get-microsoftupdate/
 	By Tom Arbuthnot. Lyncdup.com
 
 	We just adopted and tweaked it.
@@ -36,13 +36,13 @@ function Global:Get-MicrosoftUpdateInfo {
 		In this example we search for the Update "KB3121461" only and displays the info about that Update as String.
 
 	.NOTES
-		Basic Function found here: http://tomtalks.uk/2013/09/list-all-microsoftwindows-updates-with-powershell-sorted-by-kbhotfixid-get-microsoftupdate/
+		Basic Function found here: http://tomtalks.uk/2013/09/list-all-microsoftwindows-updates-with-powershell-sorted-by-kbhotfixid-Get-microsoftupdate/
 		By Tom Arbuthnot. Lyncdup.com
 
 		We just adopted and tweaked it.
 
 	.LINK
-		Source: http://tomtalks.uk/2013/09/list-all-microsoftwindows-updates-with-powershell-sorted-by-kbhotfixid-get-microsoftupdate/
+		Source: http://tomtalks.uk/2013/09/list-all-microsoftwindows-updates-with-powershell-sorted-by-kbhotfixid-Get-microsoftupdate/
 
 	.LINK
 		http://blogs.technet.com/b/tmintner/archive/2006/07/07/440729.aspx
@@ -65,7 +65,7 @@ function Global:Get-MicrosoftUpdateInfo {
 	)
 
 	BEGIN {
-		$wu = (new-object -com "Microsoft.Update.Searcher")
+		$wu = (New-Object -com "Microsoft.Update.Searcher")
 
 		$totalupdates = ($wu.GetTotalHistoryCount())
 
@@ -92,7 +92,7 @@ function Global:Get-MicrosoftUpdateInfo {
 
 	END {
 		if ($raw) {
-			return $OutputCollection | Sort-Object HotFixID
+			Return $OutputCollection | Sort-Object HotFixID
 		} else {
 			# Oupput the collection sorted and formatted:
 			$OutputCollection | Sort-Object HotFixID | Format-Table -AutoSize
@@ -106,8 +106,8 @@ function Global:Get-MicrosoftUpdateInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwudQcdBmGMGbJSu2WVu/0ZQv
-# 6eWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUI+5bTQM00MGDmIm2ROFySMOi
+# +FygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -250,25 +250,25 @@ function Global:Get-MicrosoftUpdateInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRGpFSrhh/1uUgPQi5f2PHg3S3KPzANBgkqhkiG9w0B
-# AQEFAASCAQBepBQXo6ilNao+IpXNc1kUX/CDMjc0d1WX0534Aze4GCB0rSy8rv6+
-# oEIxUXTza/P+F5c5HCP7/YeAQFphWypcogEz3CyrIEiGh33RNFQQm2jh9HFp8YaL
-# 6YI1QCwl1mnFK/QnavmqfMCqxoNK85CW1qEO2kGfV9AU4VqLRUqZ8icqQuw27T6p
-# rSI1bqq6GPxbcUQ5LG6ps2F4QKIg9165RR89uSMAp/sQkmfdDT70Rteduyj2UfFf
-# BFEfXkvdchCxDYDyLK75YJHKRkSw48Q1Bxf+uui6jmBHc8tikH6zSz9XZ2oz4F/p
-# eH3Ow7N3Xx0GhcxMjkeJQcbJQt1eIQINoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSP2/F0Y6SkFugGdyBmAy1QQxAe0TANBgkqhkiG9w0B
+# AQEFAASCAQClYTvIjDJ/Og56Zjl0XBFqllYgFx5kXcrvgaofrDUubLkQA0YVpc7l
+# BYrGlKdpyKCjKS3bo5Rfu8e0RbXpkhBAb/A1rGgHNih1+Ne0dN5NcC4EF5C3CZ7H
+# XI/ULLCiKsUCNJ7A67heD8qZ1NjDbr7q7DlbUkTXjIk8tgMGh0r71Q34NB9HL7pp
+# Lj7XNJyRN/jMVSdy6wRMcj3anwQ0/w5/Q1aHPCAGSOO5ezdF/G53JhXMOQZ4/HMQ
+# VcZ1Qw96I5C6rAo1YDti3Rl5gdp/Fag206oFN2VarMVveuPWJNJJ08ywz5axUGs8
+# G9z1w6wCwHmkZazKLHRVc22DzQJLaFFdoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxM1owIwYJKoZIhvcN
-# AQkEMRYEFDGc0HaU0IERNcT/eu2pObkK3w5DMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwM1owIwYJKoZIhvcN
+# AQkEMRYEFOzj8Y1kamBOdLFi0GBKXzpoGNFPMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCA4Rhzz415HBLSCYT/hgKGvHBvS1oz0XZX6/v0zZcnsGuB
-# toMMzHp9rvlwhhNy7SM32Dpnl1A8j5vjtBdboYlQia7UUbt1+CHscRa+HtTeWh+m
-# mXp9VsYpTTif2vj/VJV/kSGyy4TMUIv4QqifBejnwsGdqPpLSVMybuVtrcxplKnn
-# OfBBb20nsmTt8ojKB8Yexcq0e0xHF3LruFOhqq4wpUV0mjrLlSZZtoopk0UNzuuP
-# rweW2Vr4r63NnyPqLP3mJsL1hOb24y9kBedMPtiWfr+o11RKy8UnbkjbCOi4WSMj
-# jeGwmOo5wfoijELQvRd0fWMhDFOtlhivxVCdjo+x
+# hkiG9w0BAQEFAASCAQB1xz1vPuZABYqwp+5Ol6DMZLJ8TJ0TJnnm2DPc75YBZvMe
+# 8PnNwupyy4a5dxp4y4CYJV3JjLXnkqUM2trJ80+1eWYQdifmVlhpZWm/HKSVrz+I
+# R8jSn7vW0s0oURRtdnlQe5mrQrgi+8tmB7yJmU/KEu0MVeIwxpCFEl/9ymHQGg+V
+# USbbPRrDvQme5o6X9gsoVxoyK2JYZ/MVuRiEOX1Uo5+V3Ho/V0DSm7pm8vzokacf
+# 2cXnRiOSkqSC28wKLQQzYT6mZvfmzc9147ZOt5uiyInuXyXMB99ZAxEhnSsVstv+
+# 52Fw6OxByTjubHsubitcRfU9gclLNNSLanhQcHDX
 # SIG # End signature block

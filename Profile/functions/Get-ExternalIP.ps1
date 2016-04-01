@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -77,7 +77,7 @@ function global:Get-ExternalIP {
 	PROCESS {
 		try {
 			# Use the native Web call function
-			$beginbrowser = (new-object System.Net.WebClient)
+			$beginbrowser = (New-Object System.Net.WebClient)
 			$get = ($beginbrowser.downloadString($site))
 		} catch {
 			Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)"
@@ -89,15 +89,15 @@ function global:Get-ExternalIP {
 
 	END {
 		# Dump the IP info
-		return $get
+		Return $get
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwW3t7Y1a9zdt9p/dvU58w+N0
-# pwOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvMUC2TU15mSsvYdMBE8T13nL
+# ukOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -240,25 +240,25 @@ function global:Get-ExternalIP {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTGe2JbhbVcJkkWEHs/DiVXB5SNrjANBgkqhkiG9w0B
-# AQEFAASCAQBQtHP4K1FLXBZVl/BKrqcV4FmbL5+D9NExTVDC6JI/f9Jt7HcSLqIs
-# LqWlW+S3gyaU4Y5s+X8p0wd1QTJGZe3qZxoKnOtw5oeFmbeCV3EH0jxLmTnD/62A
-# akZ8iNd9YrlMrvF945KTFZZjCvRc6MCHb51O5M7rnLJCRYxZU1riSdwHgfl6dbCM
-# C4mh0wxknN2BvUceXKxC+ELe4JpxSv8nzUe4GNx2I/e1XGk/as6y5XowfI19jpo+
-# bid0rCWwtG58QGz4JeJiFwToFeLkF4Ds7UrPFLFc9ZdGFy0vGxygjzT+HjqykkXc
-# zYJ4oZNqbx9OEQ38BG9FgYMXkWan4q1NoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRT7nLcTmqoSVVuUYva2Wir8L61LzANBgkqhkiG9w0B
+# AQEFAASCAQBMWfFQUiHp/eIbe3RcMpahzW7BtjdoBPiVy//p3sgKslrEg3CgfAbP
+# JVSsCOUKNkqCyn4qyWLayjc0Q2CopE9fFMJiBeR0SB6ZxZqVJ3jOhBYQcd8YP33O
+# z2ELkg2CxtFpQtTRAAf6xihcCwOD9IhoSqEfpDIgZ2Q7gyinKYbyOXO/EY1rnuBq
+# gaz0GaoihnPLcHr3EFzls8x/vcDptBp6LYeOylCNehW7jzks9JxpWVkjA4zwdCJp
+# pCLBq9EZBtb8X2fj2K5ZzhA7OnStWqQ+ybgKHHeqVoTY2keyCv2hq0ktulnC6HVL
+# MlyRFxa+KmQ9Ee/6iz99plLgir55AQ76oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMxMFowIwYJKoZIhvcN
-# AQkEMRYEFKuHs6j+caZMPRfh9W4T3bnfgLUDMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwMVowIwYJKoZIhvcN
+# AQkEMRYEFIhpg1DW0PZjI51eKHALdKekPrzRMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBbtkYEOiHFl8/uzRKUTJP3Y9WUDC2lZkmBDNR79wLQUmTE
-# 4X3yWfhSTeZkRBHZku7A3y7nC9lptzzpbnjZLoeHCRVSf3masXrhKWKQLnfKUsX6
-# hi0VVBbu5nHVDjPdDCSNTpp1PrRW+hpnf+0t7pjlE18Wl9jrLZcq2YvpkFqBy24Y
-# npIxMSscB1XInLl17RXBehZrwB8wcwMPlMuSzb8RviiutCwzt/voiA4xkjyscMBx
-# 118s+XKkCY2LqLDjIaOf6ABj55aZtSMx9ZpthcvXDAaicB0fBhi3TCsVQkaEKGeW
-# ztmSxnh3Cgx0tGlsYG+koDdQlF2ROHExfo9LeeQ2
+# hkiG9w0BAQEFAASCAQB8opIn/zi/cPooxYGJzL1aT7QYT3Gr4wnZwH/AXUOVmaSh
+# 5BRu3kXJZsqkGUF/fb0ddhczIyoks45oyZaC0OtbdF5N9PtKKCdJbtpCSEqlPz3A
+# P1KC1CN5icpOirTRwU4XUqQ/Of1Sen5cJp2D8rdcbEhO4LkFJBJqAbiu26j6lokN
+# KrqYzLOB6vWc31j9taNoVbdwCQpZaBTr5mRj6NDi9FUu0/f46sohHczIQLn4OcoR
+# e3jdXpC4f1hfVBK2aG99xtNIkWnq9z2HntUpfWX7LN7+u9R4bHfa6p+iKmquddQ/
+# pOBNUbMmdo5iTef32tzhXw1j2/+Fabmqv2MkTnpY
 # SIG # End signature block

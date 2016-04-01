@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -100,7 +100,7 @@ function Global:ConvertTo-UnixDate {
 	}
 
 	PROCESS {
-		$unixEpochStart = new-object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc)
+		$unixEpochStart = New-Object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc)
 		[int]($Date - $unixEpochStart).TotalSeconds
 	}
 }
@@ -117,7 +117,7 @@ function Global:ConvertFrom-UnixDate {
 		Date to convert, in Unix / Epoch format
 
 	.PARAMETER Utc
-		Default behavior is to convert Date to universal time. Set this to false to return local time.
+		Default behavior is to convert Date to universal time. Set this to false to Return local time.
 
 	.EXAMPLE
 		PS C:\> ConvertFrom-UnixDate -Date 1458205878
@@ -160,12 +160,12 @@ function Global:ConvertFrom-UnixDate {
 				   HelpMessage = 'Date to convert, in Unix / Epoch format')]
 		[System.Int32]$Date,
 		[Parameter(Position = 1,
-				   HelpMessage = 'Default behavior is to convert Date to universal time. Set this to false to return local time.')]
+				   HelpMessage = 'Default behavior is to convert Date to universal time. Set this to false to Return local time.')]
 		[System.Boolean]$UTC = $true
 	)
 
 	BEGIN {
-		$unixEpochStart = new-object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc)
+		$unixEpochStart = New-Object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc)
 		$Output = $unixEpochStart.AddSeconds($Date)
 	}
 
@@ -180,13 +180,13 @@ function Global:ConvertFrom-UnixDate {
 	}
 }
 # Set a compatibility Alias
-(set-alias ConvertFrom-UnixTime ConvertFrom-UnixDate -option:AllScope -scope:Global -force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias ConvertFrom-UnixTime ConvertFrom-UnixDate -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdyv2CD5TmUFS8+HWLbvklhxf
-# MregghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzUgNTEG6wjZNSkajDuZWHIaz
+# 5EOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -329,25 +329,25 @@ function Global:ConvertFrom-UnixDate {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSpoeiJS7X/fdGfkhwHGhCRRe+jiTANBgkqhkiG9w0B
-# AQEFAASCAQAlXxnQEBKRrkqmWvvcp9IfBixkwhCqga8hGfDNBLoL2NRFqggQV6fK
-# t34V4n3cM/nIpWEBow3Iz9UdMO51RWoRziBRXrcR1kEgw24eksf1MvBHBUI5AaTB
-# OL1IkLSM2zytjBDlwNBehmDOWS3DTSgORWRCnW64TRZs5/C5il8E9c5EW8RZqec2
-# xsS7xLrgRb72Z9YpxuNgtPUwgha2SdO58rd+NZvJ/wm7nwpA9lojaV1UfJaxJ0to
-# rpUDONUZ669sW+nZE+rCfZW4DDwy6/4yq+55d8Qd7Pq3W2CeCtfOcO6cYjQMQYuV
-# Xm/ZkSfpR05bInYIf9YFMzzR3vtmuELDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ0VShYQKeA96mwESh+VTlSBxl8BjANBgkqhkiG9w0B
+# AQEFAASCAQAFhaUSv6EpTEQiRNxC2sZos/oyvZyPbf72+dxEX65C0Ox5t/2TgH70
+# lTpqZPYUxuS7tN3RYLb4B+HhF5mCEUU/KOPYmqd3ij39RRJrvimpDh3A3FXmyBEF
+# udS7Dtd1Gbm3ZY7Tw9576OucQejOgI9t5HE86x2ltqyulOwsFoWRrr5qPYvPVcTj
+# 9Vy/N8wTFWQuA4uxtCUY9yC1dxwdqb7HotLwRzYEtWJ5kI5XjTXKJJSfwNHC8Lxz
+# MEv844dzqhZbYp25ElsTE/OK8HwS1OYzM2KQJpNc8BT6UhTcd0nUd+yhltkKB+v/
+# fmbzl7oHturmcQdpiuujRY/CiKN2dc7goYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDM0MFowIwYJKoZIhvcN
-# AQkEMRYEFBtR+EwGdBZJ2sV3HPBxfgjeRgV+MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAzMVowIwYJKoZIhvcN
+# AQkEMRYEFNMSvsomKbQoNXe/xeNrWGwN17dPMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBcgGKpVbUg6K9wvvHRmOBnroeUMhE+KHhkYl6rA0v78sMY
-# nZFJ4T1DDcwT8sIOw6AJCQx09slMo0hKn44X6mP0ap2xuwqkGcX6B+cWjWEkqDbW
-# j/64u3qIDyLZUpoZVpCcHlIDSvB7KrVn7+oldwj5SSMJRHdkQF6qtSz2eheFxgB5
-# ZsZ0wrk2bUw6mU2H+CwW+dVM56is37XGz4AuHtDLsdryi8Eqm/N7EjbaVsKGXUCG
-# lzMyA82KKWu5V2ys3kuoaLdlq3hrxd7BzkMUkEfsIQ9QOReferC3VK5gCvMKqZji
-# OymRKYZJah1tH6dP2m9vH8klJJHKn+MIZPAVp+YP
+# hkiG9w0BAQEFAASCAQCPTmo1IDhucP15FWHzOmA4N17AKT8pP7rfTJvq2R+u+aUq
+# +A7oDqz1DD4uEC3eWnUYSpiJRDJlPu8JxktJ2iLIt9/FaQk2XMIJKKJPTSqEVF1p
+# dmsEHqvJMPT+l+b1hQnFgfeNxWBlKA32vqWdixSiyNzW+D+LhFdzI993BhoGzXlZ
+# rJSoZMb10hZJJvioyjM47WZmCSCEpWbxmRPURk8QXual4agTCvvrZlqbm/7Akkhd
+# eHMkwBTWHjZxnAGXjy1IUw7OGjRD36R+CvMPUjC44CBKQZkO66jQlMABoT6e3r8g
+# xMkC6LE6/yZ/5alEEsJd8y4ZZjlfTFuVvcms5HSK
 # SIG # End signature block

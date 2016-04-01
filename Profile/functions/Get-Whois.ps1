@@ -40,7 +40,7 @@
 
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-30
+	# last modified   : 2016-03-31
 	#################################################
 #>
 
@@ -79,12 +79,12 @@ function global:Get-Whois {
 		Specify what kind of report you want.  Valid types are Json, XML,HTML, CSV, or Object. The default is Object.
 
 	.EXAMPLE
-		PS C:\> Get-Whois -Domain "net-experts.net","timberforest.com"
+		PS C:\> Get-Whois -Domain "NET-Experts.net","timberforest.com"
 
 		Will create object Whois output of the domain registration data.
 
 	.EXAMPLE
-		PS C:\> Get-Whois -Domain "net-experts.net" -OutputType json
+		PS C:\> Get-Whois -Domain "NET-Experts.net" -OutputType json
 
 		Will create Json Whois Report of the domain registration data.
 
@@ -92,7 +92,7 @@ function global:Get-Whois {
 		Based on an idea of Martin Pugh (Martin Pugh)
 
 	.LINK
-		Source: http://community.spiceworks.com/scripts/show/2809-whois-report-get-whois-ps1
+		Source: http://community.spiceworks.com/scripts/show/2809-whois-report-Get-whois-ps1
 
 	.LINK
 		Joerg Hochwald: http://hochwald.net
@@ -331,8 +331,8 @@ WhoIS Report
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7+atO29KWM5E8SUk/6Hh/DAM
-# IHugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1fackqR8/KrTCVaPr6w1+eH/
+# mhigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -475,25 +475,25 @@ WhoIS Report
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSc2l+KwesDILjq/gHfwv406lr+UTANBgkqhkiG9w0B
-# AQEFAASCAQAvy54N9aZ/w4xPQHcmMjaRVLSYpTY4/TIaZrUn8usxTDXoJia/GljV
-# UGoTnxCY2zro8NJBZkvuQSEGPCCH9RMvwHvbh4rSApkL5SeZzu9a8g8VR2M0iwtL
-# wBA0AMu+6hIMRrK6/3DqEyo38qAy7eazQpx4r7mj/LwYWYHmJhwxctiKmxM4sVtW
-# v3NGa44Efjn5JzcHLeOAQWVIceHxxYdl5Ly5F+/lLesgXa2kHsf0iYT6CmnoSjxG
-# e4hK+BViXmrb0zV/1iCMGUBcX1khLTkyzEvDWPdADDXbe8gzMV700hzNOcWsOWjF
-# kjVvr9f6tw82yR445K7a4Osb4vSbsQfGoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQcJsKldnaRwDMYqtn0gbdiM0fsBzANBgkqhkiG9w0B
+# AQEFAASCAQCTN8EZbdCUxnxMMrdvO32IkcZOvxOjy4+r5eo4GeFgy/5YIIF8mF44
+# 3JVcWUigfCmqoIAB24P67OKgJx7wqf+Vof1gdvjk4OriS7iObqYwhzaFDQycK2Bf
+# qjtUN9EyjWsd+xO1LaKd4uIhTPfDe+j6kTYI9Rf6tfAMg2gA6hlak6RKxpEHadQF
+# RyV1av9on0Azv0W7ySqeXxOgSDfySdBn48xF086U8hPyhlghtv56rftJ7obuq5J0
+# WSVUSH8OXEUcz4LtEa2HrnL7loW0jq4JU4ZBvc5SnhlLhUASp7ttUlnTCgEGol/o
+# LxA22o+lpTEqe65oDOLV4hwc2MiEF2gooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMDE5NDMyMFowIwYJKoZIhvcN
-# AQkEMRYEFCcf0S8dow2ZhNmDH/+mMbxsXokOMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxMFowIwYJKoZIhvcN
+# AQkEMRYEFPJvEAHgOBI0+yYSQr1neOlEXfh5MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB5UdBODMBx+45mlhyJLX24VM/6HNXoVFkK4k2W19261JHB
-# YzfaJMzlaKuelAAWi6zztgMi1Hywbt9hFIPIPKKkVxsbFWkfJczQzKWfvwcIHI0Y
-# 9/73byD/Uo7Uu0WJGuWt1CTaIhrklhw2YZL6fIkoya46GZQ0MEqe8JhsGc64BVO/
-# vlrbEHXnVzaobaNtbh6P41Npta2QjaeYOBeNSj9FGTtyPE8OiepGif/1XXTKGQhJ
-# hThf+aJ6KCr5lCfo+yMbuAyBer5+Uot5VgZkK82nAY83870RkQdFDWN8vx0Fdo1I
-# vjFgab2e6ySo4MJM2ZsFks3ckY65E2f6C0p8Q3qt
+# hkiG9w0BAQEFAASCAQAtpg/cLrukwZKQk/G80RchBetm6X9ZRaXSX6LttHENZJJA
+# Hmwts631esbmd2GC0bWVVlApPN9xv2Q/mW4pK5zlOzfP5o8BdRWTJ7N8Hr3xDUJx
+# tssujor1elAmLq5On9bX4/1L3dXgX2IjAACI4xWasZQu9GCdNyE8nIjPPYzBtvLO
+# I30aDoanE7Vf+3j0F2p9urTPinqJMdDOoZGdX2aWnhSLRiwqr/VY/uvUF/hbrRJW
+# kt/zvutKqsUXKgM2uI6o2jF3D9ZN5FCdW5rn0Ob1UyTDYaT8I81F1tSFPhU2WdbR
+# 2/z6R8RVXd/qjJwRN+JTT5K97fD7YQEYNrX8F/TN
 # SIG # End signature block
