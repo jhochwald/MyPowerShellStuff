@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -71,9 +71,9 @@ function global:Send-Pushover {
 		Send the message "Test" to all your devices. It will have the Title "Hello!" and use the notification sound "cosmic"
 
 	.EXAMPLE
-		PS C:\> Send-Pushover -User "USERTOKEN" -token "APPTOKEN" -Message "Nice URL for you" -title "Hello!" -url "http://hochwald.net" -url_title "My Site"
+		PS C:\> Send-Pushover -User "USERTOKEN" -token "APPTOKEN" -Message "Nice URL for you" -title "Hello!" -url "http://net-experts.net" -url_title "My Site"
 
-		Send the message "Nice URL for you" with the title "Hello!" to all your devices. The Push contains a link to "http://hochwald.net" with the URL title "My Site"
+		Send the message "Nice URL for you" with the title "Hello!" to all your devices. The Push contains a link to "http://net-experts.net" with the URL title "My Site"
 
 	.PARAMETER User
 		The user/group key (not e-mail address) of your user (or you), viewable when logged into our Pushover dashboard
@@ -118,10 +118,10 @@ function global:Send-Pushover {
 		Send-SlackChat
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -298,10 +298,10 @@ function global:Get-PushoverUserDeviceInfo {
 		Send-SlackChat
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 
 #>
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -376,8 +376,8 @@ function global:Get-PushoverUserDeviceInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHtpREOBOwOfhTc7dV4blBjGn
-# fASgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNjtJXlXmqLH0haDm+/pi34u/
+# tDqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -520,25 +520,25 @@ function global:Get-PushoverUserDeviceInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSPJ7Ssx4y2gDL7W22cC/xUeOD9xjANBgkqhkiG9w0B
-# AQEFAASCAQANNZufMzyYAlj3jWrlZEge8HtUtTHCOHnaU8B2eVnIFsVd0oZ+CM6/
-# ce1seiMTp+Byo1k0kr55Q6My+XYX6+Hll2mI/7fxc0l2K3En3disga7fD3419+U5
-# jckjAJIsk6LZW4AIyKvfpYzUiBUOa2bGp/tCM1PjQmF/lti1JD4BqK8jpLixMP/2
-# f6+1Qtuy8mfO36vauU8WMtDqA84AVNr75yzWsTYgmuPQ16j/PLFBN66ZGN+Ol1Tq
-# m+qbYZHtPaGJI4sEwKSRuy10Ab6AgyPV+NBFok5l4/+k3wR7v6raLx/C5UuNeMPo
-# MXnH/5nI2wq6+oMxoWuqxUtL6bUqHXvEoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTEWfJSphsK8XksH94dJMYLP2sn3zANBgkqhkiG9w0B
+# AQEFAASCAQBRYkIqNDzJnX9OPG8GE3Yhk/ZFV85oXsnga8Ve7UEebETYluf+48uX
+# zJORbg2YEpfq8MTGaOm8eHXhQuyRzZGYrOmq2EQpHZWbNPSVja85r4pnVf3KRqpu
+# JS5UF3DS1mg3xL9GtK4f+4YTfZiKzXzCs/1whRLjhxgn/V85wfkbFFuabe8gDcp6
+# V8C7i1bpLm0x380is0Ges/wzXQrzUIqxufMoFuODdXus1Y0MdyyXvL5LHcr2JBYq
+# x4jhe4kZxRvuDmVObS9xiV+Gjxiz1bPeyvu/DWQiPP2YJQ654Wd/nBD2LYBk+Bf+
+# XIpfKCF0wdkbLHYM5k7KXGvWEaFPPPqcoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyMVowIwYJKoZIhvcN
-# AQkEMRYEFMKDdb5fawhmUcw+e2bUTPyRJhSLMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxM1owIwYJKoZIhvcN
+# AQkEMRYEFPOrzTaUVTjihtmyO+aRdna1alClMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBTPmeDuL5+VDooFEhOQwGaxuAJ+9Vkm0AFJoJ+rL3aNHgu
-# HhPtCKFYoggjHni5UmcnDVYJKDIv0j+9jbdmMh/3GX8aKlMhi18jIUYJvFFoQ/uM
-# Eu6/SR3/tRI7+f1bV/c+sR4wjSDUN70U257Zxz0azonU0PmeRWMa8/CvUUhf1HGX
-# 8xhtGyiKCziVOiCoq8ptjmlKibPqamjEUwojp37JoZA/K2UmJhZd/l4dHFNaVJq7
-# t+Ct2yxzWrRnTcaGCZTK7f8Q47+8qO/gUmlT6bqnRaKiH5MgUlfkd0W9U0YPVks2
-# g7qVXLhaPWO02u3e30WnCcZY/jjMzwTSbckUKK+A
+# hkiG9w0BAQEFAASCAQClFoCH15qb/+/HGg76qJPRQ5iCYilJYKzZ5UcRyXflYVdF
+# 6TJSzTzsS1VvkpSkyk64iU4ajN+vz2y+YF8UQlQeEZ/EHHz/2L7HC0r00V0ZiE8l
+# KhwGvNbQ441hV6GixKAcvRwbeDZqkN9vwuUMSTzq60t4v7f7a8YoSFm5ZZTjc/fm
+# OQ8Xjvr/WZ7pkoxoauNe1f8w76YG8atjoAGzGMuLtYZRvs57JMEY25wLbSmH5bpm
+# t6tHYxvIK6tSkBQHQ2hW0BZOfAkh/kw8zHR2Vh1Z1PGuhh9GV37Fo8Tbpk0nuPY8
+# Ml34kfTXsw+pfXEPwZHYnZH77KwSmmm5Mdt1NTgo
 # SIG # End signature block

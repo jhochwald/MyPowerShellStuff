@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-20
-	#################################################
 #>
 
 #endregion License
@@ -65,10 +65,10 @@ function global:Get-TimeStamp {
 		It is just a kind of a leftover: Used that within my old logging functions a lot
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	PROCESS {
@@ -79,8 +79,8 @@ function global:Get-TimeStamp {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUigKvFTMdBPocuLM9RDlUEKX
-# Hh+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUisbv9ZQfK8EirzRo/CDZqVaN
+# FiSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -223,25 +223,25 @@ function global:Get-TimeStamp {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR4Yh8rxzkvfIsSulwV/gDkgrwVVDANBgkqhkiG9w0B
-# AQEFAASCAQCHrf3ji0BDWDLCqO9nOma4ghET6/A5bf3gyPjRXupH09uZPfV+jO6p
-# lAXOgEVgBmwrth8mLfiGDQ8lRjGmNtyNtM5jdiurVidMkE8PZ9t588mBp9rlZNXo
-# qH6/sXlmniVgxNlgTclr6gE29v8jI67imH8vtM/ubk3n6i/Ha27pf6z2lF8Y2hY+
-# vKAo7uDo0LLnFadwQ5uTBV7f2EicyWZov9c0Ay8HiNth4Ij1VUZOJbu+glAVhPKD
-# CmKGbZBG+Vj3JMzuiRPMiaub1K4/6Uubl0t7tu09b7cZjb2LhaxAYIV1iKdSw45/
-# pnZuMIX1nEagyZiFKqtCeP1fnwQvVvX7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQrBfxxFzOauplV+FqXPjmXJTx5CjANBgkqhkiG9w0B
+# AQEFAASCAQBmOPKpiErBfiSBLoXZ7pmxsWwe8d56G1aARgKbcJQD0bj8qBXvrbua
+# /mmyMlhw0OWoOtasqebHOIjQ80XaWCyLG7GE+GBSW+IWutUFvwd3zxbRF8x6I7dv
+# +S6maCRxccLRnKRS//BVKbLjW8tWHLbo74jLwMr+oYOrfNZfnekELM6utQ/EVnS7
+# KMzGkgLyXbgSQSYJ9ACVOfCY1FRALzr2DF/3kTAkG28XQFHjdO4QBoiCIdXLe8UD
+# HDWGfPSQNBTjDNpPn5YwF8HL9USBDY4gjMkv7tTnQQhiNvHgnYugim+f6noN6oM9
+# mYthRjIdDM6if5n/BrD4o6DyX4HI+DVcoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwOVowIwYJKoZIhvcN
-# AQkEMRYEFEw4EwaqMrSIYphP3M3u9Hd7sQxqMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwMlowIwYJKoZIhvcN
+# AQkEMRYEFJaBLDUHrJIlhxcWAQcSLQqKmIo4MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCapuCDTI3yjAFoKyTMMT9KwW4CmOdkPL2P1K+KT3nL2FY6
-# WHZj9QQJ06KDq59LntF2/zhweY0yCNuAHe9v4IrGBqpVStxslA2q2lnMYeS37wko
-# EHk+rZGWsLUbpjQvCnG325n7BAYT0ybLBSMEq3Cn7bA0vkKL0W3NAJDShrohqjdb
-# j4Ke+wZr1gzy7x4qKvZVUbGsmd3Kl1lM9pnr5W0vVOnkYda8YY09TwdmKvXIZZ+H
-# gRzSCCIg/7HiNV/8XoYhtkDsRioND7mV/mckPK11XcmAUsLVVWIGB4nhIKLPGh7M
-# H7ZdK207WwrVQZu4xbc0baG0AHpQVh9w15mMDltV
+# hkiG9w0BAQEFAASCAQB+JHcLfjc1MOLKal0/ZJqK0AMpswtHu52pHgXY0iwf9koZ
+# SEEzdyECLcTXXeKlOcGmX/01PK2wnPf6uFkh5ekdeYpQFlltiRv9UPciT1tthUlx
+# L/5f2nT3flfK/VYhDzmQHrec7F88w2MJf7K/1AlMtSyirnamjssLE2qoxuk057kD
+# 6DCFpvP5rku2SBgZUAynEIqS8lU+gOply/dRUW4CgYwmnXqlWfI5XznEq4AzBbur
+# q7C/gOjf2o/S75ACtTWaZuSGnp3nen6BXUCswURZl3KeaxfKuvudAt0qQNkmg4tu
+# qYFeWJ7pe5Hz5cBDpsztOWnMju0cdKREDmKCH54e
 # SIG # End signature block

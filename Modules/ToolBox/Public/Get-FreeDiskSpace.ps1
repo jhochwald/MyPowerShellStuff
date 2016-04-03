@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -79,7 +79,7 @@ function Get-FreeDiskSpace {
 
 	PROCESS {
 		# Get all Disks (Only logical drives of type 3)
-		$Disks = ((Get-wmiobject win32_logicaldisk | Where-Object { $_.DriveType -eq 3 }).DeviceID)
+		$Disks = ((Get-WmiObject win32_logicaldisk | Where-Object { $_.DriveType -eq 3 }).DeviceID)
 
 		# remove the ":" from the windows like Drive letter
 		$Disks = ($Disks -replace '[:]', '')
@@ -95,8 +95,8 @@ function Get-FreeDiskSpace {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMDymJ3dnEy5o6h+97imUBPiO
-# uwOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlVAmsmZO+99BfflxcnVNTTbW
+# jpKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -239,25 +239,25 @@ function Get-FreeDiskSpace {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRhXSNXbE7Nyf08+xS76nr/BAyKejANBgkqhkiG9w0B
-# AQEFAASCAQBl4eXLCyC1pG2ufWbHGUu1TUVctHUUKaHY6OD4t5gskgmgDZIkgVFl
-# DaWHKOPrJabEkldRURjClhOSJOi8jH5QieeLV+MFQvQGwgop7Sun5idQBzJ+bEP2
-# jAhWt0xnO6o0EmZborxIY55Depb5CVIhMi597/CbCucPj0bPjanZH6V6CUwLbhN6
-# shkPZP9hqzHla5N/e9Ufxp0Oh0kqJIRgNlnxHMrOWuYpc5+SMmQGLfvUXXZ/5FlT
-# WIziwTWYgDoz/+CPOqUptlFU2GKcHBnaVEs9BkFosS0t6o/TksfTvz7kJ2rwaFqq
-# nNP6hit+djVLKUpIJoKVPNRfYvsPKi/goYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSArT/hAuAv7bN5r4uj37aemxrrHzANBgkqhkiG9w0B
+# AQEFAASCAQAXeDUcPhfqH3DX0T7bPRhGA8f/esbs2XyjNThW4u9OJNTbDEtndQXA
+# GI5nbn/z5/ueut9xsUFuWF3tvf+lWfSxcYc9gsS/IA3bQlKxPQf8FFGEHzE2YHhZ
+# r7qyxztc/s6ZT5kCsXZtsF5zGnRH5Bz8+1VxcSnLSNAM6VGDum81LysqNRMSaTtf
+# u1jE+Gi2x8tUFE+bUevS+//oX/1Y5cYc67I3NAbLL/2qHZQudq5u2zZBtNbTAGZq
+# T6meWf4Num9HGFLW3ELaGND6L73E3v1Z3LYlHoJm1NCneWgIQTh4IdNPnIa42sPo
+# YAw5AZ4BIeLATlfxqs4V3sEeoU+EuK9doYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwMVowIwYJKoZIhvcN
-# AQkEMRYEFIy//7s6LAtCOu8aAx57Kmmrvf79MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1NFowIwYJKoZIhvcN
+# AQkEMRYEFLC5AEI1rToa6ARa754XhhDeeZ7cMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAHejv3yEA2LRsp3ek6FMrfs4J+sps34FbPa9RdpZNxgYbl
-# mMNdxPt9vJ0ksxUh5ybz1dDaZoImy33FFM4JlG4FsGDMWyTQ+RlClPUkKlsR8Rpg
-# 4lpmUpHM8cfnQuRnGyuorUY3Bx7bG6b/eLZRFXHE+zL5rNtJFGPqz+cExOfomckL
-# 4KRu+Kvv/4mKXiCyp49sO8M7pxbYY1B2Lus8L9vHP7g6woBtoORShZk44F6HiYje
-# QsRUwSIudUuUWK9AyU66Rbyxeph5X4OI3zTPVjyO6xwU0LxLTeLdB3bcU/J3YNV1
-# 9jKMo5+HQsn5ebho9+yOS4hDRSlV3FLjFiqVeeq7
+# hkiG9w0BAQEFAASCAQAvew8Q4f9WFfwxxnwiaJfRkCRWmUFgh0RPI2bmS9HWfhv+
+# KsrfTH1MyDHjq89tTh2iOn8XqfUvEhy902saBsMCghXqXg6ESNKYZC8CTeK2g3Ha
+# 3/DpFz0Nxup/y0QlgT7gIcWQLX5Htc4fulUBIWwIRl/mJ5jyInkMNQGp+IHEmiOA
+# O1szSVsfwfaHoT4JFz0zeNQ3xNvTJ4hOd379cojrDTM/airL37SO20Y9FGuLuibq
+# UTol/WqXRrfoENjyI31tMtKEolrS99nNeHNFHopQMcfSW7uJCNJ4dx8ddzUXrrC+
+# CaXXXHzroOmHeGqJxXID0rzHMf+uVVJqOO2t8T9g
 # SIG # End signature block

@@ -1,4 +1,15 @@
-# MyPowerShellStuff
+# Outdated
+I will no longer update this Repository!
+I will not delete the stuff here (yet!), but there will be no more updates. And maybe I decide to delete everything here and use this repository for something else...
+
+The new home is here: [https://github.com/jhochwald/NETX](https://github.com/jhochwald/NETX)
+
+# Everything is moved!
+The new home is here: [https://github.com/jhochwald/NETX](https://github.com/jhochwald/NETX)
+
+# Old and outdated:
+
+## MyPowerShellStuff
 PowerShell Stuff that I use on a regular/daily base.
 
 Some are just shortcuts for stuff that I need to use often and based on the fact that I'm a lazy guy these are my convenience.
@@ -7,26 +18,26 @@ Other functions make Windows (or better the PowerShell) more to act like *nix! T
 
 I Dump the Full functions all the time (Due to the updated signature)
 
-# Feedback
+## Feedback
 Feedback is more then welcome!
 [https://github.com/jhochwald/MyPowerShellStuff/issues](https://github.com/jhochwald/MyPowerShellStuff/issues)
 
-# Contributing
+## Contributing
 If you find a problem or Bug, just let me know.
 Or even better: Pull it, fix it and contribute ;-)
 [https://github.com/jhochwald/MyPowerShellStuff](https://github.com/jhochwald/MyPowerShellStuff)
 Or add some more documentation :)
 
-# Have something to add?
+## Have something to add?
 Do you have something that you think it should be a part of this? Just publish it and sent me the link.
 If I like it, it will be a part of the next version here (formatted to fit and signed)
 [https://github.com/jhochwald/MyPowerShellStuff](https://github.com/jhochwald/MyPowerShellStuff)
 
-# No Warranty
+## No Warranty
 There is no Warranty of any kind!
 Everything is provided "**as is**"!
 
-# License
+## License
 Copyright (c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense,
@@ -38,7 +49,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 *Except as contained in this notice, the name of the Software, NET-Experts or Joerg Hochwald shall not be used in advertising or otherwise to promote the sale, use or other dealings in this Software without prior written authorization from Joerg Hochwald*
 
-# General Infos
+## General Infos
 [![Stories in Ready](https://badge.waffle.io/jhochwald/MyPowerShellStuff.png?label=ready&title=Ready)](https://waffle.io/jhochwald/MyPowerShellStuff)
 
 [![Throughput Graph](https://graphs.waffle.io/jhochwald/MyPowerShellStuff/throughput.svg)](https://waffle.io/jhochwald/MyPowerShellStuff/metrics)

@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -58,10 +58,10 @@ function Global:Enable-WinRM {
 		Additional information about the function.
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'Medium',
@@ -110,10 +110,10 @@ function Global:Get-NewPsSession {
 		A description of the UserName parameter.
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -149,10 +149,10 @@ function Global:Set-CurrentSession {
 		Session to use
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -181,10 +181,10 @@ function Global:Send-Command {
 		Script Block
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -212,10 +212,10 @@ function Global:Enable-Scritps {
 		Enable a script to use in the remote PowerShell session
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -243,10 +243,10 @@ function Global:Register-Script {
 		Script (Path) to register
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -267,8 +267,8 @@ function Global:Register-Script {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUSCRhFAgUnApBSxPjybQKQnNF
-# vn2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlKsKFzfTtT+sLlq8ZZAlQ76q
+# WragghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -411,25 +411,25 @@ function Global:Register-Script {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR/yRBDYHQskFL4jKdBuBk91KnZizANBgkqhkiG9w0B
-# AQEFAASCAQCu6eKsEsm6TfiPfc2eevTkpymJo7lDqqaZxq0FCw1e3DPzGTGotoGk
-# UM1x9lzQQS9bJ2+nAz+RKAHz8LF/tB/QWjSuQiOQtFVLRHkIjNeFkiBIGfbTLs2P
-# GdEetXOiL3bk33fueXCM/0vmSFv+ypk9SVSA4QlFDC7eoN7GYNoJE/Pdhzzn9zAD
-# 53Iq+AArG4/DpeiCsJSIODtzqMptuwe3qmJnxABKierr2KyeMnP+5i966YnWZ50V
-# bW1Kk3NN1oXUsAP95dKAUfI5H28AM6ZTaa+BbVAvwHI4XA7skm9jXe+vP2dzWToI
-# uUzE8w5y0TPNRKRsd27dbV/QJTm7R7EhoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTHWVzo8kVjWIJk1NEmEmnabzSc3zANBgkqhkiG9w0B
+# AQEFAASCAQAQMfpx4VGwR6ng5ce1pEHDWqPgIoe3yrLe3eYq8n4ctdK36J3khh8X
+# rhnMXVPUI+34UkOKTTdm8Qc/KXl2pvP8V6Ioh7NjRGOCHl2QTRsAqP9Padl6RciW
+# r7XuGJYMCh0WvACXp7tlvarYS+sLyVqMJwr5J7VXmIXOd2F1f5c7ch3FfhuNmY0y
+# tqQBP3XL/KJd7nv4iJ+d4J2m+OUKl8HeKEQUuZYfAcWwYhwEfpH2qTJ3j43v35J8
+# pTAsehNf2yAvIlzU5w2LBwcPhv6DLVzfiYT0++oJl+KDVGRK35veNOjyBNgNvzZN
+# na1MrVqzkUSr6aakCIIBXW3L2nC7lvFnoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyMVowIwYJKoZIhvcN
-# AQkEMRYEFLy1uXvzglD6Cw5OG3hHQ5m8oOEZMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxM1owIwYJKoZIhvcN
+# AQkEMRYEFIkxr6FK4na34yobkhx2VfzEm1T9MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBJe89fx699coyg80zIvaEi+dRUET8Jrn92/+mY669hmfUc
-# VIjV92KgG+W4uxWmoKCC1YnBLek2ZtfpnfiVCniNVqoCBN63H1xM1lj7P6DSR8Aj
-# sWvIp7jhYh6WhgN3rO3ahl4HDuvpP8/8nHBRTg1vJLZc1xT3DU+QBGfndhU2IwH7
-# Yrcixysi3LDfFjgUxcyd8pkK2iXNuzeiGf+/oSGh07kx60w+pvBtAgQYnK92UvLc
-# mYAYkeDGye05uDgyWXmGTJp8bqlHgrLlLEw964Y1QU6M1R0Gty65cQe0285cgfFC
-# x7oMwyZeGpUKQkxwosaYejyQK1+AJ8yh84mY9v1R
+# hkiG9w0BAQEFAASCAQBYoy2Bq7Nef/PJ6CBTZOYQd+hUWFqR9Tz0sF5oqph7KxIQ
+# OuHy22YdQ8jNXmN/K1F3+0YdWcDrNQvi7IWy+1amrkBVfEQfIngVvvirv88gphQl
+# KKqOxsMjdvgTBdM9q4+MReVDWWJ054BdvXgFBxeP246RP4SMotGgkO0v7DBIUQZ4
+# jPPycAdsJdwQqnJndN7p8Bt7n8C9LZO8h0wRGjCt8ajNd1EE4Q7a9ViY27rKN9yA
+# MrqNibARPzHAaTHIfTwBYjH7srPPda6HaEsCV4jHiZA5UgZ8TZM0Ayehzcu1BZ3h
+# EHZoFfbtTidZDuAekwoZVCfYrr6fUWZ38Wylsa/B
 # SIG # End signature block

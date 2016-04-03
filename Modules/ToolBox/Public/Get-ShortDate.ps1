@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-17
-	#################################################
 #>
 
 #endregion License
@@ -61,10 +61,10 @@ function global:Get-ShortDate {
 		Get a short Date String
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -80,8 +80,8 @@ function global:Get-ShortDate {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDbMldcfp314cOkW3mBSSACFe
-# P5ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpGfDenU/aA7MtrJh+Ia0czqT
+# nLegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +224,25 @@ function global:Get-ShortDate {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQQ/5RkrI1sd+8/7KQYdRXmCkTHsDANBgkqhkiG9w0B
-# AQEFAASCAQBdR5ijLurcCaCZ8GbFdRK68Ka6kFT618DuoOF4u6vgyFPbAgx2d98N
-# +cetcBS1G6c3IzWCpqy+AFEqzqeZeQ4OsAXaIyMCBqfQ4O/p0tb89rWKddKkrbQw
-# IGgKn6hsPN7UNXnxJ0ztlsn6BAp4CrLgomo9GiCBZQon8sG8dUfzx3nPEl6sHZtY
-# qzLYHK2+X2Y5Aa59yrEfIlfqTN6DOuQsM9zSrfxIZNVU7/fpK15hOgBW0jYCQ8yH
-# tAcaZLYrVrgjEpqENnyRdT00h66Phnvz67ocnrGRqHP2DpHOQjtRYre1rtgKqMZu
-# EA6GTNbivwiAblhPZXJqp5e3n4LiYDwzoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQTBGFKJdAWoNI/DLDCXkcsls3CYjANBgkqhkiG9w0B
+# AQEFAASCAQAcEFP2fhLqeXDNKHEGUKcYPlO4aex2iZ+qC+yWB+fvdfbsVHN9nt+S
+# HwYyr01cOZr13VFKHyEczsYkvo4IEKgK+s4Xf45c5HJzfzy5LcNSjJnuuLEMgqcI
+# QON724kmMCeWGHByUUAbqktzrZf616n2zO5FZVzXdc2FY6fWq8TSBIFjnzemHSM/
+# V0XjXodtUD/SlH3O8iMg26ycIGj4aKicxGSUwsMRisdd8EyfVz0dFD0caWQndOxk
+# Pt9dxy1isHY1nzUs3Kj/f57l82/zucR/Mu+oYv/YMEk90ePV3py54eqZvIhug/6f
+# G01fIO0Kx0tHErpiApUYiDs8p0t8pdUzoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwOFowIwYJKoZIhvcN
-# AQkEMRYEFJ0d0e7Lubm43U+uJMApyLNLE4R5MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwMVowIwYJKoZIhvcN
+# AQkEMRYEFCnXggQKrn+yNPpNsZkT21Q/5p3KMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQArbFnnOm7VSLj0/Pm8/sMadzMHsFer+wrkaSt043EJsxEH
-# Uv/o4jRr2kEH8saVYeBo9SNO2Kh2cX4qTWp1HGm0IYZlfDjtHk5Ux1uFKbUVVPAm
-# qdC5XMc1kKu8Lfh84llEuwa51BcKOjk9qLOfLZTlzF/vLOtkTQroQho3PwxzP7oX
-# hlAzH41FE0hIB1X9D0SqBQMh0hjLqNOz9T140KtW5almWnwd/MvjWE4U7xwizVPy
-# Zw7U3+i185fWunLBcuM0XbkJtjrw2WN3lW80uQJlfmgrSSV1r5hgn/3/7TwavIG9
-# J/Sui23cQRbsmZ1ZjtsVcWVbX73t2CCuVBLCw3aZ
+# hkiG9w0BAQEFAASCAQCWh+3MAQz/DDNNLEYS+Ai7jcbt6IzRZOSCILqLHPsVEfCO
+# kYuhS1BCPMQn3noPU1XccGpmfYbkNEdaemRaBMEBmrduy79RxJo9wHM/BTSaX5uk
+# C5k1tVCO1AAuwkESIt9jZVRxV1X0KJiQLPD3fjb04k7Q3f8BrHQOF65IPH5vhbEY
+# TYet/NDFUbebkVpRP4BNNk8YwB1p/eg5n2/KmOcpVcfN9G1PbcOQIMJbIT6kyI20
+# 06fcTvW9NeKZhcFyFhqHk3usAiVemfQ5CReRJE94e4rhmArgIeFYaY+4/x/9vNgH
+# F6f/C5KxkPN06k0PAotdjRhvEbi6C94xa44Nb5IU
 # SIG # End signature block

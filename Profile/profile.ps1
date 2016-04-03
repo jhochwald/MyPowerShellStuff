@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -52,11 +57,8 @@
 	.NOTES
 		Just an example!
 
-		modified by     : Joerg Hochwald
-		last modified   : 2016-03-31
-
 	.LINK
-		Support Site https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support Site https://github.com/jhochwald/NETX/issues
 #>
 [CmdletBinding(ConfirmImpact = 'None',
 			   SupportsShouldProcess = $true)]
@@ -144,6 +146,8 @@ foreach ($MyModule in $MyModules) {
 		(Remove-Module $MyModule -Force -confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 	}
 }
+
+(Remove-Module -Name "NETX.Core" -Force -confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 #endregion WorkAround
 
@@ -458,6 +462,26 @@ if ((Get-Command Test-Credential -ErrorAction:SilentlyContinue)) {
 
 	if (($IsCredValid -eq $False) -and (-not ($Environment -eq "Development"))) {
 		Write-Warning "Looks like your Credentials are not correct!!!"
+
+		try {
+			# Remove saved credentials!
+			if (Get-Command Remove-PSCredential -ErrorAction:SilentlyContinue) {
+				$null = (Remove-PSCredential) > $null 2>&1 3>&1
+			}
+
+			# Ask for Credentials...
+			(Invoke-AuthO365)
+
+			try {
+				if (Get-Command Export-Credentials -ErrorAction:SilentlyContinue) {
+					$null = (Export-Credentials) > $null 2>&1 3>&1
+				}
+			} catch {
+				Write-Debug "Could not export Credentials!"
+			}
+		} catch {
+			Write-Debug "Houston we have a problem!"
+		}
 	}
 }
 
@@ -469,8 +493,8 @@ if (Get-Command Invoke-GC -ErrorAction:SilentlyContinue) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8eJxKWGCZdwgRjNVc2mLINbg
-# iyygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVkmIkyXuDaen5nE/Iq3vs9oP
+# fMmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -613,25 +637,25 @@ if (Get-Command Invoke-GC -ErrorAction:SilentlyContinue) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQnNfjzWpLnhavLBxUrqoaIYZrFFjANBgkqhkiG9w0B
-# AQEFAASCAQCWKIfEq7yhmvP01/NM36/LOn/yvZfel6DOIyJIEWdTW0vC1EESWZNR
-# df8wG0lvCkuLnH8P7cKDv9NTk3ZjjXAYpIYPZ43J/uy67Dq7dP/i0+b1tH72yOJ/
-# TQQkX44/HUq4/GgjzrJ4BDHbds5YLOSbn7aRUg9CkoUsjPoUdvR76QKnzh0nApCz
-# dDkmtkL3x/pUh7VSKAgCLEe0gRYVtvR+giLCsMPoC34+B9gRF3OH/z95e3/9juyx
-# JDgG3zEzIAAbQTk8QzYkxn4mCQJ6uX9dOIkToxm2y1sqp20MI9gfa5M2r+Jhxn+n
-# MyYSpNGLZvDjiopRCZGatBIIhhdGgxVioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQRUcLsYZIMWeTczsDI6xWPwFhPOzANBgkqhkiG9w0B
+# AQEFAASCAQB9v/PriX6M1TbtvlO3w/4Sba+A2/Bse2Z/FszQlynBf0ANfGy2AcdG
+# /3dBXpjd+UjnmS5GVCgfBCZcYZAnBCuJNCupK8TQOja9oXv4cEVzBDzxjhRywO/j
+# ZeOje7u28Lh608wdlmmAn3e5k1mwU72h9/uI5FdXYW/aUJWhSF7/Ek/6nzVKUuvl
+# v5MsmArZvjamclLfjsl74ggRBZ6Y3/6cuRlRhaF8Mbdvv8Txem+bJi7/Deq/n6eS
+# ho6D5pjwfnWPZ0hS+2UqHap12oC4qt9TBLkdwTTdYIRN0sDH4RN0Nf7pD7fogXeA
+# x8t6ka8ehGnxjv91wreDMD3RzRdJOiL3oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1MVowIwYJKoZIhvcN
-# AQkEMRYEFHGfyfrKe0gWJ9u25C2Bz+8aYdHNMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0NVowIwYJKoZIhvcN
+# AQkEMRYEFLApm+jXE2j1p1u7/vbLRD+yeFC0MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBBPuJO0GxRz6ZBOJgorV7xW/CewhsprSGu1QrFoGyggE1D
-# ucreh+bu+8WCUjuddThO686HCGPFeY3G46xwe6oxkMJ5vz9PFSbi9VvXXCERpnRV
-# OrSxxuBO3L/XxuclCdkC+96PIvLH449CkR1HaeahdrRaznwjR9IC1oQkczH0+nsa
-# RuwkCHrW/Blcv2Gf/k80ez0WkNceanDFMw8uhcVSbo1ZGSEdWE7VpHq4IFJtkLJD
-# BvRTn7LCsKlP9jPZ+3S5Z+cOR/9Js6DKWR4Vn6htPnIFgf7Y06gdhT/s45Qh5rAM
-# I8DGgDPOxRBlYLmWcfVE1ljVl+OvRpq6UOrHY1yI
+# hkiG9w0BAQEFAASCAQCXpNKLzovAJsLUjYK0V+KJ8CU1aq40NmWC5JQpvxEyI4JU
+# cWgH/REuuRdT2brgXGjEkgLnKER4xsq78x/oaWF2Z4Dtsc0DpB4ZJgphDB0s7oDo
+# 476bM9SEIFC2waXTcOkjdJnglxY6mZKB1ED+UW+oZweTJrPWIQISdqcfAJSmyL0M
+# hKFg9vS2N5W8U8ZrQR9S7tzsYTT/Qcs3MCj4+Ls0fRt84ylVd280BlCPlIEQRYgx
+# iOP6SoUFOkes+fRwMa8HpS7jhAo38an5moDyz9R6PHxopg+8aEbhoMz743weTtwc
+# vJsGmhvVY4ijXhB1iMzpHpu0LLd66hfXTkobxy6T
 # SIG # End signature block

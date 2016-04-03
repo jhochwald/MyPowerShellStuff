@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -105,10 +105,10 @@ function global:Set-FileTime {
 		Change multiple files
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 
 	.LINK
 		Based on this: http://ss64.com/ps/syntax-touch.html
@@ -194,8 +194,8 @@ function global:Set-FileTime {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtmJGe7g1tnw9S2POVmernW0p
-# 9SagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUHRrs47rh1Lo5Y/OHsr8sbMtF
+# ojSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -338,25 +338,25 @@ function global:Set-FileTime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTcefZRSZ22IERYhksx/u6i3FblkTANBgkqhkiG9w0B
-# AQEFAASCAQBZ3g6DLKJGqAgYoN8PQuAq4kzMWn2tS4zsA/Y8BOdQVYLm98bniTGi
-# 8XIzfngL+0TwR0ggmKnaF07jcXMi3JF/8hHcSh+eZaealjefOOpKj5DSx+CTNG6V
-# NxYXc5BA2GUy02QTb4c4VAMoOpqlItjxNnqbm/GLi9/EUFwYhc3/pU0f+l33B7yW
-# khcRhGDfsGhIN0atleVBpIO3YBDVVZl+tkqS6ypTg1Tb+pCvecWbO2mD2z+uy1hp
-# C1dGeqOz+5Mx9n8sgLs8X/q6veWN07uVTcF+BNcgZr91rDlEs4Dx/WNa/NTYx+Rv
-# mMwbWQtJubUGMhvUc2MPf6aIxpRqDYiUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSTcqbSowZlnsAixLvNlpIOgmnOyjANBgkqhkiG9w0B
+# AQEFAASCAQB72ePfXapXUYUxw+gFjYpYqzP4lnj5c0sLxPtaZg54OkPrc8J9plce
+# k7urpmvsANznhAK9kOJ3xa05XOxU/h7yAq9VWCEhFlvwNhsFsfTUkpkCstjoBaik
+# S1GLry0K79qrrojfJa/jk9ozuyifWg6vB501iNmo2OjHtCHiDZLdkpgcKldFQDTG
+# ksK0nuYzzGJPl4LEJzTUys5UYaPLJ4CpQVxjaz1muYYbdN+Hs2RxwYlt1xftiYA4
+# BIQNDZkK1P1wWwfIA4wIL0gbS2JM+0udsPq4uXwmRWupvd0WZulDY7HlG8hlD/9f
+# w1zyY43l7X0l12KWjuOfgPDLyF3EfiVCoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAzMFowIwYJKoZIhvcN
-# AQkEMRYEFNRtFRrAusnw168i8shanPkVGi0FMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcyMVowIwYJKoZIhvcN
+# AQkEMRYEFBrRF68BimiBGPRTgGUjaDlrXDx0MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAYP0p7a38WpI7xkkCAw/GxQl6FvFdn/0hK9F43W28RBcy+
-# JHHfjM3YuplO8oXVEZMTgw2E8QEUJvxAb1E1+eNDt143g1WbLzBxCHtmDISSt4zp
-# bFPsMqeyX4cxnn69g9tCh97tt9MkrPe6x7cT9bA8tALp8r9fOQNaoKS3WN1UPhRD
-# 49s6iM28mGiuk5KvXtankELOtrcn7JZNR/tlSri/LAD0m6ClOahnp9ivwpqJTjJE
-# kpdEqsqea+Cxt1StFPXS7cgWe1WNwFEmrsAjJ4YMETPe+CQKNaED3gDzPfzZjQTz
-# E5d7S2tpxZMRnzzPaDFfUpARvwRJAZKNWGfDXUW6
+# hkiG9w0BAQEFAASCAQB17k95hF22MXB76EIU0w46phFLFFzc3NM66HEhvBRkIIYy
+# 6ybYmBrJoIWJXGuqqXNI6JZMYoYwWrZbUm+2VkAVsDsmoy7bsUE/s9/YS8HNuLZ+
+# rEZzKWnvFh6PStL8hxx+3kmlMSm8mUBLkpTneOYw3BYCBi8iV35Z7B8TCF+JI9FG
+# Dx/FFHHSNbR0wS5JHe3qULnXlU0LaaPdc5BnjYoq29cZoHPO0OMtUAkLToOJOeGO
+# nPnr9RbHKID24vTrEP4e7eKHqVk8WO3xMp8Iv7LqlC/D8rBRQpvG0eisDc1KV/U/
+# 0kE2BeOnJyvsc+32IFxsnoUl/uzR6ylUv6rK89XA
 # SIG # End signature block

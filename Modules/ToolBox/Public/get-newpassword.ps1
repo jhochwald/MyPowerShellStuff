@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -87,7 +87,7 @@ function global:Get-NewPassword {
 		Generate a Highly Complex password 5 letters long
 
 	.EXAMPLE
-		$MYPASSWORD=ConvertTo-SecureString (Get-NewPassword 8 2) -asplaintext -Force
+		$MYPASSWORD = (ConvertTo-SecureString (Get-NewPassword 8 2) -asplaintext -Force)
 
 		Create a new 8 Character Password of Uppercase/Lowercase and store
 		as a Secure.String in Variable called $MYPASSWORD
@@ -100,10 +100,10 @@ function global:Get-NewPassword {
 		4 - Ascii Upper/Lower with Numbers and Punctuation
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -179,8 +179,8 @@ function global:Get-NewPassword {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUizAwn2jwkfFipSNZs3LNsSFB
-# nyigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvTNNPdbEi75EdLlP4QRouX7Y
+# R8SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -323,25 +323,25 @@ function global:Get-NewPassword {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRXbOxaAPbIU5dWOdu0CKX1DluYiDANBgkqhkiG9w0B
-# AQEFAASCAQAca6jssoaZ3WEsLqjafKJJtFp26DdnhZsaDPtNhjt0SNupeaT2jOPK
-# Da2DKAXfNr6kLPXWBUuapeYv3Y6Q0u+lyNMH9Y2RscLYEwIZvW4RMk0n8nGeYTBJ
-# 6IWUeGdvZpykUSaD1QvzeT2fBgi62CQz27IQ5jSLMwFZ3xzQUwfifgyHPRUVKiyl
-# ZOXl8jvuGqNnyECigKvn+sBTqOdbwfJ3HBOVINjwDL9hnSRqoPq2Qa5jJ2PzzZJR
-# nfKjMv0EVb/61CzUFcvgws+zd0gr/RQRG2Td4IASnROGS4yYoRL10iQp3aXMDuaX
-# m2KjUqtcg62WpXMPw6Sm/iLkogMXvgaxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSDoJCypbhTNYMh/05ipa1VGufwnDANBgkqhkiG9w0B
+# AQEFAASCAQBAY+O+p6jI98ATHyO9MeCUyGDSTqFWssLNDw+Wp3eQz5zlxguumCEm
+# KdHy9VNAnNfY6t4pugrNl0Lvh52958FK3AxwrKtiW1k33J6PCEN/90MSJIfRuI5W
+# PJ88x9PhmftdsAKd/UpOJe+Zjpcq4+4AJ+rhSoQP4AeNKvjJT3bwPIVNmCBlPA7v
+# CRZH4aYKrr8YA1G64WjMksiG/NXhjuo1poPSxWneSxIf++6mCD5UFWM2wsNSCzWi
+# catkLm8DcGtZ2V5167vu6TwkaEPmbYP+UMrnT7gcSRVgiWeRb0KfEWNCusIortxT
+# 1ScEpw0KS9tcuecqXNRmcYWm59F20qJKoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwNVowIwYJKoZIhvcN
-# AQkEMRYEFBMx3lEIw9z6SclyhEiVvfYF3aa+MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1OFowIwYJKoZIhvcN
+# AQkEMRYEFKneRC/4GMNJd21CaS3ylH8vveG7MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAeWwlwsiMyXtM/OrpozdbqJVj0paQZvsbe0ixHIWCKXgRy
-# fLwK8DGzuLH3+IRZbSKLRbeyXOYPUirwrB92Dt6yzanwnSH1AsgEhULJI1Ahc4/5
-# 1yOGpQFSH1nfj5Zbk8rEhZzVD+r4LsUUMoBj8gkv7MZRKz9uy/hmuGHJKMOR/eOa
-# lbXK13hJqG9/aCFnhO4kHyIrzeYXUJaJq2PnLArN9CC2wa9Ao34fmvFsgjw52AaJ
-# 0oE8XxSAGqWjbfLoqRoOkFg6UycscY/spfHA4Kg4dQQX6djlp4zzr4mX3W0NDYLe
-# d8GvWBI+BV+avMNaFES2AoinogdslW7DHaZ40sXh
+# hkiG9w0BAQEFAASCAQCjP08G1PXSEb1XOllJX4QNBmKw5bblDmOkT+qHRhkfCMcB
+# +MsFswGFovBKT2qAwWqz9ZYa9hs6qOtMOjcNayKCbxQ/bGqPj+vTpzDNSMPaGqJF
+# +Hz9I+vB6u+tX4RU757BdA1pCn6GmMH9IHGBWNqx82sYJ7ek1r3TBaLSTPWrfYak
+# FBOxn0ZUTAcCDsMFGigflpUDQgpVALdO58x/0+h8W7n21khpHDVsc+5X65MuGO4e
+# 5k8alvTOTxhtC0ffo93dt25Kv2f2VD3GnLGgtZui6HsSxiyE59k1C4eodwQcql2S
+# 3tUlLvFC1tx7txkWBI62rJNVyiz0A32yoa1YXnqC
 # SIG # End signature block

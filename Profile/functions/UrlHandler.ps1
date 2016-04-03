@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -58,20 +58,20 @@ function global:Get-TinyURL {
 		Long URL
 
 	.EXAMPLE
-		PS C:\> Get-TinyURL -URL 'http://hochwald.net'
+		PS C:\> Get-TinyURL -URL 'http://net-experts.net'
 		http://tinyurl.com/yc63nbh
 
-		Request the TINYURL for http://hochwald.net.
+		Request the TINYURL for http://net-experts.net.
 		In this example the Return is http://tinyurl.com/yc63nbh
 
 	.NOTES
 		Still a beta Version!
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -127,20 +127,20 @@ function global:Get-IsGdURL {
 		Long URL
 
 	.EXAMPLE
-		PS C:\> Get-IsGdURL -URL 'http://hochwald.net'
+		PS C:\> Get-IsGdURL -URL 'http://net-experts.net'
 		http://is.gd/FkMP5v
 
-		Request the IS.GD for http://hochwald.net.
+		Request the IS.GD for http://net-experts.net.
 		In this example the Return is http://is.gd/FkMP5v
 
 	.NOTES
 		Additional information about the function.
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
@@ -195,16 +195,16 @@ function global:Get-TrImURL {
 		Long URL
 
 	.EXAMPLE
-		PS C:\> Get-TrImURL -URL 'http://hochwald.net'
+		PS C:\> Get-TrImURL -URL 'http://net-experts.net'
 
 	.NOTES
 		The service is offline at the moment!
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
@@ -261,18 +261,18 @@ function global:Get-LongURL {
 
 	.EXAMPLE
 		PS C:\> Get-LongURL -URL 'http://cutt.us/KX5CD'
-		http://hochwald.net
+		http://net-experts.net
 
-		Get the Long URL (http://hochwald.net) for a given Short URL
+		Get the Long URL (http://net-experts.net) for a given Short URL
 
 	.NOTES
 		This service supports all well known (and a lot other) short UR L services!
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
@@ -318,8 +318,8 @@ function global:Get-LongURL {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUS8rje8+gpklGLdWUd5MFcnqy
-# b8agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU51YeuxibCw44fSEA+ibuzQLY
+# nCWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -462,25 +462,25 @@ function global:Get-LongURL {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRuf8VLzPTKJTGaJea0r0IZ2Pa2lTANBgkqhkiG9w0B
-# AQEFAASCAQB4GZ3hTcA3SrsaEfgC1Dv6lJVJc+hW5aNojL8BOj6stCQk+KoY7Ikc
-# lqcosCTHYu9W7AiVAdY/+tWS9/p0wyxnRy9XZi5Lwzi5hb3zw8IXL4tOu9gY7/c4
-# yA+eqjuFrZm0C82wmIS4pRMRFT7H2GxTPAwM2rglztbnZP6QfQ841149q10H90hL
-# cG3KkT2COtosI3oVfzITstzISiOrCJ3ducF9TRL+4ihJrl7NDslkhOSAMo8e/2bn
-# 4koeuNeLLsnyO6IYiRG+OWvb/4gaPxtsgqPPetXm601YJfp6raTlT35RQChvt2o2
-# hVBC5zMqP2lLlHOfeb4tK3MExi2jut1ZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQeJO+0c0jaVJc0zZpocYzmt5oAejANBgkqhkiG9w0B
+# AQEFAASCAQAraaQJpMIIUpCc3A6kg4E/g1DkaWunB0qVK3QQ0Nx8F4quvhiL6PV+
+# 1jl53inzqn/QYTq3yP6Lk6HsTWFUBH8G1NMO6y8WCFGKR2CLLT8q3vftyyVdx2eA
+# Z8O8j3nBuzuvb+3NqI+rqMI+C0dAUOg9x9hy2TASnMfwWi9G4ql+H6NXRzSxvEql
+# dnvEUaG+cw8xMw37D9B08VCj7ETsB4rfjTxb+mvxv9pvLb/kHC/lZi9SmKN0Xohk
+# CljCSEJVjs56bP4024Tpq5A43wv+gr4iz5yFy5Z603qH8ZDj3lAwKIdZubkrekdE
+# kIWMNb8VVOiDjGJtUjLFENrQQNvtXADNoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAzMVowIwYJKoZIhvcN
-# AQkEMRYEFA9zMBH61RVkmmneIXmzXAvNU5W0MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcyMlowIwYJKoZIhvcN
+# AQkEMRYEFKd6kIKvjzPGQjJGK7bfPCcUtK4qMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBirb5b9wS5Vn7m3TRplNVQcScI/q0tIZ0lg7klrpUWq3qs
-# 3j+/XE2b4TJBC5vCo1wISgyxJQHPYcsPctHz/WkSvgrya+SPAUGVwWUCDywBml+y
-# 6UKX1FjIo/qZc1btI3lcfUNhPpWrGOJwuP5qn2d0CI5CrGq4bPnRW7OQgh/lws+A
-# MGQTH4vIKkmiQk498FzeZx7416xjE7m22qlHQDrW1O3TJ8QDFXfnL8CwxfWp84jO
-# BDP2LBpaU6KAIpWNVOxAuI5gilxfhFs1wFxcLcOEp2/jmFr9V9nSQFnVyysALeV9
-# C+jbbkPFB8izJOFhqQ4Co9bnqcfaVVgP9iUF4Uob
+# hkiG9w0BAQEFAASCAQBs1N5KtrJ2/QK7J50lEwsHNzqVx46GOaRIzs1y70mSfMV0
+# 11qiaVvCCE2CPVKYGtaV/ifcqgDQda9NIp9NDHJ1Mgp8H+4ITlBvj+a5GJXnc7Ik
+# 2y4C3WGI+8E/cFfCNt76f56SY4TBOqYoB9ntCeeaxnNlD+BQAOQanR5elJnOJF6R
+# fYX0lJP7dwV6ZpMh49sOTNgGbrEbD/azfDWfEKRbFJ0dV6/NFnN+Oyenu9K4hO38
+# Rr5X880CqAs58ihGMtCSKTJSmhIpiydTFDT8btDow+VVQVTTZRlVPEhnUtWhKRLa
+# zEWSvQo3/KmfhEFiThHUqk9i8fEDuXSrIXF77MAg
 # SIG # End signature block

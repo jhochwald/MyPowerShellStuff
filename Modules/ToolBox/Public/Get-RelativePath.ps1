@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -70,10 +70,10 @@ function global:Get-RelativePath {
 		Returns a path to log4net.xslt relative to the Logs folder
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -134,8 +134,8 @@ function global:Get-RelativePath {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJSrvmBz7RQQ2oHEgVJS/nt5r
-# zXigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUiDNwyu43fD7ftCnvLp/WuhUu
+# O7ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -278,25 +278,25 @@ function global:Get-RelativePath {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTB+hWJ8Sn4s40lQq9wOwY+h476VjANBgkqhkiG9w0B
-# AQEFAASCAQBot+mKajRxyf+IUHnZzSSjNuATtIEq79g0hU8TIiGJb96Edx3bH0vV
-# i1XsAVSL6x9LQHaGxfxgQzOfPs0N6Zq24cO1BMfN1+3qlSVjtBrU/TeYAsltZIl3
-# 4a6bplFbkfIYLeEuawgKrnhJ19FebKjGZ80pW1VFxcDQCL7EHhKH9NuvH6MDnzP3
-# SPZRAov0LAf3s8ie/chwWszRy0AFcfrs2VBbntt5e4UZN20Mkmhda6qK2dtiHxnm
-# ak5D6GyQdtl4TwSuaXEN6i/ysmNCli0bu9PW1joqPHaovHdhTncOX0blM4qsubOG
-# LEKrBka9kaHlBcYfE1QBhn1+vqnPkyC9oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSdny8gyt14OqPpAOhY+5ufw1xvADANBgkqhkiG9w0B
+# AQEFAASCAQB/mk64fnPnMmADy3PiQd3LRk00MPo6U0MJPP7MNyXoi4XTThky/7Oe
+# mLXxlzwNAFXAZU9qHTbXT4zmE29qW4TJ3q3t56icTQJuZnVvC5A3z/m71Y1ADBjq
+# Y40RvJ9k86SwDA1eqSpC9cUJ+JvRfAJLpA+d9GNYHr+e5OsNL8bqTd732V0xGfgg
+# 4c1acDAAxXvZJLXgg5Kvs3n5pt0GMNZQ4RS/fZhRjS2xRn+JbS3jAblYDDanVThT
+# +Y8hB9MLz68Pc6m07c5PZ4J8Tr9ImrrlvuiD7PzCZUa1ol1evdxNv31WgFGHgB6i
+# kKeJJKi+FGU9L4EI+/6XF1Og9aayFkWtoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwNlowIwYJKoZIhvcN
-# AQkEMRYEFBfvngUfUX8UfYXaDaH4jShSiE3BMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1OVowIwYJKoZIhvcN
+# AQkEMRYEFOPW3ZKFP9E7xIRqINN7O5OCqaRBMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBbg+K10FGqDRf7uP2OqnuJGhUlhd38a1ZW0P8LfK913wNe
-# pc/gxghb+agh4jfRHfRp3P4z4vu5BgC9fhZNwz44X23/jka5DC+hP84OKWRXRb4q
-# 574kBeOLUmkSu4M4GQ2GNuisKwA2NuMmsdQgG2mHICC+6D/eQJ8BMuAgbsejiQpa
-# eKd/m1yz84e2POLnLJkXFWn3ot3vId4M8Tb7m5CfYpHrbJt9QHHp6e7LALhzSer+
-# NEM+p0nL307OcOvtrZ5NB4p9d5IXLxr2054H7lKCaKPb8k9sML5LwFMlULCB4KQD
-# 4qa3dOP8GydZJmWcZ6CV0uYUQAChj0p24GA3NzVN
+# hkiG9w0BAQEFAASCAQBT67axjdEke+OEymuIh6iiaCx5aT37JVxo6rgOA33BkZl8
+# JT+GDq1+lL/xI++gwErjBsVCZNTbJGvDvEbu+JUFZlTbnpJcEOExZKjxDfhD4IY4
+# 7XaVYjDGuSp69a7J7ecvqU6gwlZ8yd/OZv2MxpcAJ66E+SSl6NTO4+miN7vpl3Qr
+# /V1uK7lPwQwbZbC6SsKUYnaOj2d7Jvg6FtaJ1qUNSorDk+iZxfIZVlrVy3Y0ivIQ
+# SeyVYYdY1Srk8K3WROC+PzXkZbRmx2OmgCYQzjEvNePlA2MpbRLkQOaxfxw+f4Rr
+# Tq7xUkbBOq2fEbYSyQt1yqJzIEeoEjVs7oSwv4WL
 # SIG # End signature block

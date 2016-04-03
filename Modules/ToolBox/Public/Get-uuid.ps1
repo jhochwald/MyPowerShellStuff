@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -65,10 +65,10 @@ function global:Get-UUID {
 		If you have Visual Studio installed, you might find the function useless!
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -88,8 +88,8 @@ function global:Get-UUID {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvZdZhdZyXI3zm9sHYtgkqVih
-# 7DCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUySChnWSGrMBvO02rMfpEge2o
+# B7igghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -232,25 +232,25 @@ function global:Get-UUID {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQRgDAT8jyxFn/GnZEpnFqnYCpe1TANBgkqhkiG9w0B
-# AQEFAASCAQAAXf/ywd6q71CdsxAGn3Lprb2KvzPaaGBm45+7oXFKFO99tHwW4Vlg
-# RI6u5eE22nbCHlZ1baHhzSuCoHHoJhBNWNlGmdEXL2mU/r//oiig18cNFe7J9INx
-# dwY5oGAR8YQfloO4+OJXY0vEqVoLAokZiG9DKTIsKpmw5j5ZkYouUzL0kIX0t+hE
-# twM+qb1Byv4IWpGUwN0k93UZLLOkH8/zG9vK8iqId4gKHDJUEN8NVx8935XWM8Sa
-# a0UEaXHyXxeMLtgB4HUcOyrHZsc9KqV+P72gQZRbZ1dcZCDQ8UAWAIt3C/wI/lI8
-# e6oJKSyzZGDbcnuVakEZoCX40iZbhozQoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRo9kYtwfq11ytjm1SHnfmN1ghsvjANBgkqhkiG9w0B
+# AQEFAASCAQBtK6WGtt0ueRqQWAb1jWUp1QpHF+XtSvvM+EcBHA+99m0dyi5HPd3T
+# ZhQ2LLmJMFjPTsFLJQoDPJ/ffOHLcvz+/fRYuCRF6+eq5ZxXXTpCgwweacnMbhOf
+# bRO0nkFn2O3KOE62MxvxCjHlpwBzKDGUgDcGXw2Q84IoPOkzeldVHWl6J9tFhAIh
+# qMZtODlj1z4TXRB2NISXg+onaDKER/NWq3hrIR67B2UZXh3JUZu/q6aPi3bkzhys
+# SnC9aSsY27kBeBF/IOUFpziIZ6pekglkmOteUgIXC/BAEm82vnqn81D2TeeJlbjY
+# qnyw9JxFxPo6I6RVEJg7ZuX7TFTjuApXoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxMFowIwYJKoZIhvcN
-# AQkEMRYEFMo3Khh0NjixTgfsySeW70/AqdJhMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwM1owIwYJKoZIhvcN
+# AQkEMRYEFOET0+333PieWrEgudpX7QZtdV/kMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBM8NXCeEUGuCfUUJDafEeXepvcCQsbje+s5D+zp+d6/P51
-# Q2fgYBhUJxJJTr2Z7zfNI3+iWhnEfcSIwfin9xMacVN47d0WOgbd/uX8ZYaH7GmF
-# AewDUlWw+z4cWz2zj2WauvQtjYmsxApj9beZ/I4rjXix71rPT/pg1PTRrWlGNQ2x
-# IgHwfh2nn8f3qEdOO8NSVQU7NwWi4C5BtjXNz/3AhuknTlHNtP6VlpRQWOhelVn5
-# CT9ZvrH48tlVrOJb9peY4gjStpvXdvOWBMxO/0fk4/ZRbamcLxVQAIDek0WkT5bc
-# wWbxqcQM1Zj63wElmfWOaVKrzvmml8sHkESfyEIU
+# hkiG9w0BAQEFAASCAQAN+VFn27MBE9D2r6JoPEVUA1+1pNLmihhWYiskPOvy0KsS
+# lCvyBi4B2oSGE+bwiSS0wh/C/nySZ0Zid8GGRY0Hy2uMmhKGhwBbGyRjbtlukGEW
+# IxZhG9QpGPKJvbm78pW3Df1FxvwdZ0avnsgUDARQwYiidOC1jz4Gv8JIjmEDngJm
+# 6a+QRrgQquvW7vlmvvivikA2eJc+tV+1niT5YpusJmhYENcvqhyTCr+V9ZikJCcI
+# ZSuwnQpNQkZQGpRgIxn6YrOuE6+Kz5bJ58ZkyezpH4MK9p6NzkhM/OdZzyEW6/kg
+# I104ZCjUBBK5GXNedISo7XfbPmwWDZxChEqLqw9M
 # SIG # End signature block

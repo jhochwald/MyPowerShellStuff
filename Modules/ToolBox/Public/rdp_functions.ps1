@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -63,10 +63,10 @@ function Global:Get-DefaultMessage {
 		Based on an ideas of Francois-Xavier Cat
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	param
@@ -387,8 +387,8 @@ function Global:Enable-RemoteDesktop {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgcrfeBv4jNwD0XdK+7JTuLga
-# Db6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUznkBSNqrdfhvjJoviXf4rxYL
+# wfKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -531,25 +531,25 @@ function Global:Enable-RemoteDesktop {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTnJ5lWRkV+uSWoLbHRmE2gFoK7ZzANBgkqhkiG9w0B
-# AQEFAASCAQBl3fZo31Mphs5OttYkY8dLXOWShPb3znfiWReBnNQ5ZGZ4Q1N3Pg1d
-# oFYk/k8xHK6LBhUN67ZbRvspXEzbBf+hX29AP9NcK+Meh/PD+DQK0kiy227BgkM7
-# XwznLIerJWeClFic7LxoZ7ERnmmJFS2bHjXKSEzSQ7yJZVQF0j7y89LgJrDyJzh9
-# QSpzfFVwZre3m9wivmNT2+GR4Rn1d62dl2G831nHWMRK6LRgGcHB5z25WgX1mV2x
-# 62LI7HomqP9DmHFyNXTC4wyk/3hbu7FOHLQZ9/7ybSfLfuJnZ8rmN8L5gFAJ7dXM
-# b74KFSQk+MP8hhr08oHZ6GPNwyaG2NZZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT6iIgut2i7M8EK0qRTMeIa2qnZ9DANBgkqhkiG9w0B
+# AQEFAASCAQBgk0EjUUZVyg+sj/jYiFqf5RV3/lhAOAGhnHVmZeyNcjJd4vDKEkod
+# uDPy2X3KWm7yrwjz0AxTGpLvaLl1L7XJa+2l7eKSle/5zmn812jk5dyzob5Mg6ll
+# kulpTzw8z5kf8Zfqw+Zvxs5oXuKOpT6B08yHjUByy9zRgHhyjtvqCs0RNDi+w99s
+# cSlzKQAZykjDWXr0GE6yobW9uRSKlo17O9Lhr9WgpwU5y/DAAAkSuDDd8xZg3tMg
+# x/BEuay0q2940k4VeMROmM1M9j2aJ+5jQmhc/bTrEb+vKun3ITPmLcAdHlOF9lTE
+# 1l8dc+ykHhTJ37h99wOPFP1GOO+fExcHoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyMlowIwYJKoZIhvcN
-# AQkEMRYEFAUvZkYyJZTEdX8NsaSeCH6aNOA4MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNFowIwYJKoZIhvcN
+# AQkEMRYEFGHxD5m7cMiPb6GALgofY2OqcTOYMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCEP/jFXAtm/Wnolakfh3CBvW9PrEm+mw+C2MeIbYgJVl1w
-# gaqlzK7vT6KAiurCY9kCnq4ad66tabwJpbGsSMY3uwqiWrbOSIj3hgfk8JinzvOK
-# XrGK7BWD6iMWn7RRYageuEOuqOCQQ/iPBycAVKIulwK4RWSxJEsd/6f6diHBKR2Y
-# dWhALIxaefHXHc4rKns94IMuXqDGj9OfkUqruiZ6gcQNDctFj2lJv+wyYQsS9nI7
-# lmiQBrZIap0V6H46/hE0NRdNereLgQIsMw5zjncT2Q2DSUEtN8+CdEEBRJNgG+PA
-# 66B6mjxuYWVeix00JV/PBFSVy4gdlRLJfqVMsCkR
+# hkiG9w0BAQEFAASCAQBoAUJamPWml9MtB54420q8udBowGv712Wzq+7tGyDbzIl5
+# wQBYLKQ2lGYEdx7tssXE412ssspa/wpLfPphnc8HuoY9Zf/9vo0Q8S/03kv5k8I0
+# 5gzlbklr+Q9mdHmk4CPivrt1eLGd2sIhn+/pe31IA2LgfnNGDCi3bBCo1KwnBL2c
+# uQrKETudj1J1IQPmLgFMtH/NRIarK8MAWTEMyMlaHx09maqVyadjwqHYZQDSxc5a
+# mGFgD/2vLO+4UhLkNClRzZ9zKwhdW87Ad8MZB/XkuxDJyElWkVQo/xfl3Txoevv1
+# p0KqmXZozg7J4OXZ9waYmj4fOfsV/bUJa4ghKggn
 # SIG # End signature block

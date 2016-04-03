@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -95,10 +95,10 @@ function global:Get-Whois {
 		Source: http://community.spiceworks.com/scripts/show/2809-whois-report-Get-whois-ps1
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -331,8 +331,8 @@ WhoIS Report
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1fackqR8/KrTCVaPr6w1+eH/
-# mhigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUEIxl2cWB9u92k7QsLduXzca4
+# h9ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -475,25 +475,25 @@ WhoIS Report
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQcJsKldnaRwDMYqtn0gbdiM0fsBzANBgkqhkiG9w0B
-# AQEFAASCAQCTN8EZbdCUxnxMMrdvO32IkcZOvxOjy4+r5eo4GeFgy/5YIIF8mF44
-# 3JVcWUigfCmqoIAB24P67OKgJx7wqf+Vof1gdvjk4OriS7iObqYwhzaFDQycK2Bf
-# qjtUN9EyjWsd+xO1LaKd4uIhTPfDe+j6kTYI9Rf6tfAMg2gA6hlak6RKxpEHadQF
-# RyV1av9on0Azv0W7ySqeXxOgSDfySdBn48xF086U8hPyhlghtv56rftJ7obuq5J0
-# WSVUSH8OXEUcz4LtEa2HrnL7loW0jq4JU4ZBvc5SnhlLhUASp7ttUlnTCgEGol/o
-# LxA22o+lpTEqe65oDOLV4hwc2MiEF2gooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRiGDOTpU932pqyHjMVX3AZ4YgZSTANBgkqhkiG9w0B
+# AQEFAASCAQA8VFxR/ChmHbVYtbuUXM0KtjIN4nlkt/SLoGzIXYOlN+7UPCBh6rXQ
+# +DTBVhspydBOyZRpYxeP23U8vy9ekgXdrH53cl1FAEpdF8vKi3ovjuAT/7Vsnflc
+# IYtzO2+DCrvFVFK+6SJHrir6HxlFtgcL1Q/VHoU8Gwl00TpZVst9SZpwzDqQG346
+# 9lQ43IalH/H8Qqtq7kPSThD0fnb0n0uq+tbOa49kAawBiOaxxSlR5brzunuy3HHm
+# 7UtidSxTy6GGUSHaPJpNhsYcOdjVQ6gc8nkIYgkT1ZTkcgKjvZpMOD8rwEzC1GGM
+# /1nXJ+3AbBZQEAT2kfAun0WAMsDpRU0ToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxMFowIwYJKoZIhvcN
-# AQkEMRYEFPJvEAHgOBI0+yYSQr1neOlEXfh5MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwM1owIwYJKoZIhvcN
+# AQkEMRYEFLrhUBdF7pOyJgEHr5l/ZQ1fGNTiMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAtpg/cLrukwZKQk/G80RchBetm6X9ZRaXSX6LttHENZJJA
-# Hmwts631esbmd2GC0bWVVlApPN9xv2Q/mW4pK5zlOzfP5o8BdRWTJ7N8Hr3xDUJx
-# tssujor1elAmLq5On9bX4/1L3dXgX2IjAACI4xWasZQu9GCdNyE8nIjPPYzBtvLO
-# I30aDoanE7Vf+3j0F2p9urTPinqJMdDOoZGdX2aWnhSLRiwqr/VY/uvUF/hbrRJW
-# kt/zvutKqsUXKgM2uI6o2jF3D9ZN5FCdW5rn0Ob1UyTDYaT8I81F1tSFPhU2WdbR
-# 2/z6R8RVXd/qjJwRN+JTT5K97fD7YQEYNrX8F/TN
+# hkiG9w0BAQEFAASCAQAAF+7rq97Mj0N5cjG99Y9nDMXvBeLcSloxU3tvXBxyH/wL
+# riKTm1+F04kKXbIGzneXcs12vZKv5JMdoqeWZCn5iIdUbTdOqODhcQv97KMYLLQT
+# 4m3+hC8bu8izkBfeYCqLXlSuXzvDDirQzMAta05MnprieWNEn6jKWzh8BZdYkdH+
+# nUC1d0tn+mxonMkjKoqu9/BiXRlf1tpsNmHZCoCLtt2zhkPozXUbYG98KK/E4lDu
+# bgfmTdeVFWmxZRCBUHfdNJrXKIAPK21ClIhlfx0zcTb28pqOgkIA1O72mrNWgGB2
+# Z5IeOQmsPrCDuuA2KfWkbAwUICcOHXO7LPzMp53l
 # SIG # End signature block

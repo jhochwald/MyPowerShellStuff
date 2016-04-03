@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -58,10 +58,10 @@ function global:Initialize-Modules {
 		Needs to be documented
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -87,8 +87,8 @@ function global:Initialize-Modules {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAhBY17QfTYipVHFasVMr16N9
-# /gegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNj9OGgzuUFp/GmmV2j0A3AAh
+# lHWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -231,25 +231,25 @@ function global:Initialize-Modules {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSDafE2lE0Ku5fSH6i2BG2QZApO2zANBgkqhkiG9w0B
-# AQEFAASCAQCSm4MTN/a7XMXs2erMB2T/iL+wTY5sjCO26ECbTlMKNu1jjXcEGOaT
-# xodvz+G7s4Obu2crCYYt2hK139rZ8nPe9p4p/dcwMXWDnkUX7ZYvww5vhP+p6hdc
-# 5V6+Vj6mEfTamQL1OQ9Ru2jWu0uGZd9/oyw3GPWgqvVoIpouLTMk9mtkevYmsOWL
-# HBvwLuuI3SV+jGJuYvMy+KOC04+6V1AQVve7GoVo8J4xpzu0WJeWkGoqubHN592w
-# DSBk45Expat+t8K45WXUaKKJ+Ptk7Kun0Kv6t51o91z6GZ1+O+xUgLbJcSke3vsL
-# zqNsXAUFTxsd5SvBqDzZ9KponivpwSg/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTknDcjtteGr1ga6bgsVKMxZa7pIDANBgkqhkiG9w0B
+# AQEFAASCAQBZM6dPWdimH+r4PSzWjo1JmrikF9ILq02xBYfHGk509+kIDvDpKl3i
+# bCMbbIeWi3CVOFQkMPdIPR/lhQZq09WU3VG3B7AiFT7YTn4kjQQoSPpunVnV84ZQ
+# BB8xAlHDekspy8QfoomqaimiLxXChg6XcMuN1TdoCffRFzFvwnJzCWYkoN1LgCMN
+# B92q6cfvpt3mt+jVY2Ml2mQ+cX+5jRU7lwdhsUXO3rMETE8obZNbs1dZVQ1Qf/Cy
+# sap506/ZWTElm9g0651yl9xjApeWOhg2eLY3LHEnzsConmVFUjwIlmCks1r1Llxz
+# jXeX5zKFwbjhsXBQANzYvt0OQQyxo+Z8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxM1owIwYJKoZIhvcN
-# AQkEMRYEFO4qiBoEUSJROk/u6n854wNDDOY8MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwNVowIwYJKoZIhvcN
+# AQkEMRYEFGMwTEHzh0dmS277wvXRlM7mV7NtMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAXVD0KyzjIAxEsbbZ7tQ3IA4R6PeGoCBUGwP5TU0oqP21S
-# 6t3PruutHA8IICzN1Buj4yrCsKyiEVBqetA2/eERvY6AKxsv/gErAm5nIUUUlF4u
-# YrbB65ccLYnHx/yI123XjTve9mSRgGseBmyqml1wYpbICiG295qILdBFJjnD+5ry
-# OEKtSw1TI/V9REQ9ySn9JpTPniLBQkw92YPXlRDdRPvrM12q8TNhJLQE6WAzf/y8
-# BiKBovlZeQoc7rnlbDiT2ULaCTTotpAr5Uw3ImbzalR9JZ5qs33FYmsIRtvoInQD
-# 83LuUybPbPia8ZERf2ffEgylvYqd/QNptw/WA8Vl
+# hkiG9w0BAQEFAASCAQAX/3IR7oG4uMZHGfYAfl/6lRSX4Ymp/bu8Nzz46s8vSwbq
+# cidIYVA5KEIt5TH0VgwHk3yCSruWqfqJBusXzTUYspUz8llGDE3lFRh/M85yXPmD
+# U2xF2ekpeDahyPyHejZAs/RgoOXnaTGU9qM7yItEJMv3dJPxkmcAJd3cD+P31Rrq
+# GXICYEoTOdrqR2iQlwSyGLGUXXWpnZ2gpFZANi/L5rpy5FC03ExFXevP9WDCCI32
+# 3Ptu6nkFMuPCA3YtV204rtUg7d1QMAMU3fJYK0CsWOrAx5hv5XGqd9v0op87CplZ
+# 8A5Zv25OvegGbyAqDMJi33j7mSsLyFcrLVH2Jzuw
 # SIG # End signature block

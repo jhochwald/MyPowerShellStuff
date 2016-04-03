@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -68,10 +68,10 @@ function global:append-classpath {
 		Path to include in the Java Classpath
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'Medium',
@@ -91,8 +91,8 @@ function global:append-classpath {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU59v6qmR8oE2uMGR3ZMpqV5O7
-# BAagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAqX+/uXmOGni5Ewao/rUgPsP
+# 1aygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -235,25 +235,25 @@ function global:append-classpath {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTi/hMYMwOzO1ll4uVKVgMJ7rIyHTANBgkqhkiG9w0B
-# AQEFAASCAQB3Q8wJihBvATWYX1l5BbXlGwdgsQg4WSwEd4isoyjYCnyIwINqB0IT
-# pFsC9pNnAnxmux7x4um6KX3Yu6lNr6eH7pA0O+zJN9xiDWf0UoFz1qNlchEO6CCy
-# 7Y1SJyEq4Oeaj9RF7knUZUazUfW3ISJBDeDyGP5AMFkUfTdgrKnrLW8wreW+Nbjy
-# 9wVfU4ooxw9k5rohTl0Y183SKk/rrkl13xmC4NqFl7BMGztGyLSCCBjvHnWGsrva
-# uMmjsCmzKavIjLKLDUQtJ0XOLairJHX+PkpjBnAfubvaM8l+mtwIxe3alS06/r+p
-# tg8w99cZrTTp9N9mY0obvCBzg2iM5o3BoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBStRpXV7WotH6c5kNE30BkmEhcXnTANBgkqhkiG9w0B
+# AQEFAASCAQAtKEivtWG2iA8GeLT8scV1D9zF+7gVQT4oceN5gntSR/tQNbVS+WT1
+# JciKsSTRtKC3BI77TyOZJdDPeRz8UmHj+AdNACbpAX4WUwQ6yNsPxOtV+QJgzsOE
+# VOux9HgrL8+SxTbr5D9w3XjMJ24MwoGhd685v2/m9uGgLub25jj7uo2zbNnDyl/E
+# 2pCi1qjLys7nf0Y5lECu2S3EZKImXSp+hX+Y1f/KRUS+B7bnOgZY67L4d9NiYJo4
+# UxVpx0GVuDrUfm7BOTzhIPCtOkSaocHqE6NgwLZ3qInU2kcWHFQBU2t7EEhNHlDs
+# a5cJw71GwSHejIyASoCsPOPVif211zxDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAxNlowIwYJKoZIhvcN
-# AQkEMRYEFNqsRA59iiQPhMQoTss3jzraiwKrMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwOFowIwYJKoZIhvcN
+# AQkEMRYEFONgwbkPobk0j9rY8OothO5rUN4kMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBGnox3gX3cAj8iG8XMcNp17sB8/ZZtm2Kn0xOXEfxnGleU
-# YX4A+svmJnaqyaBPu8B2C7HLg+X2BEB6iiqi7ZZISkrRCW7SHQjTf39FPmNr77dv
-# 9MAUGf230lxU3dLON9gMWv3q3PiUV9cm5eiDbSwrBUvupmjfuCx9aBJ+gUoMdJVQ
-# KMkVb3ORGtex7Vbq8b4VRvHWm45whgItZLHTuw27YR71XMFU9kdbC4fghR6MFBIZ
-# 5fN8qOQchiVsZA1VlL2rTSY/O8DXFjfXlgltRNBwOi9ctsnL9Q9TBpAjmHBUaA07
-# u9aF+wlj5ke5fpj1+CRezsrRy0w6vXUrnA2r9ngz
+# hkiG9w0BAQEFAASCAQABgL9PrCZdTHRLyX1YrduDXlPGz6rwkKmTCoIDWrG3I/YO
+# wua2Q5n6oKuz+TLxskz18LLr2z07f9qbRUfq8sY+GjGWyp/WYUYXG4IF9z6eOtDN
+# sXhqS1eOvuKsBlwoAaS9Q0LPU7g/rGbk5Y0NkNP4pdn6VtapZXk53gF1Xwh6Wn9s
+# NZuRCDu9MjTY1K6GDV44QLkJwfHt1z9139esLkBr4THDwpPiVjYrCVMFwP6cozHh
+# wGbwYYKSJe5f9FBV7TisKfqzxp1GbSaozVwWCmZuAsOqulcn3c4NfnHkbuMhIBW9
+# nywtL1GdA1Itj6TUGe9aloV6TFz52nZ2OflRX5c2
 # SIG # End signature block

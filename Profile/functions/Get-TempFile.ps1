@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-20
-	#################################################
 #>
 
 #endregion License
@@ -86,10 +86,10 @@ function global:Get-TempFile {
 		Idea: http://powershell.com/cs/blogs/tips/archive/2015/10/15/creating-temporary-filenames.aspx
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -122,8 +122,8 @@ function global:Get-TempFile {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+9/xJZlbW4QzjWIBmXeN0A3e
-# vPOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAA+PF9IhdOSmXJifVAjMR/G3
+# DjGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -266,25 +266,25 @@ function global:Get-TempFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQtsUlWYfmYiZIB1sdPnxtN5mYrBDANBgkqhkiG9w0B
-# AQEFAASCAQAvLA8nPhmJjCnuU4H+CqqphSxfUCPpENXw0ALbuNq2ELnfpsqnwRL7
-# eq+bqRsXJKHbkaqkmBPiv4juRljr98QejN8iTdlOcqgdmzTwknOUc2voXjcmtpYQ
-# c1J/+ecJCGYpi6YBARftu28xHpYBHyH/uNGLjeIuRpK4IZd+Zzaf4m2KzaSNbnTm
-# X+YPbZ7twBsIjW6S+GAV7Q/C6igq3T+2ov+bEqjsfcA2m5HylKEKhM8LknpLA0xk
-# NyZDkKrTIYU00hqnUsoQUNtVMzszpSPysCChadW11DplCV3Nd95dQC7HStbkoDCF
-# r79kEWo7dQi+ze8EFi3rKQxwOCcSLrf5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSx3HnOHBefMaawGBvpW5xhkL9EEjANBgkqhkiG9w0B
+# AQEFAASCAQADTBWP6j8o5epso1bUWX4mwMyEN+b9zjvWbvfGI5peWjDzvtmrcGOD
+# F4ewVGnZgBL8yZiBEJ4UFAK/i2TegAnVom1wDVdSZm/qGey1QQeE+bKZ2CROzolE
+# SOvtwo7ZY9xcu/HG8zT4g8HrQ2R2LvSFNFFpS2YfI1IEfvvaQl9dMLRQ7O6q7f0T
+# eMghPQcZyTuyAdojlzwkQEIVGkK11jaa1PfekqJ0cbnl8kebto38xuxihnFalOwC
+# 9JX9yXVL+3D01DA5/4EwHLBWNPq7CVBZD0pkln15mZ3l9UeyFHeFUJhn4Ck1I2Md
+# ZYY5PyTC49SX62z2qsekUv3Iev6zAeFXoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwOFowIwYJKoZIhvcN
-# AQkEMRYEFNe0dqMCJmoPUNisa+b6us1bfyjYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwMlowIwYJKoZIhvcN
+# AQkEMRYEFOZEr7gIE81adkLVDNVdDFUPzepbMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAvWnVvbiTdJP2rvRvLYXvCwGhhY4dqVBNIyE4wi7gGel7q
-# y6Pguxrqb/f/uq/jKn8SVlQb9uM3QPQ9V0KGg7EA0mwsPi+y3oFVhd8HHkfPv9ug
-# PHpxCOJ0ZUNEOSMJTQvkxvF/BcbZXnxGMuGFR+Lp2Td+qnHI/9hcC5V9Wh/yrxno
-# rHJ3yM6kXFsqTtT/gVxuvE2yWIApnBw2FyzFRoUcDu90j46hYUB+pIqh/hgrfydL
-# FT4w6Wa5hx5nX2/HPf0EpF2ZmyIhzgWtBFmV6NgmI4ebS8B9uw8LirgedAX9tyYV
-# LEbdINcsePVVFATroPJ78SYPH6pVdwajKIfPXQ3+
+# hkiG9w0BAQEFAASCAQBBwi1MpveRyuYC7+eae0JfhJrT5QHQsqbS/TuAQfyYyGUK
+# uzPAiVrD2BQkceP1reYZcI0AcUyAGNn4MjINuvYP36HTaa3yiP98RICl76ZOVxZo
+# etIgw4W0a75D4CHUHZe23IaUvjYoyUVVXn4KFA8mr7RsLJewDp3lCd7U3k2jXyci
+# yWH8Tm1mUaMq2GS5e8MZVMcThJWDTlKP3VLlQPauuvR41uf2cIja1xRPPx91uQi3
+# hbmcELaDVYLoaTejNzLrXsO/8UTxuaTrNJrZk/wc+tiDzzdLZx9lggA8reFLIokb
+# 9/Or5QY109VMCZWBduUE65fxGk8di7c5VRC0KD05
 # SIG # End signature block

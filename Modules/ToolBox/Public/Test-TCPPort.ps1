@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -73,10 +73,10 @@ function Global:Test-TCPPort {
 		This function is used to see if a TCP Port is answering
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -152,8 +152,8 @@ function Global:Test-TCPPort {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6w9+AHgTMnzzdzwof8xsnunK
-# nQWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVT/6//ZQhqYTlLaf+pcDnM5i
+# 8VKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -296,25 +296,25 @@ function Global:Test-TCPPort {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRUX1yEvjjhsGnKh2A/LDuoqvw+7TANBgkqhkiG9w0B
-# AQEFAASCAQAUCNPgAHJUaB6oHzJ4FAmZqOAzozSKCuXu/VG4dapk8Z7CB4UA41zO
-# q89opEb7aaMvbRKAj5OdiBqeO3H4lhl5OS554qS2JK8L/yfU7sNTdqYhaUGfTwAQ
-# 1e9b50tiiWg2K8ji3P069oZ7C2wBXWZshPySCuS8Ft7lAOj3vL5Ng2yGOEZvShMr
-# DIkxboKRM+zQsxI/xu0lXH53nBFMPAPGgradMoQAryvi3ErxFXitDSXHOoNM5JdU
-# sT2d3tIFsDUe/ia7yBGAzg+h+qvIhlTJg/tCVCAWe53Pc22b3Npj4DmTI1RpDFAy
-# w55bKgkhxzVEkM8O77RfXP6Aa8VXFkCooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRx+CF12aqBZekuu6SH1REowNLAKDANBgkqhkiG9w0B
+# AQEFAASCAQBaDD6n20lgDjtYTcYO9LzfQL741c2d3KwYiP3BOTGu68wJc6nMf2Wb
+# AscNJ03M4i1wOQ/hgR0IZwk0QPpuIzA97Eer3WuH17OqmBDDHHP96dJcHF/swC/6
+# KATzodBchlu45PK6r8orjoIYHJw2cGKd92CY69hTAFGttkxZ9TDyXrAehsIiAU8z
+# 3tFy19JAPHXiCJRedd3bGI1Z3jMRfsQDSFf0kyVJAZFV03ayY5SmPFz83jSg5gRo
+# gmcdxact2oFTWVc8CGnmVOEJZnplg2qk12UNy6r+CXfF0j09TwlX1WvcSC9AqdU7
+# 9Dyk/4sIjiyKUInaJPkVeOErKBtvHfpYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAzMFowIwYJKoZIhvcN
-# AQkEMRYEFEAUu7CUQpEOB5BNaQaAYCzJUdV2MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcyMFowIwYJKoZIhvcN
+# AQkEMRYEFHOB+sqY3DE6megvCKoN17rsdmloMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAdP3UoGJ30O9uVazDKK5RKTZb1085VraxZKgQ4mXhHTPAC
-# PvixES//LoMBy1WDKeVj1YC5QYrw28UXpo8KOFtmBrLQSjxCpc5V9vlK04JBXP34
-# eTBPGz7nhDnNEyQWlwR7zFzZJbCUP6sM2J5Ii9VRivwpNYsTHSpxUraONa5+gdT5
-# IE9tAFn693eHLJl+m/vVLCQooskypombmYTtHPXA8AjicDid7rnSu8aFQRLbwBLC
-# sDP6ZjMFkasXh4OC2VIooQkaPw5NzCJVBN7lf78Yoia66M4rL5hr59qih81ZbfaL
-# W+DwFP9hwXdjIcLxDT9NQvqVPKLMwoqFFKZgxr6A
+# hkiG9w0BAQEFAASCAQCK1neqs5UvpZ0eaFRb6DVo/wYich6o7XDehHaTDbj71GX1
+# bhZmVw7rswk/n8Nz0Jvpy69oc8CMTkW0ila9F+K/Y02dKdnVf/8fhgat5QN9+YyD
+# xEsj0Bt83bckZrFk+I8LVSWCYAXv70W3l0+yLxmNCT+DvUAUmybbZ6oPT6ZgKrfz
+# ZRfJXgRQ39FmtpvVVHxMHUSSKpE7fFcsS+KHB0Es4svJpYooug4YQYnFPMHU+xaD
+# YlM6GqHJbsOFsI70v4frN2L5Mtqpmw7eEB1Sd2aYG6gNetKBzCcYWHfY08qDRQNC
+# jRwXaaKNr7Z3xUmmKlxevMSxu0Hxn3bl9aaPCE7s
 # SIG # End signature block

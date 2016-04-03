@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -81,10 +81,10 @@ function global:Clear-TempDir {
 		Additional information about the function.
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[OutputType([System.String])]
@@ -133,8 +133,8 @@ function global:Clear-TempDir {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+GxrtOaRsGO8yIX23n6iSU+N
-# eKygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8kkD0NLSIg45W8CjnqXiL6xz
+# SA+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -277,25 +277,25 @@ function global:Clear-TempDir {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTIrd0LKXSoytol8zjeXy6P4vCf3DANBgkqhkiG9w0B
-# AQEFAASCAQCj7tSZU8nwXUBnc6QzRn9qTxbtC2PtLiH1rihqZIRNjccJV4IJGVUM
-# 4AhoQR7n95MRWX1JT4UmU8k3HTknyCDD+U42xQOVSlbVaPtSd4jMrJkK4zTwfAc/
-# bl2zi/xLS4Wu8Wf2dMjBvuWeaBFvMSdeogWDIuit+2Z2YumXXsd3JteVcY484O+m
-# lUbnxrAKCMzHqn7p+7tBpnzhdO8sw2AYCpWSqHUSaCaR9pdpxUzTana5Kjqishgf
-# F3xCmPIfaZ3GhaecqNWp35+uBrhWnRg4wvhBcuzaTliVLYH1CTrUt94eRM/g12c8
-# zcnpRsYq77ZpX0J1bUCzFg7pvJoVBhsMoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSJRjzpiDUsP0lkgtw1umPMaOiK9jANBgkqhkiG9w0B
+# AQEFAASCAQCVd9ondMS/+xngowe838/rpZ9+FQsr3YmVVc9mkep3/visP3B7EiZy
+# kTAuiLEp5xHrPui/BnjvwR1KrIpv3hcUIQGtFme9XURl6XWjP57LVyoLVvoX0ZFN
+# BPxrAaqLf19kjVc/nMVI1EuPwgibZwdcQ9h5oNiNWJMc7MPJnlLQ2gG5eKzqJ3PD
+# TqmyEAFjQ4gr4OYQEibrYn4E972pcKSZ7Lb386XdUOwtVIA7uRN/+3i8U1Dgk1YG
+# QelfcXPvaAqftEr7jotF6tNbiFNMokxZTer35ZzLXjyt9CjJJaQ3hTsk09QAfOGv
+# pmdSCabBcSUqxEwAvPRcB+BwTpup1ZEJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1M1owIwYJKoZIhvcN
-# AQkEMRYEFMp/67u7DbRlAzLqcurniiOcOQw9MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0N1owIwYJKoZIhvcN
+# AQkEMRYEFFd6G/6yUijB3AqY9s3UlDb7l+WfMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB3skiJdpctguFdEa/NtVMgHEvuImsLr2Kne5dRWmVS4qAd
-# v+4QPpnVlGwQRR2jze1yn0bY3Ddob29VOlZYlQMgWFrE8jPeIWbC4MhxiA7NOkkh
-# uO5d7POmh/yySj820QvGwLkTYKWsYrpZURDhczuEIJzt7NlKDJm2as92rVHAnPFF
-# c83+g505YAX3kFOj1er/trEILlckOzmbTXHSur++lqnaCxiB8Var1bfWrVCg6Gg9
-# D2LK9iZnOorpSDc/0eZVSIZonA3H9Qj6fMCe1vqR8YU/oxyhZQhghzRSrqfsnOUP
-# 9OwqcOlMS51CEd/RnKW3rGfVWGyghvuPLfUoRTZO
+# hkiG9w0BAQEFAASCAQANYx/tElAmPR7cOaE2RJBde8UThXyH4Inwma3HwHzh8Wt6
+# RYmqZ0rzsfeNOntMefBWJaouMWZ2U/PHFyDvciXSrFke0v4Q5sGCj4bLg4Q+i/pr
+# 0qAAsxhB0DJGQCkFP8uHag3ukSnz/qQnWLMOUVijGJVWd3baaqYSjdO0yhp9KnBS
+# 4hBYdI0PxoohTAf3Xp1DaD9/NtBc8ziIo9e5/Akn0qTK3tGyYuoLo15ySjg3JlrV
+# 8Bm0rF+UwNXcTV2LKndraW0Q4fxvzvws91IvYs58ThUZg/V788ayLU/xJ1ITiz4s
+# nJ2NvqXpZh1HrQcPT9Bu4dvvMtek5ddQ0injQfcq
 # SIG # End signature block

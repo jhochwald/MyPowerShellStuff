@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -106,10 +106,10 @@ function global:Create-ZIP {
 		The new archive will be located in "C:\temp\"! The directory must exist!
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -225,8 +225,8 @@ function global:Create-ZIP {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIwyYeRWpkpKc+shOzNxSzx5G
-# 6JagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIjQDOfibiGAW5MUfcg/oq1mA
+# q/ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -369,25 +369,25 @@ function global:Create-ZIP {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRz8HYxYAsSwM3ZBNdtfF3bRFd9WjANBgkqhkiG9w0B
-# AQEFAASCAQCCLYJEn5jSn/0sYh86jXWwdtRjlF3tUOGQOVJML7SAQlwwH0unELr9
-# c1tw6rM7sVQh3ZyMZSPN6fnf4VwJb7cKnbhNsf60t1uNAAA8oBq8H64M6Tffq3G/
-# DFaLnosqBAOLgoW+mC+GCUVa75ABc/iQFyLPNUKtLP5eXaOZOdi8TYDzWm9oAmDa
-# 0lQ4mmShd4FG6jIj5aAjsxBjUcRNAhBxClbNX39zrvtFshJyIgv3ZC+nbugULkpn
-# ex/uQAS443my/afEi14YorLI7/O0AJlEBxnrb/HovWyJfb4N0XfTlFUc3WAuOI6f
-# K5d2G9GLqdeT04xn4S9paRYgJVNx9oGAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTD/7MUsWvrD/aDyBTKwuzIn6q+VTANBgkqhkiG9w0B
+# AQEFAASCAQBLUlaOk+GMa8McnOXnfUwm4lZ0UeyYGFbbqm8Iar7BiyjKguc7fm8d
+# TN4ZZN32gVJOtP5G/K6nijTNpMOV5wCMAG+fvda4fgaYAAQx2PYJ3fttvjnh15zy
+# QbQ0/uCfpG08au1ocujtXxL5gTRot0rLqFwT1s3hBYKHSofAp/pnsI1WkJ8gqjSH
+# Du8/ht/5Xd2jyDuEkSGnXxlWTvELjOIZTeHCT7wwZodhzcxXeqo5/KmjrB266GXh
+# xx5SAJmB0e9CpViAb+Tkv7YUElUASJ5e0OD3v+05ILNbdBI5b8CedckVGhaL4UoV
+# hzquDEw5fj44eDhJtk+KGhxEsaMlRGnfoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1NlowIwYJKoZIhvcN
-# AQkEMRYEFJmz6QXgXNyFODtf3ZhaSB9AcoM3MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1MFowIwYJKoZIhvcN
+# AQkEMRYEFFnLhTH9psyYFIWn2C5MCjgSQXrSMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBL0Y+Y1lh1+aEMuBCXHErtczHWk5KnbH1a2KZ6YlTjyuf9
-# MdWHujktuqWdRfyHVNV3fiKMZLJ32AA05jBjo7LWxl0WOBcuGtzKI9IngoEiUM2P
-# 8IvDBgQdj6Bsn/W1LVN2Fa2r7OCbfzjsQY1tRLZ3qacOMxNET4DOGuaOAwcxx7Ao
-# O1iJpko3ka88HkGgq7yzJSi9oBbLyfWc5rwvMxV2e+0efxJ4Xnktmaf52DU2fVSF
-# 1+vncDHGCG7SQ6TF4p9W76H+XlfcCXvEloww5i0NsBtP4ehMbjoZrbrU7CBGC1IC
-# TOOOktZfl2PkGDO+F35Qfl6Uvx8PY3xyl75n3TVB
+# hkiG9w0BAQEFAASCAQAxVph+WtNOXlt0tnzF24NfF7fdtlafoWuuQ//+DhmXE4lR
+# xlIeRkIyMc7oXkGIJYkiCtrmZg5OLM7wjLnrpP1WyqdpBvNUqb75/1qy7hqMtied
+# 0/JNLA2AahXMvGxKyc24lKfUTKU6wLOp1M+eI6JMldNUWFdxmCbeUHsADEY8S49L
+# 7XXgFQ8LCp785lQpra1GZVRWn517+AKOwPw2wCo/85Op0ZwLwbKipPGFq8dQIksX
+# a2/Nj8IsRjP3AxgVobrV3U50+NAJX1d/MpCIcsmZtL0oJ6k12NxkKiOgFM+9Gr7y
+# utLJab0fZX0PZ7Mn/QY0TArnQBbxvsTAgoWvRei3
 # SIG # End signature block

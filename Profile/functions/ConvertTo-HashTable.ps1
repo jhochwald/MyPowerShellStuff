@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -65,14 +65,14 @@ Function Global:ConvertTo-HashTable {
 		Maximum depth of embedded objects to convert.  Default is 4.
 
 	.Example
-		$bios = Get-ciminstance win32_bios
+		$bios = Get-CimInstance win32_bios
 		$bios | ConvertTo-HashTable
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	Param (
@@ -117,8 +117,8 @@ Function Global:ConvertTo-HashTable {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7FKEGnU6A7g3YjLdCdS3Ix0k
-# Y7OgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnwgM06Ky1Bl58As/mqt2uIEr
+# KtigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -261,25 +261,25 @@ Function Global:ConvertTo-HashTable {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQkJx63BI4SChkKmiZSvmXAtmQitzANBgkqhkiG9w0B
-# AQEFAASCAQA/uQcMhM18wF+Lgbi+2X0CDNt4LaNgC2+LdAVkLHhVYCpDbVBR6qLs
-# gYqUYVB5MpG6LrY9Pa+s7Wxl1z1ldsmIBMcV0wTvzVz2RjMDOKOr0VGTtIai1A/+
-# 3ySg/FSmg8ZUMDfbfQodV5RU6RsDIB1r2PHeAzWm0CaZwRpJKwF2HKASd+zVXSt+
-# qXrm+eXnEkAtc3oqF7CTNfE7oe/Zf3q8aYuEhLbLQtyjToQn7r5MaVU5Gndx4mI4
-# bpvdUCXjs5VABKFKo+MVdCO7wCDZli0P+07eIbid31yLb6WtNDX9VfP5ebvf1GRE
-# 6hYaC+1uBpayFShxJNbDL6Xpjh18PLA4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR7Vc+c3kj6ABbYnc1XtwrsXWGP9jANBgkqhkiG9w0B
+# AQEFAASCAQBQkzfDWdS+NlXbZaeZy+7KVce9Wac5LP78sDMLwYUOHU1nvx52KOCj
+# 9/zQNWeO3OwLuZROLdpExceypK3jmL/Sk9bCe8MgbbOP7HmLhU2HAEBZL1JeacW6
+# kK8pqwVWUhQbTfXpmaHMSzuocLO5Q6OiGZy2dRsERrQB8vd0uvmzTmszIjgvGCAF
+# pckmaPatXkcqk728cYts8Hdq66t0Cyj1CUBEq/moKcE7dNaVmnkyNivLxYAyKJhM
+# ewA5b3DbImZ8L6ZHBIcKqN2LAOiC2UF4Oof83PMgEoko9CUCHX6MmrFqzCTzRf39
+# Rwxvk/IEjO8Hzd56cDGm+sM3AR7cEUn0oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1NVowIwYJKoZIhvcN
-# AQkEMRYEFBFFTQJJojqU8WNLxcgFo8cb2yG/MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0OFowIwYJKoZIhvcN
+# AQkEMRYEFF7N3a++v7rp5jtlMy6upcWpbOQHMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBhbDYzipj2rOBuhqWtlOfyiEGnMW/NiYu40xwoTriJxG9A
-# pTOauS34mn04fpe2Rxr5YF+p+zUuP4Ni76Vj8DNMUuvaLu8+xbEdXVY2q6igWVox
-# Au9pVqsMjShwKZsxSd0TglzTExi6qFaVpJvwNa+pbTE12WcJV+OrOsV0y9Maji1Z
-# 3YHDh57mPvYISp+vHWrxl0O3QggOTpCGgKK3ooRPFLfpBe8/4ysb1iY3256oKpz2
-# L+aTS3gqxZLbOp4L2eCY7/YQ5b9NMBINRkgsfogjt/71aIcHHEOBqSNZHzGqvY8r
-# JCtFE6mQh6zMcoTok9XWRqlqfbw137sCMY2PqKzq
+# hkiG9w0BAQEFAASCAQBcaq917ce3HliZqFw03ITu8NIEyoUelzHJlYKJ1pbkjX0U
+# hgtG0EPWmURxUZ1leaertQKkjkpJmFidVHnQwDXRk7ppMPLewSjMyUirM+N+14kJ
+# PsTPLxxFVIP8uj+vMeaj3lu9/1evHcNbLvKC6o0YLYUJmv8PH6cE2+C8iPqxK7iN
+# Lf9BpGQSlNlFH0k+j+zs1CAXSE5wmTg2udaheyfzujVqh8ZIliK+vBAq6qpx3CIO
+# 0qrSSw0yWTse6P45sxutdgI7z2u45/exOt5ZSmeHp1WFhsT9Cb2cW4YBJfvtq6ze
+# W+5K8n1JQgHMFbb3yQAH2yry1ZbIY2kwSSEtJroF
 # SIG # End signature block

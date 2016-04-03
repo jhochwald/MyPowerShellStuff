@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -65,8 +65,8 @@ function global:ConvertTo-EscapeString {
 		In this example we escape the space in the string "Hello World"
 
 	.EXAMPLE
-		PS C:\> "http://hochwald.net" | ConvertTo-EscapeString
-		http%3A%2F%2Fhochwald.net
+		PS C:\> "http://net-experts.net" | ConvertTo-EscapeString
+		http%3A%2F%2Fnet-experts.net
 
 		In this example we escape the URL string
 
@@ -75,10 +75,10 @@ function global:ConvertTo-EscapeString {
 		The companion reverses the escaped strings back to regular ones.
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
@@ -125,8 +125,8 @@ function global:ConvertFrom-EscapedString {
 		In this example we un-escape the space in the string "Hello%20World"
 
 	.EXAMPLE
-		PS C:\> "http%3A%2F%2Fhochwald.net" | ConvertFrom-EscapedString
-		http://hochwald.net
+		PS C:\> "http%3A%2F%2Fnet-experts.net" | ConvertFrom-EscapedString
+		http://net-experts.net
 
 		In this example we un-escape the masked (escaped) URL string
 
@@ -164,8 +164,8 @@ function global:ConvertFrom-EscapedString {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8bS92eoIHQXwbk65rPCmvcFv
-# mkmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKWmywMFxIigiGjb0bIt/Ru/N
+# 7u2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -308,25 +308,25 @@ function global:ConvertFrom-EscapedString {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTRF9VAQSepO9QUHSUfir1CMQbMCTANBgkqhkiG9w0B
-# AQEFAASCAQAAWvMUl6u8H4ndpPtmp0ujsAa8unqHGPD8euuEhtYfeFyopHJ4+zMF
-# kqY9aUi4XA/Np6anukcOH+bplndEmUy5HzDci69Gt4PXZFCuMSgx8WbooNVbdtwF
-# /FqbFsAsvP5J1USc6Ax5OaHb3i2fntbaIHlqmzNZV5PegrrRGipvJi9WSzrPikyT
-# yRvLEktYmeVQUZql4rWOGKIvf3E9TV3diwfBvsPttMFU8qY56lkp1/3W6T90XjYN
-# M6oakH/Shq5ma6d5MgUA49pwPNA412P8SQXxponU43YcchKi3u7uSg2+fyaNL1QU
-# 7zBmTl5inkDiMdn98PanAMAYtzOTafjyoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTeLatJNCCCewxcz61pMosaxV1STDANBgkqhkiG9w0B
+# AQEFAASCAQAfbjRjdQxyyZwDcDANOfzdI3POeai8iMxkO5z3kqKDOQrQgmquqjT/
+# C1+X283shL2nA5sTKY39sxRiMLlsfw2upCC7pNLGApiVUEV6XeUo+5YllvNqwxpE
+# x0XxSyqTveByCZt+8Ds654uSCeu4EFZuFdsKiY0+i0XUF9KidPZSqR3qKbMXe314
+# pezbDL9kMPYqtIq8CKftJDzgwv7q+4yKr5vj6LgwQL5WZ5dbYjXLGx3RFwDXgQtP
+# Xc8C2T0BCfCC2ZPLSNq0qUI37xMYPjqsR2425Gu1Qadhq/8oSJSt7UnY9kZuUCe4
+# m+j2YDqzs+1le3RCYLQvfy+cvBSuGEwloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1N1owIwYJKoZIhvcN
-# AQkEMRYEFNNlwNssx9KFG9ITwJcUfKWf6D7DMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1MVowIwYJKoZIhvcN
+# AQkEMRYEFHHa+Ahp5hQZfzjPxr3HJAXHSUQtMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBIwhGvNIEwPQqWC3qZ8rj3Y9A0Zm4gAzFI/3iRP1abnOYW
-# RvD5eDM8iOyFL1sg5nq0SsZuafODaESobhMAanjxwGn4hFYEXT9FUTfMi5JUiYTF
-# /urRRKIEYVY+PzazI1wD8Uds0S/7C7BRMcrzX09NlrbyfHaRwDWCAzizKgJfnwMi
-# 1n1BVuqF33pZnIYa1gVOozzyDFf1NGekyLZ6ydlupYDUFFAfc4Ly2e1tgTurd7te
-# zAKRk002Dl11xwcTwPYFRl9fU+j/p+US+jn7NK7pkPMcCUbnqnD2mt7o6UCysEbM
-# ZubSAyXxyf6jl9XwZMSr81Czo8OIrUpcFpD/dlMa
+# hkiG9w0BAQEFAASCAQBT5rkQuB3gj1tEGFvQ99GWE7tjJ3hvat+qSieJJ0P8jYdb
+# AMY1qZgfVpNov++mU2sYofwp1XL2UAqaZD0gk18UzZ/T7um3DRfePwyXjVi3YqXt
+# FodxsUuzLaA3eU0GwAnqRmTc8c7g3RcvLpu46xUC717uij6ZRyxpQaR8tJ8CPZzx
+# Z25ovQhsWgPihTF8JneMWVCFuprFhtkmKidFLBoXQtvJt1Th/bkiH909xJETk9dp
+# XFMu3+JM2oIl/3aglNddA9uLFIQrp0ALEumo2xRl4kqwyR0Qms0MfkJu95PBZtfZ
+# X8dLGRbNaZW3ycflQEvlBHaqXeJR66R2kyqeBSP3
 # SIG # End signature block

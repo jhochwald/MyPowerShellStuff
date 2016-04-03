@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -69,10 +69,10 @@ function Global:Get-ServiceStatus {
 		Just an inital Version of the Function, it might still need some optimization.
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -108,8 +108,8 @@ function Global:Get-ServiceStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvldB/DofNZJAWRLT+El1RQZE
-# rxugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyoabcx/azzdMla/u+FAsBoFH
+# tBWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +252,25 @@ function Global:Get-ServiceStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRAWrLd3bqcROEeJm/HPt8j84glZDANBgkqhkiG9w0B
-# AQEFAASCAQBnDR76nh8R3bB5C2pLxUAxxfY8RnzvdI3O8BtlggXPxc/EjhJb3jNO
-# sm6o78PIn6LPbKjrbznYXGs38rb6QZWFKy70pOY070x7BpiAhYqne3eno8a9NW7t
-# nGHVF/b2ii6RJGCmArg/eqR7UmUPt/w/dwgux+rBac8F2A3MdSzMZra7c/9p13Ce
-# VKnVT1I/jxnYbf9cCiY46BxeC1XLmZ9N14ps/2Y4A6e5bFZMwvZnGuluojKRP4f1
-# Wuk1Hi71F2Ao+5ytHz2c7ln8WjiTyof3FRtV6MdyVB3CAeMYISFl9VyCF1onid3/
-# p8mYI106+3aab9AX62z9gxBEnRwpuMH9oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQinr63aO4ippivkkcIG9PRwigMpzANBgkqhkiG9w0B
+# AQEFAASCAQA9g6tPtfFUvqaAUMv9+R5V+gSKOmmvJFpFvVuJ8Thsrt4AtQGgTWhO
+# OXVcWXSjJYjPCnbUjKD2ZiSri6W+fdrcL5PXj0qa99Hr0+Lzcj5GMlC6SOD+YFMQ
+# 500g6/O9fw1xbtDQqlhRy4FKxWz8XdvgQToCgNtJrgvMZlrIIhTsgQgo60fzSd9x
+# 0sb0gWb0qXi9Vd2zYdR7392ty9WZUov8sCA4Apu7ESy+KRgMD5BN5B0Z00rksWbQ
+# B8JluT6K6ga4AbrWWkFWrlLbdMf1Bek3fJOKFufQF1BDePbnJSd0mEmvP+itlrUm
+# A9ahPvQBhruaj5ck9kWpPevntwxck5eloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwN1owIwYJKoZIhvcN
-# AQkEMRYEFMxRgvK+3dD+zUVV94IIci9nDKaIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwMFowIwYJKoZIhvcN
+# AQkEMRYEFOHvVP3aKH5QGU09qeHyCmctDtGgMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCKyfTHGxj0ADB0dGa9W6b4Gl5ZXYoxJc4g8SoyCKYbcfvH
-# evltzgpmDvW5HaJlMncgJU45nKwtH/tFcBC1PHk3/W/MD+pL0nmRP1GQYlMFWd0c
-# 4AWGvIrd7jXM/K5cRA2HO+o5G/gypU9c+Zf1gckCkb9lQxE8EYbYbjXSZAkFEUwl
-# WlUkuX+AIViB7JzKKqpDDoHgZ9qDjOCMVxILi1aP8sUfrAjfF+d58BlGtuv2V4FU
-# /qlgziprC0LRlCrPJcFyiqZ7yM8bIpDqbdM5wh8wuEbJ8D+ga3C4+cTa5vnUXTY2
-# 4Ul1j0KVCaU+xrnUKeJFq7VGnMe2RuMb+bFkP9Qn
+# hkiG9w0BAQEFAASCAQCc/i5owPfomp3n3ziWCp+Molrk8rlEIy2ZP4/oFvbyDuaL
+# FD2uxe3IX8b5YFms1+XFSRiRO8IGyWHnSaGGad+ngspBgDIWGGKJnb/rWS0y4sWp
+# tiCGmHAN9pAMjXDqFx8LBrkiK4xHPx/SHZP0AE9bmbf2CVzcmMPLFvQ0xxOPYNnP
+# DaXkn2k6IHn5ACIv3O0AMelSL/Fbsh9iaf061kGC+QL1t3iRCGT1vEixojs8pFsP
+# tIL7W7SWYw1Qt5UMNASu7vPsCobwBH1x2Gt5UOKHiGc0lqNDH0xswirbVxBJzJz7
+# ywan++RhHZ9X7xXqJyQLKBkRgNtXWbNeAEdZFnWo
 # SIG # End signature block

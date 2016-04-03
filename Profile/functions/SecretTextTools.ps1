@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -78,10 +78,10 @@ function Global:Get-EncryptSecretText {
 		You need Get-DecryptSecretText to make it human radable again
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -154,10 +154,10 @@ function Global:Get-DecryptSecretText {
 		Get-EncryptSecretText
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -199,8 +199,8 @@ function Global:Get-DecryptSecretText {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKVVq7KKfCIh1sMNy3+DEcErR
-# oHSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvSVSZq3Hhke5MOfUILc8Gfzl
+# 0nKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -343,25 +343,25 @@ function Global:Get-DecryptSecretText {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSOjhfpZmREktggkwrsDzklxIZRzDANBgkqhkiG9w0B
-# AQEFAASCAQBPwXCMDvANa0F5DttWAiMYSYPLYbn3EsZYrAPS5jBgQnnUwtPDnR1e
-# ls7iZVc712S/2vzFC1b4oRPm6z151DwdWgBVs6WEXACymsodwUG5OoBxXbJmr5Sq
-# k6/8nemyvMA5c72Yf/M7tADD5qnWLlFjYirY40B+anMabLV6qgfnqU3u45CaBfTE
-# Eq+c+4H6j6qBX4Nsaxsmf1wR8VTJ+rcUuuF+feGFKTln1YrMTMpjZ0kzb3eGkNdS
-# AOJ457ig825qbkYKTeBiVltULgocveMDxupLo4VCbQ5HZILXXldAQPhQOnKPmYn1
-# R9xnoYvqmMw7CnYt3xGu+ZfzrWyH6sckoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBThqsGohSgPwMwmt8+/Rd086rQ64jANBgkqhkiG9w0B
+# AQEFAASCAQBizVL99QbIfhRnMLHRcAxgRQXEiB5onaYnB5UBHpfPmY3GhCvSUmgK
+# vV99fTsNRam86STqN0h9u/uAVdb7ENyfGTrH8EyZn5R/OAvzUYsSNa5ulnUv3Zvk
+# d3fH1UKuiJn+adLxbBg7fzlWLdj4SBmlDmVGDJ86oDdSRCAA3h1GwaZ17lRVM8vr
+# H+qhh4/8pNv8yVfIz4EClQVi7c+MY9otJMrf9g26BI2SQAeuyzJIRZ/g1uQnPLO4
+# SK6WPiA2xVqdXt7/7dX9/VpAvs4w4BLi44Jb2dfV5Qvp9+Umw3p97LFcnEbry04h
+# uKNDv09CUesVWALpxKgjCMwTCzOVe+zroYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyM1owIwYJKoZIhvcN
-# AQkEMRYEFHys4B5AxJVuZOHALnsts1b3lQTKMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNVowIwYJKoZIhvcN
+# AQkEMRYEFOJnPj3WL2K6+RDDtiGT9IPXWc90MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBjJp3MDIjL4trAaz9T4AOXmwFVkLyq8vB7tVSK419aA9cq
-# 6cgBJT6qRoOsXkH8gFlvRNct6lvY9ZRK3muQzWF2B1kLCbmVkk4pS03jD/FtlU7V
-# Sv46RrzslT1G1mUOcp//nX/ocDa7Sz5yXqILTE6WlZ1q9ZhGbEj80+kul6IoNMsn
-# U24eq3piEgncgKYIxYP6RFQ2ROzBjmnGXD3xMcdDpzzpFxsq+pi/n9RAqpz5cytq
-# v1I9Iso0kEGEB9bHS+pVQncMN1sRwueuEmmrd/1515oR+5g80o8Dei7Pq6NUPaij
-# rBYHdo47vNZl2GcPHOk1ItmocYLvikg/LZzjFUvY
+# hkiG9w0BAQEFAASCAQCKXLyJkbs6xPmUHUpYzLE4bC3CWS0hmvaFl+FBnXCQZ8MV
+# sdTAsXDPVBlxk3axXtH65S9ZpJcaKbKNP0cNIDSMba0iD8EkrZvObcT5yKvYnEQd
+# uNC0ygU2Ztdq3qOWOshbycDgqs1RmeS+QJQin6QjbOUqkthX9GtqdXGXI49c+DRo
+# /kDC6ZE2fvY90r488ZB34osUezC+b5mQbBn1ecGBKqfO+NOtKr9waLR16nbcWBIs
+# 0agmh47t3Pcns5nwCkEVB9wu8ECdz8s+im7gnG3rJR1kHEr5ixOZp4s9n1OtIwVR
+# xKLL97+NkZYbJDEBcWhtPUpVPwSxXFnm58TALme8
 # SIG # End signature block

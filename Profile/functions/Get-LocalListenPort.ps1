@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -178,8 +178,8 @@ function Global:Get-LocalListenPort {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJ7AOuDXFqOjwOXiyuUixc7lX
-# By6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUr8/0aYHfv6dZ/CFLnVy8YkRy
+# Hx6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -322,25 +322,25 @@ function Global:Get-LocalListenPort {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ2EyrTG+lr3Zamj0vlu+93C7KCVDANBgkqhkiG9w0B
-# AQEFAASCAQCWP9fPncQXTxBrgowJA7jt28zFqk8EY4nHsDlvYLREJavirBKDUIGC
-# w8BkjtE+DJDNE2t9TwdJomTV0wPIzsnQ7xVWc3NzV3OcRXxpOkNyW3shyh5zUOp4
-# 9p6r7SWUeyqPK0IkPPb+v00tJ0paxHnaYxIymN8Z+PpLzFX5jfqjlj0OQX57O2bz
-# PxmFRYB6arcR80PUv92ONunqkkfbQx4tjyG4/8hUC9Eq16PXAp88oq9MYkhMrsVG
-# HHXVx1pKCiZzgBMDXucw6LLjY1tIFg/eBmfWpmFKFs76Do8fiUugjhE8XL/u5z9K
-# T6k4udDpy1R1q0cRMV+PFvv5l4PfG2ZxoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSL1jjUKOmVIeD/4SzhYztn/ZIpGjANBgkqhkiG9w0B
+# AQEFAASCAQAfMhnNsLhThQT+6VCSrfUH0JhYWO8NnOU18G+7ryuwK40TxjmZI+qz
+# k1NgleesjY+g8kaVVcQz+4C5LHcCE444lQ23kLhS0bqA+4dNwJ+s/6h2EnOXNuD+
+# mj7lB4MDJcRZlOv6wrQbn0V1D9JofsLcNhtrAyaBE1Tx8a7hwlQ98WBVxyjLQscl
+# VlGyz5LE8/0vjaFFX+UpvZ0cJsjCkwTVcEg0c3DeI5DXTPret37JDASwMDPM++AD
+# qRNl5R2CMopDeCarWuDEf6rRGAZOW6G5oSsdqEF/rbtpSB7SGvAoDQKqjrvJkPpH
+# nR6JbB8vJvzYx8wgbrdfo+H2Srt19tDloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwM1owIwYJKoZIhvcN
-# AQkEMRYEFJrs//kCZAqzNMyhy+G2Ks5rlJ7XMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1NlowIwYJKoZIhvcN
+# AQkEMRYEFEcKh29hxzPcj+ojlcDdmvK1lOlIMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCWcLZXFtqcOJNro2QIuyro3qgjzP2SZKwWHDTcfvRYE/LY
-# Dcpc4oZw4sLZlezX9woHI7sDPxCgps2adBQ6N1Kg9JSZEsuoh93b/DjDjFIjwxj0
-# d+6dFaL5KegyEkUItKnKHdz834BuUjkbmpgR3gm65mgPtv+4JRnNXD5DUTbtwecB
-# iwswKVLkNPIMe9ALGjfolu4/LGj/voMzdg8GFivnxBoX4NOysJ2zYXoi3r/LOgpP
-# ZQHjRTp6fF6EIFKJTkJDba1Ks3eXZx3n/Atuv+AUzRJPjOGRSEeyXKnbs3Su26rk
-# x4miT2m//Pm31XrOZE8/J2stwWuzUjP9L1jIcbqD
+# hkiG9w0BAQEFAASCAQCgJKITh76WJ5Un2f4HbLDeLBk+SaOhdPsaM50UyOZX7Ur4
+# aBiWefSviA0iiQt9EQRVCG7nq3foEv41ncXkPEsY7Md4Yx21d+haSH8vuX0SQqeG
+# dKtqZpo5Q39e0ReidRv8h5JN7u0Ur/k6q78bbklbiU+N6/H+MvRyDfUsVmFDdidS
+# oE6U6ZzhdPFzJbz9Xc7wEiA8e/vAoUjlVZc8vtmW7uPSu8fvDiOHFsO2Hd78d/2T
+# 1if5vu2Zx06LuV7iohMiRGKW+3ndLjSmsASM69+EmEmTV4RM2e6VAwOrHCwfBB79
+# zdeGQ+YK3eRKaCT7kpbxqDgIorXaZD7PUJq8b0L/
 # SIG # End signature block

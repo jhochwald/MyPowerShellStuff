@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -79,10 +79,10 @@ function global:Get-TcpPortStatus {
 		Internal Helper function to check if we can reach a server via a TCP connection on a given port
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -158,8 +158,8 @@ function global:Get-TcpPortStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtS7niJ8Qcq6PblSQWRRkXmkN
-# 7OKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5lXFO/stWwfFOq5iQyiuAmYm
+# GuigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -302,25 +302,25 @@ function global:Get-TcpPortStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQaSwTfNl9WdRu2fmz7pLKFDoNxOjANBgkqhkiG9w0B
-# AQEFAASCAQBDylsE/pKhE7PGvXDb+xTyBTz3Oq7P6ZOS9LyLVlAahrMwwawKt3wq
-# Ntk4ewhzQUAO/My+vD0//SEyb/S9RRgKAKbDv8Xqqzm+wIH3EKN4DvmNLDAPfUzD
-# UOWqFYSxYxEpTubZsxxGmep0Uz+wZqlE4IIH+HGPyt8OvA3KXpzb4S6iUYET2/8n
-# aF9+kP9Xkb5Yo8G9K8EBXdWXppAYuSt0n3aMb60ZNTWH16lqG03UY9K2LzqizUFx
-# LgjjjY0WrLsWq9tgCsyW/v57BfJJCRZXEqrqiJx0xPmEM6tM/STDrHL0WqDSsQCW
-# WzPUpJX6KUJwM3eo2hDwvUNBaAvWnGGYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQaD5Pk/YPVSMmkAj49/z5gYNBkizANBgkqhkiG9w0B
+# AQEFAASCAQCPOmhhPLRmjv35ARtmNN16tbbxA9khXg5slc7IN+yiyDkdNmgfUgW9
+# nfjYoX8u9kdWTwiQ1Q/auEW1t7DJ6RQTKyLJexA1cc77GLfvl6SKmpQI3xwMQCI/
+# ohUgbOi7sOxvSBLutZZ8/UKdBVDFqEEkZ2YXQaRKAgeikXgi9cohUgjO+Rg2xHfE
+# 350fnNU5Gp/qb/PnAxfaUCQAuz61Neet+JXZEW7OrmCHLIpYH4yqvjjY4+O6/hE7
+# Np3S0B/IO7oMQ8JaJEJJVA+spw2u8iQcbGbeyxsqgPthaKYuUE6Ex1WunhHjZ+tp
+# B5UV3bonby9uYkOzAfPFVndV6WlIFN/voYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNDk1M1owIwYJKoZIhvcN
-# AQkEMRYEFLyGYgg+lYNjvjOFqVB9a28Dd23FMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0NlowIwYJKoZIhvcN
+# AQkEMRYEFN3KLB+0IaQ187F7/35wXVnPy5jbMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCd6pIDQwuDWZZeGifw5sWwhj3OC8MsEg38wwGUWjfmeNLo
-# BhqogJyl0Uxkl2uv0HJjr1Xm9rihp5nEvjchbrN2R2twlVl11wRj5GFfT0x6BRPC
-# rjLfCdEBL4WGyQYlXXufY/p+KisOdp2aSIl0bLLvhDFK6eRa00Cd6ltVtvEUlVXh
-# 8Y4zvdmxso8ZIlGgOAWZRtGzE2k2OZ6WUDLeZsldwlRA8m2VKJkdDUTLHvgLzz6Y
-# /vx/OUAxm+p/bcurx7IqfM3xUkUaMt0IdIqiMG7rIR7o+XiahaNi28F8CmSPADX1
-# OURTgFLH/gJWSjAts2VHxhDVJWqnA8bUH5doD3nw
+# hkiG9w0BAQEFAASCAQCaKp91bszb5eNkmPCY5mpTZJwY4so8/jYX4Hj7oFT2S9AR
+# iN7Y2Rr+2DdAa/aghB6C2D0HgeckBac+4Ut/3L9h2qiwXgV/kUcVYYEkuXb3H4ga
+# fK+0Kg9Sawp4LeuKa8ZSgI6PDqSC6tuZssQIgBMxrdHGwafKvSHchZZz1L9EtyQt
+# gJjMhgfIQrXDmP/70UBo4o4BleGtvQtiqfH7jNsxlrlIsDym+wdbjk5tYu5jcbYv
+# QjKocWDwCFE4gMlO/WL+h9iwocDCu6V6/7NOWtNNLtVZ83qNBzRu+pu8XS9K6lxY
+# DJTtJxw1iimj1XZd2LtRr/LDLU+2d7eutqVCYHYQ
 # SIG # End signature block

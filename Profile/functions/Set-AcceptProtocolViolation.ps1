@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -65,10 +65,10 @@ function global:Set-AcceptProtocolViolation {
 		This is just a workaround for servers that have a problem with SSL headers.
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'Medium',
@@ -113,8 +113,8 @@ function global:Set-AcceptProtocolViolation {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUytx0lbboRp8F3qt7LfrVPK5a
-# qa6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMV+AlavcyjvAp+DjWzf17W4q
+# nEKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -257,25 +257,25 @@ function global:Set-AcceptProtocolViolation {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQtRBK0BtGjjwuTF1nFNmxO3/4/tjANBgkqhkiG9w0B
-# AQEFAASCAQBLdIL8B8izQGwz5/oWhYE2dq1AtxnPAtGpNyhLNs2hDJDDrHDWPMNT
-# 2K3S1X9E7H8FhIAq/KR4RW3howkwIuD9enX3ELZ7PcySY5EN5NnwMqs4RbXhV1sK
-# c8YclaEHVK0okvOnY35gmn8f3yXins8oKQigZp4FggnuxxnZBSG31sLfX26cQIK1
-# /onRnPO9d67IaDgvHbHp/f67fu+uWBkQ5MfqUSNIu/+wBldaUueTtEahXRVAE1HG
-# W9siZVc2jxB1ywNVWi24SbWuUnX0pwxreqmUNwdbijfRVYVXqnmV435OYo2zQ0x2
-# wpG7YEkpgG3hQjFk8SX4wwKcSoJfuGXToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTgzldLSrM1zK+oU0WoMJ+1OLGS0zANBgkqhkiG9w0B
+# AQEFAASCAQBNLINwJwR+91m6pmesVGsHZuhIEc+xOIlRpmXhPz9/U2d0ha/DMxtC
+# uj7zrwVbK+y70UQJMh9nblw50sJNOS9sIqnDbLoOCoY3Dk1m6Ct4Ln+7Ozw5pFo/
+# TiH+G0NmQN4Oz2IFJSthEiJeMORs3eph3Jjf2L/HH8MV7idxFxtOaSosmJNPmOE6
+# d3B78yjUL1SSqwPAVnqHSZFMQYd664tO8fanU6tPO2RA0YeoNc4b2zFmRl/4Jpnv
+# dNWA/4QLG+p+kJfzDlenHLJI5cuHHqsqAWK0/edD2D87KsbL26bxbLkCa5znjexI
+# swx5Mg/bkwwkG4zbZJjDY2sWRlvoxWB8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyNVowIwYJKoZIhvcN
-# AQkEMRYEFHY05scLxMFkSOWZP5kD/QNZqztgMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNlowIwYJKoZIhvcN
+# AQkEMRYEFGy3BMcloQ2ouNXFjU/iNsG4PDLtMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAhdIZehuCRahGbBO/YCc22dG3bkkZuRXctoBesN2Kz71Hq
-# mYG92rXffelZlCCSs77Qr8adUnhpcMN2CY05+tBJ9v72q0l9vsjGBsMyfb5ATY/+
-# B/83AZRkFzFy1FgIUlLpzL4P1Df6967fSV5x/eCWi2nvB5hDD3uhErIszhtBDi53
-# 3DINoiiKzTT9pM4s9msJMfsxJ/4pzfYSOlFB0s5Ps0A3ASQUXaKn2mX2xbVqOE5v
-# P51QUUfTZVWgX+S4mlEykVNvr3OSUTZUQuzaUM6WyIfoqMvf7CKrkwNDYG8d2DZ4
-# jsIlmoPyUU1ngrxL8r0bZX1BkhFPsoV51k1jha5z
+# hkiG9w0BAQEFAASCAQBL/7V47Hj+tTJNAlEcUeyDWb3oSYezKOGUUtCgXV0O1r9n
+# NMnXZZNPXWJBFb2MfNpNlz6me1TPmLP1HjyeZJ5EGmDrsndgjA4bjq6CMCnqpx3B
+# cGvyWwonx9Ri/7vU89B57HzpNDed6huIz3V+uLdO6ILVtmC7uc7UvgZCOGjSZAHF
+# z9u+i+VRL/kreTS1byqDLj+FnFYeR0swXrq139gFYH0RFBgGg/5aI7jEYq6z9UbU
+# 7ug55gC0L6amzcuH26AWOEpWZ/ZXjDAgGbqdrwCGP4t+rWfZmdbMl9QRG/Ve1oap
+# UihfNs8EZ/iuvd8UsPYSGBB/iSZ9rtRKI3FCogaB
 # SIG # End signature block

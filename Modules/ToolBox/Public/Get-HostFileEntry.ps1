@@ -1,16 +1,21 @@
+#region Info
+
+<#
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
 #region License
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -71,10 +71,10 @@ function Get-HostFileEntry {
 		Sometimes I need to know what is set in the HOSTS File... So I came up with that approach.
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -109,8 +109,8 @@ function Get-HostFileEntry {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUm0nk9Z59CGYCRj0R5mKJR0rN
-# URygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjjS0jlXqYdqrrCHByFKDWaF4
+# 6BugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -253,25 +253,25 @@ function Get-HostFileEntry {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQyDLi5Dza/BE++xeSR8tIQP7rs9jANBgkqhkiG9w0B
-# AQEFAASCAQAtlujYKegUbz0RAemFttmtTeDpcZvY43X/gdsnKhY3tKrxEnbWcwlg
-# qmLK7vOz/P5jklcutomOZtevMqZLJwf1qHviTWnZGTueGUSMoZrGKh0R4uB882Uv
-# QHoRhkYsKn3S2eG5qB6TkmfN7FrzNGXTt6KBLvhEtHCnS0ZeB7koJ4yPX5FlZe0s
-# +Wm+Mbj+x0QWM+tdwb3f/sahwDbM3hoIfEmdu+tKYcfNq0Gyih3P+su0nsWi3znV
-# 1k3MeFFEwmd64x5NgF5OhONLfEKmpfmpbE2zAwbVuqJg4SLH74ZfxXev0u94L2nE
-# M7U67NUKWi2JapmKw9T1XyOvNe8CiTbPoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRu6TJUVEFyuuzwwqQBKfhTEfNVqDANBgkqhkiG9w0B
+# AQEFAASCAQBYHUy2EfdEhCwmUMYCFXbeFN6xBthzkqx0zccrjr0YSqCfsk2HDKSx
+# vmpVp08maI18JQMDlui58NcXzgGIFo7bXZGMJABhS/Qav8x8Qg6vY8ujI8uvRtSa
+# NCJJvvRs+CxD6Pmk6+U7ERssE/HcarYH3fDHDEK/G4bU/t+4ngHl2j9d5HQpYF8P
+# XQVLUVJgMcY8KTptptWJ1nLWYw8f32RYw3R7MpDHT4DErNy8QGIC6GClgDWBYrUd
+# ZIxo6yJJtKDWUoNAaCfSDu7UvOTsH3Jt/6CaFN02TL4isr289LerualAg1ZjzAqV
+# OWzd+gKOqTCzz6i8cJijjZBlg1hjVtwHoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAwMlowIwYJKoZIhvcN
-# AQkEMRYEFMjxRo5btz32Tk/Li/WZa3LBx6dDMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1NVowIwYJKoZIhvcN
+# AQkEMRYEFMtRbgpP0bswfUtLDZ8CXGFEhHq0MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA5iiQXmlntZW+SPSHOBKhXza7eElUXvhOrSSlUaiMddzZy
-# sxkgvtKbdWtSGJOccHJoetVcayNrmDOQ+icZLirzOsTXMC3KPeKq1/bviP6x28NP
-# 8NAzV0b21sr7YWCPYul/fsAspZYtFBEN5byVJV1or875MOwizO1i/1IFqk5hrJEX
-# YitH6DR41oyRbOC2FUimcanTQq1qoaMmC7FTEoeB8sK2yoTn7NOPMpFhikI5gbad
-# zoH+Lmd9Qon5gjgOEK4c8KQHPFxme9N52TK9l0Dprb4AF15aEapcs88WVjD3l4rk
-# q0eA1gypiaLqqXB3IavkVJYfJCgDLRB/jwrAfZhW
+# hkiG9w0BAQEFAASCAQCovCwtesuB3Bxja0xGg8bCUUdZ9mHUabE7J9zFXGSDs8mF
+# zXPxUxKS0JaAg4bgJXUe0m4W5SbOWat5U4uvZywNgqzTPq9AjvQCpFUhYPNgPyU6
+# v0iuyH0+3nJUA5Cj/obipdoAHJUeXFqCrIj6r0OvamJzZ9ZyhM2mZRUwdnEDHyVf
+# /M6kUQwO82ue4kCPJA15Q7bs4f/L4PfS2f2pSp4hwYM5hGtGKyFUE4vnuQfYkhUa
+# UyBTrmHnhMA5hsNlr+7uD6dwczYm4Gc9ilaA/XOexHZNFHnf/snv/RUD68wL0CDb
+# pKrPS02qs/gvdv8yl+gevj3H30cLgTWDqbl2goOO
 # SIG # End signature block

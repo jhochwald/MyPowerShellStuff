@@ -1,16 +1,21 @@
-﻿#region License
+﻿#region Info
 
 <#
-	{
-		"info": {
-			"Statement": "Code is poetry",
-			"Author": "Joerg Hochwald",
-			"Contact": "joerg.hochwald@outlook.com",
-			"Link": "http://hochwald.net",
-			"Support": "https://github.com/jhochwald/MyPowerShellStuff/issues"
-		},
-		"Copyright": "(c) 2012-2016 by Joerg Hochwald & Associates. All rights reserved."
-	}
+	#################################################
+	# modified by     : Joerg Hochwald
+	# last modified   : 2016-04-03
+	#################################################
+
+	Support: https://github.com/jhochwald/NETX/issues
+#>
+
+#endregion Info
+
+#region License
+
+<#
+	Copyright (c) 2012-2016, NET-Experts <http:/www.net-experts.net>.
+	All rights reserved.
 
 	Redistribution and use in source and binary forms, with or without modification,
 	are permitted provided that the following conditions are met:
@@ -37,11 +42,6 @@
 	POSSIBILITY OF SUCH DAMAGE.
 
 	By using the Software, you agree to the License, Terms and Conditions above!
-
-	#################################################
-	# modified by     : Joerg Hochwald
-	# last modified   : 2016-03-31
-	#################################################
 #>
 
 #endregion License
@@ -76,10 +76,10 @@ function global:Get-sessionfile {
 		This is just a little helper function to make the shell more flexible
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -122,10 +122,10 @@ function global:export-session {
 		This is just a little helper function to make the shell more flexible
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -174,10 +174,10 @@ function global:import-session {
 		This is just a little helper function to make the shell more flexible
 
 	.LINK
-		Joerg Hochwald: http://hochwald.net
+		NET-Experts http://www.net-experts.net
 
 	.LINK
-		Support https://github.com/jhochwald/MyPowerShellStuff/issues
+		Support https://github.com/jhochwald/NETX/issues
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -210,8 +210,8 @@ function global:import-session {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURQJr0MM7ELBeBYw3C/VSHJbe
-# pbOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzkQVbqADSRBy3Lq0pP9XfaHK
+# tv6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -354,25 +354,25 @@ function global:import-session {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ5uRhce5MisYbTyBTv6CrG9q+YbTANBgkqhkiG9w0B
-# AQEFAASCAQBRI7J1h0QDhlHXBRoN6w+1wZ/QK26lDJywYX4Id7Mb6dBKecuc5rAu
-# TnjihEqQOCzhhK26tWl6Skj0hlymO3hiRTgIcqbecz52zYzos5CfzQsy2/AalEvH
-# jUqnfDk5mbHfcYzlFMisc3oDVPzXudJ0uzHafJOR+5wrf+yqLbMiel/JVO6aeIsJ
-# IxK6xc+Vv+3FbVKaG4CMU5S1IMWuxvXp757RLwTg3/DiIoEyGDdu5yg2IFMWbnpl
-# yICzY3gFYlhMpz6So7zepkb2qqW8V4jj1iuAbCGif5VITczrHNtYe0p5LS1vkE4/
-# GxdxanlpESEGMPoM3PrZYB6IFRXw7hQooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRmxPh1/091eHFKFBfL2RaXJ90kUTANBgkqhkiG9w0B
+# AQEFAASCAQCIhdLe51jGka0mnTrjFUC7Wo5B4I5uqB6mXED2ncz4Qh3t2JYR1aJO
+# eC9poYLjEKS9mGnhQBPWMC74pQqnm3ZIk+hVO2AW4M3gHEl8jxev2bhvw3kv7o+c
+# uUtCmSM3ML6JPDUZ5i+qNgZC3qF06hmjkBDtchneB8YAgd4b6JG1XyfjI3nFmY/a
+# reoiADsJjUjJ+TWw6LaLG2oUy2HHO64dN2BNlXrBwaqZ+/3oGmHIkLNAnHGGibNE
+# ETcxwHPV75uUh6VmAQRWINxccr1hYKAKu7hk20bVZIQnIfQ4WAmxsUqAy/VfzEuF
+# Di3koLV3kM5Qz+pYFyX5lRJI49fTAoECoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDMzMTIwNTAyMVowIwYJKoZIhvcN
-# AQkEMRYEFHpiJ2yIipAyVFIYfoJz9KxL94DlMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxMlowIwYJKoZIhvcN
+# AQkEMRYEFDXRM7cyYIHqcfNT7utShzuq8DrNMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCQBnMYHZKo4vhj5NiP/8yTQKl8me87Z2fXOQT8wKdjquuv
-# 8KWx1EwEi3ZsVbYLmOgewR8Y0sj5fCl9nVIEmL8xcY4Bgjb+0Yo5C3wfUCHCmzAV
-# pE0Lo/UKgAfW60Cz33juPQMFZ01WIrKyCZa4s3YcwiDt4vEj/XCD1Pf5+q5y949f
-# TTaFanV/tlcG9CaVfSealfTBztJ4KQA5xlLBs15RhNZMncYXAHv9xAQmeDG2yhAu
-# FxlZ+Dx42PPpiTrZSyPUoF6PFYzU7IM+mu2dePXsj7YMzDYZsA3MAOVc05rdEq66
-# rQVyvG0fiC2LjhYzHCRi1K34Gb4ffYs5NfyqIOR3
+# hkiG9w0BAQEFAASCAQCQPT2Km3U4H8NRvIex5K5hEs1qydruX7mA5AWQCveuoYEN
+# bR60e0h7PVkMQGiLw354hWI93NVQd5hnywSMCQr9AGbgDFri2XCO98X6QUJHAOwN
+# ofNCmNwLhnLQxl0QMg5qclIBza9LjVkugLKF3cjrEb2cFQHLiTWnFl8q+r7SUJn4
+# Yk+2IbXebZ2ATFXAvFMcHvEPQyU4vnLiMv38clBr5ITnFVWydLNAt+5e6gmfPjUb
+# PLTXXqvydW2wus7R6Zl4iRuAxAxzM/A86kIba0jnSL3691ohT2vtzVBHPE5uth49
+# QPq/vDpEULQr/t5Kp0aUwIlnbRlZMHAuEL6EK2cH
 # SIG # End signature block
