@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -59,6 +59,8 @@ function global:Check-SessionArch {
 		PS C:\> Check-SessionArch
 		x64
 
+		Description
+		-----------
 		Shows that the architecture is 64BIT and that the session also supports X64
 
 	.NOTES
@@ -79,11 +81,11 @@ function global:Check-SessionArch {
 	PROCESS {
 		# Figure out if this is a x64 or x86 system via NET call
 		if ([System.IntPtr]::Size -eq 8) {
-			Write-Output "x64"
+			Return "x64"
 		} elseif ([System.IntPtr]::Size -eq 4) {
-			Write-Output "x86"
+			Return "x86"
 		} else {
-			Write-Output "Unknown Type"
+			Return "Unknown Type"
 		}
 	}
 }
@@ -91,8 +93,8 @@ function global:Check-SessionArch {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmcqRSzViOT6vjSNiv3+Lg1A1
-# wuCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUflzoHhz0KQTOfCN/nF11y8KF
+# S9ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -235,25 +237,25 @@ function global:Check-SessionArch {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRLIMI6qUb+htZCS13yEYtIwrsyCzANBgkqhkiG9w0B
-# AQEFAASCAQAPwECN3HxmFf9HeNVXgvExSuuGW6YFDnhf4QD8iBss8GC+bpMGJ7Zs
-# 16UQK7bY9QXCAvJQcT7rk6h+C0E0GpzIic8lV0CNgG3H63ho1R0CnF5JCOMR6ELk
-# qVe4ebpC7wBJaSvmj51icvoeqsHa+zRqO7EvDexw9q5kDn64BqtfMDUSaypS0pQU
-# s23QC7x9WklsthKLglR49RbAcaTiclxLCgwIcQ3A4TSBfeM1gVKCeNDQplw6hVuM
-# r0wbWJz4TCjURwAZIp977TbUqOtWIy4jVHTX79D08UrdiCCsPMUIzfv+F/ktQYl/
-# 5dUqujLRZvI9fsgCb5qNuEZZLc82ojfQoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQAGL/Apfe9NHjKnELU4klv5beYnDANBgkqhkiG9w0B
+# AQEFAASCAQAv1m1ncR+TfD6E4NzTkL9KeRs28l8KoI8NHTNSwGYSwqciWvxPFrDM
+# 6QfvwG59TkQQol+9qSixFqBGczz/XdgT+Wask2om//5FWIktV6vNnIwLCRZ7sLwx
+# OqOu6UQD/vAFainfzJ/ejZqSm2aJ97YXquL0azdpIgVqnKAWEaHBbR7FLIcpL4j/
+# HxzuoaZaqQW4JRAvlN2od2uqgESIfAQOny4/vkhGjS3MTwf7rAqgZ5sGmLF/QZl/
+# nP5TjocBYKfMOOSkHZduZRDgPs8xvqTfnY8HKbXsqAi5A4qWDSKt8WfHXU/ffdL0
+# 0sHyEmj/oUnSpl2FY95Yxuf7D5mYlkUgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0NlowIwYJKoZIhvcN
-# AQkEMRYEFBDeZiYh9OEn/wV800EnqM/YgYsBMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDIzOVowIwYJKoZIhvcN
+# AQkEMRYEFJjA6IN/r9K7A+zyIYL51HgwTvEHMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQASKPW1AUixr12WjKse4axRd1Fbpkf531zNrFazoffXlFM4
-# 7CrIJgDqgiI2YOiTNeGXrPhUOCb/Zjg2x0AZtBnuzG+A+gh2ywnAs+MJNrxPKUEM
-# IHEnKi9ZCtQbQdL+my9YFjQJWlkQL+Hr9wDo9d0uNg6iBRM5261tcEnIUpPTjNM+
-# 4PyCkdtaSNHzvfjXTuALyQOmY+4XidcF7NCTfRlVbRPnUcok9q0K0JZ4Ee0+4hom
-# A/SzfK4yvB09QzHJj8HNgKbsRM7npOc21l4dM9DUwMQCwlzJchcY73ZVhXqjW0H3
-# LjG86hJwvqfu7eIah7X5uj3uqiJPanxjnKEY9QKi
+# hkiG9w0BAQEFAASCAQBl3eenXaclCiqII6u961Tr/Mo5aRFtmf4pAibh+xL7Yg9g
+# X6EG9RBeE0w7DzKM0D3Z9iSJMqnItSUaMS2U0QJVlh4vgJYyrJsqcoTYZYHoCo/B
+# e3C9JntvNKBrNWoZRtNbyoScLlUQdmWjAB+YWVEhSAATnQyfCX0c1dz+EsjXxggO
+# z99U2q54dGoL8KmBizf0QlpNMGWnNBkz80OiJDxsL3ulQe7a4CfM2xzFH7qxCZJj
+# 8+2Xyamvj11ZhfBbFUm52pVwe5PjfCj9qBxVKkEJbwmoPWFVgDtNnL13oBJEV7o9
+# OZSfE1Zgsv+oQdNxVhdih/9ZdLxyrLt6xR3wItPH
 # SIG # End signature block
