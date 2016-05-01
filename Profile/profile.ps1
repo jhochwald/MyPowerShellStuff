@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-27
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -55,7 +55,11 @@
 		Again, this is just an example, you might want to adopt a few things for yourself.
 
 	.NOTES
-		Just an example!
+		This is just an example!
+		It contains some stuff that we at NET-Experts find useful to have, you can and should customize this profile to fit to your custom needs!
+
+		Please note:
+		If you get the NET-Experts PowerShell Toolbox distribution, you will get this file with every release, so please rename yours!
 
 	.LINK
 		Support Site https://github.com/jhochwald/NETX/issues
@@ -198,13 +202,13 @@ function global:Set-WinStyle {
 
 		$buffer.Width = 128
 		$buffer.Height = 2000
-		$console.BufferSize = $buffer
+		$console.BufferSize = ($buffer)
 
 		Set-Variable -Name size -Value $($console.WindowSize)
 
 		$size.Width = 128
 		$size.Height = 50
-		$console.WindowSize = $size
+		$console.WindowSize = ($size)
 	}
 }
 
@@ -237,7 +241,8 @@ function global:Set-RegularMode {
 
 	END {
 		# Clean screen
-		Clear-Host
+		[System.Console]::Clear()
+		[System.Console]::SetWindowPosition(0,[System.Console]::CursorTop)
 	}
 }
 
@@ -246,8 +251,8 @@ function global:Set-LightMode {
 	BEGIN {
 		# Reformat the Windows
 		if ((Get-Command Set-WinStyle -ErrorAction:SilentlyContinue)) {
-			Set-WinStyle  > $null 2>&1 3>&1
-			Set-WinStyle  > $null 2>&1 3>&1
+			Set-WinStyle > $null 2>&1 3>&1
+			Set-WinStyle > $null 2>&1 3>&1
 		}
 	}
 
@@ -270,7 +275,8 @@ function global:Set-LightMode {
 
 	END {
 		# Clean screen
-		Clear-Host
+		[System.Console]::Clear()
+		[System.Console]::SetWindowPosition(0,[System.Console]::CursorTop)
 	}
 }
 
@@ -403,7 +409,8 @@ if (Get-Command tryAutoLogin -ErrorAction:SilentlyContinue) {
 # Where are we?
 If ($host.Name -eq 'ConsoleHost') {
 	# Console Mode - Make a clean screen
-	Clear-Host
+	[System.Console]::Clear()
+	[System.Console]::SetWindowPosition(0,[System.Console]::CursorTop)
 
 	# Is this a user or an Admin account?
 	# This has nothing to do with the user / User rights!
@@ -473,8 +480,8 @@ if ((Get-Command Test-Credential -ErrorAction:SilentlyContinue)) {
 			(Invoke-AuthO365)
 
 			try {
-				if (Get-Command Export-Credentials -ErrorAction:SilentlyContinue) {
-					$null = (Export-Credentials) > $null 2>&1 3>&1
+				if (Get-Command Export-PSCredential -ErrorAction:SilentlyContinue) {
+					$null = (Export-PSCredential) > $null 2>&1 3>&1
 				}
 			} catch {
 				Write-Debug "Could not export Credentials!"
@@ -493,8 +500,8 @@ if (Get-Command Invoke-GC -ErrorAction:SilentlyContinue) {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUVkmIkyXuDaen5nE/Iq3vs9oP
-# fMmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU7VVS7jW/1dptEN4XtLyB2PgC
+# Jv6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -637,25 +644,25 @@ if (Get-Command Invoke-GC -ErrorAction:SilentlyContinue) {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQRUcLsYZIMWeTczsDI6xWPwFhPOzANBgkqhkiG9w0B
-# AQEFAASCAQB9v/PriX6M1TbtvlO3w/4Sba+A2/Bse2Z/FszQlynBf0ANfGy2AcdG
-# /3dBXpjd+UjnmS5GVCgfBCZcYZAnBCuJNCupK8TQOja9oXv4cEVzBDzxjhRywO/j
-# ZeOje7u28Lh608wdlmmAn3e5k1mwU72h9/uI5FdXYW/aUJWhSF7/Ek/6nzVKUuvl
-# v5MsmArZvjamclLfjsl74ggRBZ6Y3/6cuRlRhaF8Mbdvv8Txem+bJi7/Deq/n6eS
-# ho6D5pjwfnWPZ0hS+2UqHap12oC4qt9TBLkdwTTdYIRN0sDH4RN0Nf7pD7fogXeA
-# x8t6ka8ehGnxjv91wreDMD3RzRdJOiL3oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQsH4T0d2edtfhUA0z9NWeQavbJ5DANBgkqhkiG9w0B
+# AQEFAASCAQBiqOm8K3L1Tm3SGICMAMTg5Luw8nDGfgt0wV9EMEi3a18wH1q03sKq
+# FuX8+0HAXjSRhdRqEOR/VGJCa7qWOb+SItkPyO8orIHd9QWW0KR0Tq65/RaSz35E
+# PUXQU4dMGt+nMqexH+2WGsbuwGwF2FDWcRAJ+hxyhDONp/0NI28sQFjX04nHSBkx
+# o5CX4q3VWJ8rvQK1I5R03MrMvuMSXxBwJFRrFr4EagQTOPfLFZzdpmDET2P8w5M2
+# RIBd+PFzQadZ+SfItS1kCVFqlwCsKO43ob/zaQKXB/FmclEfurPaTTjeOUyS11vL
+# B0fGnrjl+R28cPYp/4LSW/1o0NLwF28VoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0NVowIwYJKoZIhvcN
-# AQkEMRYEFLApm+jXE2j1p1u7/vbLRD+yeFC0MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDIzOFowIwYJKoZIhvcN
+# AQkEMRYEFPIQZWn4DKAqg4/eKnQSTlJXcBadMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCXpNKLzovAJsLUjYK0V+KJ8CU1aq40NmWC5JQpvxEyI4JU
-# cWgH/REuuRdT2brgXGjEkgLnKER4xsq78x/oaWF2Z4Dtsc0DpB4ZJgphDB0s7oDo
-# 476bM9SEIFC2waXTcOkjdJnglxY6mZKB1ED+UW+oZweTJrPWIQISdqcfAJSmyL0M
-# hKFg9vS2N5W8U8ZrQR9S7tzsYTT/Qcs3MCj4+Ls0fRt84ylVd280BlCPlIEQRYgx
-# iOP6SoUFOkes+fRwMa8HpS7jhAo38an5moDyz9R6PHxopg+8aEbhoMz743weTtwc
-# vJsGmhvVY4ijXhB1iMzpHpu0LLd66hfXTkobxy6T
+# hkiG9w0BAQEFAASCAQBkg2FBONOHQJRv6Z1BYHSJ9ha0Gr3VsmLhgzWOHyhTAtZ1
+# 9S9FlqOMIQpCIYOUOeI504eq6Cxafq5CYmqnG61aoft7WeONU3AqArvgioBc5PoV
+# /7/nFajhgWZvaTfWF6xiP58nYlCtOq4u4G39ot0kic2VYc5wDIO8+4EH4fc6FB5M
+# 5wgLDyq8Ouj6HfJAtZ5tgMeBFqzJgZULZNPmT9N1jOmA3vnIfFMJSwak08YUS4jP
+# eVKHcSaI0jPuY+O47W10djyqOp3qDrXW17rA1gUD4iou7w/BPEZaZhVTw8Rjfaid
+# VAFSrbWxazwnQM4zt/dCNlpTcpvlDkzL8UFiLSc/
 # SIG # End signature block
