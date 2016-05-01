@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -72,17 +72,23 @@ function global:Expand-CompressedItem {
 	.EXAMPLE
 		PS C:\> Expands an archive 'mydata.zip' to the current directory.
 
+		Description
+		-----------
 		Expand-CompressedItem mydata.zip
 
 	.EXAMPLE
 		PS C:\> Expand-CompressedItem mydata.zip -Confirm
 
+		Description
+		-----------
 		Expands an archive 'mydata.zip' to the current directory and
 		prompts for every item to be extracted.
 
 	.EXAMPLE
 		PS C:\> Get-ChildItem Y:\Source\*.zip | Expand-CompressedItem -Path Z:\Destination -Format ZIP -Confirm
 
+		Description
+		-----------
 		You can also pipe archives to the Cmdlet.
 		Enumerate all ZIP files in 'Y:\Source' and pass them to the Cmdlet.
 		Each item to be extracted must be confirmed.
@@ -90,18 +96,20 @@ function global:Expand-CompressedItem {
 	.EXAMPLE
 		PS C:\> Expand-CompressedItem "Y:\Source\data1.zip","Y:\Source\data2.zip"
 
+		Description
+		-----------
 		Expands archives 'data1.zip' and 'data2.zip' to the current directory.
 
 	.EXAMPLE
 		PS C:\> @("Y:\Source\data1.zip","Y:\Source\data2.zip") | Expand-CompressedItem
 
+		Description
+		-----------
 		Expands archives 'data1.zip' and 'data2.zip' to the current directory.
 
 	.NOTES
 		See module manifest for required software versions and dependencies at:
 		http://dfch.biz/biz/dfch/PS/System/Utilities/biz.dfch.PS.System.Utilities.psd1/
-
-		.HELPURI
 
 	.LINK
 		Online Version: http://dfch.biz/biz/dfch/PS/System/Utilities/Expand-CompressedItem/
@@ -136,16 +144,16 @@ function global:Expand-CompressedItem {
 			"ZIP"
 			{
 				# We use the Shell to extract the ZIP file. If using .NET v4.5 we could have used .NET classes directly more easily.
-				Set-Variable -Name ShellApplication -Value $(New-Object -com Shell.Application;)
+				Set-Variable -Name ShellApplication -Value $(New-Object -com Shell.Application)
 			}
 			default {
 				# We use the Shell to extract the ZIP file. If using .NET v4.5 we could have used .NET classes directly more easily.
-				Set-Variable -Name ShellApplication -Value $(New-Object -com Shell.Application;)
+				Set-Variable -Name ShellApplication -Value $(New-Object -com Shell.Application)
 			}
 		}
 
 		# Set the Variable
-		Set-Variable -Name CopyHereOptions -Value $(4 + 1024 + 16;)
+		Set-Variable -Name CopyHereOptions -Value $(4 + 1024 + 16)
 	}
 
 	PROCESS {
@@ -158,7 +166,7 @@ function global:Expand-CompressedItem {
 		# Loop over what we have
 		foreach ($Object in $InputObject) {
 			# Define a new variable
-			Set-Variable -Name $Object -Value $(Get-Item $Object;)
+			Set-Variable -Name $Object -Value $(Get-Item $Object)
 
 			# Check what we have here
 			if ($PSCmdlet.ShouldProcess(("Extract '{0}' to '{1}'" -f $Object.Name, $Path.FullName))) {
@@ -168,7 +176,7 @@ function global:Expand-CompressedItem {
 				# Loop over what we have
 				foreach ($Item in $CompressedObject.Items()) {
 					if ($PSCmdlet.ShouldProcess(("Extract '{0}' to '{1}'" -f $Item.Name, $Path.FullName))) {
-						$ShellApplication.Namespace($Path.FullName).CopyHere($Item, $CopyHereOptions);
+						($ShellApplication.Namespace($Path.FullName).CopyHere($Item, $CopyHereOptions))
 					}
 				}
 			}
@@ -185,20 +193,15 @@ function global:Expand-CompressedItem {
 			Remove-Variable ShellApplication -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue
 		}
 		# Set another variable
-		Set-Variable -Name datEnd -Value $([datetime]::Now;)
+		Set-Variable -Name datEnd -Value $([datetime]::Now)
 	}
 }
-
-# You might want to add an Alias "unzip" as well
-# Set-Alias -Name 'Unzip' -Value 'Expand-CompressedItem';
-# if($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedItem -Alias Unzip; }
-if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedItem; }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUIh5/6tBtlNtOWScmNbDaE2Q7
-# UCqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8j4xsQRfhPXCPTNrjluMpqFR
+# BsqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -341,25 +344,25 @@ if ($MyInvocation.ScriptName) { Export-ModuleMember -Function Expand-CompressedI
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQf05UL5SqUkLtSdZ07+anZpz0gEjANBgkqhkiG9w0B
-# AQEFAASCAQBIPnNAP5fW1jkdxE7Hs03eJWN/8AisJNcwo2mEbK57yiboPNkTcn0c
-# fxH96kePVYN0g5QhNmz3eGyNqOtrg6gir6fv3E+X7mL96RjyD7EFb6Mw55S/oMsP
-# 4gOcd74qYaK48j9VUX/koeJ1PIdGPoKbi0fCCRi27U9pYnfXtF6icNj0WEkaJJTG
-# fziskp+xrIwVmk6YEP0XaxP8FmuLh8fYC03C7l69eR6i22rUBYo9jWkqbHmrmG1+
-# M0M9gjzEvIXXy1T2xEyofqxOZExzdeI9hhnc4qwOOBaEWNhEVcmILKP9cqvxLcu3
-# qPBnposp6XVHzpfuaE7Z0nc2gYpK9RjpoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQnGLnN4XD6f3yGfWwpJZK4eckhgTANBgkqhkiG9w0B
+# AQEFAASCAQCotLiQI9Pt1poz33dffCOTBGR3tA/Vgpg+GGUxwXZER4nlUxyMfs1y
+# /K5Ph3oVpLdLPDx6x5EpoV6YhS5vyIq9DDKqDdHqDqoWfctgk2t2IvkSizWtNtp7
+# TZ9dio3Recfx6o9olTFki1ahnL/2CnVob47yV29U1dQdMg3tWL8iQoQ930IcTc30
+# 4XroZEcloma8+hQOnHYywu3j4RUeaabDF0Q/dzlo6kFy4ys90tkHIlmopJhmTdVZ
+# uFKZeW2KiEWJHET4F6JelqKQcSfWLDBKuAtyD7/1qLcoDqLope7sbrZORLwlTQwZ
+# vQNpXHWOQAaFUjUQvXYicWNENOQe7tmZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1MVowIwYJKoZIhvcN
-# AQkEMRYEFCE0xO4tCKHDgPZhlX1ODMr62ETUMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0NVowIwYJKoZIhvcN
+# AQkEMRYEFEma7CWtfBOebP383aQ5rD8Bq/ljMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCKg5dvmnQ7X2SnNpnAsjIISFS9ALktDxKKhud22YvcRBQz
-# ie0gFn1mTQ32dcj98mqz5g6A/CJJMajvvDvVRh6pujvyyfE8TaCPi6Oj7npjcPBE
-# 2HqW5fyvl5edPwbj+1kiT39kG0TaJ5o3Tvy4u5/cmiXyam3oFD49OVHdBKHib6hj
-# OYA5xQWWv7NcD5irESkgIz6f4qG6crVy33ud6hHZbRz7QpW8an/yLpAglDeNLIYO
-# 1HMw7aANOOFn+Bh9l2FVf8Vj1b4SwP7AWfjOalplXh6DZVabCMxVYuNrm+cSo7bS
-# Kvrr7BG6FCYO2RAlfPLucGpZaUPaVuhknFOlGrkP
+# hkiG9w0BAQEFAASCAQBSkM2NsS13+cfAVUaJlis0AzwrCXDh8fpO7bzLij6mFtNy
+# 5laNDS0kMM0jSBkWIAvn0zyNgoUOkXq7X+UFAlpriF55/XGUyxS2KdGuHcvZXg0T
+# 0GCYYaXRqPLAfOfhXAkG1eAbQoXmSqIu+DuZr/L3W80r3207L4gTyr0Nq7W9avcD
+# m9Nst9sUOBJwkZd2P4CExNIVWIJXvERM3hmk5S4eMmp+nKVOvQlSJ4ANCCereZzk
+# vCLUWdJ8Lme+7SNLK+r6bSlF+sXIl1a0pCsdONlyf2ubudfhWtrCQGDiGEp0Lo4c
+# eV1Pam17GzafafqWlhsPmcZZVnLRL9/YZsAn5D/V
 # SIG # End signature block
