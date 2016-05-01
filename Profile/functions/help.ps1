@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -46,7 +46,7 @@
 
 #endregion License
 
-function global:help {
+function global:Invoke-PowerHelp {
 <#
 	.SYNOPSIS
 		Wrapper that use the cmdlet Get-Help -full
@@ -57,6 +57,8 @@ function global:help {
 	.EXAMPLE
 		PS C:\> help Get-item
 
+		Description
+		-----------
 		Show the full technical informations of the Get-item cmdlet
 
 	.NOTES
@@ -78,7 +80,8 @@ function global:help {
 
 	BEGIN {
 		# Make the console clean
-		clear-host
+		[System.Console]::Clear()
+		[System.Console]::SetWindowPosition(0,[System.Console]::CursorTop)
 	}
 
 	PROCESS {
@@ -86,12 +89,13 @@ function global:help {
 		Get-Help $args[0] -full
 	}
 }
+(Set-Alias Help Invoke-PowerHelp -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUp0NeITGrWzlPyb4tfSIoC0li
-# uHGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU4LKBPEWknkWnfUA+G3cITis/
+# a9CgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -234,25 +238,25 @@ function global:help {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS8dqGJ/YC7oHZwbaSK7YOKNbQaljANBgkqhkiG9w0B
-# AQEFAASCAQAgRaXG6TSGAvHAx5kJrZk/fBMSUHs4NWbAVTgC5w3LDIso8QNVdHNX
-# Hx6rRt0W0YOiO6rcFkiEhL4f1xnGG4R8RYeSneN2RxEmwv4RoZsQnT5JC5o7T726
-# Z2h1FnOkt94agn2NzKOF4W9Pp/p7b9lH31BBw3TbTFzQDx8VwY6DFHZvqT/EfV+G
-# H0OfeMzK5moK+Pix1JDChxARiXqTet2yfRkiCwi5AsNRq4UDGtg3Gq5jTiGtX830
-# 5J5xlfYfs5eUyVC20J04/G1tp7/uahNDBRUqYHnC9/1sMrKjPO3oQvweD/WNWNRv
-# KbbaZ2+0qjrd+fATx6GwzGljVaqpFVHRoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ1hzWIhSsP/5uQVREb6xYa8/qtPzANBgkqhkiG9w0B
+# AQEFAASCAQAxGtCfKi+OcMC/9WgrTv00FO6yaWigiJk8K8Jd2hrMqT9MXfo/uTc8
+# ZZkZlZCqpx8ooJWenNQa93GB2n20xTN2pSrNHKRwrsaC6ZNTJl0u0GWJekuhsuLG
+# G6esIdfo/LUtHLsTkfOmc2CgEbXNnkFiww7WYkm0Tq5jyE1b2auiU1koOpyj3r9o
+# 0qzTkAwvSh+gGIWiBEbvPx3/2xc2iqDUiU2RpkLkOEbDKbzTSEvOjD/rxsPz4Zx6
+# d3NgI/FfdLR0y95mZqJfY8/vnMfPSpIhsLLwKjB2f+3YyGVLzRrw/tXescweO67k
+# 32nKY7WF3ccxZ4tufyOyTHNAB2TrC7C+oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwNVowIwYJKoZIhvcN
-# AQkEMRYEFHCgD7nKlWSqU/TjImvCXUFiLx7LMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1OVowIwYJKoZIhvcN
+# AQkEMRYEFARPprWq08oxcCA63jdCikh4ry1dMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBtRhQn1fjBoL7P9Y5krPXbJ+0SGVpO57uCHcuFP6TI18mj
-# EVcTrjPdCu+tog5muS/bnZD87imFYVOJLM1Z0+dHtrPaPsjI6JVyPOPjkA7/U+ac
-# IqNzrom/rKLLLwyAAM/3lw4xPj/TeSRhklAO9LH4RCr/H1sbG/ZLnP+k/2KPCY2e
-# NHu7YpGZ/wp/WV4aW7OZNqUKwGUgPixj/VCcJrS12wpZmeHii8cC9edCRG1NKTom
-# X9EbPfGTMRuzLpgoLCQRPzYG7vFt9LiVf6NvuX7Pdwcz1tQWc8sx/621qUNsZ27g
-# gJz3QDrAkZdQuRmJtagH6dYjsvxo5yovMB50udiX
+# hkiG9w0BAQEFAASCAQAzD1UPfPROoLTSQMm/CWD3BIyWqchObX+KwbF/H1G/jB67
+# wO8LQzLjGCe68OfiLotjw4iIrbsd2lVi97JnckxZakU2L892xUJPhsysh5KV7Sfw
+# YTMXoGLU68bPmsldrNjDbR5J1y5X29iBLpCFG7eHxCHyeOnTrsqcS6Bv1kofimvY
+# W97TpIFTly2Nb7EnS0xAZTzwHWoNL+ZN2QzRMITfeTWtCGt8AHuU9RAoG31D8E56
+# AZe5u+0OHut9jOE81n40zP51CxmK3tSQ8td8dTThNMFi3qQjhi+WYwsSlzM+/sYR
+# W/K+W37Qstwxi8NMemVsDHUfEY6MSuYXbKMLlLPl
 # SIG # End signature block

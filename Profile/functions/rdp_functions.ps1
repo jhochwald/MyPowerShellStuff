@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -59,6 +59,24 @@ function Global:Get-DefaultMessage {
 	.PARAMETER Message
 		Specifies the message to show
 
+	.EXAMPLE
+		PS C:\> Get-DefaultMessage -Message "Test"
+		[2016.04.04-23:53:26:61][] Test
+
+		Description
+		-----------
+		Display the given message with a Time-Stamp
+
+	.EXAMPLE
+		PS C:\> .\dummy.ps1
+		[2016.04.04-23:53:26:61][dummy.ps1] Test
+
+		Description
+		-----------
+		Use the function from within another script
+		The following code is used in "dummy.ps1"
+		Get-DefaultMessage -Message "Test"
+
 	.NOTES
 		Based on an ideas of Francois-Xavier Cat
 
@@ -96,23 +114,39 @@ function Global:Disable-RemoteDesktop {
 	.PARAMETER ComputerName
 		Specifies the computername
 
-	.PARAMETER Credential
-		Specifies the credential to use
+	.PARAMETER Credentials
+		Specifies the Credentials to use
 
 	.PARAMETER CimSession
 		Specifies one or more existing CIM Session(s) to use
 
 	.EXAMPLE
-		PS C:\> Disable-RemoteDesktop -ComputerName DC01
+		PS C:\> Disable-RemoteDesktop -ComputerName 'DC01'
+
+		Description
+		-----------
+		Disable RDP on Server 'DC01'
 
 	.EXAMPLE
-		PS C:\> Disable-RemoteDesktop -ComputerName DC01 -Credential (Get-Credential -cred "FX\SuperAdmin")
+		PS C:\> Disable-RemoteDesktop -ComputerName DC01 -Credentials (Get-Credentials -cred "FX\SuperAdmin")
+
+		Description
+		-----------
+		Disable RDP on Server 'DC01' and use the Domain (FX) Credentials for 'SuperAdmin', The password will be queried.
 
 	.EXAMPLE
 		PS C:\> Disable-RemoteDesktop -CimSession $Session
 
+		Description
+		-----------
+		Disable RDP for the host where the CIM Session '$Session' is open.
+
 	.EXAMPLE
 		PS C:\> Disable-RemoteDesktop -CimSession $Session1,$session2,$session3
+
+		Description
+		-----------
+		Disable RDP for the host where the CIM Sessions '$Session1,$session2,$session3' are open.
 
 	.NOTES
 		Based on an idea of Francois-Xavier Cat
@@ -133,7 +167,7 @@ function Global:Disable-RemoteDesktop {
 				   HelpMessage = 'Specifies the credential to use')]
 		[System.Management.Automation.Credential()]
 		[Alias('RunAs')]
-		$Credential = '[System.Management.Automation.PSCredential]::Empty',
+		[PSCredential]$Credentials = '[System.Management.Automation.PSCredential]::Empty',
 		[Parameter(ParameterSetName = 'CimSession',
 				   HelpMessage = 'Specifies one or more existing CIM Session(s) to use')]
 		[Microsoft.Management.Infrastructure.CimSession[]]$CimSession
@@ -158,7 +192,7 @@ function Global:Disable-RemoteDesktop {
 					$CIMInvokeSplatting = @{
 						MethodName = "SetAllowTSConnections"
 						Arguments = @{
-							AllowTSConnections = 0;
+							AllowTSConnections = 0
 							ModifyFirewallException = 0
 						}
 						ErrorAction = 'Stop'
@@ -204,8 +238,8 @@ function Global:Disable-RemoteDesktop {
 						ErrorVariable = 'ErrorProcessGetWmi'
 					}
 
-					if ($PSBoundParameters['Credential']) {
-						$Splatting.credential = $Credential
+					if ($PSBoundParameters['Credentials']) {
+						$Splatting.credential = $Credentials
 					}
 
 					# Be verbose
@@ -243,23 +277,39 @@ function Global:Enable-RemoteDesktop {
 	.PARAMETER ComputerName
 		Specifies the computername
 
-	.PARAMETER Credential
-		Specifies the credential to use
+	.PARAMETER Credentials
+		Specifies the Credentials to use
 
 	.PARAMETER CimSession
 		Specifies one or more existing CIM Session(s) to use
 
 	.EXAMPLE
-		PS C:\> Enable-RemoteDesktop -ComputerName DC01
+		PS C:\> Enable-RemoteDesktop -ComputerName 'DC01'
+
+		Description
+		-----------
+		Enables RDP on 'DC01'
 
 	.EXAMPLE
-		PS C:\> Enable-RemoteDesktop -ComputerName DC01 -Credential (Get-Credential -cred "FX\SuperAdmin")
+		PS C:\> Enable-RemoteDesktop -ComputerName DC01 -Credentials (Get-Credentials -cred "FX\SuperAdmin")
+
+		Description
+		-----------
+		Enables RDP on 'DC01' and use the Domain (FX) Credentials for 'SuperAdmin', The password will be queried.
 
 	.EXAMPLE
 		PS C:\> Enable-RemoteDesktop -CimSession $Session
 
+		Description
+		-----------
+		Enable RDP for the host where the CIM Session '$Session' is open.
+
 	.EXAMPLE
 		PS C:\> Enable-RemoteDesktop -CimSession $Session1,$session2,$session3
+
+		Description
+		-----------
+		Enable RDP for the host where the CIM Sessions '$Session1,$session2,$session3' are open.
 
 	.NOTES
 		Based on an idea of Francois-Xavier Cat
@@ -280,7 +330,7 @@ function Global:Enable-RemoteDesktop {
 				   HelpMessage = 'Specifies the credential to use')]
 		[System.Management.Automation.Credential()]
 		[Alias('RunAs')]
-		$Credential = '[System.Management.Automation.PSCredential]::Empty',
+		[pscredential]$Credentials = '[System.Management.Automation.PSCredential]::Empty',
 		[Parameter(ParameterSetName = 'CimSession',
 				   HelpMessage = 'Specifies one or more existing CIM Session(s) to use')]
 		[Microsoft.Management.Infrastructure.CimSession[]]$CimSession
@@ -306,7 +356,7 @@ function Global:Enable-RemoteDesktop {
 					$CIMInvokeSplatting = @{
 						MethodName = "SetAllowTSConnections"
 						Arguments = @{
-							AllowTSConnections = 1;
+							AllowTSConnections = 1
 							ModifyFirewallException = 1
 						}
 						ErrorAction = 'Stop'
@@ -354,8 +404,8 @@ function Global:Enable-RemoteDesktop {
 						ErrorVariable = 'ErrorProcessGetWmi'
 					}
 
-					if ($PSBoundParameters['Credential']) {
-						$Splatting.credential = $Credential
+					if ($PSBoundParameters['Credentials']) {
+						$Splatting.credential = $Credentials
 					}
 
 					# Be verbose
@@ -387,8 +437,8 @@ function Global:Enable-RemoteDesktop {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUznkBSNqrdfhvjJoviXf4rxYL
-# wfKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUegTsUEjiDIllUgmgef7mWutH
+# Ov+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -531,25 +581,25 @@ function Global:Enable-RemoteDesktop {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT6iIgut2i7M8EK0qRTMeIa2qnZ9DANBgkqhkiG9w0B
-# AQEFAASCAQBgk0EjUUZVyg+sj/jYiFqf5RV3/lhAOAGhnHVmZeyNcjJd4vDKEkod
-# uDPy2X3KWm7yrwjz0AxTGpLvaLl1L7XJa+2l7eKSle/5zmn812jk5dyzob5Mg6ll
-# kulpTzw8z5kf8Zfqw+Zvxs5oXuKOpT6B08yHjUByy9zRgHhyjtvqCs0RNDi+w99s
-# cSlzKQAZykjDWXr0GE6yobW9uRSKlo17O9Lhr9WgpwU5y/DAAAkSuDDd8xZg3tMg
-# x/BEuay0q2940k4VeMROmM1M9j2aJ+5jQmhc/bTrEb+vKun3ITPmLcAdHlOF9lTE
-# 1l8dc+ykHhTJ37h99wOPFP1GOO+fExcHoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRRUGlTvxvySlE/Erya+seIeOP5CjANBgkqhkiG9w0B
+# AQEFAASCAQClyG7pTQtrD0tVTM28Ton7XSOht+ydMOM1i/TLle0fmEZkwbH4kCWI
+# CxDZ9eJboMvegbU//buZ5Lk/ZTzmJYBzKSJ6Ma+ggGV5QGtDPP0r/giBhnLoeK03
+# BhvrllZRmNv43e9ZcNY38ISk8u4sJZLTfSNpmOQw+/7CBGez24/G8aFD5VgU7CR/
+# RlPFRhwM95U1rAPKh3kav+W6eiDY/3kLLJu3oo95A3+AbbdCFuYh5+F+r/UZnWfX
+# GA2jwD18ZxV82ZW9UqmTAE2X53XBFrmmCNS4yBZXN36ZMqck7saYODp3rgBhTePN
+# Us2k6K7VlZsiD9OFQHxio+yCq6d4ZO43oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNFowIwYJKoZIhvcN
-# AQkEMRYEFGHxD5m7cMiPb6GALgofY2OqcTOYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwOFowIwYJKoZIhvcN
+# AQkEMRYEFFb20CxyRWbUwk49iQ6uV1UMPkRsMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBoAUJamPWml9MtB54420q8udBowGv712Wzq+7tGyDbzIl5
-# wQBYLKQ2lGYEdx7tssXE412ssspa/wpLfPphnc8HuoY9Zf/9vo0Q8S/03kv5k8I0
-# 5gzlbklr+Q9mdHmk4CPivrt1eLGd2sIhn+/pe31IA2LgfnNGDCi3bBCo1KwnBL2c
-# uQrKETudj1J1IQPmLgFMtH/NRIarK8MAWTEMyMlaHx09maqVyadjwqHYZQDSxc5a
-# mGFgD/2vLO+4UhLkNClRzZ9zKwhdW87Ad8MZB/XkuxDJyElWkVQo/xfl3Txoevv1
-# p0KqmXZozg7J4OXZ9waYmj4fOfsV/bUJa4ghKggn
+# hkiG9w0BAQEFAASCAQBrKd0Mgm/vhf6Oz4jcV7XBqsdkaJaoT6MS+E3AoiydgOHB
+# f8ywH3QzjYOTIWZWDJdUTfg6Ctc4aRPf4IuwODSqE5uOLap1igiyVM7dI+AtEvLd
+# rEPng1k0CIS4hbHSISTNkKntIVdp1LxilNpP4Z2jxmZGYA4IiPjpQknqIgMtTnq/
+# rSKgu3LZ8a8QvTGm3HyDZCN+nJscsIp1sayjpSaLPaS+wX9KPR0r806yw7j55gVG
+# GjncZoV4ypZw8y49Ur+o67ASu8wxiKfNpwMrUklCwibOf5CbeaO4AMsGCXzuYFl6
+# vO7uWjLKW8NN9WvcOmHEB2bycNvp1vOqbU13ouiq
 # SIG # End signature block

@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -55,7 +55,14 @@ function Global:Set-DebugOn {
 		Turn Debug on
 
 	.NOTES
-		Just an internal function to make my life easier!
+		Just an internal function to make our life easier!
+
+	.EXAMPLE
+		PS C:\> Set-DebugOn
+
+		Description
+		-----------
+		Turn Debug on
 
 	.LINK
 		NET-Experts http://www.net-experts.net
@@ -71,6 +78,10 @@ function Global:Set-DebugOn {
 		Set-Variable -Name DebugPreference -Scope:Global -Value:"Continue" -Option AllScope -Visibility Public -Confirm:$False
 		Set-Variable -Name NETXDebug -Scope:Global -Value:"$True" -Option AllScope -Visibility Public -Confirm:$False
 	}
+
+	END {
+		Write-Output "Debug enabled"
+	}
 }
 
 function Global:Set-DebugOff {
@@ -79,10 +90,17 @@ function Global:Set-DebugOff {
 		Turn Debug off
 
 	.DESCRIPTION
-		Turn Debug on
+		Turn Debug off
 
 	.NOTES
-		Just an internal function to make my life easier!
+		Just an internal function to make our life easier!
+
+	.EXAMPLE
+		PS C:\> Set-DebugOff
+
+		Description
+		-----------
+		Turn Debug off
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
@@ -92,13 +110,17 @@ function Global:Set-DebugOff {
 		Set-Variable -Name DebugPreference -Scope:Global -Value:"SilentlyContinue" -Option AllScope -Visibility Public -Confirm:$False
 		Set-Variable -Name NETXDebug -Scope:Global -Value:"$False" -Option AllScope -Visibility Public -Confirm:$False
 	}
+
+	END {
+		Write-Output "Debug disabled"
+	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9aTvOMfh6acr+AD21Rm9sIlX
-# O56gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhAfSyt79JPUOV80rRPRL/cJr
+# xSWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -241,25 +263,25 @@ function Global:Set-DebugOff {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQysMvL/m2d0cKp4e76n/EpMkETzzANBgkqhkiG9w0B
-# AQEFAASCAQAHsM0Kk1leD8qAlnJweGvw3QQW+3MeI+qcz6Frt0Xj33gwtUoH7NMT
-# 3Ft2ZQRcReeCODvHOxZzi9UrmPRKcgBwws9YIP3URnXuptKcQt5LS+TWI+Im3hEX
-# FKfQ2bwbOnblauhsWp/nXfwz6pMtFbH7I0A70v967pQOxzoqTjoG8aS3W/ld7/1k
-# xBamUtCFlI+LjeaLEym8Vz5pqNsFSgfhnFd3+/Knp+WbHaCRdzPr5rIR24qHEz4u
-# +31OdS+HvEoSEbJnDPIBZDwbvvv9aOnMkip3Kinmgq0t5EH3BSZl+5Vw1GO92x6D
-# 6VOBZOfaasEtnWCUr64T3WtqH5HitzzCoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTmwXxk5kBKUVqQwBn42G8iZwwusDANBgkqhkiG9w0B
+# AQEFAASCAQBWzgy1MstRwtUsGWFFMg6NSmo8gwrZCrKFGHQZUa+IEDshkttZfqyo
+# AVxApHZiXD/WEhhU4Joc/I7GtAEAMUlxFrNS+2APU7A23EHxT3nwkdCuE5ltxvIi
+# /CkBN1wL0FBWlYgBNp4HQqgNvqGFmWnmuA08HJktKYfeAb1FS87LCT9XKRaxhR7v
+# aUhTHJ4t90dX/64XZTtz1aNdb5sxEZjA+G4LOkMzM+rkYkSlkNjvNuk+RTBQ4ITd
+# EYnCsp8LiUEo3skUycm2DZ9HUOIggq3eb6suPCASAThWRG7IR/a0Hl+1tOHkYMWF
+# i6m7WCw82/TYzzL+6LH62wYuPmbViQzYoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxN1owIwYJKoZIhvcN
-# AQkEMRYEFM/k3BbwsJJv4wnLwCujTPNu91oXMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxMlowIwYJKoZIhvcN
+# AQkEMRYEFPSiVNb52pjEouubID5srQdMLABMMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAX6BwkQuPe2Zb+hkKydjF8ahgdVpKqv1YyyXlzYWioEa7B
-# Eqa7eXhtmsL9UD6o0BdXw+YV8jttiae1uqgro+pnPcU8/+sIHHPhLkIWCebHxGSj
-# ORqHe17B5iNIt0kU91oAcClRURNW6BJOZwn6gzIY0HBfwtdBZMnWXSUz05/BhbEa
-# GmInDWLY+FEyzIBzBubN2fzTZPG+CX0K7DN6B6zErvKZbh7+xi0XIP5BC+e1ziAD
-# cfJKuqnKYrM4/7beSrxXDDnm+lubDzYxGSpw5Ux8le+2ef0C1VQ4s/gw28IGvHuN
-# 5B/VUlCACHIg1DGJyGAsM8rJ6rBSFMZRAiz6SHPK
+# hkiG9w0BAQEFAASCAQBRBUCYeaeUoa7mrmDrMk+5eoB/tbWD6xBcobMxOtK/HWjC
+# P1jBPcclBCsJe4reHlYGsABuj1E+T9Z24yEsxPNXAwkxQQxrUFGWt6da0cvaBgqS
+# /Q7/xsygGiEa2ZgIEcxgj9nCxfAcreOItFfKqs4gOl25f51Eo9RTabVtxB3mD20M
+# /+ErbUvX8xRperWSz5JMbCr9oNUMTFPom6AhM18+v1grBj+D15so35zxNPvXY2jI
+# BfdYCiFKHu5BD3kliVmacMPLSEeacn/wvBBiMMnP07ZSWut7onR9JQiJBdh5mLeN
+# v68QXN90RN1eB6Dvo6BhklSTxPCWRpsVbV+6muQV
 # SIG # End signature block

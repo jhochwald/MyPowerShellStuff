@@ -40,13 +40,23 @@ Function Global:Get-RegKeyLastWriteTime {
 		A description of the NoEnumKey parameter.
 
 	.EXAMPLE
-		Get-RegKeyLastWriteTime -ComputerName testwks -Key HKLM -SubKey Software
+		Get-RegKeyLastWriteTime -ComputerName 'testwks' -Key 'HKLM' -SubKey 'Software'
+
+		# Retrieves the last write time of the supplied registry key
 
 	.EXAMPLE
-		Get-RegKeyLastWriteTime -SubKey Software\Microsoft
+		Get-RegKeyLastWriteTime -SubKey 'Software\Microsoft'
+
+		Description
+		-----------
+		Retrieves the last write time of the supplied registry key
 
 	.EXAMPLE
-		"testwks1","testwks2" | Get-RegKeyLastWriteTime -SubKey Software\Microsoft \Windows\CurrentVersion
+		"testwks1","testwks2" | Get-RegKeyLastWriteTime -SubKey 'Software\Microsoft\Windows\CurrentVersion'
+
+		Description
+		-----------
+		Retrieves the last write time of the supplied registry key
 
 	.NOTES
 		LICENSE: Creative Commons Attribution 3.0 Unported License
@@ -209,8 +219,8 @@ public static extern int RegCloseKey(
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUauPuk4U3zG4GmeiwJNLmfQWW
-# 5SOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUA49LLpT3aocRaM5MImp9j4U6
+# kGagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -353,25 +363,25 @@ public static extern int RegCloseKey(
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRkTDCx+kVKwoVusAyFPj6vHEGN7jANBgkqhkiG9w0B
-# AQEFAASCAQA8Fpub0ktu8CyFoKCIHKEdJP7JQ9n3yZVQZpXrlAQKuRthXzBpBMlF
-# xcRn3Okr7OCfOrBawug5LYJHJIc/Hki4U0iRLSJYq0kzO1jD3171B9Ri6Io8FrkJ
-# lI6ZwW5+5Lbock9L1pIM28AYMcHOAONVCCjU51y/2kb8xlbXvOqSrvnyBZUjx/9U
-# xTMsqXT+foTyZrNQDng/UG3d3Nm2CRHj30LOMthtsmtbKL8vPFOf+Bz6kSFfoOQT
-# jz/+DLMhM18o1Z6asvFKOZnSNNfNsvUnbjsGn7nq5v5iugjk9Cxd2Fpbrp33czgs
-# nXEZUExHuOda+wvzlVwM66TWEP5qJrdFoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS9z8UOdW5h16UEivS6iXUjU6fa/jANBgkqhkiG9w0B
+# AQEFAASCAQBcOPrLHVrjX3q5NmoADZGqtbCzTnOb6AC7tTe6IoX5PWEyz93ZWBrc
+# 4z7A16/RLDCR4slsiUM9qwy4HwSNGqdVms9+SzF+Pj+VysY/kPMsyXNR8dA06QEp
+# wudIj8qhk0cp/yw5UkqQlygBmxoGvrVj2ySaIq1ppLgN3knwc1WYhTtIx9NuNdeu
+# J+FS/32w91EsDGVZgJfFUizpIYowJOwM5ZZ3ISIVJTI9Mxk2aZPaAziVvcxM/h7k
+# LgigyofE2iUPzGt+Vh+X6jjxdIN64E/C2KlwwQ4/vNK6vS9SqrfZgjNVkzI0YHbA
+# FOFLzKlIdbt9j7bjHY8qUGVas6FGNLTvoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1OVowIwYJKoZIhvcN
-# AQkEMRYEFD8FAvWG9rlh0OxRRk6TKtJyGq7vMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1M1owIwYJKoZIhvcN
+# AQkEMRYEFNno+Bm5OmCpLfxMtJCnowbtCnmiMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBRhqbIoFKYlOuGRyq0XNI/TbEwq8pGv5k84b9x016IzPeJ
-# +RDfRztNEsZBVdFQk084wK96QgUv+YSb2o+j3nhgdTs10NJr3A6V1Eg/T7uqm+RA
-# DNzOWdxKSSaOnY8OM+TBAueUEhVD371OA23Xri7zx0Lce3hLmanraCDCEJS4k9IM
-# gq22Mv++39iQRHORLy1ed/+ulimuI4eITqUBbNlOK18anUgujJxqvqOO5h3pCzDn
-# kDT4I/kL3qRPAtCM1pQIZCQ5oPsU0hGmyzVBB00+oIiCq+C1bsuDWEczrQTpHtB1
-# qTkcjZkRpFK0KVDnu6MEnpK7U+92fPUlkqh/PKKi
+# hkiG9w0BAQEFAASCAQBHjp2xo2KlwB/2dPT1/+Xp0c/fJA9PFHPmpLxfjrCmWn/N
+# a/8BuKuIsK2F8NM7PJmpjeh++SCBn19cxBdaei6dU/uQhQyOwQWQ/bVsATMC4kFb
+# y8yz1bRuAiNhOfBDvxHJHfpcGA+hwGYHiEMhx5P/HTsFNlOUNhVDXY+vujTDVump
+# VVpM/+yVCCFLEantqc4OsPA1r1Su5P+eBmR6U6qpPz1uxk+IAkYyBIUtZIb8mKgX
+# 1Rn0dMBZHU4etuFOiMRremqvF2poJOe5TKyYU0N5u7RNgL11oHh6hnED5M4lHGEA
+# dXRtZsqmklYMrB81SGTO9K05dn+kkmZ4LXArXOFo
 # SIG # End signature block

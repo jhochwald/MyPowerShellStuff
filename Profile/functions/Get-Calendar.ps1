@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -49,14 +49,28 @@
 function Global:Get-Calendar {
 <#
 	.SYNOPSIS
-		Dumps a Calendar to the Colsole
+		Dumps a Calendar to the Console
 
 	.DESCRIPTION
-		Dumps a Calendar to the Colsole
+		Dumps a Calendar to the Console
 		You might find it handy to have that on a core Server or in a remote PowerShell Session
 
 	.PARAMETER StartDate
 		The Date the Calendar should start
+
+	.EXAMPLE
+		PS C:\> Get-Calendar
+		April 2016
+		Mo Tu We Th Fr Sa Su
+		            01 02 03
+		04 05 06 07 08 09 10
+		11 12 13 14 15 16 17
+		18 19 20 21 22 23 24
+		25 26 27 28 29 30
+
+		Description
+		-----------
+		Dumps a Calendar to the Console
 
 	.NOTES
 		Additional information about the function.
@@ -99,8 +113,8 @@ function Global:Get-Calendar {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDaJujld/xQlM6aS1O9BmMAzf
-# fvagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUSQguRQb7Zy33SaJD+MKL6h6a
+# q+GgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -243,25 +257,25 @@ function Global:Get-Calendar {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRitJlyLYKJ1cdheQLgbMzzTndkvTANBgkqhkiG9w0B
-# AQEFAASCAQBwaej5bcerLnBMawdOub4HKS1gRYX/+Ku5liEGAldmK1FZY+bWaGDw
-# 7lOZbTlPE3dkqwPsudF9XavTe2mszst63kiLJWjdRpPYFInrgIpIB5zP1XYxWKIJ
-# cLKcxUJvLF5sOSfFopjU2X91g20/Gqg7j+LrrJZj9Nnakaay2M470U8CL/6TihNg
-# k+0xOB5IRK81NE2ggVyU842zat1D59kMpSh4zEBC+u66dC/JfTx2zQz/5fL8qrmV
-# CoN6xbU9qoLTTouO08ccthVYhBq3DNpwjBMFisKgdnTK2d+HIw9lyjNImQVL3rvn
-# zqLbT5zd3CYL8L+4aMcSJDn2Y4odM1cooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRRZwolEffX7WI6A30Pzuvw5u0DpjANBgkqhkiG9w0B
+# AQEFAASCAQCD3eaIviCzH/+1xJEKeBnDe9Am/Q9rArBx0m9c7Df1WbEulHzKeDHP
+# sx5lWnvjvMASs/DV233zdBSwErt4pkKoZ+11jR3ZZUvKWW2qY+FZpDAGlIGiv9WX
+# I/+AB1gRD0HnAVin1W2FE59dqAZTCTQ1e/FnnwcjVRIQQOtggl1AA0XElBathjMg
+# eQ60NjhxTSorzTwT8ZCKkkBesxUdkEedEU30wh669zkXXT8tjzQGouV2JpRtNlgb
+# AirtigGtnu9aIXuHIq89yEAtMsJ4U93Q+Ib7q91omv2W1WWJ1OYJTAuFN+gI10h/
+# Hs/TItdqz4P2Ey7gBboE9JolXVEqZhBNoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1M1owIwYJKoZIhvcN
-# AQkEMRYEFIPrrgYqT5n/0Fkl84K6bawGmN5rMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0N1owIwYJKoZIhvcN
+# AQkEMRYEFL4264LW6lgAu7iB16QIbA6GWVO8MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA23XZty9Re1IJ0YuCeetWvsImbHoQK/VU36SH6FVg+Pzce
-# jv59ukGIu0IQDayEwVtzpx6ppzac7DoUne/LxLeSgAr1XfKt3G/zQ4alZm8WwwLD
-# q7ZD1T8kvHpo0vvqUu2vbCy4L5NU9lEZekQ36hlrif2wo/9oaAjR7+eypY9uosKM
-# nhpKHedgOJcBdI5LaWz8FaYvttYAxEukMGUxzmfKo4QgKtULzJay2LAULakiC0kq
-# BtDpib9ehzIjhGqq7MSo7B2XxLmobD9y5B1Id/3rfyQq2yHDFvYWekejGv+shBcf
-# SNVgWmhszrcbRktXGf7GxQLEAfdwp0tD+CefGj8+
+# hkiG9w0BAQEFAASCAQA6f4QsUSTmItB0VqB4R/uRbbTXa5cKdjmbXI6y4F5+dylo
+# M9NeY9gN/Y3KARIUZ2FBrG4oiI60mVtnlJ5bKosF7310eTae5w4zYbkCRKsjnzU5
+# e+sWzxLA5Z+uJcc2zfKvl/iStfg58P5g9YWXX3/z4WtLXS5U6BOE8IsOYrKRgpF6
+# 0MwQbdZGRxfbwA6H+fJWKtzKfVmJFFOj+z07x/4q6szWbTWVdw0IwAO0saQeH5mL
+# Nla3VSSurvBtPjG1pylhV6Wtvl1Mcbqg5/DT0qvN4vD6ag5P+iyV/h/CxxXMgb87
+# CPbpN6Pn8mtaWbK2Zsil/Bjyv15kKYn3mSKFDjH+
 # SIG # End signature block

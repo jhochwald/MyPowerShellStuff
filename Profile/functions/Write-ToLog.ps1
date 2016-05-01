@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-04
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -53,10 +53,10 @@ function global:Write-ToLog {
 
 	.DESCRIPTION
 		Write Log to file and screen
-		Each line has a UTC Timestamp
+		Each line has a UTC Time-stamp
 
 	.PARAMETER LogFile
-		Name of the Logfile
+		Name of the Log-file
 
 	.NOTES
 		Early Beta Version...
@@ -81,7 +81,7 @@ function global:Write-ToLog {
 	BEGIN {
 		# No Logfile?
 		If ($LogFile -ne '') {
-			# UTC Timestamp
+			# UTC Time-stamp
 			Set-Variable -Name "UtcTime" -Value $((Get-Date).ToUniversalTime() | Get-Date -UFormat '%Y-%m-%d %H:%M (UTC)')
 
 			# Check for the LogFile
@@ -110,7 +110,7 @@ function global:Write-ToLog {
 	}
 
 	PROCESS {
-		# UTC Timestamp
+		# UTC Time-stamp
 		Set-Variable -Name "UtcTime" -Value $((Get-Date).ToUniversalTime() | Get-Date -UFormat '%Y-%m-%d %H:%M:%S')
 
 		# Create the Message Array
@@ -147,8 +147,8 @@ function global:Write-ToLog {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUkxKtD/xKg30u1baUUP1D2yPf
-# 1TSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUISmHaZC3zjvzsYC4M0yQg7kD
+# KxmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -291,25 +291,25 @@ function global:Write-ToLog {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT9kScVmNZMLgatxnBR9utBElq+6jANBgkqhkiG9w0B
-# AQEFAASCAQB7ke1y59396JHCWAY12Q3jTvqztQCBrGj5bNKKqe6kd/00CzLJcCi5
-# bkGZJ0W9CQk/KbEHlOh43ZrDavzXkO65/sw/rrJsQMF7Om664ZhhcVfWZdo+Tc9d
-# wwpRFMN5UxAoHRfB+qLo74lBAWJQDeCyFLA13jbJWRu6CfPGHUe3oaee5iaQIfUV
-# 9mKt1PmAg4qFhl9RQqBf7qSEcmMycbl6nVV9hHgwcUNvoLl23rTsAABUTjEg3aNN
-# Gv/bmzA9Upjt6BEV4IoJRgiAVga1jFHtGCQwCqwxuaZ2TKhje3MydLj1BuNUqdqR
-# QnBtjh50AXRCIR1PCn9JVN2IXwyOHpPIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSmxHJFviwYtfp6CLYBeuzzm6GzljANBgkqhkiG9w0B
+# AQEFAASCAQASbm6/2lLnas4ctzp7sD1XyLaaxHYaksNa3r/wGfZUgCvW7/j8yDmg
+# k9XvPaZzq7V6/g4eWqVO8wwEPGzZ7g8s+bqg0iK8/plqDRklMYxlLDUIcyqnx5P0
+# IIEtIZyM08uiiHciX7YCmRvJoLfwH11CoYPXku/V57xTTBKyakpvuRDQhUdF0hc4
+# 18VK1M7f2OSLsvTaULqx9TIKC/J5SFkNtJPN7d9y7QaRcQs4p4+Fu+KgvdtrXfvP
+# c6bylk4LFL5QvNjVsbu4SqTm1X1N4KFzJaAHUY3IvngES2+AD4Ex0SQx4PbLJ8q2
+# JV0BFBW2VnNBqr40A6b3Wpck4ZkaUtIDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcyM1owIwYJKoZIhvcN
-# AQkEMRYEFG0Jk7CFMTXXUd8rxpGu+6KNfslZMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxOVowIwYJKoZIhvcN
+# AQkEMRYEFAbjU6xM1CxCgOLcEd2RYYfiEnNaMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBsNyoWnvxzOKZc2ExAmzx0ewsANaJxIyeCVp1jovrmRMzz
-# eKGIYUzv+Q40F0QGww9dcZ8B60Rw68f7zCGeOWI8k0PVTpqBjlxWjlMMNtjzzubW
-# 1DyPfBLNbFygQLoFCddMF9wDd1CJPnnE3AGGr90/FH6JUhF+0ShZENrvZsaN+tHL
-# 3j93jVE2YFOsdRy4dpNF6WznQBYdfVr4JFRp26jVxRCreztMY9UZ7WlAD67kG8RV
-# BUHzmJYzx4MFnxvUaBl/W0OBDoZ+xtLYd3Hqx2++UKlP7mc0MiOBCFAuHNnCJ0gg
-# P2f/B3b7akqg+jcpcBnfURmBuTYsPfS9Dm9QMa9v
+# hkiG9w0BAQEFAASCAQA9yXnoAnQdJVVJ7dVOX2MOsoy+ZHZkZ6yymh1O61wOGYtm
+# hzP6/LL89YRV+Tpp0YG5KJFo+K4sLR4wF5fT8MBbPaUJlqx5VR8KOuQJbLzWvWEP
+# Appy5w1Lkfi4ZebtcZccsQ0uAb7eekKH3DVmgztMv2XIS32QD17vVnYzX3MOIj8h
+# GdAbfRZlo5OBHJ0dBxuLUlqwRXX2hzafC3bR/oyTloMnNEWs9/qOmMPt3rAJBj24
+# HfTn3jDT1ND4SYkTGZwOl56C1+D9F3hHeTgtL5H9+Av4spt+rY3nzPB87y1kJCYD
+# shR8uWlkcYI1B2R0j+WQKXT3PRNEm777Ssq5wiBn
 # SIG # End signature block

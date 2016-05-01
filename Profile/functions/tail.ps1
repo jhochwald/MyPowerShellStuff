@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -66,6 +66,8 @@ function global:tail {
 	.EXAMPLE
 		PS C:\> tail C:\scripts\PowerShell\logs\create_new_OU_Structure.log
 
+		Description
+		-----------
 		Opens the given Log file (C:\scripts\PowerShell\logs\create_new_OU_Structure.log) and shows every new entry until you break it (CTRL + C)
 
 	.NOTES
@@ -123,6 +125,8 @@ function global:tail2 {
 	.EXAMPLE
 		PS C:\> tail2 C:\scripts\PowerShell\logs\create_new_OU_Structure.log
 
+		Description
+		-----------
 		Opens the given Log file (C:\scripts\PowerShell\logs\create_new_OU_Structure.log) and shows every new entry until you break it (CTRL + C)
 
 	.NOTES
@@ -161,8 +165,8 @@ function global:tail2 {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFoNmaxd5x1c5emSjScTNqSOm
-# oe+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULO/P4Mqz8QeaxxzfYZJ12nqx
+# goqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -305,25 +309,25 @@ function global:tail2 {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBS37UKmMcBFjyfYX9tnB4ckj4W6dTANBgkqhkiG9w0B
-# AQEFAASCAQCcptw/NRFcZh/j690x/YIcJM2uEP66OrjrUjDlHZcweqrlvCNNgGwa
-# pt0aNVZmRtuUglKpMDqaPL5SRTkUN+o2VYKgNanzAaF3HdmZX7eWfgnye7zIwtsn
-# 6svspupWMmaWTO4qn5TsOjTLw6Hj9kk8gykRjna1wcUUwOVLuQIxWS4nRKqlB2jv
-# gTbY2Pl+VVR/RjuOJ4d9hoq0yl/Ow0l9+3sNtbqaarGeu37VqHcH17x+Ob6fV9gR
-# jb80R7tuaF/fg6TgZQ28s56T3Y7FLfZCVJ9JdpqirhSfn4DRPfaPaG0KluD41CVr
-# MSqsnmTBvT5kPszl+DAMl+yIy8/AP9d/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTqR5aG/9RikUyKMD/yAcAGcTgM/zANBgkqhkiG9w0B
+# AQEFAASCAQAxz5S75yK8t2dlm8N2uTwhsvdJ0vy7wri2L2jYalVVIk8EsPOnqZXU
+# gORdqXTObTLpETTB9cGGtO3JO0eCO2q4rVSb2HBo16RTdLl7lXKJFto1NJL/sNlm
+# uczdStu26p8oJFC8tM1qkeGZxsEbqgg/zypjaJ9XDboXz9KtM5S5+ByLHpH6Ct2q
+# m4IzvtCyW5hhbLVGZHzEYx0Yywp3ZdMWCa8rrxw0nr7eqP5JbL50jI+J7jBDK0q2
+# 0EX2tk6DxGkcv/5Cz89VF/hR9jI49O8N2EhJ2VB4OEIuoB87g//m2FoVhGTXpXV/
+# 3g03m0+uZAfP6D7NEAmqp5aUEaQWAy/uoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxOVowIwYJKoZIhvcN
-# AQkEMRYEFCsqCJVpGkP//2jr8xNxQC/lKtFgMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxNFowIwYJKoZIhvcN
+# AQkEMRYEFHvZ8Qae4p3YF7XKStrIo4GFZguWMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAIlHq5ZcObn2/EZOfGfOCc3mr1SDpzAELe4p1/MtI3Of14
-# e4pKLL77Nvtjvsy0N6HgRJLyRJyGKBS/nxWu0yGldYalS0byTK2/fQOkXgt6Mrgv
-# 7AgULwiSFs4NKMMukO/3erV2QeYaHEIvdGoDXCBwAwUOMa3L05W48OPegIZ7AFuS
-# YdBEcy0gn/U1ZmvT4MDXAe+4doWxXLZPIAwn5Vkox/Ss50HJGVWfAD6fwE01T+f7
-# dwZqdcMILPDldNAVc+liA44YNrAi1G0UGJVwA+6skmAQ3BYk1nJAEIHTNjGHe03r
-# wZHDago3f/ZtNWgnRwfH4C/ztCpJCgqLQiQprxOH
+# hkiG9w0BAQEFAASCAQBeVagzxd8vtH8m+2xbMpsVGi8njfmVdtcEBIPXIse32/tv
+# Qa9CeCPLbwU24BFncwWrKvZnOieqBVTLvPOv3XiD5Mm2PT+0B5Y8kr0JwaT7Ppq5
+# H1dJVIJKDpDbqWICSVBxpgay5EKeKb9HgpnrdJR41P+fzB0LBUlicF8O27U+AWO5
+# 4e/ma4NYd0bGvrAvbPQdP9h7fDThKOdzlVB+hd49sz+0mPa0tj7y7705lFsa+xiS
+# Q23p30aiOq5cwimodL8sRQ3usbfs+S67fn5lpADLgkX9RNtvDi67pP/Nb6Kj5v8V
+# g2nYBh8PmtnMVGk00oFzFN5NW3OI4wdG8BGWrDKT
 # SIG # End signature block

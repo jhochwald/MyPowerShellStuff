@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -59,6 +59,13 @@ function global:Grant-PathFullPermission {
 
 	.PARAMETER user
 		User you want to grant the access to
+
+	.EXAMPLE
+		PS C:\> Grant-PathFullPermission -path 'D:\dev' -user 'John'
+
+		Description
+		-----------
+		Grant Full Access Permission for a given user 'John' to a given Path 'D:\dev'
 
 	.NOTES
 		Additional information about the function.
@@ -143,8 +150,8 @@ function global:Grant-PathFullPermission {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCsCVCGeaplIcPVR5B4YasjTB
-# JTqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMcRLviw0WpAMVw42rO1kz3br
+# QZWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -287,25 +294,25 @@ function global:Grant-PathFullPermission {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRHV4HcYz79tyF5dss22SyE+eop1jANBgkqhkiG9w0B
-# AQEFAASCAQCWc0SrRfKiUbU0fjNiH9rT0LX19Y1iIuaThl+NYvVmypTX11MDgtJ0
-# 61WyB7a4D/Ag11KnQXbn0iQtJ6riiYMrEx/oKh13xhP3Sd5jhhDJ74/wJmMDtcLK
-# 34DMmMZNNNnYvcEXpiMgeTwliYXIA+QTCNtPD2bSqqZXQoCKnmGwGiOnx1zyTTTd
-# ngMg0jrGz2Z1OVvhMD9k4ag1UNvYLLFkS4kPFf+nKHnhDGAOW5n8Ku2b/qxQ4yze
-# w8Fh9RnY3qtyAab0JkXJzdWkllx6oCilR1DgV/V7/GqmHBoqeKhLtHwjjkfVX301
-# LuJrekZLuszepGIXmRLqIQKYh5dGdq+/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT+gweEEXYr1TteZAa6CPg2xfxMzDANBgkqhkiG9w0B
+# AQEFAASCAQCdA3x/23G/Y8YKRZgqWecGSbn91/B0Cgf3lz4xIitl4KwNBkRVpI+Z
+# BS1XLAI19sqWW73vTZYzg12uSgZE6G/4sPxaxakx0eAVP3kse2loJjK98cnar2ji
+# hipMHrkLVvFTT89Ay9giiaGS4DI+NB/Aawmnp7FdwxnO4MGUxSv4+IILfngJnhaK
+# e39UZafaWfQTq1Oo7n84cQS7ULJX3rBrsZu/Q0TJQ1o9nDJd8QfrLsxANQqVwoLZ
+# Y4qXCuj9IBmrPO9v/VJquV2wOmn8eUXdK90f48D/bB0PKeGv5NVhvljEtJxw1VjL
+# I0fiWaCv98lUBAiECH8pcPkDUOMHEQ/doYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwNFowIwYJKoZIhvcN
-# AQkEMRYEFD4Dv1CS7deXUEfrJaVxwnOqXXArMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1OFowIwYJKoZIhvcN
+# AQkEMRYEFNGmhxRV+sTSKDKo1+RUYRQ+UzO1MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBw2Gh9MNUpFWQruY9uAeKCHtbT0hp7o5ik9yfzRK783wHt
-# bS7MieIv5VtAtacHwW7f0r7WlwDJO4iHOW7vCTjA1RFwwyyibSJt1FSiXlAovke9
-# mQ1MCtx0RIqsD4XfAAzv+RyNRfqXdhkUKumMRmiBdTQh92TIbiYrFNrEmCfDYM6e
-# Q0xAPbCsgLfGHZpfj4w2pm/HSNVYAUFVNKxNtUiiCX12jkq51ljo151nHuv+082T
-# cr0gwNE4Q4Aau9eUiwPourFIPAo04Q5iUVJhsZVsfW1uGeqIp+LewPEjUGPIdC4n
-# +P0CXW/Subz9IT5YFnc37fecPY6aHS/BqTOE6PMr
+# hkiG9w0BAQEFAASCAQCoopJ0FMzZzMEjh23Kx3CP1nj8OnpWo+3f3lpozu2KuQSO
+# S4bVVBHqh5kDTyEV9Ro8X1urMYvw/5JZMSOOm3qCStBOY9oc6MXFsjRG6ZujZp92
+# ealuxEqxB3fzOpBobyb/Tztrp5Dv46nIXMoz2PHTIya5QUy4ZWXJalMuvdCd5TOa
+# eZh2uACQ4r2e/P2u3QppPDYiwRw0KHrPoqyCYEUXpu/H+foJ3GrijEeoWwDCtfif
+# IgkQrP67L5XubB0fGw7wCZ/mgdQgGDRAdA+z3jJseL/zfLBNwW6EtVWo0JJBGGaW
+# 9R6nv/hUPv1fQlHXulI/Vvz1DlGbyqylvuBP7L0A
 # SIG # End signature block

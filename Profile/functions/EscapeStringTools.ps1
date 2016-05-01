@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -62,12 +62,16 @@ function global:ConvertTo-EscapeString {
 		PS C:\> ConvertTo-EscapeString -String "Hello World"
 		Hello%20World
 
+		Description
+		-----------
 		In this example we escape the space in the string "Hello World"
 
 	.EXAMPLE
 		PS C:\> "http://net-experts.net" | ConvertTo-EscapeString
 		http%3A%2F%2Fnet-experts.net
 
+		Description
+		-----------
 		In this example we escape the URL string
 
 	.NOTES
@@ -75,10 +79,7 @@ function global:ConvertTo-EscapeString {
 		The companion reverses the escaped strings back to regular ones.
 
 	.LINK
-		NET-Experts http://www.net-experts.net
-
-	.LINK
-		Support https://github.com/jhochwald/NETX/issues
+		ConvertFrom-EscapedString
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None')]
@@ -122,17 +123,24 @@ function global:ConvertFrom-EscapedString {
 		PS C:\> ConvertFrom-EscapedString -String "Hello%20World"
 		Hello World
 
+		Description
+		-----------
 		In this example we un-escape the space in the string "Hello%20World"
 
 	.EXAMPLE
 		PS C:\> "http%3A%2F%2Fnet-experts.net" | ConvertFrom-EscapedString
 		http://net-experts.net
 
+		Description
+		-----------
 		In this example we un-escape the masked (escaped) URL string
 
 	.NOTES
 		This function has a companion: ConvertTo-EscapeString
 		The companion escapes any given regular string.
+
+	.LINK
+		ConvertTo-EscapeString
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -150,7 +158,7 @@ function global:ConvertFrom-EscapedString {
 	)
 
 	PROCESS {
-		# Try to Unescape
+		# Try to Un-escape
 		try {
 			# We use the .NET UnescapeDataString provided by the System.URI type
 			[System.Uri]::UnescapeDataString($String)
@@ -164,8 +172,8 @@ function global:ConvertFrom-EscapedString {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKWmywMFxIigiGjb0bIt/Ru/N
-# 7u2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxnqdd2Wrs9cimotTtD0ZRXjM
+# joGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -308,25 +316,25 @@ function global:ConvertFrom-EscapedString {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTeLatJNCCCewxcz61pMosaxV1STDANBgkqhkiG9w0B
-# AQEFAASCAQAfbjRjdQxyyZwDcDANOfzdI3POeai8iMxkO5z3kqKDOQrQgmquqjT/
-# C1+X283shL2nA5sTKY39sxRiMLlsfw2upCC7pNLGApiVUEV6XeUo+5YllvNqwxpE
-# x0XxSyqTveByCZt+8Ds654uSCeu4EFZuFdsKiY0+i0XUF9KidPZSqR3qKbMXe314
-# pezbDL9kMPYqtIq8CKftJDzgwv7q+4yKr5vj6LgwQL5WZ5dbYjXLGx3RFwDXgQtP
-# Xc8C2T0BCfCC2ZPLSNq0qUI37xMYPjqsR2425Gu1Qadhq/8oSJSt7UnY9kZuUCe4
-# m+j2YDqzs+1le3RCYLQvfy+cvBSuGEwloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ+6nIj9vlqE7MNZEffOFsQApZ/LTANBgkqhkiG9w0B
+# AQEFAASCAQBpuLXd/vpJvLc1HNepVckk2HA6fGlHFnXZgO2VCwvz95qOKlkbp+GW
+# CbOk+ImWlRLymBeEHYTdtPlJkz6ApwiJ43uyTgF1kPRsXglTJSwyKo/XzgkiHfCR
+# Om5lPBX80a9yYbh7eBVGpZNzyimmpSjVStNGxIaEH/s75jaU2rD13YJnRQGUlukA
+# Or+KacfVT4zPCYkAUvLCIQLgZAUcB8QL5kammyh0p6uSLv08hfifHZ7m0oeTcaF2
+# 0Hw4i4h1AGsqdyD71MZnBYl8XIMsGeEXVloB3gVAvpYwJetdTEaEHkxlXTWCk4n1
+# D6IALivy/6PiJqQPLr7J4km9V+gJhlSwoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1MVowIwYJKoZIhvcN
-# AQkEMRYEFHHa+Ahp5hQZfzjPxr3HJAXHSUQtMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0NFowIwYJKoZIhvcN
+# AQkEMRYEFCCS0+T2kklBCr05/fxrq0Xx25R2MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBT5rkQuB3gj1tEGFvQ99GWE7tjJ3hvat+qSieJJ0P8jYdb
-# AMY1qZgfVpNov++mU2sYofwp1XL2UAqaZD0gk18UzZ/T7um3DRfePwyXjVi3YqXt
-# FodxsUuzLaA3eU0GwAnqRmTc8c7g3RcvLpu46xUC717uij6ZRyxpQaR8tJ8CPZzx
-# Z25ovQhsWgPihTF8JneMWVCFuprFhtkmKidFLBoXQtvJt1Th/bkiH909xJETk9dp
-# XFMu3+JM2oIl/3aglNddA9uLFIQrp0ALEumo2xRl4kqwyR0Qms0MfkJu95PBZtfZ
-# X8dLGRbNaZW3ycflQEvlBHaqXeJR66R2kyqeBSP3
+# hkiG9w0BAQEFAASCAQA5G4m7E7ipRQ3q5aqhhYmqvXWKx5ifGqSod++viz+YOvHm
+# eb35v+dagW/AU5RmRemFmCNKWaM1yFgSsDadYdBb4+fdWhLHegw4aJTdHcZ/w4MX
+# tuortcf486v9lhHF/EsqRO7kGxgyXCS/PRWjIXHBBMjX5ZCmqzRxR7zIs/OR33z6
+# MtoX2oiTysAH/mKUVz4N5Ew9is1IiL51PDnYVrE6naCde6jxKGnQPT4E4iVDYzDL
+# NJoauQnjb13PFHcSzIP3hAm7TJGAvzfoJy3SRarvCaeXN/2Ql3B0bA4d6X+NhLUw
+# mq7E51My5kejKj9jUHLsXac6o8jDpMGxTdA8YVij
 # SIG # End signature block

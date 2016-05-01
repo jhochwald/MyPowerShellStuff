@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -58,15 +58,19 @@ function global:Get-IsSessionElevated {
 
 	.EXAMPLE
 		PS C:\> Get-IsSessionElevated
-
 		True
-		# If the session is elevated
+
+		Description
+		-----------
+		If the session is elevated
 
 	.EXAMPLE
 		PS C:\> Get-IsSessionElevated
-
 		False
-		# If the session is not elevated
+
+		Description
+		-----------
+		If the session is not elevated
 
 	.NOTES
 		Quick Helper that Return if the session is started as admin (Elevated)
@@ -92,17 +96,17 @@ function global:Get-IsSessionElevated {
 
 	PROCESS {
 		if ($currentPrincipal.IsInRole($administratorsRole)) {
-			# Yep! We have some power...
-			Return $true
-
 			# Set the Variable
 			Set-Variable -Name IsSessionElevated -Scope:Global -Value $true
-		} else {
-			# Nope! Regular User Session!
-			Return $false
 
+			# Yep! We have some power...
+			Return $true
+		} else {
 			# Set the Variable
 			Set-Variable -Name IsSessionElevated -Scope:Global -Value $false
+
+			# Nope! Regular User Session!
+			Return $false
 		}
 	}
 }
@@ -110,8 +114,8 @@ function global:Get-IsSessionElevated {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUXGzLcIPlFA2MaqXzo0Rp+bQQ
-# dOegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAKJcMGHDoTpca+6rfHCysW45
+# DY6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -254,25 +258,25 @@ function global:Get-IsSessionElevated {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSv8zpKwVeniGIVtth6HiVdHPJS1DANBgkqhkiG9w0B
-# AQEFAASCAQCW+CZhHtfS6nj7a3TT8/OsN64lDj2slHUMftwgbheUmvL8y7uu+CLq
-# P01SDukBEgxn+4AFdDDTp0WUrplsvspi7SkIPOL4q+tmGxyKB4F00A/977qVEcW1
-# 5xCPYT6EbVLKtmv8P+3dsIb7lqdhli0+Zb5wiBXGep6Zg/b16jRgemjeb37AzZOV
-# 7k/4rUTDg7UYrmL67Ykbm46t0nPVaULl85zp5yUNP1AwFgC0AqExVvm7Uzg8gZGE
-# kXEU/1mYNVb7PFnSEy9XVtUIHzj6Sw5W8iwnpXgBr1Fzd+LaR0JwqG1JevqYp0d1
-# 3cgtJXm3wc8lTPzBtQ8btjrlqDjerR73oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR3LUYDFGKps88vvsSMrdUL2Loh0DANBgkqhkiG9w0B
+# AQEFAASCAQAoEwewWP/oh9nAVen7fFjpmyzKkGMKBX9SL01Q3Y072NrvK3m1zClg
+# 5CBxMjg1BtlXLI+6KUMVZ/wbi7T2FQe/VCjJ+vLgEQuqMRj3A1P1YcmwcIu+gM2c
+# wOZ1uM+rADmUU820aSiPenLuSS+S2CnJ0mrSU4P7If0zNKKsQleUeAlIybxOtl63
+# SSUnwabj7iWK5v3F3sPqJn0X3nBaBdp6HtvVypHtCW4/2mfllPOxPLFQbC50l2vt
+# qSFg7zpTH9dNbU+lAhw+DThTrAmyLgVsVtlaS5/pEiAXFhCgA9AYCcvRsMCoVj2F
+# 6S3iW3hMmDteIO9jj4tt5e56Y2f4bP6joYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1NVowIwYJKoZIhvcN
-# AQkEMRYEFHHPHthugMnJYsxGka7M25K1jiK4MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0OVowIwYJKoZIhvcN
+# AQkEMRYEFK0OXRrymxrbpRpDsb7zd7tXTueQMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAlN6wwl7+mAMCk0MQv8eJ/ltGG/DkgYy85D5scju7Kvzha
-# B1mVzjKvoK1IXDxMx/d8Pxz63oCBEtMCBDj3BYkxiIdYTvYgqoLPcYSwBubk+XNf
-# jyJsJClAa47ksYQ7s4L/X27SK6QoaCzo91yyeFvpbq0HR2RrAeaDb7zQr+EOW7J4
-# K0kt7AnEDDoMjx9Yv5qqAHQyHHh/ShLnPHNSqDqHY7q675TIyWIAZsIhDHId93So
-# cLNh2taZaknv45sG+fCYIQMJTRson6wDLNJASzcpEZW+DqiOtdB6x3/Ki3Pew4go
-# 09xVg1qMIfYkAmbbDR0ynCdaFTBWyFhsocMrMbSO
+# hkiG9w0BAQEFAASCAQAbDmn0RO5z+rFqFat64+JTMWQT/YtiTi2jYaInWgwT9107
+# yKrLnw+DaU3ySdMvLrSCdpTOJ4zt8W+U4NcGJPEOjCXrnEc0lR6Vm4sS+CIG7nac
+# 2R/SLT6WA67cwIo7eUzHHqIwUEmia2f4Ktoe1WSBqUgMUgLUbJaQXX3f0EZ6TdDt
+# DfabF5ulljgBw6QNNMh16AaJ5lBGGP2UrXGQbxaxzx7NWoRFj0VzxKmsbht0ciVF
+# 7QbROMPwoHY40PU0xlthGSMcY1IMlmhyY1poH9Jke67wouUi1ZfwYW2ZbfKILP93
+# l0FKBIgvOuUCFt83zRfuKTmy2UvF1bG48GHR4QfF
 # SIG # End signature block

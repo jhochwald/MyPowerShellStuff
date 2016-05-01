@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -46,10 +46,10 @@
 
 #endregion License
 
-function global:head {
+function global:Invoke-PowerHead {
 <#
 	.SYNOPSIS
-		display first lines of a file
+		Display first lines of a file
 
 	.DESCRIPTION
 		This filter displays the first count lines or bytes of each of the specified files,
@@ -57,12 +57,32 @@ function global:head {
 
 		If count is omitted it defaults to 10.
 
-	.PARAMETER file
+	.PARAMETER File
 		Filename
 
 	.PARAMETER count
-		A description of the count parameter.
-	The Default is 10.
+		A description of the count parameter, default is 10.
+
+	.EXAMPLE
+		PS C:\> head 'C:\scripts\info.txt'
+
+		Description
+		-----------
+		Display first 10 lines of a file 'C:\scripts\info.txt'
+
+	.EXAMPLE
+		PS C:\> Invoke-PowerHead -File 'C:\scripts\info.txt'
+
+		Description
+		-----------
+		Display first 10 lines of a file 'C:\scripts\info.txt'
+
+	.EXAMPLE
+		PS C:\> Invoke-PowerHead -File 'C:\scripts\info.txt' -count '2'
+
+		Description
+		-----------
+		Display first 2 lines of a file 'C:\scripts\info.txt'
 
 	.NOTES
 		Make PowerShell a bit more like *NIX!
@@ -82,31 +102,33 @@ function global:head {
 				   HelpMessage = 'Filename')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('FileName')]
-		[System.String]$file,
+		[System.String]$File,
 		[Alias('Counter')]
 		[System.Int32]$count = 10
 	)
 
 	BEGIN {
 		# Does this exist?
-		if ((Test-Path $file) -eq $False) {
+		if (-not (Test-Path $file)) {
 			# Aw Snap!
 			Write-Error -Message:"Unable to locate file $file" -ErrorAction:Stop
-			return;
+
+			Return
 		}
 	}
 
 	PROCESS {
 		# Show the fist X entries
-		Return Get-Content $file | Select-Object -First $count
+		Return (Get-Content $file | Select-Object -First $count)
 	}
 }
+(Set-Alias head Invoke-PowerHead -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGb/ZOJ/7vaIjEZ0I4xmAANLO
-# 0begghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUR1lzRfXC1MiWSbmGGl0hB2vA
+# RzWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -249,25 +271,25 @@ function global:head {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSF4XfFtHW4kvBCsst71BylXdF+0TANBgkqhkiG9w0B
-# AQEFAASCAQBT/6+UXfov3uCjtRVbkGAG7Oewgo0AMNDdzdjI7fupB02FBWSs319B
-# JTvTKHwDq5r4qBsE4M438tiZArg+H3KyfeW5vmvjpv0dSIEuR8iFa8Ld4vYHFgsh
-# vT8PAdpDthvM1yFQdR9cwpRCF1TRhrzNmvEj152ZoxR+/4bexkPi+Msj2w9MlhvD
-# smfma5YVSJoOdyKzLVdS6zquwPQgjYLStH5TPVliLCjs49CO1CNhoYrVG1aKnmNl
-# OwJDWw2ihScedvgWYHP8v2oOhfMPKCG6W/gmoIigqoi0XHAQQHaHBGw8dDLoGYfU
-# TQZDsXZDBfaV6OV+vhJo+APG6cSe3QG8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQGj9GUEUd0nlwgUEQENwgDTpBTNTANBgkqhkiG9w0B
+# AQEFAASCAQBP9YSVJeu9ymAOdMdBbVh50k6jvL2kTMjfeLFHYM8Dg8Uq9Eze5EDS
+# GoavH8mrcZky0VLUon6cbcJvncDSVKdspeSSsyJ6D4l0Z4NfCYyMoU+xvGX+p2Sn
+# 0+qfZQJVDZ6fgXkyzoMM9S7nsMvw/JEtzQioRQqI7fuYDrKJL/upIeifMCZeuBQS
+# MfftsxJw8DncMatqqdTy28ryFVt5qbuXSQT6k6XMpo6BrTx9dSUnIhT8qaCZHowK
+# udUugT+skts2DqLA5im6M26aDsadvG1SGmPlYDamQENTiStOrNbwv0ZrNQKjUqiH
+# gHNImFOko9VIbabAo6fX6K7bqyvUPaR4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwNFowIwYJKoZIhvcN
-# AQkEMRYEFF1AhLGVaGPy++SbjMKKcYvHZM5MMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1OVowIwYJKoZIhvcN
+# AQkEMRYEFN/P/W9k69XRmOqDYgNlNkTW/5X9MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCXkxQHQbPrqtc2MgIBhzbGH7k+864Z6Pb9zAeSdW0kxX8E
-# uNxivZqv9J0YfUiSSr+g4MH8H5Pfn0I283AfZWYStp9kAMmXkUrKP1kHv8EcaWlI
-# iSrX3WNZDOsNnSmoSIafMfaeUlxIUxwgwochS1ceSQeeXoFv5NEsYYrTaYO2ZpIE
-# 8ndtZrizX54sLm5TWzlad7+AIvzkH9PA2bRXSzwaBp7wJu/BvH4nw1HpXN7ddnLy
-# fMjgkQwCVcg0dAY2m2kOIi6ELbq9ACS0zRVJbq7nKEhh6qibc3y9z8VLpDHyUaA1
-# SN1JQVSS4zudrPj3Bg1CjWOzVe5MHrS9c+SSF9E8
+# hkiG9w0BAQEFAASCAQBx6OSPRVC89GDTGQLtP4GKt48hSSYY8W62BlGPj2BM4EWp
+# ELExfMislCbmN2mEXYm+aUJ5S7Cbv5QslLHnZkw0U9e7y/dpkNjNOjxRe7dGIGBt
+# IbA2U5rFuwFQfl48gA0erDy9SNLCzt5fqPA/i8b30PLkQmQybIFJqQhhtQ8gjUAD
+# bY9V+0IxYVnLXyLNWie4BDrky2tzOlmgV8K1ooBUzsT7ohUG8yFYhct1vDnEjWWJ
+# OMiXH11q++W1XYGPIYnYaDc8ds5FBBFKCYepGgK5CIgrVQke8hY4zwuYAqzZkib7
+# mrkUQfQDWF5zdRkUrP955m0lwGBzw8JOtEus+atQ
 # SIG # End signature block

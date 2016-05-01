@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -58,21 +58,29 @@ function global:Send-Pushover {
 	.EXAMPLE
 		PS C:\> Send-Pushover -User "USERTOKEN" -token "APPTOKEN" -Message "Test"
 
+		Description
+		-----------
 		Send the message "Test" to all your devices. The App Name is displayed a title of the push
 
 	.EXAMPLE
 		PS C:\> Send-Pushover -User "USERTOKEN" -token "APPTOKEN" -Message "Test" -device "Josh-iPadPro"
 
+		Description
+		-----------
 		Send the message "Test" to the device with the name "Josh-iPadPro". The App Name is displayed a title of the push
 
 	.EXAMPLE
 		PS C:\> Send-Pushover -User "USERTOKEN" -token "APPTOKEN" -Message "Test" -title "Hello!" -sound "cosmic"
 
+		Description
+		-----------
 		Send the message "Test" to all your devices. It will have the Title "Hello!" and use the notification sound "cosmic"
 
 	.EXAMPLE
 		PS C:\> Send-Pushover -User "USERTOKEN" -token "APPTOKEN" -Message "Nice URL for you" -title "Hello!" -url "http://net-experts.net" -url_title "My Site"
 
+		Description
+		-----------
 		Send the message "Nice URL for you" with the title "Hello!" to all your devices. The Push contains a link to "http://net-experts.net" with the URL title "My Site"
 
 	.PARAMETER User
@@ -278,12 +286,16 @@ function global:Get-PushoverUserDeviceInfo {
 		Your Pushover application API token
 
 	.EXAMPLE
-		PS C:\> Get-PushoverUserDeviceInfo -User "USERTOKEN" -token "APPTOKEN"
+		PS C:\> Get-PushoverUserDeviceInfo -User "John" -token "APPTOKEN"
 
 		John-Mac
 		John-iPadMini
 		John-iPhone5S
 		John-S5
+
+		Description
+		-----------
+		Get all Devices for User 'John'
 
 	.LINK
 		Send-Pushover
@@ -376,8 +388,8 @@ function global:Get-PushoverUserDeviceInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNjtJXlXmqLH0haDm+/pi34u/
-# tDqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU55ZDnLhKINxvW8o+WY4EaFbV
+# 3lOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -520,25 +532,25 @@ function global:Get-PushoverUserDeviceInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTEWfJSphsK8XksH94dJMYLP2sn3zANBgkqhkiG9w0B
-# AQEFAASCAQBRYkIqNDzJnX9OPG8GE3Yhk/ZFV85oXsnga8Ve7UEebETYluf+48uX
-# zJORbg2YEpfq8MTGaOm8eHXhQuyRzZGYrOmq2EQpHZWbNPSVja85r4pnVf3KRqpu
-# JS5UF3DS1mg3xL9GtK4f+4YTfZiKzXzCs/1whRLjhxgn/V85wfkbFFuabe8gDcp6
-# V8C7i1bpLm0x380is0Ges/wzXQrzUIqxufMoFuODdXus1Y0MdyyXvL5LHcr2JBYq
-# x4jhe4kZxRvuDmVObS9xiV+Gjxiz1bPeyvu/DWQiPP2YJQ654Wd/nBD2LYBk+Bf+
-# XIpfKCF0wdkbLHYM5k7KXGvWEaFPPPqcoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSLopO9ohGdyR6XHAqlkuC7e4Z3/jANBgkqhkiG9w0B
+# AQEFAASCAQCJO5V+CIh6oLnmhrJHu/SU9sD5fiBIaFWa5CMRjqsj9EiijeQcdCGy
+# 9jNr2Iysg4OG1q8deriFd4TDw30XgyyCRAcxf0Ss3x2DGlzsyKSYfAE1l48I1QUT
+# 0Idhpp5ZNdd9sUVdYj+v+xWPVXWsekzr7PGGTmiBiu/HR6DsQjim0OR+YWg2rl91
+# X+hzPb2jdOB49z4UDXZpY6TtO5yumMwcvqaLKg76bk6WDDYz/8KJA2EvQvkCuhET
+# o92K1RNvsvejLsWqTXeVsvCEljWVL5MQ7JpBgFjJHeXRcaY3ZQO8F2ympkaP9vtH
+# oD8XyWM7T8RjT/nIZVKNsCvzEqv3TfPOoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxM1owIwYJKoZIhvcN
-# AQkEMRYEFPOrzTaUVTjihtmyO+aRdna1alClMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwOFowIwYJKoZIhvcN
+# AQkEMRYEFBoB8bBZ1ZgnQCKholQHcjiILQkJMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQClFoCH15qb/+/HGg76qJPRQ5iCYilJYKzZ5UcRyXflYVdF
-# 6TJSzTzsS1VvkpSkyk64iU4ajN+vz2y+YF8UQlQeEZ/EHHz/2L7HC0r00V0ZiE8l
-# KhwGvNbQ441hV6GixKAcvRwbeDZqkN9vwuUMSTzq60t4v7f7a8YoSFm5ZZTjc/fm
-# OQ8Xjvr/WZ7pkoxoauNe1f8w76YG8atjoAGzGMuLtYZRvs57JMEY25wLbSmH5bpm
-# t6tHYxvIK6tSkBQHQ2hW0BZOfAkh/kw8zHR2Vh1Z1PGuhh9GV37Fo8Tbpk0nuPY8
-# Ml34kfTXsw+pfXEPwZHYnZH77KwSmmm5Mdt1NTgo
+# hkiG9w0BAQEFAASCAQBmijOagC07wRUPGiBMibJuq/6AU3yO1987BS6baCDQ1ggA
+# gyYu3Y8I7i8f1eHpucTGTEGyb/kDnAfA2rMtlj8oo0UAi4j5Ze1tzeU6rPS3DSVM
+# YnJoGcectvG9IzKYThqpJOGUnHsjkRwAw8JQ3PJItyNHHB8gWcXx0mpnY4wbJ0Pw
+# P33UYPe9sY9BQDr5O7+wjwe2dE5WLMcuh2gRc2TKvO25JWu8zpCFmt01hNgvGh8q
+# Tk2+Re1BNEQ1/sp7BCmvFdAD1aMc9sg+e4wadIcSZNMtpPr+Lq/C9m//cvuAkez7
+# FqJMqEg4hyZiSBu2p8pvIGOMuOcajZBXZiXzlq2I
 # SIG # End signature block

@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -46,7 +46,7 @@
 
 #endregion License
 
-function global:JavaLove {
+function global:Invoke-JavaLove {
 <#
 	.SYNOPSIS
 		Set the JAVAHOME Variable to use JDK and/or JRE instances withing the Session
@@ -57,15 +57,13 @@ function global:JavaLove {
 		It also append the Info to the PATH variable to make things easier for you.
 		But think about dropping the buggy Java crap as soon as you can. Java is not only buggy, there are also many Security issues with it!
 
-		By the way: I hate Java!
-
 	.EXAMPLE
 		PS C:\> JavaLove
 
+		Description
+		-----------
 		Find the installed JDK and/or JRE version and crate the JDK_HOME and JAVA_HOME variables for you.
 		It also appends the Path to the PATH  and CLASSPATH variable to make it easier for you.
-
-		But do you still need java?
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
@@ -115,16 +113,17 @@ function global:JavaLove {
 			}
 
 			# Update the Classpath
-			append-classpath "."
+			Invoke-AppendClassPath "."
 		}
 	}
 }
+(Set-Alias JavaLove Invoke-JavaLove -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUN0iuZgTqD0lzxzx/3a12Q6GD
-# neSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQiW2Ee2zUnIHN+JoEtI+QfGB
+# 1PqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -267,25 +266,25 @@ function global:JavaLove {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSweGkfzgUzbZ9Fw4gNLci7syiNGjANBgkqhkiG9w0B
-# AQEFAASCAQBSZU8/Kxchat799FPWuhszMx36TfDqQDO8psqJ8swlnfGuyae5gebA
-# 09KKvh4vQZ9I6T+cvdJPiBGk6pqQF/Uu6saQ2AGhzxIZra/J/ZtMsRZQ9DqVzPm0
-# Ypk4UYPywYOfnSRrYfDmoArhng2CW3jIDdBB6mH2gH0P9r2XDRVvhSuZK01KG2U5
-# ymh9l4FDzF90SI9985z/GMlG6/1pCLguwC17xSx6MrXz6cpPCUln2+NYhGpfervF
-# MIiQ9z/0jHUnS0cZ0adz/86VKgt4Ve+xDf9WpOzrdC231IzOtdnjuj++OGoZKgLR
-# MuaLY+VMyNBscEYNMDSMbJW7VcXnYPB7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRFHwKWYGPO6bjKTF/M04m5qeky1TANBgkqhkiG9w0B
+# AQEFAASCAQAQcoeIUWfEqYFkFDwyetbn1E4x1VcZBALq/tDfz+uJ/bdp3Aw+PWlk
+# 72xwaeWVJ+Y/NZN4jlrnCm3ReN0zmqJrirHet3gWfk6tVAC9hBSFoBv8FWax1FIa
+# wPmYANnbeNiGiNpl36O9UFd6yrqONjxHy5OK6/hmHNUIenlNHlCtryTa7zto/b4B
+# SabirFJTWlKVqv5/DOdpsvA+A4z7g0wkXEcP8l1qmyuJ6KtYoVCbY8e+hy3rJESS
+# LpsLJlcZT2Om/sLATcn5XXWDt9If97ActROfrSD9RQjStLf98qMWEooVYNBoIPX6
+# wD7yNQOfPjD4PfX9UPbkKMRfxCOfpshUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwOFowIwYJKoZIhvcN
-# AQkEMRYEFKzkvHgtR1aIfZ9a6lBGu1E0GtwPMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwMlowIwYJKoZIhvcN
+# AQkEMRYEFJCUosSMoGRjgI2wYjtHx8lsAQwfMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCe2bgiET1JmA/AaspQBr9nmyPDXpEbLKiceeTFVAAI++tR
-# REGtO4N9M6tzCZPj/vnqBxEe03NEmCsCXhWzE+lE5/r2bfi2VG9jv3TL5tDG/BcC
-# L73awuXZvEXDYLnN1coP6BokfXU9XZPktrjD2Jp8CKPsACd5iZiGcRNXr/Rla/zc
-# 1ofZSvQdZR1k9yKYNpMI7HctW0hXjmTnJ8+wfGPlm0hAQftsCHZShOwuQKpp7+1a
-# W4rfkIpGn7H6ocbVurn6CrrZ6b5w1oZr7fgEkprzaPMYcsukAnAGGvHp7R/OtPBN
-# FWvIeKZmYf918H/keQnzeKkOukNYFfFdYOkUUSzB
+# hkiG9w0BAQEFAASCAQCdI+NXF0C59ozdoizg1UpQqUp0H0xMdqauli753H7agJPl
+# L/Iniqpt725zoizrdfZFFuBVG2hwdMFPi29RgPNbtoEzNxo+LMe2wbuydgPoGuRo
+# kiA5OFOupY4+gvDBs51ETRi50RH7aG7OMmDzUvwnvzVwA5dX8ps4sSM1lO6qlZGz
+# K1WyOsnvRYl6rejiXzmPLpnTVsSVR96osMsTU3AdJaa/DGD5K4V6UT4RYy+EFV95
+# FK0JMGSlQJ4mGAzER3oFohDx0aQxMp22v7JV4QZXo8HzHpy9fvUSfeTsiJg+r/EK
+# tJzUyeRZSIMXSbLG+u3RDSPAtogs1n/WF7J3r8ZA
 # SIG # End signature block

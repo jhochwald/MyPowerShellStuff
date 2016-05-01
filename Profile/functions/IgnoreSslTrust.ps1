@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -63,6 +63,8 @@ function global:Set-IgnoreSslTrust {
 	.EXAMPLE
 		PS C:\> Set-IgnoreSslTrust
 
+		Description
+		-----------
 		This workaround completely disables SSL certificate checks.
 		Do this only if you know what you are doing here!!!
 
@@ -88,7 +90,7 @@ function global:Set-IgnoreSslTrust {
 	PROCESS {
 		# Set the SSL Ignore based on the configuration Value Leaves the door wide open...
 		# Think before set this Boolean to $true
-		if ($IgnoreSslTrust -eq $true) {
+		if ($IgnoreSslTrust) {
 			# AGAIN:
 			# Think before you enable this! It could be very dangerous!!!
 			[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { Return $true }
@@ -120,6 +122,8 @@ function global:Set-NotIgnoreSslTrust {
 	.EXAMPLE
 		PS C:\> Set-NotIgnoreSslTrust
 
+		Description
+		-----------
 		Enables the SSL certificate checks
 
 	.NOTES
@@ -148,8 +152,8 @@ function global:Set-NotIgnoreSslTrust {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2ZmrudymcuMpLtTzhFnPQX+U
-# 2DugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8fUhvjieariYA/80i6L4xHkc
+# vDugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -292,25 +296,25 @@ function global:Set-NotIgnoreSslTrust {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRndjPGxsdK8OWIK/ST2NEc2aA8+TANBgkqhkiG9w0B
-# AQEFAASCAQBEuVoYJjrXz3avkbdsMURX8oP7+/tGMQRX5PkPyGKn4r71aYvEodvU
-# i4m7gO3P25QWHjSv/oO9svxgyhnztgmyI93JN7EpZwoZBs0ob4YTlvHEWVy0fnQ8
-# POYUGi0cCzs4UuSKeURbPmm4O2ZtBw+1esHAcr/PbDc/T305ccBcCOS2WqKmviqx
-# pyYGEyB0CBkCsWl5hBdjt28qI4PWOLM0Rudug/jJ/n/MuA0jpQ+/TUh4IprbrGkA
-# tVkdUW/7kNvn7sjCKvwpfzr6VoUUS+cuFS8JshPxUGnTOQWGandBV8GeJ37Ag3Z6
-# IE/j2QEGCa+9F4plt8Xhf4VqkWHuWbaBoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQNVpV4P4rPYKZkCFFcESQja0mkDTANBgkqhkiG9w0B
+# AQEFAASCAQBTpb9cHYPRXDBAACxjdojb1+srlQS/z75ME7Nmtswfm39r7lSQLTJL
+# UyVp4+Iw2oGaqRG0UV5WFGWK6h4/fpagaBe54LROIZleQBk+tSlYRxS+iQhzK6BR
+# JeCpPAABtCi7kGbSquFtXl7CX5Hf2jdeiMaiO6zlzLYmiI1UeQVIFO6dUgVGrms2
+# IW/ilOjEf6Dn8j/1vYXymDU/NCcKTxvzqobvgF3AqJh7ziCVfUQ2dKzG5NUdprhm
+# mAe48NpuigFETnz/XiazRlPk23wqsQP++ZRAK5reWHf3CfeCkhqk4I2KAdVQADMN
+# lgpMEFfUaJWn8ZIhxPbZOEQm0q1FWjmFoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwNVowIwYJKoZIhvcN
-# AQkEMRYEFHTM5wEFiSsnvE2GRbIbJnsCqtIqMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1OVowIwYJKoZIhvcN
+# AQkEMRYEFBDTzCMQiEKMy8iwoSwrt/03PvsOMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB/EIILKipi7IB4oMl3/tqxwEg734FX4NKlqxuqtZMPRs8p
-# 4f6L/gBvgMXrPCE7crnZTU9NIwhZCzjzresMuWmdVSJaXtulguxgAaptdlwG0ILz
-# YDssLYY2Gt4TlbR3ubsJfv6VqzWHoaEnNT/R1xSI+0iGTL5Ba1jFB3n2kmH+IIQG
-# vH/aRqwkTwn68DY1BjWxTN9N/MrDctrP2QVcFTOWaKcRPuR2UfvVBQng9vMVmHpB
-# bsG+W1dY53ggpU7IXhvoRLUNZgRgl0ty3PvvBaBqoP++nTdEzni3xW+gAYD4jdKN
-# ZLS4u2weDyAw29XSCaN/LNAPoZAG+pedEOcv+9YJ
+# hkiG9w0BAQEFAASCAQBRbCZdUX5/XPMrHaU9eXnCSMfeWCSN/IIVjo6+mop1HLUc
+# oCMU/pnqurRgH0KOdxYsOdgtpwLFRWnjTJ5h8GGaw42mhpNaNKiSM81jvB/z2IY9
+# keYCYaWCGaeHv3UL4vmO686tLGKyzeb5uYxatDdBjOwQHySuDAUtWpmTNB59Ieku
+# JK54QVObeC7HcyE/9LX4VMg7oWonmvQa1zSd9R7UdiGQejRhQR7ATbtXLsWPJn48
+# nz7spWJ1LlcfhIPJjN3dX4099f7u4KyEaRzQCZQhgoEoSzfUvk5PryBNWnse9NGX
+# pQ2Fzn41/OGJ88Op0sNavpFhpaE7clfTvfJwqIYB
 # SIG # End signature block

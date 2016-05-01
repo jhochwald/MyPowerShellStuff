@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-21
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -58,6 +58,14 @@ function global:Get-Quote {
 
 	.EXAMPLE
 		PS C:\> Get-Quote
+		*******************************************************************
+		*  The only real mistake is the one from which we learn nothing.  *
+		*                                                     Henry Ford  *
+		*******************************************************************
+
+		Description
+		-----------
+		Get a random Quote from an Array
 
 	.NOTES
 		Based on an idea of Jeff Hicks
@@ -79,12 +87,8 @@ function global:Get-Quote {
 	BEGIN {
 		# The quote should include the author separated by " - ".
 		$texts = @(
-		"Remember, if you ever need a helping hand, it is at the end of your arm. - Audrey Hepburn",
-		"When you talk, you are only repeating what you already know. But if you listen, you may learn something new. - Dalai Lama",
+		"It was a mistake to think that GUIs ever would, could, or even should, eliminate CLIs. - Jeffrey Snover",
 		"Leader who don't Listen will eventually be surrounded by people who have nothing to say. - @AndyStanley",
-		"I can accept failure, but I can't accept not trying. - Michael Jordan",
-		"If you don't drive your business, you will be driven out of business. - B. C. Forbes",
-		"Good design is good business. - Thomas J. Watson",
 		"Good is the enemy of great. - Sir Jonathan Ive",
 		"There are 9 rejected ideas for every idea that works. - Sir Jonathan Ive"
 		"People's interest is in the product, not in its authorship. - Sir Jonathan Ive",
@@ -94,36 +98,17 @@ function global:Get-Quote {
 		"The best ideas start as conversations. - Sir Jonathan Ive",
 		"If something is not good enough, stop doing it. - Sir Jonathan Ive",
 		"There's no learning without trying lots of ideas and failing lots of times. - Sir Jonathan Ive",
-		"The urge for good design is the same as the urge to go on living. - Harry Bertoia",
 		"Any product that needs a manual to work is broken. - Elon Musk",
-		"Fashion is architecture: it is a matter of proportions. - Coco Chanel",
-		"Prophesy is a good line of business, but it is full of risks. - Mark Twain",
-		"If a business does well, the stock eventually follows. - Warren Buffett",
-		"As you grow in this business, you learn how to do more with less. - Morgan Freeman",
-		"One thing is certain in business. You and everyone around you will make mistakes. - Richard Branson",
-		"If you don't understand the details of your business you are going to fail. - Jeff Bezos",
-		"A man should never neglect his family for business. - Walt Disney",
-		"The business of business is relationships; the business of life is human connection. - Robin S. Sharma",
 		"Business has only two functions: marketing and innovation. - Milan Kundera",
-		"That's what show business is, sincere insincerity. - Benny Hill",
-		"A friendship founded on business is better than a business founded on friendship. - John D. Rockefeller",
 		"Just because something doesn't do what you planned it to do doesn't mean it's useless. - Thomas A. Edison",
 		"Great companies are built on great products. - Elon Musk",
-		"I rate enthusiasm even above professional skill. - Edward Appleton",
 		"Test fast, fail fast, adjust fast. - Tom Peters",
-		"I don't think it's a good idea to plan to sell a company. - Elon Musk",
-		"All the things I love is what my business is all about. - Martha Stewart",
-		"I believe fundamental honesty is the keystone of business. - Harvey S. Firestone",
-		"Business opportunities are like buses, there's always another one coming. - Richard Branson",
-		"When times are bad is when the real entrepreneurs emerge. - Robert Kiyosaki",
-		"We're all working together; that's the secret. - Sam Walton",
 		"Winning isn't everything, it's the only thing. - Vince Lombardi (Former NFL Coach)",
 		"The only place success comes before work is in the dictionary. - Vince Lombardi (Former NFL Coach)",
 		"The measure of who we are is what we do with what we have. - Vince Lombardi (Former NFL Coach)",
 		"The greatest accomplishment is not in never falling, but in rising again after you fall. - Vince Lombardi (Former NFL Coach)"
 		"Perfection is not attainable. But if we chase perfection, we can catch excellence. - Vince Lombardi (Former NFL Coach)",
 		"Stay focused. Your start does not determine how you're going to finish. - Herm Edwards (Former NFL Coach)",
-		"I'm not really in the excuse business. - Bill Parcells (Former NFL Coach)"
 		"Nobody who ever gave his best regretted it. - George S. Halas (Former NFL Coach)",
 		"Don't let the noise of others' opinions drown out your own inner voice. - Steve Jobs",
 		"One way to remember who you are is to remember who your heroes are. - Walter Isaacson (Steve Jobs)",
@@ -137,54 +122,11 @@ function global:Get-Quote {
 		"Software is a great combination between artistry and engineering. - Bill Gates",
 		"Success is a lousy teacher. It seduces smart people into thinking they can't lose. - Bill Gates",
 		"If you can't make it good, at least make it look good. - Bill Gates",
-		"Coming together is a beginning; keeping together is progress; working together is success. - Henry Ford",
-		"My best friend is the one who brings out the best in me. - Henry Ford",
-		"Thinking is the hardest work there is, which is probably the reason why so few engage in it. - Henry Ford",
-		"A business that makes nothing but money is a poor business. - Henry Ford",
-		"Failure is simply an opportunity to begin again, this time more intelligently. - Henry Ford",
-		"The only real mistake is the one from which we learn nothing. - Henry Ford",
-		"Unthinking respect for authority is the greatest enemy of truth. - Albert Einstein",
-		"If you can dream it, you can do it. - Walt Disney",
-		"The difference between winning and losing is most often not quitting. - Walt Disney",
-		"If you're not making mistakes, then you're not making desisions. - Catherine Cook (MeetMe Co-Founder)",
+		"If you're not making mistakes, then you're not making decisions. - Catherine Cook (MeetMe Co-Founder)",
 		"I have not failed. I've just found 10.000 ways that won't work. - Thomas Edison",
 		"If you don't build your dream, someone will hire you to help build theirs. - Tony Gaskin (Motivational Speaker)",
-		"Screw it. Let's do it. - Richard Branson",
-		"Don't worry about failure; you only have to be right once. - Drew Houston",
-		"Ideas are easy. Implementation is hard - Guy Kawasaki",
-		"Courage is grace under pressure. - Ernest Hemingway",
-		"Sometimes you can't see yourself clearly until you see yourself through the eyes of others. - Ellen DeGeneres",
-		"It does not matter how slowly you go, so long as you do not stop. - Confucius",
-		"Someone is sitting in the shade today because someone planted a tree a long time ago. - Warren Buffett",
-		"You only live once, but if you do it right, once is enough. - Mae West",
-		"Failure is another steppingstone to greatness. - Oprah Winfrey",
-		"In order to be irreplaceable one must always be different. - Coco Chanel",
-		"You miss 100% of the shots you don't take. - Wayne Gretzky",
-		"I believe every human has a finite number of heartbeats. I don't intend to waste any of mine. - Neil Armstrong",
-		"If you don't stand for something you'll fall for anything. - Malcolm X",
-		"The two most important days in your life are the day you are born and the day you find out why. - Mark Twain",
-		"It often requires more courage to dare to do right than to fear to do wrong. - Abraham Lincoln",
-		"If at first you don't succeed, try, try, try again. - William Edward Hickson",
-		"If you are going through hell, keep going. - Sir Winston Churchill",
-		"A dream doesn't become reality through magic; it takes sweat, determination and hard work. - Colin Powell",
-		"Do one thing every day that scares you. - Eleanor Roosevelt",
-		"The purpose of our lives is to be happy. - Dalai Lama",
-		"Don't be afraid to give up the good to go for the great. - John D. Rockefeller",
-		"Don't worry about failure; you only have to be right once. - Drew Houston",
-		"Nothing great was ever achieved without enthusiasm. - Ralph Waldo Emerson",
-		"All our dreams can come true if we have the courage to pursue them. - Walt Disney",
 		"Don't count the days, make the days count. - Muhammad Ali",
 		"Everything you can imagine is real. - Pablo Picasso",
-		"Be yourself. Everyone else is already taken. - Oscar Wilde",
-		"Education is the most powerful weapon which you can use to change the world. - Nelson Mandela",
-		"Your time is limited, so don't waste it living someone else's life. - Steve Jobs",
-		"Success isn't about how much money you make. It's about the difference you make in people's lives. - Michelle Obama",
-		"The best way of learning about anything is by doing. - Richard Branson",
-		"Don't let the fear of striking out hold you back. - Babe Ruth",
-		"Either write something worth reading or do something worth writing. - Benjamin Franklin",
-		"If there is no struggle, there is no progress. - Frederick Douglass",
-		"If something is important enough, even if the odds are against you, you should still do it. - Elon Musk",
-		"Whether you think you can or you think you can't, you're right. - Henry Ford",
 		"In three words I can sum up everything I've learned about life: it goes on. - Robert Frost"
 		)
 
@@ -244,11 +186,81 @@ function global:Get-Quote {
 	}
 }
 
+<# MORE Stuff:
+		"I'm not really in the excuse business. - Bill Parcells (Former NFL Coach)"
+		"Remember, if you ever need a helping hand, it is at the end of your arm. - Audrey Hepburn",
+		"When you talk, you are only repeating what you already know. But if you listen, you may learn something new. - Dalai Lama",
+		"I can accept failure, but I can't accept not trying. - Michael Jordan",
+		"If you don't drive your business, you will be driven out of business. - B. C. Forbes",
+		"Good design is good business. - Thomas J. Watson",
+		"The urge for good design is the same as the urge to go on living. - Harry Bertoia",
+		"Fashion is architecture: it is a matter of proportions. - Coco Chanel",
+		"Prophesy is a good line of business, but it is full of risks. - Mark Twain",
+		"If a business does well, the stock eventually follows. - Warren Buffett",
+		"As you grow in this business, you learn how to do more with less. - Morgan Freeman",
+		"One thing is certain in business. You and everyone around you will make mistakes. - Richard Branson",
+		"If you don't understand the details of your business you are going to fail. - Jeff Bezos",
+		"A man should never neglect his family for business. - Walt Disney",
+		"The business of business is relationships; the business of life is human connection. - Robin S. Sharma",
+		"That's what show business is, sincere insincerity. - Benny Hill",
+		"A friendship founded on business is better than a business founded on friendship. - John D. Rockefeller",
+		"I rate enthusiasm even above professional skill. - Edward Appleton",
+		"I don't think it's a good idea to plan to sell a company. - Elon Musk",
+		"All the things I love is what my business is all about. - Martha Stewart",
+		"I believe fundamental honesty is the keystone of business. - Harvey S. Firestone",
+		"Business opportunities are like buses, there's always another one coming. - Richard Branson",
+		"When times are bad is when the real entrepreneurs emerge. - Robert Kiyosaki",
+		"We're all working together; that's the secret. - Sam Walton",
+		"Coming together is a beginning; keeping together is progress; working together is success. - Henry Ford",
+		"My best friend is the one who brings out the best in me. - Henry Ford",
+		"Thinking is the hardest work there is, which is probably the reason why so few engage in it. - Henry Ford",
+		"A business that makes nothing but money is a poor business. - Henry Ford",
+		"Failure is simply an opportunity to begin again, this time more intelligently. - Henry Ford",
+		"The only real mistake is the one from which we learn nothing. - Henry Ford",
+		"Unthinking respect for authority is the greatest enemy of truth. - Albert Einstein",
+		"If you can dream it, you can do it. - Walt Disney",
+		"The difference between winning and losing is most often not quitting. - Walt Disney",
+		"Screw it. Let's do it. - Richard Branson",
+		"Don't worry about failure; you only have to be right once. - Drew Houston",
+		"Ideas are easy. Implementation is hard - Guy Kawasaki",
+		"Courage is grace under pressure. - Ernest Hemingway",
+		"Sometimes you can't see yourself clearly until you see yourself through the eyes of others. - Ellen DeGeneres",
+		"It does not matter how slowly you go, so long as you do not stop. - Confucius",
+		"Someone is sitting in the shade today because someone planted a tree a long time ago. - Warren Buffett",
+		"You only live once, but if you do it right, once is enough. - Mae West",
+		"Failure is another steppingstone to greatness. - Oprah Winfrey",
+		"In order to be irreplaceable one must always be different. - Coco Chanel",
+		"You miss 100% of the shots you don't take. - Wayne Gretzky",
+		"I believe every human has a finite number of heartbeats. I don't intend to waste any of mine. - Neil Armstrong",
+		"If you don't stand for something you'll fall for anything. - Malcolm X",
+		"The two most important days in your life are the day you are born and the day you find out why. - Mark Twain",
+		"It often requires more courage to dare to do right than to fear to do wrong. - Abraham Lincoln",
+		"If at first you don't succeed, try, try, try again. - William Edward Hickson",
+		"If you are going through hell, keep going. - Sir Winston Churchill",
+		"A dream doesn't become reality through magic; it takes sweat, determination and hard work. - Colin Powell",
+		"Do one thing every day that scares you. - Eleanor Roosevelt",
+		"The purpose of our lives is to be happy. - Dalai Lama",
+		"Don't be afraid to give up the good to go for the great. - John D. Rockefeller",
+		"Don't worry about failure; you only have to be right once. - Drew Houston",
+		"Nothing great was ever achieved without enthusiasm. - Ralph Waldo Emerson",
+		"All our dreams can come true if we have the courage to pursue them. - Walt Disney",
+		"Be yourself. Everyone else is already taken. - Oscar Wilde",
+		"Education is the most powerful weapon which you can use to change the world. - Nelson Mandela",
+		"Your time is limited, so don't waste it living someone else's life. - Steve Jobs",
+		"Success isn't about how much money you make. It's about the difference you make in people's lives. - Michelle Obama",
+		"The best way of learning about anything is by doing. - Richard Branson",
+		"Don't let the fear of striking out hold you back. - Babe Ruth",
+		"Either write something worth reading or do something worth writing. - Benjamin Franklin",
+		"If there is no struggle, there is no progress. - Frederick Douglass",
+		"If something is important enough, even if the odds are against you, you should still do it. - Elon Musk",
+		"Whether you think you can or you think you can't, you're right. - Henry Ford",
+#>
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8gvloxsoqLGec74QzyDJ+q7X
-# F7ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFHogCc1GhMLZ5GsMwTClU+dK
+# 5JagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -391,25 +403,25 @@ function global:Get-Quote {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSoBJPmbaQiGR18+hZHsZvShDGFDDANBgkqhkiG9w0B
-# AQEFAASCAQBUoqCF8Au4GoQAM+XLgP+e/L+2sOuxYXNNAD1p4z3SSJTEkWn3HCdU
-# rm0xg/uCDNJkoxudDuoPjGYoYZMwpwTqM7bPbZrJ53nabuTAD2Ss4U6Hxxs82quJ
-# MWLXf69bZ+UTDNkZKOYp4A5wXHEEK5713K5pJ8ZMKv66m5V7Zi9a8SjngTzI2PKV
-# jYGyMTJ6TZBJB3Gxt/rI4AZX/jEaN69pmpRC/4MKJslL2AHHgoM4KnbBGNGcvzfp
-# P6lGmjBdRmALKY8aVTzabLfnv2C2Hl+83Yk9uhpqr8ssb3pZr4lXUsOvpzkMhjxp
-# sD/5lQsOJST4wDrxUKmB9dSIGVs9Tib/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSQSgDwuWtTMsHPQx0Df0+qvLR+uDANBgkqhkiG9w0B
+# AQEFAASCAQBY0RAIYSiQpAQvQ52EXp9StlfVMlBejmgGPI+CUM7mfLpOeY9L/4I/
+# PoGGGDowYZev8f3S09rJ3a3Sg0bs5GYPKFT1+SmBp4UnljahJkGNDuGao8u8CqvJ
+# W8S8mc6doTozgsJSoo63PjeN8rW+sXj+RxSDNG/5KrsfHZ7qvUNdTPbQ4nS5sUGn
+# ok8exzEreeJ1tMArlHGHfEtrDqjbNzGBoQ0/2SWTVhZlsvxU3IGIif0U4YoQf/0n
+# JpYPapSbGYq2QdUFHq4x0Z+CVBNXM2PGBI1l/VZ/yMBO7zEMZzreinRwLwOEyKnz
+# RKikzWJZzIBDU2o8OCKZncJUUYEnbfiZoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1OVowIwYJKoZIhvcN
-# AQkEMRYEFJK7c44/FDpvFdornLekM5LTnXNNMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1M1owIwYJKoZIhvcN
+# AQkEMRYEFERT1ZXknDZKucbY8oZvXONEClRQMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAl2nji47G+5tEt14Nf1ruh+dTKVeXisWwO1LC71VvRtu15
-# 4fcdKfnSNXl0o/2qJ+ypp/MBW6IjHiDUKPJ0Ko2uXuf9310D6CttV2Rkurm7X5XH
-# TwHOLoW3ajAi+E+Iefe6jkkhb26LCzYrKOper0kdmTa9CSG3nWbaLF7WGTBQIEXN
-# jscQfT2z4azz2MAjJXKYRsApsRqfWuPR/7gMEXLwm31tLmUCnjmxQudkB3QuD4C4
-# T/j+r++EPvpfQTdkOvvwidVkwjYdwG6Kpil26gFIHj30wt+tF3rNykRfORctIAV2
-# R1Usi8kZXib1uYHZHNwfykXHGq5USSQSIbvuMwYQ
+# hkiG9w0BAQEFAASCAQBkrEjpRZycRJ+7oDbLodPeoFaHNDoHjmzI9ak9VVoFXWYO
+# Qt4+mLfI4FW+uU8H6j5nQo3pYGHcBVZ+0gUQrd6zjOdF1+iQbpHPTmzTaHgWpl+U
+# +2UAUDIDq/EaRR5nOLC5faeqR6quN4FvVuXb63qxXQwT4dQE+1mRZ954PDxiKuNS
+# TOfYeviKRQpDot4kG1ssBbkOZqXBcCiTwMaFKYWuAVmzOfYvMKhOhwS3VkUddbAs
+# NWJ25Ew8aU7hYs/KUHhO533cs7D3afu61mQtDt3DxXnmJiOVBuZ60SwKM6IZCE/m
+# SJkTC0l2XNDjkN09op6EYfuHM/F9+/skQOCDoJ9G
 # SIG # End signature block

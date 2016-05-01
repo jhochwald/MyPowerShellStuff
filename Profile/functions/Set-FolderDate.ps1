@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -49,20 +49,27 @@
 function global:Set-FolderDate {
 <#
 	.SYNOPSIS
-		Change a folder last-write time based on the latest last-write of the included files
+		Change one folder, or more, last-write time based on the latest last-write of the included files
 
 	.DESCRIPTION
-		Change a folder last-write time based on the latest last-write of the included files
+		Change one folder, or more, folder last-write time based on the latest last-write of the included files
 		Makes windows a lot more Uni* like and have some Convenience.
 
 	.PARAMETER Path
-		The Path you would like to update, default is C:\scripts\PowerShell\log
+		One folder, or more, you would like to update, default is C:\scripts\PowerShell\log
 
 	.EXAMPLE
 		Set-FolderDate -Path "D:\temp"
 
+		Description
+		-----------
+		Change "D:\temp" last-write time based on the latest last-write of the included files
+
 	.NOTES
-		N.N.
+		We intercept all Errors! This is the part in the "BEGIN" block.
+		You might want to change that to a warning...
+
+		We use this function in bulk operations and from scheduled scripts, so we do not want that!!!
 
 	.LINK
 		NET-Experts http://www.net-experts.net
@@ -79,16 +86,18 @@ function global:Set-FolderDate {
 				   Position = 0,
 				   HelpMessage = 'The Path you would like to update, default is C:\scripts\PowerShell\log')]
 		[ValidateNotNullOrEmpty()]
-		[System.String]$Path = "C:\scripts\PowerShell\log"
+		[System.String[]]$Path = "C:\scripts\PowerShell\log"
 	)
 
 	BEGIN {
+		# Suppress all error messages!
 		Trap [Exception] {
-			Write-Debug $("TRAPPED: " + $_.Exception.Message);
+			Write-Debug $("TRAPPED: " + $_.Exception.Message)
 
 			# Be Verbose
 			Write-Verbose "Could not change date on folder (Folder open in explorer?)"
 
+			# Ignore what happened and just continue with what you are doing...
 			Continue
 		}
 	}
@@ -104,7 +113,7 @@ function global:Set-FolderDate {
 			# Be Verbose
 			Write-Verbose "Changing date on folder '$($Path)' to '$($LatestFile.LastWriteTime)' taken from '$($LatestFile)'"
 
-			$Folder.LastWriteTime = $LatestFile.LastWriteTime
+			$Folder.LastWriteTime = ($LatestFile.LastWriteTime)
 		}
 	}
 
@@ -116,8 +125,8 @@ function global:Set-FolderDate {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUdEm4RNl4Cbe/GR2i9Ovsg3nW
-# 0QmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlp0ZGuznYXa0BXibpR7CFN3S
+# msygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -260,25 +269,25 @@ function global:Set-FolderDate {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQIgUvfc2vqBDLxexUY5ZZMj2ushDANBgkqhkiG9w0B
-# AQEFAASCAQB4hYh3l9UlFG+uYaUyt7lyE8ecd7V1AbqfRwXyUoRr/rXeSrYJU6Nm
-# euSMlMc9jP32BNfJKRlEKPAkxgAOedmk/4qzaFK6LHwRp4lA/Z3EmIpuOcS2Letd
-# VycJETGTTg1WyBmwEIjnj8daZrtuLce+91M2CIhp77X2nufL0e/eSYICGtBexYPc
-# e4lYnXPBeBe4sfX6kKHoCCri9NOPIBiV6Z1cop5wk4nSMLeNjM0Cgg2547AKcSMF
-# U6PZML5Hz0VpPhkbxOvgUROJlohB8mOFvtD5L2sbZWOGCScnRICP+e36FAxGfcMS
-# lWOXN2Pi+RWuJh3+9FGAirHsB9zZ+Z9LoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRea0VsBnuSPBjqRbhOuulHvvrseTANBgkqhkiG9w0B
+# AQEFAASCAQCJpOVIJ79/lJ+F6sEWSY5F1t2UhVaC7exHhI+Ig88/Bmtoquf8gKjD
+# d4bZ8ObLAcij/2R+Rilzj6O2KTP7t9ze/5+cdYZIfIuIR1MHkgFhjmZZtHV8XqRv
+# ZBbS5d5ZCTJHnYUar0D/OqXHtvjnZNvk2eDYttZTQC1XG2JbDfUzIRIFTUCZv96+
+# ggQcsAsWY3INvxaYM6lDC77mH2hfyEvm9gpwXAR6jCtv8l8+YkFkWhxjp1z3FgV7
+# GXWKaLrtC4CHrtGv2taR8RWp9cv+d0qy/40fTn53wltH3cteHfzMeuwkYmN65TQz
+# lapJdgRyBu9BR4UwN6o+hCp/mLLcIpF6oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxN1owIwYJKoZIhvcN
-# AQkEMRYEFPcNXZOH1vRn2zKJLI4aMHAap7o6MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxMlowIwYJKoZIhvcN
+# AQkEMRYEFEepzJ0xOn7Ox7SoI8wFvMi7eQJzMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBd2M9WHxZWGxuvgcrjpRgNWYbalZ+5W6G+LLQx52sm/x98
-# u9Eegi1wKG5oRIHdabn0YoHmVSMKSOiVkZF7bDffKBXCDZXQFBJvpLigX61elFRo
-# AnuDyGaNChcZZmR7BDvvkqKzSBzWn0RNzWXc3Lj+X/tjwyxHVA7m5Rp+CnltP5eS
-# T+Y36lxEZYdIEMTzlOYbGIUJ/1pvF1zM+dElGkh/5PhZFKU8oeNE//5nHNnxPXQR
-# hD3/C/i5OGxddDaf5MVSGCnxqh21d3CS6EiYsruvW1ah0YH9jwenl3k3Upv9FESU
-# MADCvYPIgA8DXf0EjBNq7HAhTV0ZxcjvWjs/ncEC
+# hkiG9w0BAQEFAASCAQBzlVAqu1jbWgkI32zP1npFh/d6Dcq+TM4ZD3GR4Ocx9g/m
+# vPYHMaQtklH8zHYz2bu16CcKkSFQ0rJV6o2rNri90LLqIkHQ+Slr5j8tdcsjzOG0
+# bR4k7ULTHxdgk28rWaWLuF1/t6SRB97R6c5fLLWqOvc08yoB0HereAB8+Lwx4Ydz
+# UCPB3f78oepz0ox4XHXI3pOEAcUi2xNwOCcygHGTaTdhFMckMBVyjbDV23AKWGAG
+# vElZUrzHpq+E4rkzYou+NbeLcUiPDuuFvJ0NKml2s/j0EsO4K1u0Ypht2PC8FdUX
+# riaGO/nElt+GSOC6ZKnGStYRopMrhZBXKcBrz4sN
 # SIG # End signature block

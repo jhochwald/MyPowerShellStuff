@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -66,18 +66,22 @@ function Global:Invoke-NTFSFilesCompression {
 	.PARAMETER Extension
 		The extension of files that will be processed. The default file extension is log.
 
-	.PARAMETER $OlderThan
+	.PARAMETER OlderThan
 		The count of units that are base to comparison file age.
 
 	.EXAMPLE
 		Invoke-NTFSFilesCompression -Path "C:\test" -OlderThan "20"
 
-		Compress files with extension log in folder c:\test that are older than 20 minutes
+		Description
+		-----------
+		Compress files with extension log in folder 'c:\test' that are older than 20 minutes
 
 	.EXAMPLE
 		Invoke-NTFSFilesCompression -Path "C:\test" -OlderThan "1" -TimeUnit "hours" -Extension "txt"
 
-		Compress files with extension txt in folder c:\test that are older than 1 hour
+		Description
+		-----------
+		Compress files with extension txt in folder 'c:\test' that are older than 1 hour
 
 	.NOTES
 		Based on an idea of  Wojciech Sciesinski
@@ -136,7 +140,7 @@ function Global:Invoke-NTFSFilesCompression {
 				$filepathforquery = $($i.FullName).Replace("\", "\\")
 				$file = (Get-WmiObject -Query "SELECT * FROM CIM_DataFile Where-Object Name='$filepathforquery'")
 
-				if ($file.compressed -eq $false -and $i.LastWriteTime -lt $compressolder) {
+				if ((-not ($file.compressed)) -and $i.LastWriteTime -lt $compressolder) {
 					Write-Verbose "Start compressing file $i.name"
 
 					#Invoke compression
@@ -150,8 +154,8 @@ function Global:Invoke-NTFSFilesCompression {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU40VKpNgrBb0uWxgWZWB4zFhA
-# rtGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnV6xHQ/dGNhWOAzlcInADKMn
+# dyugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -294,25 +298,25 @@ function Global:Invoke-NTFSFilesCompression {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT3LADVVPe8nqkx3M3vblRF0ro0RjANBgkqhkiG9w0B
-# AQEFAASCAQANf1jbB3PnKJchu593X91RxSWKkGZhLCz6vfYwNRImZzkGlXIkfr37
-# 9Bc709GFyOLPhgW/i4I+SzSh4nFdTBiHY/VhrTYDB7fYOMibGBhOKRbHv6PtCHCK
-# 6wc0QSg0GG4YFNDxw1ir+bA+wTycnU0G1PuQun+4DkozDqh6rxI7aARtSSQ8EMbM
-# 7Ixzw+noHC0MmK9WmjcwRaIydm3J796C4txUPmXF3bVUkfXx+Hhk99/oSe8aS+PG
-# e7IHtkxOxT4BlWNwb1JEO/J3UlFAXiZ7RXCX2XswNHuyl0dcEVX5FKFAdUwtH13b
-# wh5fjTj9SOF5jvzUO4TC0rKfONLgn70DoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRWOPLJtW06lI2gkCdN4vojd/Z4djANBgkqhkiG9w0B
+# AQEFAASCAQAP6Hd5vuaEQhHU/R5ksx1QYtgUT1XAUe4scaqtrBs9SIsq2OnByCgg
+# 7lu/a8sjZW8aaoP0bKrmbOp14tvM2RCGRkAQaUx20BNlQGRPxrmlRjnbGDFIBJdJ
+# SND/k/u2cA/6X0SJGprkQxyi543Je79gzyI/JBlVfTDsPwgpCFGI9LzdW1w4kAyz
+# ZnrPsKnvjrEJdQi4DW/lYSdSiHV5Wwqszrkviln9qGA2qD6KIrSmnnGWJpF1VGGT
+# XCS6rDUyI/oLJl2Gpqnt1mIO/HirArdFx2AOerOCVVtg/6aF6cv/p9iHN6x16S5N
+# T9Tb4R6E2gfy+R16OXHLJxAEMNpBcciJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwN1owIwYJKoZIhvcN
-# AQkEMRYEFCvJUHrb4Yfm1Lbt7OCuayUA2I89MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwMVowIwYJKoZIhvcN
+# AQkEMRYEFD3PGtjBC1mLNWAQ7i+sxMQZTXCjMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBkLQwRfzqpD6bw/C6yzluw405CBjuJKEVH09IoKAyTv4JT
-# qMzZWjZJcDZqEwDEclvywIvCD1wWYFVaqqkx6wJeKO05ua3jWpMs+fyr1bYM3CTw
-# kmJsn7MPUXkkAKuwVHwq+Ti7yH3qQIG3WyqbzDVya9PR0Oy3R/iSRKXZsFlILFKw
-# wGkt9tSREP4BrOKiHwONev7OO04qWJBIyItAvFvwA+3ABm2k4czOFuong7ihwjT6
-# qpJ4FD8wQELdXvy7zwjK+uksX24MWLMO54Ie2L6mCpE21HKoD+bhSL9kf8GG/GkK
-# mUAITQaiCHoncDc/2d5qwd4iW+7BjUWakfTY/rhL
+# hkiG9w0BAQEFAASCAQCPNSS+ndPCcvCWD3kHtgnDuusDMkNzSq3rk0nDfiXbkFWJ
+# RwUSTN2g2z47kFoXGB8h1XHseAu6c7D4vkrjYXkCdiBmczTa3yw68ujvmSNJJhhl
+# h7g2sInzzy6qr4jptVmE/PCa1JQPd08rkW6htbxS1MBDd8/wxwbBLMn6zlQV0YDp
+# PTFuk57z293HHdTMw2AxLoBcsb4sSViYUwdXfBtJc1AzwMTVW9+75eR4i5+y/r3R
+# H418iQBLiMsd60aBHdr7hbR4KVfO9U5mkkQ5pnzfpwucDLtv+266SZXl+SNPYEBs
+# Cvn9R8/F2CpoaQKfIm/oSiNHE3cHRCwVzfVz8bE+
 # SIG # End signature block

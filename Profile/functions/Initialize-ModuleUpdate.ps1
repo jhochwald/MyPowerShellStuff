@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -53,15 +53,24 @@ function Global:Initialize-ModuleUpdate {
 
 	.DESCRIPTION
 		Refresh the PowerShell Module Information
+		Wrapper for the following command: Get-Module -ListAvailable -Refresh
 
-	.PARAMETER Verbose
+	.PARAMETER Verbosity
 		Verbose output, default is not
 
 	.EXAMPLE
 		PS C:\> Initialize-ModuleUpdate -Verbose
 
+		Description
+		-----------
+		Refresh the PowerShell Module Information
+
 	.EXAMPLE
 		PS C:\> Initialize-ModuleUpdate -Verbose
+
+		Description
+		-----------
+		Refresh the PowerShell Module Information
 
 	.NOTES
 		PowerShell will auto-load modules. However, with some modules, this technique may fail.
@@ -76,8 +85,8 @@ function Global:Initialize-ModuleUpdate {
 	param
 	(
 		[Parameter(Position = 0,
-				   HelpMessage = 'Verbose output, default is not')]
-		[switch]$Verbose = "$False"
+				   HelpMessage = 'Verbosity? Default is not')]
+		[switch]$Verbosity = "$False"
 	)
 
 	BEGIN {
@@ -85,7 +94,7 @@ function Global:Initialize-ModuleUpdate {
 	}
 
 	PROCESS {
-		if ($Verbose -eq $true) {
+		if ($Verbosity) {
 			Get-Module -ListAvailable -Refresh
 		} else {
 			(Get-Module -ListAvailable -Refresh) > $null 2>&1 3>&1
@@ -96,8 +105,8 @@ function Global:Initialize-ModuleUpdate {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPGh9lIXEct1Y92LLWwqyWVN2
-# avugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU+XFo4wSLClwnbcJ2A8XrM/nK
+# 3b6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -240,25 +249,25 @@ function Global:Initialize-ModuleUpdate {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR3d3Un8bDgUms9cY8dXNpntvWxezANBgkqhkiG9w0B
-# AQEFAASCAQBJicTL4LKnNCUhylaGlE0EV5kb9QLpTg97zx7VDzzbngrh09FG9XE3
-# H2dP81+BoMP5jaPa2bJX4pAbRobAX5vRr9NAyAlfdqRiJdnPitXv0Ew3AVX0AY7t
-# HJQ0YmRv4ZwhtkTiJ4tQTVA+10/NTWlYBFF0MfQV7hpMMccVEIIYZNAu81Yl0vR9
-# SyHE23SnjkmDP7Hl6dlihQHeYokVAlZv1uqcezjUuVK3oskeQ9/xa5q7BVHL3ae0
-# kTcDU6BpnMWKnbTqlaluBuWh1n0BgQ8gx7BwxjfWwCUuIBxGt9SMQVoS01hpd3mW
-# Nqc3d6flcSOrCLruUvbC6M0i6yIhi+opoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQUUQ1zLcpynLD8rg/lxOccPFkCyzANBgkqhkiG9w0B
+# AQEFAASCAQBGhBt+s7pITUWup2VQQ30zjMteegJ6nZ6wILCXf9phR5mZjUxc8Lb4
+# NBfHpRvxL86TQibTIishPRFBhUW08V+jQB9o+rzyf0u2O6n8TTYt9XxJhy6japIt
+# cEyw27aRMy4WO6AY+GLV989AMlBqMT8ukOnkIyq0ItoplF4Vc/yyD7CzVn2R+V3g
+# K4sXEmMb606KOXBH3dAcdgAdd2sv18FlASfAYQPso320nTGVc4t/IYq+atctWgik
+# DFUJFC7eQRkxN7B9JWl9NEfp9shQUHoP1KYm5wyVsi9/ZzMy5yIPIRa3NEHSOlz7
+# ErO3v7YW1hAuMSPxCpufk0SDBtlmaQh7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwNlowIwYJKoZIhvcN
-# AQkEMRYEFCHvLoZXy/ucDY/Gn3Sq2fle5DH7MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwMFowIwYJKoZIhvcN
+# AQkEMRYEFBwlkTjpPCccr63lJXqfoQi1J1T5MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAvciCzy1QwFCSwAvr4v19ce7Gyyr6rd5il7BN/JwvbNWLw
-# PvHDKIuOT680WkC3ZSD+Ldzltb7w0o4W893tGYJxebGquuSt44UOA+gz5c+JEPjS
-# mYjq0efji/0m3AVoLBqi1Lwa+i283ups0xxu/+75XCHo5fzJt4qm6SZ6w0dWMTax
-# uQooIbKlgIX3sZHP1eoS2XPDjKbEQYx/hfGNznvXFKQOPgW/6Hr4mdeH2spy5+h4
-# D1XqC6iiXCHpFlAFmxODtCdzFo2NIh0gryyiYS+Pc4paD0zqLDpEctUPWTuGzzLH
-# t/y7FFcKssNp7xRbu+7ftOfaHHXWP64Kkz+vTQlK
+# hkiG9w0BAQEFAASCAQBUBPLf2aoIoTIWxZvo1A7bOP7OVCRnVK6GjzQ8S+zhkwQp
+# vum1hkSRG/kMRJgzeMq3s+d596BAFkratJDrJ+qqgM8NsSNU48H0SZ7cS3zuANYk
+# 7QOLnU5gYId1B3+eOMYjuVdwEvrYOeoheuTTDRSD+wxEQFlFsVGjZCGnEabk6xVN
+# lk896XB1lFlBs2Gw8dfxBO+snmpRHFAwh/bOBZoGVP22tJ2+w5Ka+pMbC5f07tdF
+# iTcKAzbDCcGV+B2WAR/L5Kbqg31ndxwV7fd92whq9XRmLBw4fwqcWg320A14g29e
+# 3QEeZCWfijJs/7Ml3N3I68b6r0mT3yElzHv/IqYQ
 # SIG # End signature block

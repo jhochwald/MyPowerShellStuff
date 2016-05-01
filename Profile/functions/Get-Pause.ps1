@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -69,12 +69,16 @@ function global:Get-Pause {
 	.EXAMPLE
 		PS C:\> pause "Please press any key"
 
+		Description
+		-----------
 		Display a console message and wait for user to press any key.
 		It shows the Text "Please press any key"
 
 	.EXAMPLE
 		PS C:\> pause -PauseMessage "Please press any key"
 
+		Description
+		-----------
 		Display a console message and wait for user to press any key.
 		It shows the Text "Please press any key"
 
@@ -128,8 +132,8 @@ function global:Get-Pause {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU/Pg8W7CWSyL70XWwZnyvzOOZ
-# z9SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUBiUmlr8Dzuf0nHq6ng1IFOvO
+# 88WgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -272,25 +276,25 @@ function global:Get-Pause {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRBGS1zaDuku0cvTbmAffOBU2GWBjANBgkqhkiG9w0B
-# AQEFAASCAQAK0PaBWy2sBpcLrMEHydo6bbUYlw37kxp22dhDGhoaT/NCojkOqpxS
-# I560bUqNlv0lhJFCarRsfS6uSHaEwT7+hneHpUGklTKmChRUVasDhJBIJzaL+80G
-# YiugMLI5IgH048TlfUf4XM86fmkiiNEX1CzWzzDAmSlt+XiwxNeRZ2ce0I03Ko9l
-# Dw7fQj4iLAhrhMAOc7pZnIgRkZ0TJDOYH2GcE9UND7/uX3FuOxP558IN6RBbPMGK
-# dLIJxsJUM2xuiq/CXpiaZ5tz1BIGOr9KI7SuY+KbDIAfoRDAJARxen18eDzh9K+H
-# Apukgclc2sd1glXBGj3AZBES5+AGINwgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTEToyIwuRErRb8Urj+VCRjxxnaBzANBgkqhkiG9w0B
+# AQEFAASCAQAyZxYY8CJdUKZscre1CPjLLD2x2U4RVktlZLVGYr2vY204dOWP6M+f
+# OlPVqMPfWGOQ3gVHhD7zCZYi7zhjUc6eb6m/O/fOGWZAqawp2dKo7MhIHnccJwv0
+# Si648+9jamG/vTqNZxUTWNBwObbMMd0l9sB8P5eDS/AMFvPadaNv6X1q598oTs5g
+# Yyel9qTowmujoK44DZapHD2KCti/c6yLhmXspBxl6JMKAsKiaAyRiFXkSfE34YR9
+# nh3QjnCwhPFyXaUGwUMdpP3573q3SOPnJYDpR3D7IbxsL5mmOrFLfST4dloS1VhZ
+# IrRV+gL792IGzdCQ2GJWw1soVz0JVgnmoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1OFowIwYJKoZIhvcN
-# AQkEMRYEFONEfh5bPvalX2n6AyZknpadJigfMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1MlowIwYJKoZIhvcN
+# AQkEMRYEFLNOgnLHSJqnrGJfOnP4b+YUMYgZMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBWMR7E8rxVvbBzUAwHE67KnS9YN5q0Rm25x/I3E316r9Sz
-# cfhYw+m1IuazfyOqeLiAojza8sMFcSxC4mNAKIKnKeZdm63+ohGRl+zutqZ9Vvgg
-# zJ8wP+7qL/zdhL96I3yz9n0RR7UKU2Ua3MCOh3DCeL6hmXMig4BL9jwTDTFIbsKC
-# uW5/XL9jhSA6SGVZCRQhiO0veoapDDMQZJnHHneLqXeY+3iV65jtIIGHHAFmB9JZ
-# f6SturhzxueSCOc/BY3qGatkJm3EpMou6FWZCNr1lZLXo/kj75WHo7JGUbk11LYi
-# ccjH/ibTGs+MTiSazDQBe1UQx1HYPOhK/UypA8UX
+# hkiG9w0BAQEFAASCAQBoRbMxi1xeU9/2zt5mV2MoajYmAn0RKLLmtgV5hRQOsq+v
+# wA11mxpZjGkC6E3+waquEnCg4mRYQC601T8whLS8Nfd5fP0T+wLqbORHq4UFIehP
+# 3jVc5z1PtUAJryoEpMqcdAfauzBRy67iyyHHihdnuECkl/RlwD6h6LMX3J2PMijV
+# s0TE51QqYxqxF2FJfdclT7cpeDudcImbopnDtrWMvhV1nlDqZaMfLODAQfmXM2Sy
+# rErdJjSlFBihyanphUP6oUbR8A4K8uMa4fSNZZcxlJrhbAsrDRPYIPzb/jRq14Jr
+# tcAEEldU8Yv5Qg/9MzPb4jJD0wwiQqdpqVb0YHh1
 # SIG # End signature block

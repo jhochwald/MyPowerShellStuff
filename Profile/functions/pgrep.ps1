@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -67,6 +67,7 @@ function Global:Out-ColorMatchInfo {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
+	[OutputType([System.String])]
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -79,9 +80,11 @@ function Global:Out-ColorMatchInfo {
 	begin {
 		function Get-RelativePath([string]$path) {
 			$path = $path.Replace($pwd.Path, '')
+
 			if ($path.StartsWith('\') -and (-not $path.StartsWith('\\'))) {
 				$path = $path.Substring(1)
 			}
+
 			$path
 		}
 
@@ -93,11 +96,13 @@ function Global:Out-ColorMatchInfo {
 
 		function Write-HighlightedMatch($match) {
 			$index = 0
+
 			foreach ($m in $match.Matches) {
 				Write-Host $match.Line.SubString($index, $m.Index - $index) -nonewline
 				Write-Host $m.Value -ForegroundColor Red -nonewline
 				$index = $m.Index + $m.Length
 			}
+
 			if ($index -lt $match.Line.Length) {
 				Write-Host $match.Line.SubString($index) -nonewline
 			}
@@ -106,8 +111,6 @@ function Global:Out-ColorMatchInfo {
 	}
 
 	process {
-
-
 		Write-PathAndLine $match
 
 		$match.Context.DisplayPreContext
@@ -117,8 +120,6 @@ function Global:Out-ColorMatchInfo {
 		$match.Context.DisplayPostContext
 		''
 	}
-
-	end { }
 }
 
 function Global:Find-String {
@@ -148,6 +149,7 @@ function Global:Find-String {
 		A description of the context parameter.
 
 	.Notes
+		TODO: Documentation
 
 	.LINK
 		Out-ColorMatchInfo
@@ -180,9 +182,6 @@ function Global:Find-String {
 	$allExclude = $directoryExclude -join "|"
 	Get-ChildItem -recurse:$recurse -include:$include | Where-Object { $_.FullName -notmatch $allExclude } | Select-String -caseSensitive:$caseSensitive -pattern:$pattern -AllMatches -context $context | Out-ColorMatchInfo
 	}
-
-	END {
-	}
 }
 # Set a compatibility Alias
 (Set-Alias pgrep Find-String -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
@@ -190,8 +189,8 @@ function Global:Find-String {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5Vfn4aRBqMO5ixL7PMfBfuW/
-# bD+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNrIYVLn5cP4XzWAexqIG1OU3
+# F2ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -334,25 +333,25 @@ function Global:Find-String {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRcyCeqYHgu95njIIE7S67G0Qmr0DANBgkqhkiG9w0B
-# AQEFAASCAQBm/g8/mkiPAnsSWoz0PjBKhG0PVCkXaZ6DrO9TXsRCeUU9J5BqFiAa
-# AgA6OTsvjZAE5Pfb8i3bdYTZeQno1Jh3wfWgEeU4yunKgsu1HKl87qzJ2FHllDUJ
-# lmIINJa+P77JB6uFEfFP5mdBOSQNJZFNZ/uS+exbCGUBbYUtbdOfRIx/5auLheP4
-# d19a1DO8fIhMQlnF8Q4hFf3DR4Y1fKJEOoZE8spPfhwEqkHp0rYvEUEVysuurcaM
-# YdNZHPQzDL2I5LbYfQSsnZHeTzosGXcgfzWyJl8/j39nRqlDCLKnX2+WFcdRvTnU
-# oWkNFLyjmxyZiOJwZZqlW+m/hnLQJxqLoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTKGtfmgnWGAg3ke4yWMR7izyeXiDANBgkqhkiG9w0B
+# AQEFAASCAQA0buwin2CHnZgU6u8YF+rejb+50/sZ7cszQLMMyIAHJe7TAKRnckeM
+# hHsDp5yZigF+1JYALjLwGn7myDeVRz424aZ/NNgbmNYlN8n3rzYpVrgv9JXQhBop
+# 3QfiEVRCLNRZqXMf0B5wmZ0Jb7B5pFwhmrYTCHnlcYVsqPeEIARtDSKAk5m0T7Ni
+# ba1NtgUBXawufQfzPkMNsNobd3thKENkQR0Nsx/Q/xA6rila2JyEJ76mgXBhE1+9
+# nUXCI6pNVD+3BgXqjCVZroGvFQZXqW0hcOxI7k8ybQ094NcW5yyE1tmlIdTWJV+W
+# CMCVDjQ6qs3DtmcsFguHXD69dsHE8QRtoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxMlowIwYJKoZIhvcN
-# AQkEMRYEFA2XOh3oe1IQjvNCIe4XzRwyFvNyMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwNlowIwYJKoZIhvcN
+# AQkEMRYEFJGnaQH0goJ/AvK7iGK+UiuZKn8PMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB9wKBMCqCqhv7fcoPJcOC3bljURgJCBebSjUixU5yjbhDz
-# FWwfv0OLD5xHfuUALXD+Z0NnOSyPu5hGSmIOkm6E5vRR4fEYOj5mKD43Z7xhlvLb
-# EEcqbjOxcqP0Qy5Sw3jXrqtdd4vfHtwLBtEV6OufIdLF1zotWeJh0WaB93szrA9z
-# t0KA/2/paTtiFi+1wcZYnnueh1vBGgB3kMDVtxGHDAT1U86K9kZfAfqHPnjnxyjm
-# DQyfKYAgEA09GUs0QyvgZfviQlsMlcDTU1diYOAcmRpf7E3JljTipk9RrDBPsE7c
-# aPMHuFayEYbzwPLSA0PcHYigwsJz+VXCOy2S9sFK
+# hkiG9w0BAQEFAASCAQAoT391aAQ6XCedBmut/SDyUERAYNckjoYstuCg3T36afWZ
+# xpplcingotHZqKO+my1YYQuwbF1vlQJGdr13BjCUa9fo6L6/Lo8P+xL7PNFB/2Uw
+# ot2RsSYRk2cbI9QHHQoyrltAZrdKVi3uu24tPSI64Goy+csTeRuXRFlCtrfQCic6
+# QhT5qdHTRBd0Y33NH3ptcQxgyO2hrkWuAd/AW/aP67M6TdRPqnm4YjAxADty33Yt
+# 8IqSANqFEXS7COqnsJiPoKycI44zMrBQpfFYRdlFxngO/j4qL+diz/Ui+XgiQgne
+# NRuHtEJZTaY+GxWteAvmtIgAlkasULWta8OTDioi
 # SIG # End signature block

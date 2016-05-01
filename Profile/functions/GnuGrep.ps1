@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -48,7 +48,7 @@
 
 # Old implementation of the above GREP tool
 # More complex but even more UNI* like
-function global:GnuGrep {
+function global:Invoke-GnuGrep {
 <#
 	.SYNOPSIS
 		File pattern searcher
@@ -70,6 +70,20 @@ function global:GnuGrep {
 
 	.PARAMETER l
 		List filenames
+
+	.EXAMPLE
+		Invoke-GnuGrep
+
+		Description
+		-----------
+		File pattern searcher
+
+	.EXAMPLE
+		Invoke-GnuGrep
+
+		Description
+		-----------
+		File pattern searcher
 
 	.NOTES
 		Make PowerShell a bit more like *NIX!
@@ -133,11 +147,13 @@ function global:GnuGrep {
 	}
 }
 
+(Set-Alias GnuGrep Invoke-GnuGrep -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURcw27kJmf0I0H8u276/NF3U0
-# lFygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUtazO3m+qU5HJM4PnFkzgo3HV
+# GfKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -280,25 +296,25 @@ function global:GnuGrep {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQIEKYJuU8DVWaZJGYRVli4yD06eDANBgkqhkiG9w0B
-# AQEFAASCAQBoFQ9xcjuXPEwJW78NfsM2ebPOWlV0x7kiIw3X89huF/LWTA1nrLR7
-# 4JQp2rxo4rHL0wkq+bbz6cW9ytihsTyEFDLZF71/o0dFhiW5l4iX0QLeEuUqSSeg
-# hLpgK6w2jnnPxyI8M9TI0Dg98I+TC1OfY1PQlLhWePa5RJcoawodvw4urB9Hv+qR
-# hkD1bg5qKHz8UgxgWfflmhTsJHQaJJ8tEyv50ftw9K/zrEAsNk6lvQ5a/7yXs8t/
-# 5d7f5c+aZNnTwkeslLtOgQ9Qtmzq3cTAsx1z/fbRxu1YAEQz5pSGeU6JeYE9TwcI
-# vRxzrah54e/ncRn9WMbUfTF5KeiP2J/MoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQV1Vq/AjnKZVeScbf2jPy5Y8rGkDANBgkqhkiG9w0B
+# AQEFAASCAQCh7sZIlmwaS5WrsJBdjWwbS+WuhJCWLp1O2Omit0nqli75a51QeZFZ
+# h4tfQR+h76vemVKtPOn+8p0WHU5SibynjFj4CIunFYqpWa5CxT0Y6Cht1dZ9QuOT
+# pjfvKPj+2KzbI5ct7Kj8OQyCduXLzE2PyjTh+Md73VDOc6Hj31hNScwlIwT4aEXP
+# yYTEB7sArnsJ48s4UHYlVCmxgbG1jhGUIpRhvGEnR8+G0V4MbN7E2F6mJOhXEfBW
+# APOz6DiHB5PS+X318vqIt7uEcNLT09nq+HvrLwZpy2x5Ork5/FxOz3mquDPwHixY
+# gnBbljkegp2nqIkVV5c8TauG0TnMqlLMoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwM1owIwYJKoZIhvcN
-# AQkEMRYEFErIPuyf8p6KIpqyVHsGE4P3y0e3MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1N1owIwYJKoZIhvcN
+# AQkEMRYEFOGWTh4gwCmw5Zs25VOk8EMG+q5WMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB8ZNvuv+FplPIbI3KZwc1KbFSPoHsBFaiXMFlp1xrSI11P
-# ZIUT9ilM1Hs+uzlYiq3lhUUVrcT9ToszIma8Obw0GcuGK3fS0Zg2nCHagveQ/U1W
-# fqxTCR7H280VX3/BDhfW7s35Ec1VMv4jcJw6/8sPTwjmxxcqdV7zBgc9UDNmLsCo
-# gzQsPhjRlmJJGTJkIIUrfIQ8HXThjrYXDQapwtmRzgnthqDRUoJQb7eBanYEnc8T
-# dvsmZuBx4UYSyCvxfQf36ug4QRiWdfNrLOxm/blo9NkA/8+9QgHUyr/mopecmHP9
-# KPCNvApqEy3fWmdKyVZz9IghdP0Sn5CxG/XUvORQ
+# hkiG9w0BAQEFAASCAQBZfjzMYLGOyCdWCXb7UzB6D2IdmIkCnlzizr/uSRcZy0Vd
+# +99R/2+7QOQG/V/jMmMD8KyZbAEaTVA4OKtIRqNORHFIYutMpts6LUvbm0IvuqB5
+# d3v5KlGQqR5whn++0OhFWpogtg/UY8HyQ549CdfRoAR5ZzzregOPOgbN6cMhM2IN
+# UR6hv20iLpI8ZNMkem9kzgedLvLPawDsOFJ1M3jUK6MSwEFd2rfZXd+pFDNg433i
+# Pae99xgBF0XKP7WNUrstwCXD+Lc5phL00i6zk12MRbOZ+zzs2uu+annVrpRFB5mm
+# /GnMtBmbp5Vvnchji6Vj3iwx5/qsdYRfnooWuzHe
 # SIG # End signature block

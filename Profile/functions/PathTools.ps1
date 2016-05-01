@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -47,29 +47,30 @@
 #endregion License
 
 function Global:Add-AppendPath {
-	<#
-		.SYNOPSIS
-			Appends a given folder (Directory) to the Path
+<#
+	.SYNOPSIS
+		Appends a given folder (Directory) to the Path
 
-		.DESCRIPTION
-			Appends a given folder (Directory) to the Path
+	.DESCRIPTION
+		Appends a given folder (Directory) to the Path
 
-		.EXAMPLE
-			PS C:\> Add-AppendPath
+	.EXAMPLE
+		PS C:\> Add-AppendPath
 
-				Adds "C:\scripts\PowerShell\" (the default) to the Path
+		Description
+		-----------
+		Adds "C:\scripts\PowerShell\" (the default) to the Path
 
-		.EXAMPLE
-			PS C:\> Add-AppendPath -Path C:\scripts\batch\
+	.EXAMPLE
+		PS C:\> Add-AppendPath -Path 'C:\scripts\batch\'
 
-				Adds "C:\scripts\batch\" to the Path
+		Description
+		-----------
+		Adds 'C:\scripts\batch\' to the Path
 
-		.NOTES
-			N.N.
-
-		.LINK
-			Support https://github.com/jhochwald/NETX/issues
-	#>
+	.LINK
+		Support https://github.com/jhochwald/NETX/issues
+#>
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
 	param
@@ -79,27 +80,26 @@ function Global:Add-AppendPath {
 				   HelpMessage = 'Path to add to the system path')]
 		[ValidateNotNullOrEmpty()]
 		[Alias('Folder')]
-		[System.String]$Path = "C:\scripts\PowerShell\"
+		[System.String]$Pathlist = "C:\scripts\PowerShell\"
 	)
 
-	BEGIN {
-		#
-		$OriginalPaths = ($env:Path)
-		$ComparePath = ("*" + $Path + "*")
-	}
-
 	PROCESS {
-		# Check if the given Folder is already in the Path!
-		if (-not ($OriginalPaths -like $ComparePath)) {
-			# Nope, so we add the folder to the Path!
-			$env:Path = ($env:Path + ";" + $BasePath)
-		}
-	}
+		foreach ($Path in $Pathlist) {
+			# Save the Path
+			$OriginalPaths = ($env:Path)
 
-	END {
-		# Cleanup
-		$OriginalPaths = $null
-		$ComparePath = $null
+			# Check if the given Folder is already in the Path!
+			$ComparePath = ("*" + $Path + "*")
+
+			if (-not ($OriginalPaths -like $ComparePath)) {
+				# Nope, so we add the folder to the Path!
+				$env:Path = ($env:Path + ";" + $BasePath)
+			}
+
+			# Cleanup
+			$ComparePath = $null
+			$OriginalPaths = $null
+		}
 	}
 }
 
@@ -111,8 +111,15 @@ function Global:Remove-FromPath {
 	.DESCRIPTION
 		Removes given Directory or Directories from the PATH
 
-	.PARAMETER path
+	.PARAMETER Pathlist
 		The PATH to remove
+
+	.EXAMPLE
+		PS C:\> Remove-FromPath -Pathlist 'C:\scripts\batch\'
+
+		Description
+		-----------
+		Removes 'C:\scripts\batch\' from the Path
 
 	.LINK
 		Add-AppendPath
@@ -127,22 +134,24 @@ function Global:Remove-FromPath {
 	(
 		[Parameter(HelpMessage = 'The PATH to remove')]
 		[ValidateNotNullOrEmpty()]
-		$path
+		[System.String[]]$Pathlist
 	)
 
 	PROCESS {
-		$path = @() + $path
-		$paths = $env:path -split ";"
-		$paths = $paths | Where-Object { $path -notcontains $_ }
-		$env:path = $paths -join ";"
+		foreach ($Path in $Pathlist) {
+			$path = @() + $path
+			$paths = ($env:path -split ";")
+			$paths = ($paths | Where-Object { $path -notcontains $_ })
+			$env:path = $paths -join ";"
+		}
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUOrUjAPj8EqNlpxKsGMk4aU5Y
-# DMegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU1E8P/UVmoPvSQhXtCgvDXFMd
+# r46gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -285,25 +294,25 @@ function Global:Remove-FromPath {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRYtVZvIbuCkYCVv92zNbGKPzZKlzANBgkqhkiG9w0B
-# AQEFAASCAQAOnCsE7+VEMatRX1E+7C/iclrbMSWOyWonapPmqebEcihBCsr/vDn+
-# Qnx54sp8di3Obqj1p537y6BJDi20uEL3gcddNb1dxxvCHaFOhNfXY9xCGbt8L+Yc
-# UXiLYwUXuKeS0O7rhKx0gwVaxEhn8VYSktixcM0yFZyJbTaFW0SohIbZSeJTnATk
-# 6zShSg9gKD04bcp00DAX5FV/YV1yuJRCfvNjSsK+MgsFy869Pmr9010hT2C0VNQK
-# Ze6zFHHvw92NbPFYMQS8ARjKkIR0BVLVy9ogfvyQe9x8ULcY/DF7h186bbaiPnTX
-# S2pFSXwPKzmt97NdZZzG8vQ9aCFCNlXBoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBScdl7G71MASrnN7UBpxKW+xtmDmDANBgkqhkiG9w0B
+# AQEFAASCAQAtzVvbT7hJrUl3Qevwt4/FIwPD4gdZAYFUffQwVRdAK0mK0mA8mPs+
+# ols8Znuv1nrs1h1ZThhh75yRybQWR4EUPx/L+EriNW2EhF4Yl4Lyiq3/RRiAfwFB
+# Z85KzjfsHDJlw/BJOnwmmu0RiQ4T7p9i4EUs56dVf80i7282o1GXAZcU2dn1bHRu
+# SlFujB94SvxzUBCfVKqMdSOIZIA/dJ7ztEihLaqCEokcRf9Gl5ceKfFS6j9w+od+
+# wzeFow0nEfQkEJ/1sAy2KmmXkqLy8ySCM3Km82exD28yMrKwC/qy3TY0SEYkZG8l
+# +G3ovVPm1+rPe4v3u5On+0Igh5/nRylboYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxMlowIwYJKoZIhvcN
-# AQkEMRYEFE5yr1OtQMoNnRSap8r6O/t4B/OTMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwNlowIwYJKoZIhvcN
+# AQkEMRYEFNbobLCFTRaeWIlnS5A7YdWWZ2sYMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCTMgQCaRUTizXCPWF4aa7AeLhngrzOss2pmkDb79/qYS+7
-# bXt47FqyjCrF+cMRpPmv3r3668laPH8t0fUlbbYcQEEi/GFnDFCZqSYH8kJJCu9r
-# z0sjU2gJ1OdrDUqc8KEoPu9rLRLScmqN2BpUViLZppTaaWEGT0MhWmJr/r5dj7DV
-# Rsx5WvFmeGYICkDCPz7f1hENyfCpZIDRm3jdrvyWbxgTySQJ7PRTDn8B88HV41dL
-# BTWRfqhJSe/v9VfIWicKUKvZSIwJSbX8UDpy2KzTG4Y/RuKJWDVeOmehcqOWF99t
-# 1VlFmcFJGbO/PfN4X8tFU5dqPnEp7LY6MY71gnWB
+# hkiG9w0BAQEFAASCAQB+xJ/sL32mL6Kp41kYRkL0xRMWIpCM7REEp5EYp551fNyv
+# 8sL4iRTS2mUUWVRUGJKRkolzP8Ua2kFp2Si+a/myUhztN7MpTLYtEGtUiQQVbzqI
+# 8l1oB35YFooVFUh0ygjHdMMUNGg9IxuNo6gGs48+vhVBuWAJaUXbioImMCsaTUH3
+# 5sGulyjGrnEJ81XE7E3MiOC1Q5reeVtVT55zAEUKAUcz+UwGmxvEBh5etQ4UGrc0
+# 1jG7DthrNCKF4dTFn8YsUAeoKnAvn5j0AVMFUovIqyaNXHn4/89WMVG74QiNWClJ
+# E5ko1WGsZ9zWZJUznU4K8ehte8J0b4ms+Gn9B0KI
 # SIG # End signature block

@@ -19,12 +19,16 @@ function Global:Get-MicrosoftUpdateInfo {
 	.EXAMPLE
 		PS C:\> Get-MicrosoftUpdateInfo
 
+		Description
+		-----------
 		Return the installed Microsoft Updates
 
 	.EXAMPLE
 		PS C:\> $MicrosoftUpdateInfo = (Get-MicrosoftUpdateInfo -raw)
 		$MicrosoftUpdateInfo | Where-Object { $_.HotFixID -eq "KB3121461" }
 
+		Description
+		-----------
 		Return the installed Microsoft Updates in a more raw format, this might be handy if you want to reuse it!
 		In this example we search for the Update "KB3121461" only and displays that info.
 
@@ -32,6 +36,8 @@ function Global:Get-MicrosoftUpdateInfo {
 		PS C:\> $MicrosoftUpdateInfo = (Get-MicrosoftUpdateInfo -raw)
 		[System.String](($MicrosoftUpdateInfo | Where-Object { $_.HotFixID -eq "KB3121461" }).Title)
 
+		Description
+		-----------
 		Return the installed Microsoft Updates in a more raw format, this might be handy if you want to reuse it!
 		In this example we search for the Update "KB3121461" only and displays the info about that Update as String.
 
@@ -106,8 +112,8 @@ function Global:Get-MicrosoftUpdateInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUDUcTaNu20/UnxnXzWsQNkh7+
-# kfagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWta2Z2X1f2kTc4q1S1cyx5EO
+# AZmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -250,25 +256,25 @@ function Global:Get-MicrosoftUpdateInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSr4g4TDE1Gdx+sjDsP3f4gwGX7FjANBgkqhkiG9w0B
-# AQEFAASCAQABQ1D55/t7FsDuvFtPkqJjb/bx8xr87v23c0T3Z5N5FLG/LO+f2Ko2
-# gT1wNEo/+ScB4N32yXGeh0p7Mcz83RuRtc1G8+R0KK5B/YCrOUclPm6xyUmhg3pe
-# GllHgfpA/qu5X1HBT4/0vQQczmPtJJQveXizDecQ+2Xbv0rCU5ZUgerjhiXIHxpY
-# nZe0rIvye45J5cLfUrm0lAisvAA8eoshwo5p42paucLD5YkSwRTrolG9/Jg1BO5c
-# CLsH8BM+e1d14Zc2b7bDIRqlCQactU00Aqf8m6sIUBJSkjfAl9QH/cHhr1AC0TJh
-# RwrenprE4jnRDKAYknCCDehYwQc0w1rUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQsVjkWUMbD9x04SkumNiacsH1yGjANBgkqhkiG9w0B
+# AQEFAASCAQBOtqT62A/ZCddOFDmC75QM1YnjV/ZY5uVqvY9kpXlCV/vDTaD04rSA
+# h/iSCOkCU3z3Ow3VzsoslYKOFxRQdtQbZWhUwH/VPCUomfw+4ZBqN7LRo9C1iJia
+# TTkCwH3dYW1cagfPbftC+Dm9cBLmxJu2P1vqfYn+7U/2nVa/4V8qcKPPSPRE6T6W
+# 7FYI+lcVsTZ74py/eCt4CCIlyDAFxhGwTqkmL5YCLG+mMOswANMU/KoIqTuPhb9r
+# ctYJiQnz+GOy+YnGDVxiymdfYDc70vfZxk4+t21eKFy/TjEIR+xHBn/TZohrsYAG
+# JK0pXoIGtScMn9Nr9G0nbPf4oi8Bp3bloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1NlowIwYJKoZIhvcN
-# AQkEMRYEFDiZFFURgSkrkhOGe1QjlFINOZkXMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1MFowIwYJKoZIhvcN
+# AQkEMRYEFNn9DAr3Epe0AiUQSmBcZhZ1H1ecMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQALWWq1dMoFhtDV7nDPDgSoOyxINHtxZKbYY/lVHBdVJPa1
-# 0m8s/lMLlkbAZmuxhcheiR1XnKHw5cOZjzIZFc6D3xjDGuUGInCL8MyePCW0NU8k
-# UTHXKcNWzxX1Ko7/Di5JBkq6/SxnUhErHkgSQ16Lbktm/J4iS8TVgwmka37QhaTX
-# gCLtdNrWlayz38cAVdjHCw6sIRNAdmh/+K3kbX9vgOSa2gCoAgho0wgTNDi0PLyH
-# uza8hPjEjvLoMovQP5+jJn8swwF1D238xiKtxlrAYZht014SgC5Wj58KJEuf4oQb
-# DfWnW8mk9/q2/HsAlWchzsP/tghJNh2MJk0hsbAS
+# hkiG9w0BAQEFAASCAQCogkUfgYxH+KaSnoeVhbGpM/zms+BRZw8RY/0ppY62RKVv
+# Wml6QwMQcyaHszHzDP+KSY/LW2Cd3HuPmkJrrMMrTWIc8NbBUIrNfHLsC4teq0XR
+# ny84/DTBBWeIRhF+X/SJdIf6DCyL1HdyqhTEg0Hww5F8eAutE87H6aALfuCGSHuY
+# GEio/qi9rikq7LOSds7QiOi6H0ZmQpsjFZqARgCLGi1j1kqR8RzAYalhKNCkhHqT
+# pRoYKN13dGAnVqSWVAsS9/Aup4eesItZYTmdbroKWTHEXyqp16kyIM2US2eJQuTK
+# H0lFe06mXcW1WWy7cYKSN6VomUceuFPKwHwnK3bb
 # SIG # End signature block

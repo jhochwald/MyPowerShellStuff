@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -64,12 +64,16 @@ function Global:ConvertTo-UnixDate {
 		PS C:\> ConvertTo-UnixDate -Date (Get-date)
 		1458205878
 
+		Description
+		-----------
 		Convert from UTC DateTime to Unix date
 
 	.EXAMPLE
 		PS C:\> ConvertTo-UnixDate -Date (Get-date) -UTC $false
 		1458209488
 
+		Description
+		-----------
 		Convert from non UTC DateTime to Unix date
 
 	.NOTES
@@ -82,6 +86,7 @@ function Global:ConvertTo-UnixDate {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
+	[OutputType([System.Int32])]
 	param
 	(
 		[Parameter(ValueFromPipeline = $true,
@@ -94,14 +99,15 @@ function Global:ConvertTo-UnixDate {
 	)
 
 	BEGIN {
+		# Do we use UTC as Time-Zone?
 		if ($UTC) {
 			$Date = $Date.ToUniversalTime()
 		}
 	}
 
 	PROCESS {
-		$unixEpochStart = New-Object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc)
-		[int]($Date - $unixEpochStart).TotalSeconds
+		$unixEpochStart = (New-Object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc))
+		[System.Int32]($Date - $unixEpochStart).TotalSeconds
 	}
 }
 
@@ -111,7 +117,7 @@ function Global:ConvertFrom-UnixDate {
 		Convert from Unix time to DateTime
 
 	.DESCRIPTION
-		Convert from Unix time to DateTime
+		Convert from Unix time to DateTime and make it human readable again
 
 	.PARAMETER Date
 		Date to convert, in Unix / Epoch format
@@ -123,24 +129,59 @@ function Global:ConvertFrom-UnixDate {
 		PS C:\> ConvertFrom-UnixDate -Date 1458205878
 		17. März 2016 09:11:18
 
+		Description
+		-----------
 		Convert from a given Unix time string to a UTC DateTime format
+		Formated based on the local PowerShell Culture!
 
 	.EXAMPLE
 		PS C:\> ConvertFrom-UnixDate -Date 1458205878 -UTC $False
 		17. März 2016 10:11:18
 
+		Description
+		-----------
 		Convert from a given Unix time string to a non UTC DateTime format
+		Formated based on the local PowerShell Culture!
+
+	.EXAMPLE
+		PS C:\> Set-Culture -culture "en-US" | ConvertFrom-UnixDate -Date 1458205878
+		Thursday, March 17, 2016 9:11:18 AM
+
+		Description
+		-----------
+		Use our Set-Culture to dump the info in US English
+
+	.EXAMPLE
+		PS C:\> Set-Culture -culture "en-GB" | ConvertFrom-UnixDate -Date 1458205878
+		17 March 2016 09:11:18
+
+		Description
+		-----------
+		Use our Set-Culture to dump the info in plain (UK) English
+
+	.EXAMPLE
+		PS C:\>  Set-Culture -culture "fr-CA" | ConvertFrom-UnixDate -Date 1458205878
+		17 mars 2016 09:11:18
+
+		Description
+		-----------
+		Use our Set-Culture to dump the info in Canadian French
 
 	.EXAMPLE
 		PS C:\> ConvertFrom-UnixDate -Date (Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion' | Select-Object -ExpandProperty InstallDate)
 		20. Juli 2015 13:24:00
 
-		Read the Install date of the local system (Unix time string) and converts it to a human radable string
+		Description
+		-----------
+		Read the Install date of the local system (Unix time string) and converts it to a human readable string
+		Formated based on the local PowerShell Culture!
 
 	.EXAMPLE
 		PS C:\> ConvertFrom-UnixDate -Date (Get-ItemProperty 'HKLM:\Software\Microsoft\Windows NT\CurrentVersion' | Select-Object -ExpandProperty InstallDate) | New-TimeSpan | Select-Object -ExpandProperty Days
 		240
 
+		Description
+		-----------
 		Read the Install date (Unix time string) and converts it ti DateTime, extracts the days
 
 	.NOTES
@@ -165,18 +206,24 @@ function Global:ConvertFrom-UnixDate {
 	)
 
 	BEGIN {
-		$unixEpochStart = New-Object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc)
-		$Output = $unixEpochStart.AddSeconds($Date)
+		# Create the Object
+		$unixEpochStart = (New-Object DateTime 1970, 1, 1, 0, 0, 0, ([DateTimeKind]::Utc))
+
+		# Default is UTC
+		$Output = ($unixEpochStart.AddSeconds($Date))
 	}
 
 	PROCESS {
+		# Convert to non UTC?
 		if (-not $UTC) {
-			$Output = $Output.ToLocalTime()
+			# OK, let us use the local time
+			$Output = ($Output.ToLocalTime())
 		}
 	}
 
 	END {
-		$Output
+		# Dump
+		Return $Output
 	}
 }
 # Set a compatibility Alias
@@ -185,8 +232,8 @@ function Global:ConvertFrom-UnixDate {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUwuV4FsWS4Yg9/ilS0GgmPbVZ
-# gmKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKqN9M83lxh6AVcq+p9MSFAjT
+# hdWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -329,25 +376,25 @@ function Global:ConvertFrom-UnixDate {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQLlaf1sKC+zPO8Z0Do2Sk0P16LATANBgkqhkiG9w0B
-# AQEFAASCAQAguTBLcye2s1i6GQZ8yYVIUOYbMJL7EvQZHagdThgDJPkFk5+VBQPE
-# 6n/GBCUfKfrKhS8OLzb2s+BcpNeQuTVQ3CVkiMrX6T3GeSNCBWhRF6Th94f2U19m
-# ejaJtkQ7AXI10yqgofDDd1Fptj1N8ILw7bfP9MwwknZPkC/FEVdnbe56MSrJkwXT
-# j1nREJWy9bXXnoMQSh8kyMgNq1omFJkJtnv9MW7npukkawvdZACkn60DpemwH/AL
-# nphonl02AQZ4L8wgzRm4MnQtIxR4IvQn0Ms1u2QZWqbfHW3syIPN0j3GbYvMFtJ5
-# r8bbqz1GUTxXY2KdU7YbTH/DqPguP1adoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR/BDHT3eB6in+05+Z3r7uR4akl5jANBgkqhkiG9w0B
+# AQEFAASCAQBI/X3zKtAgGbm0ZTVIgGkXcmcnxoZXDualNRB9IG8jbLPE0lSVX+7s
+# fbZ1BMW0OceEqZ+o0+0x3ki/Z43GGFpqOKPkEysXbEpsS5FPet9xFRG9DKxfwPVd
+# mlOEh/ZLiSkroellN7Rz0R/DoWxV8OO7Of7PfsbdDkVUPYymT3/KP1jFyV8L07tP
+# yO93+2Yf9DjBIAj25ZWWx0lhsmVg4RqvnkAl/L8pJFKRUQZAtXIXlgBkgK/DjK5Q
+# 6yJhGrv663NpUXiArHivPO4rBTbfn96DK4qoFRKdS4S5oypSfOvEmTheqihN03Uu
+# nLfwTFAFMn0XZqpBmPpNxwqR6eAUB9ZPoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcyMVowIwYJKoZIhvcN
-# AQkEMRYEFF1Of7yZfHm92osPCPb3y//5WqCbMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxN1owIwYJKoZIhvcN
+# AQkEMRYEFHQe9XMOBkIvY+npvlUxXyAki/AIMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAt1jqX2npIBjvlVbjhGVpkXyo6dB87bR4/8yVRXjwiZ4a8
-# Uy2uBtkpyaGjuj7N9K2YVvVshINySnShfUJrbXSxw05sRspNHZ3a23SOdzmMWLS4
-# ceKL714Ax4BxY/yy5uBD6MoC+NDBR+qmEYiUOF/54ehK6aNcSt0JcPQIoC7kCCMk
-# XWVt00uVDenLFktDDvY8U0P626HwLJZHBCuDjZkjb7LF1FOV2sKXwZoSg4czFQG0
-# fOdtoMexC5NtX9EpJT1h4dd/ohcOixcZftqqe8OjR82a4yLmrEpTmzlaq4Nwf9y9
-# uLqa39ms1pPK+wjKiZec1KYIKw7VKWXK8uVt1J16
+# hkiG9w0BAQEFAASCAQBRnuOQBx4TkGXSzBN82tNoAqOTnkyZ2lNSfI6yNFndtOob
+# /p/rH+Zwc2+PefMtlhGrktL5KsdhQ8izWG9gN1WHjs+9wx5u3FXq9vkqE4MnVKGX
+# Xfvsd7zuDJa+s5iEU/hlMzJDV9MHcDF6FBTpc+46xqWME9flJmL411pUkekhZAVF
+# CRstTgxhq7dalMPeKYB+Qj3k2BwlQVSz2JP2mRHlUWBaQYvNlVXaDWT9lUk8WjvF
+# YfT/JZnG4LFYp4j2IeprOymF1nnas3vmw6Z6zQXWdmGSWaXMHEzy9rj+Lkq5LrwY
+# gpJBnu2Cu4gL+A1ffqb0Ia05mJZH5pvDUq/gtCv7
 # SIG # End signature block

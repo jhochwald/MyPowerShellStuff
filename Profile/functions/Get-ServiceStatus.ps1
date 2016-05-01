@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -52,7 +52,7 @@ function Global:Get-ServiceStatus {
 		List Services Where-Object StartMode is AUTOMATIC that are NOT running
 
 	.DESCRIPTION
-		This functionwill list services from a local or remote computer Where-Object the StartMode property is set to "Automatic" and Where-Object the state is different from RUNNING (so mostly Where-Object the state is NOT RUNNING)
+		This function will list services from a local or remote computer Where-Object the StartMode property is set to "Automatic" and Where-Object the state is different from RUNNING (so mostly Where-Object the state is NOT RUNNING)
 
 	.PARAMETER ComputerName
 		Computer Name to execute the function
@@ -64,6 +64,10 @@ function Global:Get-ServiceStatus {
 		Microsoft .NET Framework NGEN v4.0.30319_X86 clr_optimization_v4.0.30319_32 Auto      Stopped
 		Microsoft .NET Framework NGEN v4.0.30319_X64 clr_optimization_v4.0.30319_64 Auto      Stopped
 		Multimedia Class Scheduler                   MMCSS                          Auto      Stopped
+
+		Description
+		-----------
+		List Services Where-Object StartMode is AUTOMATIC that are NOT running
 
 	.NOTES
 		Just an inital Version of the Function, it might still need some optimization.
@@ -108,8 +112,8 @@ function Global:Get-ServiceStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUyoabcx/azzdMla/u+FAsBoFH
-# tBWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWXe+unSH6xNZ+nLw8osq1yBY
+# /7ugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +256,25 @@ function Global:Get-ServiceStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQinr63aO4ippivkkcIG9PRwigMpzANBgkqhkiG9w0B
-# AQEFAASCAQA9g6tPtfFUvqaAUMv9+R5V+gSKOmmvJFpFvVuJ8Thsrt4AtQGgTWhO
-# OXVcWXSjJYjPCnbUjKD2ZiSri6W+fdrcL5PXj0qa99Hr0+Lzcj5GMlC6SOD+YFMQ
-# 500g6/O9fw1xbtDQqlhRy4FKxWz8XdvgQToCgNtJrgvMZlrIIhTsgQgo60fzSd9x
-# 0sb0gWb0qXi9Vd2zYdR7392ty9WZUov8sCA4Apu7ESy+KRgMD5BN5B0Z00rksWbQ
-# B8JluT6K6ga4AbrWWkFWrlLbdMf1Bek3fJOKFufQF1BDePbnJSd0mEmvP+itlrUm
-# A9ahPvQBhruaj5ck9kWpPevntwxck5eloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRA7Ht0D6j2pE+H0m1IJnyeanbeDDANBgkqhkiG9w0B
+# AQEFAASCAQABSh/klLxLmnAwp7DARVDkXBqrgTcezMKp5ErX1+XrUuDwlFFPr8Yj
+# w9bzF2QlfiVo2hDXnYUgy5Y8LekG/FwGR+z+fe19kEbrQnwKCUoeHRByO+evuEKL
+# pV36wnWv/iG0jrgRtLsAjgHcgl5ygCYrLXGyAuuNBhbw5F8UgueTauoqtBjVgLjC
+# ABg5r/Nothxz1olv5jW0rRXDwVJPXFf1R7Y7M19oUwqmy1c1IiG8RNajQ0FWGgfS
+# wwqjpiS9TeqxbiBdHbe8+qtK+1cB+eCc4rJHYV37cHDO5E7RkQGDRQKfGXXHWamG
+# hZMD2rVoCFOUCBwBe7qP6DBjiO7NolJdoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwMFowIwYJKoZIhvcN
-# AQkEMRYEFOHvVP3aKH5QGU09qeHyCmctDtGgMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1NFowIwYJKoZIhvcN
+# AQkEMRYEFIb0qTm/O5NM7WpNPup//0ONKglTMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCc/i5owPfomp3n3ziWCp+Molrk8rlEIy2ZP4/oFvbyDuaL
-# FD2uxe3IX8b5YFms1+XFSRiRO8IGyWHnSaGGad+ngspBgDIWGGKJnb/rWS0y4sWp
-# tiCGmHAN9pAMjXDqFx8LBrkiK4xHPx/SHZP0AE9bmbf2CVzcmMPLFvQ0xxOPYNnP
-# DaXkn2k6IHn5ACIv3O0AMelSL/Fbsh9iaf061kGC+QL1t3iRCGT1vEixojs8pFsP
-# tIL7W7SWYw1Qt5UMNASu7vPsCobwBH1x2Gt5UOKHiGc0lqNDH0xswirbVxBJzJz7
-# ywan++RhHZ9X7xXqJyQLKBkRgNtXWbNeAEdZFnWo
+# hkiG9w0BAQEFAASCAQCRWejkUpKZvP5lIdmBgsno9oi2trsnRsNHKRnlfgO+ij2o
+# Kt6MUlT6UmK3ef7SM3dnOKz+8RCl3QEXpZceM02dqYG5g0VjvXZ2WH6pqqWrldI8
+# roqhDqu9F+nVLWDkjJ0pW5VW8ubvNlA+qcNBI7Q2JUTvNhYl3TSAx15jMh9foLbq
+# X5jjWBXGb5t8Lie04wHovprqHh+8bCoqldaViUJwtX1zX1pwaiEfQ6PUSit6NNgH
+# qJj3SMxhR1LPev9vV1Nec0+Xx7TVNu5FA+Ye2aiVn3YAtIHOLQPmuz9ccpcLC6kW
+# IG1Plrg/pCptbcsc7d6PrRFjpXABuVsj5S9vB9Hz
 # SIG # End signature block

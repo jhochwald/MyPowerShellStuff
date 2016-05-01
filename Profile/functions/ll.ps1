@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-05
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -47,7 +47,7 @@
 #endregion License
 
 # Make Powershell more Uni* like
-function global:ll {
+function global:Invoke-PowerLL {
 <#
 	.SYNOPSIS
 		Quick helper to make my PowerShell a bit more like *nix
@@ -125,12 +125,13 @@ function global:ll {
 		$Host.UI.RawUI.ForegroundColor = $origFg
 	}
 }
+(Set-Alias ll Invoke-PowerLL -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUA+blQJuStDZbFVD1io0SNZ1o
-# 29mgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcJK/jGjjOa2drsuJEDYQHb5+
+# 8rqgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -273,25 +274,25 @@ function global:ll {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT26fjuxAhu0j4vLwYsRk8P4Z7w+TANBgkqhkiG9w0B
-# AQEFAASCAQCjGntstekMqf2BFXtpCeR48qsOY7i/i6JXmhl5IZFkSpnqFgM+CBqu
-# 6VssudQdlUuj8/Nke9RB1xVQo3L02kFP5OeYHHO+X9FzkaCWqGCNDg522oZh/CoT
-# CoKWB709pIlqkRV9H9CIA6JgkgXFlv0p5YlEPl2TwwB6ur2vLTALJV/lYrS0ZJ0J
-# pGvC5krwHyKkEynDNp2ikIQ0c8LD+kXxmbY0MJKe43GdZUENsGP9/7cSwjCbRP+m
-# +7dky+SSYCge216nXYCAG7l2xLCO+NhdO53/ZyWMlOONJ0SaEhyJlmfrOB3qRbNP
-# tBHPEF6ugZiEDXaOrsrLY6qjxfPn/hbooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQyuANCB17aiUq9cUVoDaACTnxeeTANBgkqhkiG9w0B
+# AQEFAASCAQAsQq5maZqCYPMg1YKAHS+S3HoTuR1y04lB8MoKAN++1tIsMIiARpeT
+# rYoYWhu4DTQtWGUW8IU/EZrTeJoGyvJAIHAjLXyiOm+/x0BjVuJwL2eIpVyThZ+2
+# M8cSjfIq3PHsu01Jw9zWJ1Mk29BfSJbvqFPk4+RAdGmqQiFc3k0ew0KE8BwiCu9F
+# +Oq69e3dFZWrc0XigWT/hpNaf8E0zv+9IeTgQ2w4LNBQ/9XqLG4kVCVoybbV4G2j
+# ROR5pKmrupeNSoJZLtRJ4SI8o3NgjWe4vOkiCZ+zP3WFM7HhzHdipKYLGWPrs58q
+# cIgVGqMLkiptJ3jYsoh2Whz5Xr3t3SpEoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwOVowIwYJKoZIhvcN
-# AQkEMRYEFLtnOLd8dXJZwtmR3NZTu1immevJMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwM1owIwYJKoZIhvcN
+# AQkEMRYEFL5rbQeM6/HHJf9GpfDlMan8dT7VMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQB+HXZ6VGEDf6jkuGu2LHVBYFCBfbAee39WTxz7r5V6XeFe
-# 092eqTzGsOzdFf7d/tMLvaLekWNlEqPi9BdbcVVcoLtryo8iImVWK2/89vUMm4mD
-# nPQvfpUS5hXyExaMXaIOgnI3h6wr1X+rjg4Wo87UvraiqVtw4ovyHfCZoZuwS3dI
-# RAsnf7yUkiB1IQF30k6nvaW6reAG663KbXwag9tU9lWg/FUgyf1bid6wakl717Yh
-# MuHBc3aT3pzeTyZrazIKbAX2PLNWP0QBmCCQ9pD8Flo35/wKCKxCj77py0xJvmEn
-# c2oAIaOoPCIC6JZ3ahchx4b6hpSdIjyoLiW7FELG
+# hkiG9w0BAQEFAASCAQCCPQqdlf7QBbo/3r2iUDXkMnFXiltAjyGFzb7xVkme6sh8
+# GSyoysMLGXeZRNjrdAb0Z+K/2rWCzuWqQqmf4jOlo85w2zTeJ0Ch7fN83Apcvy0+
+# tlEgFlu1ftAohS6Rdww2qoDQ21zeYTCy1J7S37YKAAeoSRAuGREuye1XVcdXTtcO
+# xIgHjqQPWITgVB4EsgAne9jm1rSo+sHS6d1UMcVKVqqL2/XlpnIqRfbrvntM86o1
+# tWLUs29nOtM6uo5g0rlXj/KpX2dbaFRNqqWvvMjvFzWp13OWlyDTjAOPRYhR3Ar/
+# p+TIAXscD78LwCmDUa0M5DjL4m5VZXiQHdhv6Kyd
 # SIG # End signature block

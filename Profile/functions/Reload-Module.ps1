@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-04
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -50,13 +50,16 @@
 function global:Reload-Module {
 <#
 	.SYNOPSIS
-		Reloads a PowerShell Module
+		Reloads one, or more, PowerShell Module(s)
 
 	.DESCRIPTION
-		Reloads a PowerShell Module
+		This function forces an unload and then load the given PowerShell Module again.
+		There is no build-in Re-Load function in PowerShell, at least yet!
 
-	.PARAMETER ModuleName
-		Name of the Module
+		If you want to reload more then one Module at the time, just separate them by comma (Usual in PowerShell for multiple-values)
+
+	.PARAMETER Module
+		Name one, or more, PowerShell Module(s) to reload
 
 	.NOTES
 		Needs to be documented
@@ -73,37 +76,37 @@ function global:Reload-Module {
 	param
 	(
 		[Parameter(Mandatory = $true,
-				   HelpMessage = 'Name of the Module')]
+				   ValueFromPipeline = $true,
+				   Position = 1,
+				   HelpMessage = 'Name of the Module to reload')]
 		[ValidateNotNullOrEmpty()]
-		[Alias('Module')]
-		$ModuleName
+		[Alias('ModuleName')]
+		[System.String[]]$Module
 	)
 
 	PROCESS {
-		# What to do?
-		if ((Get-Module -all | Where-Object { $_.name -eq "$ModuleName" } | measure-object).count -gt 0) {
-			# Unload the Module
-			Remove-Module $ModuleName
+		foreach ($SingleModule in $Module) {
+			#Check if the Module is loaded
+			if (((Get-Module -Name $SingleModule -All | Measure-Object).count) -gt 0) {
+				# Unload the Module
+				(Remove-Module -name $SingleModule -Force -confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
-			# Verbose Message
-			Write-Verbose "Module $ModuleName Unloaded"
-
-			# Define objects
-			Set-Variable -Name pwd -Value $(Get-ScriptDirectory)
-			Set-Variable -Name file_path -Value $($ModuleName;)
-
-			# is this a module?
-			if (Test-Path (join-Path $pwd "$ModuleName.psm1")) {
-				Set-Variable -Name file_path -Value $(join-Path $pwd "$ModuleName.psm1")
+				# Make sure it is unloaded!
+				(Remove-Module -name $SingleModule -Force -confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+			} else {
+				Write-Warning "The Module $SingleModule was not loaded..."
 			}
 
-			# Load the module
-			Import-Module "$file_path" -DisableNameChecking -verbose:$false
-
-			# verbose message
-			Write-Verbose "Module $ModuleName Loaded"
-		} else {
-			Write-Warning "Module $ModuleName Doesn't Exist"
+			if (((Get-Module -Name $SingleModule -ListAvailable | Measure-Object).count) -gt 0) {
+				# Load the module
+				try {
+					(Import-Module -name $SingleModule -DisableNameChecking -Force -verbose:$false -ErrorAction:Stop -WarningAction:SilentlyContinue)
+				} catch {
+					Write-Warning "Unable to load $SingleModule"
+				}
+			} else {
+				Write-Warning "Sorry, the Module $SingleModule was not found!"
+			}
 		}
 	}
 }
@@ -111,8 +114,8 @@ function global:Reload-Module {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU6q6JhKlUluPYODHGozrlhAqY
-# gp2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU91EvSOHovUDVTY6lMOztSYQR
+# 7+WgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -255,25 +258,25 @@ function global:Reload-Module {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRTYkJ3K+rek9wL8nmePYVeJ+vwyTANBgkqhkiG9w0B
-# AQEFAASCAQA1BWAqHdsfc7V8J+p70bJW1n3TfgQf021Bg4yES+WEZTd4MLbEb0v2
-# I1JpOzyxwR2sU5BJyzOTelAqh/AjEu77rXEkZA30dybbVDCm4bVL9s08mRSJtfeh
-# UxOlmIu7A+vn261MlEvZfIaK3j2y48S5hlhKAJRAZhAuTzvHdQ6Dt64PpBEhq3kw
-# VfW1kmOW6QRSJPC94YfJhchawprurXmL3BvhzOwgGYffE/Z/N8Gjq6LcL4okY53f
-# 3poi0lwWIOqtWTcsrmYyEMUKsL8Zdf0i4ksaTR89nr7FrKuEM80ZKzlpOI4XR5Fm
-# Pcss0DvVSHaiEx61dzOFy2M4amOIeVTAoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ0PVHu3MaD1/rRPEl43oCpCm1pUTANBgkqhkiG9w0B
+# AQEFAASCAQCXyjnxtKEJwxCzTeWTow365ZjJEI//edXLDgYSLvUs19f7RY0UMUZO
+# o73+GB5e3AaVuGwzTdNIifce+2rZPNnhqMTfPpR3RklImJ2izUh87n5YRua6u8wj
+# V5kpwFByBnTfptSOdx+mPBb1d6wtnbyW+gsVhXv6erkIEibgZ2Ao4ZHXjCIWqSf2
+# UPm+WFK7OBFN3UQut20nLfgPUxArSF8FOVN+l9ZaawWewWFnRJBB6IWqpzhmOHbw
+# QR8YrNijR8+8xUpo0VwNbCx3Gpx/qxoHVTT626C4PBLLP6NoXdOUv3TH8NOHI+3I
+# cCPJUiBMWogXhr7vymaaJZXMWRlChfCnoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNFowIwYJKoZIhvcN
-# AQkEMRYEFCkc8tpi7joBnCywKMPnQ+E/YRINMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwOFowIwYJKoZIhvcN
+# AQkEMRYEFJMFwNQcZ8LIOzEZj38ybl9Yzx1fMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBgcFf5ilktOkgvuypDiosxsPzfuCyxCPmn6X1WLIynprGY
-# s7MmfiJhDpiRDg9758mvgvKWtkDfEfntHnlS/D1oHGdKBZzTPoBrwKFoyIEsWsZh
-# 5IgpjNKNbzgZ3bU+h89pvsBmsPiXf09nH10KQLqymOBO7q7jIibIcU3ReAKRDCD/
-# 3C6HFQ3WWFwG6Vuep5F8xOj0NUHiq1bFdWGr7+nuaTZ98AH7a8QdMoR/a8OGkw5h
-# ON3aUfmCv0AjACTFBIDLWXsKCdbC3Ykbh+MRR808URViHzFKMETUR74epJcBRdPX
-# tVnmUd8zaf952ssmEmqgllWi3QI16vojAUk+3Gw6
+# hkiG9w0BAQEFAASCAQCqbsHV6F3L8o+SlylMYMuUFR3pxXWEWWPOeIRwS++wL5w/
+# Em1DNwc2aFhpYub7bO2Wofb3reSSIjArbTBgfmk9R21Hv6Q/2t/XCFBltmHXUGws
+# e0ODwy4x7qhwWzIf9duBXcrNQSns+0wSXoFAU7tbSEMIogkWx2jYzm5maWcNUygc
+# hbwvh3CJ2U17driBbtC62LlipzF8WHz1R8ONePCgfNSCFn+GCFevxXrxsZKTrXSk
+# jZ97/4GKWB/LFDBvwS6Yiirv4P/cW+XzHx7Eudd0qcNf+DOOY/+wv3hcgeDaxw5Z
+# /4r8nwSaSZ274WlY27YyE7J32LcIw3npmYOQPVkh
 # SIG # End signature block

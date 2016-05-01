@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -64,21 +64,24 @@ function Global:ConvertTo-StringList {
 		$Computers = "Computer1","Computer2"
 		ConvertTo-StringList -Array $Computers
 
-		Output:
+		Description
+		-----------
 		Computer1,Computer2
 
 	.EXAMPLE
 		$Computers = "Computer1","Computer2"
 		ConvertTo-StringList -Array $Computers -Delimiter "__"
 
-		Output:
+		Description
+		-----------
 		Computer1__Computer2
 
 	.EXAMPLE
 		$Computers = "Computer1"
 		ConvertTo-StringList -Array $Computers -Delimiter "__"
 
-		Output:
+		Description
+		-----------
 		Computer1
 
 	.NOTES
@@ -146,8 +149,8 @@ function Global:ConvertTo-StringList {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUC49XmNC6NfUHYSS1ObN6t0nX
-# YV+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWMx8+xrurj5lyBTeq1GXoAQb
+# kCGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -290,25 +293,25 @@ function Global:ConvertTo-StringList {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQK895dj5jKmMXxPxTZP5fh+fC1OzANBgkqhkiG9w0B
-# AQEFAASCAQBjcWVU4cvXimmVh4st2zSjs2kCW1TomHP31Kg9uJgzS9n2GycLTNuC
-# j+iV1LqLmbWrSE1oNj7Mu9M92EgJepUHvGxP59LAEwy4aRhRmNVjcsSCd1UWDaWH
-# S+hovzkL7pXMFbkaAsTBI3p9dP4ll4yiHds9kiacTapQ+FYohYPYTjIkuZ4aqhs6
-# Nk0/4WNYvCerMGKo/5St9uyCtTSWSUu4tevtFjrcduSyIeTp4anMOBt2ujdw//QM
-# 3FWHJUUst7IwB4FIN7P9o/QKokQ3Vv9VBFQSBchuAfadELAzLq10Mzn2zPI2QSN8
-# tMsS8xs0kIPx26qjPnqdmOqiIL1xh12QoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTL7rRF8FSOjPxTPyyfU9QWUiYlPjANBgkqhkiG9w0B
+# AQEFAASCAQBTON1e/1ko+lXIVYZncvXPR6eG1bj8y7DNCCXLqcQabuLXYBW8pWYW
+# xLw0QC0HdSAZYqwY9g3jPF2aNVgQRruxHSDV/Rnj1BceRMJffRCuVV4IJkZ52oz2
+# p1BMsuVRtegB+52ZcDUWKRyD9QIw/grtVasHK+wJnCgIRTJy/YurHwrkvS2m1Zmz
+# 4UhffK9HG80bynhyCs8Osh3JofTPVns0SCudmW8fqDXCBBkvJatpYEyLBJVO/ASj
+# D9TlkcvE6vOZx50CHDQ2h4bI2ea2m5v1M6B4zPAUenVQ1SHa8ezMCrHccpDBHfxG
+# 03h1kOMRqeaD0SlUCnpAAcY/mXxA/GlHoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0OVowIwYJKoZIhvcN
-# AQkEMRYEFJssgl+NKcQbjEwFamZ0eM1pjm/3MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0M1owIwYJKoZIhvcN
+# AQkEMRYEFELjsmdXSV3cp5ME9USWShVgO5zpMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBdO+JY2wzOLEhdN8eg5JJuvKtbJBtqtZxR6DcLb+yEPd6F
-# 0sMFpJ8naW9eagFnnV2N0E+aGAFz5l8S5+sq8EpXDAA9T2pdt/44VMzOwmnOtTyu
-# P7YVxEejuUf/mxgPRYSAX1EPVl0e5AFjVlmVbAhYXWHj8YHGArHJ+rzWRNo4B08S
-# U5upj05ttnwSyfqOh6rEJFelvtPHuMWE8O0R5KOJxUFIGLSOgNd86cArw7+q1MIZ
-# FfsQ1xAaPIBauNuei9zk3siIOToSsXCsuKgF4PhQt/YmuV9xTAiaA/Yu/UFRwoRH
-# RvtLiPur6bv16w0Om65ZsOtQftOl3brOQA6fTje+
+# hkiG9w0BAQEFAASCAQBGTADfaggrV/odG2KeFUjKd8WENauVrobQG8ly/TdLy+84
+# uK4kFL+LmEFUJxwDSVqWgWpPc6B9uNeCuSjlKUT0Y93Gti1gzLhsgab04D2bHJ21
+# /mpbFbaSyXMsNw5FjMiPhSE22aM2WOWYgW3Zk6geqtbrhLGdMwwYnV3lSkSKjstD
+# k1ZofBFKZeKW0finaTRX2jutlT0M+lvbcrd68tCmS4aWOvuX10snpmO9UN+6Q/wa
+# kW7RxvdZQGYyNZSPlF/z0eVsjiZ2IkPG2qDPKwjGRcR8Dt2cWjtmRmLUb8VSib7D
+# 617ziwhc9Dk8iLy8+Zy6RZD6/0w2Jgt4IuMn6Gj+
 # SIG # End signature block

@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -77,6 +77,8 @@ function global:Send-HipChat {
 	.EXAMPLE
 		PS C:\> Send-HipChat -Message "This is just a BuildServer Test" -color "gray" -Room "Testing" -notify $true
 
+		Description
+		-----------
 		Sent a HipChat Room notification "This is just a BuildServer Test" to the Room "Testing".
 		It uses the Color "gray", and it sends a notification to all users in the room.
 		It uses a default Token to do so!
@@ -84,13 +86,15 @@ function global:Send-HipChat {
 	.EXAMPLE
 		PS C:\> Send-HipChat -Message "Hello @JoergHochwald" -color "Red" -Room "DevOps" -Token "1234567890" -notify $false
 
+		Description
+		-----------
 		Sent a HipChat Room notification "Hello @JoergHochwald" to the Room "DevOps".
 		The @ indicates a user mention, this is supported like in a regular chat from user 2 User.
 		It uses the Color "red", and it sends no notification to users in the room.
 		It uses a Token "1234567890" to do so! The Token must match the Room!
 
 	.NOTES
-		Early Beta Function!
+		We use the API V2 now ;-)
 
 	.LINK
 		API: https://www.hipchat.com/docs/apiv2
@@ -206,8 +210,8 @@ function global:Send-HipChat {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUi0xhqwNbR3oNMkhp6jU8lpRT
-# 0vGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUh/DbPVmpynb3QTUfLHZG7yHH
+# nomgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -350,25 +354,25 @@ function global:Send-HipChat {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRnhn6nuAeV5jS/9wcKC/xmaIHvIDANBgkqhkiG9w0B
-# AQEFAASCAQATynLzPp09C38kltwLxLiZPgM4zCMoW7p6lVu4d2pwRDjRv0B+Vh5Z
-# uCpxYZxgQNMSCmsdr8Ku+vfLE1h7TegUtFKT8xerPheFCV3XR4VQuKPScleezfEQ
-# HAlh1vfutqnAFrrZ1LGrJ+POdGLN2seQ972fu2DEif8i331Gs/2SBvDDoMPKwgQD
-# 5kDZJcpJZ5Cusgvzy+SXOmz/jp8ceckfDJfcTV9Tb3RFzWMVPak1U+Ds3csWEMLn
-# dlbnwmxtV87mHL8+8QCADOb0HNnj5F5SU1Em0lvcM3+5SGneZDvtj0oH8Sz4DT+a
-# u/TspeXXrU9kyd8mGKZmCqCjivIlibUBoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTJJYqFNuMpQBoWQ3zOfS6EuLnEYzANBgkqhkiG9w0B
+# AQEFAASCAQCUO8UjQvk3TfAugx5ULgEHNNmF/Kw9/j9zX9wONNwZZZ983SmHbHPF
+# Bn19J8YuNa26qEb56fIxroSc5Lhw7reufE1O61xwvn1/9pfg7aHbeToW83Heu1Dl
+# sLhJnqgoz5HwN53Mny4lxqzPLEsyC5kmgYUX84e6wHraWTzswgkhAtyhhl1Iia9O
+# vIVti8OM8WX9gKoPALpJYZz/t0sNTvWIk5RfkpiS8DnmCIcqRgyd0J0+OuWvWf2Z
+# 3A2hF8bn57vk+7BFqWL2C7RbM9EL7A7BQEVaQO4orbk5gDv5dl1XP3kpE5am/xpX
+# QdSrr4/v0z7G+aHmfhrun4avUrtUvKh8oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNVowIwYJKoZIhvcN
-# AQkEMRYEFHqi2lexTdu6Dvbj2naTRS8Z85QwMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxMFowIwYJKoZIhvcN
+# AQkEMRYEFF6SOi/311lZbVdo7Lj1vqwqvf8rMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBJZkT0nAxVjitij8yMeU/lf+cERIqO4IBDuuSEVb2s8IV/
-# /jmjDJ64bejwlkHYod+zfuFualeb3qptRqoiceSdTbLRevi5HZnUN7W5Vpn3GMTm
-# ZYxLWsMPDq+rMGj74Q3NjyX2ABofXy/FDKGm/I73J5NJziO1K5GGt7bb9wxCOGtb
-# kyIsZPF6vaUnpRdx+nZrPHbx4OuvPb0xWee9Ncfxv+qKt+CTzyYa4YZ1z4YObzwA
-# uMGXJiqUTUlM8OrUxx7FpokSC2jrfneP+hACKxw5ZOZCKx6zOGmLHizkz+e/ToQ3
-# kCfrkZigne3ozBw3LsE0dVj2B3/Bi/IIcB/GtwSF
+# hkiG9w0BAQEFAASCAQAetdYU59vsKraBPjdfO8OWfDXjTzMO428XwLSNMxdv/AHQ
+# 5RuHsVLPVV17ot8OI0VV+X0+bncwcZuE5in0FSoVlEJwWXJ1BwuWNLR0lmWcPabM
+# nYQFBhK6cfVdJdlCyrLy7fPb+WEwuruhb5Eta5zFT8uCGG6Omn41MBL+sA8bHV19
+# rFCBVmdYq0kYYrFXKHkeU0Hk/DbA+7FdZS9l88k75NfGVANn6rSU2sQS22ZK6bGa
+# K6C2TeNR/IbHMJjXvIKbqwigJUuM1j21Y0PdktIsE6E4siEmNBnq5Y3lJUbIZU8a
+# fpvOkudLXi5xo3nwlKL6RMtrOU0CPth+Ie596Qz+
 # SIG # End signature block

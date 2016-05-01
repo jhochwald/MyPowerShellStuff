@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -46,7 +46,7 @@
 
 #endregion License
 
-function global:Send-Prowl {
+function Global:Send-Prowl {
 <#
 	.SYNOPSIS
 		Prowl is the Growl client for iOS.
@@ -76,11 +76,26 @@ function global:Send-Prowl {
 	.EXAMPLE
 		Send-Prowl -apiKey "1234567890" -Event "Hello World!"
 
+		Description
+		-----------
+		Send the Prowl message "Hello World!"
+
 	.EXAMPLE
-		Send-Prowl -apiKey "1234567890" -Event "Call the Helpdesk!" -Priority 2 -Description "Call the Helpdesk, we need your feedback!!!" -url "tel:1234567890"
+		Send-Prowl -apiKey "1234567890" -Event "Call the Helpdesk!" -Priority "2" -Description "Call the Helpdesk, we need your feedback!!!" -url "tel:1234567890"
+
+		Description
+		-----------
+		Send Prowl event "Call the Helpdesk!" with priority 2 and the description "Call the Helpdesk, we need your feedback!!!". It attaches the URL "tel:1234567890"
 
 	.EXAMPLE
 		Send-Prowl -apiKey "1234567890" -Event "Your Ticket is updated" -Priority 1 -Description "The Helpdesk Team updated your ticket!" -url "http://support.NET-Experts.net/"
+
+		Description
+		-----------
+		Send Prowl event "Your Ticket is updated" with priority 2 and the description "The Helpdesk Team updated your ticket!". It attaches the URL "http://support.NET-Experts.net/"
+
+	.NOTES
+		Additional information about the function.
 
 	.LINK
 		Info: http://www.prowlapp.com
@@ -97,12 +112,13 @@ function global:Send-Prowl {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
+	[OutputType([System.Boolean])]
 	param
 	(
 		[Parameter(Mandatory = $true,
 				   HelpMessage = 'The Text of the Prowl Message')]
-		[ValidateLength(1, 1024)]
 		[ValidateNotNullOrEmpty()]
+		[ValidateLength(1, 1024)]
 		[System.String]$Event,
 		[Parameter(Mandatory = $false,
 				   HelpMessage = 'Description of the Prowl Message')]
@@ -145,6 +161,7 @@ function global:Send-Prowl {
 	PROCESS {
 		# Try to send message
 		try {
+			# Fire it up!
 			$webReturn = ([System.String] (New-Object Net.WebClient).DownloadString($ProwlUrl))
 		} catch {
 			# Be Verbose
@@ -173,8 +190,8 @@ function global:Send-Prowl {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQAnJpA8tnmtvR6LAWmKyQveQ
-# 2JagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQULdOyZlAyHFMbVDn05w593hiD
+# zSagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -317,25 +334,25 @@ function global:Send-Prowl {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTgyu+zJ4J1h0IIK2mTvQjk9p8d8TANBgkqhkiG9w0B
-# AQEFAASCAQAun8M61Y22CT88cdXG+Gx5i6fvxn5oOBVXY6231jdnBz3a4YPyJQZS
-# tPEDjo3YOBSbs5Xd9WHo8H5ZT3MDbyaWnUDx9HWWwBrmWtfg9kEKIeldkr3SvI16
-# XykJLNxPgYU97hWt/CHJUnfWJq3z/rFd7PGUwj4VcOo31hS5S1uHEzO5lEDHPBpS
-# 30MnfCCiRpEg3qOQDTrfod9gKravi6+35s71vVil2TX0gVa3cxqRFySs990c5IxW
-# NZiZTxeQE3vffeZNVvNd3OmsRiwoTbomeSTLozzG1rbj9IhHgkyobqIaYRuezF0i
-# Li4LtNMA4Oy6aC7zvQZc/v2zHSDIsLepoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRQHaFkoWUAnkH/8+AAr7PvixQUhjANBgkqhkiG9w0B
+# AQEFAASCAQBdjYeWgDkNarnFpAiKLRMMkn0bFy/JOB7tRMxqrNPTtLBpp2k53Urt
+# F6GX46cMWwPlXFBOwdpxLVowt/aF+FZ9i+B36OArerD3nu1+rsOmU83uGmaIQtrD
+# 8LrV2+kjqX9Rqp7IfmoWAFGuwoNPPCwzSVPNk7TZUuxm+nfztM9e5o6/e/uLBy9z
+# DbzpwDbanOvA3kY6ETJ8ZPgutJf52OmyaYbRNW3jeCpOv2qEOQvts0tzr3k3d+Ja
+# 8ndrNaGzJr5ghp24FO/yha+b4C1iUvEqT1tPlqZ0XG/yw4lwjEC4eXV8srytjMDt
+# zNLFhbUgXBzoyyXf43dQYgPfzFKezQWJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNlowIwYJKoZIhvcN
-# AQkEMRYEFBuJePc7JBaJvT698bp2IWZX5A20MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxMVowIwYJKoZIhvcN
+# AQkEMRYEFJMWXR5T+41a1A+MFH7FtjN6/G09MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBuroPNb54jGwNCLSwuGULQlpeOnxXBMUJ6DGms81DHaZVW
-# OtSxhCE3ii6Tyka9GlFv3msOIbLv8wlvUga1eGO6puekY3goDOvwh1v8wIf4ae9B
-# 16yuDLEPmL1eiVP3FfqEtYmd0EVt9K05aM9j/8UUwQgaC8CbldEqPz8N9MFMnIP4
-# yxSK0eeas/xtlzP7xLgYEuFgD0FWXTsgnSU2TevPmR73nYXaHovEuPh5Mk+g0OtS
-# 2ezY83VdZ2m4OuYmZCuB/dcGxt6ShRDH1FrdzCiGOP17WZ9rUH1OibGRm+SXk/Ra
-# bfwAnI6zijXs8w+CR0Qw6I0mPIDVNArn7uVh+n8M
+# hkiG9w0BAQEFAASCAQBOXNM0sCwNexIlnR15e1PWcyAezqz7FZzbzATjflXvlT9O
+# WGkvTU6B5cUaYUTdb8I4dpMmZRebvSyfe/JuS3HGlf9vZ+QlDqD9RIlUPAodFmK2
+# VjEAGGtMyTPjd9iCdlpD+r1qjDm+wjsrDqqGzqLINDOyAwCyBi4sLhJL9nLVSQBt
+# LxyEk/jujdeprBiVwE4E3UD0SerGQII5z20ny8bglVnkn+2t6a0GHxZ3Xn367GBt
+# ZWEXQrNr9wky/gyyDCyJ2RZfe6qzN/3N3SCFos5X7imeHByGDf5Wih1ERqj5rk9D
+# j5Z+RA1r7r7Hqul6wB956qYp1TcvVJfEK1Gg+szr
 # SIG # End signature block

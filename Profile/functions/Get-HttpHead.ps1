@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -49,29 +49,29 @@
 function global:Get-HttpHead {
 <#
 	.Synopsis
-		Retrive HTTP Headers from target webserver
+		Retrieve HTTP Headers from target web server
 
 	.Description
-		This command will get the HTTP headers from the target webserver and test for the presence of variuos security related HTTP headers and also display the cookie information.
+		This command will get the HTTP headers from the target web server and test for the presence of various security related HTTP headers and also display the cookie information.
 
 	.PARAMETER url
 		The URL for inspection, e.g. https://www.linkedin.com
 
 	.Example
 		PS C:> Get-HttpHead -url https://www.linkedin.com
-
 		Header Information for https://www.linkedin.com
-		...
 
-		Retrive HTTPs Headers from www.linkedin.com
+		Description
+		-----------
+		Retrieve HTTPs Headers from www.linkedin.com
 
 	.Example
 		PS C:> Get-HttpHead -url http://net-experts.net
-
 		Header Information for http://net-experts.net
-		...
 
-		Retrive HTTP Headers from net-experts.net
+		Description
+		-----------
+		Retrieve HTTP Headers from net-experts.net
 
 	.NOTES
 		Based on an idea of Dave Hardy, davehardy20@gmail.com @davehrdy20
@@ -158,18 +158,18 @@ function global:Get-HttpHead {
 			Write-Host -Object "$($cookie.name) = $($cookie.value)"
 
 			if ($cookie.HttpOnly -eq 'True') {
-				Write-Host -ForegroundColor Green 'HTTPOnly Flag Set' = "$($cookie.HttpOnly)"
+				Write-Host -Object "HTTPOnly Flag Set = $($cookie.HttpOnly)" -ForegroundColor Green
 			} else {
-				Write-Host -ForegroundColor Red 'HTTPOnly Flag Set' = "$($cookie.HttpOnly)"
+				Write-Host -Object "HTTPOnly Flag Set = $($cookie.HttpOnly)" -ForegroundColor Red
 			}
 
 			if ($cookie.Secure -eq 'True') {
-				Write-Host -ForegroundColor Green 'Secure Flag Set' = "$($cookie.Secure)"
+				Write-Host -Object "Secure Flag Set = $($cookie.Secure)" -ForegroundColor Green
 			} else {
-				Write-Host -ForegroundColor Red 'Secure Flag Set' = "$($cookie.Secure)"
+				Write-Host -Object "Secure Flag Set = $($cookie.Secure)" -ForegroundColor Red
 			}
 
-			Write-Host 'Domain' = "$($cookie.Domain) `n"
+			Write-Host "Domain = $($cookie.Domain) `n"
 		}
 	}
 
@@ -184,8 +184,8 @@ function global:Get-HttpHead {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUmRFbjPGyhkfVoBgJ4cMRFWOy
-# xIOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9+4GZ9fJxkXZqLQcH0FTtVoH
+# A3qgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -328,25 +328,25 @@ function global:Get-HttpHead {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ65Km3I78dHWQwGmbRaXEzk/715DANBgkqhkiG9w0B
-# AQEFAASCAQAXLO3zgarFAz4BNjMrs9ggOnAa5sNr6s0+q1MxDrkjPPQXZPtGQDCJ
-# sbPyYVIirp7Qwl5s8WEjXhWDHgQ+/EteusH6nMclAO52nrE5N//37V7ORoVfDjtJ
-# cgnsVD+MvYKKS/3+7GK4O1vtp8j5Zs+6ucUHba2OGzblLoXVAtfKqj36kQFZ8yXo
-# fHHFLsSSG0xIUKrw0XxGjA0gzviafd+S5EG3H4LVfYqx0QYX+VF/gXu5R29pnJmy
-# f51QvCxnSndeG/ZxxtRjTI+5UItkscLGSbJTjCzz/HXTIuKWMtdT9ixuFd0PhLNG
-# /eXKDTZ1su5mAr8vvET/BrFMog/bc0FGoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTGTYnvtj22X1NVO5erwj5y6Vf7eTANBgkqhkiG9w0B
+# AQEFAASCAQAYP3P9Rd3d77iR/18hKYaQymekWz4ZPTWbUe8CEIGwGrmigYZAHn5b
+# SlgZMpeE6OLt1n6FTTga5TklMzrCn6a13lKpoi6DkiHBkoZWiJioGaJZnbmf30vZ
+# rPGo+jQoDK6/t1LtOVZz7wlzTNj+CFkwSMb800EQILYO7vvFcZX3C69+4SVmBQx0
+# mL7WLK70HuyGvfSgw4VFUv86QhOKNLaRkXgePx8iCApxvYKntHB0TTE/9MJo2ueN
+# Sm1xprC+ABrUBDrkI803TDJ7G8SVywMJEmS97U99x4GhQxy09myiG8Vr0D63aPI5
+# p8/ZPGo5qnpoiZ8O6iSUYCghs1e5x1PCoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1NVowIwYJKoZIhvcN
-# AQkEMRYEFLSKRxY4YPnDxm1a1bOzSy4ZC17fMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0OVowIwYJKoZIhvcN
+# AQkEMRYEFOTR2XULA6/gGNw4Jw5NpvRCpLsKMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAPL6x+ot4axRZuItNWNMEDwWM3mEn1gZSmwHDFfvH24SwO
-# WLeIiffzee+h1jIDCkRJahtQy24SUcB5T9J/bZ2qyZNWG1AS2xxfsljbFwhuDAIN
-# tPbvF3TqiRSrZODxOIDbqVi+sZSBABbKa5LCUUuLoYbVcnUxJ6Pp3+zcyomJHHgu
-# 9N2eiFWhYS+MMq+6lpDzGp5gq+b3X99YbjjJRXi0fb1JdNx89BGdOluP8PlK9YTd
-# nHqO/AesI8ZHH8ERSnqpwKNjAA6YnXbjbbmggWGccBQV5NJvbh7B9ILrxGMf5CF3
-# 3EEaua0dZHCl5HH20pKk/c3DPlDLHWsepYfwzi7Z
+# hkiG9w0BAQEFAASCAQB415qeetZFcXMZV9c7OxlLYmE30HF60dwBDgyEecNyfHml
+# e3BIpWc8dF9DA2JYe/T6OhpKHjQKtmtYfe2AISismd/5u8FY/uyk/mN9t7/GeR9A
+# Yby/AZ/iQxFhYwTzPt/l23IKReN9eweHVAJ5yy4hfa2oAyuxIzP4mDWsWZy1ZD4e
+# LuYAoyEELF/XhELn1CfdhtPDuK5gyvSaJBMYyCpYthOhY8PSKcaC88RIs+LAmZyI
+# vC6bvBNQnCKN5+i53j6P2skTRZLyxeKFrpYM7WBw/w+6kyHuHqi/Pc5GZhCJag0I
+# lNs1hTaENDQ0X0cyQFKJ9ESQ2wcII3sXAywoYpps
 # SIG # End signature block

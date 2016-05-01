@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -57,9 +57,9 @@ function global:Update-SysInfo {
 	.EXAMPLE
 		PS C:\> Update-SysInfo
 
+		Description
+		-----------
 		Update Information about the system, no output!
-
-	.NOTES
 
 	.LINK
 		Based on an idea found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
@@ -115,7 +115,7 @@ function global:Update-SysInfo {
 
 		# Is this a Virtual or a Real System?
 		if ((Get-Command Get-IsVirtual -ErrorAction:SilentlyContinue)) {
-			if ((Get-IsVirtual) -eq $true) {
+			if (Get-IsVirtual) {
 				Set-Variable -Name IsVirtual -Scope:Global -Value $("(Virtual)")
 			} else {
 				Set-Variable -Name IsVirtual -Scope:Global -Value $("(Real)")
@@ -128,9 +128,9 @@ function global:Update-SysInfo {
 	<#
 		# This is the old way (Will be removed soon)
 		if (Get-adminuser -ErrorAction:SilentlyContinue) {
-			if (Get-adminuser -eq $true) {
+			if (Get-adminuser) {
 				Set-Variable -Name AmIAdmin -Scope:Global -Value $("(Admin)")
-			} elseif (Get-adminuser -eq $false) {
+			} elseif (-not (Get-adminuser)) {
 				Set-Variable -Name AmIAdmin -Scope:Global -Value $("(User)")
 			} else {
 				Set-Variable -Name AmIAdmin -Scope:Global -Value $("")
@@ -159,7 +159,9 @@ function global:Clean-SysInfo {
 	.EXAMPLE
 		PS C:\> Clean-SysInfo
 
-		# Cleanup for variables from the Update-SysInfo function
+		Description
+		-----------
+		Cleanup for variables from the Update-SysInfo function
 
 	.NOTES
 
@@ -203,7 +205,9 @@ function global:Get-MOTD {
 	.EXAMPLE
 		PS C:\> Get-MOTD
 
-		# Display the colorful Message of the Day with a Microsoft Logo and some system infos
+		Description
+		-----------
+		Display the colorful Message of the Day with a Microsoft Logo and some system infos
 
 	.NOTES
 		inspired by this: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
@@ -316,7 +320,9 @@ function global:Get-SysInfo {
 	.EXAMPLE
 		PS C:\> Get-SysInfo
 
-		# Display some system infos
+		Description
+		-----------
+		Display some system infos
 
 	.NOTES
 		Based on an idea found here: https://github.com/michalmillar/ps-motd/blob/master/Get-MOTD.ps1
@@ -376,8 +382,8 @@ function global:Get-SysInfo {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPQAslSktwhBu+m7bdgiRDxaP
-# qQugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvrftG9hdu55pcNKFCQwLZaFn
+# wmmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -520,25 +526,25 @@ function global:Get-SysInfo {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQct0/dwDn66ArnVbgn+0J6KN3FxzANBgkqhkiG9w0B
-# AQEFAASCAQCiR2gjj/gP4p3HFETW1ObjMSPPfXaXK/pkqf5kEC+gzTaOYahhK8o/
-# XlIbe472JuN8h2DNyywa5TrEVzwCx/i0F+3VBEPNolDhqP8WGPD2+uH3q8cfVDBx
-# vH7uuJtvBr15NVo+tYuMOwQJpKOUQAnTyNqScM1kB3qfQLHimq1egIQ4pRbXBzxo
-# b4zwIrz3PRdATdMThAGyPmdqwO80IlmtcR1pBWJtekQIhquuMZYRuOiQ/dZZ5AUB
-# NK2yBW/wi95dZvWIg+noAtDKaP53vV55GfxA6rPDfNEjpenA2YuNjtA+QBtYHKJJ
-# B8CMaJpgnC2emdvyZ8rvLucLiv/zuxIvoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTXRx+RexcSyO2h20qepLTmxOf3cDANBgkqhkiG9w0B
+# AQEFAASCAQCPDopul7gpUhtD5lQWyG51EAxAo9wiOQL9I777uKJUlWN/vQV95Out
+# ManfwwYZBIWhMZOLavDQb0nfYldRpOVRkz6Tg+H8e8gNHgG8eP4VqRQRcAvmwvBF
+# Py4HCoow2TeTFYNJa6fjVBsEqDj6cFZ6Ssw5C6LCrNUFqpvV6DOJFQwBRz64oys6
+# h5KuZlh0MksEza5LbRi4tAvFYXgEyvITmRDSETq+Z9CbMl5XIl/PlyW9YXa6wbAI
+# 60p3uKto9+F/qvxiclWEL1fKoN/kyW+QXH7BbTISzy5cRtvUicHc6XRyz/FDQpjQ
+# Vo76SD3pxZzg1ExQmmRG+Caw2Sii78rQoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxMFowIwYJKoZIhvcN
-# AQkEMRYEFIs0GRtrEW2V01IPBFvIySxWaKs5MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwNFowIwYJKoZIhvcN
+# AQkEMRYEFMStAuhnGF29mvh/ZGzEtEOyI2QfMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCHAxmbTcjs5XzURUWPTujOEGnKHbHhHayKVszb80LdwpAj
-# sGzP616QJObkSMBN6QcNU3+jTUCUdW1Tx08ksx1umiuEEQ93k8b5KvCIAGYRuNr/
-# JQE3+XMItiDWe/MV2T0DU9I7UsdlD2PnRaD0UaUqJbKunPRDH8RIp+nS2uwFoe7l
-# jNp+/05tSEUx5GRqcR4mNmS5CbX1AF5v5gZ24WGXeijoSnwo3tDvwI+hfxUEfIoN
-# RMnfxGkMt7lWGxz2UGb8eb89AFTDUltYOZ15k6QjFLsOyDOw/hLuct10PKojgQiU
-# aM9jQGnHJ9sJr4fKcBLE/JjrrM+0ac6ydWQbufGV
+# hkiG9w0BAQEFAASCAQBuYsbOKwlE1oqgm8JyJvdCWdBuV32qTFPMVKDx5NyuQZeP
+# l3rcDS352CGjQAPZeXMY7Vq6Ome+oTce6Tx4+EbWrDcgSNvDD69ZY9cOixYDmJLi
+# 0iaKjcu4v8LZBGLHA4lUBh2ML570ubul9PsYuK5MsufNv6IPh/OzG7WH3eGGZ8Qg
+# hgAR0VJVvOdtYneziqKl24X9KFNqKZ9FwLH8W5SJDi2mCMg8KgX3RKXIRn85zBPB
+# T8wM86G3n2FfbL89fV/WUBG+mh7Jl7SQqTqS/x2TpDfHYy3zNR703tLfpurVCl/4
+# eaJdYD6nKeuCVvdR26x0l2wmOG+M7eyzKCR4Q1id
 # SIG # End signature block

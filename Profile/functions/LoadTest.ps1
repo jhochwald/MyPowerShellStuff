@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -47,7 +47,7 @@
 #endregion License
 
 # Make Powershell more Uni* like
-function global:Load-Test {
+function global:Reload-PesterModule {
 <#
 	.SYNOPSIS
 		Load Pester Module
@@ -99,13 +99,14 @@ function global:Load-Test {
 	}
 }
 # Set a compatibility Alias
-(Set-Alias Load-Pester Load-Test -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias Load-Pester Reload-PesterModule -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias Load-Test Reload-PesterModule -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUaHEgblxe7VvdSYzhf+UMouw3
-# AEugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUuKpqja96/CECoOo3deoUzo4O
+# W6agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -248,25 +249,25 @@ function global:Load-Test {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSJdbh/bTeuw3ai3KjR/7R3Zb30fjANBgkqhkiG9w0B
-# AQEFAASCAQB2g1GiTDJpjPmYDfXcrQQTsdO+NU6iRzuGVhoUgfvEw/AYY/M6QmWu
-# 0u+VqY3tHTDsAUVUSmUzI/+XoRNS/6MXYcC6xVJE+GFwSpN8LSAyDiFxoFfGfWIi
-# blnqQAaWbnrSfi3Jh5l/x8LsZ6i7WruX1YZpb0ZX5Z0TZpt4bAZXqU/1Xp7PVwD4
-# 8dazS8QgOtJFGu8hRJiqgkIYaE2Xc0S86IrqVJeXPRFJr27rdQGFg+qSmNxK0zC8
-# iiVfzLGuLjLFRDV+J+b0ULiFMe0gej5l6CKbFpUywvLYNEoubG47cg0dY553mkmY
-# Xa9tE2peSSWO/MvoKtzj/9Z4rPZHd8KjoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSVCysOpPdJnpl5uJEn/dVqlFLsNjANBgkqhkiG9w0B
+# AQEFAASCAQBV39jKI4eD0bTcOFHdGx+XGdDRmBy11+u+GvWVnLpxT32IRzFWrnP/
+# LUWEMXRGi6DKfGJqyGfGxSCCeMYFCOKWQS4a7gjx7+de9r+Gms4J1OzOb8vZi62M
+# LXAdxOY23mRzqKlVfRl49OJ8Tlz5m7EWPqf9KMutIxvzO3VWg9Yc3ymQ/rv/lbXb
+# 4AXksvEWQoxPVBRBuiSPNjKBPWtJsOwENP/0fzJMweW71/zoVricPcGF0B1O+e/x
+# j+FAu5uQqBVS9sFAOOOwp2zdjIa5O2T5uEDmCM8xgBxja7j0H5gnaL5wjF0nHZ9H
+# R2P5RRFBWovpE8pKq/C5O9iWuRCKUB6voYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwOVowIwYJKoZIhvcN
-# AQkEMRYEFKqDix5SqXit76gwi9TsOAUex2QUMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwNFowIwYJKoZIhvcN
+# AQkEMRYEFM/VbJN2OndXeUSNOj8MNU2iaObtMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA9yEfQcFmOktrFW5IjHyZ/vlZ4om3DejUHRkEakhGchkEQ
-# 9EJes1/YAb+Wds9v5gHpa0unIbbk2woyG6lhx/aa512bSFPiztyD3+U0NXRyf7FP
-# MWRRlwks9mcky2NG9cVbZrlcpxs5IpAybEIwM+9Hj007blMEnqqWFA6XMbV4MK8B
-# swS57cX/LR6Yg5pulMkfuD2WKploB6kmgSAc2FEphjJmpos0qwky07xZMxm+VDH7
-# BUPgFDjuEAVF1JIwzAHgdvxBymeFxgdjFGxhqdCAsiKN8iEi16R7fay3JYmXk9Sj
-# 3KL9QKIgZi8GUE4rrMU274Ah5D0fByiP2lof6dKG
+# hkiG9w0BAQEFAASCAQBxq/Fb2yF1898Sw/g8uhWcNvqd2fwArA7upDSouZzY1yc5
+# KHbLRsJoJLxF2snSxgHB2GMRQOZ839ucMnEZlYi8rBaJAfTnX+tOigeeBumziGCJ
+# igB8kJxazVd4EW9I/B0RnH8kWKjz//DcvACU8mDxsfqQwSD8+FMfAy/OahUDBqLn
+# FUp5lpyvWkWb3HgAQ7dUpGcPgtQPweeDVdTjPxCqpmTYNUovbnQ8eFG+/8HKWFcc
+# DXfUqeSHm71Id/0iMRkFGIjhny7JX5NrRS9zW8+rafNWTxAZ3OO3Mf8o8ZDcu+TG
+# H4WvaOWyAs/a/LH8e8m264HzrcoEy/3uNBgU9DzO
 # SIG # End signature block

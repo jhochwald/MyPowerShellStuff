@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -52,13 +52,13 @@ function global:Get-EnvironmentVariables {
 		Get and list all Environment Variables
 
 	.DESCRIPTION
-		Dum all existing Environment Variables.
+		Dump all existing Environment Variables.
 		Sometimes this comes handy if you do something that changes them an you want to compare the before and after values (See examples)
 
 	.EXAMPLE
 		PS C:\> Get-EnvironmentVariables
 
-		Get and list all Environment Variables
+		# Get and list all Environment Variables
 
 	.EXAMPLE
 		PS C:\> $before = (Get-EnvironmentVariables)
@@ -66,6 +66,8 @@ function global:Get-EnvironmentVariables {
 		PS C:\> $after = (Get-EnvironmentVariables)
 		PS C:\> Compare-Object -ReferenceObject $before -DifferenceObject $after
 
+		Description
+		-----------
 		Get and list all Environment Variables and save them to a variable.
 		Install, or do whatever you want to do... Something that might change the Environment Variables.
 		Get and list all Environment Variables again and save them to a variable.
@@ -78,6 +80,8 @@ function global:Get-EnvironmentVariables {
 		PS C:\> (Get-EnvironmentVariables) | C:\scripts\PowerShell\export\after.txt
 		PS C:\> Compare-Object -ReferenceObject 'C:\scripts\PowerShell\export\before.txt' -DifferenceObject 'C:\scripts\PowerShell\export\after.txt'
 
+		Description
+		-----------
 		Get and list all Environment Variables and save them to a file.
 		Install, or do whatever you want to do... Something that might change the Environment Variables.
 		Get and list all Environment Variables again and save them to another file.
@@ -92,14 +96,14 @@ function global:Get-EnvironmentVariables {
 	[OutputType([System.String])]
 	param ()
 
-	Get-Childitem env: | Sort-Object name
+	(Get-Childitem env: | Sort-Object name)
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKxMho3aqvVnyTpeXwupYsvRH
-# PPegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUuztrUGmHyeoeHn7H/Ms6qVyV
+# ao6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -242,25 +246,25 @@ function global:Get-EnvironmentVariables {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQvTWSYj6/QsaDiwflEBvseYgO34TANBgkqhkiG9w0B
-# AQEFAASCAQAcaue+WJrvTSjfI/DnT+ZkCCzDEV0al1IPztX9PDOnQheL9G8dYiqp
-# M1DNkrjZxIZmYdwOrnPox4NaKBsoBT3BJIkPVKdxVb1ZhoYPDtY3z09A2kwxOMKB
-# ef55i72MtiOyMN8Q37yvAMP4jsGxl2Z6ra/qDtT20Wo0gKGW3tjl8eScfqxkK89y
-# 6keciE7RI2l9a/QfG1Cgu/oqAZOU1W6pa/h8HAHINrcYkUsQF9xy2Pg5uLiBALgg
-# fSUFiH/Y+JvByz/1hcPN9Z/purUW/dvH/tatFsUW0bX614bbbvGBHaadf9rEpYfJ
-# K/GZvl94pWBty3knkJMt/krMV8zumSWgoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSnTCm8JeGloo1pJnfaow4UdU3vwzANBgkqhkiG9w0B
+# AQEFAASCAQCFM5mDtDOAbkXEmeywrTlILNz4nrjF2JUyQQ+3sBlGWdBW8I1Dcob1
+# fkQMEOfunVSrnUbeLtbGfzAXN8wHEXXaqU5/qmEpSvf2gEwh2AtVXRJ42ttFp4af
+# 7Scuk/3zxrTJralIU6uOuIajToW1ZZFqOQRDlpIknGmpk7K6b2rK41B3Dw0OF3Io
+# f6zJUhisbxtIcBcws3+fvVtTNNTx2UcY8TsfarW2bNr/2lheBgGCSLtRJKCnNKn6
+# f7m1iSOjOB07+9hJvNQQ/OBwmDZaLpQ4b5DHAmJqejmqtxDQxXQw87AdP6J9N3u/
+# 0ez4yOuOFF2oLXaLAsZEnWFdPZ3sp3R5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1NFowIwYJKoZIhvcN
-# AQkEMRYEFKuxI1TA/uggLA888CPnciVvol2PMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0OFowIwYJKoZIhvcN
+# AQkEMRYEFN82RAhex9TwqVJw8Lze2JPCS7cyMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBlYEAWVBm5RRPYCmgM8xIWkDHR7QwWRkLmJSeviNTe4akx
-# BCArhBlQCy9czreSgUkbLRWWphuHJ3FH59zDjQ5f3QiJLerBp6b7mYiYzd6ugw2r
-# Ryq/RLVSeYSnf4UQQqNe+Atcb4n1WYESgjrE2Bb4ANOSlI8ySYhPOzpy9CmGqF58
-# J1JcIbHIKkNLvdfmalPyFI5CcKDlDN06XuLchwkvQRR+oQMa4p8GD7/InMUYqmMB
-# OGDM1lRw5mIi8ENE/EGmFa+tdirvjfcHFYY+ONXvihogm8IpJj/Y7M7FkGMNRMA9
-# +7jKk8KpOu6aDRinukAp5hKiZ5I24tAjbp67mjFO
+# hkiG9w0BAQEFAASCAQAu7jDalAWTBFuRBfVZoW2WVAjk93m2F3PKgYiLB1vT+zwX
+# 4fpcSi6u++j73xk1h3LQFMK3oGzlLmSi1F45vmPyZr2L4rJJJohowAmTXTbUyYww
+# aPOHXrIIBFQzPprHUxMYaKtaQtfDuDLtFzvVbNl8VGqj2P4B3yj0fNovj/nWSAT/
+# Wvaoz/Wx4U3TTO89VLsvYVmB0VpDmle6FSLuGY6xml89XXYfJqCLfsIwc0bQ7Jqq
+# VjIE+ty5NjDDtceBUnQuv+5sZFDajQHNYy6aoMrxwztVOJ87u4BAVbOMjKHmUMFX
+# T6+/VpOTqJh3YFpafCrkuGbiXEltmD6MDT3ojlnW
 # SIG # End signature block

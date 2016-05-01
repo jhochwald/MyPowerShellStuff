@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -56,12 +56,17 @@ function global:Get-AdminUser {
 
 	.EXAMPLE
 		PS C:\> Get-AdminUser
+		True
 
+		Description
+		-----------
 		Return a boolean (True if the user is Admin and False if not)
 
 	.EXAMPLE
 		PS C:\> if ( Get-AdminUser ) {Write-Output "Hello Admin User"}
 
+		Description
+		-----------
 		Prints "Hello Admin User" to the Console if the session is started as Admin!
 
 	.NOTES
@@ -94,8 +99,8 @@ function global:Get-AdminUser {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUPsAfyatvN7JXCgCZzTD7N2fl
-# JR+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUFVOaVHKc83MRvrgyHmle50ft
+# P4igghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -238,25 +243,25 @@ function global:Get-AdminUser {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTmayFPmWKR7h436dw5zJUL+SZBKTANBgkqhkiG9w0B
-# AQEFAASCAQB7EMF2Adm23SGcbzJEbkibODH3Knom3xqmer73y3DjJiYK9xTIbgUh
-# Nz4IGnFqQCteiEu0RZvOR7cwAWoY++qkMWc5kX3ufO4i74V+qk/zAeDIn/yjuN3m
-# rQVfhmLJv0XJ6qTvXUUinoNYM3Zt2BBffcHwxghmov4g49yM/JcZE7cNiDu8wG0n
-# zXFtwW2OPitBB+Nz0ocOQzoxHqvXjZcQDESFij6+jEtE/j2rq/YLgAOWHKG9i2H+
-# vpXavP6aewkfjahK+OPk9w+dkibLS9B0Y929fSv6Mh05Sd4y3vl25Clpo4tQ5pK2
-# JS6BIOwTTJM32U6MnjqrHj9Nrc8bKpK2oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT82nynv+zfWPpU4QFuDp7x+7zA9TANBgkqhkiG9w0B
+# AQEFAASCAQCL8VBqcwAmZRP5a3N1HMP64Imc++0vrkttUZYJaRMKJDm8A+PnKKYU
+# I8iToQZUv8gsGjjI1yPP6ZchNVddsy2rm0d634CSaRRIe6LsJW5cnSuLc+FfrGua
+# TvRIS/cDVYhnu4MiqppMaEJ+YaL1UbaeGROwtBs0263k4An6ZJepv2BmOy8erPDd
+# I6Ue3DxQnZowSWuyZPLp1mOfYSfc+cDO74T0VnHUDS3SRo8TYMUB0csoxF+vQlof
+# FDHISKpN5MYZ8hvaK8H+kY6ciIb/xYeBUtIS4c18t1FC1vAhmACCGw3+FMPNehMT
+# UWm2sd+TWOZQVb3whngb0qDtiBlNpHl6oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1MlowIwYJKoZIhvcN
-# AQkEMRYEFAoHlQqvMQrnZkzZ6INdNs22zWImMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0NlowIwYJKoZIhvcN
+# AQkEMRYEFNP7BmZndnSPeUAGvuOjkMfXIQwQMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAPj+NqWNQImNI1Tmw4v61Uv2O3Jp3tTNSa9YRVdMvKp+QH
-# 1Q+XxBObpGccr5ilEfF+f8V8l8aKyQBNmDG9EXsqeju1R4q9JUGPJu28M6B1uBuG
-# PyGlOYq5b/4V7IoAyp8oDych6TAJ2SsV4+A6D/iuSfFJIma3SVpUL578EeJ2KJLX
-# exjOe/JI71TvhLr893O4hitM8w+JbHc9K5jNh/OVzsbTVE97im2nOkptwr2gkCTG
-# OEqHQ3bfYBVoEO1Y5ca/W1Sm+XpWQ0eUU9mBJAKlCm+J5BaVGVJTFQOK13qJquMV
-# Jo3Ndz3k5FdDEH9LR3M+dtnRhtjpvuzU+09iyW5o
+# hkiG9w0BAQEFAASCAQAQ6jpQCtIoDaLBRtSA5xTtQQ4d39/rZVSX4vrbQhEfjj4p
+# 3ShFpnyTwatjx+cITgimnRrkb2V3GNHeFzgqMLH8H0m4iCV1feUZXpOlsY/ffPVY
+# 0xvIOdcpBxZihPUMfsrCSuHu5HY+MaP+O/tkwlXuPayuLwVbtDe6zlFrMj4uBL4t
+# FlgSsRFdw4Fsm/1c8Loqg0G/JUkE/Ed6XIyDYLCQVksbydsh6JL5nDAks3yuZXhO
+# gHjBYZxU6j2AuQspoxtok6hHPdYQPuvzJYW2wkp+4mqYb6YzUsXTd4NJRT8t5Qv/
+# 9wK3t1lEj7Xnu608KVc4kQubbBxxJXUJt8y464Ip
 # SIG # End signature block

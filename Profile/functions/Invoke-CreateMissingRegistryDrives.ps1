@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -55,8 +55,10 @@ function global:Invoke-CreateMissingRegistryDrives {
 		Create Missing Registry Drives
 
 	.EXAMPLE
-				PS C:\> Invoke-CreateMissingRegistryDrives
+		PS C:\> Invoke-CreateMissingRegistryDrives
 
+		Description
+		-----------
 		Create Missing Registry Drives
 
 	.NOTES
@@ -71,17 +73,17 @@ function global:Invoke-CreateMissingRegistryDrives {
 	param ()
 
 	PROCESS {
-		New-PSDrive -Name HKU -PSProvider Registry -Root Registry::HKEY_USERS -EA 0 | Out-Null
-		New-PSDrive -Name HKCR -PSProvider Registry -Root Registry::HKEY_CLASSES_ROOT -EA 0 | Out-Null
-		New-PSDrive -Name HKCC -PSProvider Registry -Root Registry::HKEY_CURRENT_CONFIG -EA 0 | Out-Null
+		New-PSDrive -Name 'HKU' -PSProvider 'Registry' -Root Registry::HKEY_USERS -EA 0 | Out-Null
+		New-PSDrive -Name 'HKCR' -PSProvider 'Registry' -Root Registry::HKEY_CLASSES_ROOT -EA 0 | Out-Null
+		New-PSDrive -Name 'HKCC' -PSProvider 'Registry' -Root Registry::HKEY_CURRENT_CONFIG -EA 0 | Out-Null
 	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUJCrp7c0uHbLrToV6VvKS92N4
-# yN+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUexlYYmOt3MqP70GmlLcp7JM/
+# sTOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -224,25 +226,25 @@ function global:Invoke-CreateMissingRegistryDrives {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSYHv3pXRqNBHprfM43a0D9lbKlwTANBgkqhkiG9w0B
-# AQEFAASCAQBby9LXOiWob+chVWHEBxmQvI6VU4xPS3TMBZERn7GUsgXUBpvagmg9
-# q9tc5B4R6j69agRMa4ql7nURoz15CUPj/k5vxpi/bHpJJctuBhomCFyeMYLlF/Mh
-# PC1uChb8UlrVOuF2y4DR5WU5EGq/YMlVDAZNkUAr/msw4+LvA45SkzMgyMaSnOc6
-# 8BLnaZm/oRLN4kiJ2ryMxCoUvqzjIYVdgZ4SdkpC5rlYMXVtwfOjSTo6G5UZSieB
-# kRzn2nUPq1jvQmvFQTfqTS8A1DZMrx3dIpo0SSgEdmfwlgSBFgCs5Om51eyKhv19
-# fDScXaZTYWIszUV24FATA62gNziZC2xFoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ9zEZRBWc4uVT0VVN3/PQzEtf4zjANBgkqhkiG9w0B
+# AQEFAASCAQCFW2KKhz7BvxlWJlqS5JMX8efLr9DVbJwybECi/NhO9QbH/kzXikT7
+# 54btTIqwNMJKHex+xZpMfiP4agpiW4HqkpNLu7+YXPWDuARQrdlG8hGY/8QN7+J8
+# 17gpA+9OOxM1lhtjG6AmA7A4Fk/c8tvTwpkCvyxFv3GOU17zeZPwcmm3GNTBU5bd
+# rskIeRrJ3ql3THsAlYH575NSyRLLBBZ03uIVtNQwniKszd3oJRBwlABt9oDHPRmW
+# ofctAR22wGs9iZZPqQPTAG69V7SCZ6VqSYRMz6SNVj/RbtQjY5SnVIR7m1vHkvm9
+# fqCI967ivT0GMjo3AdokZx9D2GYFqA5boYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwNlowIwYJKoZIhvcN
-# AQkEMRYEFAOiIBExl3RjCwrCZrmyn4C0i1vuMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwMVowIwYJKoZIhvcN
+# AQkEMRYEFEWqKL8zr2i4NSBfdehjRGGXZ2xAMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQChc5JfHmkLAClNiPMcsPnizcja7GX7bl9d5BMMK55n+LJL
-# GAKYKZE4NFS06Z7dRdrLMjbWQ5bSNH/ytPGZ2q4HqUZUzbwFnbRmO660AQdIPPLo
-# oo5nKHBrD2gxSOXGMdkSg2DrKCwQhsWMYl6dFrJMgpYJ4yYXTou78L1BXN1h30/E
-# /W98VVbgVe0r0sqsrGH/sFzGxnC9jmrlEveYmgeCQjJlmSKXYnSt6yp0fEenFf8o
-# 5EEptb4nwhKa+FEtWkK9Y2NuWvhe0OYCFznlIfdjalTxR2C1PELXbiuKqk6HFAL5
-# Vqu0pO2190lHzQNtoqWJ9ZzI+7ohdtHqqPv6W9GI
+# hkiG9w0BAQEFAASCAQCNOIZc+nyBP5Y34VqSX3llV65/84bNpcauxZvqzrSBQlhz
+# CiKOv6pjLgGUHfggI0ovCcu6fa4NF+q+ecqnhtB35d5p4EEK3+9PjqPnUnmqJ+AM
+# ntJFEjMHp+vG/V20QB0hyA1lDI5l3HKTTqNdW804ato8kqtCN3KflztAOrOQlaiU
+# NlXB3w3rQZ1KjcxPrIGrh6Xa7EErY5mdmHxdeimdHClHb5Ur7qQeR+P8fRM8t7at
+# AmrJ9nKak8ikC1gUPqfQaRDz2Ol911TtNOm7JTS6yk10e3IZmuSSjW3D52bN8Rdy
+# 47l/kVjcu9R73fAeR3L5EI7Dg7yaVV9ZnvS+2/YG
 # SIG # End signature block

@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -49,25 +49,35 @@
 function global:Test-Method {
 <#
 	.SYNOPSIS
-		Short description
+		Check if the given Function is loaded from a given Module
 
 	.DESCRIPTION
-		Detailed description
+		Check if the given Function is loaded from a given Module
 
-	.PARAMETER moduleName
-		A description of the moduleName parameter.
+	.PARAMETER Module
+		Name of the Module
 
-	.PARAMETER functionName
-		A description of the functionName parameter.
-
-	.PARAMETER parameter
-		Description of parameter
+	.PARAMETER Function
+		Name of the function
 
 	.EXAMPLE
-		Example text
+		PS C:\> Test-Method -Module 'NETX.AD' -Function 'Add-AdThumbnailPhoto'
+		True
+
+		Description
+		-----------
+		Check if the given Function 'Add-AdThumbnailPhoto' is loaded from a given Module 'NETX.AD', what it IS.
+
+	.EXAMPLE
+		PS C:\> Test-Method -Module 'NETX.AD' -Function 'Test-TCPPort'
+		True
+
+		Description
+		-----------
+		Check if the given Function 'Test-TCPPort' is loaded from a given Module 'NETX.AD', what it is NOT.
 
 	.NOTES
-		N.N.
+		Quick helper function to shortcut things. / MBE
 
 	.LINK
 		NET-Experts http://www.net-experts.net
@@ -78,25 +88,35 @@ function global:Test-Method {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
+	[OutputType([System.Boolean])]
 	param
 	(
-		[Alias('Module')]
-		[System.String]$moduleName,
-		[Alias('Function')]
-		[System.String]$functionName
+		[Parameter(Mandatory = $true,
+				   ValueFromPipeline = $true,
+				   Position = 1,
+				   HelpMessage = 'Name of the Module')]
+		[Alias('moduleName')]
+		[System.String]$Module,
+		[Parameter(Mandatory = $true,
+				   ValueFromPipeline = $true,
+				   Position = 2,
+				   HelpMessage = 'Name of the function')]
+		[Alias('functionName')]
+		[System.String]$Function
 	)
 
 	PROCESS {
-		(Get-Command -module $moduleName | Where-Object { $_.Name -eq "$functionName" } | Measure-Object).Count -eq 1;
+		if ($pscmdlet.ShouldProcess("$Function", "Check if loaded from $Module")) {
+			((Get-Command -module $Module | Where-Object { $_.Name -eq "$Function" } | Measure-Object).Count -eq 1)
+		}
 	}
-
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUMas6MKaslWo8AEY4eorCqrv2
-# 47ygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvE/iXyt7CWJmWIJK/x108S9T
+# QBCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -239,25 +259,25 @@ function global:Test-Method {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT3JehuMMYntYI7tSzaRJ7YHxPZ6jANBgkqhkiG9w0B
-# AQEFAASCAQAEdo93nOyDMBO0p75VmktfT4xpEE7fnucXs01WjkS+5bgEXCV8bE/+
-# 3ictW97BjCge2EcsofuSipOGi6RhJsJcOSeuN9qRqqmj8gqcTnca3+T9kW53xp/w
-# j6BByTsLCIclX6YRWffEKHuuYzPpsyrdcG4CBd7uzGhKYqu4RIqGGiO6oKHclByI
-# iUhCKJMESzvmouteTJvxvNL9a40zK82SRAcHb2J6lKwUJ2djjJ+oLtF/ENhuuCCN
-# mxLL2lC5LNXelXw+rFztahLzQNtQ7y8+Cx9/IH6IliFnQ0aOYrY3yRUEVoawmoRK
-# MCRFyItu2+qoMhhZK+PrIj2IZ+6efZfUoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTnd3sP41C+FapLHu2L/zF7owK2bDANBgkqhkiG9w0B
+# AQEFAASCAQBUurzOH9kmPRzNrSyz1hF1nhPvEGmpZDI5XFou2qiRCB4JMfyL6b42
+# 2jH5qs/D+GxGsbriwBfNeh6UN4XJCoIl9iLM/K1ZDQTqkQClqtoY+bKviTjij/Uz
+# c0tXNG2YaF7cZmjOT9q7aQsthtqa8qjack8miLgQtPJEHHDpK9xBttkpHexaRgVs
+# V1ZJdRwZMNTZ5KePJ/sSYRwj0H7wXXaK3yNjt7EHi52Fz3mdjRHsfPBl92hEgjVN
+# 6t8xM4pBAun7ozbp7XDV4kwDp8+MFQFpLPGKdr0MP106/lW0Ba4fqULeqN1QcC+F
+# t2q9P3mwq55nIqvtY46ZfQ1J03YJWF4+oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxOVowIwYJKoZIhvcN
-# AQkEMRYEFKTTNClaZGsYRveXUBjE6ZbLR0phMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxNFowIwYJKoZIhvcN
+# AQkEMRYEFHxKMeLwNe5JQXJkQzex7gnGVTVnMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA16qxLBFiuATUDnATgYD5KRD63irqIhwbDsNTNXuNPNuxL
-# u3WUIYdWV1S7Yh/CyUFAB3C30CpgYUVbrYKjkdswpIXfQoVQDetKc3IAnNgIv4j3
-# skYovh7M1qWSRUxDJA0TLcYmNdIn7MMlYLvUFFTrY8A45G+RIqjORA6vqfMYmDXJ
-# nFvczx2FJhx/Z3g2vNkZX44eVq3sMBFTBVglpJp1xgLZjGJAi1Zari2kZ6SnxNmU
-# 9ZU94Mj/D+C32CLCZTMvmI8NuxGlDDmCqveVewq2VW1X1TljwCLOQA4PS4Qo0I0l
-# kTlIM/YAZKaOQQWUGulP46E+37IMJMpcQBXdi7pP
+# hkiG9w0BAQEFAASCAQCp5u5oPShxcllSjQh8dZg+jlU7SAcWDdfSGMNTydzGmSsX
+# qG/O3sXc5nT+lxHDhQ34JgLTWpu3QmRDzLoweeZPQRFCH72D6QhjYUvobU27OJQU
+# affDQuLFaFAougXjewXHrpwCVvHJyWe2lr9iNg8/Q9YZJQGhHX553VGgLZ25TSvF
+# 7LaGsMaCHqWmIGdoXnz2psguWuvQ/sA9jk6kk3WDrT0s15VgrvABVN4V6vEycV8H
+# 4LOcifKCEFaamzd931JZZXW3/7tHJhprVW/0qgxbkQZITlMqqE5juxugpdfoKjzX
+# 9HvPp5xrsIy1n7zThYlNCgkC/NOaPrLhCVfhqG5p
 # SIG # End signature block

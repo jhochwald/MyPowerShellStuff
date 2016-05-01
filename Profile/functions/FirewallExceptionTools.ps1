@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -57,10 +57,9 @@ function global:Set-FirewallExceptionRDP {
 	.EXAMPLE
 		PS C:\> Set-FirewallExceptionRDP
 
+		Description
+		-----------
 		Enable RDP via Windows Firewall
-
-	.NOTES
-
 #>
 
 	[CmdletBinding(ConfirmImpact = 'Medium',
@@ -83,10 +82,9 @@ function global:Set-FirewallExceptionFileSharing {
 	.EXAMPLE
 		PS C:\> Set-FirewallExceptionFileSharing
 
+		Description
+		-----------
 		Enable File Sharing via Windows Firewall
-
-	.NOTES
-
 #>
 
 	[CmdletBinding(ConfirmImpact = 'Medium',
@@ -101,8 +99,8 @@ function global:Set-FirewallExceptionFileSharing {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUjq5BD4esPJE4Bc7Z4OjZapEY
-# hlCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUaJ7/UBeKc6L7ERGuAx9UtF+T
+# wfSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -245,25 +243,25 @@ function global:Set-FirewallExceptionFileSharing {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRqintOYouxb1/VqXwsRGUCAv0lzjANBgkqhkiG9w0B
-# AQEFAASCAQBpRGmIm1V3OsFKSsLRvFghNPHq35CXlrr/G+92MjX3497bDrsF7Bnm
-# bIrEYb9odLP6Q2/RTDUcU0twUg++p1xFx96kJkeMDU/R5aG5luBC7Z+qbPU3m6m2
-# tXY9KiuXbgFdFRVqYhDFkQFGeGO298M5RjqSQbeKcYYRokRvVsGEMr+fbx7dnKh3
-# QCM1tAko/p0pdS2NtVYC697itHa9jLsu0zgmZjGOTkpW/Z4jQj0cT3qm3lZ6ZabJ
-# NyWpTGWunhfybINsmAEoIOvqcdcStFYmmM51znYQnwpvR8WsSCzoXuz5DshpZRtz
-# O0ucgXpWbnFHNVW6KSxJHGBvcO/gc/Q4oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT4DHnGU8KCfXEFKlAk7psioHk8bjANBgkqhkiG9w0B
+# AQEFAASCAQCEooWB1XWMefGzbk98rXI6S1mx1YCSFbM48VZ4d1h1mzMUuHn4JrxZ
+# MV9wW1JEd0x7n0i75AD23/7mbi6MEK/bVM0FvhrU35h/7LqCOUNU7l4OEg+GCfZJ
+# V75hCtnGsjc3HIOR+iFalaDR/a6ol4+7J84yqhjM0NCVTmIL2wpKtQSYHwSHshyW
+# Ijcx84L6gI57tN6Uy71JK3mzBrbgeFXLBXr0PP7jHkncAvZx0RNGb/SadkaxNJY0
+# UVvTvZ/IM3xqsv7NFnq5SQeJwcxvjRrMPi0qOft8qVYCU9Ytr9F6VCwKTmvFyE/1
+# MVR/xRbTq8txdKzsExik8OXJ44MxEPYXoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1MlowIwYJKoZIhvcN
-# AQkEMRYEFHBNRM06oxuh7r0mwrzVtsLy5pgaMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0NlowIwYJKoZIhvcN
+# AQkEMRYEFHL6dZXjkctL5t6iHDP6xFYadERcMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCbCS7dC0bN+FeM0mdQ/zQMsRoFDqQua9aFoytKxJ7HUoqf
-# xWF4cNBlDXQLWNMj/4CtRVVJo7DJYGdrTvcBAbCrOdamuj9KgIAh4kfX6HbfjCqC
-# Fu8zCwLsMdoByEys4N68iNVxzVnEIGmmmKctM3wZVpQTQDch53+FIgEIoto3T0F1
-# neLejq6qXYpCx8K6x2TuhSmCATxGkiO1uOiH0bJMLQm8HdoaL5aYAMs1mzGCIicR
-# ufLdCp0B6mY81/Kid22hqXYbPm9938GAsaQd+4yMDkmG2QsYgAqbxxFVA9wQGYQd
-# lSDwHxPDV98gakMvtyznAGfsL6h9pq743SDzxgYv
+# hkiG9w0BAQEFAASCAQCjKqqrsYDGI5PDGIfCOSVI/Qv5b+I+iEBwVXHcVXIdkmZ8
+# WSb4QEU5KgPe7PV9YFM/8LEpTdf0iCLhOvMjuvqTWQKiQi2g57F61dh/uQenZpnh
+# 5BvHvRBSdBfTvbjgkb3W7NVxSZQtG1CHJQ1y0WPLbxetfYp4pLHAf7BvoS6s2E9t
+# L9QlsiYKLLQ/+1OcmCvrpPSduDhzM0z8Os/jsKlY+7mOOZqISH74ibnbvqFBwfoQ
+# J0MFpb6yfMnGzJdzA1NVmnAQ5nUVrMcxNKhiqc/KWQEdhSsknkfto3Y4AtCqT7wv
+# 8kKIfIGNL7/RZ7miwVf/ct5KnFEibt1RDohD6grD
 # SIG # End signature block

@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -46,7 +46,7 @@
 
 #endregion License
 
-function global:wc {
+function Global:wc {
 <#
 	.SYNOPSIS
 		Word, line, character, and byte count
@@ -54,10 +54,6 @@ function global:wc {
 	.DESCRIPTION
 		The wc utility displays the number of lines, words, and bytes contained in each input file, or standard input (if no file is specified) to the standard output.  A line
 		is defined as a string of characters delimited by a <newline> character.  Characters beyond the final <newline> character will not be included in the line count.
-
-		A word is defined as a string of characters delimited by white space characters.  White space characters are the set of characters for which the iswspace(3) function
-		returns true.  If more than one input file is specified, a line of cumulative counts for all the files is displayed on a separate line after the output for the last
-		file.
 
 	.PARAMETER object
 		The input File, Object, or Array
@@ -74,6 +70,7 @@ function global:wc {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
+	[OutputType([System.Int32])]
 	param
 	(
 		[Alias('File')]
@@ -102,14 +99,13 @@ function global:wc {
 			$counter
 		}
 	}
-
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUpnYOPlClWQcR6tSGRqMp8RcO
-# 28OgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUZlWnzof/nhAMEuboWyY5r+bu
+# MpSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +248,25 @@ function global:wc {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSOyWHvmUGFWFApfa7LDcikYwwQ/zANBgkqhkiG9w0B
-# AQEFAASCAQBITy+7no6UN69z93NOyqYF7W48Y7c+wVSJKiLURe7DNWpSLfXwaV9h
-# Qm+rfuwk3+et/46SaAgmTWfoWKeCID8bZXsxRZpRMglaK3frgg0DyHOmTr327YZC
-# DfKuWf1hLVjqGvRxLVqK4nHIXOHFcKMe6ffZ24szZIYnx+npktrWfJCas+GGcCk+
-# BL8yVBr7B/YFkABivHLrWcBkDeZOzQRXKleXAxmdp6BTLL92RjRBTarU3UEo9eGl
-# WrLXd6LZc6yaMcRg1Z6oR+UJLRZnq18RT6w16h87Zi0wesxHpxzDzP3544hmLJjH
-# 6SLyT1RCBJLT05H+Lpsuku/EyLKCJxeQoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQPi7sIDnrS3Tzz53ZlCFFwfAESiDANBgkqhkiG9w0B
+# AQEFAASCAQBZI/Mny98HmKJadQoASxRhXisiGujZubfj2+3bbuzL5dB1Ru7SxeD1
+# Kv9CjKGhyzVKSG6m0atN2TIdSKd9Rb8RuNvAtzJij3myxQl57GYbMCfdjMK2W7H6
+# 7K5oAqIP6Y9E8N5djJSY+sfvyZpSWJ2OEjVowC11Ep8KahDHi+Wudz5IKGfbW3QW
+# l5r/uXm9uPcRSxZEQHy7WxvcPRvDAHfSKk5l9wtrth5F8tdXFPXFsq2Tydz1uMeI
+# FShxshDymP6n1UJmCR1oivFGOsEd/OOpGM+osPKV4Rkj9mlJ6r0CMSBpjNWY1Sap
+# IjL8+NnD6T3yJEW1IbTVzpFZHjYI7S67oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcyM1owIwYJKoZIhvcN
-# AQkEMRYEFOGgdUyy4e1j4oXv13MKbiY86Ev+MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxOFowIwYJKoZIhvcN
+# AQkEMRYEFJwIDy1hB+n6js8kS0DXubmWzkWSMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBVjcmXTryv+k8XOoEaUOVOt3qKpPJOcS/8Kq93xHwepSi0
-# 9cblqzohAjPYmkdhD8tmACTA2beNiXmyKtFy6WEXnp4gBOreATCVd18ShJxZIDtK
-# Kw826iZYBbCFRCaIP5ENaST5Oe7SAx0P+72U/7PUfFf5EyVcHBXi3qWAenna8HAO
-# Pu/fNEk/w4ELGFZLX8vCp/g0PASuhu3Y8RuxLYeOqsJeQwuhOWPERoEk74FTPovS
-# 84jpo+JGCzqei1eq4wG6O7rWRyPmPRaTuBlMXjzjeDMmJmTrNye+ssTwgnMbUZL2
-# CCeNfcAb+j302sf+uFQwOkscmSh3cEsHie0qFien
+# hkiG9w0BAQEFAASCAQB8Cv7IKu+fJMG138XOB/hFQuhFmPVn3YxLW96v6nzSHCUs
+# bgO3xV7Z3yczUv6lz6jqmJZN7PTcjcA/Lka16tdWXA8O5w9FEWbMBmJ7g5dOXP4q
+# btXi7Fjed6h4QW1z61TSdqGGINmrPq1TFPZdZo/IahcX6nQZc9jgMexEcJrxkPLz
+# Ao6S1RvX/YpCceUIZFC95bITQB/frZ+klcw1IB8mZX4xCVHo2exD2WwnkrHj333G
+# HtXmRhtsGyS69p6Od/O3NaT8toQ/vzfDMwFs2mOvaFpOccxr3cUCT3O2Aw7iS+eq
+# +vvuFrcxB7+ej4TwX2VrQ/zofH1hY0kI2qwpnXyt
 # SIG # End signature block

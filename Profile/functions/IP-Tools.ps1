@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -58,12 +58,13 @@ Function Global:Convert-IPToBinary {
 		The IP address which will be converted to a binary string
 
 	.EXAMPLE
-				PS C:\> Convert-IPToBinary -IP '10.211.55.1'
+		PS C:\> Convert-IPToBinary -IP '10.211.55.1'
+		Binary                                                          IPAddress
+		------                                                          ---------
+		00001010110100110011011100000001                                10.211.55.1
 
-				Binary                                                          IPAddress
-				------                                                          ---------
-				00001010110100110011011100000001                                10.211.55.1
-
+		Description
+		-----------
 		Converts 10.211.55.1 to it's binary string equivalent 00001010110100110011011100000001
 
 	.NOTES
@@ -144,6 +145,10 @@ function global:Convert-IPtoDecimal {
 		3232235521	192.168.0.1
 		167772161	10.0.0.1
 
+		Description
+		-----------
+		Converts an IP address to decimal.
+
 	.EXAMPLE
 		PS C:\> Convert-IPtoDecimal '127.0.0.1','192.168.0.1','10.0.0.1'
 
@@ -153,6 +158,10 @@ function global:Convert-IPtoDecimal {
 		3232235521	192.168.0.1
 		167772161	10.0.0.1
 
+		Description
+		-----------
+		Converts an IP address to decimal.
+
 	.EXAMPLE
 		PS C:\> '127.0.0.1','192.168.0.1','10.0.0.1' |  Convert-IPtoDecimal
 
@@ -161,6 +170,10 @@ function global:Convert-IPtoDecimal {
 		2130706433	127.0.0.1
 		3232235521	192.168.0.1
 		167772161	10.0.0.1
+
+		Description
+		-----------
+		Converts an IP address to decimal.
 
 	.NOTES
 		Sometimes I need to have that info, so I decided it would be great to have a functions who do the job!
@@ -195,7 +208,7 @@ function global:Convert-IPtoDecimal {
 
 		# Create a new object and transform it to Decimal
 		$Object = New-Object -TypeName psobject -Property (@{
-			'IPAddress' = $($IPAddress);
+			'IPAddress' = $($IPAddress)
 			'Decimal' = [Int64](
 			([Int32]::Parse($IP[0]) * [Math]::Pow(2, 24) +
 			([Int32]::Parse($IP[1]) * [Math]::Pow(2, 16) +
@@ -229,7 +242,28 @@ function global:Check-IPaddress {
 		An IP Address you want to check
 
 	.EXAMPLE
-		PS C:\> Check-IPaddress
+		PS C:\> Check-IPaddress -IPAddress '10.10.16.10'
+		True
+
+		Description
+		-----------
+		Check if a given IP Address seems to be valid
+
+	.EXAMPLE
+		PS C:\> Check-IPaddress -IPAddress '010.010.016.010'
+		True
+
+		Description
+		-----------
+		Check if a given IP Address seems to be valid
+
+	.EXAMPLE
+		PS C:\> Check-IPaddress -IPAddress '10.10.16.01O'
+		False
+
+		Description
+		-----------
+		Check if a given IP Address seems to be valid
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
@@ -280,6 +314,14 @@ function global:Get-NtpTime {
 	.PARAMETER Server
 		NTP Server to use. The default is de.pool.ntp.org
 
+	.EXAMPLE
+		PS C:\scripts\PowerShell> Get-NtpTime -Server 'de.pool.ntp.org'
+		5. April 2016 00:58:59
+
+		Description
+		-----------
+		Get the NTP Time from a given Server
+
 	.NOTES
 		This sends an NTP time packet to the specified NTP server and reads back the response.
 		The NTP time packet from the server is decoded and returned.
@@ -312,7 +354,7 @@ function global:Get-NtpTime {
 	PROCESS {
 		# Construct client NTP time packet to send to specified server
 		# (Request Header: [00=No Leap Warning; 011=Version 3; 011=Client Mode]; 00011011 = 0x1B)
-		[Byte[]]$NtpData =, 0 * 48
+		[Byte[]]$NtpData = , 0 * 48
 		$NtpData[0] = 0x1B
 
 		# Create the connection
@@ -333,7 +375,7 @@ function global:Get-NtpTime {
 
 			We now have the 64-bit NTP time in the last 8 bytes of the received data.
 			The NTP time is the number of seconds since 1/1/1900 and is split into an
-			integer part (top 32 bits) and a fractional part, multipled by 2^32, in the
+			integer part (top 32 bits) and a fractional part, multiplied by 2^32, in the
 			bottom 32 bits.
 		#>
 
@@ -350,7 +392,7 @@ function global:Get-NtpTime {
 			$FracPart = ($FracPart * 256 + $Byte)
 		}
 
-		# Convert to Millseconds (convert fractional part by dividing value by 2^32)
+		# Convert to Milliseconds (convert fractional part by dividing value by 2^32)
 		[UInt64]$Milliseconds = $IntPart * 1000 + ($FracPart * 1000 / 0x100000000)
 
 		# Create UTC date of 1 Jan 1900,
@@ -364,8 +406,8 @@ function global:Get-NtpTime {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlmQNBDinCqKbH9LzkoGP1jO7
-# /wugghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUGscRAeeceAkGKp4cLdqR1WAE
+# qwWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -508,25 +550,25 @@ function global:Get-NtpTime {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQnWxMOf2fwrXNflb26R+RPDGYH7TANBgkqhkiG9w0B
-# AQEFAASCAQAbPJlxsr7qgzm9GBgqOKSwmdLlidt1kXx6Zsbsi/XG0UxFHmUQBQqq
-# kffOOk4eiIMDi7TtD00aB/EBtYHPH2n3eRGA7FPq6uBpWLADSxnoWDxZE9PZjtAF
-# H8jalugtLF4nx39dGpLX51gh62rX1BkobA5nxLX0ocvdnohZRRWZrBHA6ReTey3Y
-# CIym4cm7lH2sK9U2YmmAU5U/N5NBG4/DFCRgTKNQ6uSYyFIV59droUHUS1EMGgJg
-# wfVmyfJk9xV43zgx92X/XE+WSmlO4MojZ/AiQYWFATIK0lCVXLBNk6r68bYGw7Jd
-# ZB0w9wcIE1gzViU61eL91zlcRPYZdk4goYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTUDQ4jhsj4o41sbjp60mlizWx4YDANBgkqhkiG9w0B
+# AQEFAASCAQBqjOqic0yu9+AtzOqkGJGJiIDCFnTlEfSGM/FpyEbbPjtrbtzH9jGc
+# ioSo+rLsCXGqqPSny8wyGIhmOu8jA94jBmHLfYcYsY1zXWexLunLU3Ln4X5hY1l7
+# 4ettt1ftPgv6M/+8llBQFA2xQxYUSCBh1Wh70h28bJMYzhTDFfA55FYzydTfHP9E
+# PkwMsSii+hJhZX+CNXPKofX+yeMvz63WpkII11rWrPTPoVFVB/NqGkwus6Pf05Mu
+# N1Wn9pbS+miUsLF+rqZZdIcoRnWv3zugBDsOmSD4o6GKQduXChxFVL7cY68jMkAD
+# vW1Dp/wyFidm4fwFnV09ttHnGpFSyiLsoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwOFowIwYJKoZIhvcN
-# AQkEMRYEFDUqq+watWICapUgd5LZ91YIFwRjMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwMlowIwYJKoZIhvcN
+# AQkEMRYEFCATvSBM35EsAOoyfnYNY4O9Wr38MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAxZ8I9bytpSw3VYFR67J/0FYUFoxeJxrMw84SySN9BnaCw
-# 6gN2V9odcrlzqjyynIlt5CY20D1BgRwaMhBY9IQlyLeiwUoilByy49uLdOPv6Ml3
-# ZRcleKQnpT50YmVc5c9xO2dV/Skr8MeLOsrPDg+vHgZ6qlZUf5lgwTm3aHNuUJA7
-# EF6RLLRD42lBxo7jMk3wnvS77elNcOAOEhXtPtN/zTod2pj4muP0BmuOfwzoKv57
-# YaTq0Xr+zugBB+i+QK+T1L73r4UjJrvEAO0TBvD54Dg7uonEtk8wtzc48/q03gW2
-# JKmQMYlBAWzyuWszG5c9jsWT+g2FiaQddNx9+Y4O
+# hkiG9w0BAQEFAASCAQBICQPdFZpvIFR6ANpqn2x1sDyO+CrXxo9ETIiBm0Ey6O7x
+# lyw5yHEloORntidOL0v10DaQpC9Pcq/YfNSKyzUyeJr6HZtu2OCElpi1A+dc+Pqy
+# nyhTVLLBKfyPExIy/A2kx29jg/d0eiuL078LQDv0udHz/+fbfst9NaRmIrmINB1v
+# wO2S1Q7a3VuEtbCmlDQeBcbL61TzEP10nlTpm5kWhSnTr3GizQWavjG1qnwY7DuK
+# w6EDtSTW1fOXpCC/9S+JN4oI6VBM63unOStr3R5JtOk4tksyedr6FBn2TPk45Tds
+# w05NFk1lonidRcKzq0PAel1h946vtrLlnOjmjXI6
 # SIG # End signature block

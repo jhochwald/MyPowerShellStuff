@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -54,6 +54,13 @@ function global:Get-TopProcesses {
 	.DESCRIPTION
 		This is a PowerShell Version of the well known *NIX like TOP
 
+	.EXAMPLE
+		PS C:\> top
+
+		Description
+		-----------
+		Shows the top CPU consuming processes
+
 	.NOTES
 		Make PowerShell a bit more like *NIX!
 
@@ -78,7 +85,7 @@ function global:Get-TopProcesses {
 		# figure out what uses the most CPU Time
 		While ($true) {
 			# Get the fist 30 items
-			Get-Process | Sort-Object -Descending CPU | Select-Object -First 30
+			(Get-Process | Sort-Object -Descending CPU | Select-Object -First 30)
 
 			# Wait 2 seconds
 			Start-Sleep -Seconds 2
@@ -94,8 +101,8 @@ function global:Get-TopProcesses {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfsa61dBbXtt8UhWA7A7jgX8v
-# rJGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUB3WwLMZXYVq+h0gk2pWV6D6
+# O+CgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -238,25 +245,25 @@ function global:Get-TopProcesses {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRyo86yryw3n/696PLZTO1uIZMLQjANBgkqhkiG9w0B
-# AQEFAASCAQApdBi3cF5hz3uPPtLJQr8goCknpvACDHTHAW8ei8zbLeEht68Qvj6y
-# 3o5ctaqip/fQuWd5zhybU8qrmQ1YNUmBcu4dGlj4plvcqAPb32TR5OGc1F5JAHAH
-# aEVNjpASjUGRrye0WiwESH9jKaokRqqo5es4lT6uGROD/flAFZ8i8h39vod/AfFi
-# 81txjoTxW0wP4xTzYogge1rUSxQliAXQqw5nbCJYRQpOFlI1HPn5a3kFS91Z3sni
-# 7/A5x3dhNPUhvyi1hB599jnN2Mgv62Xgtm63HEFXoEE94CDurMHStksvZvet9Tie
-# kLHYGBw52y7S5kDKVtwEveddOXJMz3zWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT6Qc4qhquEmOEVQVRys8YuNUDK+jANBgkqhkiG9w0B
+# AQEFAASCAQAgTCV40ZsX8PCqFNQA9VPmKT7rwe6+Pg03LHhvZPrIr0kOzufAzAfb
+# O/ZSzijOTbHxlrYAHK9JFV04PIeifR5pq712AYtsclWuGfAhRmJUtIH4LH+YPlYt
+# 2VpuWoYiaY87nibd4J4fWxCezYmIwlILhPGtLgTt/CUaEeMY33Ae1+GX43ia9uwu
+# 9O75iXUKie1qMAACLbg7S8UQvliCLpbPjEzuPgV3/dV22yeOBEteTeyjZ1smHknF
+# MNm2gBEYaEvQNnzw5Vlwx977uoLLajRBeeV3n2t4/i/QjXz8BcF5QfgXr4qoRT5K
+# seNo1wdqPi08XEFaSQ1PrO8TR1Ime6KaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwMlowIwYJKoZIhvcN
-# AQkEMRYEFKOokax9ybIw+ZBtVuzaQMPlXAp/MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1NlowIwYJKoZIhvcN
+# AQkEMRYEFBBnEw+vEPqeItlYG27w+6VgQd3zMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBeGMofIOR5xBMESot0E0zMiBByGchvy0Qr9Pk5mcjwvF6z
-# KlbsdDd/g18s3UlqROpfXn5wF5OdvjNP2EV2Y9Hqcs2x81k73Y4B73x7cwEutUa7
-# E5r9HIwWdvvN1ZtlX68kaiKZkIoRtI3YN2b13DY+7Dx1PP/VSmx4KcWfCaHMhfzt
-# TIY6fRNU4DZZXwyzlEZ8SG7EI/PDqMGa+gQBbkZzl9kFEbT0cAspQRk0PsXdiCXw
-# +wvCy9XKG9rPv5NLBUzHzI+PbT/aclFQPh1o59urwpKjxKcvGtPso9bIrJJ5XGWb
-# KC41iiUcmX7sh/F2SLCkGrdXgZWFH49rnbpiOwIV
+# hkiG9w0BAQEFAASCAQBKA4jjWp5s0Te5X2E2hpwauEW37TRHPvYu520GoTQwfbc1
+# E2kEKpFl1vg7l4Caie7xfABMUJzcFleAdoGD8kKZJz3BZxUtt5oxWY7zfiykAisX
+# kqqjBmXKcvxsji3r+7Jc6ySdYX68QYj3imhwmynQ0iZfzE0HEZNTOGJy3n+hvx71
+# OtwJL1OEvM/p5P4BfJlNdxjex0mCmU8G4C7OzMDzq1wyoLkqWFfCWfxIvPuRaV2R
+# ZsHmGCgd8s2av5+LhA7TYXQaV6QAWZ46qXHeMDvLMtMSzKqizzmLWT0MKeoHu1ka
+# 31PA2JYnZK3hcWWnII2SIV4Kcln03NelkX3pTUTO
 # SIG # End signature block

@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -57,6 +57,21 @@
 	.NOTES
 		Make PowerShell a bit more like *NIX!
 
+	.EXAMPLE
+		$MyVar | Sort-Object | Get-Unique
+
+		Description
+		-----------
+		This will dump the variable '$MyVar', sorts the return and show only unique entries
+
+	.EXAMPLE
+		$MyVar | sort | uniq
+
+		Description
+		-----------
+		This will dump the variable '$MyVar', sorts the return and show only unique entries
+		Instead of 'Sort-Object' we use the alias for Uni* command 'sort' and instead of 'Get-Unique' we use the alias 'uniq'
+
 	.LINK
 		NET-Experts http://www.net-experts.net
 
@@ -66,12 +81,13 @@
 
 # Set a compatibility Alias
 (Set-Alias unique Get-Unique -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias uniq Get-Unique -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU88D1WEJ+mj60eeU2ERDdlSiw
-# BsWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2QhIU4TKx5W9ibzKueF3ic5n
+# e+mgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -214,25 +230,25 @@
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQiHhwIik66HfsEz0OAQ1mfriGrOzANBgkqhkiG9w0B
-# AQEFAASCAQCBNk7k78YcVzP3PTe2exhwv89C9yqbXm8khzmuF6zMRiixMHKVNi/+
-# IIfniZ4TBWUI/n3+Ftvt9A6aH1gFRIL/jBYW9PI3eWA48KqIcOimL1dX/lSmwXan
-# St9klk2hRh7tWckDhdGNAIYLTt5cO2+8fty1JOMwJ9hSBn1RuiToW5sCEGDykVpZ
-# z45i3+TiRvTwjq/hS7ZC1up06EGKBSRoS/cGIWG8nyP1PhbFMukkR67DGcto4K4Q
-# VWaAiagjZiz3yGVs6nnBSlsHdF3XR/QxOlddDRAMsc54t4Y87PaWOBsW/e1YED7v
-# L5+dyGQz8gNUyJFzRONwmLWA2ipqX1qmoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQPszLJ5rm7WWMfDLJIi/eR++4yMjANBgkqhkiG9w0B
+# AQEFAASCAQBgNBHFaaEYyj6zgs+IttAbDbHOQ7VqTTsRMP+rr6vRFajv7NSPHd+K
+# s4g0EYQDfkMcmEFh+POiyZJvzVTlfQUWciq99LB0FTvk0WfAB9lwCD3cBdsBr1ki
+# MK1tS8lWozjh+hx65Oo5UN7ZreG4sJHYREWK19rx9NCeMWhnMO6jdu9SggzJq6Pp
+# BzlkK3RZ36g77PjuSPcyr1pHAIfXuEYrEBA4IGUO3doVS2fshb3sVcI3HPyCTmTy
+# yrwh/ZFiE5vlxvfA8yKNAORm2/NVM6AIcgJ998YP01SB8VMc9afDBsAI0qFAHMrd
+# I8H831iwZKkMH8M5+YYD+VpM3hWi9l2NoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcyMVowIwYJKoZIhvcN
-# AQkEMRYEFG93AOSCIqaBtihzgQUAuOOBLIvYMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxNlowIwYJKoZIhvcN
+# AQkEMRYEFNV+JTmcXxSLMHK4t0IRDwRTAKQUMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBZA2zY26X0J9TNFmM+oNFZX8We+kLWIE268t6NRcrYC1fe
-# dcBpR+oocLncTqO5GzXoi9ou4nrgiExe/pHKnKIRMnNohn8FMMsZEn/NGbTNL5+C
-# asxta9fl2YvlN/pB+M7JDOnjXoccmnFlOgwn1dBsU+2vTwUKKKlPN8OxrueXCwwp
-# vUr5KZrqx4WLRdImIGXv3Q8uRfeFK3DKxa8hRoF28tY4wbhUSfYeAn89wliC1OkB
-# /NVM6DjQVIiB32mL4Ey85vTvlCjiC25nfmR/fMFLxbMn1WBGQ8PMgad9+E4LXm9E
-# hipliocknclx9GXzuh5Ln9soENdI0uGudQ1iARlB
+# hkiG9w0BAQEFAASCAQCF3bfbmDqNeDWf+CtvtdSznXdQalerUOlSyUnL8uFf2MMd
+# g47d5ymPZS8VJP9dnqx/wHLxz2H4W469IcVFST2uaAeeKZHoOTxj/GVM8+fNZLoX
+# lEYdAiuHvD9VLssydLGK6WIhqPCZGIVPSiYZTQpsapTQjyvy0t6Q2AbJD93Yl26e
+# ZVatTFmGwzuTQPjLgNiK8noKNy1H3EgWYAORAdMWrQlmiF0Ziy3U7xRbqQnViTbQ
+# ERd8YrkGsJO6Gg/DTpeWpNl/VgICy4SLlIMz3SqGDLdzGZr1WfjB2zjVCNr0peyV
+# FdlxgV0TVLTkE5cshby4fdDeJDtOXzjWZMvOAHRC
 # SIG # End signature block

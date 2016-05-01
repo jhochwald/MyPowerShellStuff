@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -62,7 +62,8 @@ function global:New-Gitignore {
 		Creating C:\scripts\PowerShell\test\.gitignore
 		C:\scripts\PowerShell\test\.gitignore successfully created.
 
-
+		Description
+		-----------
 		The default: We downloaded the default .gitignore from GitHub
 
 	.EXAMPLE
@@ -73,7 +74,8 @@ function global:New-Gitignore {
 		Creating C:\scripts\PowerShell\test\.gitignore
 		C:\scripts\PowerShell\test\.gitignore successfully created.
 
-
+		Description
+		-----------
 		In this example we had an existing .gitignore and downloaded the default one from GitHub...
 
 	.EXAMPLE
@@ -82,7 +84,8 @@ function global:New-Gitignore {
 		Fetch a fresh one from GitHub?
 		Existing .gitignore will not be changed.
 
-
+		Description
+		-----------
 		In this Example we had an existing .gitignore and we decided to stay with em!
 
 	.NOTES
@@ -152,17 +155,13 @@ function global:New-Gitignore {
 			Write-Warning "Unable to create $PWD\.gitignore"
 		}
 	}
-
-	END {
-		#
-	}
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUCDqWnHBi+tr69eiKfHyQfVTu
-# JhCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUsKw0FSGbj1oaRfoqww1ZSHaO
+# ZoGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -305,25 +304,25 @@ function global:New-Gitignore {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBROMWWFWyW+JbH3h/R+/OeEgXAwxTANBgkqhkiG9w0B
-# AQEFAASCAQAzbyk8I3/tSKjoBS0PGNcOZoA6LCpbl64wo+s0Y689v7Ok3REA+Y8X
-# dzjdVaRfM/jXWx+4+AT88PvsfNcZ3rQi8iW+K8nc8OQgTSnFcf/W5iT5EWuw9cZ1
-# VDV4vsIhEdJGT4v72yKcL0FbA615uPSt9vkidtHOU4lq/1ThMSmSc1ZECXAlRV5S
-# mSATWdIsvgCS64Be+N+OPbJeZ/K267GtcBhOA96mBPOdxFD0OgnJyIHXAPXw1pW/
-# xJP8kG62uxBJDcVVZU4RJ2j0YFgL04V0+j0EEHCydkcjuLO/r2hm/e37ApWTJlev
-# WonJ3woC6IU024+IH6BzbMr3ofjNh7NWoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRE4ySbIhxxXqrzUHxInSOqST/SZjANBgkqhkiG9w0B
+# AQEFAASCAQAvQUYh30+z38DZ72eiEn0vRZxWBZhPZN7wdU0B61wD0BePqgN/i2uP
+# UhaI+NvQ9neTKIVpwPbXhWIHUHK79TT0peMpFfZLunyWsD159N7YEtp/VolK2DYP
+# hlFdOgd9UNrd3wDfMkZrM6ZKbi9oU30ZVXR0il3NC1ni5iEzycCbn0teBl+6dX0C
+# ILXqp/n3TUpOLkx9uhxwMu/AqxngyCER7AS+HL9/3FO0HrSJmhQgyvjjeZjrsYX/
+# GE9n5W3N7SMjKi/4c90T4q8empTTlJZpQdP1BBkiRSZmHpy96yIlcG7OVIIhwp4J
+# NkuJX6riKUkQotQmR4jDBvNYRfhIoH7YoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxMVowIwYJKoZIhvcN
-# AQkEMRYEFFYFSGOuY/lNTdIFE+5oL0KbA33DMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwNVowIwYJKoZIhvcN
+# AQkEMRYEFGoDCuFBELULJ8lNvoo+pGP2k83vMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQARMBadTdKo98idhMM0PT/M9klXXUkdZfKXtbWAy6D5Y63M
-# 90pXMPh7wxRzKM3cMzMT1HHOAHgt1pMcJr6TZXTHlz6bhBm+AjaSqjfXLbsqrxWx
-# iVKhNXsTJM5ak13pBlGM6R6ubgDakkruz+PTa1N044u78ZBgcCoARNXhvnd76uBG
-# 9fj21+3nDlXI2wpNs+M2S67b0KsoJ9ZFGlCgfLdGk/FaFgsYMBkYZI/kA/Ys/e5F
-# CscwhNV37i+CfUsSu+rRHod7TzbzPQnS6cBN0jbUcao5KzvofI54O4VeLpaLl/vV
-# bk57pCVAF8KAvwfK24z1ORaRvjum5kry30+e+sBl
+# hkiG9w0BAQEFAASCAQBeE7068XMIMus+TKS2VwM6Dj9Tai7TILCNAfsVQiKZ2irZ
+# C0zPLcfJ/265XO8SNCgMkqKAy08dpDE5vn09L0KhsznU7XBtac3bHZ5jvJe8n4ZL
+# 7+wX4MNlQzBfPRS/4iqJ2magArhRuetr08T9MdGaF5FAO7VwIm3NywClpk/wktbM
+# OjX+jIUYj3JVd+dNUqM+WHGgHGkgj9oGUivUHKO3ut5h9rjBA7J+qqblZVrh3jww
+# eW4nrCBYRAumP4XHlNgLLXipNrl2RGj4DYjFE/y5QQ0AvRC57zkxWQoaZ+cdzTI8
+# i9sDaqGHXXuMoG8N7+PjLhcYsXCi3NTipBc8Ol1N
 # SIG # End signature block

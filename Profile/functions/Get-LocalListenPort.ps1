@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -62,19 +62,51 @@ function Global:Get-LocalListenPort {
 
 	.EXAMPLE
 		PS> Get-LocalListenPort | Where-Object {$_.ProcessOwner -eq 'svchost.exe'}
+		RemotePort    : 0
+		ProcessOwner  : svchost.exe
+		IPVersion     : IPv4
+		LocalPort     : 135
+		State         : LISTENING
+		LocalAddress  : 0.0.0.0
+		RemoteAddress : 0.0.0.0
+		Protocol      : TCP
+		Service       : RpcSs
 
-		This example will find all network ports in use on the local computer that were opened
-		by the svchost.exe process.
+		Description
+		-----------
+		This example will find all network ports in use on the local computer that were opened by the svchost.exe process. (Example output trimmed)
 
 	.EXAMPLE
 		PS> Get-LocalListenPort | Where-Object {$_.IPVersion -eq 'IPv4'}
+		RemotePort    : 0
+		ProcessOwner  : svchost.exe
+		IPVersion     : IPv4
+		LocalPort     : 135
+		State         : LISTENING
+		LocalAddress  : 0.0.0.0
+		RemoteAddress : 0.0.0.0
+		Protocol      : TCP
+		Service       : RpcSs
 
-		This example will find all network ports in use on the local computer using IPv4 only.
+		Description
+		-----------
+		This example will find all network ports in use on the local computer using IPv4 only. (Example output trimmed)
 
 	.EXAMPLE
 		PS> Get-LocalListenPort | Where-Object {$_.IPVersion -eq 'IPv6'}
+		RemotePort    : 0
+		ProcessOwner  : svchost.exe
+		IPVersion     : IPv6
+		LocalPort     : 135
+		State         : LISTENING
+		LocalAddress  : ::
+		RemoteAddress : ::
+		Protocol      : TCP
+		Service       : RpcSs
 
-		This example will find all network ports in use on the local computer using IPv6 only.
+		Description
+		-----------
+		This example will find all network ports in use on the local computer using IPv6 only. (Example output trimmed)
 
 	.NOTES
 		Based on an idea of Adam Bertram
@@ -163,7 +195,9 @@ function Global:Get-LocalListenPort {
 					if ($PortAttribs -match '^\w+$') {
 						$Out.Service = (($PortAttribs -match '^\w+$')[0])
 					}
-					[pscustomobject]$Out
+
+					$MyOut = [pscustomobject]$Out
+					Write-Output $MyOut
 				}
 
 				# Keep the counter
@@ -178,8 +212,8 @@ function Global:Get-LocalListenPort {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUr8/0aYHfv6dZ/CFLnVy8YkRy
-# Hx6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUchxX1IgH5NrMbaGFYl5Xt2b7
+# oemgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -322,25 +356,25 @@ function Global:Get-LocalListenPort {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSL1jjUKOmVIeD/4SzhYztn/ZIpGjANBgkqhkiG9w0B
-# AQEFAASCAQAfMhnNsLhThQT+6VCSrfUH0JhYWO8NnOU18G+7ryuwK40TxjmZI+qz
-# k1NgleesjY+g8kaVVcQz+4C5LHcCE444lQ23kLhS0bqA+4dNwJ+s/6h2EnOXNuD+
-# mj7lB4MDJcRZlOv6wrQbn0V1D9JofsLcNhtrAyaBE1Tx8a7hwlQ98WBVxyjLQscl
-# VlGyz5LE8/0vjaFFX+UpvZ0cJsjCkwTVcEg0c3DeI5DXTPret37JDASwMDPM++AD
-# qRNl5R2CMopDeCarWuDEf6rRGAZOW6G5oSsdqEF/rbtpSB7SGvAoDQKqjrvJkPpH
-# nR6JbB8vJvzYx8wgbrdfo+H2Srt19tDloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTDjgMOEgTM7XVLKaGp2GXWzvYS6zANBgkqhkiG9w0B
+# AQEFAASCAQBzI7gHRJB7TIqVYGR+hM/11aXBvN6t0IX9WYk+44S3mc8ZfcEBpZwI
+# qrPS7asmq4KNvI5T2e3AlQCfnvnyO5A5IoBTZjGF2bDuudJjvkdcNwDAwpj8HlU/
+# pTgL/Bp3bi1YZNeFyl6Ee5WU53GVBMleTE/ba/aYmspPLvOaFM223MJB2n/QjJeP
+# i3jW5xam7vKydiEuVs5tt7fTRacxPnKkyeYICVbqF75dT6xqWB9gLIsq6oHkOtcm
+# Cd2QF6ykkon8yZNNlYvHjthPrG4KsQb9yTSt8AIikP9MBcK2Bh0dJGwSeJqR+yV4
+# PwAVmmDmT5H1r66E6Q8uIdZqIYX+bcU7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1NlowIwYJKoZIhvcN
-# AQkEMRYEFEcKh29hxzPcj+ojlcDdmvK1lOlIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1MFowIwYJKoZIhvcN
+# AQkEMRYEFIQwKLdDwfn2pbbPqHym5m1QkepdMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCgJKITh76WJ5Un2f4HbLDeLBk+SaOhdPsaM50UyOZX7Ur4
-# aBiWefSviA0iiQt9EQRVCG7nq3foEv41ncXkPEsY7Md4Yx21d+haSH8vuX0SQqeG
-# dKtqZpo5Q39e0ReidRv8h5JN7u0Ur/k6q78bbklbiU+N6/H+MvRyDfUsVmFDdidS
-# oE6U6ZzhdPFzJbz9Xc7wEiA8e/vAoUjlVZc8vtmW7uPSu8fvDiOHFsO2Hd78d/2T
-# 1if5vu2Zx06LuV7iohMiRGKW+3ndLjSmsASM69+EmEmTV4RM2e6VAwOrHCwfBB79
-# zdeGQ+YK3eRKaCT7kpbxqDgIorXaZD7PUJq8b0L/
+# hkiG9w0BAQEFAASCAQCflh+g41kXJzPPs7Y63aWUOPUdAa8Ag618UIOgyz/RvRgF
+# TlcuPtTRhZBxrQLRKr+oHs9crMuvarns2tS965imcejOvri9ia9jkFOREAgFTHn2
+# UrE4UMos/xkMbOcWUpVNzsfDgeuo24SJep6m7hPiLwDMHa0UMzkgdL/yZinaxdif
+# 1gY1ciJd3dJzIDWLtorfnjotFv/hVBXZhANSzOXZtSvrO9g/UH0u1bXZVi7cOPfk
+# O7m465Un6VBT74SHSaHPcLbfB2SZf5RCjM26117irn1qTXYHXg7a/SO/wLrz34+6
+# KM1QMtjTqBoldFcS7rPEKYGn9ZVMY46xTtCqozy5
 # SIG # End signature block

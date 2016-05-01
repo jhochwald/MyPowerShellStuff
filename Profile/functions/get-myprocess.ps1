@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -46,7 +46,7 @@
 
 #endregion License
 
-function global:Get-myProcess {
+function Global:Get-myProcess {
 <#
 	.SYNOPSIS
 		Get our own process information
@@ -59,7 +59,11 @@ function global:Get-myProcess {
 
 		Handles  NPM(K)    PM(K)      WS(K) VM(M)   CPU(s)     Id ProcessName
 		-------  ------    -----      ----- -----   ------     -- -----------
-		    511      44    79252      93428   664   11,653   3932 powershell
+		511      44        79252      93428   664   11,653   3932 powershell
+
+		Description
+		-----------
+		Get our own process information
 
 	.NOTES
 		Just a little helper function that might be useful if you have a long running shell session
@@ -73,6 +77,7 @@ function global:Get-myProcess {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
+	[OutputType([System.Diagnostics.Process])]
 	param ()
 
 	BEGIN {
@@ -81,6 +86,7 @@ function global:Get-myProcess {
 			Invoke-GC
 		}
 	}
+
 	PROCESS {
 		# Get the info
 		[diagnostics.process]::GetCurrentProcess()
@@ -90,8 +96,8 @@ function global:Get-myProcess {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqHMP6gYtKBJFaAzvY8ye60R6
-# UVmgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUuJ41Zy4dj7AtDq/8ljUYRTya
+# FAWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -234,25 +240,25 @@ function global:Get-myProcess {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRC1XpPunN+Xqc5v+6H2GUCBWgTHDANBgkqhkiG9w0B
-# AQEFAASCAQCkompSaCWpmjKAr7tutJYHcxsYYv9txmeXfNjktGIxQRT+Sc/pN2hj
-# PSpVuBn4LZ0N7kxBO5iwHHTMW5mWbPTyiA1bJNqOsC1i8OOKInmDttcdK6pUris6
-# dyf+v2+WCccMHJrfS4DEqBiFirjRp2qcDPAXkAQdd2Z+xPb50EZxp9VB7jpSmefh
-# /JUPbGQG2dy5I9zhMYEZGdx9zPzqX4Aa9Nwt+i7a7FlFI/f5PKLTEzAco4TrF6/8
-# XhjciVJVmRgeMW7Nn8HUIG5cZ+9zJLyMcUPW3NPgiIl1aAYbJP0P1JhWCdSWcT0C
-# g8opKffJ1fzd9j/0LAjq4BJAy/EwZAI9oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQNnTfqGfUM3JyKAWIsHJYhfiwj9zANBgkqhkiG9w0B
+# AQEFAASCAQAchURFZncoZZYNgr/ULXVBtS7eUedljxt8Ip/M7B0XNhPGyL1vYKod
+# JIE82XlFkXndVqb9brkFfcm7eI9RBu+DUvbIljRmIHqh92/a53nrBOK2/Q8NF2kn
+# Yq9Ag6UMOCAhJgENoPM0dzu0pOiM1oagWT6EpflrCb8Tt2vkPZGkyBmL7EczSawv
+# +8hWsvuplOlihMVQZl3Ks4YTZjt4PPejW8IFNHzcmU0+lcMwHljRheOcoxk0wFBZ
+# nTqPnAN48/HpoT26Up3NVAxvyD460ci9KCXLgdEi7HDmTdMXct4jjgcnJkn0WISH
+# lcwlOmpmFpBybcZ+CVZKqxZLGh07AoNDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1N1owIwYJKoZIhvcN
-# AQkEMRYEFI9n3Fxo+gbDVXJEpnHs8iXxFwu/MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1MVowIwYJKoZIhvcN
+# AQkEMRYEFNlvcve5d82QCpQJoZ2fPztMTtO+MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAfw3rnA+MnJzR7piPbDgI7VYh81DSiY0hQ8XuLVtkfEEVK
-# bINhpYyAfHQL9GD7Y99txPwG+hqudceJCf7tan14rjqKFVPgh422ZU2p3xmYMOnX
-# EI5Rb0JR0p+wJqx1KMGUQGicP7/A7bhKOEcwYuLwIRcYQN7M7R7HThkRcBkuQEzr
-# 2z8OniZND3luj9c5Kg2MjFPrnhzmGTeI60u6JoPnxSi45+cEmO6cupsv/ZmhajRR
-# 5db4RZp8KT4EX9pjQm4TxSrhYG61pk8gHyJonsXNcQ/nBnE18MdGhN5V1Yz+dClw
-# SJ0ok7JX0UKVCACTjjfZ4IEFh0Cy1rxGcpdN2HRT
+# hkiG9w0BAQEFAASCAQBsZMBQ+d2RZntI6HQTn2a68O5X2/nHlX52QlRkeAjwt8xc
+# MhpoGZdaqySVOjv7aMMR7pDcYXr6IYcC0bCl+BOyV0VjbDIiQxEBvOP9PrZX0VGD
+# hy0MElmWF36H6Hiip0fFEqVGSY4EQQK+TrLDG7uu6YmH+R2ulcuDn9DrtxRNtLxC
+# EWgTmnfLm4vlDdHSjJTrCs/4S92ffGZEB8/UbiUXFpTclIlwLNBikE+zAvv4vkZ/
+# xflL2fZ6jmwNsHSM5uIFHzLPnV0THNuq8Y/y7nw8oA3JfSPDKBQ7WqsA0C5zejFT
+# svYMQSnQd/pxJYzn4Mn0PPpXUzb5BUmiEouDz7E6
 # SIG # End signature block

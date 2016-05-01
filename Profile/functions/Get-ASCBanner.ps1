@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -49,13 +49,10 @@
 function global:Get-ASCBanner {
 <#
 	.SYNOPSIS
-		A brief description of the Format-Banner function.
+		Create an ASC II Banner for a given String
 
 	.DESCRIPTION
-		A detailed description of the Format-Banner function.
-
-	.PARAMETER InputString
-		The String
+		Create an ASC II Banner for a given String
 
 	.PARAMETER IsString
 		Is this a String that should be dumped as ASC Art?
@@ -73,6 +70,10 @@ function global:Get-ASCBanner {
 		#  #  #  #       #       #    #  #    #  #    #  #
 		 ## ##   ######  ######   ####    ####   #    #  ######
 
+		Description
+		-----------
+		Create an ASC II Banner for a given String
+
 	.EXAMPLE
 		PS C:\> Get-ASCBanner -InputString 'NET-Experts' -IsString -ASCChar '*'
 		*     * ******* *******         *******
@@ -83,8 +84,12 @@ function global:Get-ASCBanner {
 		*    ** *          *            *         *  *   *       *       *   *      *    *    *
 		*     * *******    *            *******  *    *  *       ******  *    *     *     ****
 
+		Description
+		-----------
+		Create an ASC II Banner for a given String
+
 	.NOTES
-		Additional information about the function.
+		Just for fun!
 #>
 
 	[CmdletBinding()]
@@ -251,8 +256,8 @@ function global:Get-ASCBanner {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUxn5BeBTutLSgpN2/mnyj2V8t
-# BkKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUf3cx2jVW++xFLs5R8u4tt/DR
+# 8tGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -395,25 +400,25 @@ function global:Get-ASCBanner {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSYfGWaWG2YHlmoL/QdEFz5/6zWKzANBgkqhkiG9w0B
-# AQEFAASCAQBumCuSqqoQFjQMo371R6j8Z9puJrzNmzv7YvTI38O92Ic9MuX/2VJ3
-# V29ygN0ZuEfQhvC2IZTc4cH9AZ/0vdxxgjL3r1VbhQUFOfuOFWG+tNnitRQMA5wx
-# tpvQACawnQe8pdmZ4iZkXykRTLdZarx+7wyTE9S9u+GpjA2b/WIsY7h6dXEG4q2T
-# E4aPNTQBIjhJA1Y3jerz3BqfNuPQcVCYS3amRs1C7zPR4/nbaJ2XIwnEFdH27PNO
-# PnREteFfT5Kb9/YmYYjEQkBPywUTwsXJP74oCIH4w1Y9r3XGmYjL9RgshtbUn8Xp
-# SLWlQdLrjeWPAdrOt7MvdpjQfkBaav5qoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTE1EO4ZiQ6Rl2bzTQBnX07/X3MMzANBgkqhkiG9w0B
+# AQEFAASCAQCBsXyrPd3mINPxSo7ib0K4D6I1TEvtvF1p6/MuzruBpPgpHrYfLHKv
+# KOZLkgjATixqnTDGqB9XR2dxQ4u6sMZJzk2+tIGxCrtI4NZ2iUaNY7eJeZVYqs4N
+# fFcl4mFKZVBBcRM+4okgICZgzaFSv5aizeOdbYlV2ss6kc62A7cMEHnkKdxPy2Hd
+# VsIzdy/hwQQ3PARUUaCIsVXP58PsBqIzBq/vwMPe/X4iVMLQb0Gn5zTam8w1K/dc
+# TRhDPw7zsZg45P+uStL1W2SGybN0FkM/GDWqroedl6EM/xpbLSknjaBOuTEia8EW
+# b7tvDhpkrKBtFgsUUcC9JZ1pSvdHn64MoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1M1owIwYJKoZIhvcN
-# AQkEMRYEFHy5Fwf8dog4tOfvFKBLAlDf5sR0MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0N1owIwYJKoZIhvcN
+# AQkEMRYEFJgLKLvApaO4FrRoUGnLsYaVe6XLMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCLX9Ecj4x91eLwbrtOsNDxjUxrpXD2uZ0TWkey16ZuVEDV
-# kTULPavDICzqCTqLP1wgEVXlf/YmUOjSXnXQjLjV0NWQWh1HQzP2FeM61iMtFSFj
-# Dp8mZ5Satt7UhsGIDfzM0vTLBGIBZuzCm8SYM02/M/m8pxg1R3gZNKfJLlf3l7GX
-# dCWhdJrzB30VdHQUjwzySlcj58vvNEobWmvnBDncnDS9RdC6tLyr5FIjcR40Gc+/
-# UZgd3byL1txUrcrxgIKO+zdPJv7AfUWEZ5mzKTfYQ240aw9Dz2UKXt0l9jYOq8vK
-# jQlijGHIoLIuoY9jUPoumwe1HKJ26bl4Ha607IcS
+# hkiG9w0BAQEFAASCAQBluPEznL/nF8rFww9OkKkKTjDdmhvJwVkxYnhNdyw7O9PB
+# VXva+49toKLMex8Dr+WzwtZC6luV+YFExIhNtI8nBVF962T6U8ArlEi4Zbh3p1Fw
+# gH9e+9M7pojvpK97+Y8ryFQoZaErka4gDruxuG38HNTkc87cmwYSL2K2NmZgVnJ6
+# wZjGmdnD1/RkUJR80/4tzgGlz3AoAta630O41roYWNCcLGqLQSD63RpOhl3mMR0y
+# sUPCKfOOpk0ehC2Q9i37UPPHXXhEF4qMKjM4oTIbTazHcFhpdTBNLkufkYhKg1fU
+# 8K/sqvZRdn7fFSdvMJkwkrVD6xelNkeV0UdebSCe
 # SIG # End signature block

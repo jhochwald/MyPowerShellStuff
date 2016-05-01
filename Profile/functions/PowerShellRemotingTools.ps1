@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -54,6 +54,13 @@ function Global:Enable-WinRM {
 	.DESCRIPTION
 		Enables Remote PowerShell on the local host
 
+	.EXAMPLE
+		PS C:\> Enable-WinRM
+
+		Description
+		-----------
+		Enables Windows Remote (WinRM) on the local system
+
 	.NOTES
 		Additional information about the function.
 
@@ -95,10 +102,10 @@ function Global:Enable-WinRM {
 function Global:Get-NewPsSession {
 <#
 	.SYNOPSIS
-		Create a session Where-Object the given credentials are used
+		Create a session and the given credentials are used
 
 	.DESCRIPTION
-		Create a session Where-Object the given credentials are used
+		Create a session and the given credentials are used
 
 	.PARAMETER computerName
 		Name of the System
@@ -106,8 +113,19 @@ function Global:Get-NewPsSession {
 	.PARAMETER PsCredentials
 		Credentials to use
 
-	.PARAMETER UserName
-		A description of the UserName parameter.
+	.EXAMPLE
+		PS C:\> Get-NewPsSession -ComputerName 'Raven' -PsCredentials $myCreds
+
+		Description
+		-----------
+		Open a PowerShell Session to the System 'Raven' and use the credentials stored in the Variable '$myCreds'
+
+	.EXAMPLE
+		PS C:\> Get-NewPsSession -ComputerName 'Raven' -PsCredentials (Get-Credentials)
+
+		Description
+		-----------
+		Open a PowerShell Session to the System 'Raven' and ask for the credentials to use
 
 	.LINK
 		NET-Experts http://www.net-experts.net
@@ -140,13 +158,21 @@ function Global:Get-NewPsSession {
 function Global:Set-CurrentSession {
 <#
 	.SYNOPSIS
-		Make the Session availible
+		Make the Session globally available
 
 	.DESCRIPTION
-		Make the Session availible
+		Make the Session globally available
 
 	.PARAMETER session
 		Session to use
+
+	.EXAMPLE
+		PS C:\> Set-CurrentSession -session $psSession
+
+		Description
+		-----------
+		Make the Session in the variable '$psSession' globally available
+		Might be useful if you open a session from within a script and want to use it after the script is finished!
 
 	.LINK
 		NET-Experts http://www.net-experts.net
@@ -165,110 +191,43 @@ function Global:Set-CurrentSession {
 	)
 
 	PROCESS {
-		$global:remoteSession = $session
+		Set-Variable -Name "remoteSession" -Scope:Global -Value $($session)
 	}
 }
 
 function Global:Send-Command {
 <#
 	.SYNOPSIS
-		Run a script in the remote PowerShell session
+		Obsolete command!
 
 	.DESCRIPTION
-		Run a script in the remote PowerShell session
-
-	.PARAMETER script
-		Script Block
+		Only an Alias for Invoke-Command
 
 	.LINK
-		NET-Experts http://www.net-experts.net
-
-	.LINK
-		Support https://github.com/jhochwald/NETX/issues
+		Invoke-Command
 #>
-
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	param
-	(
-		[Parameter(ValueFromPipeline = $true,
-				   Position = 0,
-				   HelpMessage = 'Script Block')]
-		[ValidateNotNullOrEmpty()]
-		[scriptblock]$script
-	)
-
-	PROCESS {
-		Invoke-Command -Session $global:remoteSession -ScriptBlock $script
-	}
-}
-
-function Global:Enable-Scritps {
-<#
-	.SYNOPSIS
-		Enable a script to use in the remote PowerShell session
-
-	.DESCRIPTION
-		Enable a script to use in the remote PowerShell session
-
-	.LINK
-		NET-Experts http://www.net-experts.net
-
-	.LINK
-		Support https://github.com/jhochwald/NETX/issues
-#>
-
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	param ()
-
-	PROCESS {
-		Send-Command -script
-		{
-			#Set executionpolicy to bypass warnings IN THIS SESSION ONLY
-			Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
-		}
-	}
+	(Set-Alias Send-Command Invoke-Command -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 }
 
 function Global:Register-Script {
 <#
 	.SYNOPSIS
-		Registers a script for use in remote PowerShell session
+		Obsolete command!
 
 	.DESCRIPTION
-		Registers a script for use in remote PowerShell session
-
-	.PARAMETER path
-		Script (Path) to register
+		Only an Alias for Invoke-Command
 
 	.LINK
-		NET-Experts http://www.net-experts.net
-
-	.LINK
-		Support https://github.com/jhochwald/NETX/issues
+		Invoke-Command
 #>
-
-	[CmdletBinding(ConfirmImpact = 'None',
-				   SupportsShouldProcess = $true)]
-	param
-	(
-		[Parameter(ValueFromPipeline = $true,
-				   HelpMessage = 'Script (Path) to register')]
-		[ValidateNotNullOrEmpty()]
-		[System.String]$path
-	)
-
-	PROCESS {
-		Invoke-Command -Session $global:remoteSession -FilePath $path
-	}
+	(Set-Alias Send-Command Invoke-Command -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 }
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUlKsKFzfTtT+sLlq8ZZAlQ76q
-# WragghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUqTzxvHJyG15S6+uPkWDpLBGB
+# e/OgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -411,25 +370,25 @@ function Global:Register-Script {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTHWVzo8kVjWIJk1NEmEmnabzSc3zANBgkqhkiG9w0B
-# AQEFAASCAQAQMfpx4VGwR6ng5ce1pEHDWqPgIoe3yrLe3eYq8n4ctdK36J3khh8X
-# rhnMXVPUI+34UkOKTTdm8Qc/KXl2pvP8V6Ioh7NjRGOCHl2QTRsAqP9Padl6RciW
-# r7XuGJYMCh0WvACXp7tlvarYS+sLyVqMJwr5J7VXmIXOd2F1f5c7ch3FfhuNmY0y
-# tqQBP3XL/KJd7nv4iJ+d4J2m+OUKl8HeKEQUuZYfAcWwYhwEfpH2qTJ3j43v35J8
-# pTAsehNf2yAvIlzU5w2LBwcPhv6DLVzfiYT0++oJl+KDVGRK35veNOjyBNgNvzZN
-# na1MrVqzkUSr6aakCIIBXW3L2nC7lvFnoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTR85FUjtMrQrfOd/QRBXIkXwQAQjANBgkqhkiG9w0B
+# AQEFAASCAQBnvzg5C9x9f1AZNqu9KDBvHQGm3WYOvaaD/WdrmkaTHEYUsOfNG5Rn
+# fSF+rhEj5dfHydj2WWD9ZSy1f19cigLkkKVYNU7dRIUG/IcgswARJRDX832XsiYS
+# 2W/3CcylEQlPh6hcAer4AEbeloC9hw4YLcTU5AivB6PAs/eHhiF9TUC5eGEi+FB8
+# mt5PDsJTRpaUXAgB0CsmTYCFEGnY+u4sfktej/1wJyzUJVQbL31BTtLAQJ7vlFcP
+# Dsttqlo8uXcSOcBcLSkb4NwdF+8n6BUbcYqw5J3LgEMDgMDrHp2W31cAkyzYZ0vt
+# C4HsdzqcrWJmx7+ds/UXyXrpV2VAGcwhoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxM1owIwYJKoZIhvcN
-# AQkEMRYEFIkxr6FK4na34yobkhx2VfzEm1T9MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwN1owIwYJKoZIhvcN
+# AQkEMRYEFN06kpLCzVGz+h/WML7zwBPxuXpsMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBYoy2Bq7Nef/PJ6CBTZOYQd+hUWFqR9Tz0sF5oqph7KxIQ
-# OuHy22YdQ8jNXmN/K1F3+0YdWcDrNQvi7IWy+1amrkBVfEQfIngVvvirv88gphQl
-# KKqOxsMjdvgTBdM9q4+MReVDWWJ054BdvXgFBxeP246RP4SMotGgkO0v7DBIUQZ4
-# jPPycAdsJdwQqnJndN7p8Bt7n8C9LZO8h0wRGjCt8ajNd1EE4Q7a9ViY27rKN9yA
-# MrqNibARPzHAaTHIfTwBYjH7srPPda6HaEsCV4jHiZA5UgZ8TZM0Ayehzcu1BZ3h
-# EHZoFfbtTidZDuAekwoZVCfYrr6fUWZ38Wylsa/B
+# hkiG9w0BAQEFAASCAQCQ1Cj59qn5UQkhfu3yqUPEDMi3MzTcvjkkU9xk7Lx2qzTp
+# Ntv34q2eFm3cQVkk9sP+l0yJ8RkC++11BGEkfAoskf/3FKq7rcZN2nN5pb0sSTZ+
+# 2dZuYWXsHxFhrY4p1GUtvJ/I2wBRDO4s+U44AWXEdWryolfxQ5MmTtlKd67WqbPX
+# 1ecYIe+L9uO0zI85V+V7oiZVkZnRZdiArbD8AYpI8qozA8QCeH6KzaaszFknk1ZI
+# l/SB8ufDani0pDZoMVjRJeIFutpC8nlsly6M0OtHuUoFhs4dyzwhkpZhUngLWe7T
+# 5CzfGN2fg6KVBnjMMQVfq0Obitj+Wz0EQ4HQObt6
 # SIG # End signature block

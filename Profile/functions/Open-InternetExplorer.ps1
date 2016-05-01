@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -65,13 +65,17 @@ function global:Open-InternetExplorer {
 		Should the new Internet Explorer Session start in Full Screen, the Default is NO
 
 	.EXAMPLE
-		PS C:\> Open-InternetExplorer -Url http://net-experts.net -FullScreen -InForeground
+		PS C:\> Open-InternetExplorer -Url 'http://net-experts.net' -FullScreen -InForeground
 
+		Description
+		-----------
 		Start Internet Explorer in Foreground and fullscreen, it also opens http://net-experts.net
 
 	.EXAMPLE
-		PS C:\> Open-InternetExplorer -Url https://portal.office.com
+		PS C:\> Open-InternetExplorer -Url 'https://portal.office.com'
 
+		Description
+		-----------
 		Start Internet Explorer in Foreground with the URL https://portal.office.com
 
 	.LINK
@@ -136,8 +140,8 @@ function global:Open-InternetExplorer {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUK4+FyaTyVgaUZLetghISs3LY
-# o6mgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKtNruLbfql3DUsPE5tF5DFk0
+# baygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -280,25 +284,25 @@ function global:Open-InternetExplorer {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRGtFMHJ5Ig4gfAy7lYuRsZuLTZCDANBgkqhkiG9w0B
-# AQEFAASCAQChtLU/VZ5/nKwnIb5m9TWvVpIAty9MUq+H280b5GjTv0L6E1wyf0ru
-# qAaRh3lLiHlOHiaw0gIKYdX2zX8SBX4JxyFM8LQySToix+HHPN2n0S9M9+YCxkXl
-# kHXWhIUE7ZUMmvSeGdEaG0QEkA2ciyzbSfA3+/Mmt9093cHGqgrQ21AwFGEBP7yA
-# 77p4iWVYn46ClZ6itQOsJK6jWjFgpeJ1UH2D27nqiDwMQHHQ7B06CBdGbOLk3LHf
-# dSthUgqNZYkerEAum6C/Frz7YBB6tXvJ0x7zi8fE+tE2a2K99hpIZZdydTtPdgic
-# zag4mJGOyxQ7kXIPk1y+B+wB0bVORlRDoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQIXMjNMHRW+YMHqTru04UTq6BhqTANBgkqhkiG9w0B
+# AQEFAASCAQCH8ZSZhFjvitR6wrHYFym11iV2w2G00Xhlx7W7k52nvQztttGW57qe
+# YiDCysOb+tAeJ9rG+6KcWlTKtKOA+YgDZdM54qezOM9SgGKN3Vqs5dGJXdw3o2ZL
+# yPT3hGZ8XQVoLEo8ynub0RBicTl3kkHXxqPoaTwVoE2cu1f3gWWhvePjhwvYycIY
+# iWNl0YOay8y05QaAap9WCKc0Nb1I+YUQfmgwHkW7rdCmNm/GrLP5/x3n6OZ3lhra
+# feepVYhU7bfsxmr5JZ69ubspOTvDsl68r6+X4DewNfvWjar3SlBji7WhbPqfo48H
+# jgUuz8zEbMg9zjLH3JNNQkdkZmUmXY00oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxMVowIwYJKoZIhvcN
-# AQkEMRYEFIAVzme0XzfRyUnM9QOPLBiQfMOgMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwNlowIwYJKoZIhvcN
+# AQkEMRYEFFWEKtj4BrK0lvtrjcnhLgidUKoDMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAdaQL1Hj/VqD2qKA0aviMA9Vl/FxGqWvjBe0r4A7abcRXy
-# 3fhc7sTPdrOtLZmPt7xnIxJUG1OWdxvtFYoX85TIrH4oOuHFsH5MrzFdJ2bsOOZb
-# qrliN/G9/N9rnXdx0CM5z+qh2b8sLFw/ovjDl0wVg+Qr25FfYnzptiIQ76AXzTOz
-# JOsOqdLw+KlEOnCXJtdZCyy7LuQQ2HGJMW0uDpvD4xmQ+ezNOuEKo6GSVnoWBYcE
-# Tc6IR+zONHK8wXAda1dg3ddHl900ARgntmuV5DRYlVkTaEKmZlPD0flX6Opx8NAs
-# RRy1uAu+LWbR3TsSg01OpNfBkUHmi20k4xD0evJp
+# hkiG9w0BAQEFAASCAQBDjbvqbvxrp2b4zA4AqII5Yon6hUiKV/u2YwclJpXe8Arg
+# GLnosK902JXR0mi2sr+0wg0SZvklzXAip+U5myW5ctv4itxhdj+STjtQ299Cm50L
+# ycvSwGoXACSazRile+pHRIDMQpn4+0YyAAClkh9vXcT2ywn6oVfC6BAGQ/DMhHDF
+# t7HoFgUcAoqpzxSM19mqLJvlnemzk039m7ruJB4UckHd8D08tNk3FycWqTVsURBQ
+# uTWLYulHYMHITSG35Q3W77WYsRFxzlNJyOAK0AATRxM9kHMoaGOPIPvr1iyCymB9
+# Teu436rhp2PAgRy6SyNboJzRwolXslMPBZdH4q6I
 # SIG # End signature block

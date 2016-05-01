@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -59,7 +59,7 @@ function Global:Get-EncryptSecretText {
 		Path to the certificate that you would like to use
 
 	.PARAMETER plaintext
-		Plain text string that you would like to encyt with the certificate
+		Plain text string that you would like to encrypt with the certificate
 
 	.EXAMPLE
 		PS C:\> Get-EncryptSecretText -CertificatePath "Cert:\CurrentUser\My\XYZ" -PlainText "My Secret Text"
@@ -69,13 +69,15 @@ function Global:Get-EncryptSecretText {
 		PbFw0hE0QtiKVdu8DESO2CB9H1bVYIxVWTvpvT71yDQCFFOwg0JdGJpCI6l+YxPqHqKhFcdWZtuP8JMvNZ8UbxveNVmBOrasM5ZTHfHljWIT6V6tDxy5jOd9cTiuayh/X1A2eKA/DArBgkqhkiG9w0BBwEwFAYI
 		KoZIhvcNAwcECFjYhWLX5qsEgAgjq1toxGP5GQ==
 
+		Description
+		-----------
 		In this example the Certificate with the Fingerprint "XYZ" from the certificate store of the user is used.
 
 	.LINK
 		Get-DecryptSecretText
 
 	.NOTES
-		You need Get-DecryptSecretText to make it human radable again
+		You need Get-DecryptSecretText to make it human readable again
 
 	.LINK
 		NET-Experts http://www.net-experts.net
@@ -104,7 +106,7 @@ function Global:Get-EncryptSecretText {
 	)
 
 	BEGIN {
-		[System.Reflection.Assembly]::LoadWithPartialName("System.Security") > $null 2>&1 3>&1
+		[void][System.Reflection.Assembly]::LoadWithPartialName("System.Security") > $null 2>&1 3>&1
 	}
 
 	PROCESS {
@@ -112,7 +114,7 @@ function Global:Get-EncryptSecretText {
 		Set-Variable -Name "Certificate" -Value $(Get-Item $CertificatePath)
 
 		# GetBytes .NET
-		Set-Variable -Name "ContentInfo" -Value $(New-Object Security.Cryptography.Pkcs.ContentInfo -ArgumentList (, [Text.Encoding]::Unicode.GetBytes($PlainText)))
+		Set-Variable -Name "ContentInfo" -Value $(New-Object Security.Cryptography.Pkcs.ContentInfo -ArgumentList ( , [Text.Encoding]::Unicode.GetBytes($PlainText)))
 
 		# Set the secured envelope infos
 		Set-Variable -Name "SecureEnvelope" -Value $(New-Object Security.Cryptography.Pkcs.EnvelopedCms $ContentInfo)
@@ -134,7 +136,7 @@ function Global:Get-DecryptSecretText {
 		Decrypts a given String, encrypted by Get-EncryptSecretText
 
 	.DESCRIPTION
-		Get-Decrypt makes a string encrypted by Get-EncryptSecretText decrypts it to and humnan readable again.
+		Get-DecryptSecretText makes a string encrypted by Get-EncryptSecretText decrypts it to and human readable again.
 
 	.PARAMETER EncryptedText
 		The encrypted test string
@@ -144,11 +146,13 @@ function Global:Get-DecryptSecretText {
 		PS C:\> Get-DecrypSecretText -EncryptedText $Foo
 		My Secret Text
 
-		Get-Decrypt makes a string encrypted by Get-EncryptSecretText humnan readable again.
+		Description
+		-----------
+		Get-DecryptSecretText makes a string encrypted by Get-EncryptSecretText human readable again.
 		In this example the Certificate with the Fingerprint "XYZ" from the certificate store of the user is used.
 
 	.NOTES
-		You need the certificate that was used with Get-EncryptSecretText to encryt the string
+		You need the certificate that was used with Get-EncryptSecretText to encrypt the string
 
 	.LINK
 		Get-EncryptSecretText
@@ -174,7 +178,7 @@ function Global:Get-DecryptSecretText {
 	)
 
 	BEGIN {
-		[System.Reflection.Assembly]::LoadWithPartialName("System.Security") > $null 2>&1 3>&1
+		[void][System.Reflection.Assembly]::LoadWithPartialName("System.Security") > $null 2>&1 3>&1
 	}
 
 	PROCESS {
@@ -199,8 +203,8 @@ function Global:Get-DecryptSecretText {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUvSVSZq3Hhke5MOfUILc8Gfzl
-# 0nKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTDC8nafJHIWXCThuZu3Vadxz
+# uoGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -343,25 +347,25 @@ function Global:Get-DecryptSecretText {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBThqsGohSgPwMwmt8+/Rd086rQ64jANBgkqhkiG9w0B
-# AQEFAASCAQBizVL99QbIfhRnMLHRcAxgRQXEiB5onaYnB5UBHpfPmY3GhCvSUmgK
-# vV99fTsNRam86STqN0h9u/uAVdb7ENyfGTrH8EyZn5R/OAvzUYsSNa5ulnUv3Zvk
-# d3fH1UKuiJn+adLxbBg7fzlWLdj4SBmlDmVGDJ86oDdSRCAA3h1GwaZ17lRVM8vr
-# H+qhh4/8pNv8yVfIz4EClQVi7c+MY9otJMrf9g26BI2SQAeuyzJIRZ/g1uQnPLO4
-# SK6WPiA2xVqdXt7/7dX9/VpAvs4w4BLi44Jb2dfV5Qvp9+Umw3p97LFcnEbry04h
-# uKNDv09CUesVWALpxKgjCMwTCzOVe+zroYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTlmOxBQve2mJUHU+LqPZbNQrN/wjANBgkqhkiG9w0B
+# AQEFAASCAQCAyYnf39YCmGG2MFbKskaRMGBMVx4hIdG1hT+IsRvXPqo2HNTuPuIM
+# wJYIFpQLGkvPeywOyzi4mZASib9yMx6AfXO2zmFW7etOuUZFMGiJL2zrfJCp0slG
+# k3j2L/Qu+4dEUal83WeSXY19qkh2ERIQFgNahdxebPvGgfHt/DDCUKo/d1SAGLQ2
+# PvM9mydTrVQVdZVzlyrJeos1TpE0f9ziD3wTHRVwhsT2CAItrPcTgEXb7xRxdPze
+# 8NLNzxMTI9SU2S6ggj/jgtNIcK0fTT2/MD/w/dgk6mG/W5DTwpqj2xFbgJFMxKkP
+# S08rtjL9psGMvM3kintAEM5QbPmaEj8goYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNVowIwYJKoZIhvcN
-# AQkEMRYEFOJnPj3WL2K6+RDDtiGT9IPXWc90MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxMFowIwYJKoZIhvcN
+# AQkEMRYEFBR46lk7Wxt/+B1bHY9gYcJYJOzbMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCKXLyJkbs6xPmUHUpYzLE4bC3CWS0hmvaFl+FBnXCQZ8MV
-# sdTAsXDPVBlxk3axXtH65S9ZpJcaKbKNP0cNIDSMba0iD8EkrZvObcT5yKvYnEQd
-# uNC0ygU2Ztdq3qOWOshbycDgqs1RmeS+QJQin6QjbOUqkthX9GtqdXGXI49c+DRo
-# /kDC6ZE2fvY90r488ZB34osUezC+b5mQbBn1ecGBKqfO+NOtKr9waLR16nbcWBIs
-# 0agmh47t3Pcns5nwCkEVB9wu8ECdz8s+im7gnG3rJR1kHEr5ixOZp4s9n1OtIwVR
-# xKLL97+NkZYbJDEBcWhtPUpVPwSxXFnm58TALme8
+# hkiG9w0BAQEFAASCAQA0a/Ie0uY93f7R4P3NByZyi0yTu8rzCglEW00TSFCvL/Di
+# 3ERk3Rc5jGUdpof+oRBgZcaClZqSwrKXo8nxIOwz4t3sZF031e8YU7Kl4p5b3ZkG
+# DmeGbmZ+W/3IYQvbI5IrQ/hj+IHEQpxSzxF7H8nbVbOyBQTxE6Z5tKFtK5UXnWBc
+# 247xuj9Kcveh/HWJCXHMdT3lzPWgSE74pQLvwcNUdKjdXDd4Llib7mFHysvpwAKI
+# ccJQ169raff9SZETwht7Lfh9q1mDhzzGQv5BCvwc1HWF76DIKNczEcsufnFQ62jq
+# Xq+TG3lFhZ46HmL2Okpu57l3WCRxfni2NgaHNKsy
 # SIG # End signature block

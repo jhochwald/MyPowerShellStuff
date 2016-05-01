@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -62,12 +62,16 @@ function global:Get-TempFile {
 		PS C:\> New-TempFile
 		C:\Users\josh\AppData\Local\Temp\332ddb9a-5e52-4687-aa01-1d67ab6ae2b1.tmp
 
+		Description
+		-----------
 		Returns a String of the Temp File with the extension TMP.
 
 	.EXAMPLE
 		PS C:\> New-TempFile -Extension txt
 		C:\Users\josh\AppData\Local\Temp\332ddb9a-5e52-4687-aa01-1d67ab6ae2b1.txt
 
+		Description
+		-----------
 		Returns a String of the Temp File with the extension TXT
 
 	.EXAMPLE
@@ -76,6 +80,8 @@ function global:Get-TempFile {
 		PS C:\> Add-Content -Path:$LogPath -Value:"Test" -Encoding UTF8 -Force
 		C:\Users\josh\AppData\Local\Temp\d08cec6f-8697-44db-9fba-2c369963a017.tmp
 
+		Description
+		-----------
 		Creates a temp File: C:\Users\josh\AppData\Local\Temp\d08cec6f-8697-44db-9fba-2c369963a017.tmp
 		And fill the newly created file with the String "Test"
 
@@ -122,8 +128,8 @@ function global:Get-TempFile {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUAA+PF9IhdOSmXJifVAjMR/G3
-# DjGgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUYv93ELryHEz9ujuNPkF8Yt8l
+# 7rigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -266,25 +272,25 @@ function global:Get-TempFile {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSx3HnOHBefMaawGBvpW5xhkL9EEjANBgkqhkiG9w0B
-# AQEFAASCAQADTBWP6j8o5epso1bUWX4mwMyEN+b9zjvWbvfGI5peWjDzvtmrcGOD
-# F4ewVGnZgBL8yZiBEJ4UFAK/i2TegAnVom1wDVdSZm/qGey1QQeE+bKZ2CROzolE
-# SOvtwo7ZY9xcu/HG8zT4g8HrQ2R2LvSFNFFpS2YfI1IEfvvaQl9dMLRQ7O6q7f0T
-# eMghPQcZyTuyAdojlzwkQEIVGkK11jaa1PfekqJ0cbnl8kebto38xuxihnFalOwC
-# 9JX9yXVL+3D01DA5/4EwHLBWNPq7CVBZD0pkln15mZ3l9UeyFHeFUJhn4Ck1I2Md
-# ZYY5PyTC49SX62z2qsekUv3Iev6zAeFXoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBS8JszgptLXk+nH5IRZTsMibf/3FTANBgkqhkiG9w0B
+# AQEFAASCAQCO9bN+3jAxsK4s6HahTXu1t6k81tcWMnOjB7pbCG+OYiQkpTo4Zzfr
+# JlAMyAmeamDvCxtzK19BaJr4Yq8LQd+dvRwqC9BKz5rIBwlP5DXqOkNXOPUFpx+j
+# a4+USN2C15xEku2PjP8jBcDLBWqImvq0c9KWjR/SqZMvsH/fTd5We98OuC24VHsN
+# RtYROUMfHSwOHnbGeHkO2Rt2fwKn4VhrrOdlWE8tVWvqnjgghSk0OhkM9a/j1spL
+# NO7dgePE4ZpMU2BazSxH/U3ARAjyZP9T6L1DOyLtd6TS5bMytGZRZ2pakAjlmR4W
+# iJX9vutBDAvVlgH97toaYhAQhRV06n6joYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwMlowIwYJKoZIhvcN
-# AQkEMRYEFOZEr7gIE81adkLVDNVdDFUPzepbMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI1NlowIwYJKoZIhvcN
+# AQkEMRYEFLHG1TRvjbtnUta9t2rTLer1PI0MMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBBwi1MpveRyuYC7+eae0JfhJrT5QHQsqbS/TuAQfyYyGUK
-# uzPAiVrD2BQkceP1reYZcI0AcUyAGNn4MjINuvYP36HTaa3yiP98RICl76ZOVxZo
-# etIgw4W0a75D4CHUHZe23IaUvjYoyUVVXn4KFA8mr7RsLJewDp3lCd7U3k2jXyci
-# yWH8Tm1mUaMq2GS5e8MZVMcThJWDTlKP3VLlQPauuvR41uf2cIja1xRPPx91uQi3
-# hbmcELaDVYLoaTejNzLrXsO/8UTxuaTrNJrZk/wc+tiDzzdLZx9lggA8reFLIokb
-# 9/Or5QY109VMCZWBduUE65fxGk8di7c5VRC0KD05
+# hkiG9w0BAQEFAASCAQAns/jnEjGQLuwcS/Ju9umtFT5QTeMrZF61XQLPKnFll/G6
+# /oFVmSYwsaj3XfyE/n0VNQsF3RTn81tg0cMXHJGMKjnNZ7A6QEOpDm4iViAb88xJ
+# ZuTAt+3fqn1FDJ3MhE6HZ4zIpCjjW2Ogh1BxsgtQ+zo+dRuSNjcf5YeAHzZfK9eR
+# 1eu5RxcP5ul3BU7SapO6Dd/SgtOtVde+avv/L8n0fH2MG6HfnkZyV+54sPM+0Mg4
+# f6hEzz5BeHAwwBkbOu16MHbaW3BJpwc73gDIeVrfiKaYtGhvQqUniAwcIzkmW7FP
+# +pSwd6k/Fn8g1rviSG1ZTfEBkL81LY5jI1umuUkX
 # SIG # End signature block

@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -47,7 +47,7 @@
 #endregion License
 
 # Make Powershell more Uni* like
-function global:myls {
+function global:Get-MyLS {
 <#
 	.SYNOPSIS
 		Wrapper for Get-ChildItem
@@ -64,11 +64,15 @@ function global:myls {
 	.EXAMPLE
 		PS C:\> myls
 
+		Description
+		-----------
 		Show the content of the directory Where-Object you are
 
 	.EXAMPLE
 		PS C:\> myls c:\
 
+		Description
+		-----------
 		Show the content of "c:\"
 
 	.NOTES
@@ -97,13 +101,14 @@ function global:myls {
 	}
 }
 # Set a compatibility Alias
-(Set-Alias ls myls -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias ls Get-MyLS -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
+(Set-Alias myls Get-MyLS -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUhrVjSIBDwS06K17YybuR5gOa
-# 4lSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUObSvE3lVIjtiHyBN0t3EgBY8
+# MPKgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -246,25 +251,25 @@ function global:myls {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTQG8GpjxLRveOeSkJKXGGGyRZDkDANBgkqhkiG9w0B
-# AQEFAASCAQAoY4P3b6vP/HitCWypPiluHi5hNCYS25uI1vpJraI/v0q7Eil2sy5S
-# MagK/zZRW09XZY1i5XmSXQL3eoz0AZjR7pNnZ/CxrOOXxyahf6InbN78gfru/wns
-# knLQMHbcraKONioj+7iwKRybhMPImwXOJLP9cnLnYHTSAmMF/9NJ0OvrcYUrojUU
-# ZFZOVmUiY5aOPdeUURBsXlakmB1+5LKtxZY4rXSsCWHir3OuLkTLWKrP1lmTp2FD
-# eiekbccXB7IgpsfmY60hy6TfOsVloXkrxF9kTr1zaQfRbxiLVzixDuBD2R5h49yO
-# P7Pq46KJe7IphDBGd+BYfxT+Vf5nIRtJoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRRR2ZbHYrwFU9pgmkBNgF+3cOUMTANBgkqhkiG9w0B
+# AQEFAASCAQBj7iPM9yFXE8ubN5pVsUCv70a94eOepKiNhXjKagcUR1kmd4+GGgQk
+# qlWSEALh/CQQtNm7VhbfZyLDhC/GrjhMj9xDJ66hTxcX6K90lmMnvI6ePNv6b9QL
+# BWoB4O45mvAMjn7TwyMaPFVPPwMvTE1ZzYfGixpRxzkN04uI8H/vZhXqvsDYqEjx
+# w6i0vTFLDWXZMt7rR+HWKeYb64xNwgLznPws9f43hEFPHRPAUGNyhERsajdEimgL
+# cy5ezqQMrBnrMu9rDAFNHizXjuXRWvfdOXoN8QZ0rAfBovDbJvPQLembMNbaIh6+
+# gYLsyvXL3loQrijr3x12z/mE5kxkoaxjoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxMFowIwYJKoZIhvcN
-# AQkEMRYEFC0RnuZpeqFaa+9qK/4jI6+zfRmiMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwNVowIwYJKoZIhvcN
+# AQkEMRYEFBEs2bJUJVHNtRoesy6ANBecNz+FMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAGO9DF/5p/c6tdJAOu6hcSu9F/O1UjVQbpJsPVDgodVn9F
-# Uy9FFZFBBPJxW6K63DBwxDp/J9VGhaKoVPXN7sBSKtQC3ODVWjBl6ddbDDZ9SG0R
-# /L3P4GsB5X+DpOtsBE3rypocraZas26SsVsi/0Blvo9bp3f/4Fi/ys/kGFRFpBGV
-# KyzZxGTLrShOWOpJ+j5tF1lcFj48TOIov4JmLslN9ORPJbU+VhDXVOEhyWGd6d5E
-# RW6PeivxeE7yFvervrqMMf8JAl014cY3GeW4u9qpcBvQy2jbUMQN781ZQTThNWVh
-# 6tOQNeb+yws0ErQpoBb7XPgGwi+j3GyOoDvjnS0z
+# hkiG9w0BAQEFAASCAQBLsA2xCBKw3bB4a8n/5Nyb0JFdzcqH6MztOFlOaOm7aitF
+# YgUGIGjAocMoHuWbhuz0SFs8t8L3D6h0AZxCkC1eJvkk/acomnuiU1Yw8+TBvSVB
+# 9egSI+hOvhjHREqOzP4kod5eHuv2iRkoz18ymF36YYXY9LRUG716CyBHHoMlXVhM
+# J/s6DMOxM2Fbnca3nQMmCNLGRd5a0Gwkk3ibciFsN1dszuHrhK0T44jvGd+P2CHo
+# EZq/MLC+QfCy+hLSNSEvdNqdDLsZCwVvvCRGv+84E+pbBwUhQ0+kjnc+SQcFkaC8
+# egEJrmuScnibW/nFmzTmLueKaNrNF5eIcdVbK2/e
 # SIG # End signature block

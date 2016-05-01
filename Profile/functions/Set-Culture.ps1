@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -57,6 +57,14 @@ function global:Set-Culture {
 	.PARAMETER culture
 		Culture to use
 
+	.EXAMPLE
+		PS C:\> Set-Culture -culture "en-US" | ConvertFrom-UnixDate -Date 1458205878
+		Thursday, March 17, 2016 9:11:18 AM
+
+		Description
+		-----------
+		Returns the date in the given culture (en-US) format instead of the system culture.
+
 	.NOTES
 		Inspired by Use-Culture.ps1 by Lee Holmes
 
@@ -77,8 +85,10 @@ function global:Set-Culture {
 
 	PROCESS {
 		$OldCulture = [System.Threading.Thread]::CurrentThread.CurrentUICulture
+
 		[System.Threading.Thread]::CurrentThread.CurrentUICulture = $culture
 		[System.Threading.Thread]::CurrentThread.CurrentCulture = $culture
+
 		$TheCulture = [System.Threading.Thread]::CurrentThread.CurrentUICulture
 	}
 
@@ -92,8 +102,8 @@ function global:Set-Culture {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbQBdO/HtgaAxChRJVOWbrO4H
-# Ak6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU0u+ZGIofETQQz9nUSRnHtxl8
+# Y8+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -236,25 +246,25 @@ function global:Set-Culture {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQknR3aIgDnxsGz+Afm25dR4auMkjANBgkqhkiG9w0B
-# AQEFAASCAQCfguJ424WISMp9uY77iS/ahA/7d7lX+5eS6O18PTJ+aDjUoqKF9OjM
-# WGYxx3e8LU3wxZDAfj+IglX3XVQgmolcmkhpbnWTkl5b97m+o8GwucSksWJco1wn
-# olclBMniiJ2RudtmD2TJ4dphO7UzZ7FDv8TBIQe2rf32XItb5plUbXr07ChtWVFl
-# 2yGHtYhdYbWvYSaIqqMNmbdsK+GaJso6VRD9AsrMA9oPcZmHoDkUmmRNFGp9Ew8W
-# JZYMqJQySzdaY+dQwPIzaGD0ecFbY5StKXoHb+2FNZKpdi1edOarzGj/tsWczTQC
-# JbhGYm+Gg7M8UFbGrmbJIHKMAVsRdl+GoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQvbblom/kG8T07zOy2tQDR4OyOFTANBgkqhkiG9w0B
+# AQEFAASCAQBTP111/XzfVZua3mcbCxZPND72m5THd+WisYXfgWmDcZL5Kqr64SmJ
+# X/SdIByRcCdUOpfei0+pnZp7Ri2UZhTHwj7OdBDiu2D0QjPnrBccPE5rcx8Q6lD4
+# zATt53T5pfbXnYzS5iVJGE1QwlnKJldNoV3yokA6AbGr2Q+vsUEJYz9pGpSmgcKy
+# b9dcrsPPtbzn1AmpgRvLpvHxYLEC2WfjNP9r81s8Z8ounGYRXcuMvuwCGVNo4HM+
+# meP4/ylGuEKnv96Nr6AptCPDDxKLWCDSvQaA6T7nAl6EMjg9WWATkWJHrVhke4i9
+# 9bQ5Fu/x7xZYlNEtgXhwrXxEvKRM6i7/oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNlowIwYJKoZIhvcN
-# AQkEMRYEFHXQvLBvEFp0kDC2yK/Do2XHd3SQMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxMVowIwYJKoZIhvcN
+# AQkEMRYEFNvuwlaqeNeyfKJgPHRM3A7aDZ3pMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCQHtiP8iiZ+LxYEp1EIR9SacpgNKW7Y4mEWS9SJPCCYSuV
-# LBmH4c9IhpB4OWJQoi3bpJFs9x9oaCdsgPuSj8olBhmcgrc+SQoASSBxoW4ZVLSB
-# 4RlxChemOKB8oLPKxDSjVY50VBdMRcaEUNMC+MUlPjQotRRdgEcMmnnwAnFg6Pov
-# UzIqK5RjwiYh87F0XeFIrpzWG4hp/h22N0HI8tw2eki8BjtdTQwsnySNxW9C6r0w
-# v6BiQCMbS24l7AAfSmjii6dAKUGYpHFsjOX6dpXpC551EJLbVvW5faLrtguzoJZ2
-# wDxd4rurVdiVAB5Wf8CWfawJhHk5E9DkblmxfxXX
+# hkiG9w0BAQEFAASCAQCMKZTxyTf+B72NDjy2q/K+miZiBZhVavwkmL8QGMQgDeZ9
+# fhoTv/ggnh31Zwjj1Z45pWOPd4Fij7RNgl0hFQDf95Jus7UyPmGTJ3sbiYG2AGyQ
+# orQa/NCbNH0e1cLtsHhDcxIlerIn7Vez+7LSi7MxJ7sL9jc2W06RSTAzQ0DG5OXc
+# 0diYLSrYpIEZYG6VXWF0Bcz9VbOsuKyqtFU6JQGyHoOr7GmbZC2w9uObWlTJZZog
+# vNrDMywWu8r2b8Zix66uHeNaHAIziTUsJnYf946RmeDtB7pAcJtxl/0X09O/TJle
+# fv1Th0RWyxJ6/MALG/8gFl6dZ0REN2nrhAYrG3C7
 # SIG # End signature block

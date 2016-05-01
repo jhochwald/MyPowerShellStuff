@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -70,11 +70,15 @@ function global:Send-SlackChat {
 	.EXAMPLE
 		PS C:\> Send-SlackChat -channel '#general' -message 'Hello everyone!' -botname 'The Borg' -token '1234567890'
 
+		Description
+		-----------
 		This will send a message to the "#General" channel using a specific token 1234567890, and the bot's name will be "The Borg".
 
 	.EXAMPLE
 		PS C:\> Send-SlackChat -channel '#general' -message 'Hello everyone!' -token '1234567890'
 
+		Description
+		-----------
 		This will send a message to the "#General" channel using a specific token 1234567890, and the bot's name will be default ("Build Bot").
 
 	.NOTES
@@ -176,8 +180,8 @@ function global:Send-SlackChat {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUeQZzH315lFqXAKrzq1U9qiCg
-# WxWgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUfXPSfHDuAZBLGAc6IYi8HDwX
+# tC6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -320,25 +324,25 @@ function global:Send-SlackChat {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQaa2C0lMkpHem54pm4zGMI7L529TANBgkqhkiG9w0B
-# AQEFAASCAQAhIgUQM8A1NsSJ/K3wEczrgZNUDpFNPJ/wxw42rU7mp0OM4vG0wmH/
-# Cvmm5fbyiCZOwgufihrKg0Qd9a2ovKdsHBhl3YU30jQopcD5WDFLRJPzZl86Iyng
-# wU/RmxbCpRUrbD9amdiPHB9LieQFTp3jnZ2ux6SFFhA2xE70RyENPdLR2EznKPov
-# Lu8nzMxnMZ3fbg/zNUoj8+kUtzyXf6SCkF5ebZUA9KU5y/W3CQXhH+VwOj3qYao9
-# 9ajKzEZuRVXgVq0rs2dfA2lsr+IArDiF/dL79aAUgkWcu22YHoejIUBsOhS3PBkI
-# n4XcZHhGoCnCDvfGwJsh+jhA17PdYAImoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTxy4ewQiqkhARlE2poWBdVcJzKFzANBgkqhkiG9w0B
+# AQEFAASCAQBDVJ03d5YVCsDcSmK7TWa//a/H0HDYfUMEmhCd4DZeu1Gii0WcC/8r
+# Guw47nGK1kLEUx6/K2rherdv1YHAsVps6yH8lJsWqlxS0NddPFLXlbmalja0Dq/9
+# 2Wo6sWVaYb/CzfAyKBpV+LiRFHPI2/9hJfuV4Mi775kqbzfZImPBRFwwt8xT/4mv
+# feQxdBG5tkVxJxOJH5Rg/gS4+g5xwoOiJx3Xfy6S49CYXdWWBcHUxd8hPkyl1mTT
+# VD6d+okknVtm6OFDR82XudZC/X9b2UGp6DjMRGcYRnfIv9iIG3aqssel9Lyr3Mns
+# u+h4FeimDYTCh1LyaVmtcHbOw9vlvaAIoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxNlowIwYJKoZIhvcN
-# AQkEMRYEFLHHS4u0DvdPiQLURupjImNcgrx+MIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMxMVowIwYJKoZIhvcN
+# AQkEMRYEFA7+92A/79DHK6d6KLCtmFn5RbzXMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCogSzDRmOdiurPLUxXEVFpBGgmno5xhgwYXWOXMQ7eEbOS
-# MjZpWNxUL4Be0TpyNuMmMP/OKqs2e+kKIYsZCbTz8SemD0IFfAXtW8iTCQAiBiaX
-# CQPcfCVFqDYgo/4+7L4TkFJPyzEglWNtU5wXipTq8IdIK1MT+6HGuldQ1Zx7hvT0
-# KT5/xjwRjpAyq1dBLo0qB75tCEPzO7wbymRFvUDJ5+MrO7dsf1ebW1kOPVHHK3KE
-# 7tpp1dtEGAcea2jNrtpCK5vVdwGwrErOrI/jG8/pnkg2NHukomkkbefshzRn7JK2
-# aHDk9BsQiAXgYEhBG6QVqqzzV9tTZrNWGcY6zHtp
+# hkiG9w0BAQEFAASCAQBdC7WKu2/3Pg6xaXI8VflluqEqPflrlaE15JH9D2aomyns
+# 8XVCBqzsm1L5n5wSCvpyKguuVvwViATcZc5NmQQZH6OI1obnPVBZU28yiKHqAzY4
+# N1aQGN9iMpSVAziiEjUXBQgvm0fRGNE6JDnkl20c+LeBl2LOM+ytt3kVhZuRdBku
+# P66SBxlKHJVDkFauFPba7ZAPQ7fc1tUzddj8BIHU0+I8dVXsU4mRlhOOaS6WBglf
+# 79OXdlD60lQbQZvzjCHpqtoIwkIpMQUo0VEwM4QPzOABndpvt0xKQTWuxM/gN8NN
+# NpSCt+BBKI9ZU52Bd6SmivU0yYDIn0ri30Fqbe9v
 # SIG # End signature block

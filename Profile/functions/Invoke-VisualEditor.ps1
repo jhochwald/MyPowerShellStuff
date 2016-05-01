@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -63,12 +63,16 @@ function global:Invoke-VisualEditor {
 	.EXAMPLE
 		PS C:\> Invoke-VisualEditor example.txt
 
-		# Invokes Note++ or ISE and edits "example.txt".
-		# This is possible, even if the File does not exists... The editor should ask you if it should create it for you
+		Description
+		-----------
+		Invokes Note++ or ISE and edits "example.txt".
+		This is possible, even if the File does not exists... The editor should ask you if it should create it for you
 
 	.EXAMPLE
 		PS C:\> Invoke-VisualEditor
 
+		Description
+		-----------
 		Invokes Note++ or ISE without opening a file
 
 	.NOTES
@@ -115,8 +119,8 @@ function global:Invoke-VisualEditor {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUWC5oC4kyiUnu3/o84FkXdga5
-# uKegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUgLitUwq0jSQZRAkueYDaHvUD
+# pzagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -259,25 +263,25 @@ function global:Invoke-VisualEditor {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRbZeLFzzsg0oDTMsWSo/EvM2vVJTANBgkqhkiG9w0B
-# AQEFAASCAQAf5IO+Mgicw4iZ//MYlr27c9IHi53+hGQHQkmA4eBrqrV2BHJOADWp
-# V6OEs3cj5/G/x967u6R4vrHYQ00whWHFiYMFXrjlPPg7WqccQxjCke7q6XsGbDKl
-# oRuih5UnrjghLCZ2QHH9JUmR2dlnRGmsZQD9W8/JXhCqjJgqGYXSTWjyI1GTsJBs
-# FXXd0zuzGXwL5UwIS3vrvJJGWsl9Ui3K1Hmu9hSqKX1UbZQc3hXFRXR4cDGjg3VU
-# r46+xqgpDbw3OaRpTV5PWAsbO187G8dREKQj8/IN9t0RfoZ8zIk3lUg1oe5sarzz
-# pSaeYwTu3CFk+qS52cq8jRwWNoDVUkDaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTF0Ki5vhzWLCxMX1hwohELRmEqfjANBgkqhkiG9w0B
+# AQEFAASCAQBd3wvTQmMiL6rHXqTbM7thtEE2bdSzlvSeyjc8Yg3ohZteGYSkEFNo
+# rii8qBb/AjWN2IMKusZF+RxGVKB5l/RiZDyZIovkg3F6w8ezuTeH+QdB2ULlUIWb
+# CzUTU6l7skg44+6PWHCf00snV6YowsYLGCS+COtocmPXf0DTZkdFeFFzgnXqWlkE
+# bv2/ln1fNvpqcvEVtWNwkCVF7/M039E+GKj9ydFBEW2cxpBjzBnlEoYzvv0qdzMC
+# aGtpo0HE5fyzK+hOSPy6cJezBGGx6Wzsoo7CFShvmxF0ZfnNk2aOZC9Htj7Kk3T9
+# FN2XH+GOdhgAyY0cuawFbld03x2Xp+eooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcwOFowIwYJKoZIhvcN
-# AQkEMRYEFLvvFX4wowv4SE9WWlm80n1b3nkCMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwMlowIwYJKoZIhvcN
+# AQkEMRYEFN597h00u0ZVgHnrzdn8fVBf/IAiMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCUMFR+2hn2+zz3T3rtKmv9v28czFDJ1QOHuj5Do2cl1kMJ
-# s+Ga+9fN+KlDSe2cnTc0VxBSz8nH5fz+8/BDHNpYMKVrR5tbu5jF97hIRSuGonOE
-# fHEQm4YfhA+nAVwvMihSRIhZyUxsJ7GS65lMSPxj8vJmuHvIQ2+OuVSs8jAUuNVa
-# fkR/SDtJhAdbB1HMThNngtdqZadnVxOGg2TZz3wP0G4FaRprcnPFafr8I4FGfpDV
-# pHC6T6aXIFvfb/4kGCHrGZKQJcRjULpp5Yhxiq27difBCR6kHOEEF+BDsxMg9prt
-# V4Q1251k6Y8Osp5ie/qxswK0GSEkZ3cJ8a3iNTBB
+# hkiG9w0BAQEFAASCAQCpGgjLxhSOpnjjc4hraiy7eC90Hu+gra602iXHXOzg9gnz
+# B70FfjJV4qa7NRqEaYhIPuV02NTpRwVQiMUysUTPtNIWDOCJs92kRkKCKc2WqiUT
+# HiSLzSQ3CJPVLbCFfYEtV087Z8fVcvH7CuWtmbkg4wjCnHErpf7DSEP9y+H6MxkI
+# X3+KOs78JrA8p6Dsqor5w1/TbIhr2fa//wZPGFUieJuSreUbMzN7PJpefUDJHck+
+# liXaBse9DxQaGfEDZjhnlVIWBlMuBuJwhmDSOAovRxxUW2gLlJc9UaCg6OBL1rSY
+# LMMMtPQiahLbLwYY4rEdneQhurNrzCSzLOIjIq9s
 # SIG # End signature block

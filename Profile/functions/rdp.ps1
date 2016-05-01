@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -46,7 +46,7 @@
 
 #endregion License
 
-function global:rdp {
+function Global:Invoke-RDPSession {
 <#
 	.SYNOPSIS
 		Wrapper for the Windows RDP Client
@@ -54,28 +54,40 @@ function global:rdp {
 	.DESCRIPTION
 		Just a wrapper for the Windows Remote Desktop Protocol (RDP) Client.
 
-	.PARAMETER rdphost
-		String
-
+	.PARAMETER Server
 		The Host could be a host name or an IP address
 
-	.EXAMPLE
-		PS C:\> rdp SNOOPY
+	.PARAMETER Port
+		The RDP Port to use
 
+	.EXAMPLE
+		PS C:\> Invoke-RDPSession SNOOPY
+
+		Description
+		-----------
 		Opens a Remote Desktop Session to the system with the Name SNOOPY
 
 	.EXAMPLE
-		PS C:\> rdp -host:"deepblue.fra01.kreativsign.net"
+		PS C:\> Invoke-RDPSession -Server "deepblue.fra01.kreativsign.net"
 
-		Opens a Remote Desktop Session to the system deepblue.fra01.kreativsign.net
+		Description
+		-----------
+		Opens a Remote Desktop Session to the system "deepblue.fra01.kreativsign.net"
 
 	.EXAMPLE
-		PS C:\> rdp -host:10.10.16.10
+		PS C:\> Invoke-RDPSession -host '10.10.16.10'
 
+		Description
+		-----------
 		Opens a Remote Desktop Session to the system with the IPv4 address 10.10.16.10
 
 	.NOTES
-		Additional information about the function.
+		We use the follwing defaults: /admin /w:1024 /h:768
+		Change this within the script if you like other defaults.
+		A future version might provide more parameters
+
+		The default Port is 3389.
+		You might want to change that via the commandline parameter
 
 	.LINK
 		NET-Experts http://www.net-experts.net
@@ -89,27 +101,70 @@ function global:rdp {
 	param
 	(
 		[Parameter(Mandatory = $true,
+				   Position = 1,
 				   HelpMessage = 'The Host could be a host name or an IP address')]
 		[ValidateNotNullOrEmpty()]
-		[Alias('host')]
-		[System.String]$rdphost
+		[Alias('RDPHost')]
+		[System.String]$Server,
+		[Parameter(Position = 2,
+				   HelpMessage = 'The RDP Port to use')]
+		[Alias('RDPPort')]
+		[System.Int32]$Port = 3389
 	)
+
+	BEGIN {
+		# Test RemoteDesktop Connection is valid or not
+		try {
+			$TestRemoteDesktop = New-Object System.Net.Sockets.TCPClient -ArgumentList $Server, $Port
+		} catch [System.Exception] {
+			Write-Error -Message "Error: $($_.Exception.Message) - Line Number: $($_.InvocationInfo.ScriptLineNumber)" -ErrorAction:Stop
+
+			# Still here? Make sure we are done!
+			break
+
+			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
+			exit 1
+		} catch {
+			# Did not see this one coming!
+			Write-Error -Message "Sorry, but $Server did not answer on port $Port" -ErrorAction:Stop
+
+			# Still here? Make sure we are done!
+			break
+
+			# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
+			exit 1
+		}
+	}
 
 	PROCESS {
 		# What do we have?
-		if (-not ($rdphost)) {
+		if (-not ($Server)) {
 			Write-Error -Message "Mandatory Parameter HOST is missing" -ErrorAction:Stop
 		} else {
-			Start-Process -FilePath mstsc -ArgumentList "/admin /w:1024 /h:768 /v:$rdphost"
+			if ($TestRemoteDesktop) {
+				$RDPHost2Connect = ($Server + ":" + $Port)
+				Start-Process -FilePath mstsc -ArgumentList "/admin /w:1024 /h:768 /v:$RDPHost2Connect"
+			} else {
+				# Did not see this one coming!
+				Write-Error -Message "Sorry, but $Server did not answer on port $Port" -ErrorAction:Stop
+
+				# Still here? Make sure we are done!
+				break
+
+				# Aw Snap! We are still here? Fix that the Bruce Willis way: DIE HARD!
+				exit 1
+			}
 		}
 	}
 }
+# Set a compatibility Alias
+(Set-Alias rdp Invoke-RDPSession -option:AllScope -Scope:Global -Force -Confirm:$false -ErrorAction:SilentlyContinue -WarningAction:SilentlyContinue) > $null 2>&1 3>&1
 
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUKH2OZ+GBgpNhu6t0qmmYDP0u
-# CIagghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUSruuQusQorqoj7/4rJJzxph8
+# JmSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +307,25 @@ function global:rdp {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBTD9cV+prB3v4LPUnlOfh+tuT6s4DANBgkqhkiG9w0B
-# AQEFAASCAQCgVqaHxZiWrNtuCdLfwdFYUC1oxa0r/HuN3AE+M+KJEdE3DwbFnx1V
-# +Z5O5t9Q75Yc4VHMN3YeVsvBiU7ksSwxBolXx7sC58uOU0jw/QTbJJmlNLVyf27E
-# 57f+l2lFDHQ4ulLpKcO9ocsUIZ+1vKHlV8OVRHZNmCl8bMsThZ6EyujqMuPsSmrK
-# QLKFr4b6ysKjbj+W2yd3k8XpxdgIY8dipO1vnjnxouUCxOfORA9kPxdMQHkg/2vr
-# ulK8jhV8YUHeIJE2tPi8kqE7mqeZlBCfqwx1cNqqkm94/QCftZzH57CDkHXVNNr0
-# LU5JIj9yfRc1KJYAKdWb4ixshVq6UUBaoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBTrxqFLB7qdzUlFmtLiRsB3Uu16vDANBgkqhkiG9w0B
+# AQEFAASCAQBRRDnOSE+Nj56w7zhwm/yJkhkrANeNG3CXc8cmbMv+odceD8iA2xJ+
+# UCmz+J/CmE5kVDRpNjs4abnOMkjvBq7a0DyrYpAn2sSw8Zs0a7fs2ZjXvYm6Hrjw
+# EiSNfGL19q1JUj8BzPlaiwAIN69lzUu/c1JDIGcX77UwR3IciswrgufUOPVwtGXH
+# aVpAIIS3zalsYwwRIjaK0VkpJZZwQr+0NcxhzikR5xAw3RcrEyGNbJNXr8zZoupe
+# Hm34Jp9qS25IJyIjKgEC8K5Gvn8vahhEvdryBo1secf2yj6qPZSrU55gwMqd70XA
+# 9lXUMMREw5V8AAlzH8hi22aMsahO4vv5oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxM1owIwYJKoZIhvcN
-# AQkEMRYEFKfXx6U7J5VKtU4OhEA0nNQqLpqCMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwOFowIwYJKoZIhvcN
+# AQkEMRYEFNNp91K2WpcmAlssWOk6ZCqvsHLmMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBwdo442ebNnnXCwM8qKAkjzckG9waEqpczkaHhdnzKmF5i
-# 7Z39N4fMsJr3q/70oSkCeUsWHqE+hiiihsbuH8sGHzHX/aQuHodKUEraSMPpQpyD
-# 0E4EF0adSj9Er3Jf4Rn/yaGgQXJElNXzWVmHZoSaZ5uw8JTBxXNHpDliG/dkbGyS
-# Lgk4OtZI1huWCBKh9DQGTMMSy8IqmfRSut2Owx/gQt6OVl/NCDCxwWbBpULkzQfL
-# dsF5UlYR8T2mvp36GP7RM/fgLgnOic1is30b69r3b5L7GTz2u36dL60XQfA8IRMO
-# DTNut916ACTiYcTCrKffui0grnBp2zPujv0e1Obk
+# hkiG9w0BAQEFAASCAQAs8kw+z+DefFAMOf5ev3RkaKNlL8/jbqMNGDeZFKK7lTfe
+# mPwRtEUj+4IYDm3/5xUp1Y5FQd7vo/NUbiYM04FUOG/B50rAYlbugBVPEn9KgJld
+# oO0reMnnXgqAWJsagshk2Yme5NTpCoJSdwMm6JZztG/VmSlJheMJWRquk+1C7RXd
+# FAC0P+ZZocL4nAunVHQYRVy24hLB/uPAvaljeDW09Cvv9+IIQuqIg+U/mzD+Wdx0
+# wxzoacQfdX+CkOWCXt6N56MJuaLpFoRE0BKHxACAV69R/RBnZxSacpdxdNzqYTib
+# K/9GKD4bO0SRNZrEZZk23zcZKypQWkoOECTdVCVu
 # SIG # End signature block

@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -64,13 +64,17 @@ function global:Get-sessionfile {
 		PS C:\> Get-sessionfile $O365Session
 		C:\Users\adm.jhochwald\AppData\Local\Temp\[PSSession]Session2
 
-		# Returns the Session File for a given Session
+		Description
+		-----------
+		Returns the Session File for a given Session
 
 	.EXAMPLE
 		PS C:\> Get-sessionfile
 		C:\Users\adm.jhochwald\AppData\Local\Temp\
 
-		# Returns the Session File of the running session, cloud be none!
+		Description
+		-----------
+		Returns the Session File of the running session, cloud be none!
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
@@ -95,7 +99,7 @@ function global:Get-sessionfile {
 
 	PROCESS {
 		# DUMP
-		Return "$([io.path]::GetTempPath())$sessionName";
+		Return "$([io.path]::GetTempPath())$sessionName"
 	}
 }
 
@@ -109,7 +113,7 @@ function global:export-session {
 
 		Our concept of session is simple and only considers:
 		- history
-		- The current directory
+		- The export-session
 
 		But still can be very handy and useful. If you type in some sneaky commands,
 		or some very complex things and you did not copied these to another file or script
@@ -117,6 +121,20 @@ function global:export-session {
 
 		Even if you just want to dump it quick to copy it some when later to a documentation or
 		script this might be useful.
+
+	.EXAMPLE
+		PS C:\> export-session
+
+		Description
+		-----------
+		Export the history and the export-session to a default File like 'session-2016040512.ps1session', dynamically generated based on Time/date
+
+	.EXAMPLE
+		PS C:\> export-session -sessionName 'C:\scripts\mySession'
+
+		Description
+		-----------
+		Export the history and the export-session to the File 'C:\scripts\mySession.ps1session'
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
@@ -130,7 +148,14 @@ function global:export-session {
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	param ([System.String]$sessionName = "session-$(Get-date -f yyyyMMddhh)")
+	param
+	(
+		[Parameter(ValueFromPipeline = $true,
+				   Position = 1,
+				   HelpMessage = 'Name of the Session File')]
+		[ValidateNotNullOrEmpty()]
+		[System.String]$sessionName = "session-$(Get-date -f yyyyMMddhh)"
+	)
 
 	BEGIN {
 		# Define object
@@ -159,7 +184,7 @@ function global:import-session {
 	.DESCRIPTION
 		This is a (very) poor man approach to restore some session infos
 
-	Our concept of session is simple and only considers:
+		Our concept of session is simple and only considers:
 		- history
 		- The current directory
 
@@ -169,6 +194,13 @@ function global:import-session {
 
 		Even if you just want to dump it quick to copy it some when later to a documentation or
 		script this might be useful.
+
+	.EXAMPLE
+		PS C:\> import-session -sessionName 'C:\scripts\mySession'
+
+		Description
+		-----------
+		Import the history and the export-session from the File 'C:\scripts\mySession.ps1session'
 
 	.NOTES
 		This is just a little helper function to make the shell more flexible
@@ -210,8 +242,8 @@ function global:import-session {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUzkQVbqADSRBy3Lq0pP9XfaHK
-# tv6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbFIAAMnsKVKLpoD3KC1NFKOv
+# gkegghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -354,25 +386,25 @@ function global:import-session {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBRmxPh1/091eHFKFBfL2RaXJ90kUTANBgkqhkiG9w0B
-# AQEFAASCAQCIhdLe51jGka0mnTrjFUC7Wo5B4I5uqB6mXED2ncz4Qh3t2JYR1aJO
-# eC9poYLjEKS9mGnhQBPWMC74pQqnm3ZIk+hVO2AW4M3gHEl8jxev2bhvw3kv7o+c
-# uUtCmSM3ML6JPDUZ5i+qNgZC3qF06hmjkBDtchneB8YAgd4b6JG1XyfjI3nFmY/a
-# reoiADsJjUjJ+TWw6LaLG2oUy2HHO64dN2BNlXrBwaqZ+/3oGmHIkLNAnHGGibNE
-# ETcxwHPV75uUh6VmAQRWINxccr1hYKAKu7hk20bVZIQnIfQ4WAmxsUqAy/VfzEuF
-# Di3koLV3kM5Qz+pYFyX5lRJI49fTAoECoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSDz/iON6XhN1XDG2h6tMNlIjqRfzANBgkqhkiG9w0B
+# AQEFAASCAQA8Kw5/3HjOHHDVz+zVnocgzjfwmiAkcw39bwT/GkcNiUjK4MpIvai6
+# MirpmY+61tbbjKRd1ylPZMZ0btBq+BPbh6m2hg5NuWKz9o2LLqi0KQ6gLGBZ1QxZ
+# 494Ttsb+0FG297XNI+cPd7UQwlsjNq0ExdBpr+lp99rBIeA5Wubm/0gLW2q99TJ+
+# hInQIGVJdwLykjTAUpCsVHufHkR6eU5TxIFApW1naprOxF/zhoErU1tgj1ZAEK4R
+# y4PHOEBrX21T17PeVCd3cAbftX92CXrgUsA/PfpEwGlyNQV/uaQ9iTLsm6L5gegP
+# TmRbslkXIHzIKCe+VnzznZCe4k8/tzy0oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzcxMlowIwYJKoZIhvcN
-# AQkEMRYEFDXRM7cyYIHqcfNT7utShzuq8DrNMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDMwN1owIwYJKoZIhvcN
+# AQkEMRYEFK6ART/K22+7hRknkkcJzCEWeFLSMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCQPT2Km3U4H8NRvIex5K5hEs1qydruX7mA5AWQCveuoYEN
-# bR60e0h7PVkMQGiLw354hWI93NVQd5hnywSMCQr9AGbgDFri2XCO98X6QUJHAOwN
-# ofNCmNwLhnLQxl0QMg5qclIBza9LjVkugLKF3cjrEb2cFQHLiTWnFl8q+r7SUJn4
-# Yk+2IbXebZ2ATFXAvFMcHvEPQyU4vnLiMv38clBr5ITnFVWydLNAt+5e6gmfPjUb
-# PLTXXqvydW2wus7R6Zl4iRuAxAxzM/A86kIba0jnSL3691ohT2vtzVBHPE5uth49
-# QPq/vDpEULQr/t5Kp0aUwIlnbRlZMHAuEL6EK2cH
+# hkiG9w0BAQEFAASCAQAC5kpAEcfMNfi+kbS+OXsexZI2bUk2rnpcMtGblvEJv4+h
+# pr6rD/bG6Tx8oAE0SO/LLXSRzHHqc3zUolc0TkH3Q83mMEr7W3hky5WRXrM7xhdz
+# 52/EYz0S2cHNQBQG5qrQjebnszVj/D3LoGAUSocZvKIvWRY1iQb9yKbhwe3eCTnH
+# C6LLA2f7TvYHx6JbQkm+EjEufi0m41r/SVcGs0DBQiCw645R1XbfDpoB28jiy/CD
+# dp5dbsXjiAEovjj47YJ141MAhAzxmxr87sQk859psgKkX01X0H/8rYN/7HLmYYUB
+# 498J1zXVMAgFIY9TVMiGpB+Yje7UVTw1IWJjJXY2
 # SIG # End signature block
