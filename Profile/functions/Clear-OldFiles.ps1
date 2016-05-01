@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -66,24 +66,32 @@ function Global:Clear-OldFiles {
 	.EXAMPLE
 		PS C:\> Clear-OldFiles
 
+		Description
+		-----------
 		Will remove all files older then 7 days from C:\scripts\PowerShell\log
 		You need to confirm every action!
 
 	.EXAMPLE
 		PS C:\> Clear-OldFiles -Confirm:$false
 
+		Description
+		-----------
 		Will remove all files older then 7 days from C:\scripts\PowerShell\log
 		You do not need to confirm any action!
 
 	.EXAMPLE
 		PS C:\> Clear-OldFiles -days:"30" -Confirm:$false
 
+		Description
+		-----------
 		Will remove all files older then 30 days from C:\scripts\PowerShell\log
 		You do not need to confirm any action!
 
 	.EXAMPLE
 		PS C:\> Clear-OldFiles -Extension:".csv" -days:"365" -Path:"C:\scripts\PowerShell\export" -Confirm:$false
 
+		Description
+		-----------
 		Will remove all csv files older then 365 days from C:\scripts\PowerShell\export
 		You do not need to confirm any action!
 
@@ -122,8 +130,8 @@ function Global:Clear-OldFiles {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUbUU065vn1hPOcMuLxeCpD8gD
-# BZOgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUcyEyqdiw9Ytw9N3lQId2ECMI
+# mKSgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -266,25 +274,25 @@ function Global:Clear-OldFiles {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQ+Ig89FQqebtgRBw0SyUiUm3NTczANBgkqhkiG9w0B
-# AQEFAASCAQCuKk4xv55GPJXLaBYpIoDzFAMzgDC2llylHuylnikz7IWbViY0riI0
-# 7YS027iStYVjhW2oD4CBu69f9pje6EmC+wqWPRdRzlWUJz/Wc7zB9IbuddXzh6YS
-# sM+JmNBbO1MD//hvreS0Mrpl6a+IM2/ireV1SkuEvInJvXUNGAh00pxSVi1upb56
-# 2Ze89K5lE1yPi+Tw7pipRgH6+h/gW0Rlj23loXgp2yHagSaB93dexDzyjxCkLtrq
-# RgkasuIwTTb43eBA7PuY2PyqVJr/kJmuUoFA0KIxk6hMOqU/gd94LxyMKKQZJj8V
-# 8Ae9N9acU5dM0VJ3GUFwvMX4zvU6rT+7oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSOKohY6AALHtjjxV0WhpXpm5ZynjANBgkqhkiG9w0B
+# AQEFAASCAQAW5kWrKAyUZITCPi5SN8V29FprI5cwqUvaNMUwX5ZtevA+Lr+Q1SW3
+# BJLpMLp1WPIWl1ATKrpOvQsbhEiGSSrsuWI1OAbBUMZGAJ7L12T/Zg6+haeqPmlH
+# 7tkvhJPoYkOxN2PNQ2Usgi9PxmeI7q/RJM/+S1mYlEDP3VdunP/KsRPWR+REBh/1
+# cwNd0aompl0FsnIdNWbJFrKF1Zmeyd2kZD3PDhl8MhD/KmyOOr8fEKDuid4TNjNp
+# j3NYFA7QEKETiBRTRX7VkQOmZxVR+lG7OLWjkHPI24WrbFR79EDdvEWQ7x4RfJd5
+# qAxiJkpw+lYlIKWrxjauzm44Ky73CvOloYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0N1owIwYJKoZIhvcN
-# AQkEMRYEFEmpI8fKxOC8YXQMYRuHuGruL/GnMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0MFowIwYJKoZIhvcN
+# AQkEMRYEFLjWky/Ec5YOPkmLoo8jDScGf1glMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAvKtEjD2OJbhLhPaR1YZzac0zZeW9Q3yp7GVbsnNwS1X3u
-# lCBnRY2jikumtoY0QPRGk3nH0JgVVrjA4HMsDKRw88853YXIXKN4Ayx9V1LTjc1B
-# aENEjDPKFNgBfPYuYt0gSAV6FtPOBXr76YyPPuD0FfCABGJzi2pYZHcK/hdmitAi
-# oE9/xtMM+mp2/KVMjovRD//04Fxt8N4X5lxT8gZ9MlseQKgTnJX2TCqoY4tZRKoB
-# qwD7XT4PPUz+RxZyosMDLiBfYNxY/zkwI35Uq1AnbLk/hBxutSNyHhWmokmfUL/m
-# RBGPqzrvmwe9rkbDzYizEVDtYxqalAxD9rj1NkUH
+# hkiG9w0BAQEFAASCAQAFg03wewPBhdp+VGX8aFwQB9JKBzh5tGzUr3tLIT49SSl3
+# YPLY+rJXLsgv1YCbpDVG7ye5DTig0U2uSEnmWB9+3a+LmW+Gkf+lyjUI0WMuho/Y
+# ++aVu7uOqzzfPocTbMNUHvkk6bPNCd8MBDWiYutvItMvw3YylDtvmPB6pbfe6Nv7
+# dju4q7FxwRvHL0h6OMeiqraWnafrmcjs8TLvy5sNKnBNSu/x6zI3mA+oz05Ji/86
+# D6aQDGD7GbZaC3/DRMcjo3JARh74tUt4qj4j33Mv0O4ecDry4ymystbWPnXHJnQg
+# 5x1QuulyFQr8LJUE0UtmKFiH3VszQ55EuZ5H8Pg/
 # SIG # End signature block

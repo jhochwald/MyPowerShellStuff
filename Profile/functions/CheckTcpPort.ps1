@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -56,23 +56,24 @@ function global:Get-TcpPortStatus {
 		This is not a simple port ping, it creates a real connection to see if the port is alive!
 
 	.PARAMETER Port
-		Default is 587
-		e.g. "25"
-		Port to use
+		Port to use e.g. "25", default is 587
 
 	.PARAMETER Server
-		e.g. "outlook.office365.com" or "192.168.16.10"
-		SMTP Server to use
+		SMTP Server to use e.g. "outlook.office365.com" or "192.168.16.10"
 
 	.EXAMPLE
 		PS C:\> Get-TcpPortStatus
 
+		Description
+		-----------
 		Check port 587/TCP on the default Server
 
 	.EXAMPLE
 		PS C:\> Get-TcpPortStatus -Port:25 -Server:mx.NET-Experts.net
 		True
 
+		Description
+		-----------
 		Check port 25/TCP on Server mx.NET-Experts.net
 
 	.NOTES
@@ -95,7 +96,7 @@ function global:Get-TcpPortStatus {
 		[Int32]$Port = 587,
 		[Parameter(Mandatory = $false,
 				   ValueFromPipeline = $false)]
-		[System.String]$Server
+		[System.String]$Server = "outlook.office365.com"
 	)
 
 	BEGIN {
@@ -158,8 +159,8 @@ function global:Get-TcpPortStatus {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU5lXFO/stWwfFOq5iQyiuAmYm
-# GuigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU9Qb1eZp47kKLCBex4aqE9htn
+# 2C2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -302,25 +303,25 @@ function global:Get-TcpPortStatus {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBQaD5Pk/YPVSMmkAj49/z5gYNBkizANBgkqhkiG9w0B
-# AQEFAASCAQCPOmhhPLRmjv35ARtmNN16tbbxA9khXg5slc7IN+yiyDkdNmgfUgW9
-# nfjYoX8u9kdWTwiQ1Q/auEW1t7DJ6RQTKyLJexA1cc77GLfvl6SKmpQI3xwMQCI/
-# ohUgbOi7sOxvSBLutZZ8/UKdBVDFqEEkZ2YXQaRKAgeikXgi9cohUgjO+Rg2xHfE
-# 350fnNU5Gp/qb/PnAxfaUCQAuz61Neet+JXZEW7OrmCHLIpYH4yqvjjY4+O6/hE7
-# Np3S0B/IO7oMQ8JaJEJJVA+spw2u8iQcbGbeyxsqgPthaKYuUE6Ex1WunhHjZ+tp
-# B5UV3bonby9uYkOzAfPFVndV6WlIFN/voYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQYPkCr4kphRDFfFSxNnIYNs93FhTANBgkqhkiG9w0B
+# AQEFAASCAQBFy1AnZOQ2L/xUmRITM5lBylfSfEd9js1gT16eQn6/Ct7FXuFYno/B
+# Zx47IE13Mp7kPfZpjPWbsyL/zSpiEKdTLebil2oaCy5x+STwgCiCfFJ0zoR9yv7M
+# Q6/gHYvwEcAjgYaXICKFv0rjoUAjtPc/hpQbP/qZ9y3x2PzowvMnQaE6YZdiu6Q/
+# jwYH+YWsR/YStv0AiEeVOoiJNCK/Mn3idL+QjG6BmhHLmSBJsudm/Ed4kV0jpDey
+# uXRzgqRISwTKhTBV1mHUXTlPVVFz6cjSYFEnyybXEIKcgF6svXeE7xtVXaAcYqYZ
+# 9XGgZ/KRlG1zZr0MJD7+UY11UhOCz1isoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0NlowIwYJKoZIhvcN
-# AQkEMRYEFN3KLB+0IaQ187F7/35wXVnPy5jbMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0MFowIwYJKoZIhvcN
+# AQkEMRYEFFun+NPqzMmkL35AcQ1hcHTc/sOnMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCaKp91bszb5eNkmPCY5mpTZJwY4so8/jYX4Hj7oFT2S9AR
-# iN7Y2Rr+2DdAa/aghB6C2D0HgeckBac+4Ut/3L9h2qiwXgV/kUcVYYEkuXb3H4ga
-# fK+0Kg9Sawp4LeuKa8ZSgI6PDqSC6tuZssQIgBMxrdHGwafKvSHchZZz1L9EtyQt
-# gJjMhgfIQrXDmP/70UBo4o4BleGtvQtiqfH7jNsxlrlIsDym+wdbjk5tYu5jcbYv
-# QjKocWDwCFE4gMlO/WL+h9iwocDCu6V6/7NOWtNNLtVZ83qNBzRu+pu8XS9K6lxY
-# DJTtJxw1iimj1XZd2LtRr/LDLU+2d7eutqVCYHYQ
+# hkiG9w0BAQEFAASCAQA7IsLS0Q6K2zf9i0NGTid7PsFLOUH+eV799ja9PQPwM3DN
+# 1qhkoQNDFvjCiqnyMa+e2BfT2+BS3HvrdBDqqfTEwSMvxselunjIAZY+PLsp/WL+
+# TdDx8LdO2DSauY3eSCf6VOjRSqntxQGZhu2QVgQtKWMju2fRPZGzlg7h2/tWRAtx
+# MFXnIPL8SOVjDOx+Nt35Bc858q2ZcJUJ5/l22lADmyQuMcT9IfdqRfw73+7izL/k
+# Xb0cPFAAcmHMv1iDh+5SW94IOc850O7pThmQ3jD7z5k/WN3lSeIfe4/sYtJHBHgU
+# DLkPMIPVdpzCFC3ginR4iz1s9ZI+x77pAtS1M1cw
 # SIG # End signature block

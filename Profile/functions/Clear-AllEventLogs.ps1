@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -57,15 +57,19 @@ function global:Clear-AllEventLogs {
 	.EXAMPLE
 		PS C:\> Clear-AllEventLogs
 
+		Description
+		-----------
 		Ask if it should delete all EventLog entries and you need to confirm it
 
 	.EXAMPLE
 		PS C:\> Clear-AllEventLogs -Confirm:$false
 
+		Description
+		-----------
 		Delete all EventLog entries and you do not need to confirm it
 
 	.NOTES
-		Additional information about the function.
+		Could be great to clean up everything, but everything is gone forever!
 #>
 
 	[CmdletBinding(ConfirmImpact = 'High',
@@ -74,12 +78,12 @@ function global:Clear-AllEventLogs {
 	param ()
 
 	BEGIN {
-		if ((Get-AdminUser) -eq $false) {
+		if (-not (Get-AdminUser)) {
 			Write-Output "Would clean all EventLog entires"
 			Write-Output ""
-			Write-Output "But you need to be admin to do that!"
+			Write-Output "But you need to be Admin to do that!"
 
-			break;
+			break
 		}
 	}
 
@@ -98,8 +102,8 @@ function global:Clear-AllEventLogs {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUTpVcKu5/ST04rL919N9Oolch
-# GS6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU8CnXPop2t0PKJ5yvUUL9/hAx
+# MmygghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -242,25 +246,25 @@ function global:Clear-AllEventLogs {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBT8mSfw4b5MNnKCpvKm0rw9msX81DANBgkqhkiG9w0B
-# AQEFAASCAQAJP+CpHffSaZdyhQEi0KozNaBYR0h0Hjf60spINvctVKzY1vQ2CTqi
-# B+DMvzr564lm231QFJyMgd0aP1JgJ3fP30cTzhC4Q9B7n7dsPUhO1Kw4CEtwL9Ib
-# GwBJCfAr+TgTn3DKhpaZYH3AV2R2we8HWaswD9kd5v0x4z4WrMNJjmsKXaxaj/IA
-# necfjh1aD6fScwJpeLWKcWxuHorriZR/NaaIUeMpZB4IfoDliZ3qU2z9ORrM7imz
-# RGw7NDcbiVUdiyJeiyB7VLDz1FhPcNDjMI08U2mhJFucpxIBvVJc9In9yLxPXvy0
-# o4AzpqTuJRLj1mS5zHyN0lmrq6wg/i/ioYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT6m4I5WOefYjdel4S01VVMVggtajANBgkqhkiG9w0B
+# AQEFAASCAQCguhzW0PbUKhkLkWApI/yjcSian90DIYLD4VAq2uT87DtKgs2/kRZG
+# jfk4CGLsFLYF1P4zdteVhfXGsiKgJWjQlr3mfXxQAmKbgEFkQs5Rs6XfZBgVEyrQ
+# P/43rk/vKo154XEO4NjFARRUMA/QcCe12iabCfWxR9v9gCzDFkV4nAWaw6H4mysn
+# xm0RaQRO/SYdb5NzDLLWNqqN9h9PvxChrkONzWhtniMRT90Z1ufW2hp4DpPNu+n/
+# JS9WHJOVy4mWiHHpOU+6LqcmBvv1Khp/WgAdD2PU/SXkJGeNpwK1pX7G0PqGbm0+
+# BycC2XiMUi81TDUvRD3HkDmCpfdMbj3EoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0NlowIwYJKoZIhvcN
-# AQkEMRYEFA14UoZjvYok/RWsmzhIblEZTyqFMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0MFowIwYJKoZIhvcN
+# AQkEMRYEFMNwlcGWVBuPe+GHbpGoDtVPuQ4sMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA5M2cbkVu5YXLUce87xY0wiis8Sp7dzyOFPjzktvMhQZkZ
-# baMhaqA7tie185XeAvw2+U5CQJw9RrWy7Y12xNxl9fLGVIFxJauX+VZhyOax3kHN
-# UfgnZX4uBZgPHabJlTEQj65mnu4ZDXMRqGHyq/+dupQSkJ84/pfW5p/g7avYsPgy
-# L3fti7Ldg1Uzo7Tijvr+bW5/jPQo09L1tvYsY7dIadTpupk0Nngx6NvYl7A4RWfb
-# d7HjQswfpRtB5Bdk+z6ZhNMGMYM3SiWZL8fQmg63LjK8fjFfMzQyKhQMINF3k4jG
-# t94jJKBBJijRf4/K2d2UARBI85vlYYrq1rhqIf3C
+# hkiG9w0BAQEFAASCAQB03zJB+tY29MZ3x+RiUfF5aXOZOQSmm6ZjGPHda1ltuY+U
+# LJNiDPLVMMLRmyu6ExSWsIoV59cmS6nScBFotSQl7ZMDcWCXjCG1zWIvfydoyKjn
+# aG4Y6YhwYUEz0x9yE59p1BfLtxa6OFCvOunh7teMznBhynnkjrBA+z8mzXhoP0sX
+# mL0PeT9Dzbcms67U84P/sff+cwaN9EmkO5lhi2gKO30jai9l/Rn8z2x8Lh+cuqbT
+# 6RyYsCxSlkHfiWrWiVCBWSwDH4OlcKwE59lYey6UJbSKdLp5fprg+X6orYpJLDRw
+# ZKvxZ/DjlEDgPSoTNylWhCpiXrZIHRcE9fA9FDx4
 # SIG # End signature block

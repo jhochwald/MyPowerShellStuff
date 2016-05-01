@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -52,8 +52,8 @@ Function Global:ConvertTo-HashTable {
 		Convert an object to a HashTable
 
 	.Description
-		Convert an object to a HashTable excluding certain types.  For example, ListDictionaryInternal doesn't support serialization therefore
-		can't be converted to JSON.
+		Convert an object to a HashTable excluding certain types.
+		For example ListDictionaryInternal doesn't support serialization therefore can't be converted to JSON.
 
 	.Parameter InputObject
 		Object to convert
@@ -62,11 +62,22 @@ Function Global:ConvertTo-HashTable {
 		Array of types to skip adding to resulting HashTable.  Default is to skip ListDictionaryInternal and Object arrays.
 
 	.Parameter MaxDepth
-		Maximum depth of embedded objects to convert.  Default is 4.
+		Maximum depth of embedded objects to convert, default is 4.
 
 	.Example
 		$bios = Get-CimInstance win32_bios
 		$bios | ConvertTo-HashTable
+
+		Name                           Value
+		----                           -----
+		SoftwareElementState           3
+		Manufacturer                   American Megatrends Inc.
+		Caption                        4.6.5
+		CurrentLanguage                en|US|iso8859-1
+
+		Description
+		-----------
+		Convert an object to a HashTable
 
 	.LINK
 		NET-Experts http://www.net-experts.net
@@ -117,8 +128,8 @@ Function Global:ConvertTo-HashTable {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUnwgM06Ky1Bl58As/mqt2uIEr
-# KtigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUNTZmP1KqIe9ZHXQoduRHIMi/
+# H8agghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -261,25 +272,25 @@ Function Global:ConvertTo-HashTable {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR7Vc+c3kj6ABbYnc1XtwrsXWGP9jANBgkqhkiG9w0B
-# AQEFAASCAQBQkzfDWdS+NlXbZaeZy+7KVce9Wac5LP78sDMLwYUOHU1nvx52KOCj
-# 9/zQNWeO3OwLuZROLdpExceypK3jmL/Sk9bCe8MgbbOP7HmLhU2HAEBZL1JeacW6
-# kK8pqwVWUhQbTfXpmaHMSzuocLO5Q6OiGZy2dRsERrQB8vd0uvmzTmszIjgvGCAF
-# pckmaPatXkcqk728cYts8Hdq66t0Cyj1CUBEq/moKcE7dNaVmnkyNivLxYAyKJhM
-# ewA5b3DbImZ8L6ZHBIcKqN2LAOiC2UF4Oof83PMgEoko9CUCHX6MmrFqzCTzRf39
-# Rwxvk/IEjO8Hzd56cDGm+sM3AR7cEUn0oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBQ6UcRMzfNe+Su8+5HY2ixGJTwBUDANBgkqhkiG9w0B
+# AQEFAASCAQAzm7AM1OEaOtj090Ul6SA0sLq6c84Oe4PKEY7izuJjCbwNnYlJUGVK
+# daH7VORW5VuPQUH5sTJz7vgw2Wt0t9/dxStjdN2dmgFFb5PTpYv7HlrLyjYemcoB
+# XVwaMTPQgKqNAu9oteyZZgi6n84QoJYBnSVZhF4JdfV56tGlBU7N5CUqaWgSgXhw
+# QgEfgKXadxUo2MsA8UV/d3NYMRkNm7Q8Sts71otBK5e+RB4C3pShx7pXIlEitW9P
+# olnz5whrPHzrECjlXWx7zt5OiCOjFr+nH1JOufFjFAuz5FMo+So0HBk8lUc7vQJp
+# Az+OrYtIeQh3fnohnDMO2WTTXr82jHAToYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0OFowIwYJKoZIhvcN
-# AQkEMRYEFF7N3a++v7rp5jtlMy6upcWpbOQHMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0MlowIwYJKoZIhvcN
+# AQkEMRYEFD7osXWeUGYXnR6fZWMdrlLS7b9MMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQBcaq917ce3HliZqFw03ITu8NIEyoUelzHJlYKJ1pbkjX0U
-# hgtG0EPWmURxUZ1leaertQKkjkpJmFidVHnQwDXRk7ppMPLewSjMyUirM+N+14kJ
-# PsTPLxxFVIP8uj+vMeaj3lu9/1evHcNbLvKC6o0YLYUJmv8PH6cE2+C8iPqxK7iN
-# Lf9BpGQSlNlFH0k+j+zs1CAXSE5wmTg2udaheyfzujVqh8ZIliK+vBAq6qpx3CIO
-# 0qrSSw0yWTse6P45sxutdgI7z2u45/exOt5ZSmeHp1WFhsT9Cb2cW4YBJfvtq6ze
-# W+5K8n1JQgHMFbb3yQAH2yry1ZbIY2kwSSEtJroF
+# hkiG9w0BAQEFAASCAQB6alelAuq/FYR9kfwFEEvry0MxAo/XfSASssA2U3Y/f0Xc
+# x6qDScrQcCBF7JtZ4mipn8V9MPe4Lbx/AkemqXvX8puXZYPzhlEurNjcDbrvl61Z
+# wzqVnVoso9l1Q4YzSJaVuSN5JI9+l9YQqkWQiw7CJfTKd1MrVieDCTk+scZJkj2X
+# S0XmCgtNIl2dPfGFggOuCHL3ZjivRZdKvZDchSNTmmhVP1lfzWQbFubtpyr8vFx9
+# 3DZOWYx1lCp+nNJYhBY0dbwcw8lO5Awh0vQQcmCyCrsrf4MWUSeeP7hfiwHX94av
+# lrRXMwBobwsnbmIrfjFZkUTiD2Y8fz/QWZQwb403
 # SIG # End signature block

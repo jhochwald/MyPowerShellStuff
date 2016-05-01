@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -56,8 +56,18 @@ function Global:Save-CommandHistory {
 		This file is located in the User Profile.
 		You can then restore it via Load-CommandHistory
 
+	.EXAMPLE
+		PS C:\> Save-CommandHistory
+
+		Description
+		-----------
+		Dump the Command History to an XML file "commandHistory.xml" in the user profile folder
+
 	.NOTES
-		Additional information about the function.
+		Companion command
+
+	.LINK
+		Load-CommandHistory
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -85,8 +95,18 @@ function Global:Load-CommandHistory {
 		This is the companion Command for Save-CommandHistory
 		It loads the old History from a XML File in the users Profile.
 
+	.EXAMPLE
+		PS C:\> Load-CommandHistory
+
+		Description
+		-----------
+		load the Command History from an XML file "commandHistory.xml" in the user profile folder
+
 	.NOTES
-		Additional information about the function.
+		Companion command
+
+	.LINK
+		Save-CommandHistory
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
@@ -115,8 +135,8 @@ function Global:Load-CommandHistory {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUSyPG728cA4H5seW1mE3UNiea
-# Hj+gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUkjD9sDMea4SyuMhNeVI7s/3l
+# fVCgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -259,25 +279,25 @@ function Global:Load-CommandHistory {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSMpqSs9UQJzf1rYfDSvGjx9/LGMzANBgkqhkiG9w0B
-# AQEFAASCAQA/2J9kqzWA+WgoFvm6RhM4aHjQSgBrSqjkPK8jh7/gi0k6de6BcA9x
-# oQpQhT2feaVwZK6EkJaSBvmFSo7e7jldOn3ZiX+KxoVrjk711WR9LVvPH0yLd2Oh
-# HlgRgp9uef1+DZEI0NYXlGnJ2eSoIhPC478rXTYoZB7tqXHQMflMD4Gx9dR9G6Fu
-# nhrkl9EN0keE4yOxQGTO0Yzk6IMLGrm9PjQ+r0EezTLEI2ccTM83OXeiazzpcY0T
-# 2fxF0/GQKOTbmhc0uEXsXmP3X9n9HzubeWoBWDMvsNWFiN/9+b5GAOx4XPMvZa2n
-# bUCYqQ+RoBiGC5+6+jwX3dUGt/ZrwHfooYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBT5dx8v60mmVZumnGjNJYRU6x8KajANBgkqhkiG9w0B
+# AQEFAASCAQA2CrnbrnS9Qh21pazH+3t1B6rZzYOwKeP2McVqtkL8sXJ0kpH0jQM6
+# 1x5HQFKpcFyCK0IDhfv+DeJrpLxIki3gFsqbk+w7g1QEeYFhEIZfEdfpmuKm/6gC
+# Aiuhdww+SAsulPQ8jxFDgVAjIefVnFTHZywRHfu3p4OmiWvIMNQWFYXn4xE/xrgN
+# ZkRQILDFSRuOHxu0ojunDah+I5PkkQPZQcsDQelFeQ7/4TYU5Jffw0oIP4X8RmSA
+# +UfgTJ0UROPBR6EOwfoHL/eGYIl4iudmO/mJgEDZRx4Ixg52Vtum8CSRBMvGUYUg
+# SNrMjAuGgAV4I2NK9vGB5EQl/uUcdNSPoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0N1owIwYJKoZIhvcN
-# AQkEMRYEFOA2Blj/rrAC8lJmioNMWgkwvbIIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0MVowIwYJKoZIhvcN
+# AQkEMRYEFEw6IwEi/Q1m3xxG6kuclnVFJIG1MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQA4pG+CPVULln83b6ai52bDgQJAHEWbeiYbh3DU9iVhZVDO
-# QfBcmOgTe4INowQbGcTU99TlY+3UId2HMzKkwifmjGkKpPRZstSYvuEebIk3ogKl
-# Bku6BKyQnmACMit5DnKOTG0o9mUTt1gdAut0zszcRNTGqpWOQSV2Oed0XdqReVif
-# Oet0XnFo2ygjYeNWuj+/iXmIbXJXpiIfDhvB07f0VZB0oXLwJgriFHcuqenMtMdU
-# BAkAbOEz201CE03qDAvZy9MiwHSLZl5qHxUSm9/0a9x4uJzy6yLZgL6Mi4oKRliN
-# NZ3BpCsn6F5B3+noduM2Oagde7tSExroyeKbq9U8
+# hkiG9w0BAQEFAASCAQBV8JV5R4397uSBiLBbrWeCM7klJ2Cp9UZh7TJuWW0Ihg+0
+# Aga2MmoQiTlPoEVms0BUUv8UHvJdgQoYnYgleQNR+q/GgABYqCV1HzKZ3zb5K5E6
+# cZBP0GFh1tnb+x6vz2u7LWWRbtx3oVLSKyKVo1obeEjTJxADMPIuOsuHKmRLXFdH
+# mMo1fB6rR7d+O9mZyI9N1+VLW70/B6gqEBMKftAhbF8OvPRECbHE9yiQ/4uzHmhV
+# 6ssm12oBTKlwKyhYSundNRFavyu8C+CQ/B/79tPjq++44TRDTYUrW7zZf6nG3Dhd
+# TjeVQDQ5oZZMVt47Zo0g2kOwjb3FdiSUIcAGCUY8
 # SIG # End signature block

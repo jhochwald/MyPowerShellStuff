@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-13
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -64,33 +64,36 @@ function global:Approve-MailAddress {
 		PS C:\> Approve-MailAddress -Email:"No.Reply@bewoelkt.net"
 		True
 
-		Checks a given Mail Address (No.Reply@bewoelkt.net) against a REGEX Filter to see if
-		it is RfC822 complaint
+		Description
+		-----------
+		Checks a given Mail Address (No.Reply@bewoelkt.net) against a REGEX Filter to see if it is RfC822 complaint
 
 	.EXAMPLE
 		PS C:\> Approve-MailAddress -Email:"Jörg.hochwald@gmail.com"
 		False
 
-		Checks a given Mail Address (JÃ¶rg.hochwald@gmail.com) against a REGEX Filter to see if
-		it is RfC822 complaint, and it is NOT
+		Description
+		-----------
+		Checks a given Mail Address (JÃ¶rg.hochwald@gmail.com) against a REGEX Filter to see if it is RfC822 complaint, and it is NOT
 
 	.EXAMPLE
 		PS C:\> Approve-MailAddress -Email:"Joerg hochwald@gmail.com"
 		False
 
-		Checks a given Mail Address (Joerg hochwald@gmail.com) against a REGEX Filter to see
-		if it is RfC822 complaint, and it is NOT
+		Description
+		-----------
+		Checks a given Mail Address (Joerg hochwald@gmail.com) against a REGEX Filter to see if it is RfC822 complaint, and it is NOT
 
 	.EXAMPLE
 		PS C:\> Approve-MailAddress -Email:"Joerg.hochwald@gmail"
 		False
 
-		Checks a given Mail Address (Joerg.hochwald@gmail) against a REGEX Filter to see
-		if it is RfC822 complaint, and it is NOT
+		Description
+		-----------
+		Checks a given Mail Address (Joerg.hochwald@gmail) against a REGEX Filter to see if it is RfC822 complaint, and it is NOT
 
 	.NOTES
-		Internal Helper function to check Mail addresses via REGEX to see if they are
-		RfC822 complaint before use them.
+		Internal Helper function to check Mail addresses via REGEX to see if they are RfC822 complaint before use them.
 
 	.LINK
 		NET-Experts http://www.net-experts.net
@@ -139,8 +142,8 @@ function global:Approve-MailAddress {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUUkJgt/r4LlKE/n2G8TOYJJj6
-# 9e6gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQURVdT2j2ybqwxa2ott8Jl/XRu
+# feigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -283,25 +286,25 @@ function global:Approve-MailAddress {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSAOcHhUiIPP0166GEACiniW+QiEjANBgkqhkiG9w0B
-# AQEFAASCAQAfw07CaTQ7LtLyeHiBw7qVmxHhBc1iu2rQweR7uL1UucyhEg3lV6vX
-# NjgCnhSEI7tZhLjbv6+2duKE0ZDP5ecKyQQGbgf6t4m2EO7UQxhda96al+EaDDgd
-# 1UsFf1ULRL6eXJROqTNap4nwycH0Ab9ELpc1QBokgbJfPI5JGUXHSZbp4stQGXy7
-# V/lCKNGsF+Bc8AkNd19V1Bg/XZjs5eDJo5FnEQdbFAB0CCVLoafqToHA66EHN7IR
-# Hzyed0SiX6qXT3EHSidu6iwEmFiAejUyhvOpeLrDN7x3NRYGpKedMmc2h0UGB/7k
-# wZDKBtzXdxV7qmUD9kgRlNLI2GYDyQW1oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBR2Kxf758ektrGntqudqrNj+2cTfjANBgkqhkiG9w0B
+# AQEFAASCAQBAdGyACKQ19Qp4jC4ggPlrUnEvxyRowkNeLEdzZp//nAFDy8I/G37E
+# HOarIrKoBE/M4935Od0F+r0miqryWkOgJ6t+nvaawCgsRGz2zChQG6UlWDZ6Votb
+# eTgBUfdWRsB0irRKu2CeoiW8t5B6vaX5vu4NtOnzRjIGRwdqrQRaujjksnAx1VVO
+# hpkzaBzKvVtQQ/FKaRNvLtuTEC80u062t1djSM0k9Lw/pAZ7m6Vu/yKEXuCmjTQ/
+# THQPm3hxJzTOPxnjUBEadnfdtXQO3NAHy7nL5xs/5EHPl7gM57k08fGZtsNrS3R8
+# 0Akl55GKR7c04YTKZYpDegV3rOWbFSYHoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0NVowIwYJKoZIhvcN
-# AQkEMRYEFKSskueiR8NUKUKBmm+k91Y+HnfIMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDIzOFowIwYJKoZIhvcN
+# AQkEMRYEFFLZdBnGVkrNHPBPt6VgpX/sUlx4MIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAsvRgLGEYhxClO7ZiQDibYjVtDQbzIUUwRMR2IqD0jlLRc
-# NElZzumRuYc5a8svJqeWfTAjMi+AHOUeDhpR8Tsu30xU9+XNL4qkobZ6hItq1bes
-# tlrqvxcNQsjPkUJX8xWmQ1znpDkzzttk+jQw/iKZP3p6eJcsTe4qgfwsna+fTiSq
-# RbL+Cx5zP3eAkFh6Kds8f1leBQm/IVaD7b54Vxkwaz8Jo+4DSytZ+3sGnXI7ZHxG
-# AbZq5rRdBVq0gxyxiErfJg/CJu1sNZiPm4yR/Ti0G+1ukC9UdzuxuTDjAOKKx3aY
-# i2Nt/ynVngP02j2OAplzf3kfgwsOqmw/D4kiwR/B
+# hkiG9w0BAQEFAASCAQCCp52DmpPeLs9teQ0+tAzuNR/nB0NgB9iScJItyBCNVkTN
+# it3Ofl6VVb8b3y04MOz0WeKCDm2Ge0mQgwSp4lawow28q652OyVUAjeNrkoIPnAT
+# gKvX0XZxwD7OV8/EzzY7/gaeAGX8OZObVspVqdicaEGAPyGjmk04HTyZKCm7JFBi
+# jYHXkZGEcX40DwOh321XA1Po9yQs1uGDk3mPw4xpxhQs4Xw1Jw3+9MNLJ/PHbG4d
+# cY1wg1aCOhYxoclPr0C2MHs7zK4kdmXGjTz1SY30v2//4wNpVq0A0t1h+FFuHH2h
+# y6KOM4vRRq/6ooyOF9ZmuonTj0F6FV0pVQ5jt9cW
 # SIG # End signature block
