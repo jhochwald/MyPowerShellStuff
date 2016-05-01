@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -62,13 +62,17 @@ function Global:ConvertTo-Objects {
 		$input = Select-SqlCeServer 'SELECT * FROM TABLE1' 'Data Source=C:\Users\cdbody05\Downloads\VisorImagenesNacional\VisorImagenesNacional\DIVIPOL.sdf;'
 		$input | ConvertTo-Objects
 
+		Description
+		-----------
+		You receive a result of a query and converts it to an array of objects which is
+
 	.NOTES
 		Additional information about the function.
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([System.Array])]
+	[OutputType([System.Object[]])]
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -108,8 +112,8 @@ function Global:ConvertTo-Objects {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2eWbyWtbpJH0Ld9WYwtV7EP4
-# cnigghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUQi6CX2RJZWmhWEOQpd1tD8wW
+# CC2gghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +256,25 @@ function Global:ConvertTo-Objects {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBSuYxb1T5pypzDKmJEuDYGTGauMTjANBgkqhkiG9w0B
-# AQEFAASCAQAhSDaKkIOmRKodMgCpG5DAMDi+SNSJYPLDJOS/NyDKS5CGDE4mo1rX
-# rG9yatK5LdfdLVpBsMenYCp8uQvh7PZlX/pr8SE4GeLEn4p5KhLZ6ePL12irkHuA
-# nfoK+Y1l76iQ21V94Molr2cBs3RkS20j5im//WY6S2pRRr0qXhzpn94oLHcTlKot
-# 4g4/+4whBY0Xv1RlhW6ixRXBwURWB+GybNRsz8WtueclCGL+GsgGZdxVLavpGwwD
-# 1zZf/dTQQExi2Dho2/P0juL9ZqF2WT4YYoTosWUG5YhBn+Zb80BmH4xKF1wTwoMy
-# exArU7ciw1rPo9gWVInwbYOvGRZmNl/IoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBSgQ2Y1xhQRixTPuqTzKd29T/VpiDANBgkqhkiG9w0B
+# AQEFAASCAQCTdycQVQHLJ4UO7Ij+TPdfVSDG907Bcor7PBnMYa+msoVEYGij2Kn4
+# p2Oeo2G0mTbjbuONFEgwN7+F8JktIwkXY29aBcJy5G+/R6lo5uj4oI1YQk99Emwk
+# w5K2W6GSj+gasBcjS2EEmLeLAfcf85+rkohHoROOdu3GsNCqQztS6SnWpQCZjTXn
+# d4Dt2o5dofL/pic24rExPJ1hhUKAH4PTCNyKilfKOtDlRNOWmPr+Arixvim+jJw5
+# IZQQxmb6R/hehVGqpqPLu+QVGQTwrpYndNYmeZfTvpCiFhgNP7fOWHGpEH1SGAjn
+# voN+drN5AXsPLSLCJSlA511Fvr9pU867oYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY0OVowIwYJKoZIhvcN
-# AQkEMRYEFIQklNhgZNLkUu9lvrdBhWl/HaPhMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0MlowIwYJKoZIhvcN
+# AQkEMRYEFJRnU4f5csrELhSPCl1lDdpeii3fMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQCCyRcTqEw8GvZ353S+lSHrH3R9hjHK2Zqc9MLa3JHcJzWT
-# G/qpvagweU1bfmr8JMGohNJOJSOh+Ozy7fZWzzXW5M0lE+oTa/taWg04PGcB3aq7
-# WBHty5UGEHlb0LfGRDsO+4i9a2LWA+RKZYk4jMUxsufdT0f+/VVx6cROgfNOKOPi
-# 7sXyIfVxJ+9C+C1ZlTP4oaGLYeDq/FftGVKttdBKSrdA3Kkxh0SlG20tkEOJlHiU
-# TGsXkZSu+FLPen3auPIrz9lbjxPd9CvPtCW3OuyfGLvAinmc20XdstuIOJG6MqZJ
-# JBgoDJbNuYTSJJuZUELI9JGEEKTQIqxAdt1/0KKB
+# hkiG9w0BAQEFAASCAQAddCxof5/6TARFMRHB9uWABONdapCV0W/3eJS+pFTbvrhX
+# g6X3VxMoPdVjSEvac9Jyx6rFuA5Oh8lM78c5yjsPlI3gKYPEWmyo//DB4KrsHNCM
+# 3fhDL0kXRl7DRX+f+Bh3PWowutY66T0Hns1PCXcUvwlgdf/6u1uEmfB7RLMS5xiF
+# vXixVUTzmJj1xZBIh2oAsf+N7jsDD3uHAyRaOMT99VJeDa8L3hjztSNo4fJ1Gpby
+# Zyf5y4YsNYxVmRkWqPj67ug6stYTwT6UvggJdpCmaeJwTX+As9UxkoF1TktztiBu
+# xiNLgu8bGAqo8uAxJ7tI8ghX4HCSCRTfLQ8BcnNW
 # SIG # End signature block
