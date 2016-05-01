@@ -3,7 +3,7 @@
 <#
 	#################################################
 	# modified by     : Joerg Hochwald
-	# last modified   : 2016-04-03
+	# last modified   : 2016-04-25
 	#################################################
 
 	Support: https://github.com/jhochwald/NETX/issues
@@ -66,13 +66,17 @@ function Global:Expand-ArrayObject {
 	.EXAMPLE
 		$arr | Expand-ArrayObject fieldX
 
+		Description
+		-----------
+		You get an array of objects and performs an expansion of data separated by a spacer
+
 	.NOTES
 		Additional information about the function.
 #>
 
 	[CmdletBinding(ConfirmImpact = 'None',
 				   SupportsShouldProcess = $true)]
-	[OutputType([System.String])]
+	[OutputType([System.Object[]])]
 	param
 	(
 		[Parameter(Mandatory = $true,
@@ -108,8 +112,8 @@ function Global:Expand-ArrayObject {
 # SIG # Begin signature block
 # MIIfOgYJKoZIhvcNAQcCoIIfKzCCHycCAQExCzAJBgUrDgMCGgUAMGkGCisGAQQB
 # gjcCAQSgWzBZMDQGCisGAQQBgjcCAR4wJgIDAQAABBAfzDtgWUsITrck0sYpfvNR
-# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQUc7xwIj0l11ly0wiBOQdPkPOU
-# M4SgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
+# AgEAAgEAAgEAAgEAAgEAMCEwCQYFKw4DAhoFAAQU2t9QxFDWZFXwcRnMlNLbupAs
+# 93mgghnLMIIEFDCCAvygAwIBAgILBAAAAAABL07hUtcwDQYJKoZIhvcNAQEFBQAw
 # VzELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExEDAOBgNV
 # BAsTB1Jvb3QgQ0ExGzAZBgNVBAMTEkdsb2JhbFNpZ24gUm9vdCBDQTAeFw0xMTA0
 # MTMxMDAwMDBaFw0yODAxMjgxMjAwMDBaMFIxCzAJBgNVBAYTAkJFMRkwFwYDVQQK
@@ -252,25 +256,25 @@ function Global:Expand-ArrayObject {
 # BAMTGkNPTU9ETyBSU0EgQ29kZSBTaWduaW5nIENBAhAW1PdTHZsYJ0/yJnM0UYBc
 # MAkGBSsOAwIaBQCgeDAYBgorBgEEAYI3AgEMMQowCKACgAChAoAAMBkGCSqGSIb3
 # DQEJAzEMBgorBgEEAYI3AgEEMBwGCisGAQQBgjcCAQsxDjAMBgorBgEEAYI3AgEV
-# MCMGCSqGSIb3DQEJBDEWBBR1UWMGQZdtK+h8LcWs2V5xrNfTzTANBgkqhkiG9w0B
-# AQEFAASCAQAUtYI/BKmBrfclrI2E2rt+vGUzHVqqHsN83YH9tHVky46bbXfV14EZ
-# oWyuOHEBF/iDuKCyYj6tFgYEYe7zyJPYwfOFbI1tI/D1pirA6oi09HXTu0Dcl8vq
-# /68yvowkO2dSJuK0xrVO+xjR7c62Cgr2mB0xfGdH06gU9D1h631JIbcjlkORBqOH
-# cyOS5qQS/jIvndl1N/DXy8eqLAECXf6ct+9EUCQdmEWxtAWf/gkZUvYJMJi3ugza
-# HxvR/zJezmDHPbnGFBPw3Ze7z95PLmNVidrEnii0ELq9JsxwcRIzYMeJTyd/glQA
-# ld9BMQLBuiJeRFi/M6olgHfhIqMMt86soYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
+# MCMGCSqGSIb3DQEJBDEWBBRCVrE4pk6VLW1jTR/cMreklkVAwDANBgkqhkiG9w0B
+# AQEFAASCAQCJfvr+HXf/GdAG0FWwVG+/ROCNPzJkVEVOx5xIYiS23iReQYqTELM0
+# Htm70+CAtpuZbH9SEfcWjLiSq19HRqVG4sXyfvLSZiGOV3xA/FjBbvyYD+ZzaLyD
+# 9BHtZZDaiI7cX2hm3a7AJc2JHiE9dwcQ+vXXuABfmdkBFQ/jjcVxQ8CFPeGVFdOV
+# aWomYVqv8RxPUxQyJnwzhij/TNJZ7IfB27ERxWn0meuIq01Hn3+wJ4so/7x0EVl1
+# jn7QMotqpe4jUQFqf/AYwEkzhA9VPsY7Dbnu7r2/nqYy/GvvXPrSAHw5GvawQlpc
+# Vd86nkitvL+unfrl7j1lQ0tmcmPBUG1YoYICojCCAp4GCSqGSIb3DQEJBjGCAo8w
 # ggKLAgEBMGgwUjELMAkGA1UEBhMCQkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYt
 # c2ExKDAmBgNVBAMTH0dsb2JhbFNpZ24gVGltZXN0YW1waW5nIENBIC0gRzICEhEh
 # BqCB0z/YeuWCTMFrUglOAzAJBgUrDgMCGgUAoIH9MBgGCSqGSIb3DQEJAzELBgkq
-# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQwMzIxMzY1MVowIwYJKoZIhvcN
-# AQkEMRYEFHYPTwWOXRCLU3RNDZ9OP7lci3ZRMIGdBgsqhkiG9w0BCRACDDGBjTCB
+# hkiG9w0BBwEwHAYJKoZIhvcNAQkFMQ8XDTE2MDQyODEyNDI0NFowIwYJKoZIhvcN
+# AQkEMRYEFCpdqeq17Hg7JU12ynzOMfi4SDOXMIGdBgsqhkiG9w0BCRACDDGBjTCB
 # ijCBhzCBhAQUs2MItNTN7U/PvWa5Vfrjv7EsKeYwbDBWpFQwUjELMAkGA1UEBhMC
 # QkUxGTAXBgNVBAoTEEdsb2JhbFNpZ24gbnYtc2ExKDAmBgNVBAMTH0dsb2JhbFNp
 # Z24gVGltZXN0YW1waW5nIENBIC0gRzICEhEhBqCB0z/YeuWCTMFrUglOAzANBgkq
-# hkiG9w0BAQEFAASCAQAfA8Z7cNmge4O/QFINOWPvreAU1rt6bVt4HpQCgDmhLP67
-# EtbaWVai0La5QEJEe3Wu/4pwBzPTbj+lKrQjtz9x650FXgJ9Wd0VTpxgdtlEXUlB
-# 7kx1elKrEBIb3ssBHLgdvgcwlSFgAQMWj/Ewl2z/BxHwu/9dlg1UyhCNY7uDaraz
-# 5rHsSTdxkuggOcgbHUI8Wqam9CM8rX2ha3WZ7EqXFdtn5+EWibR9QJozhHlyCVfj
-# RdyLzStctJA3NeRjvX5LyEiJdAtiUFQt3OajdOnAP0g7vyS4zQ5YMPtZb5gbSURv
-# kozZtsActoe3RMMAKZgRMfveoCijJShd2E5a5cl/
+# hkiG9w0BAQEFAASCAQCEhllrpLxBweTsQXgC1RtjgN5kJ5FNmSNC3DsqaTDP2gts
+# Jai4FPq5XOCS0X2uMh6j9E7r0SZNERfOWoBz6cAZIeQ40J6nDyozpN+JdCLFHzo6
+# +paeej8g+GjPeAOR2cnqJa9TtcKN1ZG6T1L4fL3GJAzGPuJ+k1qKl1j5gHON1/JT
+# dtAZXzV2J+b5OKpMyTGebNjP9cUPy6mnFQpSDZYufLpA9yruOu8NqNTP+4ZFTCpb
+# iXT4rIMg4PKSqrvPWJ9DLmA7V9vzeFCd/usaL5ba9vOKCPMVyoxUG3J5QqUb/n69
+# v11xzc0xVczmkv144BY5byXM3ye2ryA+Ly0rABRA
 # SIG # End signature block
